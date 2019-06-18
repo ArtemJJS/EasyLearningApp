@@ -1,0 +1,236 @@
+2019-06-17 18:48:40 main INFO  Main:14 - Start of main.
+2019-06-17 18:48:40 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 18:48:40 main WARN  ConnectionPool:41 - FAIL to create connection!!!
+2019-06-17 18:49:05 main INFO  Main:14 - Start of main.
+2019-06-17 18:49:06 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 18:49:08 main WARN  ConnectionPool:41 - FAIL to create connection!!!
+2019-06-17 18:49:56 main INFO  Main:14 - Start of main.
+2019-06-17 18:49:56 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 18:49:56 main WARN  ConnectionPool:41 - FAIL to create connection!!!
+2019-06-17 18:49:56 main DEBUG Main:17 - Connection = null
+2019-06-17 18:51:19 main INFO  Main:14 - Start of main.
+2019-06-17 18:51:19 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 18:51:19 main WARN  ConnectionPool:41 - FAIL to create connection!!!
+2019-06-17 18:51:19 main DEBUG Main:17 - Connection = null
+2019-06-17 18:52:22 main INFO  Main:14 - Start of main.
+2019-06-17 18:52:22 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 18:52:22 main WARN  ConnectionPool:42 - FAIL to create connection!!!
+2019-06-17 18:52:22 main DEBUG Main:17 - Connection = null
+2019-06-17 18:52:42 main INFO  Main:14 - Start of main.
+2019-06-17 18:52:42 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 18:52:42 main WARN  ConnectionPool:43 - FAIL to create connection!!!
+2019-06-17 18:52:42 main DEBUG Main:17 - Connection = null
+2019-06-17 18:53:01 main INFO  Main:14 - Start of main.
+2019-06-17 18:53:01 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 18:53:01 main WARN  ConnectionPool:43 - FAIL to create connection!!!
+2019-06-17 18:53:01 main DEBUG Main:17 - Connection = null
+2019-06-17 18:53:19 main INFO  Main:14 - Start of main.
+2019-06-17 18:53:20 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 18:53:31 main WARN  ConnectionPool:43 - FAIL to create connection!!!
+2019-06-17 18:53:31 main DEBUG Main:17 - Connection = null
+2019-06-17 18:54:40 main INFO  Main:14 - Start of main.
+2019-06-17 18:54:40 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 18:54:51 main WARN  ConnectionPool:43 - FAIL to create connection!!!
+2019-06-17 18:54:51 main DEBUG Main:17 - Connection = null
+2019-06-17 18:55:16 main INFO  Main:14 - Start of main.
+2019-06-17 18:55:16 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 18:55:16 main WARN  ConnectionPool:44 - FAIL to create connection!!!
+2019-06-17 18:55:16 main DEBUG Main:17 - Connection = null
+2019-06-17 18:56:43 main INFO  Main:14 - Start of main.
+2019-06-17 18:56:43 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 18:56:43 main WARN  ConnectionPool:45 - FAIL to create connection!!!
+2019-06-17 18:56:43 main DEBUG Main:17 - Connection = null
+2019-06-17 18:57:07 main INFO  Main:14 - Start of main.
+2019-06-17 18:57:07 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 18:57:07 main WARN  ConnectionPool:45 - FAIL to create connection!!!
+2019-06-17 18:57:07 main DEBUG Main:17 - Connection = null
+2019-06-17 18:59:22 main INFO  Main:14 - Start of main.
+2019-06-17 18:59:22 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 18:59:22 main WARN  ConnectionPool:47 - FAIL to create connection!!!
+2019-06-17 18:59:22 main DEBUG Main:17 - Connection = null
+2019-06-17 18:59:40 main INFO  Main:14 - Start of main.
+2019-06-17 18:59:40 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:03:10 main WARN  ConnectionPool:47 - FAIL to create connection!!!
+2019-06-17 19:03:10 main DEBUG Main:17 - Connection = null
+2019-06-17 19:03:13 main INFO  Main:14 - Start of main.
+2019-06-17 19:03:13 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:03:13 main WARN  ConnectionPool:47 - FAIL to create connection!!!javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+2019-06-17 19:03:13 main DEBUG Main:17 - Connection = null
+2019-06-17 19:04:38 main INFO  Main:14 - Start of main.
+2019-06-17 19:04:38 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:04:38 main WARN  ConnectionPool:47 - FAIL to create connection!!!javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+2019-06-17 19:04:38 main DEBUG Main:17 - Connection = null
+2019-06-17 19:12:15 main INFO  Main:14 - Start of main.
+2019-06-17 19:12:15 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:12:15 main WARN  ConnectionPool:47 - FAIL to create connection!!!javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+2019-06-17 19:12:15 main DEBUG Main:17 - Connection = null
+2019-06-17 19:13:47 main INFO  Main:14 - Start of main.
+2019-06-17 19:13:47 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:13:47 main WARN  ConnectionPool:47 - FAIL to create connection!!!javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+2019-06-17 19:13:47 main DEBUG Main:17 - Connection = null
+2019-06-17 19:15:08 main INFO  Main:14 - Start of main.
+2019-06-17 19:15:08 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:15:08 main WARN  ConnectionPool:47 - FAIL to create connection!!!javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+2019-06-17 19:15:08 main DEBUG Main:17 - Connection = null
+2019-06-17 19:22:44 main INFO  Main:14 - Start of main.
+2019-06-17 19:22:44 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:22:44 main WARN  ConnectionPool:44 - FAIL to create connection!!!
+2019-06-17 19:22:45 main DEBUG Main:17 - Connection = null
+2019-06-17 19:29:35 main INFO  Main:11 - Start of main.
+2019-06-17 19:29:35 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:29:35 main WARN  ConnectionPool:44 - FAIL to create connection!!!
+2019-06-17 19:29:35 main DEBUG Main:14 - Connection = null
+2019-06-17 19:30:04 main INFO  Main:11 - Start of main.
+2019-06-17 19:30:04 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:30:42 main INFO  Main:11 - Start of main.
+2019-06-17 19:30:42 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:31:04 main INFO  Main:11 - Start of main.
+2019-06-17 19:31:05 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:31:19 main INFO  Main:11 - Start of main.
+2019-06-17 19:31:19 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:34:58 main INFO  Main:11 - Start of main.
+2019-06-17 19:34:58 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:35:41 main INFO  Main:11 - Start of main.
+2019-06-17 19:35:41 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:36:47 main INFO  Main:11 - Start of main.
+2019-06-17 19:36:47 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:36:56 main INFO  Main:11 - Start of main.
+2019-06-17 19:36:56 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:45:14 main INFO  Main:11 - Start of main.
+2019-06-17 19:45:14 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-17 19:46:28 main INFO  Main:11 - Start of main.
+2019-06-17 19:46:28 main DEBUG ConnectionPool:27 - ConnectionPool instance created.
+2019-06-18 16:40:17 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 16:41:09 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 16:43:36 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 16:44:28 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 16:45:15 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 16:55:57 pool-1-thread-1 DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 16:55:57 main INFO  Main:47 - Main FINISHED!
+2019-06-18 16:56:28 pool-1-thread-1 DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 16:57:17 pool-1-thread-3 DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 16:57:17 main INFO  Main:47 - Main FINISHED!
+2019-06-18 17:12:03 pool-1-thread-1 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:12:04 main INFO  Main:47 - Main FINISHED!
+2019-06-18 17:12:30 pool-1-thread-1 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:12:30 main INFO  Main:48 - Main FINISHED!
+2019-06-18 17:12:39 pool-1-thread-1 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:12:39 main INFO  Main:48 - Main FINISHED!
+2019-06-18 17:13:30 pool-1-thread-3 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:13:30 main INFO  Main:48 - Main FINISHED!
+2019-06-18 17:13:51 pool-1-thread-1 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:13:51 main INFO  Main:48 - Main FINISHED!
+2019-06-18 17:14:05 pool-1-thread-3 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:14:05 main INFO  Main:48 - Main FINISHED!
+2019-06-18 17:14:14 pool-1-thread-1 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:14:15 main INFO  Main:48 - Main FINISHED!
+2019-06-18 17:14:29 pool-1-thread-1 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:14:30 main INFO  Main:48 - Main FINISHED!
+2019-06-18 17:14:39 pool-1-thread-1 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:14:42 main INFO  Main:48 - Main FINISHED!
+2019-06-18 17:14:50 pool-1-thread-3 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:14:56 main INFO  Main:48 - Main FINISHED!
+2019-06-18 17:16:00 pool-1-thread-1 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:16:05 main INFO  Main:52 - Main FINISHED!
+2019-06-18 17:16:36 pool-1-thread-3 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:16:41 main INFO  Main:52 - Main FINISHED!
+2019-06-18 17:16:56 pool-1-thread-2 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:17:02 main INFO  Main:52 - Main FINISHED!
+2019-06-18 17:18:26 pool-1-thread-1 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:18:31 main INFO  Main:52 - Main FINISHED!
+2019-06-18 17:18:42 pool-1-thread-1 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:18:46 main INFO  Main:52 - Main FINISHED!
+2019-06-18 17:19:21 pool-1-thread-1 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:19:26 main INFO  Main:52 - Main FINISHED!
+2019-06-18 17:19:34 pool-1-thread-1 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:19:39 main INFO  Main:52 - Main FINISHED!
+2019-06-18 17:19:46 pool-1-thread-2 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:19:58 main INFO  Main:52 - Main FINISHED!
+2019-06-18 17:20:04 pool-1-thread-1 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:20:11 main INFO  Main:52 - Main FINISHED!
+2019-06-18 17:20:19 pool-1-thread-1 DEBUG ConnectionPool:43 - ConnectionPool instance created.
+2019-06-18 17:20:24 main INFO  Main:52 - Main FINISHED!
+2019-06-18 17:24:13 pool-1-thread-6 DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 17:24:18 main INFO  Main:52 - Main FINISHED!
+2019-06-18 18:27:18 pool-1-thread-1 DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 18:27:23 main INFO  Main:52 - Main FINISHED!
+2019-06-18 19:30:30 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 19:31:10 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 19:31:36 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 20:13:43 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 20:20:37 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 20:21:20 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 20:23:19 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 20:28:07 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 20:43:57 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 20:46:50 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 20:56:31 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 20:57:37 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 20:57:37 main DEBUG AccRepository:44 - Attemp to execute query: select * from account where acc_type = 'admin'
+2019-06-18 20:58:38 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 20:58:38 main DEBUG AccRepository:44 - Attempt to execute query: select * from account where acc_type = '0'
+2019-06-18 20:59:12 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 20:59:12 main DEBUG AccRepository:44 - Attempt to execute query: select * from account where acc_type = '1'
+2019-06-18 21:14:49 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 21:14:49 main DEBUG AccRepository:44 - Attempt to execute query: select * from account where acc_registration_date > '2019-05-20'
+2019-06-18 21:15:19 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 21:15:19 main DEBUG AccRepository:44 - Attempt to execute query: select * from account where acc_registration_date > '2019-06-03'
+2019-06-18 21:15:36 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 21:15:36 main DEBUG AccRepository:44 - Attempt to execute query: select * from account where acc_registration_date > '2019-06-12'
+2019-06-18 21:28:19 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 21:28:19 main DEBUG AccRepository:44 - Attempt to execute query: select * from account where acc_registration_date > '2019-06-12'
+2019-06-18 21:47:23 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 21:47:23 main DEBUG AccRepository:74 - Attempt to execute query: select * from account where acc_type = '1'
+2019-06-18 21:50:50 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 21:50:50 main DEBUG AccRepository:74 - Attempt to execute query: select * from account
+2019-06-18 21:53:17 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 21:53:17 main DEBUG AccRepository:74 - Attempt to execute query: select * from account
+2019-06-18 21:54:14 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 21:54:14 main DEBUG AccRepository:74 - Attempt to execute query: select * from account
+2019-06-18 21:54:14 main DEBUG AccRepository:74 - Attempt to execute query: select * from account
+2019-06-18 21:58:58 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 21:58:58 main DEBUG AccRepository:74 - Attempt to execute query: select * from account
+2019-06-18 21:58:58 main DEBUG AccRepository:74 - Attempt to execute query: select * from account
+2019-06-18 21:59:12 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 21:59:12 main DEBUG AccRepository:74 - Attempt to execute query: select * from account
+2019-06-18 21:59:12 main DEBUG AccRepository:74 - Attempt to execute query: select * from account
+2019-06-18 22:07:29 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 22:07:29 main DEBUG AccRepository:74 - Attempt to execute query: select * from account
+2019-06-18 22:09:19 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 22:09:19 main DEBUG AccRepository:77 - Attempt to execute query: select * from account
+2019-06-18 22:10:09 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 22:10:09 main DEBUG AccRepository:77 - Attempt to execute query: select * from account
+2019-06-18 22:10:09 main DEBUG AccRepository:77 - Attempt to execute query: select * from account
+2019-06-18 22:12:38 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 22:12:38 main DEBUG AccRepository:77 - Attempt to execute query: select * from account
+2019-06-18 22:12:38 main DEBUG AccRepository:62 - Query complited: insert into account(acc_login, acc_password, acc_email, acc_name, acc_surname, acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_type) values ('Author From Insert 5', '48657', '1', 'Tommy', 'Tommovich', '2019-06-02', '2', '2019-06-18', 'sdad', 2)
+2019-06-18 22:12:38 main DEBUG AccRepository:77 - Attempt to execute query: select * from account
+2019-06-18 22:22:03 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 22:22:03 main DEBUG AccRepository:88 - Attempt to execute query: select * from account
+2019-06-18 22:22:03 main DEBUG AccRepository:44 - Query complited: delete from account where acc_login = 'Author From Insert 5'
+2019-06-18 22:22:03 main DEBUG AccRepository:88 - Attempt to execute query: select * from account
+2019-06-18 22:22:44 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 22:22:44 main DEBUG AccRepository:88 - Attempt to execute query: select * from account
+2019-06-18 22:22:44 main DEBUG AccRepository:44 - Query complited: delete from account where acc_login = 'Author From Insert 4'
+2019-06-18 22:22:44 main DEBUG AccRepository:88 - Attempt to execute query: select * from account
+2019-06-18 22:45:20 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 22:45:20 main DEBUG AccRepository:116 - Attempt to execute query: select * from account
+2019-06-18 22:45:37 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 22:45:37 main DEBUG AccRepository:116 - Attempt to execute query: select * from account
+2019-06-18 22:45:37 main DEBUG AccRepository:116 - Attempt to execute query: select * from account
+2019-06-18 22:46:30 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 22:46:30 main DEBUG AccRepository:116 - Attempt to execute query: select * from account
+2019-06-18 22:46:30 main DEBUG AccRepository:116 - Attempt to execute query: select * from account
+2019-06-18 22:46:51 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 22:46:51 main DEBUG AccRepository:116 - Attempt to execute query: select * from account
+2019-06-18 22:46:51 main DEBUG AccRepository:52 - Attempt to execute query: INSERT INTO account(acc_login, acc_password, acc_email, acc_name, acc_surname, acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_type) VALUES ('-321762516', '1', 'Updated Name', 'Updated SurName', '2019-06-02', '2', '2019-06-18', 'sdad', 2, 'Author From Insert 3')
+2019-06-18 22:47:54 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 22:47:54 main DEBUG AccRepository:116 - Attempt to execute query: select * from account
+2019-06-18 22:47:54 main DEBUG AccRepository:52 - Attempt to execute query: UPDATE account SET acc_password = '-321762516', acc_email = '1', acc_name = 'Updated Name', acc_surname = 'Updated SurName', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-18', acc_about = 'sdad', acc_type = 2 WHERE acc_login = 'Author From Insert 3'
+2019-06-18 22:47:54 main DEBUG AccRepository:54 - Query completed: UPDATE account SET acc_password = '-321762516', acc_email = '1', acc_name = 'Updated Name', acc_surname = 'Updated SurName', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-18', acc_about = 'sdad', acc_type = 2 WHERE acc_login = 'Author From Insert 3'
+2019-06-18 22:47:54 main DEBUG AccRepository:116 - Attempt to execute query: select * from account
+2019-06-18 22:53:33 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-18 22:53:33 main DEBUG AccRepository:116 - Attempt to execute query: select * from account
+2019-06-18 22:53:33 main DEBUG AccRepository:52 - Attempt to execute query: UPDATE account SET acc_password = '-321762516', acc_email = '1', acc_name = 'Updated Name', acc_surname = 'Updated SurName', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-18', acc_about = 'sdad', acc_type = 2 WHERE acc_login = 'Author From Insert 3'
+2019-06-18 22:53:33 main DEBUG AccRepository:54 - Query completed: UPDATE account SET acc_password = '-321762516', acc_email = '1', acc_name = 'Updated Name', acc_surname = 'Updated SurName', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-18', acc_about = 'sdad', acc_type = 2 WHERE acc_login = 'Author From Insert 3'
+2019-06-18 22:53:33 main DEBUG AccRepository:116 - Attempt to execute query: select * from account
