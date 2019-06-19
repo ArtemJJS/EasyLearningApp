@@ -10,6 +10,10 @@ import by.anelkin.easylearning.specification.accountspec.SelectRegistrDateAfter;
 import by.anelkin.easylearning.specification.markspec.SelectAllMark;
 import lombok.extern.log4j.Log4j;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,7 +27,7 @@ import static by.anelkin.easylearning.entity.Mark.MarkType.*;
 public class Main {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
 //        log.info("Start of main.");
 //        ConnectionPool connectionPool = ConnectionPool.getInstance();
 //        Connection connection = connectionPool.getConnection();
@@ -63,19 +67,15 @@ public class Main {
 //        log.info("Main FINISHED!");
 //
 
-        MarkRepository markRepo = new MarkRepository();
+    AccRepository repo = new AccRepository();
+    List<Account> list = repo.query(new SelectAllAccount());
 
-        List<Mark> authorsMarks = markRepo.query(new SelectAllMark(AUTHOR_MARK));
-        authorsMarks.forEach(System.out::println);
+    Account admin = list.get(1);
+  //  admin.setPhoto(new File("src/main/resources/account_avatar/1.png"));
+    repo.update(admin);
 
-        Mark mark = authorsMarks.get(1);
-        mark.setComment("Updated from main comment!");
-
-        markRepo.update(mark);
-        System.out.println("================");
-        authorsMarks = markRepo.query(new SelectAllMark(AUTHOR_MARK));
-        authorsMarks.forEach(System.out::println);
-
+    list = repo.query(new SelectAllAccount());
+    list.forEach(System.out::println);
 
      //   accRepository.delete(accountList.get(6));
 

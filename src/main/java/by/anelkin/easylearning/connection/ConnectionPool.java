@@ -57,9 +57,12 @@ public class ConnectionPool {
 
     public void returnConnection(Connection connection) {
         try {
+            connection.setAutoCommit(true);
             queue.put(connection);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (SQLException e) {
+            log.debug("Unable to turn on autocommit again.");
         }
     }
 

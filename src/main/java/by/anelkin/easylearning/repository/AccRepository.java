@@ -7,6 +7,9 @@ import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
 import org.intellij.lang.annotations.Language;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,10 +22,11 @@ public class AccRepository implements AppRepository<Account> {
     // TODO: 6/18/2019 добавить в запросы и методы ФОТО!!! (сейчас нету)
     private ConnectionPool pool = ConnectionPool.getInstance();
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static final String AVATAR_PATH = "src/main/resources/account_avatar/%s.png";
     @Language("sql")
     private static final String QUERY_UPDATE = "UPDATE account SET acc_password = ?, acc_email = ?, acc_name = ?," +
             " acc_surname = ?, acc_birthdate = ?, acc_phone_number = ?, acc_registration_date = ?, acc_about = ?," +
-            " acc_type = ? WHERE acc_login = ?";
+            " acc_photo = ?, acc_type = ? WHERE acc_login = ?";
     @Language("sql")
     private static final String QUERY_DELETE = "DELETE FROM account WHERE acc_login = ?";
     @Language("sql")
@@ -38,6 +42,7 @@ public class AccRepository implements AppRepository<Account> {
         // TODO: 6/18/2019 Сделать нормальное шифрование пароля
         String hashedPass = String.valueOf(account.getPassword().hashCode());
         try {
+            connection.setAutoCommit(false);
             PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE);
             statement.setString(1, hashedPass);
             statement.setString(2, account.getEmail());
@@ -47,17 +52,30 @@ public class AccRepository implements AppRepository<Account> {
             statement.setString(6, account.getPhoneNumber());
             statement.setString(7, dateFormat.format(account.getRegistrDate()));
             statement.setString(8, account.getAbout());
-            statement.setInt(9, account.getType().ordinal());
-            statement.setString(10, account.getLogin());
+            statement.setInt(10, account.getType().ordinal());
+            statement.setString(11, account.getLogin());
             log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
-            isUpdated = statement.execute();
             log.debug("Query completed:" + statement.toString().split(":")[1]);
+
+            if (account.getPhoto() != null) {
+                try (FileInputStream fis = new FileInputStream(account.getPhoto())) {
+                    statement.setBinaryStream(9, fis);
+                    statement.executeUpdate();
+                    connection.commit();
+                }
+            } else {
+                statement.setBlob(9, (Blob) null);
+                statement.executeUpdate();
+                connection.commit();
+            }
         } catch (SQLException e) {
             throw new RuntimeException("Wrong query!!! " + e);
-        }finally {
+        } catch (IOException e) {
+            throw new RuntimeException("IO problem with account photo: " + e);
+        } finally {
             pool.returnConnection(connection);
         }
-        return isUpdated;
+        return false;
     }
 
     @Override
@@ -72,7 +90,7 @@ public class AccRepository implements AppRepository<Account> {
             log.debug("Query completed:" + statement.toString().split(":")[1]);
         } catch (SQLException e) {
             throw new RuntimeException("Wrong query!!! " + e);
-        }finally {
+        } finally {
             pool.returnConnection(connection);
         }
         return isDeleted;
@@ -101,7 +119,7 @@ public class AccRepository implements AppRepository<Account> {
             log.debug("Query completed:" + statement.toString().split(":")[1]);
         } catch (SQLException e) {
             throw new RuntimeException("Wrong query!!! " + e);
-        }finally {
+        } finally {
             pool.returnConnection(connection);
         }
         return isInserted;
@@ -118,7 +136,7 @@ public class AccRepository implements AppRepository<Account> {
             accountList.addAll(fillAccountList(resultSet));
         } catch (SQLException e) {
             throw new RuntimeException("Wrong query!!! " + e);
-        }finally {
+        } finally {
             pool.returnConnection(connection);
         }
         return accountList;
@@ -139,6 +157,14 @@ public class AccRepository implements AppRepository<Account> {
                 account.setPhoneNumber(resultSet.getString("acc_phone_number"));
                 account.setRegistrDate(resultSet.getDate("acc_registration_date"));
                 account.setAbout(resultSet.getString("acc_about"));
+
+                Blob image = resultSet.getBlob("acc_photo");
+                if (image != null) {
+                    String currAvatarPath = String.format(AVATAR_PATH, account.getLogin());
+                    Files.write(Paths.get(currAvatarPath), image.getBytes(1, (int) image.length()));
+                    account.setPhoto(new File(currAvatarPath));
+                }
+
                 int typeId = resultSet.getInt("acc_type");
                 switch (typeId) {
                     case 1:
@@ -157,6 +183,8 @@ public class AccRepository implements AppRepository<Account> {
             }
         } catch (SQLException e) {
             log.error("Error during account creating: " + e.getMessage());
+        } catch (IOException e) {
+            log.error("Error during creating account_avatar picture from vase: " + e.getMessage());
         }
         return accountList;
     }
