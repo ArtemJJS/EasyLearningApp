@@ -1,10 +1,13 @@
 package by.anelkin.easylearning;
 
 import by.anelkin.easylearning.entity.Account;
+import by.anelkin.easylearning.entity.Mark;
 import by.anelkin.easylearning.repository.AccRepository;
+import by.anelkin.easylearning.repository.MarkRepository;
 import by.anelkin.easylearning.specification.accountspec.SelectAccByType;
 import by.anelkin.easylearning.specification.accountspec.SelectAllAccount;
 import by.anelkin.easylearning.specification.accountspec.SelectRegistrDateAfter;
+import by.anelkin.easylearning.specification.markspec.SelectAllMark;
 import lombok.extern.log4j.Log4j;
 
 import java.sql.*;
@@ -14,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 import static by.anelkin.easylearning.entity.Account.AccountType.*;
+import static by.anelkin.easylearning.entity.Mark.MarkType.*;
 
 @Log4j
 public class Main {
@@ -59,31 +63,18 @@ public class Main {
 //        log.info("Main FINISHED!");
 //
 
-        Date date = null;
-        try {
-            date = dateFormat.parse("2019-06-12");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        MarkRepository markRepo = new MarkRepository();
 
-        AccRepository accRepository = new AccRepository();
-        List<Account> accountList = accRepository.query(new SelectAllAccount());
-        accountList.forEach(System.out::println);
+        List<Mark> authorsMarks = markRepo.query(new SelectAllMark(AUTHOR_MARK));
+        authorsMarks.forEach(System.out::println);
 
-        Account newAcc = accountList.get(5);
-//        newAcc.setLogin("Author From Insert 4");
-        newAcc.setName("Updated Name");
-        newAcc.setSurname("Updated SurName");
-        newAcc.setPassword("Abc_123!!!");
-        newAcc.setRegistrDate(new Date(System.currentTimeMillis()));
+        Mark mark = authorsMarks.get(1);
+        mark.setComment("Updated from main comment!");
 
-        System.out.println("=====================");
-        System.out.println(newAcc);
-
-       accRepository.update(newAcc);
-        System.out.println("==============");
-        accountList = accRepository.query(new SelectAllAccount());
-        accountList.forEach(System.out::println);
+        markRepo.update(mark);
+        System.out.println("================");
+        authorsMarks = markRepo.query(new SelectAllMark(AUTHOR_MARK));
+        authorsMarks.forEach(System.out::println);
 
 
      //   accRepository.delete(accountList.get(6));

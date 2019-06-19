@@ -6,11 +6,11 @@ import org.intellij.lang.annotations.Language;
 
 public class SelectAllAccount implements AppSpecification<Account> {
     @Language("sql")
-    private static final String query = "select * from account";
+    private static final String QUERY = "select * from account";
 
 
     @Override
     public String getQuery() {
-        return query;
+        return QUERY;
     }
 }

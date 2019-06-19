@@ -7,6 +7,7 @@ import org.intellij.lang.annotations.Language;
 import static by.anelkin.easylearning.entity.Account.*;
 
 public class SelectAccByType implements AppSpecification<Account> {
+    // TODO: 6/19/2019 надо ли переписать под preparedStatement(возвр. строку и массив параметров)?
     private AccountType type;
     @Language("sql")
     private static final String QUERY = "select * from account where acc_type = '%d'";

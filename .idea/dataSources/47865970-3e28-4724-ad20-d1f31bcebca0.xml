@@ -1215,7 +1215,7 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="305" parent="277" name="author_id">
+    <column id="305" parent="277" name="target_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1245,7 +1245,7 @@
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="310" parent="277" name="id_author_idx">
-      <ColNames>author_id</ColNames>
+      <ColNames>target_id</ColNames>
       <Type>btree</Type>
     </index>
     <index id="311" parent="277" name="user who marked_idx">
@@ -1258,7 +1258,7 @@
       <Primary>1</Primary>
     </key>
     <foreign-key id="313" parent="277" name="mark of author">
-      <ColNames>author_id</ColNames>
+      <ColNames>target_id</ColNames>
       <RefSchemaName>easylearning</RefSchemaName>
       <RefTableName>account</RefTableName>
       <RefColNames>acc_id</RefColNames>
@@ -1448,20 +1448,20 @@
       <RefTableName>course_chapter</RefTableName>
       <RefColNames>course_chapter_id</RefColNames>
     </foreign-key>
-    <column id="346" parent="282" name="course_mark_id">
+    <column id="346" parent="282" name="mark_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="347" parent="282" name="course_id">
+    <column id="347" parent="282" name="target_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="348" parent="282" name="user_id">
+    <column id="348" parent="282" name="acc_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1478,111 +1478,34 @@
       <DataType>varchar(1000)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="351" parent="282" name="id_course_idx">
-      <ColNames>course_id</ColNames>
+    <column id="351" parent="282" name="mark_date">
+      <Position>6</Position>
+      <DataType>date|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="352" parent="282" name="id_course_idx">
+      <ColNames>target_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="352" parent="282" name="PRIMARY">
+    <index id="353" parent="282" name="user who marked course">
+      <ColNames>acc_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="354" parent="282" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>course_mark_id</ColNames>
+      <ColNames>mark_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="353" parent="282" name="course_marks">
-      <ColNames>course_id</ColNames>
+    <foreign-key id="355" parent="282" name="course_marks">
+      <ColNames>target_id</ColNames>
       <RefSchemaName>easylearning</RefSchemaName>
       <RefTableName>course</RefTableName>
       <RefColNames>course_id</RefColNames>
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="354" parent="283" name="currensy_id">
-      <Position>1</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="355" parent="283" name="currency_name">
-      <Position>2</Position>
-      <DataType>varchar(45)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="356" parent="283" name="currency_country_code">
-      <Position>3</Position>
-      <DataType>varchar(45)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="357" parent="283" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>currensy_id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="358" parent="284" name="payment_id">
-      <Position>1</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="359" parent="284" name="acc_id">
-      <Position>2</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="360" parent="284" name="course_id">
-      <Position>3</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="361" parent="284" name="payment_code">
-      <Position>4</Position>
-      <DataType>smallint(4)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="362" parent="284" name="payment_amount">
-      <Position>5</Position>
-      <DataType>decimal(10,2 digit)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="363" parent="284" name="payment_date">
-      <Position>6</Position>
-      <DataType>date|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="364" parent="284" name="currency_id">
-      <Position>7</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="365" parent="284" name="payment_description">
-      <Position>8</Position>
-      <DataType>varchar(150)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="366" parent="284" name="id_user_idx">
-      <ColNames>acc_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="367" parent="284" name="id_course_idx">
-      <ColNames>course_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="368" parent="284" name="currency_idx">
-      <ColNames>currency_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="369" parent="284" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>payment_id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="370" parent="284" name="user payment">
+    <foreign-key id="356" parent="282" name="user who marked course">
       <ColNames>acc_id</ColNames>
       <RefSchemaName>easylearning</RefSchemaName>
       <RefTableName>account</RefTableName>
@@ -1590,7 +1513,102 @@
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="371" parent="284" name="course payed">
+    <column id="357" parent="283" name="currensy_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="358" parent="283" name="currency_name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="359" parent="283" name="currency_country_code">
+      <Position>3</Position>
+      <DataType>varchar(45)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="360" parent="283" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>currensy_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="361" parent="284" name="payment_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="362" parent="284" name="acc_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="363" parent="284" name="course_id">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="364" parent="284" name="payment_code">
+      <Position>4</Position>
+      <DataType>smallint(4)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="365" parent="284" name="payment_amount">
+      <Position>5</Position>
+      <DataType>decimal(10,2 digit)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="366" parent="284" name="payment_date">
+      <Position>6</Position>
+      <DataType>date|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="367" parent="284" name="currency_id">
+      <Position>7</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="368" parent="284" name="payment_description">
+      <Position>8</Position>
+      <DataType>varchar(150)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="369" parent="284" name="id_user_idx">
+      <ColNames>acc_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="370" parent="284" name="id_course_idx">
+      <ColNames>course_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="371" parent="284" name="currency_idx">
+      <ColNames>currency_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="372" parent="284" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>payment_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="373" parent="284" name="user payment">
+      <ColNames>acc_id</ColNames>
+      <RefSchemaName>easylearning</RefSchemaName>
+      <RefTableName>account</RefTableName>
+      <RefColNames>acc_id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="374" parent="284" name="course payed">
       <ColNames>course_id</ColNames>
       <RefSchemaName>easylearning</RefSchemaName>
       <RefTableName>course</RefTableName>
@@ -1598,7 +1616,7 @@
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="372" parent="284" name="currency">
+    <foreign-key id="375" parent="284" name="currency">
       <ColNames>currency_id</ColNames>
       <RefSchemaName>easylearning</RefSchemaName>
       <RefTableName>currency_type</RefTableName>
@@ -1606,33 +1624,33 @@
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="373" parent="285" name="user_id">
+    <column id="376" parent="285" name="user_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="374" parent="285" name="course_id">
+    <column id="377" parent="285" name="course_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="375" parent="285" name="payment_id">
+    <column id="378" parent="285" name="payment_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="376" parent="285" name="id_user_idx">
+    <index id="379" parent="285" name="id_user_idx">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="377" parent="285" name="id_course_idx">
+    <index id="380" parent="285" name="id_course_idx">
       <ColNames>course_id</ColNames>
       <Type>btree</Type>
     </index>
-    <foreign-key id="378" parent="285" name="user buyer">
+    <foreign-key id="381" parent="285" name="user buyer">
       <ColNames>user_id</ColNames>
       <RefSchemaName>easylearning</RefSchemaName>
       <RefTableName>account</RefTableName>
@@ -1640,7 +1658,7 @@
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="379" parent="285" name="course purchased">
+    <foreign-key id="382" parent="285" name="course purchased">
       <ColNames>course_id</ColNames>
       <RefSchemaName>easylearning</RefSchemaName>
       <RefTableName>course</RefTableName>
@@ -1648,29 +1666,29 @@
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="380" parent="286" name="user_type_id">
+    <column id="383" parent="286" name="user_type_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="381" parent="286" name="user_type_name">
+    <column id="384" parent="286" name="user_type_name">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="382" parent="286" name="user_type_name_UNIQUE">
+    <index id="385" parent="286" name="user_type_name_UNIQUE">
       <ColNames>user_type_name</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="383" parent="286" name="PRIMARY">
+    <key id="386" parent="286" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user_type_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="384" parent="286" name="user_type_name_UNIQUE">
+    <key id="387" parent="286" name="user_type_name_UNIQUE">
       <ColNames>user_type_name</ColNames>
       <UnderlyingIndexName>user_type_name_UNIQUE</UnderlyingIndexName>
     </key>

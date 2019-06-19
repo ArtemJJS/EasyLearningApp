@@ -17,6 +17,7 @@ import static by.anelkin.easylearning.entity.Account.AccountType.*;
 @Log4j
 public class AccRepository implements AppRepository<Account> {
     // TODO: 6/18/2019 добавить в запросы и методы ФОТО!!! (сейчас нету)
+    private ConnectionPool pool = ConnectionPool.getInstance();
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     @Language("sql")
     private static final String QUERY_UPDATE = "UPDATE account SET acc_password = ?, acc_email = ?, acc_name = ?," +
@@ -33,7 +34,6 @@ public class AccRepository implements AppRepository<Account> {
     @Override
     public boolean update(@NonNull Account account) {
         boolean isUpdated;
-        ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         // TODO: 6/18/2019 Сделать нормальное шифрование пароля
         String hashedPass = String.valueOf(account.getPassword().hashCode());
@@ -52,9 +52,10 @@ public class AccRepository implements AppRepository<Account> {
             log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
             isUpdated = statement.execute();
             log.debug("Query completed:" + statement.toString().split(":")[1]);
-            pool.returnConnection(connection);
         } catch (SQLException e) {
             throw new RuntimeException("Wrong query!!! " + e);
+        }finally {
+            pool.returnConnection(connection);
         }
         return isUpdated;
     }
@@ -62,7 +63,6 @@ public class AccRepository implements AppRepository<Account> {
     @Override
     public boolean delete(@NonNull Account account) {
         boolean isDeleted;
-        ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(QUERY_DELETE);
@@ -70,9 +70,10 @@ public class AccRepository implements AppRepository<Account> {
             log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
             isDeleted = statement.execute();
             log.debug("Query completed:" + statement.toString().split(":")[1]);
-            pool.returnConnection(connection);
         } catch (SQLException e) {
             throw new RuntimeException("Wrong query!!! " + e);
+        }finally {
+            pool.returnConnection(connection);
         }
         return isDeleted;
     }
@@ -80,7 +81,6 @@ public class AccRepository implements AppRepository<Account> {
     @Override
     public boolean insert(@NonNull Account account) {
         boolean isInserted;
-        ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         // TODO: 6/18/2019 Сделать нормальное шифрование пароля
         String hashedPass = String.valueOf(account.getPassword().hashCode());
@@ -99,9 +99,10 @@ public class AccRepository implements AppRepository<Account> {
             log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
             isInserted = statement.execute();
             log.debug("Query completed:" + statement.toString().split(":")[1]);
-            pool.returnConnection(connection);
         } catch (SQLException e) {
             throw new RuntimeException("Wrong query!!! " + e);
+        }finally {
+            pool.returnConnection(connection);
         }
         return isInserted;
     }
@@ -109,16 +110,16 @@ public class AccRepository implements AppRepository<Account> {
     @Override
     public List<Account> query(@NonNull AppSpecification<Account> specification) {
         List<Account> accountList = new ArrayList<>();
-        ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         try {
             Statement statement = connection.createStatement();
             log.debug("Attempt to execute query: " + specification.getQuery());
             ResultSet resultSet = statement.executeQuery(specification.getQuery());
             accountList.addAll(fillAccountList(resultSet));
-            pool.returnConnection(connection);
         } catch (SQLException e) {
             throw new RuntimeException("Wrong query!!! " + e);
+        }finally {
+            pool.returnConnection(connection);
         }
         return accountList;
     }

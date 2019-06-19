@@ -234,3 +234,52 @@
 2019-06-18 22:53:33 main DEBUG AccRepository:52 - Attempt to execute query: UPDATE account SET acc_password = '-321762516', acc_email = '1', acc_name = 'Updated Name', acc_surname = 'Updated SurName', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-18', acc_about = 'sdad', acc_type = 2 WHERE acc_login = 'Author From Insert 3'
 2019-06-18 22:53:33 main DEBUG AccRepository:54 - Query completed: UPDATE account SET acc_password = '-321762516', acc_email = '1', acc_name = 'Updated Name', acc_surname = 'Updated SurName', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-18', acc_about = 'sdad', acc_type = 2 WHERE acc_login = 'Author From Insert 3'
 2019-06-18 22:53:33 main DEBUG AccRepository:116 - Attempt to execute query: select * from account
+2019-06-19 13:55:45 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 13:55:45 main DEBUG AccRepository:119 - Attempt to execute query: select * from account
+2019-06-19 13:55:45 main DEBUG AccRepository:52 - Attempt to execute query: UPDATE account SET acc_password = '-321762516', acc_email = '1', acc_name = 'Updated Name', acc_surname = 'Updated SurName', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-19', acc_about = 'sdad', acc_type = 2 WHERE acc_login = 'Author From Insert 3'
+2019-06-19 13:55:45 main DEBUG AccRepository:54 - Query completed: UPDATE account SET acc_password = '-321762516', acc_email = '1', acc_name = 'Updated Name', acc_surname = 'Updated SurName', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-19', acc_about = 'sdad', acc_type = 2 WHERE acc_login = 'Author From Insert 3'
+2019-06-19 13:55:45 main DEBUG AccRepository:119 - Attempt to execute query: select * from account
+2019-06-19 15:11:24 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 15:12:33 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 15:12:33 main DEBUG MarkRepository:49 - Attempt to execute query: INSERT INTO 'author_mark'(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES (2, 1, 5, 'Very good author!', '2019-06-19')
+2019-06-19 15:14:58 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 15:14:58 main DEBUG MarkRepository:49 - Attempt to execute query: INSERT INTO author_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES (2, 1, 5, 'Very good author!', '2019-06-19')
+2019-06-19 15:14:58 main DEBUG MarkRepository:51 - Query completed: INSERT INTO author_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES (2, 1, 5, 'Very good author!', '2019-06-19')
+2019-06-19 15:14:58 main DEBUG MarkRepository:68 - Attempt to execute query: SELECT * FROM author_mark
+2019-06-19 15:16:02 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 15:16:02 main DEBUG MarkRepository:49 - Attempt to execute query: INSERT INTO author_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES (2, 1, 5, 'Very good author!', '2019-06-19')
+2019-06-19 15:16:02 main DEBUG MarkRepository:51 - Query completed: INSERT INTO author_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES (2, 1, 5, 'Very good author!', '2019-06-19')
+2019-06-19 15:16:02 main DEBUG MarkRepository:68 - Attempt to execute query: SELECT * FROM author_mark
+2019-06-19 15:21:44 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 15:21:44 main DEBUG MarkRepository:52 - Attempt to execute query: INSERT INTO author_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES (2, 1, 5, 'Very good author!', '2019-06-19')
+2019-06-19 15:21:44 main DEBUG MarkRepository:54 - Query completed: INSERT INTO author_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES (2, 1, 5, 'Very good author!', '2019-06-19')
+2019-06-19 15:21:44 main DEBUG MarkRepository:72 - Attempt to execute query: SELECT * FROM author_mark
+2019-06-19 15:22:49 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 15:22:49 main DEBUG MarkRepository:72 - Attempt to execute query: SELECT * FROM author_mark
+2019-06-19 15:24:55 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 15:24:55 main DEBUG MarkRepository:72 - Attempt to execute query: SELECT * FROM author_mark
+2019-06-19 15:24:55 main DEBUG MarkRepository:74 - Query executed successfully: SELECT * FROM author_mark
+2019-06-19 15:26:48 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 15:26:48 main DEBUG MarkRepository:72 - Attempt to execute query: SELECT * FROM author_mark
+2019-06-19 15:26:48 main DEBUG MarkRepository:74 - Query executed successfully: SELECT * FROM author_mark
+2019-06-19 15:37:37 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 15:37:37 main DEBUG MarkRepository:69 - Attempt to execute query: SELECT * FROM author_mark
+2019-06-19 15:37:37 main DEBUG MarkRepository:71 - Query executed successfully: SELECT * FROM author_mark
+2019-06-19 15:38:18 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 15:38:18 main DEBUG MarkRepository:50 - Attempt to execute query: INSERT INTO author_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES (5, 1, 4, 'So-so...', '2019-06-19')
+2019-06-19 15:38:18 main DEBUG MarkRepository:52 - Query completed: INSERT INTO author_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES (5, 1, 4, 'So-so...', '2019-06-19')
+2019-06-19 15:38:18 main DEBUG MarkRepository:69 - Attempt to execute query: SELECT * FROM author_mark
+2019-06-19 15:38:18 main DEBUG MarkRepository:71 - Query executed successfully: SELECT * FROM author_mark
+2019-06-19 15:47:09 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 15:48:10 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 15:48:10 main DEBUG MarkRepository:42 - Attempt to execute query: DELETE FROM author_mark WHERE mark_id = 7
+2019-06-19 15:48:10 main DEBUG MarkRepository:44 - Query completed: DELETE FROM author_mark WHERE mark_id = 7
+2019-06-19 15:48:10 main DEBUG MarkRepository:84 - Attempt to execute query: SELECT * FROM author_mark
+2019-06-19 15:48:10 main DEBUG MarkRepository:86 - Query executed successfully: SELECT * FROM author_mark
+2019-06-19 16:04:20 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 16:04:20 main DEBUG MarkRepository:105 - Attempt to execute query: SELECT * FROM author_mark
+2019-06-19 16:04:20 main DEBUG MarkRepository:107 - Query executed successfully: SELECT * FROM author_mark
+2019-06-19 16:04:20 main DEBUG MarkRepository:44 - Attempt to execute query: UPDATE author_mark SET target_id = 2, acc_id = 1, mark_value = 5, mark_comment = 'Updated from main comment!', mark_date = '2019-06-19' WHERE mark_id = 6
+2019-06-19 16:04:20 main DEBUG MarkRepository:46 - Query completed: UPDATE author_mark SET target_id = 2, acc_id = 1, mark_value = 5, mark_comment = 'Updated from main comment!', mark_date = '2019-06-19' WHERE mark_id = 6
+2019-06-19 16:04:20 main DEBUG MarkRepository:105 - Attempt to execute query: SELECT * FROM author_mark
+2019-06-19 16:04:20 main DEBUG MarkRepository:107 - Query executed successfully: SELECT * FROM author_mark

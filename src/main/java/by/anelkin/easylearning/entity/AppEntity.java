@@ -1,4 +1,4 @@
 package by.anelkin.easylearning.entity;
 
-public abstract class AppEntity {
+public abstract class AppEntity{
 }
