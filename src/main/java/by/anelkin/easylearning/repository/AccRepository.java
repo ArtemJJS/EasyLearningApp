@@ -54,18 +54,20 @@ public class AccRepository implements AppRepository<Account> {
             statement.setString(8, account.getAbout());
             statement.setInt(10, account.getType().ordinal());
             statement.setString(11, account.getLogin());
-            log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
-            log.debug("Query completed:" + statement.toString().split(":")[1]);
 
             if (account.getPhoto() != null) {
                 try (FileInputStream fis = new FileInputStream(account.getPhoto())) {
                     statement.setBinaryStream(9, fis);
+                    log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
                     statement.executeUpdate();
+                    log.debug("Query completed:" + statement.toString().split(":")[1]);
                     connection.commit();
                 }
             } else {
                 statement.setBlob(9, (Blob) null);
+                log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
                 statement.executeUpdate();
+                log.debug("Query completed:" + statement.toString().split(":")[1]);
                 connection.commit();
             }
         } catch (SQLException e) {

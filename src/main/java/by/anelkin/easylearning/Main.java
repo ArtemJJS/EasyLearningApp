@@ -1,27 +1,21 @@
 package by.anelkin.easylearning;
 
 import by.anelkin.easylearning.entity.Account;
-import by.anelkin.easylearning.entity.Mark;
+import by.anelkin.easylearning.entity.Course;
 import by.anelkin.easylearning.repository.AccRepository;
-import by.anelkin.easylearning.repository.MarkRepository;
-import by.anelkin.easylearning.specification.accountspec.SelectAccByType;
-import by.anelkin.easylearning.specification.accountspec.SelectAllAccount;
-import by.anelkin.easylearning.specification.accountspec.SelectRegistrDateAfter;
-import by.anelkin.easylearning.specification.markspec.SelectAllMark;
+import by.anelkin.easylearning.repository.CourseRepository;
+import by.anelkin.easylearning.specification.account_spec.SelectAllAccount;
+import by.anelkin.easylearning.specification.course_spec.SelectAllCourse;
 import lombok.extern.log4j.Log4j;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static by.anelkin.easylearning.entity.Account.AccountType.*;
-import static by.anelkin.easylearning.entity.Mark.MarkType.*;
 
 @Log4j
 public class Main {
@@ -67,18 +61,22 @@ public class Main {
 //        log.info("Main FINISHED!");
 //
 
-    AccRepository repo = new AccRepository();
-    List<Account> list = repo.query(new SelectAllAccount());
 
-    Account admin = list.get(1);
-  //  admin.setPhoto(new File("src/main/resources/account_avatar/1.png"));
-    repo.update(admin);
+        CourseRepository repo = new CourseRepository();
+        List<Course> list = repo.query(new SelectAllCourse());
 
-    list = repo.query(new SelectAllAccount());
-    list.forEach(System.out::println);
+        Course course = list.get(0);
+        course.setName("Updated from main course");
+        course.setDescription("Attemt to update from main");
+        try {
+            course.setCreationDate(dateFormat.parse("2000-01-01"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-     //   accRepository.delete(accountList.get(6));
-
+        repo.update(course);
+        list = repo.query(new SelectAllCourse());
+        list.forEach(System.out::println);
 
 
     }

@@ -5,3 +5,40 @@
 2019-06-19 19:41:23 main DEBUG AccRepository:58 - Attempt to execute query: UPDATE account SET acc_password = '49744980', acc_email = '1', acc_name = '1', acc_surname = '1', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-14', acc_about = 'sdad', acc_photo = ** NOT SPECIFIED **, acc_type = 2 WHERE acc_login = 'author 1'
 2019-06-19 19:41:23 main DEBUG AccRepository:59 - Query completed: UPDATE account SET acc_password = '49744980', acc_email = '1', acc_name = '1', acc_surname = '1', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-14', acc_about = 'sdad', acc_photo = ** NOT SPECIFIED **, acc_type = 2 WHERE acc_login = 'author 1'
 2019-06-19 19:41:23 main DEBUG AccRepository:135 - Attempt to execute query: select * from account
+2019-06-19 19:48:40 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 19:48:40 main DEBUG AccRepository:134 - Attempt to execute query: select * from account
+2019-06-19 19:48:40 main DEBUG AccRepository:57 - Attempt to execute query: UPDATE account SET acc_password = '1104158559', acc_email = '1', acc_name = '1', acc_surname = '1', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-14', acc_about = 'sdad', acc_photo = ** NOT SPECIFIED **, acc_type = 2 WHERE acc_login = 'author 1'
+2019-06-19 19:48:40 main DEBUG AccRepository:58 - Query completed: UPDATE account SET acc_password = '1104158559', acc_email = '1', acc_name = '1', acc_surname = '1', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-14', acc_about = 'sdad', acc_photo = ** NOT SPECIFIED **, acc_type = 2 WHERE acc_login = 'author 1'
+2019-06-19 19:48:40 main DEBUG AccRepository:134 - Attempt to execute query: select * from account
+2019-06-19 19:52:59 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 19:52:59 main DEBUG AccRepository:134 - Attempt to execute query: select * from account
+2019-06-19 19:52:59 main DEBUG AccRepository:57 - Attempt to execute query: UPDATE account SET acc_password = '-1295585367', acc_email = '1', acc_name = '1', acc_surname = '1', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-14', acc_about = 'sdad', acc_photo = ** NOT SPECIFIED **, acc_type = 2 WHERE acc_login = 'author 1'
+2019-06-19 19:52:59 main DEBUG AccRepository:58 - Query completed: UPDATE account SET acc_password = '-1295585367', acc_email = '1', acc_name = '1', acc_surname = '1', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-14', acc_about = 'sdad', acc_photo = ** NOT SPECIFIED **, acc_type = 2 WHERE acc_login = 'author 1'
+2019-06-19 19:52:59 main DEBUG AccRepository:134 - Attempt to execute query: select * from account
+2019-06-19 19:54:35 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 19:54:35 main DEBUG AccRepository:134 - Attempt to execute query: select * from account
+2019-06-19 19:54:35 main DEBUG AccRepository:57 - Attempt to execute query: UPDATE account SET acc_password = '1443618348', acc_email = '1', acc_name = '1', acc_surname = '1', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-14', acc_about = 'sdad', acc_photo = ** NOT SPECIFIED **, acc_type = 2 WHERE acc_login = 'author 1'
+2019-06-19 19:54:35 main DEBUG AccRepository:58 - Query completed: UPDATE account SET acc_password = '1443618348', acc_email = '1', acc_name = '1', acc_surname = '1', acc_birthdate = '2019-06-02', acc_phone_number = '2', acc_registration_date = '2019-06-14', acc_about = 'sdad', acc_photo = ** NOT SPECIFIED **, acc_type = 2 WHERE acc_login = 'author 1'
+2019-06-19 19:54:35 main DEBUG AccRepository:134 - Attempt to execute query: select * from account
+2019-06-19 20:32:48 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 20:32:48 main DEBUG CourseRepository:72 - Attempt to execute query: SELECT * FROM course
+2019-06-19 20:32:48 main DEBUG CourseRepository:74 - Query successfully executed: SELECT * FROM course
+2019-06-19 20:36:51 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 20:36:51 main DEBUG CourseRepository:72 - Attempt to execute query: SELECT * FROM course
+2019-06-19 20:36:51 main DEBUG CourseRepository:74 - Query successfully executed: SELECT * FROM course
+2019-06-19 20:37:28 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 20:37:28 main DEBUG CourseRepository:70 - Attempt to execute query: SELECT * FROM course
+2019-06-19 20:37:28 main DEBUG CourseRepository:72 - Query successfully executed: SELECT * FROM course
+2019-06-19 20:38:12 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 20:38:12 main DEBUG CourseRepository:70 - Attempt to execute query: SELECT * FROM course
+2019-06-19 20:38:12 main DEBUG CourseRepository:72 - Query successfully executed: SELECT * FROM course
+2019-06-19 20:56:36 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 20:56:36 main DEBUG CourseRepository:92 - Attempt to execute query: SELECT * FROM course
+2019-06-19 20:56:36 main DEBUG CourseRepository:94 - Query successfully executed: SELECT * FROM course
+2019-06-19 20:57:45 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 20:57:45 main DEBUG CourseRepository:92 - Attempt to execute query: SELECT * FROM course
+2019-06-19 20:57:45 main DEBUG CourseRepository:94 - Query successfully executed: SELECT * FROM course
+2019-06-19 20:57:45 main DEBUG CourseRepository:41 - Attempt to execute query: DELETE FROM course WHERE course_id = 3
+2019-06-19 20:57:45 main DEBUG CourseRepository:43 - Query completed: DELETE FROM course WHERE course_id = 3
+2019-06-19 20:57:45 main DEBUG CourseRepository:92 - Attempt to execute query: SELECT * FROM course
+2019-06-19 20:57:45 main DEBUG CourseRepository:94 - Query successfully executed: SELECT * FROM course

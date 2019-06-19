@@ -3,7 +3,7 @@ package by.anelkin.easylearning.repository;
 import by.anelkin.easylearning.connection.ConnectionPool;
 import by.anelkin.easylearning.entity.Mark;
 import by.anelkin.easylearning.specification.AppSpecification;
-import by.anelkin.easylearning.specification.markspec.MarkSpecification;
+import by.anelkin.easylearning.specification.mark_spec.MarkSpecification;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
 import org.intellij.lang.annotations.Language;
