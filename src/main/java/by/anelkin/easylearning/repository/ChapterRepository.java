@@ -16,7 +16,6 @@ import java.util.List;
 @Log4j
 public class ChapterRepository implements AppRepository<CourseChapter> {
     private ConnectionPool pool = ConnectionPool.getInstance();
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     @Language("sql")
     private static final String QUERY_INSERT = "INSERT INTO course_chapter(course_id, chapter_name) VALUES (?, ?)";
     @Language("sql")

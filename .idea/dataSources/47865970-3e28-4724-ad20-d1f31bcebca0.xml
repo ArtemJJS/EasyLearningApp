@@ -1415,10 +1415,9 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="340" parent="281" name="lesson_content">
+    <column id="340" parent="281" name="lesson_content_address">
       <Position>4</Position>
-      <DataType>longblob|0s</DataType>
-      <NotNull>1</NotNull>
+      <DataType>text|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="341" parent="281" name="lesson_creation_date">

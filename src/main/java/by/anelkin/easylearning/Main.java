@@ -3,12 +3,15 @@ package by.anelkin.easylearning;
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.entity.Course;
 import by.anelkin.easylearning.entity.CourseChapter;
+import by.anelkin.easylearning.entity.CourseLesson;
 import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.repository.ChapterRepository;
 import by.anelkin.easylearning.repository.CourseRepository;
+import by.anelkin.easylearning.repository.LessonRepository;
 import by.anelkin.easylearning.specification.account_spec.SelectAllAccount;
 import by.anelkin.easylearning.specification.chapter_spec.SelectAllChapter;
 import by.anelkin.easylearning.specification.course_spec.SelectAllCourse;
+import by.anelkin.easylearning.specification.lesson_spec.SelectAllLesson;
 import lombok.extern.log4j.Log4j;
 
 import java.io.File;
@@ -19,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Log4j
 public class Main {
@@ -64,13 +68,18 @@ public class Main {
 //        log.info("Main FINISHED!");
 //
 
-        ChapterRepository repo = new ChapterRepository();
-        List<CourseChapter> list = repo.query(new SelectAllChapter());
-        CourseChapter chapter = list.get(1);
-        chapter.setName("Updated chapter name");
-        repo.update(chapter);
-        list = repo.query(new SelectAllChapter());
+
+
+        LessonRepository repo = new LessonRepository();
+        List<CourseLesson> list = repo.query(new SelectAllLesson());
+
+        CourseLesson lesson = list.get(0);
+        File content = lesson.getContent();
+
+        list = repo.query(new SelectAllLesson());
         list.forEach(System.out::println);
+
+
     }
 
 }

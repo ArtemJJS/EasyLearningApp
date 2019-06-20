@@ -106,3 +106,82 @@
 2019-06-20 15:44:41 main DEBUG ChapterRepository:39 - Query completed: UPDATE course_chapter SET course_id = 1, chapter_name = 'Updated chapter name' WHERE course_chapter_id = 2
 2019-06-20 15:44:41 main DEBUG ChapterRepository:91 - Attempt to execute query:SELECT * FROM course_chapter
 2019-06-20 15:44:41 main DEBUG ChapterRepository:93 - Query completed:SELECT * FROM course_chapter
+2019-06-20 16:31:26 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 16:31:26 main DEBUG LessonRepository:52 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 16:31:26 main DEBUG LessonRepository:54 - Query completed:SELECT * FROM course_lesson
+2019-06-20 16:31:59 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 16:31:59 main DEBUG LessonRepository:52 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 16:31:59 main DEBUG LessonRepository:54 - Query completed:SELECT * FROM course_lesson
+2019-06-20 16:32:59 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 16:32:59 main DEBUG LessonRepository:52 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 16:32:59 main DEBUG LessonRepository:54 - Query completed:SELECT * FROM course_lesson
+2019-06-20 16:59:59 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 16:59:59 main DEBUG LessonRepository:73 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 16:59:59 main DEBUG LessonRepository:75 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:01:32 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 17:01:32 main DEBUG LessonRepository:55 - Attempt to execute query: INSERT INTO course_lesson(course_chapter_id, lesson_name, lesson_content_address, lesson_creation_date, lesson_length) VALUES (1, 'lesson 2', ** NOT SPECIFIED **, '2019-06-20', 534)
+2019-06-20 17:01:32 main DEBUG LessonRepository:73 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:01:32 main DEBUG LessonRepository:75 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:02:56 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 17:02:56 main DEBUG LessonRepository:56 - Attempt to execute query: INSERT INTO course_lesson(course_chapter_id, lesson_name, lesson_content_address, lesson_creation_date, lesson_length) VALUES (1, 'lesson 2', null, '2019-06-20', 534)
+2019-06-20 17:02:56 main DEBUG LessonRepository:58 - Query completed: INSERT INTO course_lesson(course_chapter_id, lesson_name, lesson_content_address, lesson_creation_date, lesson_length) VALUES (1, 'lesson 2', null, '2019-06-20', 534)
+2019-06-20 17:02:56 main DEBUG LessonRepository:74 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:02:56 main DEBUG LessonRepository:76 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:04:49 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 17:04:49 main DEBUG LessonRepository:74 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:04:49 main DEBUG LessonRepository:76 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:05:05 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 17:05:05 main DEBUG LessonRepository:74 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:05:05 main DEBUG LessonRepository:76 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:05:28 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 17:05:28 main DEBUG LessonRepository:74 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:05:28 main DEBUG LessonRepository:76 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:06:05 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 17:06:05 main DEBUG LessonRepository:74 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:06:05 main DEBUG LessonRepository:76 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:10:28 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 17:10:28 main DEBUG LessonRepository:56 - Attempt to execute query: INSERT INTO course_lesson(course_chapter_id, lesson_name, lesson_content_address, lesson_creation_date, lesson_length) VALUES (2, 'lesson 1', 'C
+2019-06-20 17:10:28 main DEBUG LessonRepository:58 - Query completed: INSERT INTO course_lesson(course_chapter_id, lesson_name, lesson_content_address, lesson_creation_date, lesson_length) VALUES (2, 'lesson 1', 'C
+2019-06-20 17:10:28 main DEBUG LessonRepository:74 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:10:28 main DEBUG LessonRepository:76 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:11:20 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 17:11:20 main DEBUG LessonRepository:56 - Attempt to execute query: INSERT INTO course_lesson(course_chapter_id, lesson_name, lesson_content_address, lesson_creation_date, lesson_length) VALUES (2, 'lesson 1', 'C
+2019-06-20 17:11:20 main DEBUG LessonRepository:58 - Query completed: INSERT INTO course_lesson(course_chapter_id, lesson_name, lesson_content_address, lesson_creation_date, lesson_length) VALUES (2, 'lesson 1', 'C
+2019-06-20 17:11:20 main DEBUG LessonRepository:74 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:11:20 main DEBUG LessonRepository:76 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:15:44 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 17:15:44 main DEBUG LessonRepository:102 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:15:44 main DEBUG LessonRepository:104 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:15:44 main DEBUG LessonRepository:58 - Attempt to execute query: DELETE FROM course_lesson WHERE lesson_id = 1
+2019-06-20 17:15:44 main DEBUG LessonRepository:60 - Query completed: DELETE FROM course_lesson WHERE lesson_id = 1
+2019-06-20 17:15:44 main DEBUG LessonRepository:102 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:15:44 main DEBUG LessonRepository:104 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:15:56 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 17:15:56 main DEBUG LessonRepository:102 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:15:56 main DEBUG LessonRepository:104 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:15:56 main DEBUG LessonRepository:58 - Attempt to execute query: DELETE FROM course_lesson WHERE lesson_id = 3
+2019-06-20 17:15:56 main DEBUG LessonRepository:60 - Query completed: DELETE FROM course_lesson WHERE lesson_id = 3
+2019-06-20 17:15:56 main DEBUG LessonRepository:102 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:15:56 main DEBUG LessonRepository:104 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:23:22 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 17:23:22 main DEBUG LessonRepository:110 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:23:22 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:23:22 main DEBUG LessonRepository:47 - Attempt to execute query: UPDATE course_lesson SET course_chapter_id = 1, lesson_name = 'lesson 1.1', lesson_content_address = 'C
+2019-06-20 17:23:22 main DEBUG LessonRepository:49 - Query completed: UPDATE course_lesson SET course_chapter_id = 1, lesson_name = 'lesson 1.1', lesson_content_address = 'C
+2019-06-20 17:23:22 main DEBUG LessonRepository:110 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:23:22 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:24:11 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 17:24:11 main DEBUG LessonRepository:110 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:24:11 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:24:11 main DEBUG LessonRepository:110 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:24:11 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:24:23 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 17:24:23 main DEBUG LessonRepository:110 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:24:23 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:24:23 main DEBUG LessonRepository:110 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:24:23 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:24:47 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 17:24:47 main DEBUG LessonRepository:110 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:24:47 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
+2019-06-20 17:24:47 main DEBUG LessonRepository:110 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 17:24:47 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
