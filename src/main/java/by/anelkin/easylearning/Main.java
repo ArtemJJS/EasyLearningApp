@@ -2,9 +2,12 @@ package by.anelkin.easylearning;
 
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.entity.Course;
+import by.anelkin.easylearning.entity.CourseChapter;
 import by.anelkin.easylearning.repository.AccRepository;
+import by.anelkin.easylearning.repository.ChapterRepository;
 import by.anelkin.easylearning.repository.CourseRepository;
 import by.anelkin.easylearning.specification.account_spec.SelectAllAccount;
+import by.anelkin.easylearning.specification.chapter_spec.SelectAllChapter;
 import by.anelkin.easylearning.specification.course_spec.SelectAllCourse;
 import lombok.extern.log4j.Log4j;
 
@@ -61,24 +64,13 @@ public class Main {
 //        log.info("Main FINISHED!");
 //
 
-
-        CourseRepository repo = new CourseRepository();
-        List<Course> list = repo.query(new SelectAllCourse());
-
-        Course course = list.get(0);
-        course.setName("Updated from main course");
-        course.setDescription("Attemt to update from main");
-        try {
-            course.setCreationDate(dateFormat.parse("2000-01-01"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        repo.update(course);
-        list = repo.query(new SelectAllCourse());
+        ChapterRepository repo = new ChapterRepository();
+        List<CourseChapter> list = repo.query(new SelectAllChapter());
+        CourseChapter chapter = list.get(1);
+        chapter.setName("Updated chapter name");
+        repo.update(chapter);
+        list = repo.query(new SelectAllChapter());
         list.forEach(System.out::println);
-
-
     }
 
 }

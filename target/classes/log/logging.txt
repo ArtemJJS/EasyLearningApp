@@ -42,3 +42,60 @@
 2019-06-19 20:57:45 main DEBUG CourseRepository:43 - Query completed: DELETE FROM course WHERE course_id = 3
 2019-06-19 20:57:45 main DEBUG CourseRepository:92 - Attempt to execute query: SELECT * FROM course
 2019-06-19 20:57:45 main DEBUG CourseRepository:94 - Query successfully executed: SELECT * FROM course
+2019-06-19 21:08:17 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-19 21:08:17 main DEBUG CourseRepository:124 - Attempt to execute query: SELECT * FROM course
+2019-06-19 21:08:17 main DEBUG CourseRepository:126 - Query successfully executed: SELECT * FROM course
+2019-06-19 21:08:17 main DEBUG CourseRepository:45 - Attempt to execute query: UPDATE course SET course_name = 'Updated from main course', course_description = 'Attemt to update from main', course_creation_date = '2000-01-01', course_picture = ** STREAM DATA ** WHERE course_id = 1
+2019-06-19 21:08:17 main DEBUG CourseRepository:47 - Query completed: UPDATE course SET course_name = 'Updated from main course', course_description = 'Attemt to update from main', course_creation_date = '2000-01-01', course_picture = ** STREAM DATA ** WHERE course_id = 1
+2019-06-19 21:08:17 main DEBUG CourseRepository:124 - Attempt to execute query: SELECT * FROM course
+2019-06-19 21:08:17 main DEBUG CourseRepository:126 - Query successfully executed: SELECT * FROM course
+2019-06-20 15:27:02 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 15:27:02 main DEBUG ChapterRepository:62 - Attempt to execute query:SELECT * FROM course_chapter
+2019-06-20 15:27:02 main DEBUG ChapterRepository:64 - Query completed:SELECT * FROM course_chapter
+2019-06-20 15:29:07 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 15:29:07 main DEBUG CourseRepository:124 - Attempt to execute query: SELECT * FROM course
+2019-06-20 15:29:07 main DEBUG CourseRepository:126 - Query successfully executed: SELECT * FROM course
+2019-06-20 15:29:07 main DEBUG ChapterRepository:47 - Attempt to execute query: INSERT INTO course_chapter(course_id, chapter_name) VALUES (1, 'First chapter')
+2019-06-20 15:29:07 main DEBUG ChapterRepository:49 - Query completed: INSERT INTO course_chapter(course_id, chapter_name) VALUES (1, 'First chapter')
+2019-06-20 15:29:07 main DEBUG ChapterRepository:62 - Attempt to execute query:SELECT * FROM course_chapter
+2019-06-20 15:29:07 main DEBUG ChapterRepository:64 - Query completed:SELECT * FROM course_chapter
+2019-06-20 15:32:15 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 15:32:15 main DEBUG CourseRepository:124 - Attempt to execute query: SELECT * FROM course
+2019-06-20 15:32:15 main DEBUG CourseRepository:126 - Query successfully executed: SELECT * FROM course
+2019-06-20 15:32:15 main DEBUG ChapterRepository:54 - Attempt to execute query: INSERT INTO course_chapter(course_id, chapter_name) VALUES (1, 'Second chapter')
+2019-06-20 15:32:15 main DEBUG ChapterRepository:56 - Query completed: INSERT INTO course_chapter(course_id, chapter_name) VALUES (1, 'Second chapter')
+2019-06-20 15:32:15 main DEBUG ChapterRepository:69 - Attempt to execute query:SELECT * FROM course_chapter
+2019-06-20 15:32:15 main DEBUG ChapterRepository:71 - Query completed:SELECT * FROM course_chapter
+2019-06-20 15:32:26 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 15:32:26 main DEBUG CourseRepository:124 - Attempt to execute query: SELECT * FROM course
+2019-06-20 15:32:26 main DEBUG CourseRepository:126 - Query successfully executed: SELECT * FROM course
+2019-06-20 15:32:26 main DEBUG ChapterRepository:54 - Attempt to execute query: INSERT INTO course_chapter(course_id, chapter_name) VALUES (1, 'Third chapter')
+2019-06-20 15:32:26 main DEBUG ChapterRepository:56 - Query completed: INSERT INTO course_chapter(course_id, chapter_name) VALUES (1, 'Third chapter')
+2019-06-20 15:32:26 main DEBUG ChapterRepository:69 - Attempt to execute query:SELECT * FROM course_chapter
+2019-06-20 15:32:26 main DEBUG ChapterRepository:71 - Query completed:SELECT * FROM course_chapter
+2019-06-20 15:32:38 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 15:32:38 main DEBUG CourseRepository:124 - Attempt to execute query: SELECT * FROM course
+2019-06-20 15:32:38 main DEBUG CourseRepository:126 - Query successfully executed: SELECT * FROM course
+2019-06-20 15:32:38 main DEBUG ChapterRepository:54 - Attempt to execute query: INSERT INTO course_chapter(course_id, chapter_name) VALUES (1, 'Fourth chapter')
+2019-06-20 15:32:38 main DEBUG ChapterRepository:56 - Query completed: INSERT INTO course_chapter(course_id, chapter_name) VALUES (1, 'Fourth chapter')
+2019-06-20 15:32:38 main DEBUG ChapterRepository:69 - Attempt to execute query:SELECT * FROM course_chapter
+2019-06-20 15:32:38 main DEBUG ChapterRepository:71 - Query completed:SELECT * FROM course_chapter
+2019-06-20 15:38:16 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 15:38:16 main DEBUG ChapterRepository:72 - Attempt to execute query:SELECT * FROM course_chapter
+2019-06-20 15:38:16 main DEBUG ChapterRepository:74 - Query completed:SELECT * FROM course_chapter
+2019-06-20 15:38:16 main DEBUG ChapterRepository:40 - Attempt to execute query: DELETE FROM course_chapter WHERE course_chapter_id = 4
+2019-06-20 15:38:16 main DEBUG ChapterRepository:42 - Query completed: DELETE FROM course_chapter WHERE course_chapter_id = 4
+2019-06-20 15:38:16 main DEBUG ChapterRepository:72 - Attempt to execute query:SELECT * FROM course_chapter
+2019-06-20 15:38:16 main DEBUG ChapterRepository:74 - Query completed:SELECT * FROM course_chapter
+2019-06-20 15:38:21 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 15:38:21 main DEBUG ChapterRepository:72 - Attempt to execute query:SELECT * FROM course_chapter
+2019-06-20 15:38:21 main DEBUG ChapterRepository:74 - Query completed:SELECT * FROM course_chapter
+2019-06-20 15:38:21 main DEBUG ChapterRepository:40 - Attempt to execute query: DELETE FROM course_chapter WHERE course_chapter_id = 3
+2019-06-20 15:38:21 main DEBUG ChapterRepository:42 - Query completed: DELETE FROM course_chapter WHERE course_chapter_id = 3
+2019-06-20 15:38:21 main DEBUG ChapterRepository:72 - Attempt to execute query:SELECT * FROM course_chapter
+2019-06-20 15:38:21 main DEBUG ChapterRepository:74 - Query completed:SELECT * FROM course_chapter
+2019-06-20 15:44:21 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 15:44:21 main DEBUG ChapterRepository:91 - Attempt to execute query:SELECT * FROM course_chapter
+2019-06-20 15:44:21 main DEBUG ChapterRepository:93 - Query completed:SELECT * FROM course_chapter
+2019-06-20 15:44:21 main DEBUG ChapterRepository:91 - Attempt to execute query:SELECT * FROM course_chapter
+2019-06-20 15:44:21 main DEBUG ChapterRepository:93 - Query completed:SELECT * FROM course_chapter
