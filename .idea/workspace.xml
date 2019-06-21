@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="77346347-82ab-4dd4-a607-ffc1e917cca2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/repository/PaymentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/specification/payment_spec/SelectAllPayment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/connection/ProxyConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/connection/ConnectionPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/connection/ConnectionPool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/entity/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/entity/Payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/repository/LessonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/repository/LessonRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bd.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bd.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log/logging.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log/logging.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bd.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bd.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/connection/ConnectionPool.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/connection/ConnectionPool.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/entity/Payment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/entity/Payment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/repository/LessonRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/repository/LessonRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/log/logging.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log/logging.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -68,13 +55,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="304">
               <caret line="73" column="29" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/connection/ProxyConnection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#206#207#0" expanded="true" />
+                <element signature="e#250#251#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -106,18 +107,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="325">
               <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/specification/lesson_spec/SelectAllLesson.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -203,7 +192,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
         <option value="$PROJECT_DIR$/web/META-INF/context.xml" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/META-INF/context.xml" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/connection/TestThread.java" />
@@ -254,6 +242,7 @@
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/repository/PaymentRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/connection/ProxyConnection.java" />
       </list>
     </option>
   </component>
@@ -464,7 +453,7 @@
       <workItem from="1560955545843" duration="12286000" />
       <workItem from="1561032093554" duration="8403000" />
       <workItem from="1561047707578" duration="2366000" />
-      <workItem from="1561105148681" duration="4943000" />
+      <workItem from="1561105148681" duration="6607000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add entities, connection pool, repository for accounts, some specifications for accounts.">
       <created>1560887723997</created>
@@ -508,17 +497,24 @@
       <option name="project" value="LOCAL" />
       <updated>1561040771322</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat: add payment repository.">
+      <created>1561110641453</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1561110641453</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71349000" />
+    <option name="totallyTimeSpent" value="73013000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17909536" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17909536" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -528,7 +524,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32997763" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.31096196" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31096196" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.33221477" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -597,7 +593,8 @@
     <MESSAGE value="feat: add course repository." />
     <MESSAGE value="feat: add chapter repository." />
     <MESSAGE value="feat: add lesson repository." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add lesson repository." />
+    <MESSAGE value="feat: add payment repository." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add payment repository." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -614,13 +611,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/entity/AppEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/specification/account_spec/SelectAllAccount.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1012,6 +1002,18 @@
           <caret line="73" column="29" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/connection/ProxyConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#206#207#0" expanded="true" />
+            <element signature="e#250#251#0" expanded="true" />
           </folding>
         </state>
       </provider>
