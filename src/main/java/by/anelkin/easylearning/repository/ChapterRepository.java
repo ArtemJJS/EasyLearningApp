@@ -27,7 +27,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
     @Override
     public boolean update(@NonNull CourseChapter chapter) {
         int amnountUpdated = 0;
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE);
             statement.setInt(1, chapter.getCourseId());
@@ -47,7 +47,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
     @Override
     public boolean delete(@NonNull CourseChapter chapter) {
         boolean isDeleted = false;
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(QUERY_DELETE);
             statement.setInt(1, chapter.getId());
@@ -65,7 +65,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
     @Override
     public boolean insert(@NonNull CourseChapter chapter) {
         boolean isInserted = false;
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(QUERY_INSERT);
             statement.setInt(1, chapter.getCourseId());
@@ -84,7 +84,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
     @Override
     public List<CourseChapter> query(@NonNull AppSpecification<CourseChapter> specification) {
         List<CourseChapter> chapterList = new ArrayList<>();
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             Statement statement = connection.createStatement();
             log.debug("Attempt to execute query:" + specification.getQuery());

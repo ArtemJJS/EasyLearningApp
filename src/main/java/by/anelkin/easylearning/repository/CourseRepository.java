@@ -32,7 +32,7 @@ public class CourseRepository implements AppRepository<Course> {
     @Override
     public boolean update(@NonNull Course course) {
         int isUpdated = 0;
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE);
             statement.setString(1, course.getName());
@@ -66,7 +66,7 @@ public class CourseRepository implements AppRepository<Course> {
     @Override
     public boolean delete(@NonNull Course course) {
         boolean isDeleted = false;
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(QUERY_DELETE);
             statement.setInt(1, course.getId());
@@ -90,7 +90,7 @@ public class CourseRepository implements AppRepository<Course> {
     @Override
     public boolean insert(@NonNull Course course) {
         boolean isInserted = false;
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(QUERY_INSERT);
             statement.setString(1, course.getName());
@@ -118,7 +118,7 @@ public class CourseRepository implements AppRepository<Course> {
     @Override
     public List<Course> query(@NonNull AppSpecification<Course> specification) {
         List<Course> courseList = new ArrayList<>();
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             Statement statement = connection.createStatement();
             log.debug("Attempt to execute query: " + specification.getQuery());

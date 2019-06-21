@@ -31,7 +31,7 @@ public class PaymentRepository implements AppRepository<Payment> {
     @Override
     public boolean update(@NonNull Payment payment) {
         int amountUpdated = 0;
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE);
             statement.setInt(1, payment.getAccountId());
@@ -57,7 +57,7 @@ public class PaymentRepository implements AppRepository<Payment> {
     @Override
     public boolean delete(@NonNull Payment payment) {
         boolean isDeleted = false;
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(QUERY_DELETE);
             statement.setInt(1, payment.getId());
@@ -75,7 +75,7 @@ public class PaymentRepository implements AppRepository<Payment> {
     @Override
     public boolean insert(@NonNull Payment payment) {
         boolean isInserted = false;
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(QUERY_INSERT);
             statement.setInt(1, payment.getAccountId());
@@ -100,7 +100,7 @@ public class PaymentRepository implements AppRepository<Payment> {
     @Override
     public List<Payment> query(@NonNull AppSpecification<Payment> specification) {
         List<Payment> paymentList = new ArrayList<>();
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             Statement statement = connection.createStatement();
             log.debug("Attempt to execute query:" + specification.getQuery());

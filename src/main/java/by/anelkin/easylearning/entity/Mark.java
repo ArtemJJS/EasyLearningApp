@@ -9,7 +9,6 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Mark extends AppEntity {
-    // TODO: 6/19/2019 может добавить тип на кого отметка??? (author/course)
     private int id;
     private int targetId;
     private int accId;

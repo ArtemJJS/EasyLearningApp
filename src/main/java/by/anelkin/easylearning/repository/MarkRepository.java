@@ -32,7 +32,7 @@ public class MarkRepository implements AppRepository<Mark> {
     public boolean update(@NonNull Mark mark) {
         boolean isUpdated = false;
         String actualQuery = String.format(QUERY_UPDATE, mark.getMarkType().toString().toLowerCase());
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(actualQuery);
             statement.setInt(1, mark.getTargetId());
@@ -56,7 +56,7 @@ public class MarkRepository implements AppRepository<Mark> {
     public boolean delete(@NonNull Mark mark) {
         boolean isDeleted = false;
         String actualQuery = String.format(QUERY_DELETE, mark.getMarkType().toString().toLowerCase());
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(actualQuery);
             statement.setInt(1, mark.getId());
@@ -74,7 +74,7 @@ public class MarkRepository implements AppRepository<Mark> {
     @Override
     public boolean insert(@NonNull Mark mark) {
         boolean isInserted;
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         String actualQuery = String.format(QUERY_INSERT, mark.getMarkType().toString().toLowerCase());
         try {
             PreparedStatement statement = connection.prepareStatement(actualQuery);
@@ -99,7 +99,7 @@ public class MarkRepository implements AppRepository<Mark> {
     public List<Mark> query(AppSpecification<Mark> specification) {
         List<Mark> markList = new ArrayList<>();
         MarkType markType = ((MarkSpecification) specification).getMarkType();
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             Statement statement = connection.createStatement();
             log.debug("Attempt to execute query: " + specification.getQuery());

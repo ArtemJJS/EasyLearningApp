@@ -27,7 +27,7 @@ public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
 //        log.info("Start of main.");
 //        ConnectionPool connectionPool = ConnectionPool.getInstance();
-//        Connection connection = connectionPool.getConnection();
+//        Connection connection = connectionPool.takeConnection();
 //        log.debug("Connection = " + connection);
 //        try {
 //            Statement statement = connection.createStatement();
@@ -71,7 +71,7 @@ public class Main {
         Payment payment = list.get(0);
         payment.setAmount(new BigDecimal("99.99"));
         payment.setDescription("Updated from main");
-        repo.update(payment);
+        //repo.update(payment);
 
         list = repo.query(new SelectAllPayment());
         list.forEach(System.out::println);

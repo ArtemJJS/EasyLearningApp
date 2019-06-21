@@ -19,7 +19,6 @@ import static by.anelkin.easylearning.entity.Account.AccountType.*;
 
 @Log4j
 public class AccRepository implements AppRepository<Account> {
-    // TODO: 6/18/2019 добавить в запросы и методы ФОТО!!! (сейчас нету)
     private ConnectionPool pool = ConnectionPool.getInstance();
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private static final String AVATAR_PATH = "src/main/resources/account_avatar/%s.png";
@@ -38,7 +37,7 @@ public class AccRepository implements AppRepository<Account> {
     @Override
     public boolean update(@NonNull Account account) {
         boolean isUpdated;
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         // TODO: 6/18/2019 Сделать нормальное шифрование пароля
         String hashedPass = String.valueOf(account.getPassword().hashCode());
         try {
@@ -83,7 +82,7 @@ public class AccRepository implements AppRepository<Account> {
     @Override
     public boolean delete(@NonNull Account account) {
         boolean isDeleted;
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(QUERY_DELETE);
             statement.setString(1, account.getLogin());
@@ -101,7 +100,7 @@ public class AccRepository implements AppRepository<Account> {
     @Override
     public boolean insert(@NonNull Account account) {
         boolean isInserted;
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         // TODO: 6/18/2019 Сделать нормальное шифрование пароля
         String hashedPass = String.valueOf(account.getPassword().hashCode());
         try {
@@ -130,7 +129,7 @@ public class AccRepository implements AppRepository<Account> {
     @Override
     public List<Account> query(@NonNull AppSpecification<Account> specification) {
         List<Account> accountList = new ArrayList<>();
-        Connection connection = pool.getConnection();
+        Connection connection = pool.takeConnection();
         try {
             Statement statement = connection.createStatement();
             log.debug("Attempt to execute query: " + specification.getQuery());
