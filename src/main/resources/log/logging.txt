@@ -185,3 +185,49 @@
 2019-06-20 17:24:47 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
 2019-06-20 17:24:47 main DEBUG LessonRepository:110 - Attempt to execute query:SELECT * FROM course_lesson
 2019-06-20 17:24:47 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
+2019-06-20 23:00:28 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 23:00:28 main DEBUG LessonRepository:110 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 23:00:28 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
+2019-06-20 23:00:28 main DEBUG LessonRepository:110 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 23:00:28 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
+2019-06-20 23:02:14 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 23:02:14 main DEBUG LessonRepository:110 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 23:02:14 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
+2019-06-20 23:02:14 main DEBUG LessonRepository:110 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 23:02:14 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
+2019-06-20 23:02:23 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-20 23:02:23 main DEBUG LessonRepository:110 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 23:02:23 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
+2019-06-20 23:02:23 main DEBUG LessonRepository:110 - Attempt to execute query:SELECT * FROM course_lesson
+2019-06-20 23:02:23 main DEBUG LessonRepository:112 - Query completed:SELECT * FROM course_lesson
+2019-06-21 11:57:13 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-21 11:57:13 main DEBUG PaymentRepository:55 - Attempt to execute query:SELECT * FROM user_payment
+2019-06-21 11:57:13 main DEBUG PaymentRepository:57 - Query completed:SELECT * FROM user_payment
+2019-06-21 12:26:11 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-21 12:26:11 main DEBUG PaymentRepository:53 - Attempt to execute query: INSERT INTO user_payment(acc_id, course_id, payment_code, payment_amount, payment_date, currency_id, payment_description) VALUES (1, 1, 1, 9.99, '2019-06-21', 1, 'Test payment')
+2019-06-21 12:26:11 main DEBUG PaymentRepository:55 - Query completed: INSERT INTO user_payment(acc_id, course_id, payment_code, payment_amount, payment_date, currency_id, payment_description) VALUES (1, 1, 1, 9.99, '2019-06-21', 1, 'Test payment')
+2019-06-21 12:26:11 main DEBUG PaymentRepository:71 - Attempt to execute query:SELECT * FROM user_payment
+2019-06-21 12:26:11 main DEBUG PaymentRepository:73 - Query completed:SELECT * FROM user_payment
+2019-06-21 12:31:50 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-21 12:31:50 main DEBUG PaymentRepository:53 - Attempt to execute query: INSERT INTO user_payment(acc_id, course_id, payment_code, payment_amount, payment_date, currency_id, payment_description) VALUES (1, 2, 1, 19.99, '2019-06-21', 1, 'Test payment 2')
+2019-06-21 12:31:50 main DEBUG PaymentRepository:71 - Attempt to execute query:SELECT * FROM user_payment
+2019-06-21 12:31:50 main DEBUG PaymentRepository:73 - Query completed:SELECT * FROM user_payment
+2019-06-21 12:32:22 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-21 12:32:22 main DEBUG PaymentRepository:53 - Attempt to execute query: INSERT INTO user_payment(acc_id, course_id, payment_code, payment_amount, payment_date, currency_id, payment_description) VALUES (1, 1, 1, 19.99, '2019-06-21', 1, 'Test payment 2')
+2019-06-21 12:32:22 main DEBUG PaymentRepository:55 - Query completed: INSERT INTO user_payment(acc_id, course_id, payment_code, payment_amount, payment_date, currency_id, payment_description) VALUES (1, 1, 1, 19.99, '2019-06-21', 1, 'Test payment 2')
+2019-06-21 12:32:22 main DEBUG PaymentRepository:71 - Attempt to execute query:SELECT * FROM user_payment
+2019-06-21 12:32:22 main DEBUG PaymentRepository:73 - Query completed:SELECT * FROM user_payment
+2019-06-21 12:35:20 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-21 12:35:20 main DEBUG PaymentRepository:86 - Attempt to execute query:SELECT * FROM user_payment
+2019-06-21 12:35:20 main DEBUG PaymentRepository:88 - Query completed:SELECT * FROM user_payment
+2019-06-21 12:35:20 main DEBUG PaymentRepository:42 - Attempt to execute query: DELETE FROM user_payment WHERE payment_id = 3
+2019-06-21 12:35:20 main DEBUG PaymentRepository:44 - Query completed: DELETE FROM user_payment WHERE payment_id = 3
+2019-06-21 12:35:20 main DEBUG PaymentRepository:86 - Attempt to execute query:SELECT * FROM user_payment
+2019-06-21 12:35:20 main DEBUG PaymentRepository:88 - Query completed:SELECT * FROM user_payment
+2019-06-21 12:50:10 main DEBUG ConnectionPool:42 - ConnectionPool instance created.
+2019-06-21 12:50:10 main DEBUG PaymentRepository:106 - Attempt to execute query:SELECT * FROM user_payment
+2019-06-21 12:50:10 main DEBUG PaymentRepository:108 - Query completed:SELECT * FROM user_payment
+2019-06-21 12:50:10 main DEBUG PaymentRepository:45 - Attempt to execute query: UPDATE user_payment SET  acc_id = 1, course_id = 1, payment_code = 1, payment_amount = 99.99, payment_date = '2019-06-21', currency_id = 1, payment_description = 'Updated from main' WHERE payment_id = 1
+2019-06-21 12:50:10 main DEBUG PaymentRepository:47 - Query completed: UPDATE user_payment SET  acc_id = 1, course_id = 1, payment_code = 1, payment_amount = 99.99, payment_date = '2019-06-21', currency_id = 1, payment_description = 'Updated from main' WHERE payment_id = 1
+2019-06-21 12:50:10 main DEBUG PaymentRepository:106 - Attempt to execute query:SELECT * FROM user_payment
+2019-06-21 12:50:10 main DEBUG PaymentRepository:108 - Query completed:SELECT * FROM user_payment

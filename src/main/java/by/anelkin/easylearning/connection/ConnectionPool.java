@@ -15,7 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ConnectionPool {
     private static ConnectionPool instance;
     private static Lock lock = new ReentrantLock();
-    private int connectionCount = 25;
+    private int connectionCount = 10;
     private BlockingQueue<Connection> queue;
 
     private ConnectionPool() {

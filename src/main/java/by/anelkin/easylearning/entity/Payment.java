@@ -15,6 +15,6 @@ public class Payment extends AppEntity{
     private int paymentCode;
     private BigDecimal amount;
     private Date paymentDate;
-    private String currency;
+    private int currencyId;
     private String description;
 }

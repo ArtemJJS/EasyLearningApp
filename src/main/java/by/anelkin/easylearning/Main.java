@@ -1,21 +1,17 @@
 package by.anelkin.easylearning;
 
-import by.anelkin.easylearning.entity.Account;
-import by.anelkin.easylearning.entity.Course;
-import by.anelkin.easylearning.entity.CourseChapter;
-import by.anelkin.easylearning.entity.CourseLesson;
-import by.anelkin.easylearning.repository.AccRepository;
-import by.anelkin.easylearning.repository.ChapterRepository;
-import by.anelkin.easylearning.repository.CourseRepository;
-import by.anelkin.easylearning.repository.LessonRepository;
+import by.anelkin.easylearning.entity.*;
+import by.anelkin.easylearning.repository.*;
 import by.anelkin.easylearning.specification.account_spec.SelectAllAccount;
 import by.anelkin.easylearning.specification.chapter_spec.SelectAllChapter;
 import by.anelkin.easylearning.specification.course_spec.SelectAllCourse;
 import by.anelkin.easylearning.specification.lesson_spec.SelectAllLesson;
+import by.anelkin.easylearning.specification.payment_spec.SelectAllPayment;
 import lombok.extern.log4j.Log4j;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -69,14 +65,15 @@ public class Main {
 //
 
 
+        PaymentRepository repo = new PaymentRepository();
+        List<Payment> list = repo.query(new SelectAllPayment());
 
-        LessonRepository repo = new LessonRepository();
-        List<CourseLesson> list = repo.query(new SelectAllLesson());
+        Payment payment = list.get(0);
+        payment.setAmount(new BigDecimal("99.99"));
+        payment.setDescription("Updated from main");
+        repo.update(payment);
 
-        CourseLesson lesson = list.get(0);
-        File content = lesson.getContent();
-
-        list = repo.query(new SelectAllLesson());
+        list = repo.query(new SelectAllPayment());
         list.forEach(System.out::println);
 
 
