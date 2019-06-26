@@ -3,6 +3,8 @@ package by.anelkin.easylearning.repository;
 import by.anelkin.easylearning.connection.ConnectionPool;
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.specification.AppSpecification;
+import by.anelkin.easylearning.specification.account_spec.SelectAccByType;
+import by.anelkin.easylearning.specification.account_spec.TempAccSpec;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
 import org.intellij.lang.annotations.Language;
@@ -21,7 +23,7 @@ import static by.anelkin.easylearning.entity.Account.AccountType.*;
 public class AccRepository implements AppRepository<Account> {
     private ConnectionPool pool = ConnectionPool.getInstance();
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private static final String AVATAR_PATH = "src/main/resources/account_avatar/%s.png";
+    private static final String AVATAR_PATH = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/src/main/resources/account_avatar/%s.png";
     @Language("sql")
     private static final String QUERY_UPDATE = "UPDATE account SET acc_password = ?, acc_email = ?, acc_name = ?," +
             " acc_surname = ?, acc_birthdate = ?, acc_phone_number = ?, acc_registration_date = ?, acc_about = ?," +
@@ -102,11 +104,10 @@ public class AccRepository implements AppRepository<Account> {
         boolean isInserted;
         Connection connection = pool.takeConnection();
         // TODO: 6/18/2019 Сделать нормальное шифрование пароля
-        String hashedPass = String.valueOf(account.getPassword().hashCode());
         try {
             PreparedStatement statement = connection.prepareStatement(QUERY_INSERT);
             statement.setString(1, account.getLogin());
-            statement.setString(2, hashedPass);
+            statement.setString(2, account.getPassword());
             statement.setString(3, account.getEmail());
             statement.setString(4, account.getName());
             statement.setString(5, account.getSurname());
@@ -128,17 +129,29 @@ public class AccRepository implements AppRepository<Account> {
 
     @Override
     public List<Account> query(@NonNull AppSpecification<Account> specification) {
-        List<Account> accountList = new ArrayList<>();
+        List<Account> accountList;
         Connection connection = pool.takeConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
         try {
-            Statement statement = connection.createStatement();
-            log.debug("Attempt to execute query: " + specification.getQuery());
-            ResultSet resultSet = statement.executeQuery(specification.getQuery());
-            accountList.addAll(fillAccountList(resultSet));
+            statement = connection.prepareStatement(specification.getQuery());
+            Object[] params = ((TempAccSpec) specification).getStatementParameters();
+            for (int i = 0; i < params.length; i++) {
+                statement.setString(i + 1, String.valueOf(params[i]));
+            }
+            log.debug("Attempt to execute query: " + statement.toString());
+            resultSet = statement.executeQuery();
+            accountList = new ArrayList<>(fillAccountList(resultSet));
         } catch (SQLException e) {
-            throw new RuntimeException("Wrong query!!! " + e);
+            throw new RuntimeException(e);
         } finally {
-            pool.returnConnection(connection);
+            try {
+                connection.close();
+                resultSet.close();
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return accountList;
     }
@@ -159,6 +172,7 @@ public class AccRepository implements AppRepository<Account> {
                 account.setRegistrDate(resultSet.getDate("acc_registration_date"));
                 account.setAbout(resultSet.getString("acc_about"));
 
+                // TODO: 6/27/2019 переделать хранение файлов
                 Blob image = resultSet.getBlob("acc_photo");
                 if (image != null) {
                     String currAvatarPath = String.format(AVATAR_PATH, account.getLogin());
@@ -170,8 +184,7 @@ public class AccRepository implements AppRepository<Account> {
                 switch (typeId) {
                     case 1:
                         account.setType(ADMIN);
-                        break;
-                    case 2:
+                        break;                    case 2:
                         account.setType(AUTHOR);
                         break;
                     case 3:
@@ -185,7 +198,7 @@ public class AccRepository implements AppRepository<Account> {
         } catch (SQLException e) {
             log.error("Error during account creating: " + e.getMessage());
         } catch (IOException e) {
-            log.error("Error during creating account_avatar picture from vase: " + e.getMessage());
+            log.error("Error during creating account_avatar picture from base: " + e);
         }
         return accountList;
     }

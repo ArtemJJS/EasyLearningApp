@@ -6,3 +6,74 @@
 2019-06-21 15:49:38 main DEBUG PaymentRepository:108 - Query completed:SELECT * FROM user_payment
 2019-06-21 15:49:38 main DEBUG PaymentRepository:106 - Attempt to execute query:SELECT * FROM user_payment
 2019-06-21 15:49:38 main DEBUG PaymentRepository:108 - Query completed:SELECT * FROM user_payment
+2019-06-25 20:40:14 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-25 20:40:14 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-25 20:40:14 main DEBUG PaymentRepository:106 - Attempt to execute query:SELECT * FROM user_payment
+2019-06-25 20:40:14 main DEBUG PaymentRepository:108 - Query completed:SELECT * FROM user_payment
+2019-06-25 20:40:14 main DEBUG PaymentRepository:106 - Attempt to execute query:SELECT * FROM user_payment
+2019-06-25 20:40:14 main DEBUG PaymentRepository:108 - Query completed:SELECT * FROM user_payment
+2019-06-26 18:32:34 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-26 18:32:34 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-26 18:33:26 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-26 18:33:26 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-26 18:33:26 main DEBUG AccRepository:140 - Attempt to execute query: select * from account where acc_type = ?
+2019-06-26 18:34:50 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-26 18:34:50 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-26 18:34:50 main DEBUG AccRepository:140 - Attempt to execute query: select * from account where acc_type = ?
+2019-06-26 18:35:31 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-26 18:35:31 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-26 18:36:10 main DEBUG AccRepository:140 - Attempt to execute query: select * from account where acc_type = ?
+2019-06-26 18:37:49 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-26 18:37:49 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-26 18:37:49 main DEBUG AccRepository:140 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: select * from account where acc_type = '3'
+2019-06-26 18:40:41 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-26 18:40:41 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-26 18:40:41 main DEBUG AccRepository:140 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: select * from account where acc_type = '2'
+2019-06-26 18:43:40 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-26 18:43:40 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-26 18:43:40 main DEBUG AccRepository:140 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: select * from account where acc_type = 2
+2019-06-26 18:44:08 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-26 18:44:08 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-26 18:44:08 main DEBUG AccRepository:140 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: select * from account where acc_type = 2
+2019-06-26 18:45:03 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-26 18:45:03 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-26 18:45:03 main DEBUG AccRepository:140 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: select * from account where acc_type = 2
+2019-06-26 18:45:36 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-26 18:45:36 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-26 18:45:36 main DEBUG AccRepository:140 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: select * from account where acc_type = '2'
+2019-06-26 19:37:45 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-26 19:37:45 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-26 19:37:45 main DEBUG AccRepository:141 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: select * from account where acc_type = '2'
+2019-06-26 19:38:03 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-26 19:38:03 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-26 19:38:03 main DEBUG AccRepository:141 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: select * from account
+2019-06-26 19:39:04 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-26 19:39:04 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-26 19:39:04 main DEBUG AccRepository:141 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: select * from account where acc_registration_date > '2019-06-03'
+2019-06-26 19:39:48 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-26 19:39:48 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-26 19:39:48 main DEBUG AccRepository:141 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: select * from account where acc_registration_date > '2019-06-15'
+2019-06-27 00:09:14 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 00:09:14 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 00:09:14 main DEBUG AccRepository:142 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: SELECT * FROM account WHERE acc_login = 'admin'
+2019-06-27 00:09:38 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 00:09:38 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 00:09:41 main DEBUG AccRepository:142 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: SELECT * FROM account WHERE acc_login = 'admin'
+2019-06-27 00:22:00 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 00:22:00 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 00:22:00 main DEBUG AccRepository:142 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: SELECT * FROM account WHERE acc_login = 'admin'
+2019-06-27 00:22:18 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 00:22:18 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 00:22:18 main DEBUG AccRepository:142 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: SELECT * FROM account WHERE acc_login = 'admin'
+2019-06-27 00:25:36 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 00:25:37 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 00:25:37 main DEBUG AccRepository:142 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: SELECT * FROM account WHERE acc_login = 'admin'
+2019-06-27 00:29:38 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 00:29:38 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 00:29:38 main DEBUG AccRepository:142 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: SELECT * FROM account WHERE acc_login = 'admin'
+2019-06-27 00:32:15 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 00:32:15 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 00:32:15 main DEBUG AccRepository:142 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: SELECT * FROM account WHERE acc_login = 'admin'
+2019-06-27 00:32:39 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 00:32:39 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 00:32:39 main DEBUG AccRepository:142 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: SELECT * FROM account WHERE acc_login = 'admin'
