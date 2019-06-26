@@ -172,6 +172,7 @@ public class AccRepository implements AppRepository<Account> {
                 account.setRegistrDate(resultSet.getDate("acc_registration_date"));
                 account.setAbout(resultSet.getString("acc_about"));
 
+                // TODO: 6/27/2019 переделать хранение файлов
                 Blob image = resultSet.getBlob("acc_photo");
                 if (image != null) {
                     String currAvatarPath = String.format(AVATAR_PATH, account.getLogin());

@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/start_page.jsp");
             dispatcher.forward(request, response);
         } else {
-
+            response.sendRedirect("http://localhost:8080/easyLearning/account?login=" + login);
         }
     }
 
