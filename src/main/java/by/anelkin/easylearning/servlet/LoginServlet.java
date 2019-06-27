@@ -1,6 +1,7 @@
 package by.anelkin.easylearning.servlet;
 
 import by.anelkin.easylearning.entity.Account;
+import by.anelkin.easylearning.exeption.RepositoryException;
 import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
 import lombok.extern.log4j.Log4j;
@@ -34,7 +35,13 @@ public class LoginServlet extends HttpServlet {
     private boolean checkRegistration(String login, String password) {
         boolean isRegistered = false;
         AccRepository repository = new AccRepository();
-        List<Account> list = repository.query(new SelectAccByLoginSpecification(login));
+        List<Account> list = null;
+        // TODO: 6/27/2019 обработку исключения
+        try {
+            list = repository.query(new SelectAccByLoginSpecification(login));
+        } catch (RepositoryException e) {
+            e.printStackTrace();
+        }
         if (list.size() > 0) {
             Account account = list.get(0);
             isRegistered = password.equals(account.getPassword());

@@ -84,6 +84,7 @@ public class ConnectionPool {
 
     public void returnConnection(Connection connection) {
         if (connection instanceof ProxyConnection) {
+            log.debug("Returning of connection into the pool.");
             usedConnections.remove(connection);
             availableConnections.offer((ProxyConnection) connection);
         } else {

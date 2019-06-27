@@ -77,3 +77,117 @@
 2019-06-27 00:32:39 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
 2019-06-27 00:32:39 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
 2019-06-27 00:32:39 main DEBUG AccRepository:142 - Attempt to execute query: com.mysql.cj.jdbc.ClientPreparedStatement: SELECT * FROM account WHERE acc_login = 'admin'
+2019-06-27 19:08:12 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 19:08:12 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 19:08:12 main DEBUG AccRepository:119 - Attempt to execute query: SELECT * FROM account WHERE acc_login = 'admin'
+2019-06-27 19:08:12 main DEBUG AccRepository:122 - Query completed: SELECT * FROM account WHERE acc_login = 'admin'
+2019-06-27 19:08:12 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 19:49:58 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 19:49:58 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 19:49:58 main DEBUG AccRepository:119 - Attempt to execute query: select * from account
+2019-06-27 19:49:58 main DEBUG AccRepository:122 - Query completed: select * from account
+2019-06-27 19:49:58 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:15:35 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 20:15:35 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 20:15:35 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:15:35 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:15:35 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:16:56 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 20:16:56 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 20:16:56 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:16:56 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:16:56 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:16:56 main DEBUG AccRepository:105 - Attempt to execute query: INSERT INTO account(acc_login, acc_password, acc_email, acc_name, acc_surname, acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_photo_path, acc_type) VALUES ('Lalala', '1', '1', '1212', '1212', '2019-06-04', '1212', '2019-06-19', '123123', null, '0')
+2019-06-27 20:16:56 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:17:49 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 20:17:49 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 20:18:15 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:19:03 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:19:04 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:20:17 main DEBUG AccRepository:105 - Attempt to execute query: INSERT INTO account(acc_login, acc_password, acc_email, acc_name, acc_surname, acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_photo_path, acc_type) VALUES ('Lalala', '1', '1', '1212', '1212', '2019-06-04', '1212', '2019-06-19', '123123', null, '0')
+2019-06-27 20:21:49 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:22:11 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 20:22:11 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 20:22:11 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:22:11 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:22:11 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:22:11 main DEBUG AccRepository:105 - Attempt to execute query: INSERT INTO account(acc_login, acc_password, acc_email, acc_name, acc_surname, acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_photo_path, acc_type) VALUES ('Lalala', '1', '1', '1212', '1212', '2019-06-04', '1212', '2019-06-19', '123123', null, '0')
+2019-06-27 20:22:11 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:22:55 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 20:22:55 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 20:22:55 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:22:55 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:22:55 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:22:55 main DEBUG AccRepository:105 - Attempt to execute query: INSERT INTO account(acc_login, acc_password, acc_email, acc_name, acc_surname, acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_photo_path, acc_type) VALUES ('Lalala', '1', '1', '1212', '1212', '2019-06-04', '1212', '2019-06-19', '123123', null, '1')
+2019-06-27 20:22:55 main DEBUG AccRepository:107 - Query completed: INSERT INTO account(acc_login, acc_password, acc_email, acc_name, acc_surname, acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_photo_path, acc_type) VALUES ('Lalala', '1', '1', '1212', '1212', '2019-06-04', '1212', '2019-06-19', '123123', null, '1')
+2019-06-27 20:22:55 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:22:55 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:22:55 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:22:55 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:24:29 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 20:24:29 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 20:24:29 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:24:29 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:24:29 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:24:29 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:24:29 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:24:29 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:24:29 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:27:05 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 20:27:05 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 20:27:05 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:27:05 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:27:05 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:27:05 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:27:05 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:27:05 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:27:05 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:27:17 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 20:27:17 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 20:27:26 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:27:29 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:27:29 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:28:13 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:28:17 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:28:19 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:28:19 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:28:22 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 20:28:22 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 20:28:22 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:28:22 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:28:22 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:28:22 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:28:22 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:28:22 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:28:22 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:28:40 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 20:28:40 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 20:28:41 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:28:42 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:28:42 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:29:23 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:29:26 main DEBUG AccRepository:123 - Attempt to execute query: select * from account
+2019-06-27 20:29:26 main DEBUG AccRepository:126 - Query completed: select * from account
+2019-06-27 20:29:26 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:30:47 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 20:30:47 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 20:30:48 main DEBUG AccRepository:125 - Attempt to execute query: select * from account
+2019-06-27 20:30:48 main DEBUG AccRepository:128 - Query completed: select * from account
+2019-06-27 20:30:48 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:30:48 main DEBUG AccRepository:58 - Attempt to execute query: UPDATE account SET acc_password = '1', acc_email = 'Lalalafafafa', acc_name = '1212', acc_surname = '1212', acc_birthdate = '2019-06-04', acc_phone_number = '1212', acc_registration_date = '2019-06-19', acc_about = '123123', acc_photo_path = null, acc_type = '1' WHERE acc_login = 'Lalala'
+2019-06-27 20:30:48 main DEBUG AccRepository:60 - Query completed: UPDATE account SET acc_password = '1', acc_email = 'Lalalafafafa', acc_name = '1212', acc_surname = '1212', acc_birthdate = '2019-06-04', acc_phone_number = '1212', acc_registration_date = '2019-06-19', acc_about = '123123', acc_photo_path = null, acc_type = '1' WHERE acc_login = 'Lalala'
+2019-06-27 20:30:48 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:30:48 main DEBUG AccRepository:125 - Attempt to execute query: select * from account
+2019-06-27 20:30:48 main DEBUG AccRepository:128 - Query completed: select * from account
+2019-06-27 20:30:48 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:31:09 main INFO  ConnectionPool:53 - Pool was initialized. Connections amount: 10
+2019-06-27 20:31:09 main DEBUG ConnectionPool:64 - ConnectionPool instance created.
+2019-06-27 20:31:09 main DEBUG AccRepository:125 - Attempt to execute query: select * from account
+2019-06-27 20:31:09 main DEBUG AccRepository:128 - Query completed: select * from account
+2019-06-27 20:31:09 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:31:09 main DEBUG AccRepository:74 - Attempt to execute query: DELETE FROM account WHERE acc_login = 'Lalala'
+2019-06-27 20:31:09 main DEBUG AccRepository:76 - Query completed: DELETE FROM account WHERE acc_login = 'Lalala'
+2019-06-27 20:31:09 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-27 20:31:09 main DEBUG AccRepository:125 - Attempt to execute query: select * from account
+2019-06-27 20:31:09 main DEBUG AccRepository:128 - Query completed: select * from account
+2019-06-27 20:31:09 main DEBUG ConnectionPool:87 - Returning of connection into the pool.

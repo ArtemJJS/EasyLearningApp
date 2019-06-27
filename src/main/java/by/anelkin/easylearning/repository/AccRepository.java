@@ -2,12 +2,12 @@ package by.anelkin.easylearning.repository;
 
 import by.anelkin.easylearning.connection.ConnectionPool;
 import by.anelkin.easylearning.entity.Account;
+import by.anelkin.easylearning.exeption.RepositoryException;
 import by.anelkin.easylearning.specification.AppSpecification;
 import by.anelkin.easylearning.specification.account.TempAccSpec;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
 import org.intellij.lang.annotations.Language;
-
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -20,7 +20,6 @@ import static by.anelkin.easylearning.entity.Account.AccountType.*;
 public class AccRepository implements AppRepository<Account> {
     private ConnectionPool pool = ConnectionPool.getInstance();
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private static final String AVATAR_PATH = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/src/main/resources/account_avatar/%s.png";
     @Language("sql")
     private static final String QUERY_UPDATE = "UPDATE account SET acc_password = ?, acc_email = ?, acc_name = ?," +
             " acc_surname = ?, acc_birthdate = ?, acc_phone_number = ?, acc_registration_date = ?, acc_about = ?," +
@@ -32,108 +31,75 @@ public class AccRepository implements AppRepository<Account> {
             "acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_photo_path, acc_type) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-
     @Override
-    public boolean update(@NonNull Account account) {
-        boolean isUpdated;
-        Connection connection = pool.takeConnection();
+    public boolean update(@NonNull Account account) throws RepositoryException {
+        int isUpdated;
         // TODO: 6/18/2019 Сделать нормальное шифрование пароля
-        String hashedPass = String.valueOf(account.getPassword().hashCode());
-        try {
-            connection.setAutoCommit(false);
-            PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE);
-            statement.setString(1, hashedPass);
-            statement.setString(2, account.getEmail());
-            statement.setString(3, account.getName());
-            statement.setString(4, account.getSurname());
-            statement.setString(5, dateFormat.format(account.getBirthDate()));
-            statement.setString(6, account.getPhoneNumber());
-            statement.setString(7, dateFormat.format(account.getRegistrDate()));
-            statement.setString(8, account.getAbout());
-            statement.setString(9,account.getPathToPhoto());
-            statement.setInt(10, account.getType().ordinal());
-            statement.setString(11, account.getLogin());
-
+        try (Connection connection = pool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
+            String[] params = {account.getPassword(), account.getEmail(), account.getName(), account.getSurname(),
+                    dateFormat.format(account.getBirthDate()), account.getPhoneNumber(), dateFormat.format(account.getRegistrDate()),
+                    account.getAbout(), account.getPathToPhoto(), String.valueOf(account.getType().ordinal()), account.getLogin()};
+            setStatementParameters(statement, params);
+            log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
+            isUpdated = statement.executeUpdate();
+            log.debug("Query completed:" + statement.toString().split(":")[1]);
         } catch (SQLException e) {
-            throw new RuntimeException("Wrong query!!! " + e);
-        } finally {
-            pool.returnConnection(connection);
+            throw new RepositoryException("Wrong query!!! " + e);
         }
-        return false;
+        return isUpdated != 0;
     }
 
     @Override
-    public boolean delete(@NonNull Account account) {
+    public boolean delete(@NonNull Account account) throws RepositoryException {
         boolean isDeleted;
-        Connection connection = pool.takeConnection();
-        try {
-            PreparedStatement statement = connection.prepareStatement(QUERY_DELETE);
-            statement.setString(1, account.getLogin());
+        try (Connection connection = pool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_DELETE)) {
+            String[] params = {account.getLogin()};
+            setStatementParameters(statement, params);
             log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
             isDeleted = statement.execute();
             log.debug("Query completed:" + statement.toString().split(":")[1]);
         } catch (SQLException e) {
-            throw new RuntimeException("Wrong query!!! " + e);
-        } finally {
-            pool.returnConnection(connection);
+            throw new RepositoryException("Wrong query!!! " + e);
         }
         return isDeleted;
     }
 
     @Override
-    public boolean insert(@NonNull Account account) {
+    public boolean insert(@NonNull Account account) throws RepositoryException {
         boolean isInserted;
-        Connection connection = pool.takeConnection();
         // TODO: 6/18/2019 Сделать нормальное шифрование пароля
-        try {
-            PreparedStatement statement = connection.prepareStatement(QUERY_INSERT);
-            statement.setString(1, account.getLogin());
-            statement.setString(2, account.getPassword());
-            statement.setString(3, account.getEmail());
-            statement.setString(4, account.getName());
-            statement.setString(5, account.getSurname());
-            statement.setString(6, dateFormat.format(account.getBirthDate()));
-            statement.setString(7, account.getPhoneNumber());
-            statement.setString(8, dateFormat.format(account.getRegistrDate()));
-            statement.setString(9, account.getAbout());
-            statement.setString(10, account.getPathToPhoto());
-            statement.setInt(11, account.getType().ordinal());
+        try (Connection connection = pool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_INSERT)) {
+            String[] params = {account.getLogin(), account.getPassword(), account.getEmail(), account.getName(), account.getSurname(),
+                    dateFormat.format(account.getBirthDate()), account.getPhoneNumber(), dateFormat.format(account.getRegistrDate()),
+                    account.getAbout(), account.getPathToPhoto(), String.valueOf(account.getType().ordinal())};
+            setStatementParameters(statement, params);
             log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
             isInserted = statement.execute();
             log.debug("Query completed:" + statement.toString().split(":")[1]);
         } catch (SQLException e) {
-            throw new RuntimeException("Wrong query!!! " + e);
-        } finally {
-            pool.returnConnection(connection);
+            throw new RepositoryException("Wrong query!!! " + e);
         }
         return isInserted;
     }
 
     @Override
-    public List<Account> query(@NonNull AppSpecification<Account> specification) {
+    public List<Account> query(@NonNull AppSpecification<Account> specification) throws RepositoryException {
         List<Account> accountList;
-        Connection connection = pool.takeConnection();
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = connection.prepareStatement(specification.getQuery());
-            Object[] params = ((TempAccSpec) specification).getStatementParameters();
-            for (int i = 0; i < params.length; i++) {
-                statement.setString(i + 1, String.valueOf(params[i]));
+        try (Connection connection = pool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(specification.getQuery())) {
+            String[] params = ((TempAccSpec) specification).getStatementParameters();
+            setStatementParameters(statement, params);
+
+            log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                accountList = new ArrayList<>(fillAccountList(resultSet));
+                log.debug("Query completed:" + statement.toString().split(":")[1]);
             }
-            log.debug("Attempt to execute query: " + statement.toString());
-            resultSet = statement.executeQuery();
-            accountList = new ArrayList<>(fillAccountList(resultSet));
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                connection.close();
-                resultSet.close();
-                statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            throw new RepositoryException(e);
         }
         return accountList;
     }
@@ -159,7 +125,8 @@ public class AccRepository implements AppRepository<Account> {
                 switch (typeId) {
                     case 1:
                         account.setType(ADMIN);
-                        break;                    case 2:
+                        break;
+                    case 2:
                         account.setType(AUTHOR);
                         break;
                     case 3:
@@ -171,8 +138,15 @@ public class AccRepository implements AppRepository<Account> {
                 accountList.add(account);
             }
         } catch (SQLException e) {
-            log.error("Error during account creating: " + e.getMessage());
+            log.error("Error during account creating: " + e);
         }
         return accountList;
+    }
+
+    // TODO: 6/27/2019 пробрасываю искл-е и завершаю запрос по exception ?
+    private void setStatementParameters(PreparedStatement statement, String[] params) throws SQLException {
+        for (int i = 0; i < params.length; i++) {
+            statement.setString(i + 1, params[i]);
+        }
     }
 }
