@@ -3,7 +3,7 @@ package by.anelkin.easylearning.repository;
 import by.anelkin.easylearning.connection.ConnectionPool;
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.specification.AppSpecification;
-import by.anelkin.easylearning.specification.account_spec.TempAccSpec;
+import by.anelkin.easylearning.specification.account.TempAccSpec;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
 import org.intellij.lang.annotations.Language;

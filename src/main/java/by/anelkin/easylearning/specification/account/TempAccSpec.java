@@ -1,4 +1,4 @@
-package by.anelkin.easylearning.specification.account_spec;
+package by.anelkin.easylearning.specification.account;
 
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.specification.AppSpecification;

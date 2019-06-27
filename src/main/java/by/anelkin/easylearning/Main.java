@@ -2,26 +2,13 @@ package by.anelkin.easylearning;
 
 import by.anelkin.easylearning.entity.*;
 import by.anelkin.easylearning.repository.*;
-import by.anelkin.easylearning.specification.account_spec.SelectAccByLogin;
-import by.anelkin.easylearning.specification.account_spec.SelectAccByType;
-import by.anelkin.easylearning.specification.account_spec.SelectAllAccount;
-import by.anelkin.easylearning.specification.account_spec.SelectRegistrDateAfter;
-import by.anelkin.easylearning.specification.chapter_spec.SelectAllChapter;
-import by.anelkin.easylearning.specification.course_spec.SelectAllCourse;
-import by.anelkin.easylearning.specification.lesson_spec.SelectAllLesson;
-import by.anelkin.easylearning.specification.payment_spec.SelectAllPayment;
+import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
 import lombok.extern.log4j.Log4j;
 
-import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.*;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Log4j
 public class Main {
@@ -69,7 +56,7 @@ public class Main {
 
 
         AccRepository repo = new AccRepository();
-        List<Account> list = repo.query(new SelectAccByLogin("admin"));
+        List<Account> list = repo.query(new SelectAccByLoginSpecification("admin"));
 
         list.forEach(System.out::println);
 

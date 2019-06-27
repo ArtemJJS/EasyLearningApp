@@ -1,4 +1,4 @@
-package by.anelkin.easylearning.specification.mark_spec;
+package by.anelkin.easylearning.specification.mark;
 
 import by.anelkin.easylearning.entity.Mark;
 import by.anelkin.easylearning.specification.AppSpecification;
@@ -6,21 +6,21 @@ import org.intellij.lang.annotations.Language;
 
 import static by.anelkin.easylearning.entity.Mark.*;
 
-public class SelectMarkByTargetId implements AppSpecification<Mark>, MarkSpecification<Mark> {
-    @Language("sql")
-    private static final String QUERY = "SELECT * FROM %s WHERE target_id = %d";
-    private MarkType markType;
-    private int targetId;
 
-    public SelectMarkByTargetId(MarkType markType, int targetId) {
+public class SelectAllMarkSpecification implements AppSpecification<Mark>, MarkSpecification<Mark> {
+    @Language("sql")
+    private static final String QUERY = "SELECT * FROM %s";
+
+    private MarkType markType;
+
+    public SelectAllMarkSpecification(MarkType markType) {
         this.markType = markType;
-        this.targetId = targetId;
     }
 
     @Override
     public String getQuery() {
         String tableName = markType.toString().toLowerCase();
-        return String.format(QUERY, tableName, targetId);
+        return String.format(QUERY, tableName);
     }
 
     public MarkType getMarkType() {
