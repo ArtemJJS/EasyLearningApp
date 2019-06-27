@@ -19,7 +19,7 @@ public class Account extends AppEntity{
     private String phoneNumber;
     private Date registrDate;
     private String about;
-    private File photo;
+    private String pathToPhoto;
     private AccountType type;
 
     public enum AccountType{

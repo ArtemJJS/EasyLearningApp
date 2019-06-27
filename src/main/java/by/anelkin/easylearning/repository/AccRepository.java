@@ -3,15 +3,12 @@ package by.anelkin.easylearning.repository;
 import by.anelkin.easylearning.connection.ConnectionPool;
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.specification.AppSpecification;
-import by.anelkin.easylearning.specification.account_spec.SelectAccByType;
 import by.anelkin.easylearning.specification.account_spec.TempAccSpec;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
 import org.intellij.lang.annotations.Language;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,13 +24,13 @@ public class AccRepository implements AppRepository<Account> {
     @Language("sql")
     private static final String QUERY_UPDATE = "UPDATE account SET acc_password = ?, acc_email = ?, acc_name = ?," +
             " acc_surname = ?, acc_birthdate = ?, acc_phone_number = ?, acc_registration_date = ?, acc_about = ?," +
-            " acc_photo = ?, acc_type = ? WHERE acc_login = ?";
+            " acc_photo_path = ?, acc_type = ? WHERE acc_login = ?";
     @Language("sql")
     private static final String QUERY_DELETE = "DELETE FROM account WHERE acc_login = ?";
     @Language("sql")
     private static final String QUERY_INSERT = "INSERT INTO account(acc_login, acc_password, acc_email, acc_name, acc_surname, " +
-            "acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_type) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_photo_path, acc_type) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 
     @Override
@@ -53,28 +50,12 @@ public class AccRepository implements AppRepository<Account> {
             statement.setString(6, account.getPhoneNumber());
             statement.setString(7, dateFormat.format(account.getRegistrDate()));
             statement.setString(8, account.getAbout());
+            statement.setString(9,account.getPathToPhoto());
             statement.setInt(10, account.getType().ordinal());
             statement.setString(11, account.getLogin());
 
-            if (account.getPhoto() != null) {
-                try (FileInputStream fis = new FileInputStream(account.getPhoto())) {
-                    statement.setBinaryStream(9, fis);
-                    log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
-                    statement.executeUpdate();
-                    log.debug("Query completed:" + statement.toString().split(":")[1]);
-                    connection.commit();
-                }
-            } else {
-                statement.setBlob(9, (Blob) null);
-                log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
-                statement.executeUpdate();
-                log.debug("Query completed:" + statement.toString().split(":")[1]);
-                connection.commit();
-            }
         } catch (SQLException e) {
             throw new RuntimeException("Wrong query!!! " + e);
-        } catch (IOException e) {
-            throw new RuntimeException("IO problem with account photo: " + e);
         } finally {
             pool.returnConnection(connection);
         }
@@ -115,7 +96,8 @@ public class AccRepository implements AppRepository<Account> {
             statement.setString(7, account.getPhoneNumber());
             statement.setString(8, dateFormat.format(account.getRegistrDate()));
             statement.setString(9, account.getAbout());
-            statement.setInt(10, account.getType().ordinal());
+            statement.setString(10, account.getPathToPhoto());
+            statement.setInt(11, account.getType().ordinal());
             log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
             isInserted = statement.execute();
             log.debug("Query completed:" + statement.toString().split(":")[1]);
@@ -171,14 +153,7 @@ public class AccRepository implements AppRepository<Account> {
                 account.setPhoneNumber(resultSet.getString("acc_phone_number"));
                 account.setRegistrDate(resultSet.getDate("acc_registration_date"));
                 account.setAbout(resultSet.getString("acc_about"));
-
-                // TODO: 6/27/2019 переделать хранение файлов
-                Blob image = resultSet.getBlob("acc_photo");
-                if (image != null) {
-                    String currAvatarPath = String.format(AVATAR_PATH, account.getLogin());
-                    Files.write(Paths.get(currAvatarPath), image.getBytes(1, (int) image.length()));
-                    account.setPhoto(new File(currAvatarPath));
-                }
+                account.setPathToPhoto(resultSet.getString("acc_photo_path"));
 
                 int typeId = resultSet.getInt("acc_type");
                 switch (typeId) {
@@ -197,8 +172,6 @@ public class AccRepository implements AppRepository<Account> {
             }
         } catch (SQLException e) {
             log.error("Error during account creating: " + e.getMessage());
-        } catch (IOException e) {
-            log.error("Error during creating account_avatar picture from base: " + e);
         }
         return accountList;
     }
