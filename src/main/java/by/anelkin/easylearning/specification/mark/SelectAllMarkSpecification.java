@@ -10,7 +10,6 @@ import static by.anelkin.easylearning.entity.Mark.*;
 public class SelectAllMarkSpecification implements AppSpecification<Mark>, MarkSpecification<Mark> {
     @Language("sql")
     private static final String QUERY = "SELECT * FROM %s";
-
     private MarkType markType;
 
     public SelectAllMarkSpecification(MarkType markType) {
@@ -21,6 +20,11 @@ public class SelectAllMarkSpecification implements AppSpecification<Mark>, MarkS
     public String getQuery() {
         String tableName = markType.toString().toLowerCase();
         return String.format(QUERY, tableName);
+    }
+
+    @Override
+    public String[] getStatementParameters() {
+        return new String[0];
     }
 
     public MarkType getMarkType() {

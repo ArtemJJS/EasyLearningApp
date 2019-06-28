@@ -12,4 +12,9 @@ public class SelectAllPaymentSpecification implements AppSpecification<Payment> 
     public String getQuery() {
         return QUERY;
     }
+
+    @Override
+    public String[] getStatementParameters() {
+        return new String[0];
+    }
 }

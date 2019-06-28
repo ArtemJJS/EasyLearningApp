@@ -11,4 +11,9 @@ public class SelectAllLessonSpecification implements AppSpecification<CourseLess
     public String getQuery() {
         return QUERY;
     }
+
+    @Override
+    public String[] getStatementParameters() {
+        return new String[0];
+    }
 }

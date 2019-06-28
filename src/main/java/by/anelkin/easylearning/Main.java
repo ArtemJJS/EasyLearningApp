@@ -16,7 +16,7 @@ import java.util.List;
 public class Main {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException, RepositoryException {
+    public static void main(String[] args) throws RepositoryException {
 //        log.info("Start of main.");
 //        ConnectionPool connectionPool = ConnectionPool.getInstance();
 //        Connection connection = connectionPool.takeConnection();
@@ -59,10 +59,6 @@ public class Main {
 
         AccRepository repo = new AccRepository();
         List<Account> list = repo.query(new SelectAllAccountSpecification());
-        Account account = list.get(list.size()-1);
-
-        repo.delete(account);
-        list = repo.query(new SelectAllAccountSpecification());
         list.forEach(System.out::println);
     }
 

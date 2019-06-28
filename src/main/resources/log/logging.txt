@@ -202,3 +202,8 @@
 2019-06-28 00:25:36 main DEBUG AccRepository:96 - Attempt to execute query: select * from account
 2019-06-28 00:25:36 main DEBUG AccRepository:99 - Query completed: select * from account
 2019-06-28 00:25:36 main DEBUG ConnectionPool:88 - Returning of connection into the pool.
+2019-06-28 18:24:44 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-06-28 18:24:44 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-06-28 18:24:44 main DEBUG AccRepository:84 - Attempt to execute query: select * from account
+2019-06-28 18:24:44 main DEBUG AccRepository:87 - Query completed: select * from account
+2019-06-28 18:24:44 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
