@@ -1,4 +1,6 @@
 package by.anelkin.easylearning.entity;
 
-public abstract class AppEntity{
+import java.io.Serializable;
+
+public abstract class AppEntity implements Serializable, Cloneable {
 }

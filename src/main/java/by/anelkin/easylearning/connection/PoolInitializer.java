@@ -1,16 +1,17 @@
 package by.anelkin.easylearning.connection;
 
-import lombok.Data;
+import lombok.extern.log4j.Log4j;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-@Data
+@Log4j
 class PoolInitializer {
     private static final String PATH_TO_PROPERTIES = "src/main/resources/db.properties";
     private Properties property;
+    private static final int DEFAULT_MIN_CONNECTIONS_AMOUNT = 10;
 
     PoolInitializer() {
         property = new Properties();
@@ -37,8 +38,15 @@ class PoolInitializer {
     String getPassword(){
         return property.getProperty("password");
     }
-    String getMinConnections(){
-        return property.getProperty("min_connections");
+    int getMinConnections(){
+        int connAmount;
+        try{
+            connAmount = Integer.parseInt(property.getProperty("min_connections"));
+        }catch (NumberFormatException e){
+            log.warn("Wrong minimal amount of connections in properties file!!!");
+            connAmount = DEFAULT_MIN_CONNECTIONS_AMOUNT;
+        }
+        return connAmount;
     }
 
 }

@@ -8,6 +8,7 @@ import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
 import org.intellij.lang.annotations.Language;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -93,6 +94,7 @@ public class CourseRepository implements AppRepository<Course> {
                 course.setDescription(resultSet.getString("course_description"));
                 course.setCreationDate(resultSet.getDate("course_creation_date"));
                 course.setPathToPicture(resultSet.getString("course_picture"));
+                course.setPrice(new BigDecimal(resultSet.getString("course_price")));
                 courseList.add(course);
             }
         return courseList;

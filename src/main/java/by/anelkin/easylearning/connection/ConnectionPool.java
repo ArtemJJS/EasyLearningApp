@@ -36,7 +36,7 @@ public class ConnectionPool {
         USER = poolInitializer.getUser();
         PASSWORD = poolInitializer.getPassword();
         DRIVER_NAME = poolInitializer.getDriverName();
-        MIN_CONNECTIONS_AMOUNT = Integer.parseInt(poolInitializer.getMinConnections());
+        MIN_CONNECTIONS_AMOUNT = poolInitializer.getMinConnections();
     }
 
     private ConnectionPool() {

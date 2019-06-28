@@ -16,4 +16,9 @@ public class Course extends AppEntity {
     private Date creationDate;
     private String pathToPicture;
     private BigDecimal price;
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

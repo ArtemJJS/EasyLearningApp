@@ -17,4 +17,9 @@ public class Payment extends AppEntity{
     private Date paymentDate;
     private int currencyId;
     private String description;
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

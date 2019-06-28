@@ -16,4 +16,9 @@ public class CourseLesson extends AppEntity{
     private String pathToContent;
     private Date creationDate;
     private long length;
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }
