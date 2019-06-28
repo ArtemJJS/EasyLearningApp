@@ -38,8 +38,7 @@ public class AccRepository implements AppRepository<Account> {
             String[] params = {account.getPassword(), account.getEmail(), account.getName(), account.getSurname(),
                     dateFormat.format(account.getBirthDate()), account.getPhoneNumber(), dateFormat.format(account.getRegistrDate()),
                     account.getAbout(), account.getPathToPhoto(), String.valueOf(account.getType().ordinal()), account.getLogin()};
-            setStatementParameters(statement, params);
-            executeAndLog(statement);
+            setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
         }
@@ -51,8 +50,7 @@ public class AccRepository implements AppRepository<Account> {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_DELETE)) {
             String[] params = {account.getLogin()};
-            setStatementParameters(statement, params);
-            executeAndLog(statement);
+            setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
         }
@@ -67,8 +65,7 @@ public class AccRepository implements AppRepository<Account> {
             String[] params = {account.getLogin(), account.getPassword(), account.getEmail(), account.getName(), account.getSurname(),
                     dateFormat.format(account.getBirthDate()), account.getPhoneNumber(), dateFormat.format(account.getRegistrDate()),
                     account.getAbout(), account.getPathToPhoto(), String.valueOf(account.getType().ordinal())};
-            setStatementParameters(statement, params);
-            executeAndLog(statement);
+            setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
         }
@@ -81,7 +78,9 @@ public class AccRepository implements AppRepository<Account> {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(specification.getQuery())) {
             String[] params = specification.getStatementParameters();
-            setStatementParameters(statement, params);
+            for (int i = 0; i < params.length; i++) {
+                statement.setString(i+1, params[i]);
+            }
             log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
             try (ResultSet resultSet = statement.executeQuery()) {
                 accountList = new ArrayList<>(fillAccountList(resultSet));
@@ -128,13 +127,11 @@ public class AccRepository implements AppRepository<Account> {
         return accountList;
     }
 
-    private void setStatementParameters(PreparedStatement statement, String[] params) throws SQLException {
+    // TODO: 6/28/2019 надо ли эти два метода вынести в отдельный класс?
+    private void setParametersAndExecute(PreparedStatement statement, String[] params) throws SQLException {
         for (int i = 0; i < params.length; i++) {
             statement.setString(i + 1, params[i]);
         }
-    }
-
-    private void executeAndLog(PreparedStatement statement) throws SQLException {
         log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
         statement.execute();
         log.debug("Query completed:" + statement.toString().split(":")[1]);

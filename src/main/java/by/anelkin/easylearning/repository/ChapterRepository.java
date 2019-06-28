@@ -29,8 +29,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
             String[] params = {String.valueOf(chapter.getCourseId()), chapter.getName(), String.valueOf(chapter.getId())};
-            setStatementParameters(statement, params);
-            executeAndLog(statement);
+            setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
         }
@@ -42,8 +41,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_DELETE)) {
             String[] params = {String.valueOf(chapter.getId())};
-            setStatementParameters(statement, params);
-           executeAndLog(statement);
+            setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
         }
@@ -55,8 +53,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_INSERT)) {
             String[] params = {String.valueOf(chapter.getCourseId()), chapter.getName()};
-            setStatementParameters(statement, params);
-           executeAndLog(statement);
+            setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
         }
@@ -68,7 +65,10 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
         List<CourseChapter> chapterList;
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(specification.getQuery())) {
-            setStatementParameters(statement, specification.getStatementParameters());
+            String[] params = specification.getStatementParameters();
+            for (int i = 0; i < params.length; i++) {
+                statement.setString(i+1, params[i]);
+            }
             log.debug("Attempt to execute query:" + specification.getQuery());
             try (ResultSet resultSet = statement.executeQuery(specification.getQuery())) {
                 chapterList = new ArrayList<>(fillChapterList(resultSet));
@@ -96,13 +96,10 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
         return chapterList;
     }
 
-    private void setStatementParameters(PreparedStatement statement, String[] params) throws SQLException {
+    private void setParametersAndExecute(PreparedStatement statement, String[] params) throws SQLException {
         for (int i = 0; i < params.length; i++) {
             statement.setString(i + 1, params[i]);
         }
-    }
-
-    private void executeAndLog(PreparedStatement statement) throws SQLException {
         log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
         statement.execute();
         log.debug("Query completed:" + statement.toString().split(":")[1]);
