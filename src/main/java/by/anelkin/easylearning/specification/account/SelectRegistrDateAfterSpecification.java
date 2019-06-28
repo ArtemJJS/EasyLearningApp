@@ -7,7 +7,7 @@ import org.intellij.lang.annotations.Language;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SelectRegistrDateAfterSpecification implements AppSpecification<Account>, TempAccSpec{
+public class SelectRegistrDateAfterSpecification implements AppSpecification<Account>{
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private Date date;
     @Language("sql")

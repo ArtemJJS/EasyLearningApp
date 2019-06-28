@@ -12,4 +12,9 @@ public class SelectAllChapterSpecification implements AppSpecification<CourseCha
     public String getQuery() {
         return QUERY;
     }
+
+    @Override
+    public String[] getStatementParameters() {
+        return new String[0];
+    }
 }

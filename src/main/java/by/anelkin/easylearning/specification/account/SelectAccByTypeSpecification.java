@@ -6,7 +6,7 @@ import org.intellij.lang.annotations.Language;
 
 import static by.anelkin.easylearning.entity.Account.*;
 
-public class SelectAccByTypeSpecification implements AppSpecification<Account>, TempAccSpec {
+public class SelectAccByTypeSpecification implements AppSpecification<Account> {
     private AccountType type;
     @Language("sql")
     private static final String QUERY = "select * from account where acc_type = ?";

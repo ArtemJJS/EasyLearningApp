@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.Date;
 
 @Data
-@EqualsAndHashCode(callSuper = false, exclude = {"about", "photo", "registrDate"})
+@EqualsAndHashCode(callSuper = false, exclude = {"about", "pathToPhoto", "registrDate"})
 public class Account extends AppEntity{
     private int id;
     private String login;
@@ -19,10 +19,11 @@ public class Account extends AppEntity{
     private String phoneNumber;
     private Date registrDate;
     private String about;
-    private File photo;
+    private String pathToPhoto;
     private AccountType type;
 
     public enum AccountType{
+        GUEST,
         ADMIN,
         AUTHOR,
         USER

@@ -1,33 +1,22 @@
 package by.anelkin.easylearning;
 
 import by.anelkin.easylearning.entity.*;
+import by.anelkin.easylearning.exeption.RepositoryException;
 import by.anelkin.easylearning.repository.*;
-import by.anelkin.easylearning.specification.account_spec.SelectAccByLogin;
-import by.anelkin.easylearning.specification.account_spec.SelectAccByType;
-import by.anelkin.easylearning.specification.account_spec.SelectAllAccount;
-import by.anelkin.easylearning.specification.account_spec.SelectRegistrDateAfter;
-import by.anelkin.easylearning.specification.chapter_spec.SelectAllChapter;
-import by.anelkin.easylearning.specification.course_spec.SelectAllCourse;
-import by.anelkin.easylearning.specification.lesson_spec.SelectAllLesson;
-import by.anelkin.easylearning.specification.payment_spec.SelectAllPayment;
+import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
+import by.anelkin.easylearning.specification.account.SelectAllAccountSpecification;
 import lombok.extern.log4j.Log4j;
 
-import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.*;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Log4j
 public class Main {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException, RepositoryException {
 //        log.info("Start of main.");
 //        ConnectionPool connectionPool = ConnectionPool.getInstance();
 //        Connection connection = connectionPool.takeConnection();
@@ -69,10 +58,12 @@ public class Main {
 
 
         AccRepository repo = new AccRepository();
-        List<Account> list = repo.query(new SelectAccByLogin("admin"));
+        List<Account> list = repo.query(new SelectAllAccountSpecification());
+        Account account = list.get(list.size()-1);
 
+        repo.delete(account);
+        list = repo.query(new SelectAllAccountSpecification());
         list.forEach(System.out::println);
-
     }
 
 }

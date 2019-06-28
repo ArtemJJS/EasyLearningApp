@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -84,6 +85,7 @@ public class ConnectionPool {
 
     public void returnConnection(Connection connection) {
         if (connection instanceof ProxyConnection) {
+            log.debug("Returning of connection into the pool.");
             usedConnections.remove(connection);
             availableConnections.offer((ProxyConnection) connection);
         } else {
@@ -96,12 +98,21 @@ public class ConnectionPool {
             try {
                 ProxyConnection connection = availableConnections.take();
                 connection.closeFromPool();
-                // TODO: 6/21/2019 дерегистрация драйвера?
-                Driver driver = DriverManager.getDriver("com.mysql.cj.jdbc.Driver");
-                DriverManager.deregisterDriver(driver);
             } catch (InterruptedException | SQLException e) {
                 log.warn("Problems with connection closing! " + e);
-                // TODO: 6/21/2019 надо ли здесь interrupt?
+            }
+        }
+        deregisterDrivers();
+    }
+
+    private void deregisterDrivers(){
+        Enumeration<Driver> drivers = DriverManager.getDrivers();
+        while (drivers.hasMoreElements()){
+            Driver driver = drivers.nextElement();
+            try {
+                DriverManager.deregisterDriver(driver);
+            } catch (SQLException e) {
+                log.warn("Problems with driver deregister! " + e);
             }
         }
     }

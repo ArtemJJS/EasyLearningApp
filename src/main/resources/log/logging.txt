@@ -191,3 +191,14 @@
 2019-06-27 20:31:09 main DEBUG AccRepository:125 - Attempt to execute query: select * from account
 2019-06-27 20:31:09 main DEBUG AccRepository:128 - Query completed: select * from account
 2019-06-27 20:31:09 main DEBUG ConnectionPool:87 - Returning of connection into the pool.
+2019-06-28 00:25:36 main INFO  ConnectionPool:54 - Pool was initialized. Connections amount: 10
+2019-06-28 00:25:36 main DEBUG ConnectionPool:65 - ConnectionPool instance created.
+2019-06-28 00:25:36 main DEBUG AccRepository:96 - Attempt to execute query: select * from account
+2019-06-28 00:25:36 main DEBUG AccRepository:99 - Query completed: select * from account
+2019-06-28 00:25:36 main DEBUG ConnectionPool:88 - Returning of connection into the pool.
+2019-06-28 00:25:36 main DEBUG AccRepository:60 - Attempt to execute query: DELETE FROM account WHERE acc_login = 'test photo'
+2019-06-28 00:25:36 main DEBUG AccRepository:62 - Query completed: DELETE FROM account WHERE acc_login = 'test photo'
+2019-06-28 00:25:36 main DEBUG ConnectionPool:88 - Returning of connection into the pool.
+2019-06-28 00:25:36 main DEBUG AccRepository:96 - Attempt to execute query: select * from account
+2019-06-28 00:25:36 main DEBUG AccRepository:99 - Query completed: select * from account
+2019-06-28 00:25:36 main DEBUG ConnectionPool:88 - Returning of connection into the pool.
