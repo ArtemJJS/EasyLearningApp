@@ -293,3 +293,19 @@
 2019-06-28 18:57:00 main DEBUG CourseRepository:76 - Attempt to execute query: SELECT * FROM course
 2019-06-28 18:57:00 main DEBUG CourseRepository:78 - Query successfully executed: SELECT * FROM course
 2019-06-28 18:57:00 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
+2019-06-28 18:58:13 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-06-28 18:58:13 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-06-28 18:58:13 main DEBUG AccRepository:84 - Attempt to execute query: select * from account
+2019-06-28 18:58:13 main DEBUG AccRepository:87 - Query completed: select * from account
+2019-06-28 18:58:13 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
+2019-06-28 18:58:13 main DEBUG CourseRepository:77 - Attempt to execute query: SELECT * FROM course
+2019-06-28 18:58:13 main DEBUG CourseRepository:79 - Query successfully executed: SELECT * FROM course
+2019-06-28 18:58:13 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
+2019-06-28 19:07:58 main INFO  ConnectionPool:68 - Pool was initialized. Connections amount: 10
+2019-06-28 19:07:58 main DEBUG ConnectionPool:80 - ConnectionPool instance created.
+2019-06-28 19:07:58 main DEBUG AccRepository:84 - Attempt to execute query: select * from account
+2019-06-28 19:07:58 main DEBUG AccRepository:87 - Query completed: select * from account
+2019-06-28 19:07:58 main DEBUG ConnectionPool:103 - Returning of connection into the pool.
+2019-06-28 19:07:58 main DEBUG CourseRepository:77 - Attempt to execute query: SELECT * FROM course
+2019-06-28 19:07:58 main DEBUG CourseRepository:79 - Query successfully executed: SELECT * FROM course
+2019-06-28 19:07:58 main DEBUG ConnectionPool:103 - Returning of connection into the pool.

@@ -21,4 +21,9 @@ public class Mark extends AppEntity {
         AUTHOR_MARK,
         COURSE_MARK
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

@@ -12,4 +12,9 @@ public class SelectAllCourseSpecification implements AppSpecification<Course> {
     public String getQuery() {
         return QUERY;
     }
+
+    @Override
+    public String[] getStatementParameters() {
+        return new String[0];
+    }
 }

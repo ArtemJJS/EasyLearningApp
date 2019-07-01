@@ -2,6 +2,7 @@ package by.anelkin.easylearning.repository;
 
 import by.anelkin.easylearning.connection.ConnectionPool;
 import by.anelkin.easylearning.entity.Payment;
+import by.anelkin.easylearning.exeption.RepositoryException;
 import by.anelkin.easylearning.specification.AppSpecification;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
@@ -29,93 +30,66 @@ public class PaymentRepository implements AppRepository<Payment> {
 
 
     @Override
-    public boolean update(@NonNull Payment payment) {
-        int amountUpdated = 0;
-        Connection connection = pool.takeConnection();
-        try {
-            PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE);
-            statement.setInt(1, payment.getAccountId());
-            statement.setInt(2, payment.getCourseId());
-            statement.setInt(3, payment.getPaymentCode());
-            statement.setBigDecimal(4, payment.getAmount());
-            statement.setString(5, dateFormat.format(payment.getPaymentDate()));
-            statement.setInt(6, payment.getCurrencyId());
-            statement.setString(7, payment.getDescription());
-            statement.setInt(8, payment.getId());
-            log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
-            amountUpdated = statement.executeUpdate();
-            log.debug("Query completed:" + statement.toString().split(":")[1]);
+    public boolean update(@NonNull Payment payment) throws RepositoryException {
+        try (Connection connection = pool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
+            String[] params = {String.valueOf(payment.getAccountId()), String.valueOf(payment.getCourseId()), String.valueOf(payment.getPaymentCode()),
+                    String.valueOf(payment.getAmount()), dateFormat.format(payment.getPaymentDate()), String.valueOf(payment.getCurrencyId()),
+                    payment.getDescription(), String.valueOf(payment.getId())};
+            setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            pool.returnConnection(connection);
+            throw new RepositoryException(e);
         }
-
-        return amountUpdated == 0;
+        return true;
     }
 
     @Override
-    public boolean delete(@NonNull Payment payment) {
-        boolean isDeleted = false;
-        Connection connection = pool.takeConnection();
-        try {
-            PreparedStatement statement = connection.prepareStatement(QUERY_DELETE);
-            statement.setInt(1, payment.getId());
-            log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
-            isDeleted = statement.execute();
-            log.debug("Query completed:" + statement.toString().split(":")[1]);
+    public boolean delete(@NonNull Payment payment) throws RepositoryException {
+        try (Connection connection = pool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_DELETE)) {
+            String[] params = {String.valueOf(payment.getId())};
+            setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            pool.returnConnection(connection);
+            throw new RepositoryException(e);
         }
-        return isDeleted;
+        return true;
     }
 
     @Override
-    public boolean insert(@NonNull Payment payment) {
-        boolean isInserted = false;
-        Connection connection = pool.takeConnection();
-        try {
-            PreparedStatement statement = connection.prepareStatement(QUERY_INSERT);
-            statement.setInt(1, payment.getAccountId());
-            statement.setInt(2, payment.getCourseId());
-            statement.setInt(3, payment.getPaymentCode());
-            statement.setBigDecimal(4, payment.getAmount());
-            statement.setString(5, dateFormat.format(payment.getPaymentDate()));
-            statement.setInt(6, payment.getCurrencyId());
-            statement.setString(7, payment.getDescription());
-            log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
-            isInserted = statement.execute();
-            log.debug("Query completed:" + statement.toString().split(":")[1]);
+    public boolean insert(@NonNull Payment payment) throws RepositoryException {
+        try (Connection connection = pool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_INSERT)) {
+            String[] params = {String.valueOf(payment.getAccountId()), String.valueOf(payment.getCourseId()), String.valueOf(payment.getPaymentCode()),
+                    String.valueOf(payment.getAmount()), dateFormat.format(payment.getPaymentDate()), String.valueOf(payment.getCurrencyId()),
+                    payment.getDescription()};
+            setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            pool.returnConnection(connection);
+            throw new RepositoryException(e);
         }
-
-        return isInserted;
+        return true;
     }
 
     @Override
-    public List<Payment> query(@NonNull AppSpecification<Payment> specification) {
-        List<Payment> paymentList = new ArrayList<>();
-        Connection connection = pool.takeConnection();
-        try {
-            Statement statement = connection.createStatement();
+    public List<Payment> query(@NonNull AppSpecification<Payment> specification) throws RepositoryException {
+        List<Payment> paymentList;
+        try (Connection connection = pool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(specification.getQuery())) {
+            String[] params = specification.getStatementParameters();
+            for (int i = 0; i < params.length; i++) {
+                statement.setString(i + 1, params[i]);
+            }
             log.debug("Attempt to execute query:" + specification.getQuery());
-            ResultSet resultSet = statement.executeQuery(specification.getQuery());
-            log.debug("Query completed:" + specification.getQuery());
-            paymentList.addAll(fillPaymentList(resultSet));
+            try (ResultSet resultSet = statement.executeQuery(specification.getQuery())) {
+                log.debug("Query completed:" + specification.getQuery());
+                paymentList = fillPaymentList(resultSet);
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            pool.returnConnection(connection);
+            throw new RepositoryException(e);
         }
         return paymentList;
     }
 
-    private Collection<Payment> fillPaymentList(ResultSet resultSet) {
+    private List<Payment> fillPaymentList(ResultSet resultSet) {
         List<Payment> paymentList = new ArrayList<>();
         try {
             while (resultSet.next()) {
@@ -134,5 +108,14 @@ public class PaymentRepository implements AppRepository<Payment> {
             e.printStackTrace();
         }
         return paymentList;
+    }
+
+    private void setParametersAndExecute(PreparedStatement statement, String[] params) throws SQLException {
+        for (int i = 0; i < params.length; i++) {
+            statement.setString(i + 1, params[i]);
+        }
+        log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
+        statement.execute();
+        log.debug("Query completed:" + statement.toString().split(":")[1]);
     }
 }

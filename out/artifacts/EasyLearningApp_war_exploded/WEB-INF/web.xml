@@ -13,12 +13,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>by.anelkin.easylearning.servlet.LoginServlet</servlet-class>
+        <servlet-name>BasicServlet</servlet-name>
+        <servlet-class>by.anelkin.easylearning.servlet.BasicServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
+        <servlet-name>BasicServlet</servlet-name>
+        <url-pattern>/basic_servlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -28,6 +28,15 @@
     <servlet-mapping>
         <servlet-name>account</servlet-name>
         <url-pattern>/account</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SignUp</servlet-name>
+        <jsp-file>/jsp/sign_up.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignUp</servlet-name>
+        <url-pattern>/sign-up</url-pattern>
     </servlet-mapping>
 
 </web-app>

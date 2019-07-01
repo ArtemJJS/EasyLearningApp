@@ -25,9 +25,9 @@ public class Account extends AppEntity {
 
     public enum AccountType{
         GUEST,
-        ADMIN,
+        USER,
         AUTHOR,
-        USER
+        ADMIN
     }
 
     @Override

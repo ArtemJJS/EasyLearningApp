@@ -13,7 +13,12 @@ public class CourseLesson extends AppEntity{
     private int id;
     private int chapterId;
     private String name;
-    private File content;
+    private String pathToContent;
     private Date creationDate;
     private long length;
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

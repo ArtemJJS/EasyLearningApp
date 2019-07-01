@@ -4,11 +4,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @EqualsAndHashCode(callSuper = false, exclude = {"about", "pathToPhoto", "registrDate"})
-public class Account extends AppEntity{
+public class Account extends AppEntity {
     private int id;
     private String login;
     private String password;
@@ -24,8 +25,13 @@ public class Account extends AppEntity{
 
     public enum AccountType{
         GUEST,
-        ADMIN,
+        USER,
         AUTHOR,
-        USER
+        ADMIN
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

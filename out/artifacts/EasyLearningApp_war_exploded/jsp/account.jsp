@@ -6,14 +6,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>EasyLearning</title>
+<%--    <c:import url="/css/account_page.css" >--%>
+    <style>
+    <%@include  file="/css/account_page.css" %>
+    </style>
 </head>
 <body>
-    <% String login = request.getParameter("login");
-    out.println("<h1> HELLO, " + login + "!!! </h1>");
-    %>
+   <h1>Hello test from jsp</h1>
 </body>
 
 </html>

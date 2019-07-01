@@ -1182,7 +1182,7 @@
       <Position>12</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
-      <DefaultExpression>4</DefaultExpression>
+      <DefaultExpression>0</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="300" parent="277" name="login_UNIQUE">
@@ -1203,7 +1203,7 @@
       <ColNames>acc_login</ColNames>
       <UnderlyingIndexName>login_UNIQUE</UnderlyingIndexName>
     </key>
-    <foreign-key id="304" parent="277" name="type of user">
+    <foreign-key id="304" parent="277" name="account___type">
       <ColNames>acc_type</ColNames>
       <RefSchemaName>easylearning</RefSchemaName>
       <RefTableName>user_type</RefTableName>
@@ -1678,7 +1678,6 @@
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="386" parent="287" name="user_type_name">
@@ -1686,17 +1685,26 @@
       <DataType>varchar(45)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="387" parent="287" name="user_type_name_UNIQUE">
+    <index id="387" parent="287" name="user_type_user_type_id_uindex">
+      <ColNames>user_type_id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <index id="388" parent="287" name="user_type_name_UNIQUE">
       <ColNames>user_type_name</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="388" parent="287" name="PRIMARY">
+    <key id="389" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user_type_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="389" parent="287" name="user_type_name_UNIQUE">
+    <key id="390" parent="287" name="user_type_user_type_id_uindex">
+      <ColNames>user_type_id</ColNames>
+      <UnderlyingIndexName>user_type_user_type_id_uindex</UnderlyingIndexName>
+    </key>
+    <key id="391" parent="287" name="user_type_name_UNIQUE">
       <ColNames>user_type_name</ColNames>
       <UnderlyingIndexName>user_type_name_UNIQUE</UnderlyingIndexName>
     </key>

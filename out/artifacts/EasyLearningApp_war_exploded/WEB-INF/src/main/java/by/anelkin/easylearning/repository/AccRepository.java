@@ -4,7 +4,6 @@ import by.anelkin.easylearning.connection.ConnectionPool;
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.exeption.RepositoryException;
 import by.anelkin.easylearning.specification.AppSpecification;
-import by.anelkin.easylearning.specification.account.TempAccSpec;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
 import org.intellij.lang.annotations.Language;
@@ -33,56 +32,44 @@ public class AccRepository implements AppRepository<Account> {
 
     @Override
     public boolean update(@NonNull Account account) throws RepositoryException {
-        int isUpdated;
         // TODO: 6/18/2019 Сделать нормальное шифрование пароля
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
             String[] params = {account.getPassword(), account.getEmail(), account.getName(), account.getSurname(),
                     dateFormat.format(account.getBirthDate()), account.getPhoneNumber(), dateFormat.format(account.getRegistrDate()),
                     account.getAbout(), account.getPathToPhoto(), String.valueOf(account.getType().ordinal()), account.getLogin()};
-            setStatementParameters(statement, params);
-            log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
-            isUpdated = statement.executeUpdate();
-            log.debug("Query completed:" + statement.toString().split(":")[1]);
+            setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            throw new RepositoryException("Wrong query!!! " + e);
+            throw new RepositoryException(e);
         }
-        return isUpdated != 0;
+        return true;
     }
 
     @Override
     public boolean delete(@NonNull Account account) throws RepositoryException {
-        boolean isDeleted;
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_DELETE)) {
             String[] params = {account.getLogin()};
-            setStatementParameters(statement, params);
-            log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
-            isDeleted = statement.execute();
-            log.debug("Query completed:" + statement.toString().split(":")[1]);
+            setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            throw new RepositoryException("Wrong query!!! " + e);
+            throw new RepositoryException(e);
         }
-        return isDeleted;
+        return true;
     }
 
     @Override
     public boolean insert(@NonNull Account account) throws RepositoryException {
-        boolean isInserted;
         // TODO: 6/18/2019 Сделать нормальное шифрование пароля
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_INSERT)) {
             String[] params = {account.getLogin(), account.getPassword(), account.getEmail(), account.getName(), account.getSurname(),
                     dateFormat.format(account.getBirthDate()), account.getPhoneNumber(), dateFormat.format(account.getRegistrDate()),
                     account.getAbout(), account.getPathToPhoto(), String.valueOf(account.getType().ordinal())};
-            setStatementParameters(statement, params);
-            log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
-            isInserted = statement.execute();
-            log.debug("Query completed:" + statement.toString().split(":")[1]);
+            setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            throw new RepositoryException("Wrong query!!! " + e);
+            throw new RepositoryException(e);
         }
-        return isInserted;
+        return true;
     }
 
     @Override
@@ -90,9 +77,10 @@ public class AccRepository implements AppRepository<Account> {
         List<Account> accountList;
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(specification.getQuery())) {
-            String[] params = ((TempAccSpec) specification).getStatementParameters();
-            setStatementParameters(statement, params);
-
+            String[] params = specification.getStatementParameters();
+            for (int i = 0; i < params.length; i++) {
+                statement.setString(i+1, params[i]);
+            }
             log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
             try (ResultSet resultSet = statement.executeQuery()) {
                 accountList = new ArrayList<>(fillAccountList(resultSet));
@@ -104,49 +92,48 @@ public class AccRepository implements AppRepository<Account> {
         return accountList;
     }
 
-    private List<Account> fillAccountList(ResultSet resultSet) {
+    private List<Account> fillAccountList(ResultSet resultSet) throws SQLException {
         List<Account> accountList = new ArrayList<>();
-        try {
-            while (resultSet.next()) {
-                Account account = new Account();
-                account.setId(resultSet.getInt("acc_id"));
-                account.setLogin(resultSet.getString("acc_login"));
-                account.setPassword(resultSet.getString("acc_password"));
-                account.setEmail(resultSet.getString("acc_email"));
-                account.setName(resultSet.getString("acc_name"));
-                account.setSurname(resultSet.getString("acc_surname"));
-                account.setBirthDate(resultSet.getDate("acc_birthdate"));
-                account.setPhoneNumber(resultSet.getString("acc_phone_number"));
-                account.setRegistrDate(resultSet.getDate("acc_registration_date"));
-                account.setAbout(resultSet.getString("acc_about"));
-                account.setPathToPhoto(resultSet.getString("acc_photo_path"));
+        while (resultSet.next()) {
+            Account account = new Account();
+            account.setId(resultSet.getInt("acc_id"));
+            account.setLogin(resultSet.getString("acc_login"));
+            account.setPassword(resultSet.getString("acc_password"));
+            account.setEmail(resultSet.getString("acc_email"));
+            account.setName(resultSet.getString("acc_name"));
+            account.setSurname(resultSet.getString("acc_surname"));
+            account.setBirthDate(resultSet.getDate("acc_birthdate"));
+            account.setPhoneNumber(resultSet.getString("acc_phone_number"));
+            account.setRegistrDate(resultSet.getDate("acc_registration_date"));
+            account.setAbout(resultSet.getString("acc_about"));
+            account.setPathToPhoto(resultSet.getString("acc_photo_path"));
 
-                int typeId = resultSet.getInt("acc_type");
-                switch (typeId) {
-                    case 1:
-                        account.setType(ADMIN);
-                        break;
-                    case 2:
-                        account.setType(AUTHOR);
-                        break;
-                    case 3:
-                        account.setType(USER);
-                        break;
-                    default:
-                        throw new RuntimeException("Wrong type parameter from data base!!! User#" + account.getId());
-                }
-                accountList.add(account);
+            int typeId = resultSet.getInt("acc_type");
+            switch (typeId) {
+                case 1:
+                    account.setType(ADMIN);
+                    break;
+                case 2:
+                    account.setType(AUTHOR);
+                    break;
+                case 3:
+                    account.setType(USER);
+                    break;
+                default:
+                    throw new RuntimeException("Wrong type parameter from data base!!! User#" + account.getId());
             }
-        } catch (SQLException e) {
-            log.error("Error during account creating: " + e);
+            accountList.add(account);
         }
         return accountList;
     }
 
-    // TODO: 6/27/2019 пробрасываю искл-е и завершаю запрос по exception ?
-    private void setStatementParameters(PreparedStatement statement, String[] params) throws SQLException {
+    // TODO: 6/28/2019 надо ли эти два метода вынести в отдельный класс?
+    private void setParametersAndExecute(PreparedStatement statement, String[] params) throws SQLException {
         for (int i = 0; i < params.length; i++) {
             statement.setString(i + 1, params[i]);
         }
+        log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
+        statement.execute();
+        log.debug("Query completed:" + statement.toString().split(":")[1]);
     }
 }

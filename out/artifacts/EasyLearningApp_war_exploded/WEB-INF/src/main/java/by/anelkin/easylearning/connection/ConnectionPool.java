@@ -10,38 +10,51 @@ import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 @Log4j
 public class ConnectionPool {
+    private static final String URL;
+    private static final String USER;
+    private static final String PASSWORD;
+    private static final String DRIVER_NAME;
+    private static final int MIN_CONNECTIONS_AMOUNT;
+
     private static ConnectionPool instance;
     private static AtomicBoolean isInitialized = new AtomicBoolean(false);
     private static Lock lock = new ReentrantLock();
-    private int minConnectionCount = 10;
-    private int maxConnectionCount = 25;
     private BlockingQueue<ProxyConnection> availableConnections;
     private BlockingQueue<ProxyConnection> usedConnections;
 
+    static {
+        PoolInitializer poolInitializer = new PoolInitializer();
+        URL = poolInitializer.getUrl();
+        USER = poolInitializer.getUser();
+        PASSWORD = poolInitializer.getPassword();
+        DRIVER_NAME = poolInitializer.getDriverName();
+        MIN_CONNECTIONS_AMOUNT = poolInitializer.getMinConnections();
+    }
+
     private ConnectionPool() {
-        // TODO: 6/18/2019 сделать чтение параметров из файла
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            Class.forName(DRIVER_NAME);
+            initPool();
+        } catch (Exception e) {
+            throw new ExceptionInInitializerError(e);
         }
-        initPool();
     }
 
     private void initPool() {
-        usedConnections = new ArrayBlockingQueue<>(maxConnectionCount);
-        availableConnections = new ArrayBlockingQueue<>(maxConnectionCount);
-        for (int i = 0; i < minConnectionCount; i++) {
+        // TODO: 6/28/2019 реализовать max_connections_amount поле
+        usedConnections = new LinkedBlockingQueue<>(MIN_CONNECTIONS_AMOUNT);
+        availableConnections = new LinkedBlockingQueue<>(MIN_CONNECTIONS_AMOUNT);
+        for (int i = 0; i < MIN_CONNECTIONS_AMOUNT; i++) {
             try {
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/easylearning?serverTimezone=Europe/Moscow&useSSL=true", "root", "106116");
+                Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
                 ProxyConnection proxyConnection = new ProxyConnection(connection);
                 availableConnections.offer(proxyConnection);
             } catch (SQLException e) {
@@ -53,6 +66,7 @@ public class ConnectionPool {
         }
         log.info("Pool was initialized. Connections amount: " + availableConnections.size());
         checkConnectionsAmount();
+
     }
 
     public static ConnectionPool getInstance() {
@@ -83,7 +97,7 @@ public class ConnectionPool {
         return connection;
     }
 
-    public void returnConnection(Connection connection) {
+    void returnConnection(Connection connection) {
         if (connection instanceof ProxyConnection) {
             log.debug("Returning of connection into the pool.");
             usedConnections.remove(connection);
@@ -94,7 +108,7 @@ public class ConnectionPool {
     }
 
     public void closePool() {
-        for (int i = 0; i < minConnectionCount; i++) {
+        for (int i = 0; i < MIN_CONNECTIONS_AMOUNT; i++) {
             try {
                 ProxyConnection connection = availableConnections.take();
                 connection.closeFromPool();
@@ -105,9 +119,9 @@ public class ConnectionPool {
         deregisterDrivers();
     }
 
-    private void deregisterDrivers(){
+    private void deregisterDrivers() {
         Enumeration<Driver> drivers = DriverManager.getDrivers();
-        while (drivers.hasMoreElements()){
+        while (drivers.hasMoreElements()) {
             Driver driver = drivers.nextElement();
             try {
                 DriverManager.deregisterDriver(driver);
@@ -124,18 +138,18 @@ public class ConnectionPool {
             public void run() {
                 int availableAmount = availableConnections.size();
                 int usedAmount = usedConnections.size();
-                if (availableAmount + usedAmount != minConnectionCount) {
-                    log.warn("Connections leak!!!");
+                if (availableAmount + usedAmount != MIN_CONNECTIONS_AMOUNT) {
+                    log.warn("Connections leak!!! Current amount " + (availableAmount + usedAmount));
                 }
             }
         };
 
-        Thread checker = new Thread(() -> {
+//        Thread checker = new Thread(() -> {
             Timer timer = new Timer();
             timer.schedule(checkConnections, 0, 180_000); //period = 3 min
-        });
-        checker.setDaemon(true);
-        checker.start();
+//        });
+//        checker.setDaemon(true);
+//        checker.start();
     }
 
 

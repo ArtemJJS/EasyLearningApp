@@ -7,8 +7,7 @@ import org.intellij.lang.annotations.Language;
 import static by.anelkin.easylearning.entity.Mark.*;
 
 public class SelectMarkByTargetIdSpecification implements AppSpecification<Mark>, MarkSpecification<Mark> {
-    @Language("sql")
-    private static final String QUERY = "SELECT * FROM %s WHERE target_id = %d";
+    private static final String QUERY = "SELECT * FROM %s WHERE target_id = ?";
     private MarkType markType;
     private int targetId;
 
@@ -20,7 +19,12 @@ public class SelectMarkByTargetIdSpecification implements AppSpecification<Mark>
     @Override
     public String getQuery() {
         String tableName = markType.toString().toLowerCase();
-        return String.format(QUERY, tableName, targetId);
+        return String.format(QUERY, tableName);
+    }
+
+    @Override
+    public String[] getStatementParameters() {
+        return new String[]{String.valueOf(targetId)};
     }
 
     public MarkType getMarkType() {

@@ -6,7 +6,7 @@ import org.intellij.lang.annotations.Language;
 
 public class SelectAllFromCourseSpecification implements AppSpecification<CourseChapter> {
     @Language("sql")
-    private static final String QUERY = "SELECT * FROM course_chapter WHERE course_id = %d";
+    private static final String QUERY = "SELECT * FROM course_chapter WHERE course_id = ?";
     private int course_id;
 
     public SelectAllFromCourseSpecification(int course_id) {
@@ -15,6 +15,11 @@ public class SelectAllFromCourseSpecification implements AppSpecification<Course
 
     @Override
     public String getQuery() {
-        return String.format(QUERY, course_id);
+        return QUERY;
+    }
+
+    @Override
+    public String[] getStatementParameters() {
+        return new String[]{String.valueOf(course_id)};
     }
 }

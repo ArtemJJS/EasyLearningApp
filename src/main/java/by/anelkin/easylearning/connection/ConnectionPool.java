@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -50,8 +50,8 @@ public class ConnectionPool {
 
     private void initPool() {
         // TODO: 6/28/2019 реализовать max_connections_amount поле
-        usedConnections = new ArrayBlockingQueue<>(MIN_CONNECTIONS_AMOUNT);
-        availableConnections = new ArrayBlockingQueue<>(MIN_CONNECTIONS_AMOUNT);
+        usedConnections = new LinkedBlockingQueue<>(MIN_CONNECTIONS_AMOUNT);
+        availableConnections = new LinkedBlockingQueue<>(MIN_CONNECTIONS_AMOUNT);
         for (int i = 0; i < MIN_CONNECTIONS_AMOUNT; i++) {
             try {
                 Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -139,17 +139,17 @@ public class ConnectionPool {
                 int availableAmount = availableConnections.size();
                 int usedAmount = usedConnections.size();
                 if (availableAmount + usedAmount != MIN_CONNECTIONS_AMOUNT) {
-                    log.warn("Connections leak!!!");
+                    log.warn("Connections leak!!! Current amount " + (availableAmount + usedAmount));
                 }
             }
         };
 
-        Thread checker = new Thread(() -> {
+//        Thread checker = new Thread(() -> {
             Timer timer = new Timer();
             timer.schedule(checkConnections, 0, 180_000); //period = 3 min
-        });
-        checker.setDaemon(true);
-        checker.start();
+//        });
+//        checker.setDaemon(true);
+//        checker.start();
     }
 
 

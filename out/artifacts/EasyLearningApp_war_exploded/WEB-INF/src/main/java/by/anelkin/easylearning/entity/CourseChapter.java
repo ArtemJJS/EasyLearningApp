@@ -9,4 +9,9 @@ public class CourseChapter extends AppEntity{
     private int id;
     private int courseId;
     private String name;
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }
