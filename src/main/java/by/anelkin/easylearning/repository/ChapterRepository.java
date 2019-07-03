@@ -2,7 +2,7 @@ package by.anelkin.easylearning.repository;
 
 import by.anelkin.easylearning.connection.ConnectionPool;
 import by.anelkin.easylearning.entity.CourseChapter;
-import by.anelkin.easylearning.exeption.RepositoryException;
+import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.specification.AppSpecification;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;

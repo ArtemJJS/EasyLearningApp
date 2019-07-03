@@ -1,3 +1,102 @@
-h1{
-    color: red;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 20px;
+    color: black;
+}
+
+html {
+    width: 100vw;
+    height: 100vw;
+}
+
+
+header {
+    width: 100%;
+    padding-left: 12%;
+    padding-right: 12%;
+    height: 60px;
+
+    margin: 0 auto;
+    border-bottom: 1px solid green;
+
+    display: flex;
+}
+
+.logo{
+    width: 20%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.logo img{
+    width: 70%;
+    height:98%;
+}
+
+.panel{
+    width: 60%;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.panel-item{
+    margin-right: 8%;
+}
+
+.panel-item a{
+    text-decoration: none;
+}
+
+.panel-item a:hover{
+    text-decoration: underline;
+    color: green;
+}
+
+.user{
+    width:20%;
+    padding-right: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.user img{
+    height: 95%;
+    width: 25%;
+
+    margin: 0 10px;
+}
+
+/*========================*/
+
+main{
+    width: 85%;
+    background: linear-gradient(to bottom, rgb(247, 209, 209), rgb(242, 243, 242));
+    padding-top: 15px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.banner{
+    width: 80%;
+    height: 180px;
+
+    background-image: url("http://localhost:8080/easyLearning/resources/acc_banner.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position-y: 0;
+
+    font-size: 2.1rem;
+    color: rgb(11, 134, 11);
+    padding-left: 1.5rem;
+    padding-top: 0.3rem;
+
 }

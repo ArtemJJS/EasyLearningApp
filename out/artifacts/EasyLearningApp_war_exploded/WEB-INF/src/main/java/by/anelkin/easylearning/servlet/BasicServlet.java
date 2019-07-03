@@ -1,32 +1,35 @@
 package by.anelkin.easylearning.servlet;
 
-import by.anelkin.easylearning.command.CommandFactory;
-import by.anelkin.easylearning.command.RequestReceiver;
-import by.anelkin.easylearning.connection.ConnectionPool;
+import by.anelkin.easylearning.command.receiver.RequestReceiver;
 import by.anelkin.easylearning.entity.Account;
-import by.anelkin.easylearning.exeption.RepositoryException;
-import by.anelkin.easylearning.repository.AccRepository;
-import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
+import by.anelkin.easylearning.exception.RepositoryException;
 import lombok.extern.log4j.Log4j;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-import static by.anelkin.easylearning.command.CommandFactory.*;
+import static by.anelkin.easylearning.command.factory.CommandFactory.*;
+import static by.anelkin.easylearning.entity.Account.AccountType.*;
 
 @Log4j
+@WebServlet(name = "BasicServlet", urlPatterns = "/basic_servlet")
 public class BasicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println(request.getRequestURL());
+
+       if (request.getSession().getAttribute("user") == null){
+           Account guest = new Account();
+           guest.setType(GUEST);
+           request.getSession().setAttribute("user", guest);
+       }
         CommandType commandType = CommandType.valueOf(request.getParameter("command_name").toUpperCase());
         RequestReceiver receiver = new RequestReceiver(commandType, request);
         String redirectPath;

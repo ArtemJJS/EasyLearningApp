@@ -1,6 +1,6 @@
 package by.anelkin.easylearning.command;
 
-import by.anelkin.easylearning.exeption.RepositoryException;
+import by.anelkin.easylearning.exception.RepositoryException;
 
 import javax.servlet.http.HttpServletRequest;
 

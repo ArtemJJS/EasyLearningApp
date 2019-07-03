@@ -2,7 +2,7 @@ package by.anelkin.easylearning.repository;
 
 import by.anelkin.easylearning.connection.ConnectionPool;
 import by.anelkin.easylearning.entity.Account;
-import by.anelkin.easylearning.exeption.RepositoryException;
+import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.specification.AppSpecification;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
@@ -127,7 +127,6 @@ public class AccRepository implements AppRepository<Account> {
         return accountList;
     }
 
-    // TODO: 6/28/2019 надо ли эти два метода вынести в отдельный класс?
     private void setParametersAndExecute(PreparedStatement statement, String[] params) throws SQLException {
         for (int i = 0; i < params.length; i++) {
             statement.setString(i + 1, params[i]);

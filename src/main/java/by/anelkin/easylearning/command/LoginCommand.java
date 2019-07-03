@@ -1,14 +1,13 @@
 package by.anelkin.easylearning.command;
 
 import by.anelkin.easylearning.entity.Account;
-import by.anelkin.easylearning.exeption.RepositoryException;
+import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Map;
 
 public class LoginCommand implements Command {
     private static final String REDIRECT_PATH = "http://localhost:8080/easyLearning/account";

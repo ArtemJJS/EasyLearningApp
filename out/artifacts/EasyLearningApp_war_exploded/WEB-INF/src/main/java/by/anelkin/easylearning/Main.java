@@ -1,16 +1,14 @@
 package by.anelkin.easylearning;
 
 import by.anelkin.easylearning.entity.*;
-import by.anelkin.easylearning.exeption.RepositoryException;
+import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.repository.*;
-import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
 import by.anelkin.easylearning.specification.account.SelectAllAccountSpecification;
 import by.anelkin.easylearning.specification.course.SelectAllCourseSpecification;
 import lombok.extern.log4j.Log4j;
 
 import java.io.*;
 import java.math.BigDecimal;
-import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;

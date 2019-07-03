@@ -1,7 +1,7 @@
 package by.anelkin.easylearning.command;
 
 import by.anelkin.easylearning.entity.Account;
-import by.anelkin.easylearning.exeption.RepositoryException;
+import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
 
@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class SignUpNewUserCommand implements Command {
     private static final String REDIRECT_PATH = "http://localhost:8080/easyLearning/account";
-    private static final String WRONG_LOGIN_REDIRECT_PATH = "http://localhost:8080/easyLearning/sign-up";
+    private static final String WRONG_LOGIN_REDIRECT_PATH = "http://localhost:8080/easyLearning/sign-up?wrong-login=true";
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
@@ -26,10 +26,8 @@ public class SignUpNewUserCommand implements Command {
         Account account = new Account();
         initAccount(account, request);
         HttpSession session = request.getSession();
+        repository.insert(account);
         session.setAttribute("user", account);
-        boolean isInserted = repository.insert(account);
-        System.out.println(isInserted);
-        System.out.println(account);
         return REDIRECT_PATH;
     }
 

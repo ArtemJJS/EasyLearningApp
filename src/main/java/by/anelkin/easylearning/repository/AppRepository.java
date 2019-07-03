@@ -1,7 +1,7 @@
 package by.anelkin.easylearning.repository;
 
 import by.anelkin.easylearning.entity.AppEntity;
-import by.anelkin.easylearning.exeption.RepositoryException;
+import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.specification.AppSpecification;
 import lombok.NonNull;
 

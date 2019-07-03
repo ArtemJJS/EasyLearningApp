@@ -1,3 +1,90 @@
-h1{
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+h1 {
     color: green;
 }
+
+.logo {
+    background-color: green;
+}
+
+body {
+    width: 80%;
+    height: 130%;
+    margin: 0 auto;
+    border: 2px solid red;
+    padding-top: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header1 {
+    color: green;
+}
+
+main {
+    padding-top: 10px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input, select, textarea {
+    border: 1px solid #474747;
+    font-size: 0.8rem;
+}
+
+textarea {
+    margin-top: 20px;
+}
+
+input {
+    margin-top: 20px;
+    margin-bottom: 4px;
+    color: #292929;
+    width: 180px;
+}
+
+
+.field_desc {
+    font-size: 10px;
+    color: #8a8a8a;
+}
+
+label {
+    width: 100px;
+}
+
+.param8 {
+    display: flex;
+}
+
+.param8 p {
+    margin-top: 18px;
+    margin-right: 10px;
+}
+
+.submit_btn {
+    width: 100px;
+    height: 25px;
+    margin: 30px;
+    position: relative;
+    left: 100px;
+
+    border-radius: 3px;
+    background-color: #d0d0d0;
+}
+
+

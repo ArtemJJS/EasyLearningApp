@@ -43,6 +43,6 @@
         <input class="sign_up_button" type="submit" value="Sign UP!">
     </form>
 </section>
+<img src="${pageContext.request.contextPath}/resources/Elephant.jpg" alt="logo" width="80%" height="60%">
 </body>
-
 </html>

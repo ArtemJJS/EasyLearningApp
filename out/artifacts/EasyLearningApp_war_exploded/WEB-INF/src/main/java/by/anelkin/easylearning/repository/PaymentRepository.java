@@ -2,7 +2,7 @@ package by.anelkin.easylearning.repository;
 
 import by.anelkin.easylearning.connection.ConnectionPool;
 import by.anelkin.easylearning.entity.Payment;
-import by.anelkin.easylearning.exeption.RepositoryException;
+import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.specification.AppSpecification;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
@@ -11,7 +11,6 @@ import org.intellij.lang.annotations.Language;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Log4j
