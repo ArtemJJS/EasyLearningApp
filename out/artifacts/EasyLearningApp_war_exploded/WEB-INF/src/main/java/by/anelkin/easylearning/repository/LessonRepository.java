@@ -68,14 +68,14 @@ public class LessonRepository implements AppRepository<CourseLesson> {
     public List<CourseLesson> query(@NonNull AppSpecification<CourseLesson> specification) throws RepositoryException {
         List<CourseLesson> lessonList;
         try (Connection connection = pool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
+             PreparedStatement statement = connection.prepareStatement(specification.getQuery())) {
             String[] params = specification.getStatementParameters();
             for (int i = 0; i < params.length; i++) {
                 statement.setString(i + 1, params[i]);
             }
-            log.debug("Attempt to execute query:" + specification.getQuery());
-            try (ResultSet resultSet = statement.executeQuery(specification.getQuery())) {
-                log.debug("Query completed:" + specification.getQuery());
+            log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                log.debug("Query completed:" + statement.toString().split(":")[1]);
                 lessonList = fillLessonList(resultSet);
             }
         } catch (SQLException e) {

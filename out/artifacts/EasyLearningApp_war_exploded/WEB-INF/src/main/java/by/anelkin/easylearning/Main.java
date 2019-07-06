@@ -6,6 +6,7 @@ import by.anelkin.easylearning.repository.*;
 import by.anelkin.easylearning.specification.account.SelectAllAccountSpecification;
 import by.anelkin.easylearning.specification.course.SelectAllCourseSpecification;
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
+import by.anelkin.easylearning.specification.lesson.SelectByChapterIdSpecification;
 import lombok.extern.log4j.Log4j;
 
 import java.io.*;
@@ -58,8 +59,8 @@ public class Main {
 //        log.info("Main FINISHED!");
 //
 
-        CourseRepository repo = new CourseRepository();
-        List<Course> list = repo.query(new SelectCoursesPurchasedByUserSpecification(1));
+        LessonRepository repo = new LessonRepository();
+        List<CourseLesson> list = repo.query(new SelectByChapterIdSpecification(1));
         list.forEach(System.out::println);
 
     }

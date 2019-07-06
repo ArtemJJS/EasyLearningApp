@@ -1,13 +1,116 @@
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: 18px;
+    font-size: 22px;
     color: black;
 }
 
 html {
-    min-height: 100vh;
-    position: relative;
+    width: 100vw;
+    height: 100vw;
+}
+
+main {
+    width: 1000px;
+    min-height: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding-top: 70px;
+
+    background: linear-gradient(to bottom, rgb(183, 247, 199), rgb(209, 189, 206)) ;
+}
+
+.section_1 {
+    padding: 10px;
+    width: 90%;
+    height: 300px;
+    background-color: rgb(184, 185, 187);
+    border: 1px solid grey;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.course_title {
+    width: 70%;
+    min-height: 90%;
+
+
+    display: flex;
+    flex-direction: column;
+}
+
+.course_name {
+    font-size: 2rem;
+    width: 100%;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.course_description {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.course_rating {
+    font-size: 1.2rem;
+    margin-top: auto;
+}
+
+.course_view {
+    width: 30%;
+    min-height: 90%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.course_avatar {
+    width: 80%;
+    height: 75%;
+}
+
+.price {
+    margin-top: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/*========================*/
+
+.section_2 {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-top: 20px;
+
+    background-color: rgb(159, 230, 142);
+}
+
+.lessons_minutes {
+    display: flex;
+}
+
+.lessons_minutes div:first-child {
+    margin-right: 30px;
+}
+
+.section_3 {
+    width: 90%;
+}
+
+.chapter {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 40px;
+
+    margin-top: 20px;
+
+    background-color: rgb(143, 142, 230);
 }

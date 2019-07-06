@@ -75,9 +75,9 @@ public class CourseRepository implements AppRepository<Course> {
             for (int i = 0; i < params.length; i++) {
                 statement.setString(i+1, params[i]);
             }
-            log.debug("Attempt to execute query: " + specification.getQuery());
+            log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
             try(ResultSet resultSet = statement.executeQuery()) {
-                log.debug("Query successfully executed: " + specification.getQuery());
+                log.debug("Query completed:" + statement.toString().split(":")[1]);
                 courseList = fillCourseList(resultSet);
             }
         } catch (SQLException e) {

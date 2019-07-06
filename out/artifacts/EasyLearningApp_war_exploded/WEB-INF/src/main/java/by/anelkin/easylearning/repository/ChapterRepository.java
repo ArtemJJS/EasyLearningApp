@@ -69,10 +69,10 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
             for (int i = 0; i < params.length; i++) {
                 statement.setString(i+1, params[i]);
             }
-            log.debug("Attempt to execute query:" + specification.getQuery());
-            try (ResultSet resultSet = statement.executeQuery(specification.getQuery())) {
+            log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
+            try (ResultSet resultSet = statement.executeQuery()) {
                 chapterList = new ArrayList<>(fillChapterList(resultSet));
-                log.debug("Query completed:" + specification.getQuery());
+                log.debug("Query completed:" + statement.toString().split(":")[1]);
             }
         } catch (SQLException e) {
            throw new RepositoryException(e);

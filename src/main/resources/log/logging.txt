@@ -34,3 +34,20 @@ where t1.user_id = ?;
 2019-07-05 00:40:54 main DEBUG CourseRepository:78 - Attempt to execute query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = ?
 2019-07-05 00:40:54 main DEBUG CourseRepository:80 - Query successfully executed: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = ?
 2019-07-05 00:40:54 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
+2019-07-06 19:14:54 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-06 19:14:54 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-06 19:14:54 main DEBUG LessonRepository:76 - Attempt to execute query: UPDATE course_lesson SET course_chapter_id = '1', lesson_name = ** NOT SPECIFIED **, lesson_content_address = ** NOT SPECIFIED **, lesson_creation_date = ** NOT SPECIFIED **, lesson_length = ** NOT SPECIFIED ** WHERE lesson_id = ** NOT SPECIFIED **
+2019-07-06 19:14:54 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
+2019-07-06 19:16:05 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-06 19:16:05 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-06 19:16:05 main DEBUG LessonRepository:76 - Attempt to execute query: UPDATE course_lesson SET course_chapter_id = '1', lesson_name = ** NOT SPECIFIED **, lesson_content_address = ** NOT SPECIFIED **, lesson_creation_date = ** NOT SPECIFIED **, lesson_length = ** NOT SPECIFIED ** WHERE lesson_id = ** NOT SPECIFIED **
+2019-07-06 19:16:05 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
+2019-07-06 19:17:07 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-06 19:17:07 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-06 19:17:40 main DEBUG LessonRepository:76 - Attempt to execute query: UPDATE course_lesson SET course_chapter_id = '1', lesson_name = ** NOT SPECIFIED **, lesson_content_address = ** NOT SPECIFIED **, lesson_creation_date = ** NOT SPECIFIED **, lesson_length = ** NOT SPECIFIED ** WHERE lesson_id = ** NOT SPECIFIED **
+2019-07-06 19:17:40 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
+2019-07-06 19:17:44 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-06 19:17:44 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-06 19:17:44 main DEBUG LessonRepository:76 - Attempt to execute query: SELECT * FROM course_lesson WHERE course_chapter_id = '1'
+2019-07-06 19:17:44 main DEBUG LessonRepository:78 - Query completed: SELECT * FROM course_lesson WHERE course_chapter_id = '1'
+2019-07-06 19:17:44 main DEBUG ConnectionPool:102 - Returning of connection into the pool.

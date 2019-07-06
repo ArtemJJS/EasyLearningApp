@@ -18,7 +18,7 @@
 <body>
 <header>
     <div class="header-content">
-        <div class="logo"><img src="${pageContext.request.contextPath}/resources/logo.jpg" alt="logo"></div>
+        <div class="logo"><a href="${pageContext.request.contextPath}/account"><img src="${pageContext.request.contextPath}/resources/logo.jpg" alt="logo"></a></div>
         <div class="panel">
             <div class="panel-item"><a href="">Search</a></div>
             <div class="panel-item"><a href="">News</a></div>
@@ -38,7 +38,7 @@
                 </c:when>
                 <c:otherwise>
                     <img src="${pageContext.request.contextPath}/resources/default_acc_avatar.png" alt="avatar"/>
-                    <div class="user_login">${sessionScope.user.login}</div>
+                    <div class="user_login"><a href="${pageContext.request.contextPath}/account">${sessionScope.user.login}</a></div>
                     <form method="post" action="http://localhost:8080/easyLearning/basic_servlet">
                         <input type="hidden" name="command_name" value="log_out">
                         <input type="submit" name="LogOut" value="LogOut"/>
