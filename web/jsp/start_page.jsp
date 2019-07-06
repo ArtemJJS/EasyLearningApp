@@ -26,19 +26,19 @@
 </section>
 <section class="section2">
     <form class="log_in" action="http://localhost:8080/easyLearning/basic_servlet">
-        <input class="text_field" type="text" name="login" value="login">
-        <input class="text_field" type="text" name="password" value="password">
+        <input class="text_field" type="text" name="login" placeholder="login">
+        <input class="text_field" type="text" name="password" placeholder="password">
         <input type="hidden" name="command_name" value="login">
         <input type="submit" value="Login!">
     </form>
 </section>
-        <c:set var="wrong_login" value="${pageContext.request.getParameter('wrong-login')}"/>
-        <c:if test="${wrong_login == 'true'}">
+        <c:set var="wrong_login" value="${pageContext.request.getAttribute('wrong-login')}"/>
+        <c:if test="${wrong_login.toString() == true}">
             <div class="inv_login_message">${"Username or Password is incorrect! Try again, please!"}</div>
         </c:if>
 <section class="section3">
     <div class="desc_sign_up"> Still don't have an account? Register now for free!</div>
-    <form class="sign_up" action="http://localhost:8080/easyLearning/basic_servlet">
+    <form class="sign_up" action="http://localhost:8080/easyLearning/basic_servlet" >
         <input type="hidden" name="command_name" value="sign_up">
         <input class="sign_up_button" type="submit" value="Sign UP!">
     </form>

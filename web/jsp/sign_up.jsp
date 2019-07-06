@@ -37,7 +37,7 @@
         <div class="param1">
             <label for="login-field">Login*: </label>
             <input placeholder="login" type="text" id="login-field" name="login" required pattern="[A-z0-9_ -]{3,30}">
-            <c:if test="${pageContext.request.getParameter('wrong-login') == true}">
+            <c:if test="${pageContext.request.getAttribute('wrong-login') == 'true'}">
                 <p class="field_desc" style="color: red">This login is in use already, try another one! </p>
             </c:if>
             <p class="field_desc">Available characters: English letters, digits, _ and - symbols, space. Min 3, max 30 symbols. </p>

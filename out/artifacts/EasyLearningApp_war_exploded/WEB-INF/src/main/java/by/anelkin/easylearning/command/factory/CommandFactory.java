@@ -1,16 +1,14 @@
 package by.anelkin.easylearning.command.factory;
 
-import by.anelkin.easylearning.command.Command;
-import by.anelkin.easylearning.command.LoginCommand;
-import by.anelkin.easylearning.command.SignUpCommand;
-import by.anelkin.easylearning.command.SignUpNewUserCommand;
+import by.anelkin.easylearning.command.*;
 import lombok.NonNull;
 
 public class CommandFactory {
     public enum CommandType {
         LOGIN,
         SIGN_UP,
-        SIGN_UP_NEW_USER
+        SIGN_UP_NEW_USER,
+        LOG_OUT
     }
 
     public Command getCommand(@NonNull CommandType type) {
@@ -24,6 +22,10 @@ public class CommandFactory {
                 break;
             case SIGN_UP_NEW_USER:
                 command = new SignUpNewUserCommand();
+                break;
+            case LOG_OUT:
+                command = new LogOutCommand();
+                break;
         }
         return command;
     }

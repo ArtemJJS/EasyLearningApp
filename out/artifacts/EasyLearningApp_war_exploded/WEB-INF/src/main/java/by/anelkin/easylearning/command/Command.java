@@ -1,9 +1,8 @@
 package by.anelkin.easylearning.command;
 
 import by.anelkin.easylearning.exception.RepositoryException;
-
-import javax.servlet.http.HttpServletRequest;
+import by.anelkin.easylearning.receiver.SessionRequestContent;
 
 public interface Command {
-    String execute(HttpServletRequest request) throws RepositoryException;
+    SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws RepositoryException;
 }

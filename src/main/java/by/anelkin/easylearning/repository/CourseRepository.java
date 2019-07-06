@@ -17,6 +17,7 @@ import java.util.List;
 @Log4j
 public class CourseRepository implements AppRepository<Course> {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static final String PATH_TO_PICTURE = "/resources/course_avatar/";
     private ConnectionPool pool = ConnectionPool.getInstance();
     @Language("sql")
     private static final String QUERY_INSERT = "INSERT INTO course(course_name, course_description, course_creation_date, course_picture, course_price) " +
@@ -75,7 +76,7 @@ public class CourseRepository implements AppRepository<Course> {
                 statement.setString(i+1, params[i]);
             }
             log.debug("Attempt to execute query: " + specification.getQuery());
-            try(ResultSet resultSet = statement.executeQuery(specification.getQuery())) {
+            try(ResultSet resultSet = statement.executeQuery()) {
                 log.debug("Query successfully executed: " + specification.getQuery());
                 courseList = fillCourseList(resultSet);
             }
@@ -93,7 +94,7 @@ public class CourseRepository implements AppRepository<Course> {
                 course.setName(resultSet.getString("course_name"));
                 course.setDescription(resultSet.getString("course_description"));
                 course.setCreationDate(resultSet.getDate("course_creation_date"));
-                course.setPathToPicture(resultSet.getString("course_picture"));
+                course.setPathToPicture(PATH_TO_PICTURE + resultSet.getString("course_picture"));
                 course.setPrice(new BigDecimal(resultSet.getString("course_price")));
                 courseList.add(course);
             }

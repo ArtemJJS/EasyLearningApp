@@ -7,7 +7,7 @@
 <display-name>FirstProject</display-name>
 
     <welcome-file-list>
-        <welcome-file>jsp/start_page.jsp</welcome-file>
+        <welcome-file>jsp/account.jsp</welcome-file>
     </welcome-file-list>
 
     <servlet-mapping>
@@ -21,7 +21,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>start_page</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -40,6 +40,15 @@
     <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/sign-up</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Course</servlet-name>
+        <jsp-file>/jsp/course/course.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Course</servlet-name>
+        <url-pattern>/course</url-pattern>
     </servlet-mapping>
 
 

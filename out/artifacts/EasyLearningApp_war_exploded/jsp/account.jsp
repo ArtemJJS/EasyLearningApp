@@ -1,4 +1,4 @@
-<%--
+<%@ page import="by.anelkin.easylearning.entity.Account" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 6/26/2019
@@ -16,21 +16,43 @@
     </style>
 </head>
 <body>
-<header>
-    <c:set var="user" value="${requestScope.get('user')}"/>
-    <div class="logo"><img src="${pageContext.request.contextPath}/resources/logo.jpg" alt="logo"></div>
-    <div class="panel">
-        <div class="panel-item"><a href="">Search</a></div>
-        <div class="panel-item"><a href="">News</a></div>
-        <div class="panel-item"><a href="">Account</a></div>
-        <div class="panel-item"><a href="">Become Author</a></div>
-        <div class="panel-item"><a href="">Support</a></div>
-    </div>
-    <div class="user"><img src="${pageContext.request.contextPath}/resources/default_acc_avatar.png" alt="avatar"/>
-    </div>
-</header>
+<%@include file="header.jsp" %>
 <main>
     <div class="banner">Learn EASY. <br>EVERYTIME. EVERYWHERE.</div>
+    <div class="greeting">Welcome back, ${sessionScope.user.name}! Are you ready to study?</div>
+    <div class="courses_available">
+        <c:set var="courses_available" value="${sessionScope.coursesAvailable}"/>
+        <c:choose>
+            <c:when test="${courses_available == null}">
+                <c:out value="You do not have available courses... ((("/>
+            </c:when>
+            <c:otherwise>
+                <div class="available_header">Courses, that you have purchased already:</div>
+                <c:forEach var="course" items="${courses_available}">
+                    <div class="about_course">
+                        <div class="block1">
+                            <a href="http://localhost:8080/easyLearning/course">
+                                <img class="course_avatar"
+                                     src="${pageContext.request.contextPath}${course.pathToPicture}"
+                                     alt="course avatar"/>
+                            </a>
+                        </div>
+                        <div class="block2">
+                            <div class="course_name">
+                                <a href="http://localhost:8080/easyLearning/course">
+                                        ${course.name}
+                                </a>
+                            </div>
+                            <div class="course_desc">${course.description}</div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
+    </div>
+    <div class="recommended">
+        Courses, That are recommended for you:
+    </div>
 </main>
 
 </body>

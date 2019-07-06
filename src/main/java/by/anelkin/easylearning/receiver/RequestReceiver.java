@@ -1,25 +1,24 @@
-package by.anelkin.easylearning.command.receiver;
+package by.anelkin.easylearning.receiver;
 
 import by.anelkin.easylearning.command.Command;
 import by.anelkin.easylearning.command.factory.CommandFactory;
 import by.anelkin.easylearning.exception.RepositoryException;
 
-import javax.servlet.http.HttpServletRequest;
-
 import static by.anelkin.easylearning.command.factory.CommandFactory.*;
+import static by.anelkin.easylearning.receiver.SessionRequestContent.*;
 
 
 public class RequestReceiver {
     private Command command;
-    private HttpServletRequest request;
+    private SessionRequestContent requestContent;
 
-    public RequestReceiver(CommandType commandType, HttpServletRequest request) {
+    public RequestReceiver(CommandType commandType, SessionRequestContent requestContent) {
         CommandFactory factory = new CommandFactory();
         this.command = factory.getCommand(commandType);
-        this.request = request;
+        this.requestContent = requestContent;
     }
 
-    public String executeCommand() throws RepositoryException {
-        return command.execute(request);
+    public ResponseType executeCommand() throws RepositoryException {
+       return command.execute(requestContent);
     }
 }
