@@ -7,13 +7,19 @@ import by.anelkin.easylearning.specification.account.SelectAllAccountSpecificati
 import by.anelkin.easylearning.specification.course.SelectAllCourseSpecification;
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
 import by.anelkin.easylearning.specification.lesson.SelectByChapterIdSpecification;
+import by.anelkin.easylearning.specification.mark.SelectAllMarkSpecification;
+import by.anelkin.easylearning.specification.mark.SelectMarkByIdSpecification;
+import by.anelkin.easylearning.specification.mark.SelectMarkByTargetIdSpecification;
 import lombok.extern.log4j.Log4j;
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import static by.anelkin.easylearning.entity.Mark.MarkType.*;
 
 @Log4j
 public class Main {
@@ -59,10 +65,18 @@ public class Main {
 //        log.info("Main FINISHED!");
 //
 
-        LessonRepository repo = new LessonRepository();
-        List<CourseLesson> list = repo.query(new SelectByChapterIdSpecification(1));
-        list.forEach(System.out::println);
+//       Mark mark = new Mark(Mark.MarkType.AUTHOR_MARK);
+//       mark.setMarkDate(new Date(System.currentTimeMillis()));
+//       mark.setComment("ASDasdasdasdas");
+//       mark.setMarkValue(4);
+//       mark.setTargetId(2);
+//       mark.setAccId(16);
 
+        MarkRepository repo = new MarkRepository();
+        List<Mark> list = repo.query(new SelectAllMarkSpecification(COURSE_MARK));
+        list.forEach(System.out::println);
+        Mark mark = list.get(0);
+        repo.delete(mark);
     }
 
 }

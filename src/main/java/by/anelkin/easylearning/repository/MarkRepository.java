@@ -14,19 +14,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static by.anelkin.easylearning.entity.Mark.*;
+import static by.anelkin.easylearning.entity.Mark.MarkType.*;
 
 @Log4j
 public class MarkRepository implements AppRepository<Mark> {
     private ConnectionPool pool = ConnectionPool.getInstance();
+    private static final String ACCOUNT_TABLE = "account";
+    private static final String COURSE_TABLE = "course";
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private static final String QUERY_INSERT = "INSERT INTO %s(target_id, acc_id, mark_value, mark_comment, mark_date) " +
-            "VALUES (?, ?, ?, ?, ?)";
     private static final String QUERY_DELETE = "DELETE FROM %s WHERE mark_id = ?";
-    private static final String QUERY_UPDATE = "UPDATE %s SET target_id = ?, acc_id = ?, mark_value = ?, mark_comment = ?, mark_date = ? WHERE mark_id = ?";
+    private static final String QUERY_UPDATE_AVG_MARK = "UPDATE %s SET avg_mark=(SELECT AVG(mark_value) from %s where target_id = ?) where course_id = ?";
+    private static final String QUERY_INSERT_COURSE_MARK = "{call InsertCourseMark(?, ?, ?, ?, ?)}";
+    private static final String QUERY_INSERT_AUTHOR_MARK = "{call InsertAuthorMark(?, ?, ?, ?, ?)}";
+    private static final String QUERY_UPDATE_COURSE_MARK = "{call updateCourseMark(?, ?, ?, ?, ?, ?)}";
+    private static final String QUERY_UPDATE_AUTHOR_MARK = "{call updateAuthorMark(?, ?, ?, ?, ?, ?)}";
+    private static final String QUERY_DELETE_COURSE_MARK = "{call deleteCourseMark(?)}";
+    private static final String QUERY_DELETE_AUTHOR_MARK = "{call deleteAuthorMark(?)}";
+
+
 
     @Override
     public boolean update(@NonNull Mark mark) throws RepositoryException {
-        String actualQuery = String.format(QUERY_UPDATE, mark.getMarkType().toString().toLowerCase());
+        String actualQuery = mark.getMarkType() == AUTHOR_MARK ? QUERY_UPDATE_AUTHOR_MARK : QUERY_UPDATE_COURSE_MARK;
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(actualQuery)) {
             String[] params = {String.valueOf(mark.getTargetId()), String.valueOf(mark.getAccId()), String.valueOf(mark.getMarkValue()),
@@ -40,7 +49,7 @@ public class MarkRepository implements AppRepository<Mark> {
 
     @Override
     public boolean delete(@NonNull Mark mark) throws RepositoryException {
-        String actualQuery = String.format(QUERY_DELETE, mark.getMarkType().toString().toLowerCase());
+        String actualQuery = mark.getMarkType() == AUTHOR_MARK ? QUERY_DELETE_AUTHOR_MARK : QUERY_DELETE_COURSE_MARK;
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(actualQuery)) {
             String[] params = {String.valueOf(mark.getId())};
@@ -53,12 +62,13 @@ public class MarkRepository implements AppRepository<Mark> {
 
     @Override
     public boolean insert(@NonNull Mark mark) throws RepositoryException {
-        String actualQuery = String.format(QUERY_INSERT, mark.getMarkType().toString().toLowerCase());
+        String actualQuery = mark.getMarkType() == AUTHOR_MARK ? QUERY_INSERT_AUTHOR_MARK : QUERY_INSERT_COURSE_MARK;
         try (Connection connection = pool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(actualQuery)) {
-            String[] params = {String.valueOf(mark.getTargetId()), String.valueOf(mark.getAccId()),
+             CallableStatement statement = connection.prepareCall(actualQuery)){
+            // TODO: 7/8/2019 спросить про два запроса
+            String[] params1 = {String.valueOf(mark.getTargetId()), String.valueOf(mark.getAccId()),
                     String.valueOf(mark.getMarkValue()), mark.getComment(), dateFormat.format(mark.getMarkDate())};
-            setParametersAndExecute(statement, params);
+            setParametersAndExecute(statement, params1);
         } catch (SQLException e) {
             throw new RepositoryException(e);
         }
@@ -77,7 +87,7 @@ public class MarkRepository implements AppRepository<Mark> {
                 statement.setString(i + 1, params[i]);
             }
             log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
-            try (ResultSet resultSet = statement.executeQuery(specification.getQuery())) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 log.debug("Query completed:" + statement.toString().split(":")[1]);
                 markList = fillMarkList(resultSet, markType);
             }
@@ -110,4 +120,5 @@ public class MarkRepository implements AppRepository<Mark> {
         statement.execute();
         log.debug("Query completed:" + statement.toString().split(":")[1]);
     }
+
 }

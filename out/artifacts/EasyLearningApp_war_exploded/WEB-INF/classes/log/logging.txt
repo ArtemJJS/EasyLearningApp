@@ -51,3 +51,82 @@ where t1.user_id = ?;
 2019-07-06 19:17:44 main DEBUG LessonRepository:76 - Attempt to execute query: SELECT * FROM course_lesson WHERE course_chapter_id = '1'
 2019-07-06 19:17:44 main DEBUG LessonRepository:78 - Query completed: SELECT * FROM course_lesson WHERE course_chapter_id = '1'
 2019-07-06 19:17:44 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
+2019-07-08 20:59:51 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-08 20:59:51 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-08 20:59:51 main DEBUG MarkRepository:124 - Attempt to execute query: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08');UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 20:59:51 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
+2019-07-08 21:03:45 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-08 21:03:45 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-08 21:03:45 main DEBUG MarkRepository:124 - Attempt to execute query: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08');UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:03:45 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
+2019-07-08 21:16:20 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-08 21:16:20 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-08 21:16:20 main DEBUG MarkRepository:124 - Attempt to execute query: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:16:20 main DEBUG MarkRepository:126 - Query completed: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:16:20 main DEBUG MarkRepository:124 - Attempt to execute query: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:16:20 main DEBUG MarkRepository:126 - Query completed: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:16:20 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
+2019-07-08 21:16:58 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-08 21:16:58 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-08 21:16:58 main DEBUG MarkRepository:124 - Attempt to execute query: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:16:58 main DEBUG MarkRepository:126 - Query completed: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:16:58 main DEBUG MarkRepository:124 - Attempt to execute query: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:16:58 main DEBUG MarkRepository:126 - Query completed: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:16:58 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
+2019-07-08 21:17:03 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-08 21:17:03 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-08 21:17:03 main DEBUG MarkRepository:124 - Attempt to execute query: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:17:03 main DEBUG MarkRepository:126 - Query completed: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:17:03 main DEBUG MarkRepository:124 - Attempt to execute query: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:17:03 main DEBUG MarkRepository:126 - Query completed: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:17:03 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
+2019-07-08 21:19:46 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-08 21:19:46 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-08 21:19:46 main DEBUG MarkRepository:125 - Attempt to execute query: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:19:46 main DEBUG MarkRepository:127 - Query completed: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:19:46 main DEBUG MarkRepository:125 - Attempt to execute query: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:19:46 main DEBUG MarkRepository:127 - Query completed: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:19:46 main DEBUG ConnectionPool:102 - Returning of connection into the pool. Available connections: 9.
+2019-07-08 21:21:34 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-08 21:21:34 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-08 21:21:34 main DEBUG MarkRepository:128 - Attempt to execute query: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:21:34 main DEBUG MarkRepository:130 - Query completed: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:21:34 main DEBUG MarkRepository:128 - Attempt to execute query: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:21:34 main DEBUG MarkRepository:130 - Query completed: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:21:34 main DEBUG ConnectionPool:102 - Returning of connection into the pool. Available connections: 9.
+2019-07-08 21:22:00 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-08 21:22:00 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-08 21:22:00 main DEBUG MarkRepository:128 - Attempt to execute query: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:22:00 main DEBUG MarkRepository:130 - Query completed: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:22:00 main DEBUG MarkRepository:128 - Attempt to execute query: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:22:00 main DEBUG MarkRepository:130 - Query completed: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:22:00 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-08 21:22:14 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-08 21:22:14 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-08 21:22:14 main DEBUG MarkRepository:125 - Attempt to execute query: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:22:14 main DEBUG MarkRepository:127 - Query completed: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:22:14 main DEBUG MarkRepository:125 - Attempt to execute query: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:22:14 main DEBUG MarkRepository:127 - Query completed: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:22:14 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-08 21:23:44 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-08 21:23:44 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-08 21:23:44 main DEBUG MarkRepository:127 - Attempt to execute query: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08'); UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:23:44 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-08 21:24:24 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-08 21:24:24 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-08 21:24:25 main DEBUG MarkRepository:128 - Attempt to execute query: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08'); UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:24:25 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-08 21:24:47 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-08 21:24:47 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-08 21:24:47 main DEBUG MarkRepository:126 - Attempt to execute query: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:24:47 main DEBUG MarkRepository:128 - Query completed: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:24:47 main DEBUG MarkRepository:126 - Attempt to execute query: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:24:47 main DEBUG MarkRepository:128 - Query completed: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:24:47 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-08 21:26:34 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-08 21:26:34 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-08 21:26:34 main DEBUG MarkRepository:126 - Attempt to execute query: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:26:34 main DEBUG MarkRepository:128 - Query completed: INSERT INTO course_mark(target_id, acc_id, mark_value, mark_comment, mark_date) VALUES ('4', '15', '4', 'ASDasdasdasdas', '2019-07-08')
+2019-07-08 21:26:34 main DEBUG MarkRepository:126 - Attempt to execute query: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:26:34 main DEBUG MarkRepository:128 - Query completed: UPDATE course SET avg_mark=(SELECT AVG(mark_value) from course_mark where target_id = '4') where course_id = '4'
+2019-07-08 21:26:34 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.

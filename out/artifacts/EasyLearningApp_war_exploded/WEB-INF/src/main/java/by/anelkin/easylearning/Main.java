@@ -13,6 +13,7 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Log4j
@@ -59,9 +60,15 @@ public class Main {
 //        log.info("Main FINISHED!");
 //
 
-        LessonRepository repo = new LessonRepository();
-        List<CourseLesson> list = repo.query(new SelectByChapterIdSpecification(1));
-        list.forEach(System.out::println);
+       Mark mark = new Mark(Mark.MarkType.COURSE_MARK);
+       mark.setMarkDate(new Date(System.currentTimeMillis()));
+       mark.setComment("ASDasdasdasdas");
+       mark.setMarkValue(4);
+       mark.setTargetId(4);
+       mark.setAccId(15);
+
+       MarkRepository repo = new MarkRepository();
+       repo.insert(mark);
 
     }
 

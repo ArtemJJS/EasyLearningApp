@@ -23,12 +23,12 @@
         <div class="course_title">
             <div class="course_name">${curr_course.name}</div>
             <div class="course_description">${curr_course.description}</div>
-            <div class="course_rating">5.0<br>Feedbacks: 34</div>
+            <div class="course_rating">Mark from users: ${curr_course.avgMark}<br>Feedbacks: 34</div>
         </div>
         <div class="course_view">
             <img class="course_avatar" src="${pageContext.request.contextPath}${curr_course.pathToPicture}"
                  alt="course">
-            <div class="price">${curr_course.price}</div>
+            <div class="price">${curr_course.price}$</div>
         </div>
     </section>
 

@@ -1,53 +1,94 @@
-2019-07-05 00:09:54 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-07-05 00:09:54 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-07-05 00:10:55 main DEBUG CourseRepository:77 - Attempt to execute query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id
-where t1.user_id = ?;
-2019-07-05 00:11:01 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
-2019-07-05 00:12:57 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-07-05 00:12:57 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-07-05 00:12:57 main DEBUG CourseRepository:77 - Attempt to execute query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = ?;
-2019-07-05 00:12:57 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
-2019-07-05 00:13:57 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-07-05 00:13:57 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-07-05 00:13:57 main DEBUG CourseRepository:77 - Attempt to execute query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = ?
-2019-07-05 00:13:57 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
-2019-07-05 00:15:04 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-07-05 00:15:04 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-07-05 00:15:04 main DEBUG CourseRepository:77 - Attempt to execute query: select * from user_purchased_course as t1            LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = 1
-2019-07-05 00:15:04 main DEBUG CourseRepository:79 - Query successfully executed: select * from user_purchased_course as t1            LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = 1
-2019-07-05 00:15:04 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
-2019-07-05 00:15:33 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-07-05 00:15:33 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-07-05 00:15:33 main DEBUG CourseRepository:77 - Attempt to execute query: select * from user_purchased_course as t1            LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = ?
-2019-07-05 00:15:34 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
-2019-07-05 00:15:54 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-07-05 00:15:54 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-07-05 00:15:54 main DEBUG CourseRepository:77 - Attempt to execute query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = ?
-2019-07-05 00:15:54 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
-2019-07-05 00:17:55 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-07-05 00:17:55 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-07-05 00:17:55 main DEBUG CourseRepository:77 - Attempt to execute query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = ?
-2019-07-05 00:17:55 main DEBUG CourseRepository:79 - Query successfully executed: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = ?
-2019-07-05 00:17:55 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
-2019-07-05 00:40:54 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-07-05 00:40:54 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-07-05 00:40:54 main DEBUG CourseRepository:78 - Attempt to execute query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = ?
-2019-07-05 00:40:54 main DEBUG CourseRepository:80 - Query successfully executed: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = ?
-2019-07-05 00:40:54 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
-2019-07-06 19:14:54 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-07-06 19:14:54 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-07-06 19:14:54 main DEBUG LessonRepository:76 - Attempt to execute query: UPDATE course_lesson SET course_chapter_id = '1', lesson_name = ** NOT SPECIFIED **, lesson_content_address = ** NOT SPECIFIED **, lesson_creation_date = ** NOT SPECIFIED **, lesson_length = ** NOT SPECIFIED ** WHERE lesson_id = ** NOT SPECIFIED **
-2019-07-06 19:14:54 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
-2019-07-06 19:16:05 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-07-06 19:16:05 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-07-06 19:16:05 main DEBUG LessonRepository:76 - Attempt to execute query: UPDATE course_lesson SET course_chapter_id = '1', lesson_name = ** NOT SPECIFIED **, lesson_content_address = ** NOT SPECIFIED **, lesson_creation_date = ** NOT SPECIFIED **, lesson_length = ** NOT SPECIFIED ** WHERE lesson_id = ** NOT SPECIFIED **
-2019-07-06 19:16:05 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
-2019-07-06 19:17:07 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-07-06 19:17:07 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-07-06 19:17:40 main DEBUG LessonRepository:76 - Attempt to execute query: UPDATE course_lesson SET course_chapter_id = '1', lesson_name = ** NOT SPECIFIED **, lesson_content_address = ** NOT SPECIFIED **, lesson_creation_date = ** NOT SPECIFIED **, lesson_length = ** NOT SPECIFIED ** WHERE lesson_id = ** NOT SPECIFIED **
-2019-07-06 19:17:40 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
-2019-07-06 19:17:44 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-07-06 19:17:44 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-07-06 19:17:44 main DEBUG LessonRepository:76 - Attempt to execute query: SELECT * FROM course_lesson WHERE course_chapter_id = '1'
-2019-07-06 19:17:44 main DEBUG LessonRepository:78 - Query completed: SELECT * FROM course_lesson WHERE course_chapter_id = '1'
-2019-07-06 19:17:44 main DEBUG ConnectionPool:102 - Returning of connection into the pool.
+2019-07-09 00:42:27 main DEBUG MarkRepository:88 - Attempt to execute query: SELECT * FROM author_mark
+2019-07-09 00:42:27 main DEBUG MarkRepository:90 - Query completed: SELECT * FROM author_mark
+2019-07-09 00:42:27 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 00:42:27 main DEBUG MarkRepository:118 - Attempt to execute query: DELETE FROM author_mark WHERE mark_id = '6'
+2019-07-09 00:42:28 main DEBUG MarkRepository:120 - Query completed: DELETE FROM author_mark WHERE mark_id = '6'
+2019-07-09 00:42:28 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:04:33 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-09 01:04:33 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-09 01:04:33 main DEBUG MarkRepository:88 - Attempt to execute query: SELECT * FROM author_mark
+2019-07-09 01:04:33 main DEBUG MarkRepository:90 - Query completed: SELECT * FROM author_mark
+2019-07-09 01:04:33 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:04:33 main DEBUG MarkRepository:118 - Attempt to execute query: DELETE FROM author_mark WHERE mark_id = '8'
+2019-07-09 01:04:34 main DEBUG MarkRepository:120 - Query completed: DELETE FROM author_mark WHERE mark_id = '8'
+2019-07-09 01:04:34 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:05:19 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-09 01:05:19 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-09 01:05:19 main DEBUG MarkRepository:88 - Attempt to execute query: SELECT * FROM course_mark
+2019-07-09 01:05:19 main DEBUG MarkRepository:90 - Query completed: SELECT * FROM course_mark
+2019-07-09 01:05:19 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:05:19 main DEBUG MarkRepository:118 - Attempt to execute query: DELETE FROM course_mark WHERE mark_id = '22'
+2019-07-09 01:05:19 main DEBUG MarkRepository:120 - Query completed: DELETE FROM course_mark WHERE mark_id = '22'
+2019-07-09 01:05:19 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:08:11 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-09 01:08:11 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-09 01:08:11 main DEBUG MarkRepository:88 - Attempt to execute query: SELECT * FROM course_mark
+2019-07-09 01:08:11 main DEBUG MarkRepository:90 - Query completed: SELECT * FROM course_mark
+2019-07-09 01:08:11 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:08:11 main DEBUG MarkRepository:118 - Attempt to execute query: DELETE FROM course_mark WHERE mark_id = '23'
+2019-07-09 01:08:11 main DEBUG MarkRepository:120 - Query completed: DELETE FROM course_mark WHERE mark_id = '23'
+2019-07-09 01:08:11 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:11:06 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-09 01:11:06 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-09 01:11:06 main DEBUG MarkRepository:88 - Attempt to execute query: SELECT * FROM course_mark
+2019-07-09 01:11:06 main DEBUG MarkRepository:90 - Query completed: SELECT * FROM course_mark
+2019-07-09 01:11:06 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:11:06 main DEBUG MarkRepository:118 - Attempt to execute query: DELETE FROM course_mark WHERE mark_id = '24'
+2019-07-09 01:11:06 main DEBUG MarkRepository:120 - Query completed: DELETE FROM course_mark WHERE mark_id = '24'
+2019-07-09 01:11:06 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:12:08 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-09 01:12:08 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-09 01:12:08 main DEBUG MarkRepository:88 - Attempt to execute query: SELECT * FROM course_mark
+2019-07-09 01:12:08 main DEBUG MarkRepository:90 - Query completed: SELECT * FROM course_mark
+2019-07-09 01:12:08 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:12:08 main DEBUG MarkRepository:118 - Attempt to execute query: DELETE FROM course_mark WHERE mark_id = '25'
+2019-07-09 01:12:08 main DEBUG MarkRepository:120 - Query completed: DELETE FROM course_mark WHERE mark_id = '25'
+2019-07-09 01:12:08 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:23:50 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-09 01:23:50 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-09 01:23:50 main DEBUG MarkRepository:88 - Attempt to execute query: SELECT * FROM course_mark
+2019-07-09 01:23:50 main DEBUG MarkRepository:90 - Query completed: SELECT * FROM course_mark
+2019-07-09 01:23:50 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:23:50 main DEBUG MarkRepository:118 - Attempt to execute query: CALL updateCourseMark('5', '1', '5', null, '2019-07-08', '26')
+2019-07-09 01:23:50 main DEBUG MarkRepository:120 - Query completed: CALL updateCourseMark('5', '1', '5', null, '2019-07-08', '26')
+2019-07-09 01:23:50 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:25:13 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-09 01:25:13 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-09 01:25:13 main DEBUG MarkRepository:88 - Attempt to execute query: SELECT * FROM author_mark
+2019-07-09 01:25:13 main DEBUG MarkRepository:90 - Query completed: SELECT * FROM author_mark
+2019-07-09 01:25:13 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:25:13 main DEBUG MarkRepository:118 - Attempt to execute query: CALL updateAuthorMark('2', '15', '3', 'ASDasdasdasdas', '2019-07-08', '9')
+2019-07-09 01:25:13 main DEBUG MarkRepository:120 - Query completed: CALL updateAuthorMark('2', '15', '3', 'ASDasdasdasdas', '2019-07-08', '9')
+2019-07-09 01:25:13 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:28:58 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-09 01:28:58 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-09 01:28:58 main DEBUG MarkRepository:89 - Attempt to execute query: SELECT * FROM author_mark
+2019-07-09 01:28:58 main DEBUG MarkRepository:91 - Query completed: SELECT * FROM author_mark
+2019-07-09 01:28:58 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:28:58 main DEBUG MarkRepository:119 - Attempt to execute query: CALL deleteAuthorMark('9')
+2019-07-09 01:28:58 main DEBUG MarkRepository:121 - Query completed: CALL deleteAuthorMark('9')
+2019-07-09 01:28:58 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:30:43 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-09 01:30:43 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-09 01:30:43 main DEBUG MarkRepository:89 - Attempt to execute query: SELECT * FROM course_mark
+2019-07-09 01:30:43 main DEBUG MarkRepository:91 - Query completed: SELECT * FROM course_mark
+2019-07-09 01:30:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:30:43 main DEBUG MarkRepository:119 - Attempt to execute query: CALL deleteCourseMark('26')
+2019-07-09 01:30:43 main DEBUG MarkRepository:121 - Query completed: CALL deleteCourseMark('26')
+2019-07-09 01:30:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:33:02 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-09 01:33:02 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-09 01:33:02 main DEBUG MarkRepository:89 - Attempt to execute query: SELECT * FROM course_mark
+2019-07-09 01:33:02 main DEBUG MarkRepository:91 - Query completed: SELECT * FROM course_mark
+2019-07-09 01:33:02 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:33:02 main DEBUG MarkRepository:119 - Attempt to execute query: CALL deleteCourseMark('27')
+2019-07-09 01:33:02 main DEBUG MarkRepository:121 - Query completed: CALL deleteCourseMark('27')
+2019-07-09 01:33:02 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:33:38 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-09 01:33:38 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-09 01:33:38 main DEBUG MarkRepository:89 - Attempt to execute query: SELECT * FROM course_mark
+2019-07-09 01:33:38 main DEBUG MarkRepository:91 - Query completed: SELECT * FROM course_mark
+2019-07-09 01:33:38 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:33:38 main DEBUG MarkRepository:119 - Attempt to execute query: CALL deleteCourseMark('28')
+2019-07-09 01:33:39 main DEBUG MarkRepository:121 - Query completed: CALL deleteCourseMark('28')
+2019-07-09 01:33:39 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
