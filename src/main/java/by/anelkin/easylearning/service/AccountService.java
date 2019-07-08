@@ -1,8 +1,7 @@
-package by.anelkin.easylearning.command.service;
+package by.anelkin.easylearning.service;
 
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.entity.Course;
-import by.anelkin.easylearning.entity.Mark;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.AccRepository;

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+    <tlib-version>1.0</tlib-version>
+    <short-name>ctg</short-name>
+    <uri>customtags</uri>
+
+    <tag>
+        <name>chapter-short-writer</name>
+        <tag-class>by.anelkin.easylearning.tag.ChapterShortWriter</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>chapter</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>by.anelkin.easylearning.entity.CourseChapter</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>lesson-short-writer</name>
+        <tag-class>by.anelkin.easylearning.tag.LessonsShortWriter</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>lessons</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type><![CDATA[java.util.List<by.anelkin.easylearning.entity.CourseLesson>]]></type>
+        </attribute>
+    </tag>
+
+
+    <!-- Invoke 'Generate' action to add tags or functions -->
+
+</taglib>

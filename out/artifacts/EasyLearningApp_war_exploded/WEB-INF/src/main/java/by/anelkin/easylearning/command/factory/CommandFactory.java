@@ -9,6 +9,7 @@ public class CommandFactory {
         SIGN_UP,
         SIGN_UP_NEW_USER,
         LOG_OUT
+
     }
 
     public Command getCommand(@NonNull CommandType type) {
@@ -26,6 +27,7 @@ public class CommandFactory {
             case LOG_OUT:
                 command = new LogOutCommand();
                 break;
+
         }
         return command;
     }

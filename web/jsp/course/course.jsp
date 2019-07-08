@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <html>
 <head>
     <title>Title</title>
@@ -43,21 +43,10 @@
     <section class="section_3">
         <c:set var="course_content" value="${requestScope.get('currentCourseContent')}"/>
         <c:forEach var="chapter_lesson" items="${course_content}">
-            <c:set var="chapter" value="${chapter_lesson.getKey()}"/>
-            <div class="chapter">
-                <div class="materials_title">${chapter.name}</div>
-                <div class="lessons_minutes">
-                    <div>0 lessons</div>
-                    <div>0 minutes</div>
-                </div>
-            </div>
-            <C:set var="lessons" value="${chapter_lesson.getValue()}"/>
-            <c:forEach var="lesson" items="${lessons}">
-                <div class="lesson">${lesson.name}</div>
-            </c:forEach>
+            <ctg:chapter-short-writer chapter="${chapter_lesson.getKey()}"/>
+            <ctg:lesson-short-writer lessons="${chapter_lesson.getValue()}"/>
         </c:forEach>
     </section>
-
 </main>
 </body>
 </html>

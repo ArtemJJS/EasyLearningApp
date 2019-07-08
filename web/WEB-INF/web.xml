@@ -10,6 +10,13 @@
         <welcome-file>jsp/account.jsp</welcome-file>
     </welcome-file-list>
 
+    <jsp-config>
+        <taglib>
+            <taglib-uri>customtags</taglib-uri>
+            <taglib-location>/WEB-INF/tld/custom.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>/resources/*</url-pattern>
