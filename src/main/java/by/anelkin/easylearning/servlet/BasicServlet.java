@@ -1,12 +1,10 @@
 package by.anelkin.easylearning.servlet;
 
 import by.anelkin.easylearning.receiver.RequestReceiver;
-import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import lombok.extern.log4j.Log4j;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static by.anelkin.easylearning.command.factory.CommandFactory.*;
+import static by.anelkin.easylearning.command.CommandFactory.*;
 import static by.anelkin.easylearning.entity.Account.AccountType.*;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.*;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
@@ -27,6 +25,7 @@ public class BasicServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 
         if (request.getSession().getAttribute("role") == null) {
             request.getSession().setAttribute("role", GUEST);

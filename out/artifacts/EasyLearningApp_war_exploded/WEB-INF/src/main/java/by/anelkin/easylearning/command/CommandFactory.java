@@ -1,4 +1,4 @@
-package by.anelkin.easylearning.command.factory;
+package by.anelkin.easylearning.command;
 
 import by.anelkin.easylearning.command.*;
 import lombok.NonNull;

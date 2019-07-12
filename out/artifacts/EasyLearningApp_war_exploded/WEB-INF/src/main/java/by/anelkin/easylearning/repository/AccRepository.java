@@ -17,6 +17,8 @@ import static by.anelkin.easylearning.entity.Account.AccountType.*;
 
 @Log4j
 public class AccRepository implements AppRepository<Account> {
+    private static final String PATH_TO_AVATAR = "resources/account_avatar/";
+    private static final String PATH_TO_AVATAR_DEFAULT = "resources/default_acc_avatar.png";
     private ConnectionPool pool = ConnectionPool.getInstance();
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     @Language("sql")
@@ -79,7 +81,7 @@ public class AccRepository implements AppRepository<Account> {
              PreparedStatement statement = connection.prepareStatement(specification.getQuery())) {
             String[] params = specification.getStatementParameters();
             for (int i = 0; i < params.length; i++) {
-                statement.setString(i+1, params[i]);
+                statement.setString(i + 1, params[i]);
             }
             log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -106,7 +108,13 @@ public class AccRepository implements AppRepository<Account> {
             account.setPhoneNumber(resultSet.getString("acc_phone_number"));
             account.setRegistrDate(resultSet.getDate("acc_registration_date"));
             account.setAbout(resultSet.getString("acc_about"));
-            account.setPathToPhoto(resultSet.getString("acc_photo_path"));
+            String avatarFileName = resultSet.getString("acc_photo_path");
+            if (avatarFileName == null) {
+                account.setPathToPhoto(PATH_TO_AVATAR_DEFAULT);
+            } else {
+                account.setPathToPhoto(PATH_TO_AVATAR + avatarFileName);
+            }
+            account.setAvgMark(resultSet.getDouble("avg_mark"));
 
             int typeId = resultSet.getInt("acc_type");
             switch (typeId) {

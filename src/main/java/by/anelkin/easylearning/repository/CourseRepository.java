@@ -96,6 +96,7 @@ public class CourseRepository implements AppRepository<Course> {
                 course.setCreationDate(resultSet.getDate("course_creation_date"));
                 course.setPathToPicture(PATH_TO_PICTURE + resultSet.getString("course_picture"));
                 course.setPrice(new BigDecimal(resultSet.getString("course_price")));
+                // TODO: 7/12/2019 продумать если нет оценок
                 String courseAvgMark = resultSet.getString("avg_mark");
                 if (courseAvgMark != null){
                     course.setAvgMark(Double.parseDouble(courseAvgMark));

@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 22px;
+    color: black;
+}
+
+html {
+    width: 100vw;
+    height: 100vw;
+}
+
+main {
+    width: 1000px;
+    min-height: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding-top: 30px;
+
+    background: linear-gradient(to bottom, rgb(183, 247, 199), rgb(209, 189, 206));
+}
+
+section {
+    width: 80%;
+    margin-bottom: 30px;
+}
+
+.nickname {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.name_surname {
+    font-size: 1.5rem;
+}
+
+.section_2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.author_avatar {
+    width: 20%;
+}
+
+.author_description_and_stats {
+    width: 75%;
+    border-bottom: 1px solid green;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.author_stats {
+    margin-top: 20px;
+    width: 60%;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/*==============================*/
+
+.section_3 {
+    border: none;
+    margin-top: 42px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.course_list_title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+
+.about_course {
+    display: flex;
+    width: 85%;
+    margin-bottom: 30px;
+    font-size: 0.8rem;
+
+    border: 1px solid green;
+}
+
+.about_course .block2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.course_name {
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.course_desc {
+    font-size: 0.8em;
+}
+
+.course_avatar {
+    width: 120px;
+    height: 120px;
+    margin-right: 10px;
+}
+
+
+.course_block_header {
+    min-width: 100%;
+    margin-bottom: 15px;
+}
+
+/*==============================*/

@@ -1371,6 +1371,7 @@
     <column id="333" parent="280" name="course_picture">
       <Position>5</Position>
       <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="334" parent="280" name="course_price">

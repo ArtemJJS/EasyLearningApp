@@ -10,9 +10,9 @@
 <html>
 <head>
     <title>EasyLearning</title>
-    <%--    <c:import url="/css/account_page.css" >--%>
+    <%--    <c:import url="/css/main_page.css" >--%>
     <style>
-        <%@include  file="/css/account_page.css" %>
+        <%@include  file="/css/main_page.css" %>
     </style>
 </head>
 <body>
@@ -31,7 +31,7 @@
                 <c:forEach var="course" items="${courses_available}">
                     <div class="about_course">
                         <div class="block1">
-                            <a href="http://localhost:8080/easyLearning/course?course-id=${course.id}">
+                            <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
                                 <img class="course_avatar"
                                      src="${pageContext.request.contextPath}${course.pathToPicture}"
                                      alt="course avatar"/>
@@ -39,7 +39,7 @@
                         </div>
                         <div class="block2">
                             <div class="course_name">
-                                <a href="http://localhost:8080/easyLearning/course?course-id=${course.id}">
+                                <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
                                         ${course.name}
                                 </a>
                             </div>

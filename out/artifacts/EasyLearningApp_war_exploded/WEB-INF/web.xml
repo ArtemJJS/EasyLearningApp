@@ -7,7 +7,7 @@
 <display-name>FirstProject</display-name>
 
     <welcome-file-list>
-        <welcome-file>jsp/account.jsp</welcome-file>
+        <welcome-file>jsp/main_page.jsp</welcome-file>
     </welcome-file-list>
 
     <jsp-config>
@@ -32,12 +32,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>account</servlet-name>
-        <jsp-file>/jsp/account.jsp</jsp-file>
+        <servlet-name>main_page</servlet-name>
+        <jsp-file>/jsp/main_page.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>account</servlet-name>
-        <url-pattern>/account</url-pattern>
+        <servlet-name>main_page</servlet-name>
+        <url-pattern>/easyLearning</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -58,6 +58,14 @@
         <url-pattern>/course</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>account_page</servlet-name>
+        <jsp-file>/jsp/author.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>account_page</servlet-name>
+        <url-pattern>/author/*</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>

@@ -22,6 +22,7 @@ public class Account extends AppEntity {
     private String about;
     private String pathToPhoto;
     private AccountType type;
+    private double avgMark;
 
     public enum AccountType{
         GUEST,

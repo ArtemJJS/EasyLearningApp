@@ -3,6 +3,7 @@ package by.anelkin.easylearning.service;
 import by.anelkin.easylearning.entity.Course;
 import by.anelkin.easylearning.entity.CourseChapter;
 import by.anelkin.easylearning.entity.CourseLesson;
+import by.anelkin.easylearning.entity.Mark;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.ChapterRepository;
@@ -25,13 +26,17 @@ public class CourseService {
         CourseRepository repository = new CourseRepository();
         int courseId = Integer.parseInt(requestContent.getRequestParameters().get("course-id")[0]);
         log.debug("receiving course from base, id: " + courseId);
-
+        List<Mark> marks = (new MarkService()).takeMarksOfCourse(courseId);
         List<Course> courses = repository.query(new SelectCourseByIdSpecification(courseId));
         if (courses.size() != 1) {
+            // TODO: 7/12/2019 service exception
             throw new RepositoryException("Course wasn't found");
         }
+        // TODO: 7/12/2019 вынести в текстовые константы
+        requestContent.getRequestAttributes().put("currentCourseMarks", marks);
         requestContent.getRequestAttributes().put("requestedCourse", courses.get(0));
         requestContent.getRequestAttributes().put("currentCourseContent", takeChaptersAndLessons(courseId));
+        requestContent.getRequestAttributes().put("author_of_course", (new AccountService()).takeAuthorOfCourse(courseId));
     }
 
     // returns map of chapters and lessons of current course, then it have to be setted to request attribute
@@ -46,4 +51,6 @@ public class CourseService {
         }
         return courseContent;
     }
+
+
 }

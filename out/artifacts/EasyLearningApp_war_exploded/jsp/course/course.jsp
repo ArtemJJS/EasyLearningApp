@@ -47,6 +47,38 @@
             <ctg:lesson-short-writer lessons="${chapter_lesson.getValue()}"/>
         </c:forEach>
     </section>
+
+    <section class="section_4">
+        <c:set var="author" value="${pageContext.request.getAttribute('author_of_course')}"/>
+        <div class="author_image_and_stats">
+            <a href="${pageContext.request.contextPath}/author/${author.login}"><img class="author_avatar" src="${pageContext.request.contextPath}/${author.pathToPhoto}" alt="author"></a>
+            <div class="author_rating">${author.avgMark}</div>
+            <div class="author_students">322 students</div>
+        </div>
+        <div class="author_about">
+            <div class="author_login"><a class="author_link" href="${pageContext.request.contextPath}/author/${author.login}">${author.login}</a></div>
+            <div class="author_description">${author.about}</div>
+        </div>
+    </section>
+
+    <section class="section_5">
+        <div class="comments_title">Feedback from users on this course:</div>
+        <c:set var="marks" value="${pageContext.request.getAttribute('currentCourseMarks')}"/>
+        <c:forEach var="mark" items="${marks}">
+            <div class="single_mark">
+                <div class="mark_content">
+                    <div class="value">Mark: ${mark.markValue}</div>
+                    <div class="writer_login">${mark.accLogin}</div>
+                    <div class="comment">${mark.comment}</div>
+                    <div class="date">${mark.markDate}</div>
+                </div>
+                <img class="writer_avatar" src="${pageContext.request.contextPath}/${mark.accPathToPhoto}"
+                                                alt="avatar"/>
+            </div>
+        </c:forEach>
+    </section>
+
+    <video src="${pageContext.request.contextPath}/resources/lesson_content/test.mp4" width="500px" controls></video>
 </main>
 </body>
 </html>

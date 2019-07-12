@@ -3,23 +3,27 @@ package by.anelkin.easylearning.service;
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.entity.Course;
 import by.anelkin.easylearning.exception.RepositoryException;
+import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.repository.CourseRepository;
 import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
+import by.anelkin.easylearning.specification.account.SelectByCourseIdSpecification;
+import by.anelkin.easylearning.specification.course.SelectByAuthorIdSpecification;
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
 import lombok.NonNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static by.anelkin.easylearning.entity.Account.AccountType.GUEST;
 
 public class AccountService {
+    private static final String URI_SPACE_REPRESENT = "%20";
+    private static final String URI_SPLITTER = "/";
+
+    // TODO: 7/12/2019 налдо ли из методов вынести в поле переменные класса? например репозитории?
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public boolean login(@NonNull SessionRequestContent requestContent) throws RepositoryException {
@@ -60,6 +64,7 @@ public class AccountService {
         return true;
     }
 
+    // TODO: 7/12/2019 переделать нормально!
     public void logOut(@NonNull SessionRequestContent requestContent){
         HashMap<String, Object> sessionAttributes = requestContent.getSessionAttributes();
         sessionAttributes.remove("user");
@@ -67,7 +72,35 @@ public class AccountService {
         sessionAttributes.put("role", GUEST);
     }
 
+    // TODO: 7/12/2019 исключения обработать нормально
+    public Account takeAuthorOfCourse(int courseId) throws RepositoryException {
+        AccRepository repository = new AccRepository();
+        List<Account> accounts = repository.query(new SelectByCourseIdSpecification(courseId));
+        if (accounts.size() != 1){
+            // TODO: 7/12/2019 handle
+            throw new RepositoryException();
+        }
+        return accounts.get(0);
+    }
 
+    public void initAuthorPage(@NonNull SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+        AccRepository repository = new AccRepository();
+        // TODO: 7/12/2019 подумать надо ли Optional
+        String login = (String) requestContent.getRequestAttributes().get("requested_author_login");
+        List<Account> accounts = repository.query(new SelectAccByLoginSpecification(login));
+        if (accounts.size() != 1){
+            throw new ServiceException("Author with login " + login + " is not exists!");
+        }
+        Account author = accounts.get(0);
+        CourseRepository courseRepository = new CourseRepository();
+        List<Course> courses = courseRepository.query(new SelectByAuthorIdSpecification(author.getId()));
+
+        requestContent.getRequestAttributes().put("requested_author", author);
+        requestContent.getRequestAttributes().put("author_course_list", courses);
+    }
+
+
+    // TODO: 7/12/2019 надо ли проверку на ноль??? nonnull?
     private void initAccount(Account account, Map<String, String[]> requestParams) {
         account.setLogin(requestParams.get("login")[0]);
         account.setPassword(requestParams.get("password")[0]);
@@ -86,4 +119,8 @@ public class AccountService {
     }
 
 
+    public String pickTargetNameFromUri(String requestURI) {
+        String[] parts = requestURI.split(URI_SPLITTER);
+        return parts[parts.length-1].replaceAll(URI_SPACE_REPRESENT, " ");
+    }
 }

@@ -12,6 +12,8 @@ public class Mark extends AppEntity {
     private int id;
     private int targetId;
     private int accId;
+    private String accPathToPhoto;
+    private String accLogin;
     private int markValue;
     private String comment;
     private Date markDate;

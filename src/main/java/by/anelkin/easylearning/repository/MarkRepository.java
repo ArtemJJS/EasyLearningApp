@@ -107,6 +107,13 @@ public class MarkRepository implements AppRepository<Mark> {
             mark.setMarkValue(resultSet.getInt("mark_value"));
             mark.setComment(resultSet.getString("mark_comment"));
             mark.setMarkDate(resultSet.getDate("mark_date"));
+            // data from account table (for queries with join)
+            mark.setAccLogin(resultSet.getString("acc_login"));
+            mark.setAccPathToPhoto(resultSet.getString("acc_photo_path"));
+            // TODO: 7/9/2019 перенести проверку фото в другое место (перед тем как попадает в базу)
+            if (mark.getAccPathToPhoto() == null){
+                mark.setAccPathToPhoto("resources/account_avatar/default_acc_avatar.png");
+            }
             marks.add(mark);
         }
         return marks;

@@ -84,3 +84,21 @@
 2019-07-09 01:33:02 main DEBUG MarkRepository:119 - Attempt to execute query: CALL deleteCourseMark('27')
 2019-07-09 01:33:02 main DEBUG MarkRepository:121 - Query completed: CALL deleteCourseMark('27')
 2019-07-09 01:33:02 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:33:38 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-09 01:33:38 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-09 01:33:38 main DEBUG MarkRepository:89 - Attempt to execute query: SELECT * FROM course_mark
+2019-07-09 01:33:38 main DEBUG MarkRepository:91 - Query completed: SELECT * FROM course_mark
+2019-07-09 01:33:38 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-09 01:33:38 main DEBUG MarkRepository:119 - Attempt to execute query: CALL deleteCourseMark('28')
+2019-07-09 01:33:39 main DEBUG MarkRepository:121 - Query completed: CALL deleteCourseMark('28')
+2019-07-09 01:33:39 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-12 00:31:33 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-12 00:31:33 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-12 00:31:33 main DEBUG AccRepository:84 - Attempt to execute query: SELECT * FROM account WHERE acc_id IN (SELECT acc_id FROM author_of_course WHERE course_id = '1')
+2019-07-12 00:31:33 main DEBUG AccRepository:87 - Query completed: SELECT * FROM account WHERE acc_id IN (SELECT acc_id FROM author_of_course WHERE course_id = '1')
+2019-07-12 00:31:33 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-12 00:34:55 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-12 00:34:55 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-12 00:34:55 main DEBUG AccRepository:84 - Attempt to execute query: SELECT * FROM account WHERE acc_id IN (SELECT author_id FROM author_of_course WHERE course_id = '1')
+2019-07-12 00:34:55 main DEBUG AccRepository:87 - Query completed: SELECT * FROM account WHERE acc_id IN (SELECT author_id FROM author_of_course WHERE course_id = '1')
+2019-07-12 00:34:55 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.

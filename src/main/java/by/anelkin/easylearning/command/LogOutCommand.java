@@ -8,7 +8,7 @@ import by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
 
 public class LogOutCommand implements Command {
-    private static final String CORRECT_LOGOUT_PATH = "http://localhost:8080/easyLearning/account";
+    private static final String CORRECT_LOGOUT_PATH = "http://localhost:8080/easyLearning/easyLearning";
 
     @Override
     public ResponseType execute(SessionRequestContent requestContent) throws RepositoryException {

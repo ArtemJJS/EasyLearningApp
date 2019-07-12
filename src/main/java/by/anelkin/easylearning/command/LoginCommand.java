@@ -9,7 +9,7 @@ import lombok.NonNull;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
 
 public class LoginCommand implements Command {
-    private static final String CORRECT_PATH = "http://localhost:8080/easyLearning/account";
+    private static final String CORRECT_PATH = "http://localhost:8080/easyLearning/easyLearning";
     private static final String WRONG_LOGIN_PATH = "/jsp/start_page.jsp";
 
     @Override

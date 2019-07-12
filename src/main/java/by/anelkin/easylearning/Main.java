@@ -4,6 +4,7 @@ import by.anelkin.easylearning.entity.*;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.repository.*;
 import by.anelkin.easylearning.specification.account.SelectAllAccountSpecification;
+import by.anelkin.easylearning.specification.account.SelectByCourseIdSpecification;
 import by.anelkin.easylearning.specification.course.SelectAllCourseSpecification;
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
 import by.anelkin.easylearning.specification.lesson.SelectByChapterIdSpecification;
@@ -72,11 +73,9 @@ public class Main {
 //       mark.setTargetId(2);
 //       mark.setAccId(16);
 
-        MarkRepository repo = new MarkRepository();
-        List<Mark> list = repo.query(new SelectAllMarkSpecification(COURSE_MARK));
-        list.forEach(System.out::println);
-        Mark mark = list.get(0);
-        repo.delete(mark);
+       AccRepository repo = new AccRepository();
+       List<Account> list = repo.query(new SelectByCourseIdSpecification(1));
+       list.forEach(System.out::println);
     }
 
 }
