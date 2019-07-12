@@ -44,6 +44,7 @@
                                 </a>
                             </div>
                             <div class="course_desc">${course.description}</div>
+                            <a href="${pageContext.request.contextPath}/course/learn?course-id=${course.id}">Continue learning</a>
                         </div>
                     </div>
                 </c:forEach>

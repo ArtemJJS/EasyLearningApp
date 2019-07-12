@@ -31,14 +31,11 @@ public class AuthorPageFilter implements Filter {
         requestContent.extractValues(request);
         try {
             accountService.initAuthorPage(requestContent);
+            requestContent.insertAttributes(request);
         } catch (RepositoryException | ServiceException e) {
             // TODO: 7/12/2019 на страницу ошибки
             throw new ServletException(e);
         }
-        requestContent.insertAttributes(request);
-
-        System.out.println(request.getAttribute("requested_author"));
-        System.out.println(request.getAttribute("author_course_list"));
 
         filterChain.doFilter(request, servletResponse);
     }

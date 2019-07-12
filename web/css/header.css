@@ -11,6 +11,7 @@ header {
     height: 60px;
     background: linear-gradient(to top, rgb(247, 209, 209), #fff7fb);
     position: relative;
+    z-index: 10;
 
     border-bottom: 1px solid green;
     display: block;

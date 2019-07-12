@@ -67,5 +67,14 @@
         <url-pattern>/author/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>learn_course</servlet-name>
+        <jsp-file>/jsp/course/learn_course.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>learn_course</servlet-name>
+        <url-pattern>/course/learn</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

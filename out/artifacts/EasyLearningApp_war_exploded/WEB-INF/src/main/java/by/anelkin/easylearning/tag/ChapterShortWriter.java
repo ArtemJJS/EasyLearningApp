@@ -16,10 +16,11 @@ public class ChapterShortWriter extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         try {
+            // TODO: 7/12/2019 нормально ли столько тегов из jsp убирать? неудобно стили писать потом
             JspWriter writer = pageContext.getOut();
             writer.write("<div class=\"chapter\">");
             writer.write("<div class=\"materials_title\">" + chapter.getName() + "</div>");
-            writer.write("<div class=\"lessons_minutes\"><div>0 lessons</div><div>0 minutes</div>");
+            writer.write("<div class=\"lessons_minutes\"><div class='lessons'>0 lessons</div><div class='seconds'>0 minutes</div>");
             writer.write("</div></div>");
         } catch (IOException e) {
             throw new JspTagException(e);
