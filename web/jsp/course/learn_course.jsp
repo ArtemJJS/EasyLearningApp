@@ -21,7 +21,7 @@
     <c:set var="author" value="${pageContext.request.getAttribute('author_of_course')}"/>
     <section class="section_1">
         <div class="video_content">
-            <iframe src="https://drive.google.com/file/d/1iEEp7Yxcta_g6tRhC8b0J_EzTEbvacqi/preview"
+            <iframe id="video_player" src="https://drive.google.com/file/d/1iEEp7Yxcta_g6tRhC8b0J_EzTEbvacqi/preview"
                     width="100%" height="100%" allowfullscreen></iframe>
         </div>
         <div class="course_about">
@@ -34,7 +34,7 @@
             <div class="course_description">${course.description}</div>
         </div>
     </section>
-    <section class="section_2">
+    <section id="content_section" class="section_2">
         <div id="sidebar" class="content">Course content:</div>
         <c:set var="course_content" value="${requestScope.get('currentCourseContent')}"/>
         <c:forEach var="chapter_lesson" items="${course_content}">
@@ -43,5 +43,9 @@
         </c:forEach>
     </section>
 </main>
+<script>var lessons_list = "${pageContext.request.getAttribute('currentCourseContent').values()}"</script>
+<script type="text/javascript">
+    <%@include file="/js/learn_course.js"%>
+</script>
 </body>
 </html>

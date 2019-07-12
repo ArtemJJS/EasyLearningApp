@@ -19,7 +19,7 @@ public class LessonsShortWriter extends TagSupport {
         JspWriter writer = pageContext.getOut();
         try {
             for (CourseLesson lesson : lessons) {
-                writer.write(" <div class='lesson'>" + lesson.getName() + "</div>");
+                writer.write(" <div id='" + lesson.getId() + "' class='lesson'>" + lesson.getName() + "</div>");
             }
         } catch (IOException e) {
            throw new JspTagException(e);

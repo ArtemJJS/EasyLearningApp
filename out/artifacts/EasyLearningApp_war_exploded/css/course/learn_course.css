@@ -101,6 +101,11 @@ main {
     flex-direction: column;
 }
 
+.lesson:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
+
 
 
 
