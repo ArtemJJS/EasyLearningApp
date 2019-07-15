@@ -22,7 +22,7 @@
     <section class="section_1">
         <div class="video_content">
             <iframe id="video_player" src="https://drive.google.com/file/d/1iEEp7Yxcta_g6tRhC8b0J_EzTEbvacqi/preview"
-                    width="100%" height="100%" allowfullscreen a></iframe>
+                    width="100%" height="100%" allowfullscreen></iframe>
         </div>
         <div class="course_about">
             <div class="course_title">${course.name}</div>

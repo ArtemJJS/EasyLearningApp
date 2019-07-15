@@ -145,8 +145,8 @@ public class ConnectionPool {
         };
 
 //        Thread checker = new Thread(() -> {
-            Timer timer = new Timer();
-            timer.schedule(checkConnections, 0, 180_000); //period = 3 min
+//            Timer timer = new Timer();
+//            timer.schedule(checkConnections, 0, 180_000); //period = 3 min
 //        });
 //        checker.setDaemon(true);
 //        checker.start();
