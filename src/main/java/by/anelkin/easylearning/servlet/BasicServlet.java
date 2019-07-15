@@ -25,7 +25,7 @@ public class BasicServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        System.out.println(request.getHeader("referer"));
 
         if (request.getSession().getAttribute("role") == null) {
             request.getSession().setAttribute("role", GUEST);

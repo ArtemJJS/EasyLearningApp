@@ -19,11 +19,7 @@ import static by.anelkin.easylearning.entity.Mark.MarkType.*;
 @Log4j
 public class MarkRepository implements AppRepository<Mark> {
     private ConnectionPool pool = ConnectionPool.getInstance();
-    private static final String ACCOUNT_TABLE = "account";
-    private static final String COURSE_TABLE = "course";
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private static final String QUERY_DELETE = "DELETE FROM %s WHERE mark_id = ?";
-    private static final String QUERY_UPDATE_AVG_MARK = "UPDATE %s SET avg_mark=(SELECT AVG(mark_value) from %s where target_id = ?) where course_id = ?";
     private static final String QUERY_INSERT_COURSE_MARK = "{call InsertCourseMark(?, ?, ?, ?, ?)}";
     private static final String QUERY_INSERT_AUTHOR_MARK = "{call InsertAuthorMark(?, ?, ?, ?, ?)}";
     private static final String QUERY_UPDATE_COURSE_MARK = "{call updateCourseMark(?, ?, ?, ?, ?, ?)}";
@@ -37,6 +33,7 @@ public class MarkRepository implements AppRepository<Mark> {
     public boolean update(@NonNull Mark mark) throws RepositoryException {
         String actualQuery = mark.getMarkType() == AUTHOR_MARK ? QUERY_UPDATE_AUTHOR_MARK : QUERY_UPDATE_COURSE_MARK;
         try (Connection connection = pool.takeConnection();
+             // FIXME: 7/15/2019 переделать на callableStatement?
              PreparedStatement statement = connection.prepareStatement(actualQuery)) {
             String[] params = {String.valueOf(mark.getTargetId()), String.valueOf(mark.getAccId()), String.valueOf(mark.getMarkValue()),
                     mark.getComment(), dateFormat.format(mark.getMarkDate()), String.valueOf(mark.getId())};

@@ -98,7 +98,7 @@ main {
     padding-top: 3px;
 
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
 }
 
 .lesson:hover{

@@ -25,7 +25,7 @@
     <div class="description">The best learning site ever!!!</div>
 </section>
 <section class="section2">
-    <form class="log_in" action="http://localhost:8080/easyLearning/basic_servlet">
+    <form class="log_in" method="post" action="http://localhost:8080/easyLearning/basic_servlet">
         <input class="text_field" type="text" name="login" placeholder="login">
         <input class="text_field" type="password" name="password" placeholder="password">
         <input type="hidden" name="command_name" value="login">

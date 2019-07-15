@@ -102,3 +102,54 @@
 2019-07-12 00:34:55 main DEBUG AccRepository:84 - Attempt to execute query: SELECT * FROM account WHERE acc_id IN (SELECT author_id FROM author_of_course WHERE course_id = '1')
 2019-07-12 00:34:55 main DEBUG AccRepository:87 - Query completed: SELECT * FROM account WHERE acc_id IN (SELECT author_id FROM author_of_course WHERE course_id = '1')
 2019-07-12 00:34:55 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-15 22:10:16 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-15 22:10:16 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-15 22:10:16 main DEBUG AccRepository:86 - Attempt to execute query: SELECT * FROM account WHERE acc_id IN (SELECT author_id FROM author_of_course WHERE course_id = '1')
+2019-07-15 22:10:16 main DEBUG AccRepository:89 - Query completed: SELECT * FROM account WHERE acc_id IN (SELECT author_id FROM author_of_course WHERE course_id = '1')
+2019-07-15 22:10:16 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 00:05:46 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 00:05:46 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 00:05:46 main DEBUG LessonRepository:106 - Attempt to execute query: CALL insertLesson('6', '2019-07-16', 'Про всякое разное', 'https
+2019-07-16 00:05:46 main DEBUG LessonRepository:108 - Query completed: CALL insertLesson('6', '2019-07-16', 'Про всякое разное', 'https
+2019-07-16 00:05:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 00:07:11 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 00:07:11 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 00:07:11 main DEBUG LessonRepository:106 - Attempt to execute query: CALL insertLesson('6', '2019-07-16', 'Про всякое разное 123', 'https
+2019-07-16 00:07:11 main DEBUG LessonRepository:108 - Query completed: CALL insertLesson('6', '2019-07-16', 'Про всякое разное 123', 'https
+2019-07-16 00:07:11 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 00:08:36 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 00:08:36 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 00:08:36 main DEBUG LessonRepository:106 - Attempt to execute query: CALL updateLesson('Про всякое разное 123', 'https
+2019-07-16 00:08:36 main DEBUG LessonRepository:108 - Query completed: CALL updateLesson('Про всякое разное 123', 'https
+2019-07-16 00:08:36 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 00:10:21 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 00:10:21 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 00:10:21 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 00:10:49 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 00:10:49 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 00:10:49 main DEBUG LessonRepository:106 - Attempt to execute query:ALL updateLesson('Про всякое разное 123', 'https
+2019-07-16 00:10:49 main DEBUG LessonRepository:108 - Query completed: CALL updateLesson('Про всякое разное 123', 'https
+2019-07-16 00:10:49 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 00:10:59 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 00:10:59 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 00:10:59 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 00:11:32 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 00:11:32 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 00:11:32 main DEBUG LessonRepository:106 - Attempt to execute query:com.mysql.cj.jdbc.CallableStatement: CALL updateLesson('Про всякое разное 123', 'https://drive.google.com/file/d/1iEEp7Yxcta_g6tRhC8b0J_EzTEbvacqi/preview', '11111', '0')
+2019-07-16 00:11:32 main DEBUG LessonRepository:108 - Query completed:com.mysql.cj.jdbc.CallableStatement: CALL updateLesson('Про всякое разное 123', 'https://drive.google.com/file/d/1iEEp7Yxcta_g6tRhC8b0J_EzTEbvacqi/preview', '11111', '0')
+2019-07-16 00:11:32 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 00:13:11 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 00:13:11 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 00:13:12 main DEBUG LessonRepository:106 - Attempt to execute query:com.mysql.cj.jdbc.CallableStatement: CALL updateLesson('Про всякое разное 123', 'https://drive.google.com/file/d/1iEEp7Yxcta_g6tRhC8b0J_EzTEbvacqi/preview', '11111', '11')
+2019-07-16 00:13:12 main DEBUG LessonRepository:108 - Query completed:com.mysql.cj.jdbc.CallableStatement: CALL updateLesson('Про всякое разное 123', 'https://drive.google.com/file/d/1iEEp7Yxcta_g6tRhC8b0J_EzTEbvacqi/preview', '11111', '11')
+2019-07-16 00:13:12 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 00:13:42 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 00:13:42 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 00:13:42 main DEBUG LessonRepository:106 - Attempt to execute query:com.mysql.cj.jdbc.CallableStatement: CALL deleteLesson('11')
+2019-07-16 00:13:43 main DEBUG LessonRepository:108 - Query completed:com.mysql.cj.jdbc.CallableStatement: CALL deleteLesson('11')
+2019-07-16 00:13:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 00:15:02 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 00:15:02 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 00:15:02 main DEBUG LessonRepository:76 - Attempt to execute query: SELECT * FROM course_lesson
+2019-07-16 00:15:02 main DEBUG LessonRepository:78 - Query completed: SELECT * FROM course_lesson
+2019-07-16 00:15:02 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.

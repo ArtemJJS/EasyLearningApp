@@ -35,16 +35,31 @@
     <section class="section_2">
         <div class="materials_title">Course materials</div>
         <div class="lessons_minutes">
-            <div>0 lessons</div>
-            <div>0 minutes</div>
+            <div>${curr_course.lessonAmount} lessons</div>
+            <div><ctg:time-prettier secondsAmount="${curr_course.duration}"/></div>
         </div>
     </section>
 
     <section class="section_3">
         <c:set var="course_content" value="${requestScope.get('currentCourseContent')}"/>
         <c:forEach var="chapter_lesson" items="${course_content}">
-            <ctg:chapter-short-writer chapter="${chapter_lesson.getKey()}"/>
-            <ctg:lesson-short-writer lessons="${chapter_lesson.getValue()}"/>
+            <c:set var="chapter" value="${chapter_lesson.getKey()}"/>
+            <%--            <ctg:chapter-short-writer chapter="${chapter_lesson.getKey()}"/>--%>
+            <div class="chapter">
+                <div class="materials_title">${chapter.getName()}</div>
+                <div class="lessons_minutes">
+                    <div class='lessons'>${chapter.getLessonAmount()} lessons</div>
+                    <div class='seconds'>
+                        <ctg:time-prettier secondsAmount='${chapter.getDuration()}'/></div>
+                </div>
+            </div>
+            <%--  <ctg:lesson-short-writer lessons="${chapter_lesson.getValue()}"/>--%>
+            <c:forEach var="lesson" items="${chapter_lesson.getValue()}">
+                <div id="${lesson.getId()}" class='lesson'>
+                    <div class="lesson_title">${lesson.getName()}</div>
+                    <div class="lesson_duration"><ctg:time-prettier secondsAmount="${lesson.getDuration()}"/></div>
+                </div>
+            </c:forEach>
         </c:forEach>
     </section>
 

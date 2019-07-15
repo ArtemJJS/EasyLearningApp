@@ -7,6 +7,7 @@ import by.anelkin.easylearning.specification.account.SelectAllAccountSpecificati
 import by.anelkin.easylearning.specification.account.SelectByCourseIdSpecification;
 import by.anelkin.easylearning.specification.course.SelectAllCourseSpecification;
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
+import by.anelkin.easylearning.specification.lesson.SelectAllLessonSpecification;
 import by.anelkin.easylearning.specification.lesson.SelectByChapterIdSpecification;
 import by.anelkin.easylearning.specification.mark.SelectAllMarkSpecification;
 import by.anelkin.easylearning.specification.mark.SelectMarkByIdSpecification;
@@ -27,55 +28,19 @@ public class Main {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public static void main(String[] args) throws RepositoryException {
-//        log.info("Start of main.");
-//        ConnectionPool connectionPool = ConnectionPool.getInstance();
-//        Connection connection = connectionPool.takeConnection();
-//        log.debug("Connection = " + connection);
-//        try {
-//            Statement statement = connection.createStatement();
-//            ResultSet result = statement.executeQuery("SELECT * from account");
-//            while (result.next()){
-//                System.out.println(result.getString("id_user"));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+//        CourseLesson lesson = new CourseLesson();
+////        lesson.setChapterId(6);
+////        lesson.setCreationDate(new Date(System.currentTimeMillis()));
+////        lesson.setDuration(11111);
+////        lesson.setName("Про всякое разное 123");
+////        lesson.setPathToContent("https://drive.google.com/file/d/1iEEp7Yxcta_g6tRhC8b0J_EzTEbvacqi/preview");
+//        lesson.setId(11);
 
-//        Class.forName("com.mysql.cj.jdbc.Driver");
-//        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/easylearning", "root", "106116");
-//        Statement statement = connection.createStatement();
-//        ResultSet resultSet = statement.executeQuery("select * from account");
-//        while(resultSet.next()){
-//            System.out.println(resultSet.getString("id_user"));
-//        }
+        LessonRepository repo = new LessonRepository();
+      List<CourseLesson> list = repo.query(new SelectAllLessonSpecification());
+      list.forEach(System.out::println);
 
-//        Long start = System.currentTimeMillis();
-//        ExecutorService executorService = Executors.newFixedThreadPool(100);
-//        for (int i = 0; i < 30000; i++) {
-//            executorService.submit(new TestThread(i));
-//        }
-//        executorService.shutdown();
-//        try {
-//            executorService.awaitTermination(30, TimeUnit.SECONDS);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(ConnectionPool.getInstance().connectionsAvailable());
-//        Long finish = System.currentTimeMillis();
-//        System.out.println("Time seconds = " + (finish-start)/1000d);
-//        log.info("Main FINISHED!");
-//
 
-//       Mark mark = new Mark(Mark.MarkType.AUTHOR_MARK);
-//       mark.setMarkDate(new Date(System.currentTimeMillis()));
-//       mark.setComment("ASDasdasdasdas");
-//       mark.setMarkValue(4);
-//       mark.setTargetId(2);
-//       mark.setAccId(16);
-
-       AccRepository repo = new AccRepository();
-       List<Account> list = repo.query(new SelectByCourseIdSpecification(1));
-       list.forEach(System.out::println);
     }
 
 }

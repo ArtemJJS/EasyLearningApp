@@ -21,7 +21,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
     @Language("sql")
     private static final String QUERY_DELETE = "DELETE FROM course_chapter WHERE course_chapter_id = ?";
     @Language("sql")
-    private static final String QUERY_UPDATE = "UPDATE course_chapter SET course_id = ?, chapter_name = ? " +
+    private static final String QUERY_UPDATE = "UPDATE course_chapter SET course_id = ?, chapter_name = ?" +
             "WHERE course_chapter_id = ?";
 
     @Override
@@ -88,6 +88,8 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
                 chapter.setId(resultSet.getInt("course_chapter_id"));
                 chapter.setCourseId(resultSet.getInt("course_id"));
                 chapter.setName(resultSet.getString("chapter_name"));
+                chapter.setLessonAmount(resultSet.getInt("chapter_lesson_amount"));
+                chapter.setDuration(resultSet.getLong("chapter_duration"));
                 chapterList.add(chapter);
             }
         } catch (SQLException e) {

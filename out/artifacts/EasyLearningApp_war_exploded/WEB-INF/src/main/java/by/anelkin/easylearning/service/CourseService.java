@@ -29,10 +29,10 @@ public class CourseService {
         List<Mark> marks = (new MarkService()).takeMarksOfCourse(courseId);
         List<Course> courses = repository.query(new SelectCourseByIdSpecification(courseId));
         if (courses.size() != 1) {
-            // TODO: 7/12/2019 service exception
+            // fixme: 7/12/2019 service exception
             throw new RepositoryException("Course wasn't found");
         }
-        // TODO: 7/12/2019 вынести в текстовые константы
+        // fixme: 7/12/2019 вынести в текстовые константы
         requestContent.getRequestAttributes().put("currentCourseMarks", marks);
         requestContent.getRequestAttributes().put("requestedCourse", courses.get(0));
         requestContent.getRequestAttributes().put("currentCourseContent", takeChaptersAndLessons(courseId));

@@ -18,31 +18,31 @@ public class LessonRepository implements AppRepository<CourseLesson> {
     private ConnectionPool pool = ConnectionPool.getInstance();
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     @Language("sql")
-    private static final String QUERY_INSERT = "INSERT INTO course_lesson(course_chapter_id, lesson_name, " +
-            "lesson_content_address, lesson_creation_date, lesson_length) VALUES (?, ?, ?, ?, ?)";
+    private static final String QUERY_INSERT = "{call insertLesson(?, ?, ?, ?, ? )}";
     @Language("sql")
-    private static final String QUERY_DELETE = "DELETE FROM course_lesson WHERE lesson_id = ?";
+    private static final String QUERY_DELETE = "{call deleteLesson(?)}";
     @Language("sql")
-    private static final String QUERY_UPDATE = "UPDATE course_lesson SET course_chapter_id = ?, lesson_name = ?, " +
-            "lesson_content_address = ?, lesson_creation_date = ?, lesson_length = ? WHERE lesson_id = ?";
+    private static final String QUERY_UPDATE = "{call updateLesson(?, ?, ?, ?)}";
 
     @Override
     public boolean update(@NonNull CourseLesson lesson) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)){
-            String[] params = {String.valueOf(lesson.getChapterId()), lesson.getName(), lesson.getPathToContent(),
-                    dateFormat.format(lesson.getCreationDate()), String.valueOf(lesson.getLength()), String.valueOf(lesson.getId())};
+             CallableStatement statement = connection.prepareCall(QUERY_UPDATE)) {
+            String[] params = {lesson.getName(), lesson.getPathToContent(),
+                    String.valueOf(lesson.getDuration()), String.valueOf(lesson.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
         }
+        // FIXME: 7/16/2019 плохо что возврат true без возможности возврата false
         return true;
     }
 
+    // TODO: 7/16/2019 может быть сделать в параметрах просто инт id ???
     @Override
     public boolean delete(@NonNull CourseLesson lesson) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(QUERY_DELETE)) {
+             CallableStatement statement = connection.prepareCall(QUERY_DELETE)) {
             String[] params = {String.valueOf(lesson.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
@@ -54,9 +54,9 @@ public class LessonRepository implements AppRepository<CourseLesson> {
     @Override
     public boolean insert(@NonNull CourseLesson lesson) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(QUERY_INSERT)) {
-            String[] params = {String.valueOf(lesson.getChapterId()), lesson.getName(), lesson.getPathToContent(),
-                    dateFormat.format(lesson.getCreationDate()), String.valueOf(lesson.getLength())};
+             CallableStatement statement = connection.prepareCall(QUERY_INSERT)) {
+            String[] params = {String.valueOf(lesson.getChapterId()), dateFormat.format(lesson.getCreationDate()),
+                    lesson.getName(), lesson.getPathToContent(), String.valueOf(lesson.getDuration())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
@@ -92,7 +92,7 @@ public class LessonRepository implements AppRepository<CourseLesson> {
             lesson.setChapterId(resultSet.getInt("course_chapter_id"));
             lesson.setName(resultSet.getString("lesson_name"));
             lesson.setCreationDate(resultSet.getDate("lesson_creation_date"));
-            lesson.setLength(resultSet.getLong("lesson_length"));
+            lesson.setDuration(resultSet.getLong("lesson_duration"));
             lesson.setPathToContent(resultSet.getString("lesson_content_address"));
             lessonList.add(lesson);
         }
@@ -103,8 +103,8 @@ public class LessonRepository implements AppRepository<CourseLesson> {
         for (int i = 0; i < params.length; i++) {
             statement.setString(i + 1, params[i]);
         }
-        log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
+        log.debug("Attempt to execute query:" + statement.toString());
         statement.execute();
-        log.debug("Query completed:" + statement.toString().split(":")[1]);
+        log.debug("Query completed:" + statement.toString());
     }
 }

@@ -7,7 +7,7 @@ console.log(lessons_list);
 function handlerChooseLesson(event) {
     if (event.target.matches('.lesson')){
         var currLessonId = event.target.id;
-        // console.log(currLessonId);
+        // console.log(lessons_list);
         var lessons =  lessons_list.split("CourseLesson");
         // console.log(lessons);
         // var currLessonParts = lessons.filter(function (value) { value.indexOf('id=' + currLessonId)}).join("").split(",");
@@ -20,7 +20,7 @@ function handlerChooseLesson(event) {
             var index = value.indexOf('pathToContent');
             return index > -1;
         }).join("").split("=")[1];
-       console.log(newPath);
+       // console.log(newPath);
         videoPlayer.src = newPath;
     }
 }

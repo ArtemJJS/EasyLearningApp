@@ -20,7 +20,7 @@ main {
     margin: 0 auto;
     padding-top: 70px;
 
-    background: linear-gradient(to bottom, rgb(183, 247, 199), rgb(209, 189, 206)) ;
+    background: linear-gradient(to bottom, rgb(183, 247, 199), rgb(209, 189, 206));
 }
 
 .section_1 {
@@ -115,8 +115,14 @@ main {
 
     background-color: rgb(143, 142, 230);
 }
+
+.lesson {
+    display: flex;
+    justify-content: space-between;
+}
+
 /*==============================*/
-.section_4{
+.section_4 {
     width: 80%;
     margin-top: 30px;
     border: 1px solid green;
@@ -124,7 +130,7 @@ main {
     display: flex;
 }
 
-.author_image_and_stats{
+.author_image_and_stats {
     min-width: 25%;
     border-right: 1px solid green;
 
@@ -132,11 +138,11 @@ main {
     flex-direction: column;
 }
 
-.author_avatar{
+.author_avatar {
     width: 90%;
 }
 
-.author_rating{
+.author_rating {
     margin-top: 10px;
 }
 
@@ -144,7 +150,7 @@ main {
 /*==============================*/
 
 
-.section_5{
+.section_5 {
     width: 80%;
     min-height: 150px;
     margin-top: 35px;
@@ -156,14 +162,14 @@ main {
 
 }
 
-.single_mark{
+.single_mark {
     border: 1px solid green;
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
 }
 
-.writer_avatar{
+.writer_avatar {
     width: 120px;
 }
 
