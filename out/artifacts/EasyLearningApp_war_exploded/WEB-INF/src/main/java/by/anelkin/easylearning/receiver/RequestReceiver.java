@@ -3,6 +3,7 @@ package by.anelkin.easylearning.receiver;
 import by.anelkin.easylearning.command.Command;
 import by.anelkin.easylearning.command.CommandFactory;
 import by.anelkin.easylearning.exception.RepositoryException;
+import by.anelkin.easylearning.exception.ServiceException;
 
 import static by.anelkin.easylearning.command.CommandFactory.*;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.*;
@@ -18,7 +19,7 @@ public class RequestReceiver {
         this.requestContent = requestContent;
     }
 
-    public ResponseType executeCommand() throws RepositoryException {
+    public ResponseType executeCommand() throws RepositoryException, ServiceException {
        return command.execute(requestContent);
     }
 }

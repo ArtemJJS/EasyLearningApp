@@ -38,7 +38,7 @@
                 </c:when>
                 <c:otherwise>
                     <img src="${pageContext.request.contextPath}/resources/default_acc_avatar.png" alt="avatar"/>
-                    <div class="user_login"><a href="${pageContext.request.contextPath}/easyLearning">${sessionScope.user.login}</a></div>
+                    <div class="user_login"><a href="${pageContext.request.contextPath}/user">${sessionScope.user.login}</a></div>
                     <form method="post" action="http://localhost:8080/easyLearning/basic_servlet">
                         <input type="hidden" name="command_name" value="log_out">
                         <input type="submit" name="LogOut" value="LogOut"/>

@@ -1,5 +1,6 @@
 package by.anelkin.easylearning.servlet;
 
+import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.RequestReceiver;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
@@ -39,7 +40,7 @@ public class BasicServlet extends HttpServlet {
         ResponseType responseType;
         try {
             responseType = receiver.executeCommand();
-        } catch (RepositoryException e) {
+        } catch (RepositoryException | ServiceException e) {
             // TODO: 7/5/2019 сделать редирект на страницу ошибки
             throw new ServletException(e);
         }

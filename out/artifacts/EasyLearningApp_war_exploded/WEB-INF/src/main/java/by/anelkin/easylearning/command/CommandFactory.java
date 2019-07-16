@@ -8,7 +8,8 @@ public class CommandFactory {
         LOGIN,
         SIGN_UP,
         SIGN_UP_NEW_USER,
-        LOG_OUT
+        LOG_OUT,
+        EDIT_USER_INFO
 
     }
 
@@ -26,6 +27,9 @@ public class CommandFactory {
                 break;
             case LOG_OUT:
                 command = new LogOutCommand();
+                break;
+            case EDIT_USER_INFO:
+                command = new EditUserInfoCommand();
                 break;
 
         }

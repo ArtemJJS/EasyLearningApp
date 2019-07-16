@@ -23,7 +23,7 @@ public class AccountService {
     private static final String URI_SPACE_REPRESENT = "%20";
     private static final String URI_SPLITTER = "/";
 
-    // TODO: 7/12/2019 налдо ли из методов вынести в поле переменные класса? например репозитории?
+    // TODO: 7/12/2019 надо ли из методов вынести в поле переменные класса? например репозитории?
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public boolean login(@NonNull SessionRequestContent requestContent) throws RepositoryException {
@@ -34,10 +34,10 @@ public class AccountService {
             return false;
         }
         Account account = accounts.get(0);
-        requestContent.getSessionAttributes().put("user", account);
-
         CourseRepository courseRepository = new CourseRepository();
         List<Course> courses = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
+
+        requestContent.getSessionAttributes().put("user", account);
         requestContent.getSessionAttributes().put("coursesAvailable", courses);
         requestContent.getSessionAttributes().put("role", account.getType());
         return true;
@@ -65,18 +65,42 @@ public class AccountService {
     }
 
     // TODO: 7/12/2019 переделать нормально!
-    public void logOut(@NonNull SessionRequestContent requestContent){
+    public void logOut(@NonNull SessionRequestContent requestContent) {
         HashMap<String, Object> sessionAttributes = requestContent.getSessionAttributes();
         sessionAttributes.remove("user");
         sessionAttributes.remove("coursesAvailable");
         sessionAttributes.put("role", GUEST);
     }
 
+    public void editAccountInfo(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+        AccRepository repository = new AccRepository();
+        Account clone = null;
+        try {
+            clone = ((Account) requestContent.getSessionAttributes().get("user")).clone();
+            Map<String, String[]> requestParams = requestContent.getRequestParameters();
+            clone.setLogin(requestParams.get("login")[0]);
+            clone.setName(requestParams.get("name")[0]);
+            clone.setSurname(requestParams.get("surname")[0]);
+            clone.setEmail(requestParams.get("email")[0]);
+            clone.setPhoneNumber(requestParams.get("phonenumber")[0]);
+            clone.setAbout(requestParams.get("about")[0]);
+        } catch (CloneNotSupportedException e) {
+            throw new ServiceException(e);
+        }
+        try {
+            repository.update(clone);
+        } catch (RepositoryException e) {
+            // TODO: 7/12/2019 handle
+            throw new RepositoryException();
+        }
+        requestContent.getSessionAttributes().put("user", clone);
+    }
+
     // TODO: 7/12/2019 исключения обработать нормально
     public Account takeAuthorOfCourse(int courseId) throws RepositoryException {
         AccRepository repository = new AccRepository();
         List<Account> accounts = repository.query(new SelectByCourseIdSpecification(courseId));
-        if (accounts.size() != 1){
+        if (accounts.size() != 1) {
             // TODO: 7/12/2019 handle
             throw new RepositoryException();
         }
@@ -88,7 +112,7 @@ public class AccountService {
         // TODO: 7/12/2019 подумать надо ли Optional
         String login = (String) requestContent.getRequestAttributes().get("requested_author_login");
         List<Account> accounts = repository.query(new SelectAccByLoginSpecification(login));
-        if (accounts.size() != 1){
+        if (accounts.size() != 1) {
             throw new ServiceException("Author with login " + login + " is not exists!");
         }
         Account author = accounts.get(0);
@@ -121,6 +145,6 @@ public class AccountService {
 
     public String pickTargetNameFromUri(String requestURI) {
         String[] parts = requestURI.split(URI_SPLITTER);
-        return parts[parts.length-1].replaceAll(URI_SPACE_REPRESENT, " ");
+        return parts[parts.length - 1].replaceAll(URI_SPACE_REPRESENT, " ");
     }
 }

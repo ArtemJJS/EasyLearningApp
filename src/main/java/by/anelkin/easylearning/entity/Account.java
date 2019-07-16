@@ -32,7 +32,7 @@ public class Account extends AppEntity {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Account clone() throws CloneNotSupportedException {
+        return (Account) super.clone();
     }
 }

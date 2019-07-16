@@ -118,14 +118,17 @@ public class AccRepository implements AppRepository<Account> {
 
             int typeId = resultSet.getInt("acc_type");
             switch (typeId) {
+                case 0:
+                    account.setType(GUEST);
+                    break;
                 case 1:
-                    account.setType(ADMIN);
+                    account.setType(USER);
                     break;
                 case 2:
                     account.setType(AUTHOR);
                     break;
                 case 3:
-                    account.setType(USER);
+                    account.setType(ADMIN);
                     break;
                 default:
                     throw new RuntimeException("Wrong type parameter from data base!!! User#" + account.getId());
