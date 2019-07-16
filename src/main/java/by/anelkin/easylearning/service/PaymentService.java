@@ -8,14 +8,17 @@ import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.repository.PaymentRepository;
 import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
+import by.anelkin.easylearning.specification.payment.SelectPaymentByAccountIdSpecification;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class PaymentService {
     private static final String SESSION_ATTR_USER = "user";
     private static final String REQUEST_PARAM_AMOUNT = "amount";
     private static final String REQUEST_PARAM_CURRENCY = "currency";
     private static final String REQUEST_PARAM_CARD = "card";
+    private static final String REQUEST_ATTR_PAYMENTS = "payments";
     private static final String CARD_NUMBER_SPLITTER = " ";
     private static final String DESCRIPTION_DEPOSIT_BY_CARD = "Deposit from card ends with ";
     private static final int PAYMENT_CODE_DEPOSIT_FROM_CARD = 15;
@@ -42,6 +45,18 @@ public class PaymentService {
         } catch (RepositoryException e) {
             // FIXME: 7/16/2019
             throw new ServiceException(e);
+        }
+    }
+
+    public void insertPaymentsIntoRequestAttributes(SessionRequestContent requestContent) {
+        PaymentRepository paymentRepository = new PaymentRepository();
+        Account currAccount = (Account) requestContent.getSessionAttributes().get(SESSION_ATTR_USER);
+        try {
+            List<Payment> payments = paymentRepository.query(new SelectPaymentByAccountIdSpecification(currAccount.getId()));
+            requestContent.getRequestAttributes().put(REQUEST_ATTR_PAYMENTS, payments);
+        } catch (RepositoryException e) {
+            // FIXME: 7/16/2019
+            throw new RuntimeException(e);
         }
     }
 

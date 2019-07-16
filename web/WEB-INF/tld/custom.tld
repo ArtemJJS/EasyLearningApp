@@ -43,6 +43,28 @@
             <type>long</type>
         </attribute>
     </tag>
+    <tag>
+        <name>millisec-to-time</name>
+        <tag-class>by.anelkin.easylearning.tag.MillisecToDateTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>millisecAmount</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>long</type>
+        </attribute>
+    </tag>
+    <tag>
+        <name>currency-marker</name>
+        <tag-class>by.anelkin.easylearning.tag.CurrencyMarkerTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>currencyId</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+    </tag>
 
 
     <!-- Invoke 'Generate' action to add tags or functions -->

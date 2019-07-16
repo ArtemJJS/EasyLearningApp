@@ -95,4 +95,22 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>UserPurchasedCourses</servlet-name>
+        <jsp-file>/jsp/user/purchased_courses.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserPurchasedCourses</servlet-name>
+        <url-pattern>/user/purchased-courses</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AccountPaymentHistory</servlet-name>
+        <jsp-file>/jsp/global/payment_history.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AccountPaymentHistory</servlet-name>
+        <url-pattern>/account/payments</url-pattern>
+    </servlet-mapping>
+
 </web-app>

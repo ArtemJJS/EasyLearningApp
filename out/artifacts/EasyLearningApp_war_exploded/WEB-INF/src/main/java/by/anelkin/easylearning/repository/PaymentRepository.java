@@ -86,7 +86,7 @@ public class PaymentRepository implements AppRepository<Payment> {
                 statement.setString(i + 1, params[i]);
             }
             log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
-            try (ResultSet resultSet = statement.executeQuery(specification.getQuery())) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 log.debug("Query completed:" + statement.toString().split(":")[1]);
                 paymentList = fillPaymentList(resultSet);
             }

@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 22px;
+    color: black;
+}
+
+html {
+    width: 100vw;
+    height: 100vh;
+}
+
+main {
+    width: 1200px;
+    min-height: 600px;
+    border: 1px solid #595959;
+    border-top: none;
+    margin: 0 auto;
+    padding-top: 30px;
+    padding-bottom: 70px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.page_title{
+    color: darkgreen;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+
+    align-self: center;
+}
+
+.payment_list_wrapper{
+    width: 1000px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-view {
+    min-height: 40px;
+    border: 1px solid #7a7a7a;
+    border-bottom: none;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-view:last-child{
+    border-bottom: 1px solid #7a7a7a;
+}
+
+.payment-view:nth-child(2n){
+    background-color: #d9eff4;
+}
+
+.payment_date {
+    width: 20%;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.payment_description {
+    width: 65%;
+
+    display: flex;
+    align-items: center;
+}
+
+.amount_and_currency {
+    width: 15%;
+    padding-right: 10px;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.payment_currency{
+    margin-left: 10px;
+}

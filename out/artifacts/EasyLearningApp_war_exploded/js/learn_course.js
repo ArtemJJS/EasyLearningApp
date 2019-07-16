@@ -1,15 +1,17 @@
 var videoPlayer = document.getElementById('video_player');
-// var lessons = document.getElementsByClassName('lesson');
-var sectionWithContent = document.getElementById('content_section');
+let lessonDivs = document.getElementsByClassName('lesson');
 
-console.log(lessons_list);
+// console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+// console.log(lessonDivs);
 
 function handlerChooseLesson(event) {
-    if (event.target.matches('.lesson')){
-        var currLessonId = event.target.id;
+    // console.log("11111111111111111111111");
+    if (this.matches('.lesson')) {
+        // console.log("222222222222222222222");
+        var currLessonId = this.id;
         // console.log(lessons_list);
-        var lessons =  lessons_list.split("CourseLesson");
-        // console.log(lessons);
+        var lessons = lessons_list.split("CourseLesson");
+        console.log('!!!! ' + lessons);
         // var currLessonParts = lessons.filter(function (value) { value.indexOf('id=' + currLessonId)}).join("").split(",");
         var currLessonParts = lessons.filter(function (value) {
             var index = value.indexOf('id=' + currLessonId)
@@ -20,9 +22,12 @@ function handlerChooseLesson(event) {
             var index = value.indexOf('pathToContent');
             return index > -1;
         }).join("").split("=")[1];
-       // console.log(newPath);
+        // console.log(newPath);
         videoPlayer.src = newPath;
     }
 }
 
-sectionWithContent.addEventListener("click", handlerChooseLesson);
+for (let i = 0; i < lessonDivs.length; i++) {
+    lessonDivs[i].addEventListener("click", handlerChooseLesson);
+}
+

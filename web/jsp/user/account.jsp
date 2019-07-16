@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: User
@@ -6,6 +5,7 @@
   Time: 1:21 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -26,10 +26,10 @@
         <div class="links">
             <div class="link"><a href="">Change photo</a></div>
             <div class="link"><a href="">Change password</a></div>
-            <div class="link"><a href="">Payments</a></div>
+            <div class="link"><a href="${pageContext.request.contextPath}/account/payments">Payments</a></div>
             <c:choose>
                 <c:when test="${curr_role.toString() == 'USER'}">
-                    <div class="link"><a href="">Purchased courses</a></div>
+                    <div class="link"><a href="${pageContext.request.contextPath}/user/purchased-courses">Purchased courses</a></div>
                     <div class="link"><a href="${pageContext.request.contextPath}/user/deposit">Deposit</a></div>
                 </c:when>
                 <c:when test="${curr_role.toString() == 'AUTHOR'}">
