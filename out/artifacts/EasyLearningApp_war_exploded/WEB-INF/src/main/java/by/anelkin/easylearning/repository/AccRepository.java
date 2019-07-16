@@ -108,12 +108,12 @@ public class AccRepository implements AppRepository<Account> {
             account.setPhoneNumber(resultSet.getString("acc_phone_number"));
             account.setRegistrDate(resultSet.getDate("acc_registration_date"));
             account.setAbout(resultSet.getString("acc_about"));
+            account.setBalance(resultSet.getBigDecimal("acc_balance"));
+
+
             String avatarFileName = resultSet.getString("acc_photo_path");
-            if (avatarFileName == null) {
-                account.setPathToPhoto(PATH_TO_AVATAR_DEFAULT);
-            } else {
-                account.setPathToPhoto(PATH_TO_AVATAR + avatarFileName);
-            }
+            account.setPathToPhoto(PATH_TO_AVATAR + avatarFileName);
+
             account.setAvgMark(resultSet.getDouble("avg_mark"));
 
             int typeId = resultSet.getInt("acc_type");

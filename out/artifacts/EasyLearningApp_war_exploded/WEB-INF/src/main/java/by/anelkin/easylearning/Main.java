@@ -12,6 +12,7 @@ import by.anelkin.easylearning.specification.lesson.SelectByChapterIdSpecificati
 import by.anelkin.easylearning.specification.mark.SelectAllMarkSpecification;
 import by.anelkin.easylearning.specification.mark.SelectMarkByIdSpecification;
 import by.anelkin.easylearning.specification.mark.SelectMarkByTargetIdSpecification;
+import by.anelkin.easylearning.specification.payment.SelectAllPaymentSpecification;
 import lombok.extern.log4j.Log4j;
 
 import java.io.*;
@@ -36,9 +37,20 @@ public class Main {
 ////        lesson.setPathToContent("https://drive.google.com/file/d/1iEEp7Yxcta_g6tRhC8b0J_EzTEbvacqi/preview");
 //        lesson.setId(11);
 
-        LessonRepository repo = new LessonRepository();
-      List<CourseLesson> list = repo.query(new SelectAllLessonSpecification());
-      list.forEach(System.out::println);
+        Payment payment = new Payment();
+        payment.setAccountId(24);
+        payment.setCurrencyId(1);
+        payment.setDescription("Продажа курса ");
+        payment.setCourseId(1);
+
+        payment.setAmount((new BigDecimal("9.99")));
+        payment.setPaymentCode(11);
+        payment.setPaymentDate(System.currentTimeMillis());
+
+        PaymentRepository repo = new PaymentRepository();
+        repo.insert(payment);
+        List<Payment> list = repo.query(new SelectAllPaymentSpecification());
+        list.forEach(System.out::println);
 
 
     }

@@ -1,102 +1,58 @@
-create procedure updateLesson(in new_name text, in new_path text, in new_duration long, in curr_lesson_id int)
+create procedure insertPaymentAndUpdateBalance(curr_acc_id int, curr_course_id int,
+                                               curr_payment_code int, curr_amount decimal(10, 2), curr_date long,
+                                               curr_currency_id int,
+                                               curr_description text)
 begin
-    update course_lesson
-    set lesson_name            = new_name,
-        lesson_content_address = new_path,
-        lesson_duration        = new_duration
-    where lesson_id = curr_lesson_id;
+    select @curr_course_name := course_name from course where course_id = curr_course_id;
 
-    select @curr_chapter := course_chapter_id from course_lesson where lesson_id = curr_lesson_id;
+    insert into user_payment
+    set acc_id              = curr_acc_id,
+        course_id           = curr_course_id,
+        payment_code        = curr_payment_code,
+        payment_amount      = curr_amount,
+        payment_date        = curr_date,
+        currency_id         = curr_currency_id,
+        payment_description = coalesce(concat(curr_description, @curr_course_name), curr_description);
 
-    update course_chapter
-    set chapter_duration      = (select sum(lesson_duration)
-                                 from course_lesson
-                                 where course_lesson.course_chapter_id = @curr_chapter),
-        chapter_lesson_amount = (select count(*)
-                                 from course_lesson
-                                 where course_lesson.course_chapter_id = @curr_chapter)
-    where course_chapter_id = @curr_chapter;
+    select @actual_user_balance := acc_balance from account where acc_id = curr_acc_id;
+    update account set acc_balance = (@actual_user_balance + curr_amount) where acc_id = curr_acc_id;
 
-    select @curr_course := course_id from course_chapter where course_chapter_id = @curr_chapter;
-
-    update course
-    set course_duration      = (select sum(chapter_duration)
-                                from course_chapter
-                                where course_chapter.course_id = @curr_course),
-        course_lesson_amount = (select sum(chapter_lesson_amount)
-                                from course_chapter
-                                where course_chapter.course_id = @curr_course)
-    where course_id = @curr_course;
-
+#     select @actual_course_author_balance := acc_balance from account where acc_id = curr_author_id;
+#     update account set acc_balance = (@actual_course_author_balance - curr_amount) where  acc_id = curr_author_id;
 end;
 
-# =========================================
 
-create procedure insertLesson(in new_chapter_id int, in new_date text, in new_name text, in new_path text,
-                              in new_duration long)
+call insertPaymentAndUpdateBalance(23, null, 15, 10.5, 1563282126825, 1, 'пополнение счета');
+
+
+call insertPaymentAndUpdateBalance(23, 1, 11, -9.99, 1563282139925, 1, 'покупка курса ');
+
+
+CALL insertPaymentAndUpdateBalance('23', '-1', '15', '100', '1563285696401', '1', 'Пополнение счета');
+
+
+
+create
+   procedure insertPaymentByCard(IN curr_acc_id int, IN curr_course_id int,
+                                                                     IN curr_payment_code int,
+                                                                     IN curr_amount decimal(10, 2),
+                                                                     IN curr_date mediumtext, IN curr_currency_id int,
+                                                                     IN curr_description text)
 begin
-    insert into course_lesson
-    set course_chapter_id      = new_chapter_id,
-        lesson_name            = new_name,
-        lesson_content_address = new_path,
-        lesson_creation_date   = new_date,
-        lesson_duration        = new_duration;
+    select @curr_course_name := course_name from course where course_id = curr_course_id;
 
-    update course_chapter
-    set chapter_duration      = (select sum(lesson_duration)
-                                 from course_lesson
-                                 where course_lesson.course_chapter_id = new_chapter_id),
-        chapter_lesson_amount = (select count(*)
-                                 from course_lesson
-                                 where course_lesson.course_chapter_id = new_chapter_id)
-    where course_chapter_id = new_chapter_id;
+    insert into user_payment
+    set acc_id              = curr_acc_id,
+        course_id           = curr_course_id,
+        payment_code        = curr_payment_code,
+        payment_amount      = curr_amount,
+        payment_date        = curr_date,
+        currency_id         = curr_currency_id,
+        payment_description = coalesce(concat(curr_description, @curr_course_name), curr_description);
 
-    select @curr_course := course_id from course_chapter where course_chapter_id = new_chapter_id;
+#     select @actual_user_balance := acc_balance from account where acc_id = curr_acc_id;
+#     update account set acc_balance = (@actual_user_balance + curr_amount) where acc_id = curr_acc_id;
 
-    update course
-    set course_duration      = (select sum(chapter_duration)
-                                from course_chapter
-                                where course_chapter.course_id = @curr_course),
-        course_lesson_amount = (select sum(chapter_lesson_amount)
-                                from course_chapter
-                                where course_chapter.course_id = @curr_course)
-    where course_id = @curr_course;
-
+    #     select @actual_course_author_balance := acc_balance from account where acc_id = curr_author_id;
+#     update account set acc_balance = (@actual_course_author_balance - curr_amount) where  acc_id = curr_author_id;
 end;
-
-call insertLesson(5, '2019-07-15', 'Вторая глава',
-                  'https://drive.google.com/file/d/14YMnWZJAMhkCqFhJI8E40QrYaVpoqAer/preview',
-                  1824);
-
-
-# =========================================
-
-create procedure deleteLesson(in curr_lesson_id int)
-begin
-    select @curr_chapter := course_chapter_id from course_lesson where lesson_id = curr_lesson_id;
-
-    delete from course_lesson where lesson_id = curr_lesson_id;
-
-    update course_chapter
-    set chapter_duration      = (select sum(lesson_duration)
-                                 from course_lesson
-                                 where course_lesson.course_chapter_id = @curr_chapter),
-        chapter_lesson_amount = (select count(*)
-                                 from course_lesson
-                                 where course_lesson.course_chapter_id = @curr_chapter)
-    where course_chapter_id = @curr_chapter;
-
-    select @curr_course := course_id from course_chapter where course_chapter_id = @curr_chapter;
-
-    update course
-    set course_duration      = (select sum(chapter_duration)
-                                from course_chapter
-                                where course_chapter.course_id = @curr_course),
-        course_lesson_amount = (select sum(chapter_lesson_amount)
-                                from course_chapter
-                                where course_chapter.course_id = @curr_course)
-    where course_id = @curr_course;
-
-end;
-
-call deleteLesson(9);

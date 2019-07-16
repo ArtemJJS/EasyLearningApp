@@ -21,8 +21,6 @@
         <div class="logo"><a href="${pageContext.request.contextPath}/easyLearning"><img src="${pageContext.request.contextPath}/resources/logo.jpg" alt="logo"></a></div>
         <div class="panel">
             <div class="panel-item"><a href="">Search</a></div>
-            <div class="panel-item"><a href="">News</a></div>
-            <div class="panel-item"><a href="">Account</a></div>
             <div class="panel-item"><a href="">Become Author</a></div>
             <div class="panel-item"><a href="">Support</a></div>
         </div>
@@ -38,7 +36,7 @@
                 </c:when>
                 <c:otherwise>
                     <img src="${pageContext.request.contextPath}/resources/default_acc_avatar.png" alt="avatar"/>
-                    <div class="user_login"><a href="${pageContext.request.contextPath}/user">${sessionScope.user.login}</a></div>
+                    <div class="user_login"><a href="${pageContext.request.contextPath}/account">${sessionScope.user.login}</a></div>
                     <form method="post" action="http://localhost:8080/easyLearning/basic_servlet">
                         <input type="hidden" name="command_name" value="log_out">
                         <input type="submit" name="LogOut" value="LogOut"/>

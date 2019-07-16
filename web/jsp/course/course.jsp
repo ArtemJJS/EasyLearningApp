@@ -91,7 +91,7 @@
                     <div class="comment">${mark.comment}</div>
                     <div class="date">${mark.markDate}</div>
                 </div>
-                <img class="writer_avatar" src="${pageContext.request.contextPath}/${mark.accPathToPhoto}"
+                <img class="writer_avatar" src="${pageContext.request.contextPath}${mark.accPathToPhoto}"
                      alt="avatar"/>
             </div>
         </c:forEach>

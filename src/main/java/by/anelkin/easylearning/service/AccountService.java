@@ -21,7 +21,8 @@ import static by.anelkin.easylearning.entity.Account.AccountType.GUEST;
 
 public class AccountService {
     private static final String URI_SPACE_REPRESENT = "%20";
-    private static final String URI_SPLITTER = "/";
+    private static final String PATH_SPLITTER = "/";
+
 
     // TODO: 7/12/2019 надо ли из методов вынести в поле переменные класса? например репозитории?
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -74,6 +75,7 @@ public class AccountService {
 
     public void editAccountInfo(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
         AccRepository repository = new AccRepository();
+        Account updatedAccount;
         Account clone = null;
         try {
             clone = ((Account) requestContent.getSessionAttributes().get("user")).clone();
@@ -84,16 +86,19 @@ public class AccountService {
             clone.setEmail(requestParams.get("email")[0]);
             clone.setPhoneNumber(requestParams.get("phonenumber")[0]);
             clone.setAbout(requestParams.get("about")[0]);
+            trimPathToPhoto(clone);
         } catch (CloneNotSupportedException e) {
             throw new ServiceException(e);
         }
         try {
             repository.update(clone);
+            updatedAccount = repository.query(new SelectAccByLoginSpecification(clone.getLogin())).get(0);
         } catch (RepositoryException e) {
             // TODO: 7/12/2019 handle
             throw new RepositoryException();
         }
-        requestContent.getSessionAttributes().put("user", clone);
+        // query instead of using clone because of problems with path to photo when use cloning
+        requestContent.getSessionAttributes().put("user", updatedAccount);
     }
 
     // TODO: 7/12/2019 исключения обработать нормально
@@ -105,6 +110,11 @@ public class AccountService {
             throw new RepositoryException();
         }
         return accounts.get(0);
+    }
+
+    public String pickTargetNameFromUri(String requestURI) {
+        String[] parts = requestURI.split(PATH_SPLITTER);
+        return parts[parts.length - 1].replaceAll(URI_SPACE_REPRESENT, " ");
     }
 
     public void initAuthorPage(@NonNull SessionRequestContent requestContent) throws RepositoryException, ServiceException {
@@ -133,6 +143,7 @@ public class AccountService {
         account.setEmail(requestParams.get("email")[0]);
         account.setPhoneNumber(requestParams.get("phonenumber")[0]);
         account.setAbout(requestParams.get("about")[0]);
+        // FIXME: 7/16/2019 работа с фото при регистрации
         try {
             account.setBirthDate(dateFormat.parse(requestParams.get("birthdate")[0]));
             account.setRegistrDate(new Date(System.currentTimeMillis()));
@@ -142,9 +153,13 @@ public class AccountService {
         account.setType(Account.AccountType.valueOf(requestParams.get("role")[0].toUpperCase()));
     }
 
-
-    public String pickTargetNameFromUri(String requestURI) {
-        String[] parts = requestURI.split(URI_SPLITTER);
-        return parts[parts.length - 1].replaceAll(URI_SPACE_REPRESENT, " ");
+    // there must be only file-name in the bd instead of full path
+    private void trimPathToPhoto(Account account) {
+        String pathToPhoto = account.getPathToPhoto();
+        String[] parts = pathToPhoto.split(PATH_SPLITTER);
+        String photoFileName = parts[parts.length - 1];
+        account.setPathToPhoto(photoFileName);
     }
+
+
 }

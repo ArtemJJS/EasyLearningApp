@@ -153,3 +153,63 @@
 2019-07-16 00:15:02 main DEBUG LessonRepository:76 - Attempt to execute query: SELECT * FROM course_lesson
 2019-07-16 00:15:02 main DEBUG LessonRepository:78 - Query completed: SELECT * FROM course_lesson
 2019-07-16 00:15:02 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 16:48:45 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 16:48:45 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 16:48:45 main DEBUG PaymentRepository:79 - Attempt to execute query: SELECT * FROM user_payment
+2019-07-16 16:48:45 main DEBUG PaymentRepository:81 - Query completed: SELECT * FROM user_payment
+2019-07-16 16:48:45 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 16:51:21 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 16:51:21 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 16:51:21 main DEBUG PaymentRepository:79 - Attempt to execute query: SELECT * FROM user_payment
+2019-07-16 16:51:21 main DEBUG PaymentRepository:81 - Query completed: SELECT * FROM user_payment
+2019-07-16 16:51:21 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 16:54:33 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 16:54:33 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 16:54:33 main DEBUG PaymentRepository:79 - Attempt to execute query: SELECT * FROM user_payment
+2019-07-16 16:54:33 main DEBUG PaymentRepository:81 - Query completed: SELECT * FROM user_payment
+2019-07-16 16:54:33 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 16:54:50 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 16:54:50 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 16:54:50 main DEBUG PaymentRepository:79 - Attempt to execute query: SELECT * FROM user_payment
+2019-07-16 16:54:50 main DEBUG PaymentRepository:81 - Query completed: SELECT * FROM user_payment
+2019-07-16 16:54:50 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 17:00:11 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 17:00:11 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 17:00:11 main DEBUG PaymentRepository:115 - Attempt to execute query: CALL insertPaymentAndUpdateBalance('23', 'null', '15', '100', '1563285610524', '1', 'Пополнение счета')
+2019-07-16 17:00:11 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 17:01:37 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 17:01:37 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 17:01:37 main DEBUG PaymentRepository:115 - Attempt to execute query: CALL insertPaymentAndUpdateBalance('23', '-1', '15', '100', '1563285696401', '1', 'Пополнение счета')
+2019-07-16 17:01:37 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 17:09:20 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 17:09:20 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 17:09:20 main DEBUG PaymentRepository:115 - Attempt to execute query: CALL insertPaymentAndUpdateBalance('23', '-1', '15', '100', '1563286159218', '1', 'Пополнение счета')
+2019-07-16 17:09:20 main DEBUG PaymentRepository:117 - Query completed: CALL insertPaymentAndUpdateBalance('23', '-1', '15', '100', '1563286159218', '1', 'Пополнение счета')
+2019-07-16 17:09:20 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 17:09:20 main DEBUG PaymentRepository:79 - Attempt to execute query: SELECT * FROM user_payment
+2019-07-16 17:09:20 main DEBUG PaymentRepository:81 - Query completed: SELECT * FROM user_payment
+2019-07-16 17:09:20 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 17:16:47 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 17:16:47 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 17:16:47 main DEBUG PaymentRepository:115 - Attempt to execute query: CALL insertPaymentAndUpdateBalance('23', '1', '11', '-9.99', '1563286607008', '1', 'Покупка курса ')
+2019-07-16 17:16:48 main DEBUG PaymentRepository:117 - Query completed: CALL insertPaymentAndUpdateBalance('23', '1', '11', '-9.99', '1563286607008', '1', 'Покупка курса ')
+2019-07-16 17:16:48 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 17:16:48 main DEBUG PaymentRepository:79 - Attempt to execute query: SELECT * FROM user_payment
+2019-07-16 17:16:48 main DEBUG PaymentRepository:81 - Query completed: SELECT * FROM user_payment
+2019-07-16 17:16:48 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 17:17:52 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 17:17:52 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 17:17:52 main DEBUG PaymentRepository:115 - Attempt to execute query: CALL insertPaymentAndUpdateBalance('24', '1', '11', '9.99', '1563286672064', '1', 'Продажа курса ')
+2019-07-16 17:17:52 main DEBUG PaymentRepository:117 - Query completed: CALL insertPaymentAndUpdateBalance('24', '1', '11', '9.99', '1563286672064', '1', 'Продажа курса ')
+2019-07-16 17:17:53 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 17:17:53 main DEBUG PaymentRepository:79 - Attempt to execute query: SELECT * FROM user_payment
+2019-07-16 17:17:53 main DEBUG PaymentRepository:81 - Query completed: SELECT * FROM user_payment
+2019-07-16 17:17:53 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 17:33:52 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-16 17:33:52 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-16 17:33:52 main DEBUG PaymentRepository:125 - Attempt to execute query: INSERT INTO user_payment(acc_id, course_id, payment_code, payment_amount, payment_date, currency_id, payment_description) VALUES ('23', '1', '10', '-9.99', '1563287630992', '1', 'Покупка по карте курса ')
+2019-07-16 17:33:52 main DEBUG PaymentRepository:127 - Query completed: INSERT INTO user_payment(acc_id, course_id, payment_code, payment_amount, payment_date, currency_id, payment_description) VALUES ('23', '1', '10', '-9.99', '1563287630992', '1', 'Покупка по карте курса ')
+2019-07-16 17:33:52 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-16 17:33:52 main DEBUG PaymentRepository:89 - Attempt to execute query: SELECT * FROM user_payment
+2019-07-16 17:33:52 main DEBUG PaymentRepository:91 - Query completed: SELECT * FROM user_payment
+2019-07-16 17:33:52 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.

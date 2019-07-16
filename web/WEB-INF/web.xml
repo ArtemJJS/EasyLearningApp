@@ -78,11 +78,11 @@
 
     <servlet>
         <servlet-name>AccountUser</servlet-name>
-        <jsp-file>/jsp/user/account_user.jsp</jsp-file>
+        <jsp-file>/jsp/user/account.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>AccountUser</servlet-name>
-        <url-pattern>/user</url-pattern>
+        <url-pattern>/account</url-pattern>
     </servlet-mapping>
 
 

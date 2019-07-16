@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import java.io.File;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -23,6 +24,7 @@ public class Account extends AppEntity {
     private String pathToPhoto;
     private AccountType type;
     private double avgMark;
+    private BigDecimal balance;
 
     public enum AccountType{
         GUEST,

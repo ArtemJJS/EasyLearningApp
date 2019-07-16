@@ -11,22 +11,38 @@
 <head>
     <title>Title</title>
     <style>
-        <%@include file="/css/user/account_user.css"%>
+        <%@include file="/css/user/account.css"%>
     </style>
 </head>
 <body>
-<%@include file="/jsp/header.jsp"%>
+<%@include file="/jsp/header.jsp" %>
 <main>
     <c:set var="user" value="${sessionScope.user}"/>
+    <c:set var="curr_role" value="${sessionScope.role}"/>
     <div class="img_and_links">
         <img src="${pageContext.request.contextPath}/${user.pathToPhoto}" alt="avatar">
-        <div class="role">Student</div>
-        <div class="balance">Balance: 125$</div>
+        <div class="role">${sessionScope.role}</div>
+        <div class="balance">Balance: ${user.balance}$</div>
         <div class="links">
             <div class="link"><a href="">Change photo</a></div>
             <div class="link"><a href="">Change password</a></div>
             <div class="link"><a href="">Payments</a></div>
-            <div class="link"><a href="">Courses available</a></div>
+            <c:choose>
+                <c:when test="${curr_role.toString() == 'USER'}">
+                    <div class="link"><a href="">Purchased courses</a></div>
+                    <div class="link"><a href="">Deposit</a></div>
+                </c:when>
+                <c:when test="${curr_role.toString() == 'AUTHOR'}">
+                    <div class="link"><a href="">Add course</a></div>
+                    <div class="link"><a href="">Statistic</a></div>
+                    <div class="link"><a href="">CashOut</a></div>
+                </c:when>
+                <c:when test="${curr_role.toString() == 'ADMIN'}">
+                    <div class="link"><a href="">Add course request</a></div>
+                    <div class="link"><a href="">Register acc request</a></div>
+                    <div class="link"><a href="">Dashboard</a></div>
+                </c:when>
+            </c:choose>
         </div>
     </div>
     <div class="update_section">

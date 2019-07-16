@@ -19,6 +19,7 @@ import static by.anelkin.easylearning.entity.Mark.MarkType.*;
 @Log4j
 public class MarkRepository implements AppRepository<Mark> {
     private ConnectionPool pool = ConnectionPool.getInstance();
+    private static final String PATH_TO_PICTURE = "/resources/account_avatar/";
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private static final String QUERY_INSERT_COURSE_MARK = "{call InsertCourseMark(?, ?, ?, ?, ?)}";
     private static final String QUERY_INSERT_AUTHOR_MARK = "{call InsertAuthorMark(?, ?, ?, ?, ?)}";
@@ -106,11 +107,8 @@ public class MarkRepository implements AppRepository<Mark> {
             mark.setMarkDate(resultSet.getDate("mark_date"));
             // data from account table (for queries with join)
             mark.setAccLogin(resultSet.getString("acc_login"));
-            mark.setAccPathToPhoto(resultSet.getString("acc_photo_path"));
-            // TODO: 7/9/2019 перенести проверку фото в другое место (перед тем как попадает в базу)
-            if (mark.getAccPathToPhoto() == null){
-                mark.setAccPathToPhoto("resources/account_avatar/default_acc_avatar.png");
-            }
+            mark.setAccPathToPhoto(PATH_TO_PICTURE + resultSet.getString("acc_photo_path"));
+
             marks.add(mark);
         }
         return marks;

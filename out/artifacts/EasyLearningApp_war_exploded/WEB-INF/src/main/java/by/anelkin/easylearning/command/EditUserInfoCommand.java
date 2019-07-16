@@ -21,16 +21,6 @@ public class EditUserInfoCommand implements Command {
     public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
         (new AccountService()).editAccountInfo(requestContent);
         AccountType role = (AccountType) requestContent.getSessionAttributes().get("role");
-
-//
-//        try {
-//            TimeUnit.SECONDS.sleep(2);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-
         // TODO: 7/16/2019 а если тут гость??? может ли такое быть?
         switch (role){
             case USER:
