@@ -26,7 +26,7 @@
 </header>
 <main>
     <div class="header1">Registration form:</div>
-    <form id="reg_form" method="post" action="http://localhost:8080/easyLearning/basic_servlet">
+    <form id="reg_form" method="post" action="${pageContext.request.contextPath}/basic_servlet">
         <div class="param0">
             <label for="role-field">Role: </label>
                 <select id="role-field" name="role" required autofocus>

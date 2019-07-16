@@ -38,13 +38,13 @@ public class Main {
 //        lesson.setId(11);
 
         Payment payment = new Payment();
-        payment.setAccountId(24);
+        payment.setAccountId(23);
         payment.setCurrencyId(1);
-        payment.setDescription("Продажа курса ");
+        payment.setDescription("Покупка по карте курса ");
         payment.setCourseId(1);
 
-        payment.setAmount((new BigDecimal("9.99")));
-        payment.setPaymentCode(11);
+        payment.setAmount((new BigDecimal("-9.99")));
+        payment.setPaymentCode(10);
         payment.setPaymentDate(System.currentTimeMillis());
 
         PaymentRepository repo = new PaymentRepository();

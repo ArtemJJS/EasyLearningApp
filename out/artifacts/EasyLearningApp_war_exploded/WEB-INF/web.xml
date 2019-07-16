@@ -85,6 +85,14 @@
         <url-pattern>/account</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UserDeposit</servlet-name>
+        <jsp-file>/jsp/user/deposit_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserDeposit</servlet-name>
+        <url-pattern>/user/deposit</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>

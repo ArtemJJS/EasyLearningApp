@@ -30,7 +30,7 @@
             <c:choose>
                 <c:when test="${curr_role.toString() == 'USER'}">
                     <div class="link"><a href="">Purchased courses</a></div>
-                    <div class="link"><a href="">Deposit</a></div>
+                    <div class="link"><a href="${pageContext.request.contextPath}/user/deposit">Deposit</a></div>
                 </c:when>
                 <c:when test="${curr_role.toString() == 'AUTHOR'}">
                     <div class="link"><a href="">Add course</a></div>

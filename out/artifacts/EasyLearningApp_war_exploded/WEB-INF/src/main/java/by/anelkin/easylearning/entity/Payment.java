@@ -12,14 +12,18 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 public class Payment extends AppEntity{
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-    private int id;
-    private int accountId;
+    private int id;//
+    private int accountId;//
     private int courseId;
     private int paymentCode;
-    private BigDecimal amount;
-    private long paymentDate;
-    private int currencyId;
+    private BigDecimal amount;//
+    private long paymentDate;//
+    private int currencyId;//
     private String description;
+
+    public enum CurrencyType{
+        USD
+    }
 
     @Override
     public Object clone() throws CloneNotSupportedException {

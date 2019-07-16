@@ -16,15 +16,18 @@ import java.util.List;
 @Log4j
 public class PaymentRepository implements AppRepository<Payment> {
     private ConnectionPool pool = ConnectionPool.getInstance();
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    @Language("sql")
-    private static final String QUERY_INSERT = "{CALL insertPaymentAndUpdateBalance(?, ?, ?, ?, ?, ?, ?)}";
+    private static final String BUY_COURSE_WITH_CARD_PAYMENT_CODE = "10";
     @Language("sql")
     private static final String QUERY_DELETE = "DELETE FROM user_payment WHERE payment_id = ?";
     @Language("sql")
     private static final String QUERY_UPDATE = "UPDATE user_payment SET  acc_id = ?, " +
             "course_id = ?, payment_code = ?, payment_amount = ?, payment_date = ?, currency_id = ?, payment_description = ?" +
             " WHERE payment_id = ?";
+    @Language("sql")
+    private static final String QUERY_INSERT_AND_UPDATE_BALANCE = "{CALL insertPaymentAndUpdateBalance(?, ?, ?, ?, ?, ?, ?)}";
+    //without balance updating:
+    @Language("sql")
+    private static final String QUERY_INSERT_BUY_WITH_CARD = "{CALL insertPaymentByCard(?, ?, ?, ?, ?, ?, ?)}";
 
     // TODO: 7/16/2019 Может для платежей вообще заглушить update/delete?
     @Override
@@ -32,7 +35,7 @@ public class PaymentRepository implements AppRepository<Payment> {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
             String[] params = {String.valueOf(payment.getAccountId()), String.valueOf(payment.getCourseId()), String.valueOf(payment.getPaymentCode()),
-                    String.valueOf(payment.getAmount()), dateFormat.format(payment.getPaymentDate()), String.valueOf(payment.getCurrencyId()),
+                    String.valueOf(payment.getAmount()), String.valueOf(payment.getPaymentDate()), String.valueOf(payment.getCurrencyId()),
                     payment.getDescription(), String.valueOf(payment.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
@@ -55,8 +58,14 @@ public class PaymentRepository implements AppRepository<Payment> {
 
     @Override
     public boolean insert(@NonNull Payment payment) throws RepositoryException {
+            String curr_query;
+        if (payment.getPaymentCode() == 10) {
+            curr_query = QUERY_INSERT_BUY_WITH_CARD;
+        }else {
+            curr_query = QUERY_INSERT_AND_UPDATE_BALANCE;
+        }
         try (Connection connection = pool.takeConnection();
-             CallableStatement statement = connection.prepareCall(QUERY_INSERT)) {
+            CallableStatement statement = connection.prepareCall(curr_query)) {
             String[] params = {String.valueOf(payment.getAccountId()), String.valueOf(payment.getCourseId()), String.valueOf(payment.getPaymentCode()),
                     String.valueOf(payment.getAmount()), String.valueOf(payment.getPaymentDate()), String.valueOf(payment.getCurrencyId()),
                     payment.getDescription()};
