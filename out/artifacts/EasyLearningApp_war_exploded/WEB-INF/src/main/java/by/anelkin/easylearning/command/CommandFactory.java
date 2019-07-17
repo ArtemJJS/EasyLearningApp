@@ -11,7 +11,8 @@ public class CommandFactory {
         LOG_OUT,
         EDIT_USER_INFO,
         DEPOSIT_BY_CARD,
-        CHANGE_PASSWORD
+        CHANGE_PASSWORD,
+        CASH_OUT
 
     }
 
@@ -38,6 +39,9 @@ public class CommandFactory {
                 break;
             case CHANGE_PASSWORD:
                 command = new ChangePasswordCommand();
+                break;
+            case CASH_OUT:
+                command = new CashOutCommand();
                 break;
 
         }

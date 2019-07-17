@@ -140,4 +140,13 @@
         <url-pattern>/account/change-photo</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CashOut</servlet-name>
+        <jsp-file>/jsp/author/cash_out_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CashOut</servlet-name>
+        <url-pattern>/account/author/cash-out</url-pattern>
+    </servlet-mapping>
+
 </web-app>

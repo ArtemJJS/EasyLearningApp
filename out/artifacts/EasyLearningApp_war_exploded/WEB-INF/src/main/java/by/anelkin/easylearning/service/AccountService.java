@@ -13,6 +13,7 @@ import by.anelkin.easylearning.specification.course.SelectByAuthorIdSpecificatio
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
 import lombok.NonNull;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -145,6 +146,17 @@ public class AccountService {
         } catch (RepositoryException e) {
             // TODO: 7/12/2019 handle
             throw new RepositoryException();
+        }
+    }
+
+    public void refreshSessionAttributeUser(SessionRequestContent requestContent, Account account){
+        AccRepository repository = new AccRepository();
+        try {
+            Account refreshedAcc = repository.query(new SelectAccByLoginSpecification(account.getLogin())).get(0);
+            requestContent.getSessionAttributes().put(SESSION_ATTR_USER, refreshedAcc);
+        } catch (RepositoryException e) {
+            // FIXME: 7/17/2019
+            e.printStackTrace();
         }
     }
 

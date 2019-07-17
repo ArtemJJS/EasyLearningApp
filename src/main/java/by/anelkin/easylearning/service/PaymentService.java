@@ -12,6 +12,9 @@ import by.anelkin.easylearning.specification.payment.SelectPaymentByAccountIdSpe
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+
+import static by.anelkin.easylearning.entity.Payment.*;
 
 public class PaymentService {
     private static final String SESSION_ATTR_USER = "user";
@@ -21,14 +24,18 @@ public class PaymentService {
     private static final String REQUEST_ATTR_PAYMENTS = "payments";
     private static final String CARD_NUMBER_SPLITTER = " ";
     private static final String DESCRIPTION_DEPOSIT_BY_CARD = "Deposit from card ends with ";
+    private static final String DESCRIPTION_CASH_OUT_TO_CARD = "Cash out to card ends with ";
+    private static final String NOT_ENOUGH_MONEY_MSG = "You have not enough funds to proceed operation!";
+    private static final String ATTR_PREVIOUS_OPERATION_MSG = "previous_operation_message";
     private static final int PAYMENT_CODE_DEPOSIT_FROM_CARD = 15;
-    private static final int FANTOM_COURSE_ID = -1;
+    private static final int PAYMENT_CODE_CASH_OUT_TO_CARD = 20;
+    private static final int PHANTOM_COURSE_ID = -1;
 
 
     public void processDepositByCard(SessionRequestContent requestContent) throws ServiceException {
         PaymentRepository repository = new PaymentRepository();
         Payment payment = initBasicPaymentParams(requestContent);
-        payment.setCourseId(FANTOM_COURSE_ID);
+        payment.setCourseId(PHANTOM_COURSE_ID);
         payment.setPaymentCode(PAYMENT_CODE_DEPOSIT_FROM_CARD);
         String cardEndNumbers = selectLastCardDigits(requestContent);
         payment.setDescription(DESCRIPTION_DEPOSIT_BY_CARD + cardEndNumbers);
@@ -47,6 +54,31 @@ public class PaymentService {
             throw new ServiceException(e);
         }
     }
+
+    public boolean processCashOutFromBalance(SessionRequestContent requestContent) throws ServiceException {
+        String cardEndNumbers = selectLastCardDigits(requestContent);
+        Payment payment = initBasicPaymentParams(requestContent);
+        payment.setAmount(payment.getAmount().negate());
+        Account currAcc = (Account) requestContent.getSessionAttributes().get(SESSION_ATTR_USER);
+        //not enough funds:
+        if (currAcc.getBalance().add(payment.getAmount()).compareTo(BigDecimal.ZERO) < 0) {
+            requestContent.getRequestAttributes().put(ATTR_PREVIOUS_OPERATION_MSG, NOT_ENOUGH_MONEY_MSG);
+            return false;
+        }
+        payment.setCourseId(PHANTOM_COURSE_ID);
+        payment.setPaymentCode(PAYMENT_CODE_CASH_OUT_TO_CARD);
+        payment.setDescription(DESCRIPTION_CASH_OUT_TO_CARD + cardEndNumbers);
+        PaymentRepository repository = new PaymentRepository();
+        try {
+            repository.insert(payment);
+            (new AccountService()).refreshSessionAttributeUser(requestContent, currAcc);
+        } catch (RepositoryException e) {
+            // FIXME: 7/17/2019
+            throw new ServiceException(e);
+        }
+        return true;
+    }
+
 
     public void insertPaymentsIntoRequestAttributes(SessionRequestContent requestContent) {
         PaymentRepository paymentRepository = new PaymentRepository();
@@ -67,7 +99,7 @@ public class PaymentService {
         payment.setAccountId(account.getId());
         payment.setAmount(new BigDecimal(requestContent.getRequestParameters().get(REQUEST_PARAM_AMOUNT)[0]));
         payment.setPaymentDate(System.currentTimeMillis());
-        payment.setCurrencyId(Payment.CurrencyType.valueOf(requestContent.getRequestParameters()
+        payment.setCurrencyId(CurrencyType.valueOf(requestContent.getRequestParameters()
                 .get(REQUEST_PARAM_CURRENCY)[0].toUpperCase()).ordinal() + 1);
         return payment;
     }
