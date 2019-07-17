@@ -9,6 +9,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta http-equiv='Cache-Control' content='no-cache'>
+    <meta http-equiv='Expires' content='0'>
+    <meta http-equiv='Pragma' content='no-cache'>
     <title>Title</title>
     <style>
         <%@include file="/css/user/account.css"%>
@@ -24,7 +27,7 @@
         <div class="role">${sessionScope.role}</div>
         <div class="balance">Balance: ${user.balance}$</div>
         <div class="links">
-            <div class="link"><a href="">Change photo</a></div>
+            <div class="link"><a href="${pageContext.request.contextPath}/account/change-photo">Change photo</a></div>
             <div class="link"><a href="${pageContext.request.contextPath}/account/change-password">Change password</a></div>
             <div class="link"><a href="${pageContext.request.contextPath}/account/payments">Payments</a></div>
             <c:choose>

@@ -29,7 +29,7 @@ public class AccountService {
     private static final String PWD_CHANGED_SUCCESSFULLY_MSG = "You password has been successfully changed!!!";
     private static final String PWD_NOT_CHANGED_MSG = "You password wasn't changed! Password is not correct!";
     private static final String ATTR_OPERATION_RESULT = "operation_result";
-
+    private static final String ATTR_FILE_NAME = "file_name";
 
 
     // TODO: 7/12/2019 надо ли из методов вынести в поле переменные класса? например репозитории?
@@ -109,6 +109,23 @@ public class AccountService {
         }
     }
 
+    public void updateAccImage(SessionRequestContent requestContent) throws ServiceException {
+        Map<String, Object> sessionAttrs = requestContent.getSessionAttributes();
+        Account currAccount = (Account) sessionAttrs.get(SESSION_ATTR_USER);
+        String fileName = (String) requestContent.getRequestAttributes().get(ATTR_FILE_NAME);
+        currAccount.setPathToPhoto(fileName);
+
+        AccRepository repository = new AccRepository();
+        try {
+            repository.update(currAccount);
+            currAccount = repository.query(new SelectAccByLoginSpecification(currAccount.getLogin())).get(0);
+            sessionAttrs.put(SESSION_ATTR_USER, currAccount);
+        } catch (RepositoryException e) {
+            // FIXME: 7/17/2019
+            throw new ServiceException(e);
+        }
+    }
+
     public void editAccountInfo(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
         AccRepository repository = new AccRepository();
         Account clone = null;
@@ -182,14 +199,5 @@ public class AccountService {
         }
         account.setType(Account.AccountType.valueOf(requestParams.get("role")[0].toUpperCase()));
     }
-
-//    // there must be only file-name in the bd instead of full path
-//    private void trimPathToPhoto(Account account) {
-//        String pathToPhoto = account.getPathToPhoto();
-//        String[] parts = pathToPhoto.split(PATH_SPLITTER);
-//        String photoFileName = parts[parts.length - 1];
-//        account.setPathToPhoto(photoFileName);
-//    }
-
 
 }

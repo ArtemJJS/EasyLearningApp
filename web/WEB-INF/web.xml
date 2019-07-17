@@ -17,6 +17,15 @@
         </taglib>
     </jsp-config>
 
+    <context-param>
+        <description>Location to store uploaded account avatar files</description>
+        <param-name>acc_avatar_upload</param-name>
+        <param-value>
+            C:\Users\User\Desktop\GIT Projects\EasyLearningApp\web\resources\account_avatar
+        </param-value>
+    </context-param>
+
+
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>/resources/*</url-pattern>
@@ -120,6 +129,15 @@
     <servlet-mapping>
         <servlet-name>AccountChangePassword</servlet-name>
         <url-pattern>/account/change-password</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ChangeAccPhoto</servlet-name>
+        <jsp-file>/jsp/global/change_acc_photo_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeAccPhoto</servlet-name>
+        <url-pattern>/account/change-photo</url-pattern>
     </servlet-mapping>
 
 </web-app>
