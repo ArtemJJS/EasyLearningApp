@@ -10,7 +10,8 @@ public class CommandFactory {
         SIGN_UP_NEW_USER,
         LOG_OUT,
         EDIT_USER_INFO,
-        DEPOSIT_BY_CARD
+        DEPOSIT_BY_CARD,
+        CHANGE_PASSWORD
 
     }
 
@@ -34,6 +35,9 @@ public class CommandFactory {
                 break;
             case DEPOSIT_BY_CARD:
                 command = new DepositByCardCommand();
+                break;
+            case CHANGE_PASSWORD:
+                command = new ChangePasswordCommand();
                 break;
 
         }

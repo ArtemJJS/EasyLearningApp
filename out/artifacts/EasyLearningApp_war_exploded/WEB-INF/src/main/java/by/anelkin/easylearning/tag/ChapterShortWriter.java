@@ -15,6 +15,7 @@ public class ChapterShortWriter extends TagSupport {
 
     @Override
     public int doStartTag() throws JspException {
+
         try {
             // TODO: 7/12/2019 нормально ли столько тегов из jsp убирать? неудобно стили писать потом
             JspWriter writer = pageContext.getOut();

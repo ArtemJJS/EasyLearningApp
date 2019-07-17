@@ -37,9 +37,10 @@ public class AccRepository implements AppRepository<Account> {
         // TODO: 6/18/2019 Сделать нормальное шифрование пароля
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
+            String[] pathToPhotoParts = account.getPathToPhoto().split("/");
             String[] params = {account.getPassword(), account.getEmail(), account.getName(), account.getSurname(),
                     dateFormat.format(account.getBirthDate()), account.getPhoneNumber(), dateFormat.format(account.getRegistrDate()),
-                    account.getAbout(), account.getPathToPhoto(), String.valueOf(account.getType().ordinal()), account.getLogin()};
+                    account.getAbout(), pathToPhotoParts[pathToPhotoParts.length-1], String.valueOf(account.getType().ordinal()), account.getLogin()};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
@@ -64,9 +65,10 @@ public class AccRepository implements AppRepository<Account> {
         // TODO: 6/18/2019 Сделать нормальное шифрование пароля
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_INSERT)) {
+            String[] pathToPhotoParts = account.getPathToPhoto().split("/");
             String[] params = {account.getLogin(), account.getPassword(), account.getEmail(), account.getName(), account.getSurname(),
                     dateFormat.format(account.getBirthDate()), account.getPhoneNumber(), dateFormat.format(account.getRegistrDate()),
-                    account.getAbout(), account.getPathToPhoto(), String.valueOf(account.getType().ordinal())};
+                    account.getAbout(), pathToPhotoParts[pathToPhotoParts.length-1], String.valueOf(account.getType().ordinal())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);

@@ -113,4 +113,13 @@
         <url-pattern>/account/payments</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AccountChangePassword</servlet-name>
+        <jsp-file>/jsp/global/change_password_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AccountChangePassword</servlet-name>
+        <url-pattern>/account/change-password</url-pattern>
+    </servlet-mapping>
+
 </web-app>

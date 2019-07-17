@@ -25,7 +25,7 @@
         <div class="balance">Balance: ${user.balance}$</div>
         <div class="links">
             <div class="link"><a href="">Change photo</a></div>
-            <div class="link"><a href="">Change password</a></div>
+            <div class="link"><a href="${pageContext.request.contextPath}/account/change-password">Change password</a></div>
             <div class="link"><a href="${pageContext.request.contextPath}/account/payments">Payments</a></div>
             <c:choose>
                 <c:when test="${curr_role.toString() == 'USER'}">

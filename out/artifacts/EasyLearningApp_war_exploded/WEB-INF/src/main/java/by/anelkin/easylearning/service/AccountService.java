@@ -22,6 +22,14 @@ import static by.anelkin.easylearning.entity.Account.AccountType.GUEST;
 public class AccountService {
     private static final String URI_SPACE_REPRESENT = "%20";
     private static final String PATH_SPLITTER = "/";
+    private static final String SESSION_ATTR_USER = "user";
+    private static final String REQUEST_PARAM_PREVIOUS_PWD = "password";
+    private static final String REQUEST_PARAM_UPDATED_PWD = "updated_password";
+    private static final String PREVIOUS_OPERATION_MSG = "previous_operation_message";
+    private static final String PWD_CHANGED_SUCCESSFULLY_MSG = "You password has been successfully changed!!!";
+    private static final String PWD_NOT_CHANGED_MSG = "You password wasn't changed! Check your input data!";
+    private static final String ATTR_OPERATION_RESULT = "operation_result";
+
 
 
     // TODO: 7/12/2019 надо ли из методов вынести в поле переменные класса? например репозитории?
@@ -73,9 +81,36 @@ public class AccountService {
         sessionAttributes.put("role", GUEST);
     }
 
+    public void changeAccountPassword(SessionRequestContent requestContent) throws ServiceException {
+        String currPassword = requestContent.getRequestParameters().get(REQUEST_PARAM_PREVIOUS_PWD)[0];
+        AccRepository repository = new AccRepository();
+        Account clone = null;
+        try {
+            clone = ((Account) requestContent.getSessionAttributes().get(SESSION_ATTR_USER)).clone();
+        } catch (CloneNotSupportedException e) {
+            throw new ServiceException(e);
+        }
+        if (clone.getPassword().equals(currPassword)) {
+            String updatedPassword = requestContent.getRequestParameters().get(REQUEST_PARAM_UPDATED_PWD)[0];
+            clone.setPassword(updatedPassword);
+            try {
+                repository.update(clone);
+                requestContent.getSessionAttributes().put(SESSION_ATTR_USER, clone);
+                requestContent.getRequestAttributes().put(PREVIOUS_OPERATION_MSG, PWD_CHANGED_SUCCESSFULLY_MSG);
+                requestContent.getRequestAttributes().put(ATTR_OPERATION_RESULT, true);
+            } catch (RepositoryException e) {
+                // FIXME: 7/17/2019
+                throw new RuntimeException(e);
+            }
+        } else {
+            requestContent.getRequestAttributes().put(PREVIOUS_OPERATION_MSG, PWD_NOT_CHANGED_MSG);
+            requestContent.getRequestAttributes().put(ATTR_OPERATION_RESULT, false);
+
+        }
+    }
+
     public void editAccountInfo(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
         AccRepository repository = new AccRepository();
-        Account updatedAccount;
         Account clone = null;
         try {
             clone = ((Account) requestContent.getSessionAttributes().get("user")).clone();
@@ -86,19 +121,14 @@ public class AccountService {
             clone.setEmail(requestParams.get("email")[0]);
             clone.setPhoneNumber(requestParams.get("phonenumber")[0]);
             clone.setAbout(requestParams.get("about")[0]);
-            trimPathToPhoto(clone);
+            repository.update(clone);
+            requestContent.getSessionAttributes().put("user", clone);
         } catch (CloneNotSupportedException e) {
             throw new ServiceException(e);
-        }
-        try {
-            repository.update(clone);
-            updatedAccount = repository.query(new SelectAccByLoginSpecification(clone.getLogin())).get(0);
         } catch (RepositoryException e) {
             // TODO: 7/12/2019 handle
             throw new RepositoryException();
         }
-        // query instead of using clone because of problems with path to photo when use cloning
-        requestContent.getSessionAttributes().put("user", updatedAccount);
     }
 
     // TODO: 7/12/2019 исключения обработать нормально
@@ -153,13 +183,13 @@ public class AccountService {
         account.setType(Account.AccountType.valueOf(requestParams.get("role")[0].toUpperCase()));
     }
 
-    // there must be only file-name in the bd instead of full path
-    private void trimPathToPhoto(Account account) {
-        String pathToPhoto = account.getPathToPhoto();
-        String[] parts = pathToPhoto.split(PATH_SPLITTER);
-        String photoFileName = parts[parts.length - 1];
-        account.setPathToPhoto(photoFileName);
-    }
+//    // there must be only file-name in the bd instead of full path
+//    private void trimPathToPhoto(Account account) {
+//        String pathToPhoto = account.getPathToPhoto();
+//        String[] parts = pathToPhoto.split(PATH_SPLITTER);
+//        String photoFileName = parts[parts.length - 1];
+//        account.setPathToPhoto(photoFileName);
+//    }
 
 
 }
