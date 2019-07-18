@@ -149,4 +149,13 @@
         <url-pattern>/account/author/cash-out</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CourseApproval</servlet-name>
+        <jsp-file>/jsp/admin/course_approval_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CourseApproval</servlet-name>
+        <url-pattern>/account/admin/course-approval</url-pattern>
+    </servlet-mapping>
+
 </web-app>

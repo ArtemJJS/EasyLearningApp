@@ -53,25 +53,5 @@ public class BasicServlet extends HttpServlet {
             log.debug("Sending redirect: " + path);
             response.sendRedirect(path);
         }
-
-
-
-        //        System.out.println(request.getContextPath());
-//        String login = request.getParameter("login");
-//        String password = request.getParameter("password");
-//        log.debug("Attempt to enter in account. Login: " + login + ", password: " + password);
-//        if (!checkRegistration(login, password)) {
-//            request.setAttribute("wrong_login_message", "Username or Password is incorrect! Try again, please!");
-//            RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/start_page.jsp");
-//            dispatcher.forward(request, response);
-//        } else {
-//            response.sendRedirect("http://localhost:8080/easyLearning/account?login=" + login);
-//        }
     }
-
-//    @Override
-//    public void destroy() {
-//        ConnectionPool.getInstance().closePool();
-//        super.destroy();
-//    }
 }

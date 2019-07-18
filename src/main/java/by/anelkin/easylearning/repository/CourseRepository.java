@@ -18,22 +18,25 @@ import java.util.List;
 public class CourseRepository implements AppRepository<Course> {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private static final String PATH_TO_PICTURE = "/resources/course_avatar/";
+    private static final String PATH_SPLITTER = "/";
     private ConnectionPool pool = ConnectionPool.getInstance();
     @Language("sql")
-    private static final String QUERY_INSERT = "INSERT INTO course(course_name, course_description, course_creation_date, course_picture, course_price) " +
-            "VALUES (?, ?, ?, ?, ?)";
+    private static final String QUERY_INSERT = "INSERT INTO course(course_name, course_description, course_creation_date, course_picture, course_price, state) " +
+            "VALUES (?, ?, ?, ?, ?, ?)";
     @Language("sql")
     private static final String QUERY_DELETE = "DELETE FROM course WHERE course_id = ?";
     @Language("sql")
     private static final String QUERY_UPDATE = "UPDATE course SET course_name = ?, course_description = ?, " +
-            "course_creation_date = ?, course_picture = ?, course_price = ? WHERE course_id = ?";
+            "course_creation_date = ?, course_picture = ?, course_price = ?, state = ? WHERE course_id = ?";
 
     @Override
     public boolean update(@NonNull Course course) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
+           String[] pathToImg = course.getPathToPicture().split(PATH_SPLITTER);
             String[] params = {course.getName(), course.getDescription(), dateFormat.format(course.getCreationDate()),
-                    course.getPathToPicture(), course.getPrice().toString(), String.valueOf(course.getId())};
+                    pathToImg[pathToImg.length-1], course.getPrice().toString(), String.valueOf(course.getState()), String.valueOf(course.getId())};
+            System.out.println(statement.toString());
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
@@ -57,8 +60,9 @@ public class CourseRepository implements AppRepository<Course> {
     public boolean insert(@NonNull Course course) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_INSERT)) {
+            String[] pathToImg = course.getPathToPicture().split(PATH_SPLITTER);
             String[] params = {course.getName(), course.getDescription(), dateFormat.format(course.getCreationDate()),
-                    course.getPathToPicture(), course.getPrice().toString()};
+                    pathToImg[pathToImg.length-1], course.getPrice().toString(), String.valueOf(course.getState())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
            throw new RepositoryException(e);
@@ -98,6 +102,7 @@ public class CourseRepository implements AppRepository<Course> {
                 course.setPrice(new BigDecimal(resultSet.getString("course_price")));
                 course.setLessonAmount(resultSet.getInt("course_lesson_amount"));
                 course.setDuration(resultSet.getLong("course_duration"));
+                course.setState(resultSet.getByte("state"));
                 // TODO: 7/12/2019 продумать если нет оценок (уходит null, обработка в логике)
                 String courseAvgMark = resultSet.getString("avg_mark");
                 if (courseAvgMark != null){

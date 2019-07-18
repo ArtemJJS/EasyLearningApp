@@ -9,9 +9,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta http-equiv='Cache-Control' content='no-cache'>
-    <meta http-equiv='Expires' content='0'>
-    <meta http-equiv='Pragma' content='no-cache'>
     <title>Title</title>
     <style>
         <%@include file="/css/user/account.css"%>
@@ -41,8 +38,8 @@
                     <div class="link"><a href="${pageContext.request.contextPath}/account/author/cash-out">CashOut</a></div>
                 </c:when>
                 <c:when test="${curr_role.toString() == 'ADMIN'}">
-                    <div class="link"><a href="">Add course request</a></div>
-                    <div class="link"><a href="">Register acc request</a></div>
+                    <div class="link"><a href="${pageContext.request.contextPath}/account/admin/course-approval">Add course request</a></div>
+                    <div class="link"><a href="">Change img request</a></div>
                     <div class="link"><a href="">Dashboard</a></div>
                 </c:when>
             </c:choose>

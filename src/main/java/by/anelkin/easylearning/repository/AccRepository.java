@@ -19,6 +19,7 @@ import static by.anelkin.easylearning.entity.Account.AccountType.*;
 public class AccRepository implements AppRepository<Account> {
     private static final String PATH_TO_AVATAR = "resources/account_avatar/";
     private static final String PATH_TO_AVATAR_DEFAULT = "resources/default_acc_avatar.png";
+    private static final String PATH_SPLITTER = "/";
     private ConnectionPool pool = ConnectionPool.getInstance();
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     @Language("sql")
@@ -37,7 +38,7 @@ public class AccRepository implements AppRepository<Account> {
         // TODO: 6/18/2019 Сделать нормальное шифрование пароля
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
-            String[] pathToPhotoParts = account.getPathToPhoto().split("/");
+            String[] pathToPhotoParts = account.getPathToPhoto().split(PATH_SPLITTER);
             String[] params = {account.getPassword(), account.getEmail(), account.getName(), account.getSurname(),
                     dateFormat.format(account.getBirthDate()), account.getPhoneNumber(), dateFormat.format(account.getRegistrDate()),
                     account.getAbout(), pathToPhotoParts[pathToPhotoParts.length-1], String.valueOf(account.getType().ordinal()), account.getLogin()};

@@ -12,7 +12,9 @@ public class CommandFactory {
         EDIT_USER_INFO,
         DEPOSIT_BY_CARD,
         CHANGE_PASSWORD,
-        CASH_OUT
+        CASH_OUT,
+        APPROVE_COURSE,
+        DECLINE_COURSE_APPROVAL
 
     }
 
@@ -42,6 +44,12 @@ public class CommandFactory {
                 break;
             case CASH_OUT:
                 command = new CashOutCommand();
+                break;
+            case APPROVE_COURSE:
+                command = new ApproveCourseCommand();
+                break;
+            case DECLINE_COURSE_APPROVAL:
+                command = new DeclineCourseApprovalCommand();
                 break;
 
         }
