@@ -128,3 +128,8 @@ form .submit_btn{
 .chapter{
     margin-top: 30px;
 }
+
+.previous_operation_msg{
+    color: red;
+    font-size: 0.9rem;
+}

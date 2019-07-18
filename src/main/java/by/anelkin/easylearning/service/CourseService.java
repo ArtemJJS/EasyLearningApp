@@ -100,6 +100,7 @@ public class CourseService {
 
 
     // TODO: 7/18/2019 если fail то поудалять все что добавилось?
+    // TODO: 7/18/2019 подумать может получится разнести хотя бы на два метода?
     public boolean addCourseToReview(SessionRequestContent requestContent) throws RepositoryException {
         Map<String, String[]> params = requestContent.getRequestParameters();
         CourseRepository courseRepo = new CourseRepository();
@@ -114,11 +115,6 @@ public class CourseService {
         course.setDescription(params.get(ATTR_COURSE_DESCRIPTION)[0]);
         course.setPrice(new BigDecimal(params.get(ATTR_COURSE_PRICE)[0]));
         course.setCreationDate(new Date(System.currentTimeMillis()));
-        // FIXME: 7/18/2019 должно без этих 3 работать?
-//        course.setLessonAmount(0);
-//        course.setAvgMark(0);
-//        course.setDuration(0);
-
         course.setPathToPicture(DEFAULT_IMG);
         course.setState(CourseState.NOT_APPROVED);
         courseRepo.insert(course);
@@ -157,10 +153,7 @@ public class CourseService {
                     lessonRepo.insert(lesson);
                 }
             }
-
         }
-
-
         return true;
     }
 

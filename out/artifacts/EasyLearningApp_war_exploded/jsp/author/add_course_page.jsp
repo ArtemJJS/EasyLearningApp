@@ -23,9 +23,7 @@
             <div class="input_and_pattern">
                 <input placeholder="Title" type="text" id="course_title_field" name="course_name" required
                        pattern="[A-z0-9_ -]{5,200}">
-                <%--            <c:if test="${pageContext.request.getAttribute('wrong-course-name') == 'true'}">--%>
-                <%--                <p class="field_desc" style="color: red">This course title is in use already, try another one! </p>--%>
-                <%--            </c:if>--%>
+                <div class="previous_operation_msg">${requestScope.course_exists_msg}</div>
                 <p class="field_desc">Available characters: English letters, digits, _ and - symbols, space. Min 5, max
                     200
                     symbols. </p>
