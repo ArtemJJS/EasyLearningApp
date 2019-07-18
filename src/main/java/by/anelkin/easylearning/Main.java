@@ -14,14 +14,17 @@ public class Main {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public static void main(String[] args) throws RepositoryException {
-    CourseRepository repo = new CourseRepository();
-    List<Course> list = repo
-            .query(new SelectByStateAndAuthorIdSpecification(2, true));
-//                .query(new SelectByAuthorIdSpecification(2));
-     Course course = list.get(list.size()-1);
-        course.setState((byte)-1);
-        repo.update(course);
-    list.forEach(System.out::println);
+//    CourseRepository repo = new CourseRepository();
+//    List<Course> list = repo
+//            .query(new SelectByStateAndAuthorIdSpecification(2, true));
+////                .query(new SelectByAuthorIdSpecification(2));
+//     Course course = list.get(list.size()-1);
+//        course.setState((byte)-1);
+//        repo.update(course);
+//    list.forEach(System.out::println);
+//
+int index = 0;
+        System.out.println(Course.CourseState.values()[index]);
 
 
     }

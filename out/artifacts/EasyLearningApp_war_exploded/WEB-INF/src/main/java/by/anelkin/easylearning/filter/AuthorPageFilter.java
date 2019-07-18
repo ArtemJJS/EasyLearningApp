@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 
-@WebFilter(urlPatterns = "/author/*")
+@WebFilter(urlPatterns = "/author-info/*")
 public class AuthorPageFilter implements Filter {
     // TODO: 7/12/2019 правильно ли вынести как поле в соответствии с жизненным циклом?
     private AccountService accountService;

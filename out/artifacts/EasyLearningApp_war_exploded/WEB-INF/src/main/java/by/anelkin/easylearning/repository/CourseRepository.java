@@ -14,6 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.anelkin.easylearning.entity.Course.*;
+
 @Log4j
 public class CourseRepository implements AppRepository<Course> {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -33,9 +35,9 @@ public class CourseRepository implements AppRepository<Course> {
     public boolean update(@NonNull Course course) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
-           String[] pathToImg = course.getPathToPicture().split(PATH_SPLITTER);
+            String[] pathToImg = course.getPathToPicture().split(PATH_SPLITTER);
             String[] params = {course.getName(), course.getDescription(), dateFormat.format(course.getCreationDate()),
-                    pathToImg[pathToImg.length-1], course.getPrice().toString(), String.valueOf(course.getState()), String.valueOf(course.getId())};
+                    pathToImg[pathToImg.length - 1], course.getPrice().toString(), String.valueOf(course.getState().ordinal()), String.valueOf(course.getId())};
             System.out.println(statement.toString());
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
@@ -62,10 +64,10 @@ public class CourseRepository implements AppRepository<Course> {
              PreparedStatement statement = connection.prepareStatement(QUERY_INSERT)) {
             String[] pathToImg = course.getPathToPicture().split(PATH_SPLITTER);
             String[] params = {course.getName(), course.getDescription(), dateFormat.format(course.getCreationDate()),
-                    pathToImg[pathToImg.length-1], course.getPrice().toString(), String.valueOf(course.getState())};
+                    pathToImg[pathToImg.length - 1], course.getPrice().toString(), String.valueOf(course.getState().ordinal())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-           throw new RepositoryException(e);
+            throw new RepositoryException(e);
         }
         return true;
     }
@@ -74,42 +76,42 @@ public class CourseRepository implements AppRepository<Course> {
     public List<Course> query(@NonNull AppSpecification<Course> specification) throws RepositoryException {
         List<Course> courseList;
         try (Connection connection = pool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(specification.getQuery())){
+             PreparedStatement statement = connection.prepareStatement(specification.getQuery())) {
             String[] params = specification.getStatementParameters();
             for (int i = 0; i < params.length; i++) {
-                statement.setString(i+1, params[i]);
+                statement.setString(i + 1, params[i]);
             }
             log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
-            try(ResultSet resultSet = statement.executeQuery()) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 log.debug("Query completed:" + statement.toString().split(":")[1]);
                 courseList = fillCourseList(resultSet);
             }
         } catch (SQLException e) {
-           throw new RepositoryException(e);
+            throw new RepositoryException(e);
         }
         return courseList;
     }
 
     private List<Course> fillCourseList(ResultSet resultSet) throws SQLException {
         List<Course> courseList = new ArrayList<>();
-            while (resultSet.next()) {
-                Course course = new Course();
-                course.setId(resultSet.getInt("course_id"));
-                course.setName(resultSet.getString("course_name"));
-                course.setDescription(resultSet.getString("course_description"));
-                course.setCreationDate(resultSet.getDate("course_creation_date"));
-                course.setPathToPicture(PATH_TO_PICTURE + resultSet.getString("course_picture"));
-                course.setPrice(new BigDecimal(resultSet.getString("course_price")));
-                course.setLessonAmount(resultSet.getInt("course_lesson_amount"));
-                course.setDuration(resultSet.getLong("course_duration"));
-                course.setState(resultSet.getByte("state"));
-                // TODO: 7/12/2019 продумать если нет оценок (уходит null, обработка в логике)
-                String courseAvgMark = resultSet.getString("avg_mark");
-                if (courseAvgMark != null){
-                    course.setAvgMark(Double.parseDouble(courseAvgMark));
-                }
-                courseList.add(course);
+        while (resultSet.next()) {
+            Course course = new Course();
+            course.setId(resultSet.getInt("course_id"));
+            course.setName(resultSet.getString("course_name"));
+            course.setDescription(resultSet.getString("course_description"));
+            course.setCreationDate(resultSet.getDate("course_creation_date"));
+            course.setPathToPicture(PATH_TO_PICTURE + resultSet.getString("course_picture"));
+            course.setPrice(new BigDecimal(resultSet.getString("course_price")));
+            course.setLessonAmount(resultSet.getInt("course_lesson_amount"));
+            course.setDuration(resultSet.getLong("course_duration"));
+            course.setState(CourseState.values()[resultSet.getInt("state")]);
+            // TODO: 7/12/2019 продумать если нет оценок (уходит null, обработка в логике)
+            String courseAvgMark = resultSet.getString("avg_mark");
+            if (courseAvgMark != null) {
+                course.setAvgMark(Double.parseDouble(courseAvgMark));
             }
+            courseList.add(course);
+        }
         return courseList;
     }
 

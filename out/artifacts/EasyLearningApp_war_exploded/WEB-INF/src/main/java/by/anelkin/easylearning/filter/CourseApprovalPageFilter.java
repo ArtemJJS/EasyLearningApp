@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Log4j
-@WebFilter(urlPatterns = "/account/admin/course-approval")
+@WebFilter(urlPatterns = "/admin/course-approval")
 public class CourseApprovalPageFilter implements Filter {
     private static final String ATTR_ROLE = "role";
     private CourseService courseService;

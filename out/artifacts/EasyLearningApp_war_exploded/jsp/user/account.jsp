@@ -33,12 +33,12 @@
                     <div class="link"><a href="${pageContext.request.contextPath}/user/deposit">Deposit</a></div>
                 </c:when>
                 <c:when test="${curr_role.toString() == 'AUTHOR'}">
-                    <div class="link"><a href="">Add course</a></div>
+                    <div class="link"><a href="${pageContext.request.contextPath}/author/add-new-course">Add new course</a></div>
                     <div class="link"><a href="">Statistic</a></div>
                     <div class="link"><a href="${pageContext.request.contextPath}/account/author/cash-out">CashOut</a></div>
                 </c:when>
                 <c:when test="${curr_role.toString() == 'ADMIN'}">
-                    <div class="link"><a href="${pageContext.request.contextPath}/account/admin/course-approval">Add course request</a></div>
+                    <div class="link"><a href="${pageContext.request.contextPath}/admin/course-approval">Add course request</a></div>
                     <div class="link"><a href="">Change img request</a></div>
                     <div class="link"><a href="">Dashboard</a></div>
                 </c:when>

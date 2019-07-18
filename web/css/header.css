@@ -66,19 +66,31 @@ header {
     align-items: center;
     justify-content: flex-end;
 }
-.user form:first-child{
-    margin-right: 15px;
-}
-.user form:last-child{
-    margin-right: 30px;
-}
 
 .user img{
     height: 59px;
     width: 68px;
     margin: 0 10px;
 }
+.header-content .user form{
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.header-content .user form:first-child{
+    margin-right: 15px;
+}
+.header-content .user form:last-child{
+    margin-right: 30px;
+}
 
 .user_login{
     margin-right: 35px;
+}
+.user form input{
+    border: 1px solid #313131;
+    margin: 0;
+    padding: 0;
+    width: 120px;
 }

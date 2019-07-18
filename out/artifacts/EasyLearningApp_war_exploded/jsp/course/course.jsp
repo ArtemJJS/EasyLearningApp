@@ -66,7 +66,7 @@
     <section class="section_4">
         <c:set var="author" value="${pageContext.request.getAttribute('author_of_course')}"/>
         <div class="author_image_and_stats">
-            <a href="${pageContext.request.contextPath}/author/${author.login}"><img class="author_avatar"
+            <a href="${pageContext.request.contextPath}/author-info/${author.login}"><img class="author_avatar"
                                                                                      src="${pageContext.request.contextPath}/${author.pathToPhoto}"
                                                                                      alt="author"></a>
             <div class="author_rating">${author.avgMark}</div>
@@ -74,7 +74,7 @@
         </div>
         <div class="author_about">
             <div class="author_login"><a class="author_link"
-                                         href="${pageContext.request.contextPath}/author/${author.login}">${author.login}</a>
+                                         href="${pageContext.request.contextPath}/author-info/${author.login}">${author.login}</a>
             </div>
             <div class="author_description">${author.about}</div>
         </div>

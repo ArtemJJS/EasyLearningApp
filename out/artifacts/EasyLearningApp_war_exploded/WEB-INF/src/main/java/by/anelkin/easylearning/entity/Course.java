@@ -19,7 +19,13 @@ public class Course extends AppEntity {
     private double avgMark;
     private int lessonAmount;
     private long duration;
-    private byte state; // 1 - approved, 0 - not approved, -1 - freeze
+    private CourseState state; // 1 - approved, 0 - not approved, -1 - freeze
+
+    public enum CourseState{
+        FREEZING,
+        NOT_APPROVED,
+        APPROVED
+    }
 
     @Override
     public Object clone() throws CloneNotSupportedException {

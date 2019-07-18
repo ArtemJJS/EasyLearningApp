@@ -4,13 +4,15 @@ import by.anelkin.easylearning.entity.Course;
 import by.anelkin.easylearning.specification.AppSpecification;
 import org.intellij.lang.annotations.Language;
 
+import static by.anelkin.easylearning.entity.Course.*;
+
 public class SelectByStateSpecification implements AppSpecification<Course> {
-    private int state;
+    private CourseState state;
     @Language("sql")
     private static final String QUERY = "SELECT * FROM course WHERE state = ?";
 
-    public SelectByStateSpecification(boolean isApproved) {
-        this.state= isApproved? 1 : 0;
+    public SelectByStateSpecification(CourseState state) {
+        this.state = state;
     }
 
     @Override
@@ -20,6 +22,6 @@ public class SelectByStateSpecification implements AppSpecification<Course> {
 
     @Override
     public String[] getStatementParameters() {
-        return new String[]{String.valueOf(state)};
+        return new String[]{String.valueOf(state.ordinal())};
     }
 }

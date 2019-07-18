@@ -69,11 +69,11 @@
 
     <servlet>
         <servlet-name>account_page</servlet-name>
-        <jsp-file>/jsp/author.jsp</jsp-file>
+        <jsp-file>/jsp/author-info.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>account_page</servlet-name>
-        <url-pattern>/author/*</url-pattern>
+        <url-pattern>/author-info/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -155,7 +155,17 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>CourseApproval</servlet-name>
-        <url-pattern>/account/admin/course-approval</url-pattern>
+        <url-pattern>/admin/course-approval</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddCourse</servlet-name>
+        <jsp-file>/jsp/author/add_course_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddCourse</servlet-name>
+        <url-pattern>/author/add-new-course</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

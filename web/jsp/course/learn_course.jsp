@@ -29,7 +29,7 @@
             <div class="rating_and_author">
                 <div class="course_rating">Rating: ${course.avgMark}</div>
                 <div class="course_author"><a
-                        href="${pageContext.request.contextPath}/author/${author.login}">Author: ${author.login}</a>
+                        href="${pageContext.request.contextPath}/author-info/${author.login}">Author: ${author.login}</a>
                 </div>
             </div>
             <div class="course_description">${course.description}</div>

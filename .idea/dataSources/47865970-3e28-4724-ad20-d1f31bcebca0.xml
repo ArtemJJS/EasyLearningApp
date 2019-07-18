@@ -1411,27 +1411,31 @@
       <Position>6</Position>
       <DataType>decimal(10,2 digit)|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>0.00</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="343" parent="280" name="avg_mark">
       <Position>7</Position>
       <DataType>decimal(3,2 digit)|0s</DataType>
+      <DefaultExpression>0.00</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="344" parent="280" name="course_lesson_amount">
       <Position>8</Position>
       <DataType>int(11)|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="345" parent="280" name="course_duration">
       <Position>9</Position>
-      <DataType>mediumtext|0s</DataType>
+      <DataType>bigint(20)|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="346" parent="280" name="state">
       <Position>10</Position>
-      <DataType>tinyint(4)|0s</DataType>
-      <DefaultExpression>0</DefaultExpression>
+      <DataType>int(11)|0s</DataType>
+      <DefaultExpression>2</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="347" parent="280" name="course_name_UNIQUE">
@@ -1470,11 +1474,13 @@
     <column id="353" parent="281" name="chapter_lesson_amount">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="354" parent="281" name="chapter_duration">
       <Position>5</Position>
-      <DataType>mediumtext|0s</DataType>
+      <DataType>bigint(20)|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="355" parent="281" name="id_course_idx">
@@ -1507,8 +1513,9 @@
     </column>
     <column id="360" parent="282" name="lesson_name">
       <Position>3</Position>
-      <DataType>varchar(200)|0s</DataType>
+      <DataType>varchar(150)|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>&apos;wrong name&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="361" parent="282" name="lesson_content_address">
@@ -1524,8 +1531,9 @@
     </column>
     <column id="363" parent="282" name="lesson_duration">
       <Position>6</Position>
-      <DataType>mediumtext|0s</DataType>
+      <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="364" parent="282" name="id_chapter_idx">
