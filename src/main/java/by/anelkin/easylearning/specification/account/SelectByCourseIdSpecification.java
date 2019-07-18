@@ -7,8 +7,8 @@ import org.intellij.lang.annotations.Language;
 public class SelectByCourseIdSpecification implements AppSpecification<Account> {
     private int courseId;
     @Language("sql")
-    private static final String QUERY = "SELECT * FROM account WHERE acc_id " +
-            "IN (SELECT author_id FROM author_of_course WHERE course_id = ?)";
+    private static final String QUERY = "SELECT * FROM account " +
+            "WHERE acc_id = (SELECT course_author_id FROM course WHERE course_id = ?)";
 
 
     public SelectByCourseIdSpecification(int courseId) {

@@ -1,9 +1,6 @@
 package by.anelkin.easylearning.service;
 
-import by.anelkin.easylearning.entity.Course;
-import by.anelkin.easylearning.entity.CourseChapter;
-import by.anelkin.easylearning.entity.CourseLesson;
-import by.anelkin.easylearning.entity.Mark;
+import by.anelkin.easylearning.entity.*;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
@@ -29,6 +26,7 @@ import static by.anelkin.easylearning.entity.Course.*;
 @Log4j
 public class CourseService {
     private static final String ATTR_NEED_APPROVAL = "courses_need_approval";
+    private static final String ATTR_USER = "user";
     private static final String ATTR_COURSE_ID = "course_id";
     private static final String ATTR_COURSE_NAME = "course_name";
     private static final String ATTR_COURSE_DESCRIPTION = "course_description";
@@ -111,6 +109,8 @@ public class CourseService {
             return false;
         }
         Course course = new Course();
+        Account currAccount = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
+        course.setAuthorId(currAccount.getId());
         course.setName(courseName);
         course.setDescription(params.get(ATTR_COURSE_DESCRIPTION)[0]);
         course.setPrice(new BigDecimal(params.get(ATTR_COURSE_PRICE)[0]));
@@ -122,10 +122,12 @@ public class CourseService {
 
         ChapterRepository chapterRepo = new ChapterRepository();
         String[] chapterNames = params.get(ATTR_CHAPTER_NAME);
+        int courseId = courseRepo.query(new SelectCourseByNameSpecification(courseName))
+                .get(0).getId();
+
         for (String chapterName : chapterNames) {
             CourseChapter chapter = new CourseChapter();
-            chapter.setCourseId(courseRepo.query(new SelectCourseByNameSpecification(courseName))
-                    .get(0).getId());
+            chapter.setCourseId(courseId);
             chapter.setName(chapterName);
             chapterRepo.insert(chapter);
         }

@@ -1,5 +1,6 @@
 package by.anelkin.easylearning.command;
 
+import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.service.AccountService;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
@@ -13,7 +14,7 @@ public class LoginCommand implements Command {
     private static final String WRONG_LOGIN_PATH = "/jsp/start_page.jsp";
 
     @Override
-    public ResponseType execute(@NonNull SessionRequestContent requestContent) throws RepositoryException {
+    public ResponseType execute(@NonNull SessionRequestContent requestContent) throws RepositoryException, ServiceException {
         boolean isLoginCorrect = (new AccountService()).login(requestContent);
         if (!isLoginCorrect){
             requestContent.getRequestAttributes().put("wrong-login", "true");

@@ -7,7 +7,7 @@ import org.intellij.lang.annotations.Language;
 public class SelectByAuthorIdSpecification implements AppSpecification<Course> {
     private int authorId;
     @Language("sql")
-    private static final String QUERY = "select * from course where course_id IN (select course_id from author_of_course where author_id = ?)";
+    private static final String QUERY = "select * from course where course_author_id = ?";
 
     public SelectByAuthorIdSpecification(int authorId) {
         this.authorId = authorId;

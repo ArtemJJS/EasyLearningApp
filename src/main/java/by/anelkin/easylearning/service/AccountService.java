@@ -13,79 +13,92 @@ import by.anelkin.easylearning.specification.course.SelectByAuthorIdSpecificatio
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
 import lombok.NonNull;
 
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static by.anelkin.easylearning.entity.Account.*;
 import static by.anelkin.easylearning.entity.Account.AccountType.GUEST;
+import static by.anelkin.easylearning.entity.Account.AccountType.USER;
 
 public class AccountService {
     private static final String URI_SPACE_REPRESENT = "%20";
     private static final String PATH_SPLITTER = "/";
     private static final String SESSION_ATTR_USER = "user";
-    private static final String REQUEST_PARAM_PREVIOUS_PWD = "password";
+    private static final String SESSION_ATTR_ROLE = "role";
+    private static final String REQUEST_PARAM_PWD = "password";
     private static final String REQUEST_PARAM_UPDATED_PWD = "updated_password";
     private static final String PREVIOUS_OPERATION_MSG = "previous_operation_message";
     private static final String PWD_CHANGED_SUCCESSFULLY_MSG = "You password has been successfully changed!!!";
     private static final String PWD_NOT_CHANGED_MSG = "You password wasn't changed! Password is not correct!";
     private static final String ATTR_OPERATION_RESULT = "operation_result";
     private static final String ATTR_FILE_NAME = "file_name";
-
-
-    // TODO: 7/12/2019 надо ли из методов вынести в поле переменные класса? например репозитории?
+    private static final String ATTR_AVAILABLE_COURSES = "coursesAvailable";
+    private static final String ATTR_LOGIN = "login";
+    private static final String ATTR_WRONG_LOGIN_MSG = "wrong-login";
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    public boolean login(@NonNull SessionRequestContent requestContent) throws RepositoryException {
+
+    public boolean login(@NonNull SessionRequestContent requestContent) throws RepositoryException, ServiceException {
         AccRepository repository = new AccRepository();
         List<Account> accounts = repository.query(new SelectAccByLoginSpecification(requestContent.getRequestParameters().get("login")[0]));
-        String[] expectedPassword = requestContent.getRequestParameters().get("password");
+        String[] expectedPassword = requestContent.getRequestParameters().get(REQUEST_PARAM_PWD);
         if (accounts.size() != 1 || !accounts.get(0).getPassword().equals(expectedPassword[0])) {
             return false;
         }
         Account account = accounts.get(0);
+        AccountType role = account.getType();
         CourseRepository courseRepository = new CourseRepository();
-        List<Course> courses = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
 
-        requestContent.getSessionAttributes().put("user", account);
-        requestContent.getSessionAttributes().put("coursesAvailable", courses);
-        requestContent.getSessionAttributes().put("role", account.getType());
+        List<Course> courses = new ArrayList<>();
+        switch (role) {
+            case USER:
+                courses = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
+                break;
+            case AUTHOR:
+                courses = courseRepository.query(new SelectByAuthorIdSpecification(account.getId()));
+                break;
+        }
+
+        requestContent.getSessionAttributes().put(SESSION_ATTR_USER, account);
+        requestContent.getSessionAttributes().put(ATTR_AVAILABLE_COURSES, courses);
+        requestContent.getSessionAttributes().put(SESSION_ATTR_ROLE, account.getType());
         return true;
     }
 
     public boolean signUp(@NonNull SessionRequestContent requestContent) throws RepositoryException {
         AccRepository repository = new AccRepository();
-        String login = requestContent.getRequestParameters().get("login")[0];
+        String login = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
         if (repository.query(new SelectAccByLoginSpecification(login)).size() != 0) {
-            requestContent.getRequestAttributes().put("wrong-login", "true");
+            requestContent.getRequestAttributes().put(ATTR_WRONG_LOGIN_MSG, "true");
             return false;
         }
         Account account = new Account();
         initAccount(account, requestContent.getRequestParameters());
         repository.insert(account);
         // TODO: 7/6/2019  проверку на замену роли из браузера
-        requestContent.getSessionAttributes().put("user", account);
-        requestContent.getSessionAttributes().put("role", account.getType());
+        requestContent.getSessionAttributes().put(SESSION_ATTR_USER, account);
+        requestContent.getSessionAttributes().put(SESSION_ATTR_ROLE, account.getType());
         // fixme: 7/5/2019 повторяющийся код:
         CourseRepository courseRepository = new CourseRepository();
         List<Course> courses = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
         // TODO: 7/6/2019  сделать размещение во времеменном атрибуте чтобы потом чистить?
-        requestContent.getSessionAttributes().put("coursesAvailable", courses);
+        requestContent.getSessionAttributes().put(ATTR_AVAILABLE_COURSES, courses);
         return true;
     }
 
     // TODO: 7/12/2019 переделать нормально!
     public void logOut(@NonNull SessionRequestContent requestContent) {
         HashMap<String, Object> sessionAttributes = requestContent.getSessionAttributes();
-        sessionAttributes.remove("user");
-        sessionAttributes.remove("coursesAvailable");
-        sessionAttributes.put("role", GUEST);
+        sessionAttributes.remove(SESSION_ATTR_USER);
+        sessionAttributes.remove(ATTR_AVAILABLE_COURSES);
+        sessionAttributes.put(SESSION_ATTR_ROLE, GUEST);
     }
 
     public void changeAccountPassword(SessionRequestContent requestContent) throws ServiceException {
-        String currPassword = requestContent.getRequestParameters().get(REQUEST_PARAM_PREVIOUS_PWD)[0];
+        String currPassword = requestContent.getRequestParameters().get(REQUEST_PARAM_PWD)[0];
         AccRepository repository = new AccRepository();
-        Account clone = null;
+        Account clone;
         try {
             clone = ((Account) requestContent.getSessionAttributes().get(SESSION_ATTR_USER)).clone();
         } catch (CloneNotSupportedException e) {
@@ -129,9 +142,9 @@ public class AccountService {
 
     public void editAccountInfo(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
         AccRepository repository = new AccRepository();
-        Account clone = null;
+        Account clone;
         try {
-            clone = ((Account) requestContent.getSessionAttributes().get("user")).clone();
+            clone = ((Account) requestContent.getSessionAttributes().get(SESSION_ATTR_USER)).clone();
             Map<String, String[]> requestParams = requestContent.getRequestParameters();
             clone.setLogin(requestParams.get("login")[0]);
             clone.setName(requestParams.get("name")[0]);
@@ -140,7 +153,7 @@ public class AccountService {
             clone.setPhoneNumber(requestParams.get("phonenumber")[0]);
             clone.setAbout(requestParams.get("about")[0]);
             repository.update(clone);
-            requestContent.getSessionAttributes().put("user", clone);
+            requestContent.getSessionAttributes().put(SESSION_ATTR_USER, clone);
         } catch (CloneNotSupportedException e) {
             throw new ServiceException(e);
         } catch (RepositoryException e) {
@@ -149,7 +162,7 @@ public class AccountService {
         }
     }
 
-    public void refreshSessionAttributeUser(SessionRequestContent requestContent, Account account){
+    public void refreshSessionAttributeUser(SessionRequestContent requestContent, Account account) {
         AccRepository repository = new AccRepository();
         try {
             Account refreshedAcc = repository.query(new SelectAccByLoginSpecification(account.getLogin())).get(0);
@@ -209,7 +222,7 @@ public class AccountService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        account.setType(Account.AccountType.valueOf(requestParams.get("role")[0].toUpperCase()));
+        account.setType(AccountType.valueOf(requestParams.get(SESSION_ATTR_ROLE)[0].toUpperCase()));
     }
 
 }

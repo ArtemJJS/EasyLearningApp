@@ -23,10 +23,10 @@ public class CourseRepository implements AppRepository<Course> {
     private static final String PATH_SPLITTER = "/";
     private ConnectionPool pool = ConnectionPool.getInstance();
     @Language("sql")
-    private static final String QUERY_INSERT = "INSERT INTO course(course_name, course_description, course_creation_date, course_picture, course_price, state) " +
-            "VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String QUERY_INSERT = "INSERT INTO course(course_author_id ,course_name, course_description, course_creation_date, course_picture, course_price, state) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?)";
     @Language("sql")
-    private static final String QUERY_DELETE = "DELETE FROM course WHERE course_id = ?";
+    private static final String QUERY_DELETE = "UPDATE course SET state = 0 WHERE course_id = ?";
     @Language("sql")
     private static final String QUERY_UPDATE = "UPDATE course SET course_name = ?, course_description = ?, " +
             "course_creation_date = ?, course_picture = ?, course_price = ?, state = ? WHERE course_id = ?";
@@ -36,9 +36,9 @@ public class CourseRepository implements AppRepository<Course> {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
             String[] pathToImg = course.getPathToPicture().split(PATH_SPLITTER);
-            String[] params = {course.getName(), course.getDescription(), dateFormat.format(course.getCreationDate()),
-                    pathToImg[pathToImg.length - 1], course.getPrice().toString(), String.valueOf(course.getState().ordinal()), String.valueOf(course.getId())};
-            System.out.println(statement.toString());
+            String[] params = {course.getName(), course.getDescription(),
+                    dateFormat.format(course.getCreationDate()), pathToImg[pathToImg.length - 1],
+                    course.getPrice().toString(), String.valueOf(course.getState().ordinal()), String.valueOf(course.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
@@ -46,8 +46,10 @@ public class CourseRepository implements AppRepository<Course> {
         return true;
     }
 
+
     @Override
     public boolean delete(@NonNull Course course) throws RepositoryException {
+        //set state = 0 (freeze) instead of deleting
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_DELETE)) {
             String[] params = {String.valueOf(course.getId())};
@@ -63,7 +65,7 @@ public class CourseRepository implements AppRepository<Course> {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_INSERT)) {
             String[] pathToImg = course.getPathToPicture().split(PATH_SPLITTER);
-            String[] params = {course.getName(), course.getDescription(), dateFormat.format(course.getCreationDate()),
+            String[] params = {String.valueOf(course.getAuthorId()), course.getName(), course.getDescription(), dateFormat.format(course.getCreationDate()),
                     pathToImg[pathToImg.length - 1], course.getPrice().toString(), String.valueOf(course.getState().ordinal())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
@@ -98,6 +100,7 @@ public class CourseRepository implements AppRepository<Course> {
             Course course = new Course();
             course.setId(resultSet.getInt("course_id"));
             course.setName(resultSet.getString("course_name"));
+            course.setAuthorId(resultSet.getInt("course_author_id"));
             course.setDescription(resultSet.getString("course_description"));
             course.setCreationDate(resultSet.getDate("course_creation_date"));
             course.setPathToPicture(PATH_TO_PICTURE + resultSet.getString("course_picture"));

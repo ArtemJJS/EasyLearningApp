@@ -3,7 +3,9 @@ package by.anelkin.easylearning.servlet;
 
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
+import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.service.AccountService;
+import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -45,7 +47,7 @@ public class ImgUploadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         boolean isMultiPart = ServletFileUpload.isMultipartContent(req);
         if (!isMultiPart) {
-           throw new ServletException("Request must be multipart!");
+            throw new ServletException("Request must be multipart!");
         }
 
         DiskFileItemFactory factory = new DiskFileItemFactory();

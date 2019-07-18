@@ -34,7 +34,7 @@
                 </c:when>
                 <c:when test="${curr_role.toString() == 'AUTHOR'}">
                     <div class="link"><a href="${pageContext.request.contextPath}/author/add-new-course">Add new course</a></div>
-                    <div class="link"><a href="">Statistic</a></div>
+                    <div class="link"><a href="${pageContext.request.contextPath}/author/my-courses">My courses</a></div>
                     <div class="link"><a href="${pageContext.request.contextPath}/account/author/cash-out">CashOut</a></div>
                 </c:when>
                 <c:when test="${curr_role.toString() == 'ADMIN'}">

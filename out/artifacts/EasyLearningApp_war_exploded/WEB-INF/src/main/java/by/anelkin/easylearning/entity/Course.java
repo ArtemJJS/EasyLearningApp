@@ -11,6 +11,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false, exclude = "pathToPicture")
 public class Course extends AppEntity {
     private int id;
+    private int authorId;
     private String name;
     private String description;
     private Date creationDate;

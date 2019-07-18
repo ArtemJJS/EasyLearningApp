@@ -8,12 +8,12 @@ import by.anelkin.easylearning.service.CourseService;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
 
 public class DeclineCourseApprovalCommand implements Command {
-    private static final String OPERATION_SUCCESSFUL_FORWARD = "/jsp/admin/course_approval_page.jsp";
+    private static final String OPERATION_SUCCESSFUL_REDIRECT= "http://localhost:8080/easyLearning/admin/course-approval";
 
     @Override
     public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
         (new CourseService()).freezeCourse(requestContent);
-        requestContent.setPath(OPERATION_SUCCESSFUL_FORWARD);
-        return FORWARD;
+        requestContent.setPath(OPERATION_SUCCESSFUL_REDIRECT);
+        return REDIRECT;
     }
 }

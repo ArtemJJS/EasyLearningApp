@@ -66,6 +66,19 @@
         </attribute>
     </tag>
 
+    <tag>
+        <name>course-state-writer</name>
+        <tag-class>by.anelkin.easylearning.tag.WriteCourseStateTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>state</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>by.anelkin.easylearning.entity.Course.CourseState</type>
+        </attribute>
+    </tag>
+
+
 
     <!-- Invoke 'Generate' action to add tags or functions -->
 

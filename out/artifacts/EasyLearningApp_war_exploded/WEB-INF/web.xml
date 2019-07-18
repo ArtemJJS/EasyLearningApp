@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-<display-name>FirstProject</display-name>
+    <display-name>FirstProject</display-name>
 
     <welcome-file-list>
         <welcome-file>jsp/main_page.jsp</welcome-file>
@@ -167,5 +167,12 @@
         <url-pattern>/author/add-new-course</url-pattern>
     </servlet-mapping>
 
-
+    <servlet>
+        <servlet-name>AuthorMyCourses</servlet-name>
+        <jsp-file>/jsp/author/author_my_courses_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AuthorMyCourses</servlet-name>
+        <url-pattern>/author/my-courses</url-pattern>
+    </servlet-mapping>
 </web-app>
