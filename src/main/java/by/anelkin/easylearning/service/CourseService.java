@@ -76,6 +76,8 @@ public class CourseService {
             Course currCourse = repository.query(new SelectCourseByIdSpecification(courseId)).get(0);
             currCourse.setState(CourseState.APPROVED);
             repository.update(currCourse);
+//if I will change command result to forward, this will init correct courses list to approve:
+//          initCourseApprovalPage(requestContent);
         } catch (RepositoryException e) {
             // FIXME: 7/18/2019
             throw new ServiceException(e);
