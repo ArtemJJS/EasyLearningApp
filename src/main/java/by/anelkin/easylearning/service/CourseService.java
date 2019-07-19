@@ -102,10 +102,13 @@ public class CourseService {
     // TODO: 7/18/2019 если fail то поудалять все что добавилось?
     // TODO: 7/18/2019 подумать может получится разнести хотя бы на два метода?
     public boolean addCourseToReview(SessionRequestContent requestContent) throws RepositoryException {
+        System.out.println(requestContent.getRequestReferer());
         Map<String, String[]> params = requestContent.getRequestParameters();
         CourseRepository courseRepo = new CourseRepository();
         String courseName = params.get(ATTR_COURSE_NAME)[0];
-        if (courseRepo.query(new SelectCourseByNameSpecification(courseName)).size() > 0) {
+        boolean isCourseNew = requestContent.getRequestReferer().endsWith("author/add-new-course");
+        System.out.println(isCourseNew);
+        if (courseRepo.query(new SelectCourseByNameSpecification(courseName)).size() > 0 && isCourseNew) {
             // TODO: 7/18/2019 попробовать сохранить данные при наличии такого названия курса в базе? при форварде?
             requestContent.getRequestAttributes().put(ATTR_COURSE_ALREADY_EXISTS, MSG_COURSE_ALREADY_EXISTS);
             return false;
@@ -119,27 +122,43 @@ public class CourseService {
         course.setCreationDate(new Date(System.currentTimeMillis()));
         course.setPathToPicture(DEFAULT_IMG);
         course.setState(CourseState.NOT_APPROVED);
-        courseRepo.insert(course);
-        course = courseRepo.query(new SelectCourseByNameSpecification(courseName)).get(0);
-
-        ChapterRepository chapterRepo = new ChapterRepository();
-        String[] chapterNames = params.get(ATTR_CHAPTER_NAME);
+        if (isCourseNew) {
+            courseRepo.insert(course);
+        } else {
+            courseRepo.update(course);
+        }
         int courseId = courseRepo.query(new SelectCourseByNameSpecification(courseName))
                 .get(0).getId();
 
+        String[] chapterNames = insertChaptersIfNotExists(courseId, params);
+        insertLessons(courseId, params, chapterNames);
+
+        return true;
+    }
+
+    private String[] insertChaptersIfNotExists(int courseId, Map<String, String[]> params) throws RepositoryException {
+        ChapterRepository chapterRepo = new ChapterRepository();
+        String[] chapterNames = params.get(ATTR_CHAPTER_NAME);
+
         for (String chapterName : chapterNames) {
+            if (chapterRepo.query(new SelectChapterByNameAndCourseIdSpecification(chapterName, courseId)).size() == 0){
             CourseChapter chapter = new CourseChapter();
             chapter.setCourseId(courseId);
             chapter.setName(chapterName);
             chapterRepo.insert(chapter);
+            }
         }
+        return chapterNames;
+    }
 
+    private void insertLessons(int courseId, Map<String, String[]> params, String[] chapterNames) throws RepositoryException {
+        ChapterRepository chapterRepo = new ChapterRepository();
         LessonRepository lessonRepo = new LessonRepository();
         for (int i = 0; i < chapterNames.length; i++) {
             String[] lessonNames = params.get(PATTERN_LESSON_TITLE + (i + 1));
             String[] lessonContents = params.get(PATTERN_LESSON_CONTENT + (i + 1));
             String[] lessonDurations = params.get(PATTERN_LESSON_DURATION + (i + 1));
-            int chapterId = chapterRepo.query(new SelectChapterByNameAndCourseIdSpecification(chapterNames[i], course.getId()))
+            int chapterId = chapterRepo.query(new SelectChapterByNameAndCourseIdSpecification(chapterNames[i], courseId))
                     .get(0).getId();
             // TODO: 7/18/2019 проверить на пустых полях
             for (int j = 0; j < lessonNames.length; j++) {
@@ -158,9 +177,7 @@ public class CourseService {
                 }
             }
         }
-        return true;
     }
-
 
     // returns map of chapters and lessons of current course, then it have to be setted to request attribute
     private Map<CourseChapter, List<CourseLesson>> takeChaptersAndLessons(int courseId) throws RepositoryException {

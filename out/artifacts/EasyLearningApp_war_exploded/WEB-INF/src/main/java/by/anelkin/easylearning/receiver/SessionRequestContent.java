@@ -18,6 +18,7 @@ public class SessionRequestContent {
     private HashMap<String, Object> sessionAttributes = new HashMap<>();
     private ResponseType responseType;
     private String path;
+    private String requestReferer;
 
     public enum ResponseType {
         REDIRECT,
@@ -25,6 +26,7 @@ public class SessionRequestContent {
     }
 
     public void extractValues(@NonNull HttpServletRequest request) {
+        requestReferer = request.getHeader("referer");
         requestParameters = request.getParameterMap();
 
         Enumeration<String> attributeNames = request.getAttributeNames();

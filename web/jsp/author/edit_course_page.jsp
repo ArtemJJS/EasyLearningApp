@@ -17,14 +17,15 @@
 <body>
 <%@include file="/jsp/header.jsp" %>
 <main>
-    <c:set var="content" value="${requestScope.currentCourseContent}"/>
     <c:set var="course" value="${requestScope.requestedCourse}" property=""/>
+    <c:set var="content" value="${requestScope.currentCourseContent}"/>
     <div class="page_title">Edit course:</div>
     <form class="main_form" method="post" action="${pageContext.request.contextPath}/basic_servlet">
         <div class="param">
-            <label for="course_title_field">Course title:</label>
+            <div class="unit_title">Course title:</div>
             <div class="input_and_pattern">
-                <input placeholder="${course.name}" type="text" id="course_title_field" disabled
+                <div class="param_field">${course.name}</div>
+                <input value="${course.name}" type="text" id="course_title_field" name="course_name" hidden
                        pattern="[A-z0-9_ -]{5,200}">
                 <%--                <div class="previous_operation_msg">${requestScope.course_exists_msg}</div>--%>
                 <p class="field_desc">Available characters: English letters, digits, _ and - symbols, space. Min 5, max
@@ -47,51 +48,41 @@
         </div>
 
         <%--    =================Chapters======================    --%>
-        <c:set var="i" value="1"/>
+        <jsp:useBean id="i" class="by.anelkin.easylearning.entity.JspIntWrapper"/>
         <c:forEach var="entry" items="${content}">
             <c:set var="chapter" value="${entry.getKey()}"/>
-            <div id="${i}" class="chapter">
+            <div id="${i.value}" class="chapter">
                 <div class="param chapter">
-                    <label for="chapter-field_${i}">Chapter ${i}:</label>
-                    <input type="text" id="chapter-field_${i}" name="chapter_name" value="${chapter.name}" disabled
-                           pattern='[A-z0-9_ -]{3,200}'>
-                        <%--            <p class="field_desc">Format: 12345678.12</p>--%>
+                    <div class="unit_title">Chapter ${i.value}:</div>
+                    <div class="param_field">${chapter.name}</div>
+                    <input value="${chapter.name}" type="text" id="chapter_name" name="chapter_name" hidden
+                           pattern="[A-z0-9_ -]{5,200}">
                 </div>
                 <div class="lessons">
-                    <c:set var="j" value="1"/>
+                    <jsp:useBean id="j" class="by.anelkin.easylearning.entity.JspIntWrapper"/>
                     <c:forEach var="lesson" items="${entry.getValue()}">
                         <div class="param lesson">
-                            <label for="lesson_field">Lesson ${j}:</label>
+                            <div class="unit_title">Lesson ${j.receiveAndIncrement()}:</div>
                             <div class="lesson_params">
-                                <input type="text" id="lesson_field" name="lesson_title_${i}" value="${lesson.name}"
-                                       disabled
-                                       pattern='[A-z0-9_ -]{3,100}'>
-                                <input type="text" name="lesson_content_${i}" placeholder="Path to content" disabled>
-                                <input type="text" name="lesson_duration_${i}" placeholder="Duration" disabled>
+                                <div class="param_field">${lesson.name}</div>
+                                <div class="param_field">${lesson.pathToContent}</div>
+                                <div class="param_field">${lesson.duration}</div>
                             </div>
                         </div>
-<%--                        <c:set value="${j + '1'}"/>--%>
                     </c:forEach>
                     <div class="add_lesson">add lesson</div>
                 </div>
             </div>
-<%--            <c:set value="${i = i+1}" />--%>
+            ${j.resetToOne()}
+            ${i.increment()}
         </c:forEach>
 
-
         <div class="add_chapter">add chapter</div>
-
         <input type="hidden" name="command_name" value="add_course_to_review">
         <input class="submit_btn" type="submit" value="Send to review">
     </form>
-    <script> var abc = ${content};
-    <%--let lessonsListArray = ${requestScope.currentCourseContent.values()};--%>
-    </script>
     <script>
-                <%@include file="/js/add_lesson.js"%>
-    </script>
-    <script>
-        <%@include file="/js/edit_course.js"%>
+        <%@include file="/js/add_lesson.js"%>
     </script>
 </main>
 </body>

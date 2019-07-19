@@ -63,13 +63,19 @@ form {
     color: #5e5e5e;
 }
 
-label {
+.unit_title {
     margin-right: 15px;
 }
 
-input, textarea {
+.param_field, input, textarea {
     width: 550px;
     font-size: 0.9rem;
+}
+
+.param_field{
+    border: 1px solid grey;
+    background-color: rgb(235, 235, 228);
+    color: rgb(84, 84, 84);
 }
 
 .add_lesson {
@@ -106,11 +112,13 @@ input, textarea {
     width: 550px;
 }
 
-.lesson_params input {
+.lesson_params .param_field,
+.lesson_params input{
     margin-top: 8px;
 }
 
-.lesson_params input:first-child {
+.lesson_params .param_field:first-child,
+.lesson_params input:first-child{
     margin-top: 0;
 }
 

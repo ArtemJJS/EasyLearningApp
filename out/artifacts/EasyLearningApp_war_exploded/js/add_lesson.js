@@ -12,7 +12,7 @@ const lessonParamClass = 'lesson_params';
 const lessonsClass = 'lessons';
 const addLessonClass = 'add_lesson';
 const addLessonBtnText = 'add lesson';
-let addLessonBtn = document.getElementsByClassName('add_lesson')[0];
+let addLessonBtns = document.getElementsByClassName('add_lesson');
 let addChapterBtn = document.getElementsByClassName('add_chapter')[0];
 
 
@@ -135,5 +135,8 @@ function findAncestor(elem, cls) {
 }
 
 
-addLessonBtn.addEventListener("click", addMoreLesson);
+for (let i = 0; i < addLessonBtns.length; i++) {
+    addLessonBtns[i].addEventListener("click", addMoreLesson);
+}
+
 addChapterBtn.addEventListener('click', addMoreChapter);
