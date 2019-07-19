@@ -70,7 +70,7 @@
                                 <input type="text" name="lesson_duration_${i}" placeholder="Duration" disabled>
                             </div>
                         </div>
-<%--                        <c:set value="${j + '1'}"/>--%>
+                        <c:set value="${j + '1'}" target="${j}"/>
                     </c:forEach>
                     <div class="add_lesson">add lesson</div>
                 </div>

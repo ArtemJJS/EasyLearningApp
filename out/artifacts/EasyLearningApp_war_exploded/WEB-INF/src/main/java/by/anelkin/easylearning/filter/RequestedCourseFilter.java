@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Log4j
-@WebFilter(urlPatterns = {"/course", "/course/learn"})
+@WebFilter(urlPatterns = {"/course", "/course/learn", "/author/edit-course"})
 public class RequestedCourseFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

@@ -175,4 +175,15 @@
         <servlet-name>AuthorMyCourses</servlet-name>
         <url-pattern>/author/my-courses</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditCourse</servlet-name>
+        <jsp-file>/jsp/author/edit_course_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditCourse</servlet-name>
+        <url-pattern>/author/edit-course</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

@@ -47,7 +47,7 @@
                             <div class="links">
                                 <a href="${pageContext.request.contextPath}/course/learn?course-id=${course.id}">Learning
                                     page</a>
-                                <a href="">Edit course</a>
+                                <a href="${pageContext.request.contextPath}/author/edit-course?course-id=${course.id}">Edit course</a>
                             </div>
                         </div>
                     </div>

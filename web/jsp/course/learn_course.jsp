@@ -64,7 +64,7 @@
         </c:forEach>
     </section>
 </main>
-<script>var lessons_list = "${pageContext.request.getAttribute('currentCourseContent').values()}"</script>
+<script>let lessons_list = "${pageContext.request.getAttribute('currentCourseContent').values()}"</script>
 <script type="text/javascript">
     <%@include file="/js/learn_course.js"%>
 </script>

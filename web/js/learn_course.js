@@ -1,4 +1,4 @@
-var videoPlayer = document.getElementById('video_player');
+let videoPlayer = document.getElementById('video_player');
 let lessonDivs = document.getElementsByClassName('lesson');
 
 // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
