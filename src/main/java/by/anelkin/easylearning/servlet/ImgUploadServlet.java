@@ -95,8 +95,9 @@ public class ImgUploadServlet extends HttpServlet {
                     }
                     String fileName = item.getName();
                     String fileExtension = fileName.substring(fileName.lastIndexOf("."));
-
+                    // put it to request, expected in service
                     req.setAttribute(ATTR_FILE_EXTENSION, fileExtension);
+                    req.setAttribute("course_id", courseId);
 
 
                     // FIXME: 7/17/2019 фото обновляется не сразу на странице аккаунта??? (через какое-то время)
@@ -127,12 +128,9 @@ public class ImgUploadServlet extends HttpServlet {
             throw new ServletException(e);
         }
 
-
-
-
         SessionRequestContent requestContent = new SessionRequestContent();
         requestContent.extractValues(req);
-        RequestReceiver receiver = new RequestReceiver(CommandType.CHANGE_ACC_IMG, requestContent);
+        RequestReceiver receiver = new RequestReceiver(commandType, requestContent);
         SessionRequestContent.ResponseType responseType;
         try {
             responseType = receiver.executeCommand();

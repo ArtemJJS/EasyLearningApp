@@ -24,7 +24,7 @@
             <div class="info_block">
                 <div class="avatar">
                     <div class="img_detail">New Avatar:</div>
-                    <img src="${pageContext.request.contextPath}${course.updatePhotoPath}" alt="">
+                    <img src="${pageContext.request.contextPath}/${course.updatePhotoPath}" alt="">
                 </div>
                 <div class="course_info">
                     <div class="course_login">${course.name}</div>

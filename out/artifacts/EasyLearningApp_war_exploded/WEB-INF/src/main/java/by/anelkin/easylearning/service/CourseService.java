@@ -34,6 +34,7 @@ public class CourseService {
     private static final String COURSE_IMG_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web";
     private static final String COURSE_IMG_LOCATION_TEMP = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web";
     private static final String COURSE_DEFAULT_IMG_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/course_img/default_course_avatar.png";
+    private static final String COURSE_IMG_FOLDER = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/course_img/";
 
     private static final String ATTR_NEED_APPROVAL = "courses_need_approval";
     private static final String ATTR_USER = "user";
@@ -43,6 +44,7 @@ public class CourseService {
     private static final String ATTR_COURSE_PRICE = "course_price";
     private static final String ATTR_CHAPTER_NAME = "chapter_name";
     private static final String ATTR_COURSE_ALREADY_EXISTS = "course_exists_msg";
+    private static final String ATTR_FILE_EXTENSION = "file_extension";
 
     private static final String PREVIOUS_OPERATION_MSG = "previous_operation_message";
     private static final String MSG_COURSE_ALREADY_EXISTS = "Course with name specified already exists! Try another one!";
@@ -51,7 +53,20 @@ public class CourseService {
     private static final String PATTERN_LESSON_CONTENT = "lesson_content_";
     private static final String PATTERN_LESSON_DURATION = "lesson_duration_";
     private static final String EMPTY_STRING = "";
+    private static final String PATH_SPLITTER = "/";
 
+
+    public void addCourseImgToReview(SessionRequestContent requestContent) throws ServiceException {
+        int courseId = Integer.parseInt(String.valueOf(requestContent.getRequestAttributes().get(ATTR_COURSE_ID)));
+        CourseRepository repository = new CourseRepository();
+        try {
+            Course course = repository.query(new SelectCourseByIdSpecification(courseId)).get(0);
+            course.setUpdatePhotoPath(course.getId() + (String)requestContent.getRequestAttributes().get(ATTR_FILE_EXTENSION));
+            repository.update(course);
+        } catch (RepositoryException | NullPointerException e) {
+           throw new ServiceException(e);
+        }
+    }
 
     public void approveCourseImgChange(SessionRequestContent requestContent) throws ServiceException {
         CourseRepository repository = new CourseRepository();
@@ -60,16 +75,31 @@ public class CourseService {
             Course course = repository.query(new SelectCourseByNameSpecification(courseName)).get(0);
             String imgToApprovePath = course.getUpdatePhotoPath();
             String currImgPath = COURSE_IMG_LOCATION + course.getPathToPicture();
+            String fileName = imgToApprovePath.substring(imgToApprovePath.lastIndexOf(PATH_SPLITTER)+1);
             if (!currImgPath.equals(COURSE_DEFAULT_IMG_LOCATION)) {
                 Files.deleteIfExists(Paths.get(currImgPath));
             }
             File file = new File(COURSE_IMG_LOCATION_TEMP + imgToApprovePath);
-            file.renameTo(new File(currImgPath));
+            file.renameTo(new File(COURSE_IMG_FOLDER + "/" + fileName));
             Files.deleteIfExists(Paths.get(COURSE_IMG_LOCATION_TEMP + imgToApprovePath));
 
             course.setUpdatePhotoPath(EMPTY_STRING);
             course.setPathToPicture(imgToApprovePath); //it is getting correct value inside repo
             repository.update(course);
+            requestContent.getRequestAttributes().put(ATTR_NEED_APPROVAL
+                    , repository.query(new SelectCourseUpdateImgSpecification()));
+        } catch (RepositoryException | NullPointerException | IOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public void declineCourseImgChange(SessionRequestContent requestContent) throws ServiceException {
+        CourseRepository repository = new CourseRepository();
+        String courseName = requestContent.getRequestParameters().get(ATTR_COURSE_NAME)[0];
+        try {
+            Course course = repository.query(new SelectCourseByNameSpecification(courseName)).get(0);
+            Files.deleteIfExists(Paths.get(COURSE_IMG_LOCATION_TEMP + course.getUpdatePhotoPath()));
+            course.setUpdatePhotoPath(EMPTY_STRING);
             requestContent.getRequestAttributes().put(ATTR_NEED_APPROVAL
                     , repository.query(new SelectCourseUpdateImgSpecification()));
         } catch (RepositoryException | NullPointerException | IOException e) {
