@@ -185,5 +185,13 @@
         <url-pattern>/author/edit-course</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ApproveAccAvatar</servlet-name>
+        <jsp-file>/jsp/admin/approve_acc_avatar_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ApproveAccAvatar</servlet-name>
+        <url-pattern>/admin/approve-acc-avatar</url-pattern>
+    </servlet-mapping>
 
 </web-app>

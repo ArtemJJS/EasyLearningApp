@@ -14,7 +14,7 @@ import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseTyp
 public class EditUserInfoCommand implements Command {
     // FIXME: 7/16/2019 поправить адрес админу
     private static final String REDIRECT_ADMIN = "http://localhost:8080/easyLearning/account";
-    private static final String REDIRECT_AUTHOR = "http://localhost:8080/easyLearning/author";
+    private static final String REDIRECT_AUTHOR = "http://localhost:8080/easyLearning/account";
     private static final String REDIRECT_USER = "http://localhost:8080/easyLearning/account";
 
     @Override

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-@EqualsAndHashCode(callSuper = false, exclude = {"about", "pathToPhoto", "registrDate"})
+@EqualsAndHashCode(callSuper = false, exclude = {"about", "pathToPhoto", "updatePhotoPath"})
 public class Account extends AppEntity {
     private int id;
     private String login;
@@ -25,6 +25,8 @@ public class Account extends AppEntity {
     private AccountType type;
     private double avgMark;
     private BigDecimal balance;
+    private String updatePhotoPath;
+
 
     public enum AccountType{
         GUEST,

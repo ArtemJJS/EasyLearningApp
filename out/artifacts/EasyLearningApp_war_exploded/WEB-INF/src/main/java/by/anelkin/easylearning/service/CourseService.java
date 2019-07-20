@@ -40,15 +40,20 @@ public class CourseService {
     private static final String PATTERN_LESSON_DURATION = "lesson_duration_";
 
 
-    public void initCoursePage(SessionRequestContent requestContent) throws RepositoryException {
+    public void initCoursePage(SessionRequestContent requestContent) throws ServiceException {
         CourseRepository repository = new CourseRepository();
         int courseId = Integer.parseInt(requestContent.getRequestParameters().get("course-id")[0]);
         log.debug("receiving course from base, id: " + courseId);
         List<Mark> marks = (new MarkService()).takeMarksOfCourse(courseId);
-        List<Course> courses = repository.query(new SelectCourseByIdSpecification(courseId));
+        List<Course> courses = null;
+        try {
+            courses = repository.query(new SelectCourseByIdSpecification(courseId));
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
         if (courses.size() != 1) {
             // fixme: 7/12/2019 service exception
-            throw new RepositoryException("Course wasn't found");
+            throw new ServiceException("Course wasn't found");
         }
         // fixme: 7/12/2019 вынести в текстовые константы
         requestContent.getRequestAttributes().put("currentCourseMarks", marks);
@@ -93,7 +98,6 @@ public class CourseService {
             currCourse.setState(CourseState.FREEZING);
             repository.update(currCourse);
         } catch (RepositoryException e) {
-            // FIXME: 7/18/2019
             throw new ServiceException(e);
         }
     }
@@ -102,18 +106,18 @@ public class CourseService {
     // TODO: 7/18/2019 если fail то поудалять все что добавилось?
     // TODO: 7/18/2019 подумать может получится разнести хотя бы на два метода?
     public boolean addCourseToReview(SessionRequestContent requestContent) throws RepositoryException {
-        System.out.println(requestContent.getRequestReferer());
         Map<String, String[]> params = requestContent.getRequestParameters();
         CourseRepository courseRepo = new CourseRepository();
         String courseName = params.get(ATTR_COURSE_NAME)[0];
         boolean isCourseNew = requestContent.getRequestReferer().endsWith("author/add-new-course");
-        System.out.println(isCourseNew);
-        if (courseRepo.query(new SelectCourseByNameSpecification(courseName)).size() > 0 && isCourseNew) {
+        List<Course> courses = courseRepo.query(new SelectCourseByNameSpecification(courseName));
+        if (courses.size() > 0 && isCourseNew) {
             // TODO: 7/18/2019 попробовать сохранить данные при наличии такого названия курса в базе? при форварде?
             requestContent.getRequestAttributes().put(ATTR_COURSE_ALREADY_EXISTS, MSG_COURSE_ALREADY_EXISTS);
             return false;
         }
-        Course course = new Course();
+        Course course;
+        course = isCourseNew ? new Course() : courses.get(0);
         Account currAccount = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
         course.setAuthorId(currAccount.getId());
         course.setName(courseName);
@@ -141,11 +145,11 @@ public class CourseService {
         String[] chapterNames = params.get(ATTR_CHAPTER_NAME);
 
         for (String chapterName : chapterNames) {
-            if (chapterRepo.query(new SelectChapterByNameAndCourseIdSpecification(chapterName, courseId)).size() == 0){
-            CourseChapter chapter = new CourseChapter();
-            chapter.setCourseId(courseId);
-            chapter.setName(chapterName);
-            chapterRepo.insert(chapter);
+            if (chapterRepo.query(new SelectChapterByNameAndCourseIdSpecification(chapterName, courseId)).size() == 0) {
+                CourseChapter chapter = new CourseChapter();
+                chapter.setCourseId(courseId);
+                chapter.setName(chapterName);
+                chapterRepo.insert(chapter);
             }
         }
         return chapterNames;
@@ -158,9 +162,11 @@ public class CourseService {
             String[] lessonNames = params.get(PATTERN_LESSON_TITLE + (i + 1));
             String[] lessonContents = params.get(PATTERN_LESSON_CONTENT + (i + 1));
             String[] lessonDurations = params.get(PATTERN_LESSON_DURATION + (i + 1));
+            if (lessonNames == null || lessonContents == null || lessonDurations == null) {
+                return;
+            }
             int chapterId = chapterRepo.query(new SelectChapterByNameAndCourseIdSpecification(chapterNames[i], courseId))
                     .get(0).getId();
-            // TODO: 7/18/2019 проверить на пустых полях
             for (int j = 0; j < lessonNames.length; j++) {
                 CourseLesson lesson = new CourseLesson();
                 String name = lessonNames[j];
@@ -180,14 +186,18 @@ public class CourseService {
     }
 
     // returns map of chapters and lessons of current course, then it have to be setted to request attribute
-    private Map<CourseChapter, List<CourseLesson>> takeChaptersAndLessons(int courseId) throws RepositoryException {
+    private Map<CourseChapter, List<CourseLesson>> takeChaptersAndLessons(int courseId) throws ServiceException {
         ChapterRepository chapterRepository = new ChapterRepository();
         LessonRepository lessonRepository = new LessonRepository();
         Map<CourseChapter, List<CourseLesson>> courseContent = new HashMap<>();
-        List<CourseChapter> chapters = chapterRepository.query(new SelectAllFromCourseSpecification(courseId));
-        for (CourseChapter chapter : chapters) {
-            List<CourseLesson> lessons = lessonRepository.query(new SelectByChapterIdSpecification(chapter.getId()));
-            courseContent.put(chapter, lessons);
+        try {
+            List<CourseChapter> chapters = chapterRepository.query(new SelectAllFromCourseSpecification(courseId));
+            for (CourseChapter chapter : chapters) {
+                List<CourseLesson> lessons = lessonRepository.query(new SelectByChapterIdSpecification(chapter.getId()));
+                courseContent.put(chapter, lessons);
+            }
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
         }
         return courseContent;
     }

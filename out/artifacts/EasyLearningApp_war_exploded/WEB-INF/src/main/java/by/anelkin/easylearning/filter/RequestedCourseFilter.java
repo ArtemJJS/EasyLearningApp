@@ -1,6 +1,7 @@
 package by.anelkin.easylearning.filter;
 
 import by.anelkin.easylearning.exception.RepositoryException;
+import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.service.CourseService;
 import lombok.extern.log4j.Log4j;
@@ -23,8 +24,7 @@ public class RequestedCourseFilter implements Filter {
         try {
             courseService.initCoursePage(requestContent);
             requestContent.insertAttributes(request);
-        } catch (RepositoryException e) {
-            // TODO: 7/8/2019 на страницу ошибки, курс не найден
+        } catch (ServiceException e) {
             throw new ServletException(e);
         }
         filterChain.doFilter(request, servletResponse);

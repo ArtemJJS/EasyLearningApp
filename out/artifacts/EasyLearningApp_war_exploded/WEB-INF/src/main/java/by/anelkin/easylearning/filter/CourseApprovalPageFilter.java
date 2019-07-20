@@ -1,9 +1,7 @@
 package by.anelkin.easylearning.filter;
 
-import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
-import by.anelkin.easylearning.repository.CourseRepository;
 import by.anelkin.easylearning.service.CourseService;
 import lombok.extern.log4j.Log4j;
 

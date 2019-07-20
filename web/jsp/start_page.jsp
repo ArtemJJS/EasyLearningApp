@@ -25,7 +25,7 @@
     <div class="description">The best learning site ever!!!</div>
 </section>
 <section class="section2">
-    <form class="log_in" method="post" action="http://localhost:8080/easyLearning/basic_servlet">
+    <form class="log_in" method="post" action="${pageContext.request.contextPath}/basic_servlet">
         <input class="text_field" type="text" name="login" placeholder="login">
         <input class="text_field" type="password" name="password" placeholder="password">
         <input type="hidden" name="command_name" value="login">
@@ -38,7 +38,7 @@
         </c:if>
 <section class="section3">
     <div class="desc_sign_up"> Still don't have an account? Register now for free!</div>
-    <form class="sign_up" action="http://localhost:8080/easyLearning/basic_servlet" >
+    <form class="sign_up" action="${pageContext.request.contextPath}/basic_servlet" >
         <input type="hidden" name="command_name" value="sign_up">
         <input class="sign_up_button" type="submit" value="Sign UP!">
     </form>

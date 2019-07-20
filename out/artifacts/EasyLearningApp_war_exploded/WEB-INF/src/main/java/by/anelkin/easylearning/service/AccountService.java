@@ -8,20 +8,27 @@ import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.repository.CourseRepository;
 import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
+import by.anelkin.easylearning.specification.account.SelectAccToPhotoApproveSpecification;
 import by.anelkin.easylearning.specification.account.SelectByCourseIdSpecification;
 import by.anelkin.easylearning.specification.course.SelectByAuthorIdSpecification;
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
 import lombok.NonNull;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static by.anelkin.easylearning.entity.Account.*;
 import static by.anelkin.easylearning.entity.Account.AccountType.GUEST;
-import static by.anelkin.easylearning.entity.Account.AccountType.USER;
 
 public class AccountService {
+    // FIXME: 7/20/2019 на относительный путь
+    private static final String ACC_AVATAR_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/";
+    private static final String ACC_AVATAR_LOCATION_TEMP = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/";
     private static final String URI_SPACE_REPRESENT = "%20";
     private static final String PATH_SPLITTER = "/";
     private static final String SESSION_ATTR_USER = "user";
@@ -32,10 +39,15 @@ public class AccountService {
     private static final String PWD_CHANGED_SUCCESSFULLY_MSG = "You password has been successfully changed!!!";
     private static final String PWD_NOT_CHANGED_MSG = "You password wasn't changed! Password is not correct!";
     private static final String ATTR_OPERATION_RESULT = "operation_result";
-    private static final String ATTR_FILE_NAME = "file_name";
     private static final String ATTR_AVAILABLE_COURSES = "coursesAvailable";
     private static final String ATTR_LOGIN = "login";
     private static final String ATTR_WRONG_LOGIN_MSG = "wrong-login";
+    private static final String ATTR_REQUESTED_AUTHOR_LOGIN = "requested_author_login";
+    private static final String ATTR_REQUESTED_AUTHOR = "requested_author";
+    private static final String ATTR_AUTHOR_COURSE_LIST = "author_course_list";
+    private static final String ATTR_FILE_EXTENSION = "file_extension";
+    private static final String ATTR_ACCS_TO_AVATAR_APPROVE = "acc_avatar_approve_list";
+
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
@@ -123,22 +135,64 @@ public class AccountService {
         }
     }
 
-    public void updateAccImage(SessionRequestContent requestContent) throws ServiceException {
-        Map<String, Object> sessionAttrs = requestContent.getSessionAttributes();
-        Account currAccount = (Account) sessionAttrs.get(SESSION_ATTR_USER);
-        String fileName = (String) requestContent.getRequestAttributes().get(ATTR_FILE_NAME);
-        currAccount.setPathToPhoto(fileName);
-
+    public void initApproveAccAvatarPage(SessionRequestContent requestContent) throws RepositoryException {
         AccRepository repository = new AccRepository();
+        List<Account> accounts = repository.query(new SelectAccToPhotoApproveSpecification());
+        requestContent.getRequestAttributes().put(ATTR_ACCS_TO_AVATAR_APPROVE, accounts);
+    }
+
+    public void addAccAvatarToReview(SessionRequestContent requestContent) throws RepositoryException {
+        HashMap<String, Object> sessionAttrs = requestContent.getSessionAttributes();
+        Account account = (Account) sessionAttrs.get(SESSION_ATTR_USER);
+        String fileExtension = (String) requestContent.getRequestAttributes().get(ATTR_FILE_EXTENSION);
+        account.setUpdatePhotoPath(account.getId() + fileExtension);
+        AccRepository repository = new AccRepository();
+        repository.update(account);
+    }
+
+    public void approveAccAvatar(SessionRequestContent requestContent) throws ServiceException {
+        AccRepository repository = new AccRepository();
+        String currLogin = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
+        Account currAccount;
         try {
+            currAccount = repository.query(new SelectAccByLoginSpecification(currLogin)).get(0);
+            String fileName = currAccount.getUpdatePhotoPath();
+
+            try {
+                File file = new File(ACC_AVATAR_LOCATION_TEMP + currAccount.getUpdatePhotoPath());
+                Files.deleteIfExists(Paths.get(ACC_AVATAR_LOCATION + currAccount.getPathToPhoto()));
+                file.renameTo(new File(ACC_AVATAR_LOCATION + currAccount.getPathToPhoto()));
+                Files.deleteIfExists(Paths.get(ACC_AVATAR_LOCATION_TEMP + currAccount.getUpdatePhotoPath()));
+            } catch (IOException e) {
+                throw new ServiceException(e);
+            }
+
+            currAccount.setPathToPhoto(fileName);
+            currAccount.setUpdatePhotoPath("");
             repository.update(currAccount);
-            currAccount = repository.query(new SelectAccByLoginSpecification(currAccount.getLogin())).get(0);
-            sessionAttrs.put(SESSION_ATTR_USER, currAccount);
+            requestContent.getRequestAttributes().put(ATTR_ACCS_TO_AVATAR_APPROVE
+                    , repository.query(new SelectAccToPhotoApproveSpecification()));
         } catch (RepositoryException e) {
             // FIXME: 7/17/2019
             throw new ServiceException(e);
         }
     }
+
+    public void declineAccAvatar(SessionRequestContent requestContent) throws ServiceException {
+        AccRepository repository = new AccRepository();
+        String currLogin = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
+        try {
+            Account currAcc = repository.query(new SelectAccByLoginSpecification(currLogin)).get(0);
+            Files.deleteIfExists(Paths.get(ACC_AVATAR_LOCATION_TEMP + currAcc.getUpdatePhotoPath()));
+            currAcc.setUpdatePhotoPath("");
+            repository.update(currAcc);
+            requestContent.getRequestAttributes().put(ATTR_ACCS_TO_AVATAR_APPROVE
+                    , repository.query(new SelectAccToPhotoApproveSpecification()));
+        } catch (RepositoryException | IOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
 
     public void editAccountInfo(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
         AccRepository repository = new AccRepository();
@@ -173,13 +227,16 @@ public class AccountService {
         }
     }
 
-    // TODO: 7/12/2019 исключения обработать нормально
-    public Account takeAuthorOfCourse(int courseId) throws RepositoryException {
+    public Account takeAuthorOfCourse(int courseId) throws ServiceException {
         AccRepository repository = new AccRepository();
-        List<Account> accounts = repository.query(new SelectByCourseIdSpecification(courseId));
+        List<Account> accounts = null;
+        try {
+            accounts = repository.query(new SelectByCourseIdSpecification(courseId));
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
         if (accounts.size() != 1) {
-            // TODO: 7/12/2019 handle
-            throw new RepositoryException();
+            throw new ServiceException("Account doesn't exists.");
         }
         return accounts.get(0);
     }
@@ -192,7 +249,7 @@ public class AccountService {
     public void initAuthorPage(@NonNull SessionRequestContent requestContent) throws RepositoryException, ServiceException {
         AccRepository repository = new AccRepository();
         // TODO: 7/12/2019 подумать надо ли Optional
-        String login = (String) requestContent.getRequestAttributes().get("requested_author_login");
+        String login = (String) requestContent.getRequestAttributes().get(ATTR_REQUESTED_AUTHOR_LOGIN);
         List<Account> accounts = repository.query(new SelectAccByLoginSpecification(login));
         if (accounts.size() != 1) {
             throw new ServiceException("Author with login " + login + " is not exists!");
@@ -201,8 +258,8 @@ public class AccountService {
         CourseRepository courseRepository = new CourseRepository();
         List<Course> courses = courseRepository.query(new SelectByAuthorIdSpecification(author.getId()));
 
-        requestContent.getRequestAttributes().put("requested_author", author);
-        requestContent.getRequestAttributes().put("author_course_list", courses);
+        requestContent.getRequestAttributes().put(ATTR_REQUESTED_AUTHOR, author);
+        requestContent.getRequestAttributes().put(ATTR_AUTHOR_COURSE_LIST, courses);
     }
 
 

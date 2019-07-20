@@ -18,20 +18,20 @@ import static by.anelkin.easylearning.entity.Account.AccountType.*;
 @Log4j
 public class AccRepository implements AppRepository<Account> {
     private static final String PATH_TO_AVATAR = "resources/account_avatar/";
-    private static final String PATH_TO_AVATAR_DEFAULT = "resources/default_acc_avatar.png";
+    private static final String PATH_TO_AVATAR_UPDATE = "resources/account_avatar_update/";
     private static final String PATH_SPLITTER = "/";
     private ConnectionPool pool = ConnectionPool.getInstance();
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     @Language("sql")
     private static final String QUERY_UPDATE = "UPDATE account SET acc_password = ?, acc_email = ?, acc_name = ?," +
             " acc_surname = ?, acc_birthdate = ?, acc_phone_number = ?, acc_registration_date = ?, acc_about = ?," +
-            " acc_photo_path = ?, acc_type = ? WHERE acc_login = ?";
+            " acc_photo_path = ?, acc_type = ?, update_photo_path = ? WHERE acc_login = ?";
     @Language("sql")
     private static final String QUERY_DELETE = "DELETE FROM account WHERE acc_login = ?";
     @Language("sql")
     private static final String QUERY_INSERT = "INSERT INTO account(acc_login, acc_password, acc_email, acc_name, acc_surname, " +
-            "acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_photo_path, acc_type) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_photo_path, acc_type, update_photo_path) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     @Override
     public boolean update(@NonNull Account account) throws RepositoryException {
@@ -39,9 +39,11 @@ public class AccRepository implements AppRepository<Account> {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
             String[] pathToPhotoParts = account.getPathToPhoto().split(PATH_SPLITTER);
+            String[] pathUpdatePhotoParts = account.getUpdatePhotoPath().split("/");
             String[] params = {account.getPassword(), account.getEmail(), account.getName(), account.getSurname(),
                     dateFormat.format(account.getBirthDate()), account.getPhoneNumber(), dateFormat.format(account.getRegistrDate()),
-                    account.getAbout(), pathToPhotoParts[pathToPhotoParts.length-1], String.valueOf(account.getType().ordinal()), account.getLogin()};
+                    account.getAbout(), pathToPhotoParts[pathToPhotoParts.length - 1], String.valueOf(account.getType().ordinal()),
+                    pathUpdatePhotoParts[pathUpdatePhotoParts.length - 1], account.getLogin()};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
@@ -67,9 +69,11 @@ public class AccRepository implements AppRepository<Account> {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_INSERT)) {
             String[] pathToPhotoParts = account.getPathToPhoto().split("/");
+            String[] pathUpdatePhotoParts = account.getUpdatePhotoPath().split("/");
             String[] params = {account.getLogin(), account.getPassword(), account.getEmail(), account.getName(), account.getSurname(),
                     dateFormat.format(account.getBirthDate()), account.getPhoneNumber(), dateFormat.format(account.getRegistrDate()),
-                    account.getAbout(), pathToPhotoParts[pathToPhotoParts.length-1], String.valueOf(account.getType().ordinal())};
+                    account.getAbout(), pathToPhotoParts[pathToPhotoParts.length - 1], String.valueOf(account.getType().ordinal()),
+                    pathUpdatePhotoParts[pathUpdatePhotoParts.length - 1]};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
@@ -113,12 +117,19 @@ public class AccRepository implements AppRepository<Account> {
             account.setAbout(resultSet.getString("acc_about"));
             account.setBalance(resultSet.getBigDecimal("acc_balance"));
 
+            String updatePhotoFileName = resultSet.getString("update_photo_path");
+            if (updatePhotoFileName == null || updatePhotoFileName.isEmpty()) {
+                account.setUpdatePhotoPath("");
+            } else {
+                account.setUpdatePhotoPath(PATH_TO_AVATAR_UPDATE + updatePhotoFileName);
+            }
 
             String avatarFileName = resultSet.getString("acc_photo_path");
             account.setPathToPhoto(PATH_TO_AVATAR + avatarFileName);
 
             account.setAvgMark(resultSet.getDouble("avg_mark"));
 
+            // do it with int because need default to handle possible exception
             int typeId = resultSet.getInt("acc_type");
             switch (typeId) {
                 case 0:
@@ -134,7 +145,8 @@ public class AccRepository implements AppRepository<Account> {
                     account.setType(ADMIN);
                     break;
                 default:
-                    throw new RuntimeException("Wrong type parameter from data base!!! User#" + account.getId());
+                    throw new SQLException("Wrong type parameter from data base!!! " +
+                            "User#" + account.getId() + ". Type: " + typeId);
             }
             accountList.add(account);
         }

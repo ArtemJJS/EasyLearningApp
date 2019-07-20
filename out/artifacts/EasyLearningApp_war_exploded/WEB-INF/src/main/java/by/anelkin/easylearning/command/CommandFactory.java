@@ -15,7 +15,9 @@ public class CommandFactory {
         CASH_OUT,
         APPROVE_COURSE,
         DECLINE_COURSE_APPROVAL,
-        ADD_COURSE_TO_REVIEW
+        ADD_COURSE_TO_REVIEW,
+        APPROVE_AVATAR_CHANGE,
+        DECLINE_AVATAR_CHANGE
 
     }
 
@@ -54,6 +56,12 @@ public class CommandFactory {
                 break;
             case ADD_COURSE_TO_REVIEW:
                 command = new AddCourseToReviewCommand();
+                break;
+            case APPROVE_AVATAR_CHANGE:
+                command = new ApproveAccAvatarCommand();
+                break;
+            case DECLINE_AVATAR_CHANGE:
+                command = new DeclineAccAvatarCommand();
                 break;
 
         }

@@ -30,12 +30,18 @@ import java.util.List;
         maxFileSize = 1024 * 1024,
         maxRequestSize = 1024 * 1024 * 5)
 public class ImgUploadServlet extends HttpServlet {
-    private static final String PREVIOUS_OPERATION_MSG = "previous_operation_message";
+    // TODO: 7/19/2019 может форвардить с сообщением?
+    private static final String REDIRECT_TO = "/account";
+    private static final String PREVIOUS_OPERATION_MSG = "Image added to review.";
     private static final String ATTR_USER = "user";
+    private static final String ATTR_FILE_EXTENSION = "file_extension";
     private static final String ATTR_FILE_NAME = "file_name";
     private static final String ERROR_MSG = "You must be a registered user to process file uploading!";
-    private static final String FILE_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/account_avatar/";
-    private static final String TEMP_FILE_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/account_avatar/" + "temp_";
+    // FIXME: 7/19/2019 относительный путь
+    private static final String ACC_AVATAR_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/account_avatar/";
+    private static final String TEMP_ACC_AVATAR_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/account_avatar_update/";
+    private static final String TEMP_FILE_PREFIX = "temp_";
+
     // TODO: 7/17/2019 инициализация пути папки в init()?? но тогда нужно поле сервлету???
 
     @Override
@@ -71,30 +77,34 @@ public class ImgUploadServlet extends HttpServlet {
                     }
                     String fileName = item.getName();
                     String fileExtension = fileName.substring(fileName.lastIndexOf("."));
+                    req.setAttribute(ATTR_FILE_EXTENSION, fileExtension);
                     String accId = String.valueOf(account.getId());
 
                     //write file as temp, if successful - delete previous version if exists
                     // and rename current with correct path
                     // FIXME: 7/17/2019 фото обновляется не сразу на странице аккаунта??? (через какое-то время)
-                    // FIXME: 7/17/2019 кеш?? как исправить??? может это из-за дефолтного сервлета?
-                    File file = new File(TEMP_FILE_LOCATION + accId + fileExtension);
+                    // FIXME: 7/17/2019 кеш?? как исправить?
+
+                    Files.deleteIfExists(Paths.get(TEMP_ACC_AVATAR_LOCATION  + accId + fileExtension));
+                    File file = new File(TEMP_ACC_AVATAR_LOCATION  + accId + fileExtension);
                     item.write(file);
-                    Files.deleteIfExists(Paths.get(FILE_LOCATION + accId + fileExtension));
-                    file.renameTo(new File(FILE_LOCATION + accId + fileExtension));
-                    req.setAttribute(ATTR_FILE_NAME, accId + fileExtension);
+
+//                    Files.deleteIfExists(Paths.get(FILE_LOCATION + accId + fileExtension));
+//                    file.renameTo(new File(FILE_LOCATION + accId + fileExtension));
+//                    req.setAttribute(ATTR_FILE_NAME, accId + fileExtension);
                 }
             }
 
+
             SessionRequestContent requestContent = new SessionRequestContent();
             requestContent.extractValues(req);
-            (new AccountService()).updateAccImage(requestContent);
+            (new AccountService()).addAccAvatarToReview(requestContent);
+//            (new AccountService()).updateAccImage(requestContent);
             requestContent.insertAttributes(req);
-            resp.sendRedirect(req.getContextPath() + "/account");
+
+            resp.sendRedirect(req.getContextPath() + REDIRECT_TO);
         } catch (Exception e) {
-            // FIXME: 7/17/2019
             throw new ServletException(e);
         }
-
-
     }
 }
