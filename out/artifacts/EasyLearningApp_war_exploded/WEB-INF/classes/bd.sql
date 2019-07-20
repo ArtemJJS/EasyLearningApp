@@ -1,1 +1,1 @@
-select * from account where update_photo_path NOT IN ('' AND NULL);
+select * from course where update_img_path NOT IN ('' AND NULL);

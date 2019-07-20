@@ -159,6 +159,7 @@ public class AccountService {
             String fileName = currAccount.getUpdatePhotoPath();
 
             try {
+                // FIXME: 7/20/2019 по идее удалит дефолтный автар из папки если он стоит????
                 File file = new File(ACC_AVATAR_LOCATION_TEMP + currAccount.getUpdatePhotoPath());
                 Files.deleteIfExists(Paths.get(ACC_AVATAR_LOCATION + currAccount.getPathToPhoto()));
                 file.renameTo(new File(ACC_AVATAR_LOCATION + currAccount.getPathToPhoto()));

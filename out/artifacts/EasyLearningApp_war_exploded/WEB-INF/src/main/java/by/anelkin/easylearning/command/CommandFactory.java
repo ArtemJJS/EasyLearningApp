@@ -1,6 +1,5 @@
 package by.anelkin.easylearning.command;
 
-import by.anelkin.easylearning.command.*;
 import lombok.NonNull;
 
 public class CommandFactory {
@@ -19,8 +18,9 @@ public class CommandFactory {
         APPROVE_AVATAR_CHANGE,
         DECLINE_AVATAR_CHANGE,
         CHANGE_ACC_IMG,
-        CHANGE_COURSE_IMG
-
+        CHANGE_COURSE_IMG,
+        APPROVE_COURSE_IMG_CHANGE,
+        DECLINE_COURSE_IMG_CHANGE
     }
 
     public Command getCommand(@NonNull CommandType type) {
@@ -70,6 +70,12 @@ public class CommandFactory {
                 break;
             case CHANGE_COURSE_IMG:
                 command = new ChangeCourseImgCommand();
+                break;
+            case APPROVE_COURSE_IMG_CHANGE:
+                command = new ApproveCourseImgChangeCommand();
+                break;
+            case DECLINE_COURSE_IMG_CHANGE:
+                command = new DeclineCourseImgChange();
                 break;
 
         }

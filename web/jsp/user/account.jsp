@@ -38,8 +38,9 @@
                     <div class="link"><a href="${pageContext.request.contextPath}/account/author/cash-out">CashOut</a></div>
                 </c:when>
                 <c:when test="${curr_role.toString() == 'ADMIN'}">
-                    <div class="link"><a href="${pageContext.request.contextPath}/admin/course-approval">Add course request</a></div>
-                    <div class="link"><a href="${pageContext.request.contextPath}/admin/approve-acc-avatar">Change img request</a></div>
+                    <div class="link"><a href="${pageContext.request.contextPath}/admin/course-approval">Courses on review</a></div>
+                    <div class="link"><a href="${pageContext.request.contextPath}/admin/approve-course-img">Course images on review</a></div>
+                    <div class="link"><a href="${pageContext.request.contextPath}/admin/approve-acc-avatar">Account images on review</a></div>
                     <div class="link"><a href="">Dashboard</a></div>
                 </c:when>
             </c:choose>

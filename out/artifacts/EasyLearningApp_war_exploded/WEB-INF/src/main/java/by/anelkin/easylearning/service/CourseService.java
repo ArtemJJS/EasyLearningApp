@@ -12,10 +12,16 @@ import by.anelkin.easylearning.specification.chapter.SelectChapterByNameAndCours
 import by.anelkin.easylearning.specification.course.SelectByStateSpecification;
 import by.anelkin.easylearning.specification.course.SelectCourseByIdSpecification;
 import by.anelkin.easylearning.specification.course.SelectCourseByNameSpecification;
+import by.anelkin.easylearning.specification.course.SelectCourseUpdateImgSpecification;
 import by.anelkin.easylearning.specification.lesson.SelectByChapterIdSpecification;
+import com.mysql.cj.jdbc.exceptions.NotUpdatable;
 import lombok.extern.log4j.Log4j;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +31,10 @@ import static by.anelkin.easylearning.entity.Course.*;
 
 @Log4j
 public class CourseService {
+    private static final String COURSE_IMG_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web";
+    private static final String COURSE_IMG_LOCATION_TEMP = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web";
+    private static final String COURSE_DEFAULT_IMG_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/course_img/default_course_avatar.png";
+
     private static final String ATTR_NEED_APPROVAL = "courses_need_approval";
     private static final String ATTR_USER = "user";
     private static final String ATTR_COURSE_ID = "course_id";
@@ -33,12 +43,39 @@ public class CourseService {
     private static final String ATTR_COURSE_PRICE = "course_price";
     private static final String ATTR_CHAPTER_NAME = "chapter_name";
     private static final String ATTR_COURSE_ALREADY_EXISTS = "course_exists_msg";
+
+    private static final String PREVIOUS_OPERATION_MSG = "previous_operation_message";
     private static final String MSG_COURSE_ALREADY_EXISTS = "Course with name specified already exists! Try another one!";
     private static final String DEFAULT_IMG = "default_course_avatar.png";
     private static final String PATTERN_LESSON_TITLE = "lesson_title_";
     private static final String PATTERN_LESSON_CONTENT = "lesson_content_";
     private static final String PATTERN_LESSON_DURATION = "lesson_duration_";
+    private static final String EMPTY_STRING = "";
 
+
+    public void approveCourseImgChange(SessionRequestContent requestContent) throws ServiceException {
+        CourseRepository repository = new CourseRepository();
+        String courseName = requestContent.getRequestParameters().get(ATTR_COURSE_NAME)[0];
+        try {
+            Course course = repository.query(new SelectCourseByNameSpecification(courseName)).get(0);
+            String imgToApprovePath = course.getUpdatePhotoPath();
+            String currImgPath = COURSE_IMG_LOCATION + course.getPathToPicture();
+            if (!currImgPath.equals(COURSE_DEFAULT_IMG_LOCATION)) {
+                Files.deleteIfExists(Paths.get(currImgPath));
+            }
+            File file = new File(COURSE_IMG_LOCATION_TEMP + imgToApprovePath);
+            file.renameTo(new File(currImgPath));
+            Files.deleteIfExists(Paths.get(COURSE_IMG_LOCATION_TEMP + imgToApprovePath));
+
+            course.setUpdatePhotoPath(EMPTY_STRING);
+            course.setPathToPicture(imgToApprovePath); //it is getting correct value inside repo
+            repository.update(course);
+            requestContent.getRequestAttributes().put(ATTR_NEED_APPROVAL
+                    , repository.query(new SelectCourseUpdateImgSpecification()));
+        } catch (RepositoryException | NullPointerException | IOException e) {
+            throw new ServiceException(e);
+        }
+    }
 
     public void initCoursePage(SessionRequestContent requestContent) throws ServiceException {
         CourseRepository repository = new CourseRepository();
@@ -48,7 +85,7 @@ public class CourseService {
         List<Course> courses = null;
         try {
             courses = repository.query(new SelectCourseByIdSpecification(courseId));
-        } catch (RepositoryException e) {
+        } catch (RepositoryException | NullPointerException e) {
             throw new ServiceException(e);
         }
         if (courses.size() != 1) {
@@ -62,6 +99,7 @@ public class CourseService {
         requestContent.getRequestAttributes().put("author_of_course", (new AccountService()).takeAuthorOfCourse(courseId));
     }
 
+    // TODO: 7/20/2019 может объединить этот и след методы????
     public void initCourseApprovalPage(SessionRequestContent requestContent) throws ServiceException {
         CourseRepository repository = new CourseRepository();
         try {
@@ -69,6 +107,16 @@ public class CourseService {
             requestContent.getRequestAttributes().put(ATTR_NEED_APPROVAL, courses);
         } catch (RepositoryException e) {
             // FIXME: 7/18/2019
+            throw new ServiceException(e);
+        }
+    }
+
+    public void initCourseImgApprovalPage(SessionRequestContent requestContent) throws ServiceException {
+        CourseRepository repository = new CourseRepository();
+        try {
+            List<Course> courses = repository.query(new SelectCourseUpdateImgSpecification());
+            requestContent.getRequestAttributes().put(ATTR_NEED_APPROVAL, courses);
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -83,11 +131,12 @@ public class CourseService {
             repository.update(currCourse);
 //if I will change command result to forward, this will init correct courses list to approve:
 //          initCourseApprovalPage(requestContent);
-        } catch (RepositoryException e) {
+        } catch (RepositoryException | NullPointerException e) {
             // FIXME: 7/18/2019
             throw new ServiceException(e);
         }
     }
+
 
     public void freezeCourse(SessionRequestContent requestContent) throws ServiceException {
         // TODO: 7/18/2019 защиту если придет не инт
@@ -97,11 +146,10 @@ public class CourseService {
             Course currCourse = repository.query(new SelectCourseByIdSpecification(courseId)).get(0);
             currCourse.setState(CourseState.FREEZING);
             repository.update(currCourse);
-        } catch (RepositoryException e) {
+        } catch (RepositoryException | NullPointerException e) {
             throw new ServiceException(e);
         }
     }
-
 
     // TODO: 7/18/2019 если fail то поудалять все что добавилось?
     // TODO: 7/18/2019 подумать может получится разнести хотя бы на два метода?
@@ -196,7 +244,7 @@ public class CourseService {
                 List<CourseLesson> lessons = lessonRepository.query(new SelectByChapterIdSpecification(chapter.getId()));
                 courseContent.put(chapter, lessons);
             }
-        } catch (RepositoryException e) {
+        } catch (RepositoryException | NullPointerException e) {
             throw new ServiceException(e);
         }
         return courseContent;

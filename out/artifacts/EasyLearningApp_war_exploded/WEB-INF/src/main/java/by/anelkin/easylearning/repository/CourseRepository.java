@@ -19,26 +19,29 @@ import static by.anelkin.easylearning.entity.Course.*;
 @Log4j
 public class CourseRepository implements AppRepository<Course> {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private static final String PATH_TO_PICTURE = "/resources/course_avatar/";
+    private static final String PATH_TO_PICTURE = "/resources/course_img/";
+    private static final String PATH_TO_PICTURE_UPDATE = "/resources/course_img_update/";
     private static final String PATH_SPLITTER = "/";
     private ConnectionPool pool = ConnectionPool.getInstance();
     @Language("sql")
-    private static final String QUERY_INSERT = "INSERT INTO course(course_author_id ,course_name, course_description, course_creation_date, course_picture, course_price, state) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String QUERY_INSERT = "INSERT INTO course(course_author_id ,course_name, course_description, course_creation_date, course_picture, course_price, state, update_img_path) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     @Language("sql")
     private static final String QUERY_DELETE = "UPDATE course SET state = 0 WHERE course_id = ?";
     @Language("sql")
     private static final String QUERY_UPDATE = "UPDATE course SET course_name = ?, course_description = ?, " +
-            "course_creation_date = ?, course_picture = ?, course_price = ?, state = ? WHERE course_id = ?";
+            "course_creation_date = ?, course_picture = ?, course_price = ?, state = ?, update_img_path = ? WHERE course_id = ?";
 
     @Override
     public boolean update(@NonNull Course course) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
             String[] pathToImg = course.getPathToPicture().split(PATH_SPLITTER);
+            String[] pathToImgUpdate = course.getUpdatePhotoPath().split(PATH_SPLITTER);
             String[] params = {course.getName(), course.getDescription(),
                     dateFormat.format(course.getCreationDate()), pathToImg[pathToImg.length - 1],
-                    course.getPrice().toString(), String.valueOf(course.getState().ordinal()), String.valueOf(course.getId())};
+                    course.getPrice().toString(), String.valueOf(course.getState().ordinal()),
+                    pathToImgUpdate[pathToImgUpdate.length - 1], String.valueOf(course.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
@@ -65,8 +68,10 @@ public class CourseRepository implements AppRepository<Course> {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_INSERT)) {
             String[] pathToImg = course.getPathToPicture().split(PATH_SPLITTER);
+            String[] pathToImgUpdate = course.getUpdatePhotoPath().split(PATH_SPLITTER);
             String[] params = {String.valueOf(course.getAuthorId()), course.getName(), course.getDescription(), dateFormat.format(course.getCreationDate()),
-                    pathToImg[pathToImg.length - 1], course.getPrice().toString(), String.valueOf(course.getState().ordinal())};
+                    pathToImg[pathToImg.length - 1], course.getPrice().toString(),
+                    String.valueOf(course.getState().ordinal()), pathToImgUpdate[pathToImgUpdate.length - 1]};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
@@ -110,6 +115,14 @@ public class CourseRepository implements AppRepository<Course> {
             course.setState(CourseState.values()[resultSet.getInt("state")]);
             // TODO: 7/12/2019 продумать если нет оценок (уходит null, обработка в логике)
             String courseAvgMark = resultSet.getString("avg_mark");
+
+            String updatePhotoFileName = resultSet.getString("update_img_path");
+            if (updatePhotoFileName == null || updatePhotoFileName.isEmpty()) {
+                course.setUpdatePhotoPath("");
+            } else {
+                course.setUpdatePhotoPath(PATH_TO_PICTURE_UPDATE + updatePhotoFileName);
+            }
+
             if (courseAvgMark != null) {
                 course.setAvgMark(Double.parseDouble(courseAvgMark));
             }

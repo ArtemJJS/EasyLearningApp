@@ -16,6 +16,7 @@ public class Course extends AppEntity {
     private String description;
     private Date creationDate;
     private String pathToPicture;
+    private String updatePhotoPath;
     private BigDecimal price;
     private double avgMark;
     private int lessonAmount;
