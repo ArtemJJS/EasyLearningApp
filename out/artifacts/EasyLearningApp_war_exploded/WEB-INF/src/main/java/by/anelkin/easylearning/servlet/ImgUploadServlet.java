@@ -1,7 +1,11 @@
 package by.anelkin.easylearning.servlet;
 
 
+import by.anelkin.easylearning.command.CommandFactory;
 import by.anelkin.easylearning.entity.Account;
+import by.anelkin.easylearning.exception.RepositoryException;
+import by.anelkin.easylearning.exception.ServiceException;
+import by.anelkin.easylearning.receiver.RequestReceiver;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.service.AccountService;
@@ -23,6 +27,10 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 
+import static by.anelkin.easylearning.command.CommandFactory.*;
+import static by.anelkin.easylearning.command.CommandFactory.CommandType.*;
+import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.FORWARD;
+
 @WebServlet(urlPatterns = "/upload_img_servlet")
 @MultipartConfig(
         location = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/account_avatar",
@@ -41,8 +49,12 @@ public class ImgUploadServlet extends HttpServlet {
     private static final String ACC_AVATAR_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/account_avatar/";
     private static final String TEMP_ACC_AVATAR_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/account_avatar_update/";
     private static final String TEMP_FILE_PREFIX = "temp_";
-
+    private static final String TEMP_COURSE_IMG_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/course_img_update/";
     // TODO: 7/17/2019 инициализация пути папки в init()?? но тогда нужно поле сервлету???
+
+    private String commandStr;
+    private String courseId;
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -51,6 +63,12 @@ public class ImgUploadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        commandStr = req.getHeader("referer");
+        CommandType commandType = commandStr.endsWith("change-picture") ? CHANGE_ACC_IMG : CHANGE_COURSE_IMG;
+        if (commandType == CHANGE_COURSE_IMG) {
+            String tempCourseId = commandStr.substring(commandStr.lastIndexOf("-") + 1);
+            courseId = tempCourseId.substring(tempCourseId.lastIndexOf("=") + 1);
+        }
         boolean isMultiPart = ServletFileUpload.isMultipartContent(req);
         if (!isMultiPart) {
             throw new ServletException("Request must be multipart!");
@@ -77,34 +95,57 @@ public class ImgUploadServlet extends HttpServlet {
                     }
                     String fileName = item.getName();
                     String fileExtension = fileName.substring(fileName.lastIndexOf("."));
-                    req.setAttribute(ATTR_FILE_EXTENSION, fileExtension);
-                    String accId = String.valueOf(account.getId());
 
-                    //write file as temp, if successful - delete previous version if exists
-                    // and rename current with correct path
+                    req.setAttribute(ATTR_FILE_EXTENSION, fileExtension);
+
+
                     // FIXME: 7/17/2019 фото обновляется не сразу на странице аккаунта??? (через какое-то время)
                     // FIXME: 7/17/2019 кеш?? как исправить?
 
-                    Files.deleteIfExists(Paths.get(TEMP_ACC_AVATAR_LOCATION  + accId + fileExtension));
-                    File file = new File(TEMP_ACC_AVATAR_LOCATION  + accId + fileExtension);
-                    item.write(file);
+                    String currId;
+                    String currFilePath;
 
-//                    Files.deleteIfExists(Paths.get(FILE_LOCATION + accId + fileExtension));
-//                    file.renameTo(new File(FILE_LOCATION + accId + fileExtension));
-//                    req.setAttribute(ATTR_FILE_NAME, accId + fileExtension);
+                    switch (commandType) {
+                        case CHANGE_ACC_IMG:
+                            currId = String.valueOf(account.getId());
+                            currFilePath = TEMP_ACC_AVATAR_LOCATION + currId + fileExtension;
+                            break;
+                        case CHANGE_COURSE_IMG:
+                            currId = String.valueOf(courseId);
+                            currFilePath = TEMP_COURSE_IMG_LOCATION + currId + fileExtension;
+                            break;
+                        default:
+                            throw new ServletException("Unexpected command: " + commandType);
+                    }
+
+                    Files.deleteIfExists(Paths.get(currFilePath));
+                    File file = new File(currFilePath);
+                    item.write(file);
                 }
             }
-
-
-            SessionRequestContent requestContent = new SessionRequestContent();
-            requestContent.extractValues(req);
-            (new AccountService()).addAccAvatarToReview(requestContent);
-//            (new AccountService()).updateAccImage(requestContent);
-            requestContent.insertAttributes(req);
-
-            resp.sendRedirect(req.getContextPath() + REDIRECT_TO);
         } catch (Exception e) {
             throw new ServletException(e);
+        }
+
+
+
+
+        SessionRequestContent requestContent = new SessionRequestContent();
+        requestContent.extractValues(req);
+        RequestReceiver receiver = new RequestReceiver(CommandType.CHANGE_ACC_IMG, requestContent);
+        SessionRequestContent.ResponseType responseType;
+        try {
+            responseType = receiver.executeCommand();
+        } catch (RepositoryException | ServiceException e) {
+            throw new ServletException(e);
+        }
+
+        requestContent.insertAttributes(req);
+        String path = requestContent.getPath();
+        if (responseType == FORWARD) {
+            req.getRequestDispatcher(path).forward(req, resp);
+        } else {
+            resp.sendRedirect(path);
         }
     }
 }

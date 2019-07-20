@@ -133,11 +133,11 @@
 
     <servlet>
         <servlet-name>ChangeAccPhoto</servlet-name>
-        <jsp-file>/jsp/global/change_acc_photo_page.jsp</jsp-file>
+        <jsp-file>/jsp/global/change_picture.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>ChangeAccPhoto</servlet-name>
-        <url-pattern>/account/change-photo</url-pattern>
+        <url-pattern>/account/change-picture</url-pattern>
     </servlet-mapping>
 
     <servlet>

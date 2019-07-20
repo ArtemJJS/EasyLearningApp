@@ -17,7 +17,9 @@ public class CommandFactory {
         DECLINE_COURSE_APPROVAL,
         ADD_COURSE_TO_REVIEW,
         APPROVE_AVATAR_CHANGE,
-        DECLINE_AVATAR_CHANGE
+        DECLINE_AVATAR_CHANGE,
+        CHANGE_ACC_IMG,
+        CHANGE_COURSE_IMG
 
     }
 
@@ -62,6 +64,12 @@ public class CommandFactory {
                 break;
             case DECLINE_AVATAR_CHANGE:
                 command = new DeclineAccAvatarCommand();
+                break;
+            case CHANGE_ACC_IMG:
+                command = new ChangeAccImgCommand();
+                break;
+            case CHANGE_COURSE_IMG:
+                command = new ChangeCourseImgCommand();
                 break;
 
         }

@@ -24,7 +24,7 @@
         <div class="role">${sessionScope.role}</div>
         <div class="balance">Balance: ${user.balance}$</div>
         <div class="links">
-            <div class="link"><a href="${pageContext.request.contextPath}/account/change-photo">Change photo</a></div>
+            <div class="link"><a href="${pageContext.request.contextPath}/account/change-picture">Change photo</a></div>
             <div class="link"><a href="${pageContext.request.contextPath}/account/change-password">Change password</a></div>
             <div class="link"><a href="${pageContext.request.contextPath}/account/payments">Payments</a></div>
             <c:choose>
