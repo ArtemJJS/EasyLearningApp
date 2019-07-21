@@ -4,14 +4,14 @@ import by.anelkin.easylearning.entity.Course;
 import by.anelkin.easylearning.specification.AppSpecification;
 import org.intellij.lang.annotations.Language;
 
-public class SelectCourseByNameSpecification implements AppSpecification<Course> {
-    private String courseName;
+public class SelectCourseSearchSpecification implements AppSpecification<Course> {
+    private String keyPhrase;
+    private static final String SQL_PATTERN_SPECIFICATOR = "%";
     @Language("sql")
     private static final String QUERY = "SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER(?)";
 
-
-    public SelectCourseByNameSpecification(String courseName) {
-        this.courseName = courseName;
+    public SelectCourseSearchSpecification(String keyPhrase) {
+        this.keyPhrase = keyPhrase;
     }
 
     @Override
@@ -21,6 +21,7 @@ public class SelectCourseByNameSpecification implements AppSpecification<Course>
 
     @Override
     public String[] getStatementParameters() {
-        return new String[]{courseName};
+        String correctedKeyPhrase = SQL_PATTERN_SPECIFICATOR + keyPhrase + SQL_PATTERN_SPECIFICATOR;
+        return new String[]{correctedKeyPhrase};
     }
 }

@@ -17,7 +17,7 @@
 <body>
 <%@include file="/jsp/header.jsp"%>
 <main>
-    <c:set var="courses" value="${pageContext.request.getAttribute('courses_need_approval')}"/>
+    <c:set var="courses" value="${pageContext.request.getAttribute('courses_list')}"/>
     <div class="page_title">Change course image requests:</div>
     <c:forEach var="course" items="${courses}">
         <div class="course_wrapper">

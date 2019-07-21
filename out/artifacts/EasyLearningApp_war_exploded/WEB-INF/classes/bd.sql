@@ -1,1 +1,4 @@
-select * from course where update_img_path NOT IN ('' AND NULL);
+select * from account where acc_login like ('%user%');
+
+
+SELECT * FROM course WHERE LOWER(course_description) LIKE ('%2%');

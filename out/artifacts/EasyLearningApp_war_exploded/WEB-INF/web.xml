@@ -203,4 +203,13 @@
         <url-pattern>/admin/approve-course-img</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>SearchResultPage</servlet-name>
+        <jsp-file>/jsp/global/search_result_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchResultPage</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
 </web-app>

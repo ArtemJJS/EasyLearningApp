@@ -7,7 +7,7 @@ import org.intellij.lang.annotations.Language;
 public class SelectAccByLoginSpecification implements AppSpecification<Account> {
     private String login;
     @Language("sql")
-    private static final String QUERY = "SELECT * FROM account WHERE acc_login = ?";
+    private static final String QUERY = "SELECT * FROM account WHERE LOWER(acc_login) = LOWER(?)";
 
     public SelectAccByLoginSpecification(String login) {
         this.login = login;

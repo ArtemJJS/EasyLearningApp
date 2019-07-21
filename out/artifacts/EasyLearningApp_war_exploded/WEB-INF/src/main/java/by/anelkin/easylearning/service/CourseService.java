@@ -7,6 +7,7 @@ import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.ChapterRepository;
 import by.anelkin.easylearning.repository.CourseRepository;
 import by.anelkin.easylearning.repository.LessonRepository;
+import by.anelkin.easylearning.specification.AppSpecification;
 import by.anelkin.easylearning.specification.chapter.SelectAllFromCourseSpecification;
 import by.anelkin.easylearning.specification.chapter.SelectChapterByNameAndCourseIdSpecification;
 import by.anelkin.easylearning.specification.course.SelectByStateSpecification;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.security.Provider;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +38,7 @@ public class CourseService {
     private static final String COURSE_DEFAULT_IMG_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/course_img/default_course_avatar.png";
     private static final String COURSE_IMG_FOLDER = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/course_img/";
 
-    private static final String ATTR_NEED_APPROVAL = "courses_need_approval";
+    private static final String ATTR_COURSES_LIST = "courses_list";
     private static final String ATTR_USER = "user";
     private static final String ATTR_COURSE_ID = "course_id";
     private static final String ATTR_COURSE_NAME = "course_name";
@@ -54,6 +56,7 @@ public class CourseService {
     private static final String PATTERN_LESSON_DURATION = "lesson_duration_";
     private static final String EMPTY_STRING = "";
     private static final String PATH_SPLITTER = "/";
+
 
 
     public void addCourseImgToReview(SessionRequestContent requestContent) throws ServiceException {
@@ -86,7 +89,7 @@ public class CourseService {
             course.setUpdatePhotoPath(EMPTY_STRING);
             course.setPathToPicture(imgToApprovePath); //it is getting correct value inside repo
             repository.update(course);
-            requestContent.getRequestAttributes().put(ATTR_NEED_APPROVAL
+            requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));
         } catch (RepositoryException | NullPointerException | IOException e) {
             throw new ServiceException(e);
@@ -100,7 +103,7 @@ public class CourseService {
             Course course = repository.query(new SelectCourseByNameSpecification(courseName)).get(0);
             Files.deleteIfExists(Paths.get(COURSE_IMG_LOCATION_TEMP + course.getUpdatePhotoPath()));
             course.setUpdatePhotoPath(EMPTY_STRING);
-            requestContent.getRequestAttributes().put(ATTR_NEED_APPROVAL
+            requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));
         } catch (RepositoryException | NullPointerException | IOException e) {
             throw new ServiceException(e);
@@ -134,9 +137,19 @@ public class CourseService {
         CourseRepository repository = new CourseRepository();
         try {
             List<Course> courses = repository.query(new SelectByStateSpecification(CourseState.NOT_APPROVED));
-            requestContent.getRequestAttributes().put(ATTR_NEED_APPROVAL, courses);
+            requestContent.getRequestAttributes().put(ATTR_COURSES_LIST, courses);
         } catch (RepositoryException e) {
-            // FIXME: 7/18/2019
+            throw new ServiceException(e);
+        }
+    }
+
+    // TODO: 7/21/2019 метод замещает несколько разных? после проверки попробовать совместить
+    public void initRequestBySpecification(SessionRequestContent requestContent, AppSpecification<Course> specification) throws ServiceException {
+        CourseRepository repository = new CourseRepository();
+        try {
+            List<Course> courses = repository.query(specification);
+            requestContent.getRequestAttributes().put(ATTR_COURSES_LIST, courses);
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -145,7 +158,7 @@ public class CourseService {
         CourseRepository repository = new CourseRepository();
         try {
             List<Course> courses = repository.query(new SelectCourseUpdateImgSpecification());
-            requestContent.getRequestAttributes().put(ATTR_NEED_APPROVAL, courses);
+            requestContent.getRequestAttributes().put(ATTR_COURSES_LIST, courses);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
@@ -187,6 +200,8 @@ public class CourseService {
         Map<String, String[]> params = requestContent.getRequestParameters();
         CourseRepository courseRepo = new CourseRepository();
         String courseName = params.get(ATTR_COURSE_NAME)[0];
+        // FIXME: 7/21/2019 при повторной отправке после форварда адрес
+        //  отличается(там адрес сервлета) и бьет ошибку
         boolean isCourseNew = requestContent.getRequestReferer().endsWith("author/add-new-course");
         List<Course> courses = courseRepo.query(new SelectCourseByNameSpecification(courseName));
         if (courses.size() > 0 && isCourseNew) {
@@ -203,6 +218,7 @@ public class CourseService {
         course.setPrice(new BigDecimal(params.get(ATTR_COURSE_PRICE)[0]));
         course.setCreationDate(new Date(System.currentTimeMillis()));
         course.setPathToPicture(DEFAULT_IMG);
+        course.setUpdatePhotoPath(EMPTY_STRING);
         course.setState(CourseState.NOT_APPROVED);
         if (isCourseNew) {
             courseRepo.insert(course);

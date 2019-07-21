@@ -45,19 +45,6 @@ header {
     align-items: center;
 }
 
-.panel-item{
-    margin-right: 8%;
-}
-
-.panel-item a{
-    text-decoration: none;
-}
-
-.panel-item a:hover{
-    text-decoration: underline;
-    color: green;
-}
-
 .user{
     width:20%;
     padding-right: 20px;
@@ -94,3 +81,27 @@ header {
     padding: 0;
     width: 120px;
 }
+
+#header_search_form{
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+}
+.header_search_field{
+    margin: 0;
+    width: 450px;
+    height: 30px;
+    font-size: 20px;
+    border-right: none;
+    text-align: end;
+    padding-right: 10px;
+}
+
+.header_submit_btn{
+    margin: 0;
+    width: 80px;
+    /*align-self: normal;*/
+    height: 30px;
+    font-size: 20px;
+}
+

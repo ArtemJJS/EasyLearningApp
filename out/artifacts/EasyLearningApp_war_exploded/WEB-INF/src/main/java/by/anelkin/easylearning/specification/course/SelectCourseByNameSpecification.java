@@ -7,7 +7,7 @@ import org.intellij.lang.annotations.Language;
 public class SelectCourseByNameSpecification implements AppSpecification<Course> {
     private String courseName;
     @Language("sql")
-    private static final String QUERY = "SELECT * FROM course WHERE course_name = ?";
+    private static final String QUERY = "SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER(?)";
 
 
     public SelectCourseByNameSpecification(String courseName) {

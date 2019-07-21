@@ -20,7 +20,8 @@ public class CommandFactory {
         CHANGE_ACC_IMG,
         CHANGE_COURSE_IMG,
         APPROVE_COURSE_IMG_CHANGE,
-        DECLINE_COURSE_IMG_CHANGE
+        DECLINE_COURSE_IMG_CHANGE,
+        SEARCH_COURSE
     }
 
     public Command getCommand(@NonNull CommandType type) {
@@ -76,6 +77,9 @@ public class CommandFactory {
                 break;
             case DECLINE_COURSE_IMG_CHANGE:
                 command = new DeclineCourseImgChange();
+                break;
+            case SEARCH_COURSE:
+                command = new SearchCourseCommand();
                 break;
 
         }

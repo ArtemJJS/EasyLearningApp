@@ -17,7 +17,7 @@
 <%@include file="/jsp/header.jsp" %>
 <main>
     <div class="courses_block">
-        <c:set var="courses" value="${requestScope.courses_need_approval}"/>
+        <c:set var="courses" value="${requestScope.courses_list}"/>
         <c:choose>
             <c:when test="${courses == null}">
                 <c:out value="Nothing to approve..."/>
