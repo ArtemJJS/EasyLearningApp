@@ -17,11 +17,6 @@
 <body>
 <%@include file="/jsp/header.jsp" %>
 <main>
-<%--    <form id="header_search_form" action="${pageContext.request.contextPath}/search">--%>
-<%--        &lt;%&ndash;               <input id="header_hidden_input" type="hidden" name="command_name" value="search_course">&ndash;%&gt;--%>
-<%--        <input class="header_search_field" type="text" name="search_key" placeholder="search course">--%>
-<%--        <input class="header_submit_btn" type="submit" value="Search!">--%>
-<%--    </form>--%>
     <div class="courses_block">
         <c:set var="courses_available" value="${pageContext.request.getAttribute('courses_list')}"/>
         <c:choose>
@@ -58,7 +53,28 @@
             </c:otherwise>
         </c:choose>
     </div>
+    <div class="pagination">
+        <form class="pages_form" method="get" action="${pageContext.request.contextPath}/search">
+            <input type="hidden" name="command_name" value="search_course">
+            <input type="hidden" name="search_key" value="${pageContext.request.getParameter('search_key')}">
+            <input class="page_number" type="hidden" name="page" value="1">
+            <input class="submit_btn" type="submit" value="<">
+        </form>
+        <form class="pages_form" method="get" action="${pageContext.request.contextPath}/search">
+            <input type="hidden" name="command_name" value="search_course">
+            <input type="hidden" name="search_key" value="${pageContext.request.getParameter('search_key')}">
+            <input class="page_number" type="hidden" name="page" value="1">
+            <input class="submit_btn" type="submit" value=">">
+        </form>
+    </div>
 </main>
-
+<script>let currPageNumber = ${pageContext.request.getParameter('page')};
+</script>
+<script>
+    let hasMorePages =  ${pageContext.request.getAttribute('has_more_pages')};
+</script>
+<script>
+    <%@include file="/js/search_page.js"%>
+</script>
 </body>
 </html>

@@ -19,7 +19,7 @@ import static by.anelkin.easylearning.receiver.SessionRequestContent.*;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
 
 @Log4j
-@WebServlet(name = "BasicServlet", urlPatterns = "/basic_servlet")
+@WebServlet(name = "BasicServlet", urlPatterns = {"/basic_servlet", "/search"})
 public class BasicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);

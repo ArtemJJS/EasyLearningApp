@@ -72,3 +72,14 @@ main{
     min-width: 100%;
     margin-bottom: 15px;
 }
+
+.pagination{
+    width: 110px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit_btn{
+    width: 40px ;
+}

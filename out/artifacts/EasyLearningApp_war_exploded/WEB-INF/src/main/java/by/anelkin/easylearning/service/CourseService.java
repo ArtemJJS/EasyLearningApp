@@ -10,10 +10,7 @@ import by.anelkin.easylearning.repository.LessonRepository;
 import by.anelkin.easylearning.specification.AppSpecification;
 import by.anelkin.easylearning.specification.chapter.SelectAllFromCourseSpecification;
 import by.anelkin.easylearning.specification.chapter.SelectChapterByNameAndCourseIdSpecification;
-import by.anelkin.easylearning.specification.course.SelectByStateSpecification;
-import by.anelkin.easylearning.specification.course.SelectCourseByIdSpecification;
-import by.anelkin.easylearning.specification.course.SelectCourseByNameSpecification;
-import by.anelkin.easylearning.specification.course.SelectCourseUpdateImgSpecification;
+import by.anelkin.easylearning.specification.course.*;
 import by.anelkin.easylearning.specification.lesson.SelectByChapterIdSpecification;
 import com.mysql.cj.jdbc.exceptions.NotUpdatable;
 import lombok.extern.log4j.Log4j;
@@ -37,6 +34,7 @@ public class CourseService {
     private static final String COURSE_IMG_LOCATION_TEMP = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web";
     private static final String COURSE_DEFAULT_IMG_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/course_img/default_course_avatar.png";
     private static final String COURSE_IMG_FOLDER = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/course_img/";
+    private static final int SEARCH_LIMIT = 4;
 
     private static final String ATTR_COURSES_LIST = "courses_list";
     private static final String ATTR_USER = "user";
@@ -47,6 +45,9 @@ public class CourseService {
     private static final String ATTR_CHAPTER_NAME = "chapter_name";
     private static final String ATTR_COURSE_ALREADY_EXISTS = "course_exists_msg";
     private static final String ATTR_FILE_EXTENSION = "file_extension";
+    private static final String ATTR_SEARCH_KEY = "search_key";
+    private static final String ATTR_PAGE = "page";
+    private static final String ATTR_HAS_MORE_PAGES = "has_more_pages";
 
     private static final String PREVIOUS_OPERATION_MSG = "previous_operation_message";
     private static final String MSG_COURSE_ALREADY_EXISTS = "Course with name specified already exists! Try another one!";
@@ -58,16 +59,15 @@ public class CourseService {
     private static final String PATH_SPLITTER = "/";
 
 
-
     public void addCourseImgToReview(SessionRequestContent requestContent) throws ServiceException {
         int courseId = Integer.parseInt(String.valueOf(requestContent.getRequestAttributes().get(ATTR_COURSE_ID)));
         CourseRepository repository = new CourseRepository();
         try {
             Course course = repository.query(new SelectCourseByIdSpecification(courseId)).get(0);
-            course.setUpdatePhotoPath(course.getId() + (String)requestContent.getRequestAttributes().get(ATTR_FILE_EXTENSION));
+            course.setUpdatePhotoPath(course.getId() + (String) requestContent.getRequestAttributes().get(ATTR_FILE_EXTENSION));
             repository.update(course);
         } catch (RepositoryException | NullPointerException e) {
-           throw new ServiceException(e);
+            throw new ServiceException(e);
         }
     }
 
@@ -78,7 +78,7 @@ public class CourseService {
             Course course = repository.query(new SelectCourseByNameSpecification(courseName)).get(0);
             String imgToApprovePath = course.getUpdatePhotoPath();
             String currImgPath = COURSE_IMG_LOCATION + course.getPathToPicture();
-            String fileName = imgToApprovePath.substring(imgToApprovePath.lastIndexOf(PATH_SPLITTER)+1);
+            String fileName = imgToApprovePath.substring(imgToApprovePath.lastIndexOf(PATH_SPLITTER) + 1);
             if (!currImgPath.equals(COURSE_DEFAULT_IMG_LOCATION)) {
                 Files.deleteIfExists(Paths.get(currImgPath));
             }
@@ -144,10 +144,26 @@ public class CourseService {
     }
 
     // TODO: 7/21/2019 метод замещает несколько разных? после проверки попробовать совместить
-    public void initRequestBySpecification(SessionRequestContent requestContent, AppSpecification<Course> specification) throws ServiceException {
+    public void searchCourses(SessionRequestContent requestContent) throws ServiceException {
+        Map<String, String[]> reqParam = requestContent.getRequestParameters();
         CourseRepository repository = new CourseRepository();
+        String searchKey = reqParam.get(ATTR_SEARCH_KEY)[0];
+        String[] reqParamPageNumbers = reqParam.get(ATTR_PAGE);
+        String searchPageNumber = reqParamPageNumbers == null ? null : reqParamPageNumbers[0];
+        int currPageNumber;
+        if (searchPageNumber == null || searchPageNumber.isEmpty()) {
+            currPageNumber = 0;
+        } else {
+            int tempPageNumber = Integer.parseInt(searchPageNumber);
+            currPageNumber = tempPageNumber < 0 ? 0 : tempPageNumber;
+        }
+        int offset = currPageNumber * SEARCH_LIMIT;
         try {
-            List<Course> courses = repository.query(specification);
+            List<Course> courses = repository.query(new SelectCourseSearchSpecification(searchKey, SEARCH_LIMIT + 1, offset));
+            if (courses.size() > SEARCH_LIMIT) {
+                requestContent.getRequestAttributes().put(ATTR_HAS_MORE_PAGES, "true");
+                courses.remove(courses.size() - 1);
+            }
             requestContent.getRequestAttributes().put(ATTR_COURSES_LIST, courses);
         } catch (RepositoryException e) {
             throw new ServiceException(e);

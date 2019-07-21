@@ -4,6 +4,7 @@ import by.anelkin.easylearning.connection.ConnectionPool;
 import by.anelkin.easylearning.entity.Course;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.specification.AppSpecification;
+import by.anelkin.easylearning.specification.course.SelectCourseSearchSpecification;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
 import org.intellij.lang.annotations.Language;
@@ -85,8 +86,14 @@ public class CourseRepository implements AppRepository<Course> {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(specification.getQuery())) {
             String[] params = specification.getStatementParameters();
-            for (int i = 0; i < params.length; i++) {
-                statement.setString(i + 1, params[i]);
+            if (!(specification instanceof SelectCourseSearchSpecification)) {
+                for (int i = 0; i < params.length; i++) {
+                    statement.setString(i + 1, params[i]);
+                }
+            }else {
+                statement.setString(1, params[0]);
+                statement.setInt(2, Integer.valueOf(params[1]));
+                statement.setInt(3, Integer.valueOf(params[2]));
             }
             log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
             try (ResultSet resultSet = statement.executeQuery()) {

@@ -209,7 +209,9 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>SearchResultPage</servlet-name>
-        <url-pattern>/search</url-pattern>
+        <url-pattern>/search_page</url-pattern>
     </servlet-mapping>
+
+
 
 </web-app>

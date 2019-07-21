@@ -21,7 +21,7 @@
         <div class="logo"><a href="${pageContext.request.contextPath}/easyLearning"><img src="${pageContext.request.contextPath}/resources/logo.jpg" alt="logo"></a></div>
         <div class="panel">
            <form id="header_search_form" action="${pageContext.request.contextPath}/search">
-<%--               <input id="header_hidden_input" type="hidden" name="command_name" value="search_course">--%>
+               <input id="header_hidden_input" type="hidden" name="command_name" value="search_course">
                <input class="header_search_field" type="text" name="search_key" placeholder="search course">
                <input class="header_submit_btn" type="submit" value="Search!">
            </form>
