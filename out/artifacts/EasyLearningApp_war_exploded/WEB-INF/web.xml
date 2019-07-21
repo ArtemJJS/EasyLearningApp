@@ -212,6 +212,14 @@
         <url-pattern>/search_page</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>BuyCoursePage</servlet-name>
+        <jsp-file>/jsp/user/buy_course_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BuyCoursePage</servlet-name>
+        <url-pattern>/user/buy-course</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>

@@ -80,8 +80,11 @@ main{
     margin-bottom: 15px;
 }
 .links{
-    width: 45%;
+    width: 58%;
 
     display: flex;
     justify-content: space-between;
+}
+.links a{
+    font-size: 0.8rem;
 }

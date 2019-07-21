@@ -1,3 +1,4 @@
+<%@ taglib prefix="ctg" uri="customtags" %>
 <%--
   Created by IntelliJ IDEA.
   User: User
@@ -42,8 +43,9 @@
                                 </div>
                                 <div class="course_desc">${course.description}</div>
                             </div>
-                            <a href="${pageContext.request.contextPath}/course/learn?course-id=${course.id}">Continue
-                                learning</a>
+                            <ctg:course-options role="${sessionScope.role}" course="${course}"
+                                                contextPath="${pageContext.request.contextPath}"
+                                                coursesAvailable="${sessionScope.coursesAvailable}"/>
                         </div>
                     </div>
                 </c:forEach>

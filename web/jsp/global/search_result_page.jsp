@@ -7,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="ctg" uri="customtags" %>
 <html>
 <head>
     <title>easyLearning</title>
@@ -45,8 +46,7 @@
                                 </div>
                                 <div class="course_desc">${course.description}</div>
                             </div>
-                            <a href="${pageContext.request.contextPath}/course/learn?course-id=${course.id}">Continue
-                                learning</a>
+                           <ctg:course-options role="${sessionScope.role}" course="${course}" contextPath="${pageContext.request.contextPath}" coursesAvailable="${sessionScope.coursesAvailable}"/>
                         </div>
                     </div>
                 </c:forEach>

@@ -77,7 +77,35 @@
             <type>by.anelkin.easylearning.entity.Course.CourseState</type>
         </attribute>
     </tag>
-
+    <tag>
+        <name>course-options</name>
+        <tag-class>by.anelkin.easylearning.tag.CourseOptionTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>role</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>by.anelkin.easylearning.entity.Account.AccountType</type>
+        </attribute>
+        <attribute>
+            <name>course</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>by.anelkin.easylearning.entity.Course</type>
+        </attribute>
+        <attribute>
+            <name>contextPath</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <name>coursesAvailable</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type><![CDATA[java.util.List<by.anelkin.easylearning.entity.Course>]]></type>
+        </attribute>
+    </tag>
 
 
     <!-- Invoke 'Generate' action to add tags or functions -->
