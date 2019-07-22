@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 22px;
+    color: black;
+}
+
+html {
+    width: 100vw;
+    height: 100vh;
+}
+
+main {
+    width: 1200px;
+    min-height: 400px;
+    border: 1px solid #595959;
+    margin: 100px auto;
+    padding-top: 30px;
+    padding-bottom: 70px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page_title {
+    width: 200px;
+    margin: 40px auto;
+    color: darkgreen;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.mark_form {
+    width: 70%;
+    padding-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.params {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.param {
+    display: flex;
+}
+
+.param:first-child {
+    width: 25%;
+}
+
+.param:last-child {
+    width: 65%;
+}
+
+.label_and_pattern {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+}
+
+textarea {
+    font-size: 0.9rem;
+}
+
+.submit_btn {
+    margin-top: 30px;
+}
+
+.pattern-info {
+    font-size: 0.65rem;
+    color: #535353;
+    margin-right: 5px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+.mark_selectors {
+    display: flex;
+}
+
+.mark_selectors input {
+    margin-right: 15px;
+}
+
+.mark_selectors label {
+    margin-right: 5px;
+}
+
+.param:last-child {
+    justify-content: flex-end;
+}

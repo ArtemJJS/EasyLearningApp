@@ -1848,7 +1848,7 @@
     </argument>
     <argument id="420" parent="289" name="date_of_mark">
       <Position>5</Position>
-      <DataType>date|0s</DataType>
+      <DataType>bigint(20)|0s</DataType>
     </argument>
     <argument id="421" parent="290" name="targ_id">
       <Position>1</Position>
@@ -2004,7 +2004,7 @@
     </argument>
     <argument id="459" parent="298" name="date_of_mark">
       <Position>5</Position>
-      <DataType>date|0s</DataType>
+      <DataType>bigint(20)|0s</DataType>
     </argument>
     <argument id="460" parent="298" name="id">
       <Position>6</Position>
@@ -2028,7 +2028,7 @@
     </argument>
     <argument id="465" parent="299" name="date_of_mark">
       <Position>5</Position>
-      <DataType>date|0s</DataType>
+      <DataType>bigint(20)|0s</DataType>
     </argument>
     <argument id="466" parent="299" name="id">
       <Position>6</Position>

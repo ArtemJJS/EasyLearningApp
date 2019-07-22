@@ -2,16 +2,19 @@ package by.anelkin.easylearning.service;
 
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.entity.Course;
+import by.anelkin.easylearning.entity.Mark;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.repository.CourseRepository;
+import by.anelkin.easylearning.repository.MarkRepository;
 import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
 import by.anelkin.easylearning.specification.account.SelectAccToPhotoApproveSpecification;
 import by.anelkin.easylearning.specification.account.SelectAuthorOfCourseSpecification;
 import by.anelkin.easylearning.specification.course.SelectByAuthorIdSpecification;
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
+import by.anelkin.easylearning.specification.mark.SelectMarkByTargetIdSpecification;
 import lombok.NonNull;
 
 import java.io.File;
@@ -24,6 +27,7 @@ import java.util.*;
 
 import static by.anelkin.easylearning.entity.Account.*;
 import static by.anelkin.easylearning.entity.Account.AccountType.GUEST;
+import static by.anelkin.easylearning.entity.Mark.*;
 
 public class AccountService {
     // FIXME: 7/20/2019 на относительный путь
@@ -47,6 +51,7 @@ public class AccountService {
     private static final String ATTR_AUTHOR_COURSE_LIST = "author_course_list";
     private static final String ATTR_FILE_EXTENSION = "file_extension";
     private static final String ATTR_ACCS_TO_AVATAR_APPROVE = "acc_avatar_approve_list";
+    private static final String ATTR_IS_AUTHOR_MARKED_ALREADY = "is_author_marked_already";
     private static final String EMPTY_STRING = "";
 
 
@@ -276,18 +281,24 @@ public class AccountService {
     }
 
     public void initAuthorPage(@NonNull SessionRequestContent requestContent) throws ServiceException {
+        HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
         AccRepository repository = new AccRepository();
+        MarkRepository markRepository = new MarkRepository();
         // TODO: 7/12/2019 подумать надо ли Optional
-        String login = (String) requestContent.getRequestAttributes().get(ATTR_REQUESTED_AUTHOR_LOGIN);
+        String login = (String) reqAttrs.get(ATTR_REQUESTED_AUTHOR_LOGIN);
         List<Account> accounts = null;
         try {
             accounts = repository.query(new SelectAccByLoginSpecification(login));
             Account author = accounts.get(0);
             CourseRepository courseRepository = new CourseRepository();
             List<Course> courses = courseRepository.query(new SelectByAuthorIdSpecification(author.getId()));
+            reqAttrs.put(ATTR_REQUESTED_AUTHOR, author);
+            reqAttrs.put(ATTR_AUTHOR_COURSE_LIST, courses);
 
-            requestContent.getRequestAttributes().put(ATTR_REQUESTED_AUTHOR, author);
-            requestContent.getRequestAttributes().put(ATTR_AUTHOR_COURSE_LIST, courses);
+            List<Mark> accMarksForThisAuthor = markRepository.query(new SelectMarkByTargetIdSpecification(MarkType.AUTHOR_MARK, author.getId()));
+            if (accMarksForThisAuthor.size() != 0){
+                reqAttrs.put(ATTR_IS_AUTHOR_MARKED_ALREADY, true);
+            }
         } catch (RepositoryException | NullPointerException e) {
             throw new ServiceException(e);
         }

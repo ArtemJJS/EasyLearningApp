@@ -34,6 +34,9 @@
                 <div class="author_students">Students: 352</div>
                 <div class="courses_amount">Courses: ${courses.size()}</div>
             </div>
+            <c:if test="${pageContext.request.getAttribute('is_author_marked_already') == null}">
+                <a href="${pageContext.request.contextPath}/user/mark-author?author-id=${author.id}">Mark author</a>
+            </c:if>
         </div>
     </section>
     <section class="section_3">

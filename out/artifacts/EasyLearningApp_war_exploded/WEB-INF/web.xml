@@ -230,4 +230,13 @@
         <url-pattern>/user/mark-course</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>MarkAuthorPage</servlet-name>
+        <jsp-file>/jsp/user/mark_author.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MarkAuthorPage</servlet-name>
+        <url-pattern>/user/mark-author</url-pattern>
+    </servlet-mapping>
+
 </web-app>

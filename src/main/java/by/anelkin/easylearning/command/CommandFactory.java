@@ -24,7 +24,8 @@ public class CommandFactory {
         SEARCH_COURSE,
         BUY_WITH_CARD,
         BUY_FROM_BALANCE,
-        MARK_COURSE
+        MARK_COURSE,
+        MARK_AUTHOR
 
     }
 
@@ -93,6 +94,9 @@ public class CommandFactory {
                 break;
             case MARK_COURSE:
                 command = new MarkCourseCommand();
+                break;
+            case MARK_AUTHOR:
+                command = new MarkAuthorCommand();
                 break;
 
         }
