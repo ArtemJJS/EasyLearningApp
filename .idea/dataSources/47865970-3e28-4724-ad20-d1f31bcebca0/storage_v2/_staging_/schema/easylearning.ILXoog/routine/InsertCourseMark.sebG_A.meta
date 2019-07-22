@@ -1,0 +1,2 @@
+#n:InsertCourseMark
+#i:(int(11),int(11),tinyint(4),varchar(1000),date)

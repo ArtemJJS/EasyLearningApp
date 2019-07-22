@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="course_desc">${course.description}</div>
                             </div>
-                           <ctg:course-options role="${sessionScope.role}" course="${course}" contextPath="${pageContext.request.contextPath}" coursesAvailable="${sessionScope.coursesAvailable}"/>
+                           <ctg:course-options course="${course}"/>
                         </div>
                     </div>
                 </c:forEach>

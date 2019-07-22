@@ -32,8 +32,7 @@ public class AuthorPageFilter implements Filter {
         try {
             accountService.initAuthorPage(requestContent);
             requestContent.insertAttributes(request);
-        } catch (RepositoryException | ServiceException e) {
-            // TODO: 7/12/2019 на страницу ошибки
+        } catch (ServiceException e) {
             throw new ServletException(e);
         }
 

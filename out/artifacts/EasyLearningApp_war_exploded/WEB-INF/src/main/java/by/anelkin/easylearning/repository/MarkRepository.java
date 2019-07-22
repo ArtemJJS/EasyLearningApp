@@ -1,10 +1,12 @@
 package by.anelkin.easylearning.repository;
 
 import by.anelkin.easylearning.connection.ConnectionPool;
+import by.anelkin.easylearning.entity.Course;
 import by.anelkin.easylearning.entity.Mark;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.specification.AppSpecification;
 import by.anelkin.easylearning.specification.mark.MarkSpecification;
+import by.anelkin.easylearning.specification.mark.SelectByIdWithWriterInfoSpecification;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
 
@@ -20,14 +22,13 @@ import static by.anelkin.easylearning.entity.Mark.MarkType.*;
 public class MarkRepository implements AppRepository<Mark> {
     private ConnectionPool pool = ConnectionPool.getInstance();
     private static final String PATH_TO_PICTURE = "/resources/account_avatar/";
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    //    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private static final String QUERY_INSERT_COURSE_MARK = "{call InsertCourseMark(?, ?, ?, ?, ?)}";
     private static final String QUERY_INSERT_AUTHOR_MARK = "{call InsertAuthorMark(?, ?, ?, ?, ?)}";
     private static final String QUERY_UPDATE_COURSE_MARK = "{call updateCourseMark(?, ?, ?, ?, ?, ?)}";
     private static final String QUERY_UPDATE_AUTHOR_MARK = "{call updateAuthorMark(?, ?, ?, ?, ?, ?)}";
     private static final String QUERY_DELETE_COURSE_MARK = "{call deleteCourseMark(?)}";
     private static final String QUERY_DELETE_AUTHOR_MARK = "{call deleteAuthorMark(?)}";
-
 
 
     @Override
@@ -37,7 +38,7 @@ public class MarkRepository implements AppRepository<Mark> {
              // FIXME: 7/15/2019 переделать на callableStatement?
              PreparedStatement statement = connection.prepareStatement(actualQuery)) {
             String[] params = {String.valueOf(mark.getTargetId()), String.valueOf(mark.getAccId()), String.valueOf(mark.getMarkValue()),
-                    mark.getComment(), dateFormat.format(mark.getMarkDate()), String.valueOf(mark.getId())};
+                    mark.getComment(), String.valueOf(mark.getMarkDate()), String.valueOf(mark.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
@@ -62,10 +63,10 @@ public class MarkRepository implements AppRepository<Mark> {
     public boolean insert(@NonNull Mark mark) throws RepositoryException {
         String actualQuery = mark.getMarkType() == AUTHOR_MARK ? QUERY_INSERT_AUTHOR_MARK : QUERY_INSERT_COURSE_MARK;
         try (Connection connection = pool.takeConnection();
-             CallableStatement statement = connection.prepareCall(actualQuery)){
+             CallableStatement statement = connection.prepareCall(actualQuery)) {
             // TODO: 7/8/2019 спросить про два запроса
             String[] params1 = {String.valueOf(mark.getTargetId()), String.valueOf(mark.getAccId()),
-                    String.valueOf(mark.getMarkValue()), mark.getComment(), dateFormat.format(mark.getMarkDate())};
+                    String.valueOf(mark.getMarkValue()), mark.getComment(), String.valueOf(mark.getMarkDate())};
             setParametersAndExecute(statement, params1);
         } catch (SQLException e) {
             throw new RepositoryException(e);
@@ -87,7 +88,7 @@ public class MarkRepository implements AppRepository<Mark> {
             log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
             try (ResultSet resultSet = statement.executeQuery()) {
                 log.debug("Query completed:" + statement.toString().split(":")[1]);
-                markList = fillMarkList(resultSet, markType);
+                markList = fillMarkList(resultSet, markType, specification);
             }
         } catch (SQLException e) {
             throw new RepositoryException(e);
@@ -95,7 +96,7 @@ public class MarkRepository implements AppRepository<Mark> {
         return markList;
     }
 
-    private List<Mark> fillMarkList(ResultSet resultSet, MarkType markType) throws SQLException {
+    private List<Mark> fillMarkList(ResultSet resultSet, MarkType markType, AppSpecification<Mark> specification) throws SQLException {
         List<Mark> marks = new ArrayList<>();
         while (resultSet.next()) {
             Mark mark = new Mark(markType);
@@ -104,11 +105,12 @@ public class MarkRepository implements AppRepository<Mark> {
             mark.setAccId(resultSet.getInt("acc_id"));
             mark.setMarkValue(resultSet.getInt("mark_value"));
             mark.setComment(resultSet.getString("mark_comment"));
-            mark.setMarkDate(resultSet.getDate("mark_date"));
+            mark.setMarkDate(resultSet.getLong("mark_date"));
             // data from account table (for queries with join)
+            if (specification instanceof SelectByIdWithWriterInfoSpecification){
             mark.setAccLogin(resultSet.getString("acc_login"));
             mark.setAccPathToPhoto(PATH_TO_PICTURE + resultSet.getString("acc_photo_path"));
-
+            }
             marks.add(mark);
         }
         return marks;

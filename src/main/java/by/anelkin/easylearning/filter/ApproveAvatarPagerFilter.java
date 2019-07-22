@@ -24,8 +24,8 @@ public class ApproveAvatarPagerFilter implements Filter {
             (new AccountService()).initApproveAccAvatarPage(requestContent);
             requestContent.insertAttributes(request);
             log.debug("Filter " + this.getClass().getSimpleName() + " completed work.");
-        } catch (RepositoryException e) {
-            e.printStackTrace();
+        } catch (ServiceException e) {
+            throw new ServletException(e);
         }
         filterChain.doFilter(request, servletResponse);
     }

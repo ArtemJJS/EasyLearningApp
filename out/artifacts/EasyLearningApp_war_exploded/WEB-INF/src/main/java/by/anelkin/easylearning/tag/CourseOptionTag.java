@@ -1,10 +1,10 @@
 package by.anelkin.easylearning.tag;
 
-import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.entity.Course;
 import lombok.Setter;
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -15,6 +15,8 @@ import static by.anelkin.easylearning.entity.Account.*;
 
 @Setter
 public class CourseOptionTag extends TagSupport {
+    private static final String ATTR_MARKED_COURSES_IDS = "marked_courses_ids";
+
     private static final String AUTHOR_LEARNING_PAGE = "Learning page";
     private static final String AUTHOR_LEARNING_PAGE_LINK = "/course/learn?course-id=";
     private static final String AUTHOR_EDIT_COURSE = "Edit course";
@@ -26,16 +28,22 @@ public class CourseOptionTag extends TagSupport {
     private static final String USER_LEARNING_PAGE_LINK = "/course/learn?course-id=";
     private static final String USER_BUY_COURSE = "Buy course";
     private static final String USER_BUY_COURSE_LINK = "/user/buy-course?course-id=";
+    private static final String USER_MARK_COURSE = "Mark course";
+    private static final String USER_MARK_COURSE_LINK = "/user/mark-course?course-id=";
 
 
-    private AccountType role;
     private Course course;
-    private String contextPath;
-    private List<Course> coursesAvailable;
 
     @Override
     public int doStartTag() throws JspException {
+        String contextPath = pageContext.getServletContext().getContextPath();
+        AccountType role = (AccountType) pageContext.getSession().getAttribute("role");
+        List<Integer> markedCourses = (List<Integer>) pageContext.getSession().getAttribute(ATTR_MARKED_COURSES_IDS);
+        List<Course> coursesAvailable = (List<Course>) pageContext.getSession().getAttribute("coursesAvailable");
         JspWriter writer = pageContext.getOut();
+        if (role == null) {
+            return SKIP_BODY;
+        }
         try {
             switch (role) {
                 case AUTHOR:
@@ -51,6 +59,7 @@ public class CourseOptionTag extends TagSupport {
                     if (coursesAvailable.contains(course)) {
                         writer.write("<div class='links'>");
                         writer.write("<a href=" + contextPath + USER_LEARNING_PAGE_LINK + course.getId() + ">" + USER_LEARNING_PAGE + "</a>");
+                        writer.write(markLinkIfNotMarked(markedCourses, contextPath));
                         writer.write("</div>");
                     } else {
                         writer.write("<div class='links'>");
@@ -60,9 +69,14 @@ public class CourseOptionTag extends TagSupport {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new JspTagException(e);
         }
         return SKIP_BODY;
+    }
+
+    private String markLinkIfNotMarked(List<Integer> markedCoursesIds, String contextPath) {
+        return markedCoursesIds.contains(course.getId()) ? "" :
+                "<a href=" + contextPath + USER_MARK_COURSE_LINK + course.getId() + ">" + USER_MARK_COURSE + "</a>";
     }
 }
 

@@ -16,7 +16,7 @@ public class Mark extends AppEntity {
     private String accLogin;
     private int markValue;
     private String comment;
-    private Date markDate;
+    private long markDate;
     @NonNull private MarkType markType;
 
     public enum MarkType{

@@ -1320,7 +1320,7 @@
     </column>
     <column id="326" parent="278" name="mark_date">
       <Position>6</Position>
-      <DataType>date|0s</DataType>
+      <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1571,7 +1571,7 @@
     </column>
     <column id="369" parent="282" name="mark_date">
       <Position>6</Position>
-      <DataType>date|0s</DataType>
+      <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1868,7 +1868,7 @@
     </argument>
     <argument id="425" parent="290" name="date_of_mark">
       <Position>5</Position>
-      <DataType>date|0s</DataType>
+      <DataType>bigint(20)|0s</DataType>
     </argument>
     <argument id="426" parent="291" name="id">
       <Position>1</Position>

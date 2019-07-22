@@ -221,5 +221,13 @@
         <url-pattern>/user/buy-course</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>MarkCoursePage</servlet-name>
+        <jsp-file>/jsp/user/mark_course.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MarkCoursePage</servlet-name>
+        <url-pattern>/user/mark-course</url-pattern>
+    </servlet-mapping>
 
 </web-app>

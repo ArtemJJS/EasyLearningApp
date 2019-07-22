@@ -23,7 +23,8 @@ public class CommandFactory {
         DECLINE_COURSE_IMG_CHANGE,
         SEARCH_COURSE,
         BUY_WITH_CARD,
-        BUY_FROM_BALANCE
+        BUY_FROM_BALANCE,
+        MARK_COURSE
 
     }
 
@@ -89,6 +90,9 @@ public class CommandFactory {
                 break;
             case BUY_FROM_BALANCE:
                 command = new BuyFromBalanceCommand();
+                break;
+            case MARK_COURSE:
+                command = new MarkCourseCommand();
                 break;
 
         }

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -47,12 +48,15 @@
                     </a>
                 </div>
                 <div class="block2">
-                    <div class="course_name">
-                        <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
-                                ${course.name}
-                        </a>
+                    <div>
+                        <div class="course_name">
+                            <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
+                                    ${course.name}
+                            </a>
+                        </div>
+                        <div class="course_desc">${course.description}</div>
                     </div>
-                    <div class="course_desc">${course.description}</div>
+                    <ctg:course-options course="${course}"/>
                 </div>
             </div>
         </c:forEach>

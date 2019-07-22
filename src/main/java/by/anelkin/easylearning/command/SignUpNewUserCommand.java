@@ -1,6 +1,7 @@
 package by.anelkin.easylearning.command;
 
 
+import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.service.AccountService;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
@@ -16,7 +17,7 @@ public class SignUpNewUserCommand implements Command {
 
 
     @Override
-    public ResponseType execute(SessionRequestContent requestContent) throws RepositoryException {
+    public ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
         boolean isRegistered = (new AccountService()).signUp(requestContent);
         if (isRegistered) {
             requestContent.setPath(CORRECT_RIGISTRATION_PATH);

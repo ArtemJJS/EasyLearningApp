@@ -24,6 +24,7 @@
             <div class="course_name">${curr_course.name}</div>
             <div class="course_description">${curr_course.description}</div>
             <div class="course_rating">Mark from users: ${curr_course.avgMark}<br>Feedbacks: 34</div>
+            <ctg:course-options course="${curr_course}"/>
         </div>
         <div class="course_view">
             <img class="course_avatar" src="${pageContext.request.contextPath}${curr_course.pathToPicture}"
@@ -67,8 +68,8 @@
         <c:set var="author" value="${pageContext.request.getAttribute('author_of_course')}"/>
         <div class="author_image_and_stats">
             <a href="${pageContext.request.contextPath}/author-info/${author.login}"><img class="author_avatar"
-                                                                                     src="${pageContext.request.contextPath}/${author.pathToPhoto}"
-                                                                                     alt="author"></a>
+                                                                                          src="${pageContext.request.contextPath}/${author.pathToPhoto}"
+                                                                                          alt="author"></a>
             <div class="author_rating">${author.avgMark}</div>
             <div class="author_students">322 students</div>
         </div>

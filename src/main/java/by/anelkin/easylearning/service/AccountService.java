@@ -47,55 +47,69 @@ public class AccountService {
     private static final String ATTR_AUTHOR_COURSE_LIST = "author_course_list";
     private static final String ATTR_FILE_EXTENSION = "file_extension";
     private static final String ATTR_ACCS_TO_AVATAR_APPROVE = "acc_avatar_approve_list";
+    private static final String EMPTY_STRING = "";
+
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
-    public boolean login(@NonNull SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+    public boolean login(@NonNull SessionRequestContent requestContent) throws ServiceException {
+        HashMap<String, Object> reqAttrs = requestContent.getSessionAttributes();
         AccRepository repository = new AccRepository();
-        List<Account> accounts = repository.query(new SelectAccByLoginSpecification(requestContent.getRequestParameters().get("login")[0]));
-        String[] expectedPassword = requestContent.getRequestParameters().get(REQUEST_PARAM_PWD);
-        if (accounts.size() != 1 || !accounts.get(0).getPassword().equals(expectedPassword[0])) {
-            return false;
-        }
-        Account account = accounts.get(0);
-        AccountType role = account.getType();
-        CourseRepository courseRepository = new CourseRepository();
+        List<Account> accounts = null;
+        try {
+            accounts = repository.query(new SelectAccByLoginSpecification(requestContent.getRequestParameters().get("login")[0]));
+            String[] expectedPassword = requestContent.getRequestParameters().get(REQUEST_PARAM_PWD);
+            if (accounts.size() != 1 || !accounts.get(0).getPassword().equals(expectedPassword[0])) {
+                return false;
+            }
+            Account account = accounts.get(0);
+            AccountType role = account.getType();
+            CourseRepository courseRepository = new CourseRepository();
 
-        List<Course> courses = new ArrayList<>();
-        switch (role) {
-            case USER:
-                courses = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
-                break;
-            case AUTHOR:
-                courses = courseRepository.query(new SelectByAuthorIdSpecification(account.getId()));
-                break;
+            List<Course> courses = new ArrayList<>();
+            switch (role) {
+                case USER:
+                    courses = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
+                    break;
+                case AUTHOR:
+                    courses = courseRepository.query(new SelectByAuthorIdSpecification(account.getId()));
+                    break;
+            }
+
+            reqAttrs.put(SESSION_ATTR_USER, account);
+            reqAttrs.put(ATTR_AVAILABLE_COURSES, courses);
+            reqAttrs.put(SESSION_ATTR_ROLE, account.getType());
+            (new MarkService()).insertMarkedCourseIdsIntoSession(requestContent);
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
         }
 
-        requestContent.getSessionAttributes().put(SESSION_ATTR_USER, account);
-        requestContent.getSessionAttributes().put(ATTR_AVAILABLE_COURSES, courses);
-        requestContent.getSessionAttributes().put(SESSION_ATTR_ROLE, account.getType());
         return true;
     }
 
-    public boolean signUp(@NonNull SessionRequestContent requestContent) throws RepositoryException {
+    public boolean signUp(@NonNull SessionRequestContent requestContent) throws ServiceException {
         AccRepository repository = new AccRepository();
         String login = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
-        if (repository.query(new SelectAccByLoginSpecification(login)).size() != 0) {
-            requestContent.getRequestAttributes().put(ATTR_WRONG_LOGIN_MSG, "true");
-            return false;
+        try {
+            if (repository.query(new SelectAccByLoginSpecification(login)).size() != 0) {
+                requestContent.getRequestAttributes().put(ATTR_WRONG_LOGIN_MSG, "true");
+                return false;
+            }
+            Account account = new Account();
+            initAccount(account, requestContent.getRequestParameters());
+            repository.insert(account);
+            // TODO: 7/6/2019  проверку на замену роли из браузера
+            requestContent.getSessionAttributes().put(SESSION_ATTR_USER, account);
+            requestContent.getSessionAttributes().put(SESSION_ATTR_ROLE, account.getType());
+            // fixme: 7/5/2019 повторяющийся код:
+            CourseRepository courseRepository = new CourseRepository();
+            List<Course> courses = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
+            requestContent.getSessionAttributes().put(ATTR_AVAILABLE_COURSES, courses);
+            (new MarkService()).insertMarkedCourseIdsIntoSession(requestContent);
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
         }
-        Account account = new Account();
-        initAccount(account, requestContent.getRequestParameters());
-        repository.insert(account);
-        // TODO: 7/6/2019  проверку на замену роли из браузера
-        requestContent.getSessionAttributes().put(SESSION_ATTR_USER, account);
-        requestContent.getSessionAttributes().put(SESSION_ATTR_ROLE, account.getType());
-        // fixme: 7/5/2019 повторяющийся код:
-        CourseRepository courseRepository = new CourseRepository();
-        List<Course> courses = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
-        // TODO: 7/6/2019  сделать размещение во времеменном атрибуте чтобы потом чистить?
-        requestContent.getSessionAttributes().put(ATTR_AVAILABLE_COURSES, courses);
         return true;
     }
 
@@ -135,19 +149,27 @@ public class AccountService {
         }
     }
 
-    public void initApproveAccAvatarPage(SessionRequestContent requestContent) throws RepositoryException {
+    public void initApproveAccAvatarPage(SessionRequestContent requestContent) throws ServiceException {
         AccRepository repository = new AccRepository();
-        List<Account> accounts = repository.query(new SelectAccToPhotoApproveSpecification());
-        requestContent.getRequestAttributes().put(ATTR_ACCS_TO_AVATAR_APPROVE, accounts);
+        try {
+            List<Account> accounts = repository.query(new SelectAccToPhotoApproveSpecification());
+            requestContent.getRequestAttributes().put(ATTR_ACCS_TO_AVATAR_APPROVE, accounts);
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
     }
 
-    public void addAccAvatarToReview(SessionRequestContent requestContent) throws RepositoryException {
+    public void addAccAvatarToReview(SessionRequestContent requestContent) throws ServiceException {
         HashMap<String, Object> sessionAttrs = requestContent.getSessionAttributes();
         Account account = (Account) sessionAttrs.get(SESSION_ATTR_USER);
         String fileExtension = (String) requestContent.getRequestAttributes().get(ATTR_FILE_EXTENSION);
         account.setUpdatePhotoPath(account.getId() + fileExtension);
         AccRepository repository = new AccRepository();
-        repository.update(account);
+        try {
+            repository.update(account);
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
     }
 
     public void approveAccAvatar(SessionRequestContent requestContent) throws ServiceException {
@@ -169,7 +191,7 @@ public class AccountService {
             }
 
             currAccount.setPathToPhoto(fileName);
-            currAccount.setUpdatePhotoPath("");
+            currAccount.setUpdatePhotoPath(EMPTY_STRING);
             repository.update(currAccount);
             requestContent.getRequestAttributes().put(ATTR_ACCS_TO_AVATAR_APPROVE
                     , repository.query(new SelectAccToPhotoApproveSpecification()));
@@ -195,7 +217,7 @@ public class AccountService {
     }
 
 
-    public void editAccountInfo(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+    public void editAccountInfo(SessionRequestContent requestContent) throws ServiceException {
         AccRepository repository = new AccRepository();
         Account clone;
         try {
@@ -209,15 +231,12 @@ public class AccountService {
             clone.setAbout(requestParams.get("about")[0]);
             repository.update(clone);
             requestContent.getSessionAttributes().put(SESSION_ATTR_USER, clone);
-        } catch (CloneNotSupportedException e) {
+        } catch (CloneNotSupportedException | RepositoryException e) {
             throw new ServiceException(e);
-        } catch (RepositoryException e) {
-            // TODO: 7/12/2019 handle
-            throw new RepositoryException();
         }
     }
 
-    public void refreshSessionAttributeUser(SessionRequestContent requestContent, Account account) throws ServiceException {
+    void refreshSessionAttributeUser(SessionRequestContent requestContent, Account account) throws ServiceException {
         AccRepository repository = new AccRepository();
         try {
             Account refreshedAcc = repository.query(new SelectAccByLoginSpecification(account.getLogin())).get(0);
@@ -227,7 +246,7 @@ public class AccountService {
         }
     }
 
-    public void refreshSessionAttributeAvailableCourses(SessionRequestContent requestContent, Account account) throws ServiceException {
+    void refreshSessionAttributeAvailableCourses(SessionRequestContent requestContent, Account account) throws ServiceException {
         CourseRepository repository = new CourseRepository();
         try {
             List<Course> courses = repository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
@@ -237,7 +256,7 @@ public class AccountService {
         }
     }
 
-    public Account takeAuthorOfCourse(int courseId) throws ServiceException {
+    Account takeAuthorOfCourse(int courseId) throws ServiceException {
         AccRepository repository = new AccRepository();
         List<Account> accounts = null;
         try {
@@ -256,20 +275,22 @@ public class AccountService {
         return parts[parts.length - 1].replaceAll(URI_SPACE_REPRESENT, " ");
     }
 
-    public void initAuthorPage(@NonNull SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+    public void initAuthorPage(@NonNull SessionRequestContent requestContent) throws ServiceException {
         AccRepository repository = new AccRepository();
         // TODO: 7/12/2019 подумать надо ли Optional
         String login = (String) requestContent.getRequestAttributes().get(ATTR_REQUESTED_AUTHOR_LOGIN);
-        List<Account> accounts = repository.query(new SelectAccByLoginSpecification(login));
-        if (accounts.size() != 1) {
-            throw new ServiceException("Author with login " + login + " is not exists!");
-        }
-        Account author = accounts.get(0);
-        CourseRepository courseRepository = new CourseRepository();
-        List<Course> courses = courseRepository.query(new SelectByAuthorIdSpecification(author.getId()));
+        List<Account> accounts = null;
+        try {
+            accounts = repository.query(new SelectAccByLoginSpecification(login));
+            Account author = accounts.get(0);
+            CourseRepository courseRepository = new CourseRepository();
+            List<Course> courses = courseRepository.query(new SelectByAuthorIdSpecification(author.getId()));
 
-        requestContent.getRequestAttributes().put(ATTR_REQUESTED_AUTHOR, author);
-        requestContent.getRequestAttributes().put(ATTR_AUTHOR_COURSE_LIST, courses);
+            requestContent.getRequestAttributes().put(ATTR_REQUESTED_AUTHOR, author);
+            requestContent.getRequestAttributes().put(ATTR_AUTHOR_COURSE_LIST, courses);
+        } catch (RepositoryException | NullPointerException e) {
+            throw new ServiceException(e);
+        }
     }
 
 

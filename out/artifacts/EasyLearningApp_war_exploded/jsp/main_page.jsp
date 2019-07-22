@@ -47,9 +47,7 @@
                                 </div>
                                 <div class="course_desc">${course.description}</div>
                             </div>
-                            <ctg:course-options role="${sessionScope.role}" course="${course}"
-                                                contextPath="${pageContext.request.contextPath}"
-                                                coursesAvailable="${sessionScope.coursesAvailable}"/>
+                            <ctg:course-options course="${course}"/>
                         </div>
                     </div>
                 </c:forEach>
@@ -70,12 +68,15 @@
                     </a>
                 </div>
                 <div class="block2">
-                    <div class="course_name">
-                        <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
-                                ${course.name}
-                        </a>
+                    <div>
+                        <div class="course_name">
+                            <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
+                                    ${course.name}
+                            </a>
+                        </div>
+                        <div class="course_desc">${course.description}</div>
                     </div>
-                    <div class="course_desc">${course.description}</div>
+                    <ctg:course-options course="${course}"/>
                 </div>
             </div>
         </c:forEach>
