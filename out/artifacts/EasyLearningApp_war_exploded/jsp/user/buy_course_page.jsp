@@ -27,7 +27,7 @@
         <img class="course_img" src="${pageContext.request.contextPath}/${course.pathToPicture}" alt="Course image">
     </div>
     <c:if test="${pageContext.request.getParameter('result') != null}">
-        <div class="previous_operation_message">Not enough funds!</div>
+        <div class="previous_operation_message">Not enough funds! Payment declined!</div>
     </c:if>
     <div class="buy_block">
         <div class="pay-card">
@@ -60,12 +60,18 @@
                     <div class="amount_title">Balance:</div>
                     <div class="form_price acc_balance">${account.balance}$</div>
                 </div>
+                <div class="insufficient_funds" style="display: none;">Insufficient funds!</div>
                 <input type="hidden" name="command_name" value="buy_from_balance">
                 <input type="hidden" name="course_id" value="${course.id}">
-                <input class="submit_btn" type="submit" value="Submit">
+                <input class="submit_btn btn_balance_purchase" type="submit" value="Submit">
             </form>
         </div>
     </div>
 </main>
+<script>let balance = ${account.balance};</script>
+<script>let price = ${course.price};</script>
+<script>
+    <%@include file="/js/buy_course_page.js"%>
+</script>
 </body>
 </html>

@@ -130,3 +130,9 @@ main {
     color: red;
     margin: 20px auto;
 }
+
+.insufficient_funds{
+    color: red;
+    margin-top: 25px;
+}
+
