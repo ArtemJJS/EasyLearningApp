@@ -1,5 +1,5 @@
 create
-   procedure insertPurchaseCourseFromBalance(IN curr_acc_id int, IN curr_course_id int,
+    definer = root@localhost procedure insertPaymentAndUpdateBalance(IN curr_acc_id int, IN curr_course_id int,
                                                                      IN curr_payment_code int,
                                                                      IN curr_amount decimal(10, 2),
                                                                      IN curr_date mediumtext, IN curr_currency_id int,
@@ -19,5 +19,6 @@ begin
     select @actual_user_balance := acc_balance from account where acc_id = curr_acc_id;
     update account set acc_balance = (@actual_user_balance + curr_amount) where acc_id = curr_acc_id;
 
-    insert into user_purchased_course set user_id = curr_acc_id, course_id = curr_course_id;
+
 end;
+

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Log4j
-@WebFilter(urlPatterns = {"/course", "/course/learn", "/author/edit-course"})
+@WebFilter(urlPatterns = {"/course", "/course/learn", "/author/edit-course", "/user/buy-course"})
 public class RequestedCourseFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

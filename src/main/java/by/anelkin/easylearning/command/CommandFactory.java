@@ -21,7 +21,10 @@ public class CommandFactory {
         CHANGE_COURSE_IMG,
         APPROVE_COURSE_IMG_CHANGE,
         DECLINE_COURSE_IMG_CHANGE,
-        SEARCH_COURSE
+        SEARCH_COURSE,
+        BUY_WITH_CARD,
+        BUY_FROM_BALANCE
+
     }
 
     public Command getCommand(@NonNull CommandType type) {
@@ -80,6 +83,12 @@ public class CommandFactory {
                 break;
             case SEARCH_COURSE:
                 command = new SearchCourseCommand();
+                break;
+            case BUY_WITH_CARD:
+                command = new BuyWithCardCommand();
+                break;
+            case BUY_FROM_BALANCE:
+                command = new BuyFromBalanceCommand();
                 break;
 
         }

@@ -13,10 +13,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.anelkin.easylearning.entity.Payment.*;
+import static by.anelkin.easylearning.entity.Payment.PaymentCode.*;
+
 @Log4j
 public class PaymentRepository implements AppRepository<Payment> {
     private ConnectionPool pool = ConnectionPool.getInstance();
-    private static final String BUY_COURSE_WITH_CARD_PAYMENT_CODE = "10";
+    // FIXME: 7/22/2019 может в enum?
+
+//    private static final int BUY_COURSE_WITH_CARD_PAYMENT_CODE = 10;
+//    private static final int BUY_COURSE_FROM_BALANCE_PAYMENT_CODE = 11;
+//    private static final int PAYMENT_CODE_DEPOSIT_FROM_CARD = 15;
+//    private static final int PAYMENT_CODE_CASH_OUT_TO_CARD = 20;
     @Language("sql")
     private static final String QUERY_DELETE = "DELETE FROM user_payment WHERE payment_id = ?";
     @Language("sql")
@@ -25,13 +33,16 @@ public class PaymentRepository implements AppRepository<Payment> {
             " WHERE payment_id = ?";
     @Language("sql")
     private static final String QUERY_INSERT_AND_UPDATE_BALANCE = "{CALL insertPaymentAndUpdateBalance(?, ?, ?, ?, ?, ?, ?)}";
+    @Language("sql")
+    private static final String QUERY_INSERT_BUY_FROM_BALANCE = "{call insertPurchaseCourseFromBalance(?, ?, ?, ?, ?, ?, ?)}";
     //without balance updating:
     @Language("sql")
-    private static final String QUERY_INSERT_BUY_WITH_CARD = "{CALL insertPaymentByCard(?, ?, ?, ?, ?, ?, ?)}";
+    private static final String QUERY_INSERT_BUY_WITH_CARD = "{CALL insertPurchaseCourseByCard(?, ?, ?, ?, ?, ?, ?)}";
 
     // TODO: 7/16/2019 Может для платежей вообще заглушить update/delete?
     @Override
     public boolean update(@NonNull Payment payment) throws RepositoryException {
+
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
             String[] params = {String.valueOf(payment.getAccountId()), String.valueOf(payment.getCourseId()), String.valueOf(payment.getPaymentCode()),
@@ -58,14 +69,23 @@ public class PaymentRepository implements AppRepository<Payment> {
 
     @Override
     public boolean insert(@NonNull Payment payment) throws RepositoryException {
-            String curr_query;
-        if (payment.getPaymentCode() == 10) {
-            curr_query = QUERY_INSERT_BUY_WITH_CARD;
-        }else {
-            curr_query = QUERY_INSERT_AND_UPDATE_BALANCE;
+        String curr_query;
+        PaymentCode paymentCode = PaymentCode.getPaymentCodeInstanceByCode(payment.getPaymentCode());
+        if (paymentCode == null){
+            throw new RepositoryException("Payment code is not correct!");
+        }
+        switch (paymentCode) {
+            case BUY_COURSE_WITH_CARD:
+                curr_query = QUERY_INSERT_BUY_WITH_CARD;
+                break;
+            case BUY_COURSE_FROM_BALANCE:
+                curr_query = QUERY_INSERT_BUY_FROM_BALANCE;
+                break;
+            default:
+                curr_query = QUERY_INSERT_AND_UPDATE_BALANCE;
         }
         try (Connection connection = pool.takeConnection();
-            CallableStatement statement = connection.prepareCall(curr_query)) {
+             CallableStatement statement = connection.prepareCall(curr_query)) {
             String[] params = {String.valueOf(payment.getAccountId()), String.valueOf(payment.getCourseId()), String.valueOf(payment.getPaymentCode()),
                     String.valueOf(payment.getAmount()), String.valueOf(payment.getPaymentDate()), String.valueOf(payment.getCurrencyId()),
                     payment.getDescription()};

@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 @Data
@@ -20,6 +21,29 @@ public class Payment extends AppEntity{
     private long paymentDate;
     private int currencyId;
     private String description;
+
+    public enum PaymentCode{
+        BUY_COURSE_WITH_CARD(10),
+        BUY_COURSE_FROM_BALANCE(11),
+        DEPOSIT_FROM_CARD(15),
+        CASH_OUT_TO_CARD(20),
+        SALE_COURSE(21);
+
+        private final int code;
+
+        PaymentCode(int code) {
+            this.code = code;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public static PaymentCode getPaymentCodeInstanceByCode(int code){
+          Object[] result = Arrays.stream(values()).filter(item->item.getCode()==code).toArray();
+          return result.length > 0 ? (PaymentCode) result[0] : null;
+        }
+    }
 
     public enum CurrencyType{
         USD;

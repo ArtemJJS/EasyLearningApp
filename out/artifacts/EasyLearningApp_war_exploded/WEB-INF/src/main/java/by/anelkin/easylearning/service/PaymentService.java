@@ -1,13 +1,17 @@
 package by.anelkin.easylearning.service;
 
 import by.anelkin.easylearning.entity.Account;
+import by.anelkin.easylearning.entity.Course;
 import by.anelkin.easylearning.entity.Payment;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.AccRepository;
+import by.anelkin.easylearning.repository.CourseRepository;
 import by.anelkin.easylearning.repository.PaymentRepository;
 import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
+import by.anelkin.easylearning.specification.account.SelectAuthorOfCourseSpecification;
+import by.anelkin.easylearning.specification.course.SelectCourseByIdSpecification;
 import by.anelkin.easylearning.specification.payment.SelectPaymentByAccountIdSpecification;
 
 import java.math.BigDecimal;
@@ -17,26 +21,104 @@ import java.util.Map;
 import static by.anelkin.easylearning.entity.Payment.*;
 
 public class PaymentService {
-    private static final String SESSION_ATTR_USER = "user";
-    private static final String REQUEST_PARAM_AMOUNT = "amount";
-    private static final String REQUEST_PARAM_CURRENCY = "currency";
-    private static final String REQUEST_PARAM_CARD = "card";
-    private static final String REQUEST_ATTR_PAYMENTS = "payments";
+
+    private static final String ATTR_COURSE_ID = "course_id";
+    private static final String ATTR_USER = "user";
+    private static final String ATTR_AMOUNT = "amount";
+    private static final String ATTR_CURRENCY = "currency";
+    private static final String ATTR_CARD = "card";
+    private static final String ATTR_PAYMENTS = "payments";
+    private static final String ATTR_PREVIOUS_OPERATION_MSG = "previous_operation_message";
     private static final String CARD_NUMBER_SPLITTER = " ";
     private static final String DESCRIPTION_DEPOSIT_BY_CARD = "Deposit from card ends with ";
     private static final String DESCRIPTION_CASH_OUT_TO_CARD = "Cash out to card ends with ";
+    private static final String DESCRIPTION_BUY_WITH_CARD = "Purchasing by card ends with %s. Course: ";
+    private static final String DESCRIPTION_BUY_FROM_BALANCE = "Purchasing from balance. Course: ";
+    private static final String DESCRIPTION_SALE_COURSE = "Sale course: ";
     private static final String NOT_ENOUGH_MONEY_MSG = "You have not enough funds to proceed operation!";
-    private static final String ATTR_PREVIOUS_OPERATION_MSG = "previous_operation_message";
-    private static final int PAYMENT_CODE_DEPOSIT_FROM_CARD = 15;
-    private static final int PAYMENT_CODE_CASH_OUT_TO_CARD = 20;
-    private static final int PHANTOM_COURSE_ID = -1;
+    private static final int NOT_EXISTS_COURSE_ID = -1;
 
+
+    public boolean processPurchaseFromBalance(SessionRequestContent requestContent) throws ServiceException {
+        PaymentRepository repository = new PaymentRepository();
+        Map<String, String[]> reqParams = requestContent.getRequestParameters();
+        Payment payment = new Payment();
+        Account account = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
+        int courseId = Integer.parseInt(reqParams.get(ATTR_COURSE_ID)[0]);
+        try {
+            Course course = (new CourseRepository()).query(new SelectCourseByIdSpecification(courseId)).get(0);
+            if (account.getBalance().subtract(course.getPrice()).compareTo(BigDecimal.ZERO) < 0){
+                requestContent.getRequestAttributes().put(ATTR_PREVIOUS_OPERATION_MSG, NOT_ENOUGH_MONEY_MSG);
+                return false;
+            }
+            payment.setAccountId(account.getId());
+            payment.setCourseId(courseId);
+            payment.setPaymentCode(PaymentCode.BUY_COURSE_FROM_BALANCE.getCode());
+            payment.setAmount(course.getPrice().negate());
+            payment.setPaymentDate(System.currentTimeMillis());
+            payment.setCurrencyId(CurrencyType.USD.ordinal() + 1);
+            payment.setDescription(DESCRIPTION_BUY_FROM_BALANCE);
+            repository.insert(payment);
+            AccountService accService = new AccountService();
+            accService.refreshSessionAttributeUser(requestContent, account);
+            accService.refreshSessionAttributeAvailableCourses(requestContent, account);
+            processAuthorSaleOperation(course);
+        } catch (RepositoryException | NullPointerException e) {
+            throw new ServiceException(e);
+        }
+        return true;
+    }
+
+    public void processPurchaseByCard(SessionRequestContent requestContent) throws ServiceException {
+        PaymentRepository repository = new PaymentRepository();
+        Map<String, String[]> reqParams = requestContent.getRequestParameters();
+        Payment payment = new Payment();
+        Account account = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
+        int courseId = Integer.parseInt(reqParams.get(ATTR_COURSE_ID)[0]);
+        try {
+            Course course = (new CourseRepository()).query(new SelectCourseByIdSpecification(courseId)).get(0);
+            payment.setAccountId(account.getId());
+            payment.setCourseId(courseId);
+            payment.setPaymentCode(PaymentCode.BUY_COURSE_WITH_CARD.getCode());
+            payment.setAmount(course.getPrice());
+            payment.setPaymentDate(System.currentTimeMillis());
+            payment.setCurrencyId(CurrencyType.USD.ordinal() + 1);
+            payment.setDescription(String.format(DESCRIPTION_BUY_WITH_CARD, selectLastCardDigits(requestContent)));
+            repository.insert(payment);
+            AccountService accService = new AccountService();
+            accService.refreshSessionAttributeUser(requestContent, account);
+            accService.refreshSessionAttributeAvailableCourses(requestContent, account);
+            processAuthorSaleOperation(course);
+        } catch (RepositoryException | NullPointerException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+
+    private void processAuthorSaleOperation(Course course) throws ServiceException {
+        AccRepository accRepository = new AccRepository();
+        PaymentRepository paymentRepository = new PaymentRepository();
+        Payment payment = new Payment();
+        try {
+            Account author = accRepository.query(new SelectAuthorOfCourseSpecification(course.getId())).get(0);
+            payment.setAccountId(author.getId());
+            payment.setCourseId(course.getId());
+            payment.setPaymentCode(PaymentCode.SALE_COURSE.getCode());
+            payment.setAmount(course.getPrice());
+            payment.setPaymentDate(System.currentTimeMillis());
+            payment.setCurrencyId(CurrencyType.USD.ordinal() + 1);
+            payment.setDescription(DESCRIPTION_SALE_COURSE);
+            paymentRepository.insert(payment);
+        } catch (RepositoryException | NullPointerException e) {
+            throw new ServiceException(e);
+        }
+    }
 
     public void processDepositByCard(SessionRequestContent requestContent) throws ServiceException {
         PaymentRepository repository = new PaymentRepository();
         Payment payment = initBasicPaymentParams(requestContent);
-        payment.setCourseId(PHANTOM_COURSE_ID);
-        payment.setPaymentCode(PAYMENT_CODE_DEPOSIT_FROM_CARD);
+        payment.setCourseId(NOT_EXISTS_COURSE_ID);
+        payment.setPaymentCode(PaymentCode.DEPOSIT_FROM_CARD.getCode());
         String cardEndNumbers = selectLastCardDigits(requestContent);
         payment.setDescription(DESCRIPTION_DEPOSIT_BY_CARD + cardEndNumbers);
         try {
@@ -45,10 +127,10 @@ public class PaymentService {
             // FIXME: 7/16/2019
             throw new ServiceException(e);
         }
-        Account currUser = (Account) requestContent.getSessionAttributes().get(SESSION_ATTR_USER);
+        Account currUser = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
         try {
             Account updatedUser = (new AccRepository()).query(new SelectAccByLoginSpecification(currUser.getLogin())).get(0);
-            requestContent.getSessionAttributes().put(SESSION_ATTR_USER, updatedUser);
+            requestContent.getSessionAttributes().put(ATTR_USER, updatedUser);
         } catch (RepositoryException e) {
             // FIXME: 7/16/2019
             throw new ServiceException(e);
@@ -59,54 +141,52 @@ public class PaymentService {
         String cardEndNumbers = selectLastCardDigits(requestContent);
         Payment payment = initBasicPaymentParams(requestContent);
         payment.setAmount(payment.getAmount().negate());
-        Account currAcc = (Account) requestContent.getSessionAttributes().get(SESSION_ATTR_USER);
+        Account currAcc = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
         //not enough funds:
         if (currAcc.getBalance().add(payment.getAmount()).compareTo(BigDecimal.ZERO) < 0) {
             requestContent.getRequestAttributes().put(ATTR_PREVIOUS_OPERATION_MSG, NOT_ENOUGH_MONEY_MSG);
             return false;
         }
-        payment.setCourseId(PHANTOM_COURSE_ID);
-        payment.setPaymentCode(PAYMENT_CODE_CASH_OUT_TO_CARD);
+        payment.setCourseId(NOT_EXISTS_COURSE_ID);
+        payment.setPaymentCode(PaymentCode.CASH_OUT_TO_CARD.getCode());
         payment.setDescription(DESCRIPTION_CASH_OUT_TO_CARD + cardEndNumbers);
         PaymentRepository repository = new PaymentRepository();
         try {
             repository.insert(payment);
             (new AccountService()).refreshSessionAttributeUser(requestContent, currAcc);
         } catch (RepositoryException e) {
-            // FIXME: 7/17/2019
             throw new ServiceException(e);
         }
         return true;
     }
 
 
-    public void insertPaymentsIntoRequestAttributes(SessionRequestContent requestContent) {
+    public void insertPaymentsIntoRequestAttributes(SessionRequestContent requestContent) throws ServiceException {
         PaymentRepository paymentRepository = new PaymentRepository();
-        Account currAccount = (Account) requestContent.getSessionAttributes().get(SESSION_ATTR_USER);
+        Account currAccount = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
         try {
             List<Payment> payments = paymentRepository.query(new SelectPaymentByAccountIdSpecification(currAccount.getId()));
-            requestContent.getRequestAttributes().put(REQUEST_ATTR_PAYMENTS, payments);
+            requestContent.getRequestAttributes().put(ATTR_PAYMENTS, payments);
         } catch (RepositoryException e) {
-            // FIXME: 7/16/2019
-            throw new RuntimeException(e);
+            throw new ServiceException(e);
         }
     }
 
     // accId, amount, date, currencyId
     private Payment initBasicPaymentParams(SessionRequestContent requestContent) {
         Payment payment = new Payment();
-        Account account = (Account) requestContent.getSessionAttributes().get(SESSION_ATTR_USER);
+        Account account = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
         payment.setAccountId(account.getId());
-        payment.setAmount(new BigDecimal(requestContent.getRequestParameters().get(REQUEST_PARAM_AMOUNT)[0]));
+        payment.setAmount(new BigDecimal(requestContent.getRequestParameters().get(ATTR_AMOUNT)[0]));
         payment.setPaymentDate(System.currentTimeMillis());
         payment.setCurrencyId(CurrencyType.valueOf(requestContent.getRequestParameters()
-                .get(REQUEST_PARAM_CURRENCY)[0].toUpperCase()).ordinal() + 1);
+                .get(ATTR_CURRENCY)[0].toUpperCase()).ordinal() + 1);
         return payment;
     }
 
     private String selectLastCardDigits(SessionRequestContent requestContent) {
         String[] numberParts = requestContent.getRequestParameters()
-                .get(REQUEST_PARAM_CARD)[0].split(CARD_NUMBER_SPLITTER);
+                .get(ATTR_CARD)[0].split(CARD_NUMBER_SPLITTER);
         return numberParts[numberParts.length - 1];
     }
 }

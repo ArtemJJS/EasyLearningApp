@@ -9,7 +9,7 @@ import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.repository.CourseRepository;
 import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
 import by.anelkin.easylearning.specification.account.SelectAccToPhotoApproveSpecification;
-import by.anelkin.easylearning.specification.account.SelectByCourseIdSpecification;
+import by.anelkin.easylearning.specification.account.SelectAuthorOfCourseSpecification;
 import by.anelkin.easylearning.specification.course.SelectByAuthorIdSpecification;
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
 import lombok.NonNull;
@@ -217,14 +217,23 @@ public class AccountService {
         }
     }
 
-    public void refreshSessionAttributeUser(SessionRequestContent requestContent, Account account) {
+    public void refreshSessionAttributeUser(SessionRequestContent requestContent, Account account) throws ServiceException {
         AccRepository repository = new AccRepository();
         try {
             Account refreshedAcc = repository.query(new SelectAccByLoginSpecification(account.getLogin())).get(0);
             requestContent.getSessionAttributes().put(SESSION_ATTR_USER, refreshedAcc);
         } catch (RepositoryException e) {
-            // FIXME: 7/17/2019
-            e.printStackTrace();
+            throw new ServiceException(e);
+        }
+    }
+
+    public void refreshSessionAttributeAvailableCourses(SessionRequestContent requestContent, Account account) throws ServiceException {
+        CourseRepository repository = new CourseRepository();
+        try {
+            List<Course> courses = repository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
+            requestContent.getSessionAttributes().put(ATTR_AVAILABLE_COURSES, courses);
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
         }
     }
 
@@ -232,7 +241,7 @@ public class AccountService {
         AccRepository repository = new AccRepository();
         List<Account> accounts = null;
         try {
-            accounts = repository.query(new SelectByCourseIdSpecification(courseId));
+            accounts = repository.query(new SelectAuthorOfCourseSpecification(courseId));
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
