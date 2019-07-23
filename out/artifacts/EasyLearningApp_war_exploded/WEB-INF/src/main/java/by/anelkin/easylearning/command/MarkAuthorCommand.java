@@ -12,7 +12,7 @@ public class MarkAuthorCommand implements Command {
     private static final String SUCCESSFUL_OPERATION_REDIRECT = "http://localhost:8080/easyLearning/author-info/";
 
     @Override
-    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
         (new MarkService()).markAuthor(requestContent);
         requestContent.setPath(SUCCESSFUL_OPERATION_REDIRECT + requestContent.getRequestAttributes().get(ATTR_AUTHOR_LOGIN));
         return REDIRECT;

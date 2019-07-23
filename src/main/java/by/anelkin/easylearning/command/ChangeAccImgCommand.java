@@ -11,7 +11,7 @@ public class ChangeAccImgCommand implements Command {
     private static final String FORWARD_PATH = "/jsp/global/change_picture.jsp";
 
     @Override
-    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
         (new AccountService()).addAccAvatarToReview(requestContent);
         requestContent.setPath(FORWARD_PATH);
         return FORWARD;

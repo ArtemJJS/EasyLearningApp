@@ -12,7 +12,7 @@ public class MarkCourseCommand implements Command {
     private static final String ATTR_COURSE_ID = "course_id";
 
     @Override
-    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
         (new MarkService()).markCourse(requestContent);
         int courseId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_COURSE_ID)[0]);
         requestContent.setPath(SUCCESSFUL_OPERATION_REDIRECT + courseId);

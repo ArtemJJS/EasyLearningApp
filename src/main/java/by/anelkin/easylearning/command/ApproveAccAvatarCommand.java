@@ -11,7 +11,7 @@ public class ApproveAccAvatarCommand implements Command {
     private static final String FORWARD_PATH = "/jsp/admin/approve_acc_avatar_page.jsp";
 
     @Override
-    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
         (new AccountService()).approveAccAvatar(requestContent);
         requestContent.setPath(FORWARD_PATH);
         return FORWARD;

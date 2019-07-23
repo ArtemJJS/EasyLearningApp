@@ -12,7 +12,7 @@ public class AddCourseToReviewCommand implements Command {
     private static final String SUCCESSFUL_OPERATION_REDIRECT = "http://localhost:8080/easyLearning/account";
 
     @Override
-    public ResponseType execute(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+    public ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
         boolean isExecuted = (new CourseService()).addCourseToReview(requestContent);
         if (isExecuted) {
             requestContent.setPath(SUCCESSFUL_OPERATION_REDIRECT);

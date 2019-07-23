@@ -14,7 +14,7 @@ public class LoginCommand implements Command {
     private static final String WRONG_LOGIN_PATH = "/jsp/start_page.jsp";
 
     @Override
-    public ResponseType execute(@NonNull SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+    public ResponseType execute(@NonNull SessionRequestContent requestContent) throws ServiceException {
         boolean isLoginCorrect = (new AccountService()).login(requestContent);
         if (!isLoginCorrect){
             requestContent.getRequestAttributes().put("wrong-login", "true");

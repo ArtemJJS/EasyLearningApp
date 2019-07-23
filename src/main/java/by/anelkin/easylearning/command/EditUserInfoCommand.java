@@ -18,7 +18,7 @@ public class EditUserInfoCommand implements Command {
     private static final String REDIRECT_USER = "http://localhost:8080/easyLearning/account";
 
     @Override
-    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
         (new AccountService()).editAccountInfo(requestContent);
         AccountType role = (AccountType) requestContent.getSessionAttributes().get("role");
         // TODO: 7/16/2019 а если тут гость??? может ли такое быть?

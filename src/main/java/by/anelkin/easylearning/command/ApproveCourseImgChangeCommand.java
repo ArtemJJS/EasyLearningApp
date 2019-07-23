@@ -11,7 +11,7 @@ public class ApproveCourseImgChangeCommand implements Command {
     private static final String FORWARD_PATH = "/jsp/admin/approve_course_img_page.jsp";
 
     @Override
-    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
 
         (new CourseService()).approveCourseImgChange(requestContent);
         requestContent.setPath(FORWARD_PATH);

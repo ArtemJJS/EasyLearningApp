@@ -12,7 +12,7 @@ public class ChangePasswordCommand implements Command {
 //    private static final String CHANGE_SUCCESSFUL_REDIRECT = "http://localhost:8080/easyLearning/account";
 
     @Override
-    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
        (new AccountService()).changeAccountPassword(requestContent);
 //        if (isPasswordChanged){
 //            requestContent.setPath(CHANGE_SUCCESSFUL_REDIRECT);

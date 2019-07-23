@@ -30,6 +30,11 @@
                 <input type="password" id="updated_password" name="updated_password" placeholder="new password" required pattern=".{5,50}">
                 <p class="field_desc">Min 5, max 50 symbols.</p>
             </div>
+            <div class="param">
+                <label for="repeated_password">Repeat new password: </label>
+                <input type="password" id="repeated_password" name="repeated_password" placeholder="repeat new password" required pattern=".{5,50}">
+                <p class="field_desc">Min 5, max 50 symbols.</p>
+            </div>
             <input type="hidden" name="command_name" value="change_password">
             <input class="submit_btn" type="submit" value="Submit">
         </form>

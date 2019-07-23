@@ -210,43 +210,45 @@ public class CourseService {
         }
     }
 
-    // TODO: 7/18/2019 если fail то поудалять все что добавилось?
-    // TODO: 7/18/2019 подумать может получится разнести хотя бы на два метода?
-    public boolean addCourseToReview(SessionRequestContent requestContent) throws RepositoryException {
+    public boolean addCourseToReview(SessionRequestContent requestContent) throws ServiceException {
         Map<String, String[]> params = requestContent.getRequestParameters();
         CourseRepository courseRepo = new CourseRepository();
         String courseName = params.get(ATTR_COURSE_NAME)[0];
         // FIXME: 7/21/2019 при повторной отправке после форварда адрес
         //  отличается(там адрес сервлета) и бьет ошибку
         boolean isCourseNew = requestContent.getRequestReferer().endsWith("author/add-new-course");
-        List<Course> courses = courseRepo.query(new SelectCourseByNameSpecification(courseName));
-        if (courses.size() > 0 && isCourseNew) {
-            // TODO: 7/18/2019 попробовать сохранить данные при наличии такого названия курса в базе? при форварде?
-            requestContent.getRequestAttributes().put(ATTR_COURSE_ALREADY_EXISTS, MSG_COURSE_ALREADY_EXISTS);
-            return false;
-        }
-        Course course;
-        course = isCourseNew ? new Course() : courses.get(0);
-        Account currAccount = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
-        course.setAuthorId(currAccount.getId());
-        course.setName(courseName);
-        course.setDescription(params.get(ATTR_COURSE_DESCRIPTION)[0]);
-        course.setPrice(new BigDecimal(params.get(ATTR_COURSE_PRICE)[0]));
-        course.setCreationDate(new Date(System.currentTimeMillis()));
-        course.setPathToPicture(DEFAULT_IMG);
-        course.setUpdatePhotoPath(EMPTY_STRING);
-        course.setState(CourseState.NOT_APPROVED);
-        if (isCourseNew) {
-            courseRepo.insert(course);
-        } else {
-            courseRepo.update(course);
-        }
-        int courseId = courseRepo.query(new SelectCourseByNameSpecification(courseName))
-                .get(0).getId();
+        List<Course> courses = null;
+        try {
+            courses = courseRepo.query(new SelectCourseByNameSpecification(courseName));
+            if (courses.size() > 0 && isCourseNew) {
+                // TODO: 7/18/2019 попробовать сохранить данные при наличии такого названия курса в базе? при форварде?
+                requestContent.getRequestAttributes().put(ATTR_COURSE_ALREADY_EXISTS, MSG_COURSE_ALREADY_EXISTS);
+                return false;
+            }
+            Course course;
+            course = isCourseNew ? new Course() : courses.get(0);
+            Account currAccount = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
+            course.setAuthorId(currAccount.getId());
+            course.setName(courseName);
+            course.setDescription(params.get(ATTR_COURSE_DESCRIPTION)[0]);
+            course.setPrice(new BigDecimal(params.get(ATTR_COURSE_PRICE)[0]));
+            course.setCreationDate(new Date(System.currentTimeMillis()));
+            course.setPathToPicture(DEFAULT_IMG);
+            course.setUpdatePhotoPath(EMPTY_STRING);
+            course.setState(CourseState.NOT_APPROVED);
+            if (isCourseNew) {
+                courseRepo.insert(course);
+            } else {
+                courseRepo.update(course);
+            }
+            int courseId = courseRepo.query(new SelectCourseByNameSpecification(courseName))
+                    .get(0).getId();
 
-        String[] chapterNames = insertChaptersIfNotExists(courseId, params);
-        insertLessons(courseId, params, chapterNames);
-
+            String[] chapterNames = insertChaptersIfNotExists(courseId, params);
+            insertLessons(courseId, params, chapterNames);
+        } catch (RepositoryException e) {
+           throw new ServiceException(e);
+        }
         return true;
     }
 

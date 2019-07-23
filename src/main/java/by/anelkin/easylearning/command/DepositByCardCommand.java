@@ -11,7 +11,7 @@ public class DepositByCardCommand implements Command {
     private static final String REDIRECT_PATH = "http://localhost:8080/easyLearning/account";
 
     @Override
-    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
         (new PaymentService()).processDepositByCard(requestContent);
         requestContent.setPath(REDIRECT_PATH);
         return REDIRECT;

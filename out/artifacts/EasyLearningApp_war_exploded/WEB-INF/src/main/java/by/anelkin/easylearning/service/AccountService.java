@@ -39,9 +39,10 @@ public class AccountService {
     private static final String SESSION_ATTR_ROLE = "role";
     private static final String REQUEST_PARAM_PWD = "password";
     private static final String REQUEST_PARAM_UPDATED_PWD = "updated_password";
+    private static final String REQUEST_PARAM_REPEATED_PWD = "repeated_password";
     private static final String PREVIOUS_OPERATION_MSG = "previous_operation_message";
     private static final String PWD_CHANGED_SUCCESSFULLY_MSG = "You password has been successfully changed!!!";
-    private static final String PWD_NOT_CHANGED_MSG = "You password wasn't changed! Password is not correct!";
+    private static final String PWD_NOT_CHANGED_MSG = "You password wasn't changed! Check inserted data!";
     private static final String ATTR_OPERATION_RESULT = "operation_result";
     private static final String ATTR_AVAILABLE_COURSES = "coursesAvailable";
     private static final String ATTR_LOGIN = "login";
@@ -127,7 +128,10 @@ public class AccountService {
     }
 
     public void changeAccountPassword(SessionRequestContent requestContent) throws ServiceException {
-        String currPassword = requestContent.getRequestParameters().get(REQUEST_PARAM_PWD)[0];
+        Map<String, String[]> reqParams = requestContent.getRequestParameters();
+        String currPassword = reqParams.get(REQUEST_PARAM_PWD)[0];
+        String updatedPassword = reqParams.get(REQUEST_PARAM_UPDATED_PWD)[0];
+        String repeatedPassword = reqParams.get(REQUEST_PARAM_REPEATED_PWD)[0];
         AccRepository repository = new AccRepository();
         Account clone;
         try {
@@ -135,8 +139,7 @@ public class AccountService {
         } catch (CloneNotSupportedException e) {
             throw new ServiceException(e);
         }
-        if (clone.getPassword().equals(currPassword)) {
-            String updatedPassword = requestContent.getRequestParameters().get(REQUEST_PARAM_UPDATED_PWD)[0];
+        if (clone.getPassword().equals(currPassword) && updatedPassword.equals(repeatedPassword)) {
             clone.setPassword(updatedPassword);
             try {
                 repository.update(clone);

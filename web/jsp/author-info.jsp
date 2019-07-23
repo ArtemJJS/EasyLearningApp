@@ -30,7 +30,7 @@
         <div class="author_description_and_stats">
             <div class="author_about">${author.about}</div>
             <div class="author_stats">
-                <div class="author_rating">Rating: ${author.avgMark}</div>
+                <div class="author_rating">Rating: <ctg:author-rating rating="${author.avgMark}"/></div>
                 <div class="author_students">Students: 352</div>
                 <div class="courses_amount">Courses: ${courses.size()}</div>
             </div>

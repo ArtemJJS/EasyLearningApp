@@ -12,7 +12,7 @@ public class CashOutCommand implements Command {
     private static final String FAIL_OPERATION_FORWARD = "/jsp/author/cash_out_page.jsp";
 
     @Override
-    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
         boolean isCashOutProceed = (new PaymentService()).processCashOutFromBalance(requestContent);
         if (isCashOutProceed){
             requestContent.setPath(SUCCESS_OPERATION_REDIRECT);

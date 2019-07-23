@@ -1,6 +1,7 @@
 package by.anelkin.easylearning.command;
 
 import by.anelkin.easylearning.exception.RepositoryException;
+import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ public class SignUpCommand implements Command {
 //    }
 
     @Override
-    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws RepositoryException {
+    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
         requestContent.setPath(REDIRECT_PATH);
         return REDIRECT;
     }

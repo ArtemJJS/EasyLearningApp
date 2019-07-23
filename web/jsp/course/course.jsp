@@ -70,7 +70,7 @@
             <a href="${pageContext.request.contextPath}/author-info/${author.login}"><img class="author_avatar"
                                                                                           src="${pageContext.request.contextPath}/${author.pathToPhoto}"
                                                                                           alt="author"></a>
-            <div class="author_rating">${author.avgMark}</div>
+            <div class="author_rating">Rating: <ctg:author-rating rating="${author.avgMark}"/></div>
             <div class="author_students">322 students</div>
         </div>
         <div class="author_about">

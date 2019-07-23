@@ -14,7 +14,7 @@ public class BuyFromBalanceCommand implements Command {
 
 
     @Override
-    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws RepositoryException, ServiceException {
+    public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
         boolean isOperationSuccessful = (new PaymentService()).processPurchaseFromBalance(requestContent);
             int courseId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_COURSE_ID)[0]);
         if (isOperationSuccessful) {
