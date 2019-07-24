@@ -85,7 +85,11 @@ header {
 #header_search_form{
     display: flex;
     flex-direction: row;
-    justify-items: center;
+    justify-content: flex-end;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 550px;
 }
 .header_search_field{
     margin: 0;

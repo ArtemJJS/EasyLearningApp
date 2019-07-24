@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="text_resources" var="rb"/>
 <html>
 <head>
     <title>easyLearning</title>
@@ -20,17 +23,17 @@
         <c:set var="courses" value="${requestScope.courses_list}"/>
         <c:choose>
             <c:when test="${courses == null}">
-                <c:out value="Nothing to approve..."/>
+                <div><fmt:message key='course.nothing_to_approve' bundle='${rb}'/></div>
             </c:when>
             <c:otherwise>
-                <div class="course_block_header">Courses, that are waiting of approval</div>
+                <div class="course_block_header"><fmt:message key='course.waiting_of_approval' bundle='${rb}'/></div>
                 <c:forEach var="course" items="${courses}">
                     <div class="about_course">
                         <div class="block1">
                             <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
                                 <img class="course_avatar"
                                      src="${pageContext.request.contextPath}${course.pathToPicture}"
-                                     alt="course avatar"/>
+                                     alt='<fmt:message key='global.course_image' bundle='${rb}'/>'/>
                             </a>
                         </div>
                         <div class="block2">
@@ -50,12 +53,12 @@
                         <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
                             <input type="hidden" name="course_id" value="${course.id}">
                             <input type="hidden" name="command_name" value="approve_course">
-                            <input type="submit" value="Approve!">
+                            <input type="submit" value='<fmt:message key='btn.approve' bundle='${rb}'/>'>
                         </form>
                         <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
                             <input type="hidden" name="course_id" value="${course.id}">
                             <input type="hidden" name="command_name" value="decline_course_approval">
-                            <input type="submit" value="Decline">
+                            <input type="submit" value='<fmt:message key='btn.decline' bundle='${rb}'/>'>
                         </form>
                     </div>
                 </c:forEach>

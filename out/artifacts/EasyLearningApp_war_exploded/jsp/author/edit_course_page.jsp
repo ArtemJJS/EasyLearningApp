@@ -5,8 +5,10 @@
   Time: 12:54 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="text_resources" var="rb"/>
 <html>
 <head>
     <title>easyLearning</title>
@@ -19,41 +21,36 @@
 <main>
     <c:set var="course" value="${requestScope.requestedCourse}" property=""/>
     <c:set var="content" value="${requestScope.currentCourseContent}"/>
-    <div class="page_title">Edit course:</div>
+    <div class="page_title"><fmt:message key='course.edit_course' bundle='${rb}'/>:</div>
     <form class="main_form" method="post" action="${pageContext.request.contextPath}/basic_servlet">
         <div class="param">
-            <div class="unit_title">Course title:</div>
+            <div class="unit_title"><fmt:message key='course.course_title' bundle='${rb}'/>:</div>
             <div class="input_and_pattern">
                 <div class="param_field">${course.name}</div>
-                <input value="${course.name}" type="text" id="course_title_field" name="course_name" hidden
+                <input type="hidden" value="${course.name}" id="course_title_field" name="course_name"
                        pattern="[A-z0-9_ -]{5,200}">
-                <%--                <div class="previous_operation_msg">${requestScope.course_exists_msg}</div>--%>
-                <p class="field_desc">Available characters: English letters, digits, _ and - symbols, space. Min 5, max
-                    200
-                    symbols. </p>
             </div>
         </div>
         <div class="param">
-            <label for="price-field">Price in USD:</label>
+            <label for="price-field"><fmt:message key='course.price_in_usd' bundle='${rb}'/>:</label>
             <div class="input_and_pattern">
                 <input type="text" id="price-field" name="course_price" value="${course.price}" required
                        pattern="[0-9]{1,8}(\.[0-9]{1,2})?">
-                <p class="field_desc">Format: 12345678.12</p>
+                <p class="field_desc"><fmt:message key='course.price_format' bundle='${rb}'/></p>
             </div>
         </div>
         <div class="param">
-            <label for="course_desc">Course description:</label>
+            <label for="course_desc"><fmt:message key='course.course_description' bundle='${rb}'/>:</label>
             <textarea id="course_desc" name="course_description" cols="25"
                       rows="7">${course.description}</textarea>
         </div>
 
-        <%--    =================Chapters======================    --%>
         <jsp:useBean id="i" class="by.anelkin.easylearning.entity.JspIntWrapper"/>
         <c:forEach var="entry" items="${content}">
             <c:set var="chapter" value="${entry.getKey()}"/>
             <div id="${i.value}" class="chapter">
                 <div class="param chapter">
-                    <div class="unit_title">Chapter ${i.value}:</div>
+                    <div class="unit_title"><fmt:message key='course.chapter' bundle='${rb}'/> ${i.value}:</div>
                     <div class="param_field">${chapter.name}</div>
                     <input value="${chapter.name}" type="text" id="chapter_name" name="chapter_name" hidden
                            pattern="[A-z0-9_ -]{5,200}">
@@ -62,7 +59,7 @@
                     <jsp:useBean id="j" class="by.anelkin.easylearning.entity.JspIntWrapper"/>
                     <c:forEach var="lesson" items="${entry.getValue()}">
                         <div class="param lesson">
-                            <div class="unit_title">Lesson ${j.receiveAndIncrement()}:</div>
+                            <div class="unit_title"><fmt:message key='course.lesson' bundle='${rb}'/> ${j.receiveAndIncrement()}:</div>
                             <div class="lesson_params">
                                 <div class="param_field">${lesson.name}</div>
                                 <div class="param_field">${lesson.pathToContent}</div>
@@ -70,16 +67,16 @@
                             </div>
                         </div>
                     </c:forEach>
-                    <div class="add_lesson">add lesson</div>
+                    <div class="add_lesson"><fmt:message key='course.add_lesson' bundle='${rb}'/></div>
                 </div>
             </div>
             ${j.resetToOne()}
             ${i.increment()}
         </c:forEach>
 
-        <div class="add_chapter">add chapter</div>
+        <div class="add_chapter"><fmt:message key='course.add_chapter' bundle='${rb}'/></div>
         <input type="hidden" name="command_name" value="add_course_to_review">
-        <input class="submit_btn" type="submit" value="Send to review">
+        <input class="submit_btn" type="submit" value='<fmt:message key='btn.send_to_review' bundle='${rb}'/>'>
     </form>
     <script>
         <%@include file="/js/add_lesson.js"%>

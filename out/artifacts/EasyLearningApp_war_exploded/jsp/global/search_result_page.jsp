@@ -8,6 +8,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="ctg" uri="customtags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="text_resources" var="rb"/>
 <html>
 <head>
     <title>easyLearning</title>
@@ -22,11 +25,11 @@
         <c:set var="courses_available" value="${pageContext.request.getAttribute('courses_list')}"/>
         <c:choose>
             <c:when test="${courses_available.size()<1}">
-                <c:out value="Nothing found on your request ${pageContext.request.getParameter('search_key')}... ((("/>
+                <div><fmt:message key='search.nothing_found' bundle='${rb}'/> ${pageContext.request.getParameter('search_key')}  (((</div>
             </c:when>
             <c:otherwise>
                 <div class="course_block_header">${courses_available.size()}
-                    courses has been found on your request
+                    <fmt:message key='search.courses_have_been_found' bundle='${rb}'/>
                         ${pageContext.request.getParameter('search_key')}</div>
                 <c:forEach var="course" items="${courses_available}">
                     <div class="about_course">
@@ -34,7 +37,7 @@
                             <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
                                 <img class="course_avatar"
                                      src="${pageContext.request.contextPath}${course.pathToPicture}"
-                                     alt="course avatar"/>
+                                     alt='<fmt:message key='global.course_image' bundle='${rb}'/>'/>
                             </a>
                         </div>
                         <div class="block2">

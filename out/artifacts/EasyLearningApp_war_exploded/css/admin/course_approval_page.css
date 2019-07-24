@@ -9,7 +9,6 @@
 html {
     width: 100vw;
     /*height: 100vw;*/
-
 }
 
 main {
@@ -73,10 +72,11 @@ main {
 }
 
 .forms{
-    width: 200px;
     margin-top: 15px;
     margin-bottom: 40px;
 
     display: flex;
-    justify-content: space-between;
+}
+.forms form{
+    margin-right: 40px;
 }

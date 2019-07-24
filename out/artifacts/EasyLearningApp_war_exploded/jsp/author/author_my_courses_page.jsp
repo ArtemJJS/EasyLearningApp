@@ -7,6 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="ctg" uri="customtags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="text_resources" var="rb"/>
 <html>
 <head>
     <title>easyLearning</title>
@@ -21,17 +24,17 @@
         <c:set var="courses_available" value="${sessionScope.coursesAvailable}"/>
         <c:choose>
             <c:when test="${courses_available == null || courses_available.size() < 1}">
-                <c:out value="You still have no courses..."/>
+                <div><fmt:message key='course.you_still_have_no_courses' bundle='${rb}'/></div>
             </c:when>
             <c:otherwise>
-                <div class="course_block_header">Courses, that you have purchased already:</div>
+                <div class="course_block_header"><fmt:message key='course.your_courses' bundle='${rb}'/>:</div>
                 <c:forEach var="course" items="${courses_available}">
                     <div class="about_course">
                         <div class="block1">
                             <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
                                 <img class="course_avatar"
                                      src="${pageContext.request.contextPath}${course.pathToPicture}"
-                                     alt="course avatar"/>
+                                     alt='<fmt:message key='global.course_image' bundle='${rb}'/>'/>
                             </a>
                         </div>
                         <div class="block2">

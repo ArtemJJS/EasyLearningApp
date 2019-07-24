@@ -71,14 +71,16 @@ main {
 
 .forms{
     margin-top: 30px;
-    width: 30%;
+    width: 35%;
 
     display: flex;
-    justify-content: space-between;
     align-self: center;
 }
 
 input{
-    width: 100px;
+    width: 120px;
     height: 35px;
+}
+.forms form:first-child input{
+    margin-right: 20px;
 }

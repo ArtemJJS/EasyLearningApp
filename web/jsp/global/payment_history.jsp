@@ -7,6 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="ctg" uri="customtags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="text_resources" var="rb"/>
 <html>
 <head>
     <title>easyLearning</title>
@@ -17,7 +20,7 @@
 <body>
 <%@include file="/jsp/header.jsp" %>
 <main>
-    <div class="page_title">Your Payment History:</div>
+    <div class="page_title"><fmt:message key='payment.your_payment_history' bundle='${rb}'/>:</div>
     <c:set var="payments" value="${pageContext.request.getAttribute('payments')}"/>
     <div class="payment_list_wrapper">
         <c:forEach var="payment" items="${payments}">
