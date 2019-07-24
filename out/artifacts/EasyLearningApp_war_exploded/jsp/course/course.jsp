@@ -26,7 +26,7 @@
         <div class="course_title">
             <div class="course_name">${curr_course.name}</div>
             <div class="course_description">${curr_course.description}</div>
-            <div class="course_rating"><fmt:message key='course.mark_from_users' bundle='${rb}'/>: ${curr_course.avgMark}
+            <div class="course_rating"><fmt:message key='course.mark_from_users' bundle='${rb}'/>: <ctg:write-rating rating='${curr_course.avgMark}'/>
                 <br><fmt:message key='course.feedbacks' bundle='${rb}'/>: 34</div>
             <ctg:course-options course="${curr_course}"/>
         </div>
@@ -72,7 +72,7 @@
             <a href="${pageContext.request.contextPath}/author-info/${author.login}"><img class="author_avatar"
                                                                                           src="${pageContext.request.contextPath}/${author.pathToPhoto}"
                                                                                           alt="author"></a>
-            <div class="author_rating"><fmt:message key='global.rating' bundle='${rb}'/>: <ctg:author-rating rating="${author.avgMark}"/></div>
+            <div class="author_rating"><fmt:message key='global.rating' bundle='${rb}'/>: <ctg:write-rating rating="${author.avgMark}"/></div>
             <div class="author_students">322 <fmt:message key='course.students' bundle='${rb}'/></div>
         </div>
         <div class="author_about">

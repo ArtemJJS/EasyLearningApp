@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Locale;
 
 import static by.anelkin.easylearning.command.CommandFactory.*;
 import static by.anelkin.easylearning.entity.Account.AccountType.*;
@@ -30,6 +31,8 @@ public class BasicServlet extends HttpServlet {
 
         if (request.getSession().getAttribute("role") == null) {
             request.getSession().setAttribute("role", GUEST);
+            request.getSession().setAttribute("locale", new Locale("en", "US"));
+
         }
 
         CommandType commandType = CommandType.valueOf(request.getParameter("command_name").toUpperCase());

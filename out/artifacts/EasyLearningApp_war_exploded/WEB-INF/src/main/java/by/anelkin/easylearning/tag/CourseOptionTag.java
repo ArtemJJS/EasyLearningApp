@@ -10,35 +10,47 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static by.anelkin.easylearning.entity.Account.*;
 
 @Setter
 public class CourseOptionTag extends TagSupport {
     private static final String ATTR_MARKED_COURSES_IDS = "marked_courses_ids";
+    private static final String RESOURCE_BUNDLE_BASE = "text_resources";
+    private static final String ATTR_LOCALE = "locale";
+    private static final String LOCALE_SPLITTER = "_";
 
-    private static final String AUTHOR_LEARNING_PAGE = "Learning page";
+
+    private static final String BUNDLE_LEARNING_PAGE = "tag.learning_page";
+    private static final String BUNDLE_EDIT_COURSE = "tag.edit_course";
+    private static final String BUNDLE_EDIT_IMAGE = "tag.edit_image";
+    //    private static final String AUTHOR_LEARNING_PAGE = "Learning page";
+//    private static final String AUTHOR_EDIT_COURSE = "Edit course";
+//    private static final String AUTHOR_EDIT_IMAGE = "Edit image";
     private static final String AUTHOR_LEARNING_PAGE_LINK = "/course/learn?course-id=";
-    private static final String AUTHOR_EDIT_COURSE = "Edit course";
     private static final String AUTHOR_EDIT_COURSE_LINK = "/author/edit-course?course-id=";
-    private static final String AUTHOR_EDIT_IMAGE = "Edit image";
     private static final String AUTHOR_EDIT_IMAGE_LINK = "/account/change-picture?course-id=";
 
-    private static final String USER_LEARNING_PAGE = "Learning page";
+    private static final String BUNDLE_BUY_COURSE = "tag.buy_course";
+    private static final String BUNDLE_MARK_COURSE = "tag.mark_course";
     private static final String USER_LEARNING_PAGE_LINK = "/course/learn?course-id=";
-    private static final String USER_BUY_COURSE = "Buy course";
-    private static final String USER_BUY_COURSE_LINK = "/user/buy-course?course-id=";
-    private static final String USER_MARK_COURSE = "Mark course";
     private static final String USER_MARK_COURSE_LINK = "/user/mark-course?course-id=";
+    private static final String USER_BUY_COURSE_LINK = "/user/buy-course?course-id=";
+//    private static final String USER_BUY_COURSE = "Buy course";
+//    private static final String USER_LEARNING_PAGE = "Learning page";
+//    private static final String USER_MARK_COURSE = "Mark course";
 
 
     private Course course;
 
     @Override
     public int doStartTag() throws JspException {
+        String[] localeArr = String.valueOf(pageContext.getSession().getAttribute(ATTR_LOCALE)).split(LOCALE_SPLITTER);
+        Locale locale = new Locale(localeArr[0], localeArr[1]);
         String contextPath = pageContext.getServletContext().getContextPath();
         AccountType role = (AccountType) pageContext.getSession().getAttribute("role");
-        List<Integer> markedCourses = (List<Integer>) pageContext.getSession().getAttribute(ATTR_MARKED_COURSES_IDS);
         List<Course> coursesAvailable = (List<Course>) pageContext.getSession().getAttribute("coursesAvailable");
         JspWriter writer = pageContext.getOut();
         if (role == null) {
@@ -47,25 +59,10 @@ public class CourseOptionTag extends TagSupport {
         try {
             switch (role) {
                 case AUTHOR:
-                    if (coursesAvailable.contains(course)) {
-                        writer.write("<div class='links'>");
-                        writer.write("<a href=" + contextPath + AUTHOR_LEARNING_PAGE_LINK + course.getId() + ">" + AUTHOR_LEARNING_PAGE + "</a>");
-                        writer.write("<a href=" + contextPath + AUTHOR_EDIT_COURSE_LINK + course.getId() + ">" + AUTHOR_EDIT_COURSE + "</a>");
-                        writer.write("<a href=" + contextPath + AUTHOR_EDIT_IMAGE_LINK + course.getId() + ">" + AUTHOR_EDIT_IMAGE + "</a>");
-                        writer.write("</div>");
-                    }
+                    writeAuthorLinks(coursesAvailable, contextPath, locale);
                     break;
                 case USER:
-                    if (coursesAvailable.contains(course)) {
-                        writer.write("<div class='links'>");
-                        writer.write("<a href=" + contextPath + USER_LEARNING_PAGE_LINK + course.getId() + ">" + USER_LEARNING_PAGE + "</a>");
-                        writer.write(markLinkIfNotMarked(markedCourses, contextPath));
-                        writer.write("</div>");
-                    } else {
-                        writer.write("<div class='links'>");
-                        writer.write("<a href=" + contextPath + USER_BUY_COURSE_LINK + course.getId() + ">" + USER_BUY_COURSE + "</a>");
-                        writer.write("</div>");
-                    }
+                    writeUserLinks(coursesAvailable, contextPath, locale);
             }
 
         } catch (IOException e) {
@@ -74,9 +71,46 @@ public class CourseOptionTag extends TagSupport {
         return SKIP_BODY;
     }
 
-    private String markLinkIfNotMarked(List<Integer> markedCoursesIds, String contextPath) {
-        return markedCoursesIds.contains(course.getId()) ? "" :
-                "<a href=" + contextPath + USER_MARK_COURSE_LINK + course.getId() + ">" + USER_MARK_COURSE + "</a>";
+
+    private void writeAuthorLinks(List<Course> coursesAvailable, String contextPath, Locale locale) throws IOException {
+        ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale);
+        String learningPage = rb.getString(BUNDLE_LEARNING_PAGE);
+        String editCourse = rb.getString(BUNDLE_EDIT_COURSE);
+        String editImage = rb.getString(BUNDLE_EDIT_IMAGE);
+
+        JspWriter writer = pageContext.getOut();
+        if (coursesAvailable.contains(course)) {
+            writer.write("<div class='links'>");
+            writer.write("<a href=" + contextPath + AUTHOR_LEARNING_PAGE_LINK + course.getId() + ">" + learningPage + "</a>");
+            writer.write("<a href=" + contextPath + AUTHOR_EDIT_COURSE_LINK + course.getId() + ">" + editCourse + "</a>");
+            writer.write("<a href=" + contextPath + AUTHOR_EDIT_IMAGE_LINK + course.getId() + ">" + editImage + "</a>");
+            writer.write("</div>");
+        }
     }
+
+    private void writeUserLinks(List<Course> coursesAvailable, String contextPath, Locale locale) throws IOException {
+        ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale);
+        List<Integer> markedCourses = (List<Integer>) pageContext.getSession().getAttribute(ATTR_MARKED_COURSES_IDS);
+        String learningPage = rb.getString(BUNDLE_LEARNING_PAGE);
+        String buyCourse = rb.getString(BUNDLE_BUY_COURSE);
+        String markCourse = rb.getString(BUNDLE_MARK_COURSE);
+        JspWriter writer = pageContext.getOut();
+        if (coursesAvailable.contains(course)) {
+            writer.write("<div class='links'>");
+            writer.write("<a href=" + contextPath + USER_LEARNING_PAGE_LINK + course.getId() + ">" + learningPage + "</a>");
+            writer.write(markLinkIfNotMarked(markedCourses, contextPath, markCourse));
+            writer.write("</div>");
+        } else {
+            writer.write("<div class='links'>");
+            writer.write("<a href=" + contextPath + USER_BUY_COURSE_LINK + course.getId() + ">" + buyCourse + "</a>");
+            writer.write("</div>");
+        }
+    }
+
+    private String markLinkIfNotMarked(List<Integer> markedCoursesIds, String contextPath, String markCourse) {
+        return markedCoursesIds.contains(course.getId()) ? "" :
+                "<a href=" + contextPath + USER_MARK_COURSE_LINK + course.getId() + ">" + markCourse + "</a>";
+    }
+
 }
 

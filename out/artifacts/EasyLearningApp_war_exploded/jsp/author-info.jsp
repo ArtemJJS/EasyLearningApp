@@ -33,7 +33,7 @@
         <div class="author_description_and_stats">
             <div class="author_about">${author.about}</div>
             <div class="author_stats">
-                <div class="author_rating"><fmt:message key='author.rating' bundle='${rb}'/> <ctg:author-rating rating="${author.avgMark}"/></div>
+                <div class="author_rating"><fmt:message key='author.rating' bundle='${rb}'/> <ctg:write-rating rating="${author.avgMark}"/></div>
                 <div class="author_students"><fmt:message key='author.students' bundle='${rb}'/> 352</div>
                 <div class="courses_amount"><fmt:message key='author.courses' bundle='${rb}'/> ${courses.size()}</div>
             </div>

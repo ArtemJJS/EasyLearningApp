@@ -10,29 +10,6 @@
     <uri>customtags</uri>
 
     <tag>
-        <name>chapter-short-writer</name>
-        <tag-class>by.anelkin.easylearning.tag.ChapterShortWriter</tag-class>
-        <body-content>empty</body-content>
-        <attribute>
-            <name>chapter</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>by.anelkin.easylearning.entity.CourseChapter</type>
-        </attribute>
-    </tag>
-
-    <tag>
-        <name>lesson-short-writer</name>
-        <tag-class>by.anelkin.easylearning.tag.LessonsShortWriter</tag-class>
-        <body-content>empty</body-content>
-        <attribute>
-            <name>lessons</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type><![CDATA[java.util.List<by.anelkin.easylearning.entity.CourseLesson>]]></type>
-        </attribute>
-    </tag>
-    <tag>
         <name>time-prettier</name>
         <tag-class>by.anelkin.easylearning.tag.SecondsToHoursAndMinutes</tag-class>
         <body-content>empty</body-content>
@@ -89,8 +66,8 @@
         </attribute>
     </tag>
     <tag>
-        <name>author-rating</name>
-        <tag-class>by.anelkin.easylearning.tag.AuthorRatingTag</tag-class>
+        <name>write-rating</name>
+        <tag-class>by.anelkin.easylearning.tag.RatingTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>rating</name>
