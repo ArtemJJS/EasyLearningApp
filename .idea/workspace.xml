@@ -7,51 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77346347-82ab-4dd4-a607-ffc1e917cca2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/resources/course_img_update/14.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/course_img_update/14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/filter/CharsetFilter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/filter/CharsetFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/filter/CharsetFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/filter/CharsetFilter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/text_resources.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/text_resources.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/text_resources_ru_RU.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/text_resources_ru_RU.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/text_resources.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/text_resources.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/text_resources_ru_RU.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/text_resources_ru_RU.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/css/admin/approve_course_img_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/css/admin/approve_course_img_page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/css/admin/course_approval_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/css/admin/course_approval_page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/css/author/edit_course_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/css/author/edit_course_page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/css/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/css/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/admin/approve_acc_avatar_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/admin/approve_acc_avatar_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/admin/approve_course_img_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/admin/approve_course_img_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/admin/course_approval_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/admin/course_approval_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/author/add_course_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/author/add_course_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/author/author_my_courses_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/author/author_my_courses_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/author/cash_out_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/author/cash_out_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/author/edit_course_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/author/edit_course_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/course/course.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/course/course.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/global/change_password_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/global/change_password_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/global/change_picture.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/global/change_picture.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/global/payment_history.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/global/payment_history.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/global/search_result_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/global/search_result_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/resources/account_avatar/24.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/resources/account_avatar/24.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/text_resources.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/text_resources.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/text_resources_ru_RU.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/text_resources_ru_RU.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/text_resources.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/text_resources.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/text_resources_ru_RU.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/text_resources_ru_RU.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/admin/approve_course_img_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/admin/approve_course_img_page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/admin/course_approval_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/admin/course_approval_page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/author/edit_course_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/author/edit_course_page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/admin/approve_acc_avatar_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/admin/approve_acc_avatar_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/admin/approve_course_img_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/admin/approve_course_img_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/admin/course_approval_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/admin/course_approval_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/author/add_course_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/author/add_course_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/author/author_my_courses_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/author/author_my_courses_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/author/cash_out_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/author/cash_out_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/author/edit_course_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/author/edit_course_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/course/course.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/course/course.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/global/change_password_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/global/change_password_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/global/change_picture.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/global/change_picture.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/global/payment_history.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/global/payment_history.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/global/search_result_page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/global/search_result_page.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/resources/account_avatar/24.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/resources/account_avatar/24.png" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -110,31 +70,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/filter/CharsetFilter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/jsp/admin/approve_acc_avatar_page.jsp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="450">
-              <caret line="51" column="18" lean-forward="true" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/text_resources.properties">
-          <provider editor-type-id="ResourceBundle" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="155" column="36" selection-start-line="155" selection-start-column="36" selection-end-line="155" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/text_resources_ru_RU.properties">
-          <provider editor-type-id="ResourceBundle" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="158" lean-forward="true" selection-start-line="158" selection-end-line="158" />
+              <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -212,7 +164,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/property/text.properties" />
         <option value="$PROJECT_DIR$/property/text_fr_FR.properties" />
         <option value="$PROJECT_DIR$/property/text_ru_RU.properties" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/property/text/property.java" />
@@ -263,6 +214,7 @@
         <option value="$PROJECT_DIR$/web/jsp/admin/approve_acc_avatar_page.jsp" />
         <option value="$PROJECT_DIR$/src/main/resources/text_resources_ru_RU.properties" />
         <option value="$PROJECT_DIR$/src/main/resources/text_resources.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/filter/CharsetFilter.java" />
       </list>
     </option>
   </component>
@@ -344,6 +296,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="easylearning" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EasyLearningApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="easylearning" type="462c0819:PsiDirectoryNode" />
+              <item name="filter" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
@@ -669,14 +630,7 @@
       <workItem from="1563789887634" duration="41440000" />
       <workItem from="1563889389953" duration="5401000" />
       <workItem from="1563896110689" duration="19618000" />
-      <workItem from="1563967261775" duration="9822000" />
-    </task>
-    <task id="LOCAL-00005" summary="feat: add chapter repository.">
-      <created>1561034716475</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1561034716475</updated>
+      <workItem from="1563967261775" duration="10515000" />
     </task>
     <task id="LOCAL-00006" summary="feat: add lesson repository.">
       <created>1561040771322</created>
@@ -1014,11 +968,18 @@
       <option name="project" value="LOCAL" />
       <updated>1563928064684</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="feat: add russian locale representation to pages.">
+      <created>1563978206753</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1563978206754</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="679533000" />
+    <option name="totallyTimeSpent" value="680226000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1033,7 +994,7 @@
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.64888126" visible="true" weight="0.1393643" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.64888126" visible="true" weight="0.22493887" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -1043,7 +1004,7 @@
       <window_info id="Web" order="7" sideWeight="0.35111877" side_tool="true" weight="0.21149144" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32997763" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4987775" visible="true" weight="0.34004474" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4987775" visible="true" weight="0.34004474" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.34004474" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1064,7 +1025,7 @@
       <window_info anchor="right" id="Maven" order="3" weight="0.3294621" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" weight="0.2292176" />
+      <window_info active="true" anchor="right" id="Database" order="6" visible="true" weight="0.2292176" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.3294621" />
@@ -1113,7 +1074,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="feat: add buy course and account balance logic." />
     <MESSAGE value="feat: add deposit by card to account balance option." />
     <MESSAGE value="feat: add check payment history option." />
     <MESSAGE value="style: update password changing page." />
@@ -1138,7 +1098,8 @@
     <MESSAGE value="feat: user can rate author of purchased couses." />
     <MESSAGE value="refactor: update commands exceptions." />
     <MESSAGE value="feat: add internationalization option." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add internationalization option." />
+    <MESSAGE value="feat: add russian locale representation to pages." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add russian locale representation to pages." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1190,7 +1151,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/text.properties" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/test.properties" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/test_ru_RU.properties" />
     <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/text_ru_RU.properties" />
@@ -1432,15 +1392,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://47865970-3e28-4724-ad20-d1f31bcebca0/schema/easylearning/table/account">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="f86e01d1-ef43-4c77-98dd-a30c586eba2b">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/jsp/author/add_course_page.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -1484,18 +1435,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/jsp/admin/approve_acc_avatar_page.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="51" column="18" lean-forward="true" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/text_resources.properties">
       <provider editor-type-id="ResourceBundle" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="155" column="36" selection-start-line="155" selection-start-column="36" selection-end-line="155" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/jsp/admin/approve_acc_avatar_page.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://47865970-3e28-4724-ad20-d1f31bcebca0/schema/easylearning/table/account">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="f86e01d1-ef43-4c77-98dd-a30c586eba2b">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/filter/CharsetFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
