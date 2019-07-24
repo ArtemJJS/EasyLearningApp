@@ -53,6 +53,7 @@ public class AccountService {
     private static final String ATTR_FILE_EXTENSION = "file_extension";
     private static final String ATTR_ACCS_TO_AVATAR_APPROVE = "acc_avatar_approve_list";
     private static final String ATTR_IS_AUTHOR_MARKED_ALREADY = "is_author_marked_already";
+    private static final String ATTR_DESTROY_SESSION = "destroy_session";
     private static final String EMPTY_STRING = "";
 
 
@@ -122,9 +123,7 @@ public class AccountService {
     // TODO: 7/12/2019 переделать нормально!
     public void logOut(@NonNull SessionRequestContent requestContent) {
         HashMap<String, Object> sessionAttributes = requestContent.getSessionAttributes();
-        sessionAttributes.remove(SESSION_ATTR_USER);
-        sessionAttributes.remove(ATTR_AVAILABLE_COURSES);
-        sessionAttributes.put(SESSION_ATTR_ROLE, GUEST);
+        sessionAttributes.put(ATTR_DESTROY_SESSION, true);
     }
 
     public void changeAccountPassword(SessionRequestContent requestContent) throws ServiceException {

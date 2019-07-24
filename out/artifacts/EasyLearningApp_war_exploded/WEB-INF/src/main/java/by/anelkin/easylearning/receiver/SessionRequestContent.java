@@ -13,6 +13,8 @@ import java.util.Map;
 @Setter
 @Getter
 public class SessionRequestContent {
+    private static final String ATTR_DESTROY_SESSION = "destroy_session";
+
     private HashMap<String, Object> requestAttributes = new HashMap<>();
     private Map<String, String[]> requestParameters;
     private HashMap<String, Object> sessionAttributes = new HashMap<>();
@@ -53,15 +55,23 @@ public class SessionRequestContent {
         }
         requestAttributes.forEach(request::setAttribute);
 
-        HttpSession session = request.getSession();
-        Enumeration<String> sessionAttrs = session.getAttributeNames();
-        while (sessionAttrs.hasMoreElements()) {
-            String sessionAttrName = sessionAttrs.nextElement();
-            if (!sessionAttributes.containsKey(sessionAttrName)) {
-                session.removeAttribute(sessionAttrName);
-            }
-        }
-        sessionAttributes.forEach(session::setAttribute);
-    }
+//        System.out.println("!!!!!!!!!!!" + session.getId());
+        HttpSession session = request.getSession(false);
+//        if (session != null) {
+//            Enumeration<String> sessionAttrs = session.getAttributeNames();
+//            while (sessionAttrs.hasMoreElements()) {
+//                String sessionAttrName = sessionAttrs.nextElement();
+//                if (!sessionAttributes.containsKey(sessionAttrName)) {
+//                    session.removeAttribute(sessionAttrName);
+//                }
+//            }
+        if (sessionAttributes.containsKey(ATTR_DESTROY_SESSION)) {
+            session.invalidate();
+        } else {
+            sessionAttributes.forEach(session::setAttribute);
 
+        }
+    }
 }
+
+
