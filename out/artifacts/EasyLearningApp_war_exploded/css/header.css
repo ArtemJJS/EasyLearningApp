@@ -99,9 +99,16 @@ header {
 
 .header_submit_btn{
     margin: 0;
-    width: 80px;
+    width: 90px;
     /*align-self: normal;*/
     height: 30px;
     font-size: 20px;
 }
 
+.choose_lang{
+    display: flex;
+    margin-right: 30px;
+}
+.choose_lang a{
+    margin-right: 20px;
+}

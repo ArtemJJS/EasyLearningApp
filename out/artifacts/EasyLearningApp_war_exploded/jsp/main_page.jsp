@@ -8,10 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="ctg" uri="customtags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="text_resources" var="rb"/>
 <html>
 <head>
     <title>EasyLearning</title>
-    <%--    <c:import url="/css/main_page.css" >--%>
     <style>
         <%@include  file="/css/main_page.css" %>
     </style>
@@ -19,23 +21,26 @@
 <body>
 <%@include file="header.jsp" %>
 <main>
-    <div class="banner">Learn EASY. <br>EVERYTIME. EVERYWHERE.</div>
-    <div class="greeting">Welcome back, ${sessionScope.user.name}! Are you ready to study?</div>
+    <div class="banner"><fmt:message key='main.learn_easy' bundle='${rb}'/><br><fmt:message
+            key='main.everytime_everywhere' bundle='${rb}'/></div>
+    <div class="greeting"><fmt:message key='main.welcome_back' bundle='${rb}'/>${sessionScope.user.name}! <fmt:message
+            key='main.are_you_ready_to_study' bundle='${rb}'/></div>
     <div class="courses_block">
         <c:set var="courses_available" value="${sessionScope.coursesAvailable}"/>
         <c:choose>
             <c:when test="${courses_available == null}">
-                <c:out value="You do not have available courses... ((("/>
+                <div><fmt:message key='main.you_do_not_have_available_courses' bundle='${rb}'/></div>
             </c:when>
             <c:otherwise>
-                <div class="course_block_header">Courses, that you have purchased already:</div>
+                <div class="course_block_header"><fmt:message key='main.courses_that_you_have_purchased_already'
+                                                              bundle='${rb}'/></div>
                 <c:forEach var="course" items="${courses_available}">
                     <div class="about_course">
                         <div class="block1">
                             <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
                                 <img class="course_avatar"
                                      src="${pageContext.request.contextPath}${course.pathToPicture}"
-                                     alt="course avatar"/>
+                                     alt='<fmt:message key='global.course_image' bundle='${rb}'/>'/>
                             </a>
                         </div>
                         <div class="block2">
@@ -57,14 +62,14 @@
     <div class="courses_block">
         <c:set var="courses_recommended"
                value="${sessionScope.get('coursesRecommended')}"/>
-        <div class="course_block_header"> Courses, That are recommended for you:</div>
+        <div class="course_block_header"><fmt:message key='main.courses_that_are_recommended' bundle='${rb}'/></div>
         <c:forEach var="course" items="${courses_available}">
             <div class="about_course">
                 <div class="block1">
                     <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
                         <img class="course_avatar"
                              src="${pageContext.request.contextPath}${course.pathToPicture}"
-                             alt="course avatar"/>
+                             alt='<fmt:message key='global.course_image' bundle='${rb}'/>'/>
                     </a>
                 </div>
                 <div class="block2">
@@ -82,7 +87,5 @@
         </c:forEach>
     </div>
 </main>
-
 </body>
-
 </html>

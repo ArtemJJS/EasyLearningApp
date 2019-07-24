@@ -25,7 +25,7 @@ main {
 }
 
 .page_title {
-    width: 200px;
+    width: 300px;
     margin: 40px auto;
     color: darkgreen;
     font-size: 1.5rem;
@@ -62,9 +62,10 @@ main {
 }
 
 .label_and_pattern {
+    margin-left: 30px;
     display: flex;
     flex-direction: column;
-    width: 100px;
+    width: 150px;
 }
 
 textarea {

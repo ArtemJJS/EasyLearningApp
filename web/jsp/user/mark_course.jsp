@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="text_resources" var="rb"/>
 <html>
 <head>
     <title>easyLearning</title>
@@ -20,16 +23,16 @@
 <main>
     <div class="page_title">
         <div class="title_and_price">
-            <div class="title">Mark next course:</div>
-            <div class="course_price">Price: ${course.price}$</div>
+            <div class="title"><fmt:message key='mark.mark_next_course' bundle='${rb}'/>:</div>
+            <div class="course_price"><fmt:message key='global.price' bundle='${rb}'/>: ${course.price}$</div>
         </div>
         <div class="course_name">${course.name}</div>
-        <img class="course_img" src="${pageContext.request.contextPath}/${course.pathToPicture}" alt="Course image">
+        <img class="course_img" src="${pageContext.request.contextPath}/${course.pathToPicture}" alt='<fmt:message key='global.course_image' bundle='${rb}'/>'>
     </div>
     <form class="mark_form" method="post" action="${pageContext.request.contextPath}/basic_servlet">
         <div class="params">
             <div class="param">
-                <label for="mark_value_field_1">Mark: </label>
+                <label for="mark_value_field_1"><fmt:message key='mark.mark' bundle='${rb}'/>: </label>
                 <div class="mark_selectors">
                     <label for="mark_value_field_1">1</label>
                     <input id="mark_value_field_1" type="radio" name="mark_value" value="1">
@@ -45,16 +48,16 @@
             </div>
             <div class="param">
                 <div class="label_and_pattern">
-                    <label for="mark_comment">Comment:</label>
-                    <div class="pattern-info">max 1000 symbols</div>
+                    <label for="mark_comment"><fmt:message key='mark.comment' bundle='${rb}'/>:</label>
+                    <div class="pattern-info"><fmt:message key='mark.max_1000_symbols' bundle='${rb}'/></div>
                 </div>
-                <textarea id="mark_comment" name="comment" placeholder="Write your comment" rows="5"
+                <textarea id="mark_comment" name="comment" placeholder="<fmt:message key='mark.write_your_comment' bundle='${rb}'/>" rows="5"
                           cols="40"></textarea>
             </div>
         </div>
         <input type="hidden" name="command_name" value="mark_course"/>
         <input type="hidden" name="course_id" value="${pageContext.request.getParameter("course-id")}"/>
-        <input class="submit_btn" type="submit" value="Submit">
+        <input class="submit_btn" type="submit" value='<fmt:message key='btn.submit' bundle='${rb}'/>'>
     </form>
 </main>
 </body>

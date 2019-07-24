@@ -1,4 +1,3 @@
-<%@ taglib prefix="ctg" uri="customtags" %>
 <%--
   Created by IntelliJ IDEA.
   User: User
@@ -6,7 +5,11 @@
   Time: 9:36 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="text_resources" var="rb"/>
 <html>
 <head>
     <title>easyLearning</title>
@@ -21,17 +24,17 @@
         <c:set var="courses_available" value="${sessionScope.coursesAvailable}"/>
         <c:choose>
             <c:when test="${courses_available == null}">
-                <c:out value="You do not have available courses... ((("/>
+                <div><fmt:message key='course.you_do_not_have_available_courses' bundle='${rb}'/></div>
             </c:when>
             <c:otherwise>
-                <div class="course_block_header">Courses, that you have purchased already:</div>
+                <div class="course_block_header"><fmt:message key='course.purchased_courses' bundle='${rb}'/>:</div>
                 <c:forEach var="course" items="${courses_available}">
                     <div class="about_course">
                         <div class="block1">
                             <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
                                 <img class="course_avatar"
                                      src="${pageContext.request.contextPath}${course.pathToPicture}"
-                                     alt="course avatar"/>
+                                     alt='<fmt:message key='global.avatar' bundle='${rb}'/>'/>
                             </a>
                         </div>
                         <div class="block2">

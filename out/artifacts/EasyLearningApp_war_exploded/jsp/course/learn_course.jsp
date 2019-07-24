@@ -7,9 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="ctg" uri="customtags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="text_resources" var="rb"/>
 <html>
 <head>
-    <title>Title</title>
+    <title>easyLearning</title>
     <style>
         <%@include file="/css/course/learn_course.css"%>
     </style>
@@ -27,18 +30,18 @@
         <div class="course_about">
             <div class="course_title">${course.name}</div>
             <div class="rating_and_author">
-                <div class="course_rating">Rating: ${course.avgMark}</div>
+                <div class="course_rating"><fmt:message key='global.rating' bundle='${rb}'/>: ${course.avgMark}</div>
                 <div class="course_author"><a
-                        href="${pageContext.request.contextPath}/author-info/${author.login}">Author: ${author.login}</a>
+                        href="${pageContext.request.contextPath}/author-info/${author.login}"><fmt:message key='global.author' bundle='${rb}'/>: ${author.login}</a>
                 </div>
             </div>
             <div class="course_description">${course.description}</div>
         </div>
     </section>
     <section id="content_section" class="section_2">
-        <div id="sidebar" class="content">Course content:
+        <div id="sidebar" class="content"><fmt:message key='course.course_content' bundle='${rb}'/>:
             <div class="lessons_minutes">
-                <div class='lessons'>${course.getLessonAmount()} lessons</div>
+                <div class='lessons'>${course.getLessonAmount()} <fmt:message key='course.lessons' bundle='${rb}'/></div>
                 <div class='seconds'>
                     <ctg:time-prettier secondsAmount='${course.getDuration()}'/></div>
             </div>
@@ -50,7 +53,7 @@
             <div class="chapter">
                 <div class="materials_title">${chapter.getName()}</div>
                 <div class="lessons_minutes">
-                    <div class='lessons'>${chapter.getLessonAmount()} lessons</div>
+                    <div class='lessons'>${chapter.getLessonAmount()} <fmt:message key='course.lessons' bundle='${rb}'/></div>
                     <div class='seconds'>
                         <ctg:time-prettier secondsAmount='${chapter.getDuration()}'/></div>
                 </div>

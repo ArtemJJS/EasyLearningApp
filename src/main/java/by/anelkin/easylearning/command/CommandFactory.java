@@ -25,7 +25,8 @@ public class CommandFactory {
         BUY_WITH_CARD,
         BUY_FROM_BALANCE,
         MARK_COURSE,
-        MARK_AUTHOR
+        MARK_AUTHOR,
+        CHANGE_LANG
 
     }
 
@@ -97,6 +98,9 @@ public class CommandFactory {
                 break;
             case MARK_AUTHOR:
                 command = new MarkAuthorCommand();
+                break;
+            case CHANGE_LANG:
+                command = new ChangeLangCommand();
                 break;
 
         }

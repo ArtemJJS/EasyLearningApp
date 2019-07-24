@@ -6,6 +6,8 @@
 
     <display-name>FirstProject</display-name>
 
+
+
     <welcome-file-list>
         <welcome-file>jsp/main_page.jsp</welcome-file>
     </welcome-file-list>

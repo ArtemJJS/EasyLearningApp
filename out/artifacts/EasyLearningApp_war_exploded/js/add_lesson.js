@@ -59,19 +59,19 @@ function createLessonInput(index, parentId) {
     label.innerText = "Lesson " + index + ":";
 
     let lessonTitle = document.createElement("input");
-    lessonTitle.setAttribute("type", "text");
+    lessonTitle.setAttribute("type", "by.anelkin.easylearning.text");
     lessonTitle.setAttribute("id", "lesson_field_" + index);
     lessonTitle.setAttribute("name", "lesson_title_" + parentId);
     lessonTitle.setAttribute("placeholder", "Lesson title");
     lessonTitle.setAttribute("pattern", "[A-z0-9_ -]{3,150}");
 
     let lessonContent = document.createElement("input");
-    lessonContent.setAttribute("type", "text");
+    lessonContent.setAttribute("type", "by.anelkin.easylearning.text");
     lessonContent.setAttribute("name", "lesson_content_" + parentId);
     lessonContent.setAttribute("placeholder", "Lesson content");
 
     let lessonDuration = document.createElement("input");
-    lessonDuration.setAttribute("type", "text");
+    lessonDuration.setAttribute("type", "by.anelkin.easylearning.text");
     lessonDuration.setAttribute("name", "lesson_duration_" + parentId);
     lessonDuration.setAttribute("placeholder", "Lesson duration");
     lessonDuration.setAttribute("pattern", "[0-9]{1,10}");
@@ -94,7 +94,7 @@ function createChapterInput(index) {
     label.innerText = "Chapter " + index + ":";
 
     let chapterTitle = document.createElement("input");
-    chapterTitle.setAttribute("type", "text");
+    chapterTitle.setAttribute("type", "by.anelkin.easylearning.text");
     chapterTitle.setAttribute("id", "chapter_field_" + index);
     chapterTitle.setAttribute("name", "chapter_name");
     chapterTitle.setAttribute("placeholder", "Chapter title");
