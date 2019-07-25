@@ -1,6 +1,7 @@
 package by.anelkin.easylearning.servlet;
 
 import by.anelkin.easylearning.exception.ServiceException;
+import by.anelkin.easylearning.filter.JspAccessFilter;
 import by.anelkin.easylearning.receiver.RequestReceiver;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
@@ -51,6 +52,8 @@ public class BasicServlet extends HttpServlet {
         requestContent.insertAttributes(request);
         String path = requestContent.getPath();
         if (responseType == FORWARD) {
+            log.debug("Sending forward: " + path);
+            request.setAttribute(JspAccessFilter.ATTR_JSP_PERMITTED, true);
             request.getRequestDispatcher(path).forward(request, response);
         } else {
             log.debug("Sending redirect: " + path);

@@ -9,13 +9,14 @@ import by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
 
 public class LogOutCommand implements Command {
-//    private static final String CORRECT_LOGOUT_PATH = "http://localhost:8080/easyLearning/easyLearning";
-    
+    private static final String ATTR_DESTROY_SESSION = "destroy_session";
+
     @Override
     public ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
-        (new AccountService()).logOut(requestContent);
+        requestContent.getSessionAttributes().put(ATTR_DESTROY_SESSION, true);
         requestContent.setPath(requestContent.getRequestReferer());
         requestContent.setResponseType(REDIRECT);
         return REDIRECT;
     }
 }
+

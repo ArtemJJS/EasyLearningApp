@@ -120,12 +120,6 @@ public class AccountService {
         return true;
     }
 
-    // TODO: 7/12/2019 переделать нормально!
-    public void logOut(@NonNull SessionRequestContent requestContent) {
-        HashMap<String, Object> sessionAttributes = requestContent.getSessionAttributes();
-        sessionAttributes.put(ATTR_DESTROY_SESSION, true);
-    }
-
     public void changeAccountPassword(SessionRequestContent requestContent) throws ServiceException {
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
         String currPassword = reqParams.get(REQUEST_PARAM_PWD)[0];

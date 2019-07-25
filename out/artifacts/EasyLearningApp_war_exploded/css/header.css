@@ -7,7 +7,8 @@
 }
 
 header {
-    width: 100%;
+    width: 1400px;
+    min-width: 100vw;
     height: 60px;
     background: linear-gradient(to top, rgb(247, 209, 209), #fff7fb);
     position: relative;
@@ -17,27 +18,29 @@ header {
     display: block;
 }
 
-.header-content{
-    width: 1500px;
+.header-content {
+    padding: 0 20px;
+    width: 1300px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
 }
 
-.logo{
-    width: 110px;
+.logo {
+    width: 200px;
     height: 59px;
 
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
-.logo img{
+
+.logo img {
     width: 200px;
-    height:58px;
+    height: 58px;
 }
 
-.panel{
+.panel {
     width: 60%;
 
     display: flex;
@@ -45,53 +48,74 @@ header {
     align-items: center;
 }
 
-.user{
-    width:20%;
-    padding-right: 20px;
-
+.choose_lang {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    margin-left: 60px;
 }
 
-.user img{
+.header_links {
+    display: flex;
+    align-items: center;
+}
+
+.header_links a {
+    margin-right: 25px;
+}
+
+/*.user{*/
+/*    width:20%;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: flex-end;*/
+/*}*/
+
+.header_logged_user_info {
+    display: flex;
+    align-items: center;
+}
+
+.header_logged_user_info img {
     height: 59px;
     width: 68px;
     margin: 0 10px;
 }
-.header-content .user form{
+
+.header-content .user form {
     margin: 0;
     padding: 0;
     border: none;
 }
 
-.header-content .user form:first-child{
-    margin-right: 15px;
-}
-.header-content .user form:last-child{
-    margin-right: 30px;
+.user_login {
+    margin-right: 10px;
+    min-width: 75px;
+    max-width: 135px;
 }
 
-.user_login{
-    margin-right: 35px;
+header .header_logged_user_info .header_logout_btn {
+    width: 80px;
 }
-.user form input{
+
+.header_logged_user_info form input {
     border: 1px solid #313131;
     margin: 0;
     padding: 0;
     width: 120px;
 }
 
-#header_search_form{
+#header_search_form {
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: flex-end;
     border: none;
     margin: 0;
     padding: 0;
     width: 550px;
 }
-.header_search_field{
+
+.header_search_field {
     margin: 0;
     width: 450px;
     height: 30px;
@@ -101,7 +125,7 @@ header {
     padding-right: 10px;
 }
 
-.header_submit_btn{
+.header_submit_btn {
     margin: 0;
     width: 90px;
     /*align-self: normal;*/
@@ -109,10 +133,7 @@ header {
     font-size: 20px;
 }
 
-.choose_lang{
-    display: flex;
-    margin-right: 30px;
-}
-.choose_lang a{
+
+.choose_lang a {
     margin-right: 20px;
 }
