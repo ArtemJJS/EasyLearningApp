@@ -1,5 +1,6 @@
 package by.anelkin.easylearning.servlet;
 
+import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.filter.JspAccessFilter;
 import by.anelkin.easylearning.receiver.RequestReceiver;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -29,14 +31,18 @@ public class BasicServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println(request.getHeader("referer"));
-
-        if (request.getSession().getAttribute("role") == null) {
+        HttpSession session;
+        if ((session = request.getSession()).getAttribute("role") == null) {
             request.getSession().setAttribute("role", GUEST);
             request.getSession().setAttribute("locale", new Locale("en", "US"));
-
         }
 
+
         CommandType commandType = CommandType.valueOf(request.getParameter("command_name").toUpperCase());
+        Account.AccountType accType = (Account.AccountType) session.getAttribute("role");
+        if (!commandType.getAccessTypes().contains(accType)){
+            throw new ServletException("Access DENIED!!!");
+        }
         log.debug("Server received command: " + commandType);
         SessionRequestContent requestContent = new SessionRequestContent();
         requestContent.extractValues(request);

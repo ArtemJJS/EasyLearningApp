@@ -148,7 +148,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>CashOut</servlet-name>
-        <url-pattern>/account/author/cash-out</url-pattern>
+        <url-pattern>/author/cash-out</url-pattern>
     </servlet-mapping>
 
     <servlet>

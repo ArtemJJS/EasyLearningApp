@@ -38,7 +38,7 @@
                 <c:when test="${curr_role.toString() == 'AUTHOR'}">
                     <div class="link"><a href="${pageContext.request.contextPath}/author/add-new-course"><fmt:message key='acc.add_new_course' bundle='${rb}'/></a></div>
                     <div class="link"><a href="${pageContext.request.contextPath}/author/my-courses"><fmt:message key='acc.my_courses' bundle='${rb}'/></a></div>
-                    <div class="link"><a href="${pageContext.request.contextPath}/account/author/cash-out"><fmt:message key='acc.cashout' bundle='${rb}'/></a></div>
+                    <div class="link"><a href="${pageContext.request.contextPath}/author/cash-out"><fmt:message key='acc.cashout' bundle='${rb}'/></a></div>
                 </c:when>
                 <c:when test="${curr_role.toString() == 'ADMIN'}">
                     <div class="link"><a href="${pageContext.request.contextPath}/admin/course-approval"><fmt:message key='acc.courses_on_review' bundle='${rb}'/></a></div>

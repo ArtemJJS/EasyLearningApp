@@ -2,32 +2,46 @@ package by.anelkin.easylearning.command;
 
 import lombok.NonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static by.anelkin.easylearning.entity.Account.*;
+import static by.anelkin.easylearning.entity.Account.AccountType.*;
+
 public class CommandFactory {
     public enum CommandType {
-        LOGIN,
-        SIGN_UP,
-        SIGN_UP_NEW_USER,
-        LOG_OUT,
-        EDIT_USER_INFO,
-        DEPOSIT_BY_CARD,
-        CHANGE_PASSWORD,
-        CASH_OUT,
-        APPROVE_COURSE,
-        DECLINE_COURSE_APPROVAL,
-        ADD_COURSE_TO_REVIEW,
-        APPROVE_AVATAR_CHANGE,
-        DECLINE_AVATAR_CHANGE,
-        CHANGE_ACC_IMG,
-        CHANGE_COURSE_IMG,
-        APPROVE_COURSE_IMG_CHANGE,
-        DECLINE_COURSE_IMG_CHANGE,
-        SEARCH_COURSE,
-        BUY_WITH_CARD,
-        BUY_FROM_BALANCE,
-        MARK_COURSE,
-        MARK_AUTHOR,
-        CHANGE_LANG
+        LOGIN (GUEST),
+        SIGN_UP_NEW_USER (GUEST),
+        LOG_OUT (ADMIN, AUTHOR, USER),
+        EDIT_USER_INFO (ADMIN, AUTHOR, USER),
+        DEPOSIT_BY_CARD (USER),
+        CHANGE_PASSWORD (ADMIN, AUTHOR, USER),
+        CASH_OUT (AUTHOR),
+        APPROVE_COURSE (ADMIN),
+        DECLINE_COURSE_APPROVAL (ADMIN),
+        ADD_COURSE_TO_REVIEW (AUTHOR),
+        APPROVE_AVATAR_CHANGE (ADMIN),
+        DECLINE_AVATAR_CHANGE (ADMIN),
+        CHANGE_ACC_IMG (ADMIN, AUTHOR, USER),
+        CHANGE_COURSE_IMG (AUTHOR),
+        APPROVE_COURSE_IMG_CHANGE (ADMIN),
+        DECLINE_COURSE_IMG_CHANGE (ADMIN),
+        SEARCH_COURSE (ADMIN, AUTHOR, USER, GUEST),
+        BUY_WITH_CARD (USER),
+        BUY_FROM_BALANCE (USER),
+        MARK_COURSE (USER),
+        MARK_AUTHOR (USER),
+        CHANGE_LANG (ADMIN, AUTHOR, USER, GUEST);
 
+        private List<AccountType> accessTypes = new ArrayList<>();
+        CommandType(@NonNull AccountType... types) {
+            accessTypes.addAll(Arrays.asList(types));
+        }
+
+        public List<AccountType> getAccessTypes() {
+            return accessTypes;
+        }
     }
 
     public Command getCommand(@NonNull CommandType type) {
@@ -35,9 +49,6 @@ public class CommandFactory {
         switch (type) {
             case LOGIN:
                 command = new LoginCommand();
-                break;
-            case SIGN_UP:
-                command = new SignUpCommand();
                 break;
             case SIGN_UP_NEW_USER:
                 command = new SignUpNewUserCommand();
