@@ -27,6 +27,10 @@
         </param-value>
     </context-param>
 
+    <error-page>
+        <exception-type>javax.servlet.ServletException</exception-type>
+        <location>/jsp/error_page.jsp</location>
+    </error-page>
 
     <servlet-mapping>
         <servlet-name>default</servlet-name>

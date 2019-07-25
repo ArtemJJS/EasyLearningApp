@@ -37,10 +37,15 @@ public class BasicServlet extends HttpServlet {
             request.getSession().setAttribute("locale", new Locale("en", "US"));
         }
 
+        CommandType commandType;
+        try {
+            commandType = CommandType.valueOf(request.getParameter("command_name").toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new ServletException("Wrong command name!!!");
+        }
 
-        CommandType commandType = CommandType.valueOf(request.getParameter("command_name").toUpperCase());
         Account.AccountType accType = (Account.AccountType) session.getAttribute("role");
-        if (!commandType.getAccessTypes().contains(accType)){
+        if (!commandType.getAccessTypes().contains(accType)) {
             throw new ServletException("Access DENIED!!!");
         }
         log.debug("Server received command: " + commandType);
