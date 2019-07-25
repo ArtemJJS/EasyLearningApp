@@ -21,16 +21,19 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static by.anelkin.easylearning.entity.Account.*;
-import static by.anelkin.easylearning.entity.Account.AccountType.GUEST;
 import static by.anelkin.easylearning.entity.Mark.*;
 
 public class AccountService {
     // FIXME: 7/20/2019 на относительный путь
+    private static final String CURRENT_ENCRYPTING = "SHA-256";
+
     private static final String ACC_AVATAR_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/";
     private static final String ACC_AVATAR_LOCATION_TEMP = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/";
     private static final String URI_SPACE_REPRESENT = "%20";
@@ -53,7 +56,6 @@ public class AccountService {
     private static final String ATTR_FILE_EXTENSION = "file_extension";
     private static final String ATTR_ACCS_TO_AVATAR_APPROVE = "acc_avatar_approve_list";
     private static final String ATTR_IS_AUTHOR_MARKED_ALREADY = "is_author_marked_already";
-    private static final String ATTR_DESTROY_SESSION = "destroy_session";
     private static final String EMPTY_STRING = "";
 
 
@@ -66,9 +68,20 @@ public class AccountService {
         List<Account> accounts = null;
         try {
             accounts = repository.query(new SelectAccByLoginSpecification(requestContent.getRequestParameters().get("login")[0]));
-            String[] expectedPassword = requestContent.getRequestParameters().get(REQUEST_PARAM_PWD);
-            if (accounts.size() != 1 || !accounts.get(0).getPassword().equals(expectedPassword[0])) {
+            if (accounts.size() != 1) {
                 return false;
+            }
+            String expectedPassword = requestContent.getRequestParameters().get(REQUEST_PARAM_PWD)[0];
+            try {
+                MessageDigest messageDigest = MessageDigest.getInstance(CURRENT_ENCRYPTING);
+                String saltedPass = expectedPassword + accounts.get(0).getPassSalt();
+                String hashedPass = new String(messageDigest.digest(saltedPass.getBytes()));
+                String realPassword = accounts.get(0).getPassword();
+                if (!hashedPass.equals(realPassword)) {
+                    return false;
+                }
+            } catch (NoSuchAlgorithmException e) {
+                throw new ServiceException(e);
             }
             Account account = accounts.get(0);
             AccountType role = account.getType();
@@ -106,6 +119,7 @@ public class AccountService {
             Account account = new Account();
             initAccount(account, requestContent.getRequestParameters());
             repository.insert(account);
+            account = repository.query(new SelectAccByLoginSpecification(account.getLogin())).get(0);
             // TODO: 7/6/2019  проверку на замену роли из браузера
             requestContent.getSessionAttributes().put(SESSION_ATTR_USER, account);
             requestContent.getSessionAttributes().put(SESSION_ATTR_ROLE, account.getType());
@@ -292,7 +306,7 @@ public class AccountService {
             reqAttrs.put(ATTR_AUTHOR_COURSE_LIST, courses);
 
             List<Mark> accMarksForThisAuthor = markRepository.query(new SelectMarkByTargetIdSpecification(MarkType.AUTHOR_MARK, author.getId()));
-            if (accMarksForThisAuthor.size() != 0){
+            if (accMarksForThisAuthor.size() != 0) {
                 reqAttrs.put(ATTR_IS_AUTHOR_MARKED_ALREADY, true);
             }
         } catch (RepositoryException | NullPointerException e) {
@@ -302,22 +316,58 @@ public class AccountService {
 
 
     // TODO: 7/12/2019 надо ли проверку на ноль??? nonnull?
-    private void initAccount(Account account, Map<String, String[]> requestParams) {
+    private void initAccount(Account account, Map<String, String[]> requestParams) throws ServiceException {
         account.setLogin(requestParams.get("login")[0]);
-        account.setPassword(requestParams.get("password")[0]);
         account.setName(requestParams.get("name")[0]);
         account.setSurname(requestParams.get("surname")[0]);
         account.setEmail(requestParams.get("email")[0]);
         account.setPhoneNumber(requestParams.get("phonenumber")[0]);
         account.setAbout(requestParams.get("about")[0]);
-        // FIXME: 7/16/2019 работа с фото при регистрации
+
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance(CURRENT_ENCRYPTING);
+            account.setPassSalt(generateSaltForPassword());
+            String saltedPass = requestParams.get("password")[0] + account.getPassSalt();
+            String hashedPass = new String(messageDigest.digest(saltedPass.getBytes()));
+            account.setPassword(hashedPass);
+        } catch (NoSuchAlgorithmException e) {
+            throw new ServiceException(e);
+        }
+
+        account.setPathToPhoto("/resources/account_avatar/default_acc_avatar.png");
+        account.setUpdatePhotoPath(EMPTY_STRING);
         try {
             account.setBirthDate(dateFormat.parse(requestParams.get("birthdate")[0]));
             account.setRegistrDate(new Date(System.currentTimeMillis()));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        account.setType(AccountType.valueOf(requestParams.get(SESSION_ATTR_ROLE)[0].toUpperCase()));
+
+        // FIXME: 7/26/2019 в отдельный метод
+        String role = requestParams.get(SESSION_ATTR_ROLE)[0].toLowerCase();
+        // FIXME: 7/26/2019 добавить французские
+        if (role.equals("студент")) {
+            role = "user";
+        }
+        if (role.equals("автор")) {
+            role = "author";
+        }
+        try {
+            account.setType(AccountType.valueOf(role.toUpperCase()));
+        } catch (IllegalArgumentException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    private String generateSaltForPassword() {
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        int i = 0;
+        while (i++ < 10) {
+            char ch = (char) (random.nextInt(74) + 48);
+            sb.append(ch);
+        }
+        return sb.toString();
     }
 
 }

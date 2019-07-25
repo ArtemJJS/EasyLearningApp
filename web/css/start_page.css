@@ -58,6 +58,8 @@ body {
 
 .description {
     font-size: 35px;
+
+    text-align: center;
 }
 
 .section3 {
@@ -82,10 +84,16 @@ body {
 .text_field {
     width: 150px;
 }
-.inv_login_message{
+
+.inv_login_message {
     width: 80%;
     color: red;
     background-color: rgb(191, 214, 185);
     text-align: center;
+}
+
+.submit_btn {
+    width: 70px;
+    height: 25px;
 }
 

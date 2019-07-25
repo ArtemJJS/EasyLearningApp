@@ -30,8 +30,8 @@ public class AccRepository implements AppRepository<Account> {
     private static final String QUERY_DELETE = "DELETE FROM account WHERE acc_login = ?";
     @Language("sql")
     private static final String QUERY_INSERT = "INSERT INTO account(acc_login, acc_password, acc_email, acc_name, acc_surname, " +
-            "acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_photo_path, acc_type, update_photo_path) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_photo_path, acc_type, update_photo_path, acc_pass_salt) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     @Override
     public boolean update(@NonNull Account account) throws RepositoryException {
@@ -73,7 +73,7 @@ public class AccRepository implements AppRepository<Account> {
             String[] params = {account.getLogin(), account.getPassword(), account.getEmail(), account.getName(), account.getSurname(),
                     dateFormat.format(account.getBirthDate()), account.getPhoneNumber(), dateFormat.format(account.getRegistrDate()),
                     account.getAbout(), pathToPhotoParts[pathToPhotoParts.length - 1], String.valueOf(account.getType().ordinal()),
-                    pathUpdatePhotoParts[pathUpdatePhotoParts.length - 1]};
+                    pathUpdatePhotoParts[pathUpdatePhotoParts.length - 1], account.getPassSalt()};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);
@@ -116,6 +116,7 @@ public class AccRepository implements AppRepository<Account> {
             account.setRegistrDate(resultSet.getDate("acc_registration_date"));
             account.setAbout(resultSet.getString("acc_about"));
             account.setBalance(resultSet.getBigDecimal("acc_balance"));
+            account.setPassSalt(resultSet.getString("acc_pass_salt"));
 
             String updatePhotoFileName = resultSet.getString("update_photo_path");
             if (updatePhotoFileName == null || updatePhotoFileName.isEmpty()) {

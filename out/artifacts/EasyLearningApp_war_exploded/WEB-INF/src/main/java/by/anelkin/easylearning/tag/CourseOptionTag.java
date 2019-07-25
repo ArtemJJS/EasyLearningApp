@@ -47,12 +47,21 @@ public class CourseOptionTag extends TagSupport {
 
     @Override
     public int doStartTag() throws JspException {
-        String[] localeArr = String.valueOf(pageContext.getSession().getAttribute(ATTR_LOCALE)).split(LOCALE_SPLITTER);
-        Locale locale = new Locale(localeArr[0], localeArr[1]);
+//        String[] localeArr = String.valueOf(pageContext.getSession().getAttribute(ATTR_LOCALE)).split(LOCALE_SPLITTER);
+//        Locale locale = new Locale(localeArr[0], localeArr[1]);
+        Locale locale;
+        Object localeAttr =  pageContext.getSession().getAttribute(ATTR_LOCALE);
+        //to prevent error when logging out on page with tag:
+        if (localeAttr == null) {
+            locale = Locale.US;
+        } else {
+            String[] localeParts = localeAttr.toString().split(LOCALE_SPLITTER);
+            locale = new Locale(localeParts[0], localeParts[1]);
+//            locale = localeAttr;
+        }
         String contextPath = pageContext.getServletContext().getContextPath();
         AccountType role = (AccountType) pageContext.getSession().getAttribute("role");
         List<Course> coursesAvailable = (List<Course>) pageContext.getSession().getAttribute("coursesAvailable");
-        JspWriter writer = pageContext.getOut();
         if (role == null) {
             return SKIP_BODY;
         }

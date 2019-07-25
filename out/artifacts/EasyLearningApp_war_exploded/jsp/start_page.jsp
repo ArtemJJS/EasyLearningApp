@@ -29,10 +29,10 @@
 </section>
 <section class="section2">
     <form class="log_in" method="post" action="${pageContext.request.contextPath}/basic_servlet">
-        <input class="text_field" type="text" name="login" placeholder='<fmt:message key='btn.login' bundle='${rb}'/>'>
+        <input class="text_field" type="text" name="login" placeholder='<fmt:message key='global.login' bundle='${rb}'/>'>
         <input class="text_field" type="password" name="password" placeholder='<fmt:message key='global.password' bundle='${rb}'/>'>
         <input type="hidden" name="command_name" value="login"/>
-        <input type="submit" value='<fmt:message key='btn.login' bundle='${rb}'/>'/>
+        <input class="submit_btn" type="submit" value='<fmt:message key='btn.login' bundle='${rb}'/>'/>
     </form>
 </section>
         <c:set var="wrong_login" value="${pageContext.request.getAttribute('wrong-login')}"/>
@@ -41,10 +41,8 @@
         </c:if>
 <section class="section3">
     <div class="desc_sign_up"><fmt:message key='login.Still_do_not_have_an_account?' bundle='${rb}'/></div>
-    <form class="sign_up" action="${pageContext.request.contextPath}/basic_servlet" >
-        <input type="hidden" name="command_name" value="sign_up">
-        <input class="sign_up_button" type="submit" value='<fmt:message key='btn.sign_up' bundle='${rb}'/>'>
-    </form>
+    <a href="${pageContext.request.contextPath}/sign-up"><fmt:message key="btn.sign_up"
+                                                                      bundle="${rb}"/></a>
 </section>
 <img src="${pageContext.request.contextPath}/resources/Elephant.jpg" alt="logo" width="80%" height="60%">
 </body>

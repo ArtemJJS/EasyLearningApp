@@ -26,6 +26,7 @@ public class Account extends AppEntity {
     private double avgMark;
     private BigDecimal balance;
     private String updatePhotoPath;
+    private String passSalt;
 
 
     public enum AccountType{

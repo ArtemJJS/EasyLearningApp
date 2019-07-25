@@ -20,8 +20,16 @@ public class RatingTag extends TagSupport {
 
     @Override
     public int doStartTag() throws JspException {
-        String[] localeArr = String.valueOf(pageContext.getSession().getAttribute(ATTR_LOCALE)).split(LOCALE_SPLITTER);
-        Locale locale = new Locale(localeArr[0], localeArr[1]);
+        Locale locale;
+        Object localeAttr =  pageContext.getSession().getAttribute(ATTR_LOCALE);
+        //to prevent error when logging out on page with tag:
+        if (localeAttr == null) {
+            locale = Locale.US;
+        } else {
+            String[] localeParts = localeAttr.toString().split(LOCALE_SPLITTER);
+            locale = new Locale(localeParts[0], localeParts[1]);
+//            locale = localeAttr;
+        }
         ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale);
         String notRated = rb.getString(BUNDLE_NOT_RATED);
         JspWriter writer = pageContext.getOut();

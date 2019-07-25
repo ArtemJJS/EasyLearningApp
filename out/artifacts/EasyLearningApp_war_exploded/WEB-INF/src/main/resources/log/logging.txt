@@ -67,3 +67,45 @@
 2019-07-18 03:42:57 main DEBUG CourseRepository:124 - Attempt to execute query: UPDATE course SET course_name = 'Second Course', course_description = 'second', course_creation_date = '2019-07-04', course_picture = '/resources/course_avatar/default_course_avatar.png', course_price = '9.99', is_approved = null WHERE course_id = '4'
 2019-07-18 03:42:57 main DEBUG CourseRepository:126 - Query completed: UPDATE course SET course_name = 'Second Course', course_description = 'second', course_creation_date = '2019-07-04', course_picture = '/resources/course_avatar/default_course_avatar.png', course_price = '9.99', is_approved = null WHERE course_id = '4'
 2019-07-18 03:42:57 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-25 22:59:20 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-25 22:59:20 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-25 22:59:20 main DEBUG AccRepository:93 - Attempt to execute query: select * from account
+2019-07-25 22:59:20 main DEBUG AccRepository:96 - Query completed: select * from account
+2019-07-25 22:59:20 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-25 23:15:07 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-25 23:15:07 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-25 23:15:07 main DEBUG AccRepository:93 - Attempt to execute query: select * from account
+2019-07-25 23:15:07 main DEBUG AccRepository:96 - Query completed: select * from account
+2019-07-25 23:15:07 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-25 23:16:39 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-25 23:16:39 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-25 23:16:39 main DEBUG AccRepository:93 - Attempt to execute query: select * from account
+2019-07-25 23:16:39 main DEBUG AccRepository:96 - Query completed: select * from account
+2019-07-25 23:16:39 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-25 23:16:39 main DEBUG AccRepository:161 - Attempt to execute query: UPDATE account SET acc_password = '�e�Y B/�A~Hg��O��J?��~������z�', acc_email = 'email@tut.by', acc_name = 'Admin', acc_surname = 'Adminovich', acc_birthdate = '2019-06-14', acc_phone_number = '+12312312123123', acc_registration_date = '2019-06-14', acc_about = 'Это - админ.123', acc_photo_path = '1.png', acc_type = '3', update_photo_path = '' WHERE acc_login = 'admin'
+2019-07-25 23:16:39 main DEBUG AccRepository:163 - Query completed: UPDATE account SET acc_password = '�e�Y B/�A~Hg��O��J?��~������z�', acc_email = 'email@tut.by', acc_name = 'Admin', acc_surname = 'Adminovich', acc_birthdate = '2019-06-14', acc_phone_number = '+12312312123123', acc_registration_date = '2019-06-14', acc_about = 'Это - админ.123', acc_photo_path = '1.png', acc_type = '3', update_photo_path = '' WHERE acc_login = 'admin'
+2019-07-25 23:16:39 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-25 23:29:45 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-25 23:29:45 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-25 23:29:45 main DEBUG AccRepository:93 - Attempt to execute query: select * from account
+2019-07-25 23:29:45 main DEBUG AccRepository:96 - Query completed: select * from account
+2019-07-25 23:29:45 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-25 23:29:45 main DEBUG AccRepository:161 - Attempt to execute query: UPDATE account SET acc_password = '�h�\\\rn&ȴ�t>k��t�L/�Y�ȉV�(���', acc_email = 'email@tut.by', acc_name = 'Admin', acc_surname = 'Adminovich', acc_birthdate = '2019-06-14', acc_phone_number = '+12312312123123', acc_registration_date = '2019-06-14', acc_about = 'Это - админ.123', acc_photo_path = '1.png', acc_type = '3', update_photo_path = '' WHERE acc_login = 'admin'
+2019-07-25 23:29:46 main DEBUG AccRepository:163 - Query completed: UPDATE account SET acc_password = '�h�\\\rn&ȴ�t>k��t�L/�Y�ȉV�(���', acc_email = 'email@tut.by', acc_name = 'Admin', acc_surname = 'Adminovich', acc_birthdate = '2019-06-14', acc_phone_number = '+12312312123123', acc_registration_date = '2019-06-14', acc_about = 'Это - админ.123', acc_photo_path = '1.png', acc_type = '3', update_photo_path = '' WHERE acc_login = 'admin'
+2019-07-25 23:29:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-25 23:30:39 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-25 23:30:39 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-25 23:30:39 main DEBUG AccRepository:93 - Attempt to execute query: select * from account
+2019-07-25 23:30:39 main DEBUG AccRepository:96 - Query completed: select * from account
+2019-07-25 23:30:39 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-25 23:30:39 main DEBUG AccRepository:161 - Attempt to execute query: UPDATE account SET acc_password = '�h�\\\rn&ȴ�t>k��t�L/�Y�ȉV�(���', acc_email = 'email@tut.by', acc_name = 'Admin', acc_surname = 'Adminovich', acc_birthdate = '2019-06-14', acc_phone_number = '+12312312123123', acc_registration_date = '2019-06-14', acc_about = 'Это - админ.123', acc_photo_path = '1.png', acc_type = '3', update_photo_path = '' WHERE acc_login = 'admin'
+2019-07-25 23:30:39 main DEBUG AccRepository:163 - Query completed: UPDATE account SET acc_password = '�h�\\\rn&ȴ�t>k��t�L/�Y�ȉV�(���', acc_email = 'email@tut.by', acc_name = 'Admin', acc_surname = 'Adminovich', acc_birthdate = '2019-06-14', acc_phone_number = '+12312312123123', acc_registration_date = '2019-06-14', acc_about = 'Это - админ.123', acc_photo_path = '1.png', acc_type = '3', update_photo_path = '' WHERE acc_login = 'admin'
+2019-07-25 23:30:39 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-25 23:31:08 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-07-25 23:31:08 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-07-25 23:31:08 main DEBUG AccRepository:93 - Attempt to execute query: select * from account
+2019-07-25 23:31:08 main DEBUG AccRepository:96 - Query completed: select * from account
+2019-07-25 23:31:08 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-07-25 23:31:08 main DEBUG AccRepository:161 - Attempt to execute query: UPDATE account SET acc_password = '�h�\\\rn&ȴ�t>k��t�L/�Y�ȉV�(���', acc_email = 'email@tut.by', acc_name = 'Admin', acc_surname = 'Adminovich', acc_birthdate = '2019-06-14', acc_phone_number = '+12312312123123', acc_registration_date = '2019-06-14', acc_about = 'Это - админ.123', acc_photo_path = '1.png', acc_type = '3', update_photo_path = '' WHERE acc_login = 'admin'
+2019-07-25 23:31:08 main DEBUG AccRepository:163 - Query completed: UPDATE account SET acc_password = '�h�\\\rn&ȴ�t>k��t�L/�Y�ȉV�(���', acc_email = 'email@tut.by', acc_name = 'Admin', acc_surname = 'Adminovich', acc_birthdate = '2019-06-14', acc_phone_number = '+12312312123123', acc_registration_date = '2019-06-14', acc_about = 'Это - админ.123', acc_photo_path = '1.png', acc_type = '3', update_photo_path = '' WHERE acc_login = 'admin'
+2019-07-25 23:31:08 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
