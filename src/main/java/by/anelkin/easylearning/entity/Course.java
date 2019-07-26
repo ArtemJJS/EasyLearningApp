@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-@EqualsAndHashCode(callSuper = false, exclude = "pathToPicture")
+@EqualsAndHashCode(callSuper = false, exclude = {"pathToPicture", "avgMark"})
 public class Course extends AppEntity {
     private int id;
     private int authorId;

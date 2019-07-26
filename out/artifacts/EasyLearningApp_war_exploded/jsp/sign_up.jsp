@@ -39,7 +39,7 @@
         <div class="param1">
             <label for="login-field"><fmt:message key='registr.login' bundle='${rb}'/></label>
             <input placeholder='<fmt:message key='global.login' bundle='${rb}'/>' type="text" id="login-field"
-                   name="login" required pattern="[A-z0-9_ -]{3,30}">
+                   name="login" required pattern="[A-Za-zА-я0-9_ -]{3,30}">
             <c:if test="${pageContext.request.getAttribute('wrong-login') == 'true'}">
                 <p class="field_desc" style="color: red"><fmt:message key='registr.This_login_is_in_use_already'
                                                                       bundle='${rb}'/></p>
@@ -55,13 +55,13 @@
         <div class="param3">
             <label for="name-field"><fmt:message key='registr.name' bundle='${rb}'/></label>
             <input type="text" id="name-field" name="name" placeholder='<fmt:message key='global.name' bundle='${rb}'/>'
-                   required pattern="[A-z]{2,45}">
+                   required pattern="[A-Za-zА-я]{2,30}">
             <p class="field_desc"><fmt:message key='registr.name_pattern' bundle='${rb}'/></p>
         </div>
         <div class="param4">
             <label for="surname-field"><fmt:message key='registr.surname' bundle='${rb}'/></label>
             <input type="text" id="surname-field" name="surname"
-                   placeholder='<fmt:message key='global.surname' bundle='${rb}'/>' required pattern="[A-z]{2,45}">
+                   placeholder='<fmt:message key='global.surname' bundle='${rb}'/>' required pattern="[A-Za-zА-я]{2,30}">
             <p class="field_desc"><fmt:message key='registr.surname_pattern' bundle='${rb}'/></p>
         </div>
         <div class="param5">
@@ -77,7 +77,7 @@
         <div class="param7 ">
             <label for="phonenumber-field"><fmt:message key='registr.phone' bundle='${rb}'/></label>
             <input type="text" id="phonenumber-field" name="phonenumber" placeholder="+1234567890"
-                   pattern="+[0-9]{,19}">
+                   pattern="+[0-9]{2,19}">
             <p class="field_desc"><fmt:message key='registr.phone_pattern' bundle='${rb}'/></p>
         </div>
         <div class="param8">

@@ -12,6 +12,7 @@ import by.anelkin.easylearning.specification.account.SelectAccByIdSpecification;
 import by.anelkin.easylearning.specification.mark.SelectByIdWithWriterInfoSpecification;
 import by.anelkin.easylearning.specification.mark.SelectMarkByTargetIdSpecification;
 import by.anelkin.easylearning.specification.mark.SelectMarksMadeByUserSpecification;
+import by.anelkin.easylearning.validator.FormValidator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,13 +65,23 @@ public class MarkService {
     }
 
     public void markCourse(SessionRequestContent requestContent) throws ServiceException {
+        FormValidator val = new FormValidator();
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
         MarkRepository repository = new MarkRepository();
         Account account = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
         Mark mark = new Mark(COURSE_MARK);
         mark.setTargetId(Integer.parseInt(reqParams.get(ATTR_COURSE_ID)[0]));
         mark.setAccId(account.getId());
-        mark.setComment(reqParams.get(ATTR_COMMENT)[0]);
+        if (reqParams.get(ATTR_COMMENT) != null) {
+            String comment = reqParams.get(ATTR_COMMENT)[0];
+            String correctComment;
+            if (!val.validateCourseMarkCommentLength(comment)) {
+                correctComment = comment.substring(0, FormValidator.COURSE_MARK_COMMENT_MAX_LENGTH);
+            } else {
+                correctComment = comment;
+            }
+            mark.setComment((new AccountService().esqapeQuotes(correctComment)));
+        }
         mark.setMarkDate(System.currentTimeMillis());
         mark.setMarkValue(Integer.parseInt(reqParams.get(ATTR_MARK_VALUE)[0]));
         try {
@@ -79,7 +90,6 @@ public class MarkService {
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
-
     }
 
     List<Mark> takeMarksOfCourse(int courseId) throws ServiceException {

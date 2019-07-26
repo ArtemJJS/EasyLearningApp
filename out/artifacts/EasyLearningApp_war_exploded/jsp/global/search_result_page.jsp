@@ -25,12 +25,15 @@
         <c:set var="courses_available" value="${pageContext.request.getAttribute('courses_list')}"/>
         <c:choose>
             <c:when test="${courses_available.size()<1}">
-                <div><fmt:message key='search.nothing_found' bundle='${rb}'/> ${pageContext.request.getParameter('search_key')}  (((</div>
+                <div><fmt:message key='search.nothing_found' bundle='${rb}'/>
+                    <c:out value="${pageContext.request.getParameter('search_key')}  ((("/>
+                </div>
             </c:when>
             <c:otherwise>
                 <div class="course_block_header">${courses_available.size()}
                     <fmt:message key='search.courses_have_been_found' bundle='${rb}'/>
-                        ${pageContext.request.getParameter('search_key')}</div>
+                    <c:out value="${pageContext.request.getParameter('search_key')}"/>
+                </div>
                 <c:forEach var="course" items="${courses_available}">
                     <div class="about_course">
                         <div class="block1">
@@ -49,7 +52,7 @@
                                 </div>
                                 <div class="course_desc">${course.description}</div>
                             </div>
-                           <ctg:course-options course="${course}"/>
+                            <ctg:course-options course="${course}"/>
                         </div>
                     </div>
                 </c:forEach>

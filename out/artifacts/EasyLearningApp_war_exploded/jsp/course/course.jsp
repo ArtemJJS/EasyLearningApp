@@ -22,6 +22,7 @@
 <%@include file="/jsp/header.jsp" %>
 <main>
     <c:set var="curr_course" value="${pageContext.request.getAttribute('requestedCourse')}"/>
+    <c:out value="${sessionScope.coursesAvailable}"/>
     <section class="section_1">
         <div class="course_title">
             <div class="course_name">${curr_course.name}</div>

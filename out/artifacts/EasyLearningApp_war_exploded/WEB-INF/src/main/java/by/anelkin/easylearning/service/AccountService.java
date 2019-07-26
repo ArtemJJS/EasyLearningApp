@@ -15,8 +15,10 @@ import by.anelkin.easylearning.specification.account.SelectAuthorOfCourseSpecifi
 import by.anelkin.easylearning.specification.course.SelectByAuthorIdSpecification;
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
 import by.anelkin.easylearning.specification.mark.SelectMarkByTargetIdSpecification;
+import by.anelkin.easylearning.validator.FormValidator;
 import lombok.NonNull;
 
+import javax.xml.validation.Validator;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -58,7 +60,6 @@ public class AccountService {
     private static final String ATTR_IS_AUTHOR_MARKED_ALREADY = "is_author_marked_already";
     private static final String EMPTY_STRING = "";
 
-
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
@@ -96,7 +97,6 @@ public class AccountService {
                     courses = courseRepository.query(new SelectByAuthorIdSpecification(account.getId()));
                     break;
             }
-
             reqAttrs.put(SESSION_ATTR_USER, account);
             reqAttrs.put(ATTR_AVAILABLE_COURSES, courses);
             reqAttrs.put(SESSION_ATTR_ROLE, account.getType());
@@ -110,6 +110,7 @@ public class AccountService {
 
     public boolean signUp(@NonNull SessionRequestContent requestContent) throws ServiceException {
         AccRepository repository = new AccRepository();
+        FormValidator validator = new FormValidator();
         String login = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
         try {
             if (repository.query(new SelectAccByLoginSpecification(login)).size() != 0) {
@@ -118,12 +119,17 @@ public class AccountService {
             }
             Account account = new Account();
             initAccount(account, requestContent.getRequestParameters());
+            String pass = requestContent.getRequestParameters().get(REQUEST_PARAM_PWD)[0];
+            String birthdate = requestContent.getRequestParameters().get("birthdate")[0];
+            if (!validateAccFields(account, pass, birthdate)) {
+                // TODO: 7/26/2019 сообщение на страницу
+                requestContent.getRequestAttributes().put(ATTR_WRONG_LOGIN_MSG, "true");
+                return false;
+            }
             repository.insert(account);
             account = repository.query(new SelectAccByLoginSpecification(account.getLogin())).get(0);
-            // TODO: 7/6/2019  проверку на замену роли из браузера
             requestContent.getSessionAttributes().put(SESSION_ATTR_USER, account);
             requestContent.getSessionAttributes().put(SESSION_ATTR_ROLE, account.getType());
-            // fixme: 7/5/2019 повторяющийся код:
             CourseRepository courseRepository = new CourseRepository();
             List<Course> courses = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
             requestContent.getSessionAttributes().put(ATTR_AVAILABLE_COURSES, courses);
@@ -133,6 +139,7 @@ public class AccountService {
         }
         return true;
     }
+
 
     public void changeAccountPassword(SessionRequestContent requestContent) throws ServiceException {
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
@@ -374,6 +381,31 @@ public class AccountService {
             sb.append(ch);
         }
         return sb.toString();
+    }
+
+    private boolean validateAccFields(Account acc, String pass, String birthdate) {
+        FormValidator val = new FormValidator();
+        boolean isFieldsCorrect = val.validateLogin(acc.getLogin()) && val.validateName(acc.getName()) && val.validateSurName(acc.getSurname())
+                && val.validateEmail(acc.getEmail()) && val.validateBirthDate(birthdate) && val.validatePassword(pass);
+        if (!isFieldsCorrect) {
+            return false;
+        }
+        boolean isAboutCorrect = acc.getAbout() == null || val.validateAccAboutLength(acc.getAbout());
+        if (isAboutCorrect) {
+            acc.setAbout(esqapeQuotes(acc.getAbout()));
+        }
+        boolean isPhoneCorrect = acc.getPhoneNumber() == null || val.validatePhone(acc.getPhoneNumber());
+        return isAboutCorrect && isPhoneCorrect;
+    }
+
+    // TODO: 7/27/2019 общий метод, может в utils вынести в отдельный пакет?
+    public String esqapeQuotes(String text) {
+        String correctText = null;
+        if (text != null) {
+            correctText = text.replace("<", "&lt;");
+            correctText = correctText.replace(">", "&gt;");
+        }
+        return correctText;
     }
 
 }
