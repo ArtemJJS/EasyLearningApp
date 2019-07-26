@@ -28,7 +28,14 @@ public class SessionRequestContent {
     }
 
     public void extractValues(@NonNull HttpServletRequest request) {
-        requestReferer = request.getHeader("referer");
+        System.out.println(request.getRequestURI());
+        String referer = request.getHeader("referer");
+        referer = referer.substring(referer.indexOf(request.getContextPath()));
+        referer = referer.replace("/easyLearning", "");
+        requestReferer = referer;
+
+        System.out.println(requestReferer);
+
         requestParameters = request.getParameterMap();
 
         Enumeration<String> attributeNames = request.getAttributeNames();
@@ -54,22 +61,11 @@ public class SessionRequestContent {
             }
         }
         requestAttributes.forEach(request::setAttribute);
-
-//        System.out.println("!!!!!!!!!!!" + session.getId());
         HttpSession session = request.getSession(false);
-//        if (session != null) {
-//            Enumeration<String> sessionAttrs = session.getAttributeNames();
-//            while (sessionAttrs.hasMoreElements()) {
-//                String sessionAttrName = sessionAttrs.nextElement();
-//                if (!sessionAttributes.containsKey(sessionAttrName)) {
-//                    session.removeAttribute(sessionAttrName);
-//                }
-//            }
         if (sessionAttributes.containsKey(ATTR_DESTROY_SESSION)) {
             session.invalidate();
         } else {
             sessionAttributes.forEach(session::setAttribute);
-
         }
     }
 }

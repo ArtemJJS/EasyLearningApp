@@ -9,7 +9,7 @@ import static by.anelkin.easylearning.receiver.SessionRequestContent.*;
 
 public class AddCourseToReviewCommand implements Command {
     private static final String FAIL_OPERATION_FORWARD = "jsp/author/add_course_page.jsp";
-    private static final String SUCCESSFUL_OPERATION_REDIRECT = "http://localhost:8080/easyLearning/account";
+    private static final String SUCCESSFUL_OPERATION_REDIRECT = "/account";
 
     @Override
     public ResponseType execute(SessionRequestContent requestContent) throws ServiceException {

@@ -25,7 +25,7 @@ public class AccRepository implements AppRepository<Account> {
     @Language("sql")
     private static final String QUERY_UPDATE = "UPDATE account SET acc_password = ?, acc_email = ?, acc_name = ?," +
             " acc_surname = ?, acc_birthdate = ?, acc_phone_number = ?, acc_registration_date = ?, acc_about = ?," +
-            " acc_photo_path = ?, acc_type = ?, update_photo_path = ? WHERE acc_login = ?";
+            " acc_photo_path = ?, acc_type = ?, update_photo_path = ?, acc_pass_salt = ? WHERE acc_login = ?";
     @Language("sql")
     private static final String QUERY_DELETE = "DELETE FROM account WHERE acc_login = ?";
     @Language("sql")
@@ -43,7 +43,7 @@ public class AccRepository implements AppRepository<Account> {
             String[] params = {account.getPassword(), account.getEmail(), account.getName(), account.getSurname(),
                     dateFormat.format(account.getBirthDate()), account.getPhoneNumber(), dateFormat.format(account.getRegistrDate()),
                     account.getAbout(), pathToPhotoParts[pathToPhotoParts.length - 1], String.valueOf(account.getType().ordinal()),
-                    pathUpdatePhotoParts[pathUpdatePhotoParts.length - 1], account.getLogin()};
+                    pathUpdatePhotoParts[pathUpdatePhotoParts.length - 1], account.getPassSalt(), account.getLogin()};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
             throw new RepositoryException(e);

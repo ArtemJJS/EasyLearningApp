@@ -67,8 +67,9 @@ public class BasicServlet extends HttpServlet {
             request.setAttribute(JspAccessFilter.ATTR_JSP_PERMITTED, true);
             request.getRequestDispatcher(path).forward(request, response);
         } else {
-            log.debug("Sending redirect: " + path);
-            response.sendRedirect(path);
+            String url = request.getContextPath() + path;
+            log.debug("Sending redirect: " + url);
+            response.sendRedirect(url);
         }
     }
 }

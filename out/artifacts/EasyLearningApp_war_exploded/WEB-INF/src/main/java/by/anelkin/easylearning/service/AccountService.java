@@ -136,33 +136,39 @@ public class AccountService {
 
     public void changeAccountPassword(SessionRequestContent requestContent) throws ServiceException {
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
+        HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
+        AccRepository repository = new AccRepository();
         String currPassword = reqParams.get(REQUEST_PARAM_PWD)[0];
         String updatedPassword = reqParams.get(REQUEST_PARAM_UPDATED_PWD)[0];
         String repeatedPassword = reqParams.get(REQUEST_PARAM_REPEATED_PWD)[0];
-        AccRepository repository = new AccRepository();
         Account clone;
+
+        String hashedPass;
         try {
             clone = ((Account) requestContent.getSessionAttributes().get(SESSION_ATTR_USER)).clone();
-        } catch (CloneNotSupportedException e) {
+            MessageDigest messageDigest = MessageDigest.getInstance(CURRENT_ENCRYPTING);
+            String saltedPass = currPassword + clone.getPassSalt();
+            hashedPass = new String(messageDigest.digest(saltedPass.getBytes()));
+
+            if (clone.getPassword().equals(hashedPass) && updatedPassword.equals(repeatedPassword)) {
+                clone.setPassSalt(generateSaltForPassword());
+                String updatedSaltedPass = updatedPassword + clone.getPassSalt();
+                String updatedHashedPass = new String(messageDigest.digest(updatedSaltedPass.getBytes()));
+                clone.setPassword(updatedHashedPass);
+                repository.update(clone);
+
+                requestContent.getSessionAttributes().put(SESSION_ATTR_USER, clone);
+                reqAttrs.put(PREVIOUS_OPERATION_MSG, PWD_CHANGED_SUCCESSFULLY_MSG);
+                reqAttrs.put(ATTR_OPERATION_RESULT, true);
+            } else {
+                reqAttrs.put(PREVIOUS_OPERATION_MSG, PWD_NOT_CHANGED_MSG);
+                reqAttrs.put(ATTR_OPERATION_RESULT, false);
+            }
+        } catch (RepositoryException | NoSuchAlgorithmException | CloneNotSupportedException e) {
             throw new ServiceException(e);
         }
-        if (clone.getPassword().equals(currPassword) && updatedPassword.equals(repeatedPassword)) {
-            clone.setPassword(updatedPassword);
-            try {
-                repository.update(clone);
-                requestContent.getSessionAttributes().put(SESSION_ATTR_USER, clone);
-                requestContent.getRequestAttributes().put(PREVIOUS_OPERATION_MSG, PWD_CHANGED_SUCCESSFULLY_MSG);
-                requestContent.getRequestAttributes().put(ATTR_OPERATION_RESULT, true);
-            } catch (RepositoryException e) {
-                // FIXME: 7/17/2019
-                throw new RuntimeException(e);
-            }
-        } else {
-            requestContent.getRequestAttributes().put(PREVIOUS_OPERATION_MSG, PWD_NOT_CHANGED_MSG);
-            requestContent.getRequestAttributes().put(ATTR_OPERATION_RESULT, false);
-
-        }
     }
+
 
     public void initApproveAccAvatarPage(SessionRequestContent requestContent) throws ServiceException {
         AccRepository repository = new AccRepository();

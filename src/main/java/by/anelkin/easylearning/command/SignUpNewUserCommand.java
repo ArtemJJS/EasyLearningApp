@@ -12,7 +12,7 @@ import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseTyp
 
 public class SignUpNewUserCommand implements Command {
     // TODO: 7/12/2019 путь с htt должен быть относительным, как минимум на счет порта позаботиться
-    private static final String CORRECT_RIGISTRATION_PATH = "http://localhost:8080/easyLearning/easyLearning";
+    private static final String CORRECT_RIGISTRATION_PATH = "/easyLearning";
     private static final String WRONG_REGISTRATION_REDIRECT_PATH = "/jsp/sign_up.jsp";
 
 

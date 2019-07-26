@@ -37,7 +37,7 @@
             <input id="header_hidden_input" type="hidden" name="command_name" value="search_course">
             <input class="header_search_field" type="text" name="search_key"
                    placeholder='<fmt:message key='header.search_placeholder' bundle='${rb}'/>'>
-            <input class="header_submit_btn" type="submit"
+            <input class="header_search_btn" type="submit"
                    value='<fmt:message key="header.Search" bundle="${rb}"/>'>
         </form>
         <%--        </div>--%>
@@ -56,7 +56,7 @@
                         <img src="${pageContext.request.contextPath}/${sessionScope.user.pathToPhoto}" alt="avatar"/>
                         <div class="user_login"><a
                                 href="${pageContext.request.contextPath}/account">${sessionScope.user.login}</a></div>
-                        <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
+                        <form id="header_logout_form" method="post" action="${pageContext.request.contextPath}/basic_servlet">
                             <input type="hidden" name="command_name" value="log_out">
                             <input class="header_logout_btn" type="submit" name="LogOut" value='<fmt:message key="btn.log_out" bundle="${rb}"/>'/>
                         </form>

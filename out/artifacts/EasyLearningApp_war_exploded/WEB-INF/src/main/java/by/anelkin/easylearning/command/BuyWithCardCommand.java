@@ -8,7 +8,7 @@ import by.anelkin.easylearning.service.PaymentService;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
 
 public class BuyWithCardCommand implements Command {
-    private static final String SUCCESSFUL_OPERATION_REDIRECT = "http://localhost:8080/easyLearning/course?course-id=";
+    private static final String SUCCESSFUL_OPERATION_REDIRECT = "/course?course-id=";
 
     @Override
     public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {

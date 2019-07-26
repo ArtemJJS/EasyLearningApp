@@ -73,11 +73,13 @@ input, textarea{
 }
 
 .add_lesson{
-    width: 140px;
+    width: 170px;
     height: 30px;
     border: 1px solid grey;
     margin: 20px auto 0;
     text-align: center;
+    position: relative;
+    right: 18px;
 }
 .add_lesson:hover{
     border: 2px solid black;

@@ -94,7 +94,8 @@ header {
 }
 
 header .header_logged_user_info .header_logout_btn {
-    width: 80px;
+    width: 105px;
+    font-size: 0.88rem;
 }
 
 .header_logged_user_info form input {
@@ -102,6 +103,10 @@ header .header_logged_user_info .header_logout_btn {
     margin: 0;
     padding: 0;
     width: 120px;
+}
+
+#header_logout_form{
+    border: none;
 }
 
 #header_search_form {
@@ -125,7 +130,7 @@ header .header_logged_user_info .header_logout_btn {
     padding-right: 10px;
 }
 
-.header_submit_btn {
+.header_search_btn {
     margin: 0;
     width: 90px;
     /*align-self: normal;*/

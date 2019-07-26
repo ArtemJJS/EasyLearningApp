@@ -8,8 +8,8 @@ import by.anelkin.easylearning.service.PaymentService;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.REDIRECT;
 
 public class BuyFromBalanceCommand implements Command {
-    private static final String SUCCESSFUL_OPERATION_REDIRECT = "http://localhost:8080/easyLearning/course?course-id=";
-    private static final String FAIL_OPERATION_REDIRECT = "http://localhost:8080/easyLearning/user/buy-course?result=fail&course-id=";
+    private static final String SUCCESSFUL_OPERATION_REDIRECT = "/course?course-id=";
+    private static final String FAIL_OPERATION_REDIRECT = "/user/buy-course?result=fail&course-id=";
     private static final String ATTR_COURSE_ID = "course_id";
 
 

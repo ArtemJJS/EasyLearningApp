@@ -8,7 +8,7 @@ import by.anelkin.easylearning.service.CourseService;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
 
 public class DeclineCourseApprovalCommand implements Command {
-    private static final String OPERATION_SUCCESSFUL_REDIRECT= "http://localhost:8080/easyLearning/admin/course-approval";
+    private static final String OPERATION_SUCCESSFUL_REDIRECT= "/admin/course-approval";
 
     @Override
     public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
