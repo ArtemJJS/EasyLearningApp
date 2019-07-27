@@ -55,6 +55,10 @@ main {
 img{
     max-height: 250px;
 }
+.message{
+    color: blue;
+    margin-bottom: 25px;
+}
 
 .course_info{
     width: 30%;

@@ -41,8 +41,8 @@
                     <div class="link"><a href="${pageContext.request.contextPath}/author/cash-out"><fmt:message key='acc.cashout' bundle='${rb}'/></a></div>
                 </c:when>
                 <c:when test="${curr_role.toString() == 'ADMIN'}">
-                    <div class="link"><a href="${pageContext.request.contextPath}/admin/course-approval"><fmt:message key='acc.courses_on_review' bundle='${rb}'/></a></div>
-                    <div class="link"><a href="${pageContext.request.contextPath}/admin/approve-course-img"><fmt:message key='acc.course_images_on_review' bundle='${rb}'/></a></div>
+                    <div class="link"><a href="${pageContext.request.contextPath}/admin/course-approve"><fmt:message key='acc.courses_on_review' bundle='${rb}'/></a></div>
+                    <div class="link"><a href="${pageContext.request.contextPath}/admin/approve-course-image"><fmt:message key='acc.course_images_on_review' bundle='${rb}'/></a></div>
                     <div class="link"><a href="${pageContext.request.contextPath}/admin/approve-account-avatar"><fmt:message key='acc.account_images_on_review' bundle='${rb}'/></a></div>
                     <div class="link"><a href="">Dashboard</a></div>
                 </c:when>

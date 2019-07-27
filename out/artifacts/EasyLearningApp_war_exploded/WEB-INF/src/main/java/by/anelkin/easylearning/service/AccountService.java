@@ -60,8 +60,8 @@ public class AccountService {
     private static final String ATTR_ACCS_TO_AVATAR_APPROVE = "acc_avatar_approve_list";
     private static final String ATTR_IS_AUTHOR_MARKED_ALREADY = "is_author_marked_already";
     private static final String ATTR_MESSAGE = "message";
-    private static final String MSG_AVATAR_APPROVED= "Avatar changed successfully to account ";
-    private static final String MSG_AVATAR_DECLINED= "Avatar change was declined to account ";
+    private static final String MSG_AVATAR_APPROVED= "Avatar changed successfully to account: ";
+    private static final String MSG_AVATAR_DECLINED= "Avatar change was declined to account: ";
     private static final String EMPTY_STRING = "";
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

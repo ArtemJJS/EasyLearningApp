@@ -46,8 +46,12 @@ public class CourseService {
     private static final String ATTR_SEARCH_KEY = "search_key";
     private static final String ATTR_PAGE = "page";
     private static final String ATTR_HAS_MORE_PAGES = "has_more_pages";
+    private static final String ATTR_MESSAGE = "message";
 
-    private static final String PREVIOUS_OPERATION_MSG = "previous_operation_message";
+    private static final String MSG_PICTURE_APPROVED = "Picture changed successfully to course id = ";
+    private static final String MSG_PICTURE_DECLINED = "Picture change was declined to course id = ";
+    private static final String MSG_COURSE_APPROVED = "Course was approved, id = ";
+    private static final String MSG_COURSE_FROZEN = "Course was frozen, id = ";
     private static final String MSG_COURSE_ALREADY_EXISTS = "Course with name specified already exists! Try another one!";
     private static final String DEFAULT_IMG = "default_course_avatar.png";
     private static final String PATTERN_LESSON_TITLE = "lesson_title_";
@@ -87,6 +91,7 @@ public class CourseService {
             course.setUpdatePhotoPath(EMPTY_STRING);
             course.setPathToPicture(imgToApprovePath); //it is getting correct value inside repo
             repository.update(course);
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, MSG_PICTURE_APPROVED + course.getId());
             requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));
         } catch (RepositoryException | NullPointerException | IOException e) {
@@ -101,6 +106,7 @@ public class CourseService {
             Course course = repository.query(new SelectCourseByNameSpecification(courseName)).get(0);
             Files.deleteIfExists(Paths.get(COURSE_IMG_LOCATION_TEMP + course.getUpdatePhotoPath()));
             course.setUpdatePhotoPath(EMPTY_STRING);
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, MSG_PICTURE_DECLINED + course.getId());
             requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));
         } catch (RepositoryException | NullPointerException | IOException e) {
@@ -187,7 +193,8 @@ public class CourseService {
             currCourse.setState(CourseState.APPROVED);
             repository.update(currCourse);
 //if I will change command result to forward, this will init correct courses list to approve:
-//          initCourseApprovalPage(requestContent);
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, MSG_COURSE_APPROVED + currCourse.getId());
+            initCourseApprovalPage(requestContent);
         } catch (RepositoryException | NullPointerException e) {
             // FIXME: 7/18/2019
             throw new ServiceException(e);
@@ -203,6 +210,7 @@ public class CourseService {
             Course currCourse = repository.query(new SelectCourseByIdSpecification(courseId)).get(0);
             currCourse.setState(CourseState.FREEZING);
             repository.update(currCourse);
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, MSG_COURSE_FROZEN + currCourse.getId());
         } catch (RepositoryException | NullPointerException e) {
             throw new ServiceException(e);
         }
@@ -245,7 +253,7 @@ public class CourseService {
             String[] chapterNames = insertChaptersIfNotExists(courseId, params);
             insertLessons(courseId, params, chapterNames);
         } catch (RepositoryException e) {
-           throw new ServiceException(e);
+            throw new ServiceException(e);
         }
         return true;
     }

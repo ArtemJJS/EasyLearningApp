@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Log4j
-@WebFilter(urlPatterns = "/admin/course-approval")
+@WebFilter(urlPatterns = "/admin/course-approve")
 public class CourseApprovalPageFilter implements Filter {
     private static final String ATTR_ROLE = "role";
     private CourseService courseService;

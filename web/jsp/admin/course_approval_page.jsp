@@ -19,6 +19,7 @@
 <body>
 <%@include file="/jsp/header.jsp" %>
 <main>
+    <div class="message">${pageContext.request.getAttribute("message")}</div>
     <div class="courses_block">
         <c:set var="courses" value="${requestScope.courses_list}"/>
         <c:choose>
@@ -50,12 +51,12 @@
                         </div>
                     </div>
                     <div class="forms">
-                        <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
+                        <form method="post" action="${pageContext.request.contextPath}/admin/course-approval">
                             <input type="hidden" name="course_id" value="${course.id}">
                             <input type="hidden" name="command_name" value="approve_course">
                             <input type="submit" value='<fmt:message key='btn.approve' bundle='${rb}'/>'>
                         </form>
-                        <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
+                        <form method="post" action="${pageContext.request.contextPath}/admin/course-approval">
                             <input type="hidden" name="course_id" value="${course.id}">
                             <input type="hidden" name="command_name" value="decline_course_approval">
                             <input type="submit" value='<fmt:message key='btn.decline' bundle='${rb}'/>'>

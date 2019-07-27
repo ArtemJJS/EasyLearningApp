@@ -159,7 +159,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>CourseApproval</servlet-name>
-        <url-pattern>/admin/course-approval</url-pattern>
+        <url-pattern>/admin/course-approve</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -204,7 +204,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ApproveCourseImg</servlet-name>
-        <url-pattern>/admin/approve-course-img</url-pattern>
+        <url-pattern>/admin/approve-course-image</url-pattern>
     </servlet-mapping>
 
     <servlet>
