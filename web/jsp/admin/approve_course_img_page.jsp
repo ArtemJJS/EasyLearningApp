@@ -27,7 +27,7 @@
             <div class="info_block">
                 <div class="avatar">
                     <div class="img_detail"><fmt:message key='course.new_image' bundle='${rb}'/>:</div>
-                    <img src="${pageContext.request.contextPath}/${course.updatePhotoPath}" alt="">
+                    <img src="${pageContext.request.contextPath}/img/${course.updatePhotoPath}" alt="">
                 </div>
                 <div class="course_info">
                     <div class="course_login">${course.name}</div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="avatar">
                     <div class="img_detail"><fmt:message key='course.current_image' bundle='${rb}'/>:</div>
-                    <img src="${pageContext.request.contextPath}/${course.pathToPicture}">
+                    <img src="${pageContext.request.contextPath}/img/${course.pathToPicture}">
                 </div>
             </div>
             <div class="forms">

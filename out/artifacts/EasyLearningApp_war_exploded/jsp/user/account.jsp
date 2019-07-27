@@ -23,7 +23,7 @@
     <c:set var="user" value="${sessionScope.user}"/>
     <c:set var="curr_role" value="${sessionScope.role}"/>
     <div class="img_and_links">
-        <img src="${pageContext.request.contextPath}/${user.pathToPhoto}" alt='<fmt:message key='global.avatar' bundle='${rb}'/>'>
+        <img src="${pageContext.request.contextPath}/img/${user.pathToPhoto}" alt='<fmt:message key='global.avatar' bundle='${rb}'/>'>
         <div class="role">${sessionScope.role}</div>
         <div class="balance"><fmt:message key='global.balance' bundle='${rb}'/>: ${user.balance}$</div>
         <div class="links">

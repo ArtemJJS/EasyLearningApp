@@ -23,7 +23,7 @@
 <body>
 <header>
     <div class="logo">
-        <img src="http://localhost:8080/easyLearning/resources/2.jpg" alt="logo" width="180px" height="100px">
+        <img src="${pageContext.request.contextPath}/img/resources/Elephant.jpg" alt="logo" width="180px" height="100px">
     </div>
 </header>
 <main>

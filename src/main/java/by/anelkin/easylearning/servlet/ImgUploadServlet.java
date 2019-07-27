@@ -20,10 +20,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Iterator;
 import java.util.List;
 
@@ -32,11 +35,11 @@ import static by.anelkin.easylearning.command.CommandFactory.CommandType.*;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.FORWARD;
 
 @WebServlet(urlPatterns = "/upload_img_servlet")
-@MultipartConfig(
+@MultipartConfig/*(
         location = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/account_avatar",
         fileSizeThreshold = 1024,
         maxFileSize = 1024 * 1024,
-        maxRequestSize = 1024 * 1024 * 5)
+        maxRequestSize = 1024 * 1024 * 5)*/
 public class ImgUploadServlet extends HttpServlet {
     // TODO: 7/19/2019 может форвардить с сообщением?
     private static final String REDIRECT_TO = "/account";
@@ -47,13 +50,15 @@ public class ImgUploadServlet extends HttpServlet {
     private static final String ERROR_MSG = "You must be a registered user to process file uploading!";
     // FIXME: 7/19/2019 относительный путь
     private static final String ACC_AVATAR_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/account_avatar/";
-    private static final String TEMP_ACC_AVATAR_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/account_avatar_update/";
+    //    private static final String TEMP_ACC_AVATAR_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/account_avatar_update/";
+    private static final String TEMP_ACC_AVATAR_LOCATION = "C:/temp/resources/account_avatar_update/";
     private static final String TEMP_FILE_PREFIX = "temp_";
-    private static final String TEMP_COURSE_IMG_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/course_img_update/";
+    //    private static final String TEMP_COURSE_IMG_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/course_img_update/";
+    private static final String TEMP_COURSE_IMG_LOCATION = "C:/temp/resources/course_img_update/";
     // TODO: 7/17/2019 инициализация пути папки в init()?? но тогда нужно поле сервлету???
 
-    private String commandStr;
-    private String courseId;
+//    private String commandStr;
+//    private String courseId;
 
 
     @Override
@@ -63,74 +68,44 @@ public class ImgUploadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        commandStr = req.getHeader("referer");
-        CommandType commandType = commandStr.endsWith("change-picture") ? CHANGE_ACC_IMG : CHANGE_COURSE_IMG;
-        if (commandType == CHANGE_COURSE_IMG) {
-            String tempCourseId = commandStr.substring(commandStr.lastIndexOf("-") + 1);
-            courseId = tempCourseId.substring(tempCourseId.lastIndexOf("=") + 1);
+        Account acc = (Account) req.getSession().getAttribute("user");
+        String commandName = req.getParameter("command_name");
+        CommandType command = CommandType.valueOf(commandName.toUpperCase());
+        String courseId = null;
+        String currentFolderPath;
+        String tempFileName;
+        if (command == CHANGE_COURSE_IMG) {
+            courseId = req.getParameter("course_id");
+            tempFileName = courseId;
+            currentFolderPath = TEMP_COURSE_IMG_LOCATION;
+            req.setAttribute("course_id", courseId);
+        } else {
+            tempFileName = String.valueOf(acc.getId());
+            currentFolderPath = TEMP_ACC_AVATAR_LOCATION;
         }
-        boolean isMultiPart = ServletFileUpload.isMultipartContent(req);
-        if (!isMultiPart) {
-            throw new ServletException("Request must be multipart!");
-        }
-
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-//        factory.setSizeThreshold(1024);
-//        // Location to save data that is larger than maxMemSize.
-//        factory.setRepository(new File("c:/temp"));
-
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        upload.setSizeMax(1024 * 1024);
-
-        // TODO: 7/17/2019 обработки файла(правильное расширение, размер и т.д.)
-        try {
-            List<FileItem> fileItems = upload.parseRequest(req);
-            Iterator iter = fileItems.iterator();
-            Account account = (Account) req.getSession().getAttribute(ATTR_USER);
-            while (iter.hasNext()) {
-                FileItem item = (FileItem) iter.next();
-                if (!item.isFormField()) {
-                    if (account == null) {
-                        throw new ServletException(ERROR_MSG);
-                    }
-                    String fileName = item.getName();
-                    String fileExtension = fileName.substring(fileName.lastIndexOf("."));
-                    // put it to request, expected in service
-                    req.setAttribute(ATTR_FILE_EXTENSION, fileExtension);
-                    req.setAttribute("course_id", courseId);
+        Part filePart = req.getPart("img_to_upload");
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        String extension = fileName.substring((fileName.lastIndexOf(".")));
 
 
-                    // FIXME: 7/17/2019 фото обновляется не сразу на странице аккаунта??? (через какое-то время)
-                    // FIXME: 7/17/2019 кеш?? как исправить?
+        System.out.println("ContPathRealPath :" + req.getServletContext().getRealPath("/temp"));
+        System.out.println("user: " + acc);
+        System.out.println("tempFileName: " + tempFileName);
+        System.out.println("currentFolderPath: " + currentFolderPath);
+        System.out.println("command: " + command);
+        System.out.println("file name: " + fileName);
+        System.out.println("course Id: " + courseId);
+        System.out.println("extension: " + extension);
 
-                    String currId;
-                    String currFilePath;
+        InputStream in = filePart.getInputStream();
+        System.out.println(in.available());
+        File file = new File(currentFolderPath + tempFileName + extension);
+        Files.copy(in, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-                    switch (commandType) {
-                        case CHANGE_ACC_IMG:
-                            currId = String.valueOf(account.getId());
-                            currFilePath = TEMP_ACC_AVATAR_LOCATION + currId + fileExtension;
-                            break;
-                        case CHANGE_COURSE_IMG:
-                            currId = String.valueOf(courseId);
-                            currFilePath = TEMP_COURSE_IMG_LOCATION + currId + fileExtension;
-                            break;
-                        default:
-                            throw new ServletException("Unexpected command: " + commandType);
-                    }
-
-                    Files.deleteIfExists(Paths.get(currFilePath));
-                    File file = new File(currFilePath);
-                    item.write(file);
-                }
-            }
-        } catch (Exception e) {
-            throw new ServletException(e);
-        }
-
+        req.setAttribute(ATTR_FILE_EXTENSION, extension);
         SessionRequestContent requestContent = new SessionRequestContent();
         requestContent.extractValues(req);
-        RequestReceiver receiver = new RequestReceiver(commandType, requestContent);
+        RequestReceiver receiver = new RequestReceiver(command, requestContent);
         SessionRequestContent.ResponseType responseType;
         try {
             responseType = receiver.executeCommand();
@@ -145,5 +120,88 @@ public class ImgUploadServlet extends HttpServlet {
         } else {
             resp.sendRedirect(path);
         }
+
+
+        //        commandStr = req.getHeader("referer");
+//        CommandType commandType = commandStr.endsWith("change-picture") ? CHANGE_ACC_IMG : CHANGE_COURSE_IMG;
+//        if (commandType == CHANGE_COURSE_IMG) {
+//            String tempCourseId = commandStr.substring(commandStr.lastIndexOf("-") + 1);
+//            courseId = tempCourseId.substring(tempCourseId.lastIndexOf("=") + 1);
+//        }
+//        boolean isMultiPart = ServletFileUpload.isMultipartContent(req);
+//        if (!isMultiPart) {
+//            throw new ServletException("Request must be multipart!");
+//        }
+//
+//        DiskFileItemFactory factory = new DiskFileItemFactory();
+////        factory.setSizeThreshold(1024);
+////        // Location to save data that is larger than maxMemSize.
+////        factory.setRepository(new File("c:/temp"));
+//
+//        ServletFileUpload upload = new ServletFileUpload(factory);
+//        upload.setSizeMax(1024 * 1024);
+//
+//        // TODO: 7/17/2019 обработки файла(правильное расширение, размер и т.д.)
+//        try {
+//            List<FileItem> fileItems = upload.parseRequest(req);
+//            Iterator iter = fileItems.iterator();
+//            Account account = (Account) req.getSession().getAttribute(ATTR_USER);
+//            while (iter.hasNext()) {
+//                FileItem item = (FileItem) iter.next();
+//                if (!item.isFormField()) {
+//                    if (account == null) {
+//                        throw new ServletException(ERROR_MSG);
+//                    }
+//                    String fileName = item.getName();
+//                    String fileExtension = fileName.substring(fileName.lastIndexOf("."));
+//                    // put it to request, expected in service
+//                    req.setAttribute(ATTR_FILE_EXTENSION, fileExtension);
+//                    req.setAttribute("course_id", courseId);
+//
+//                    // FIXME: 7/17/2019 фото обновляется не сразу на странице аккаунта??? (через какое-то время)
+//                    // FIXME: 7/17/2019 кеш?? как исправить?
+//
+//                    String currId;
+//                    String currFilePath;
+//
+//                    switch (commandType) {
+//                        case CHANGE_ACC_IMG:
+//                            currId = String.valueOf(account.getId());
+//                            currFilePath = TEMP_ACC_AVATAR_LOCATION + currId + fileExtension;
+//                            break;
+//                        case CHANGE_COURSE_IMG:
+//                            currId = String.valueOf(courseId);
+//                            currFilePath = TEMP_COURSE_IMG_LOCATION + currId + fileExtension;
+//                            break;
+//                        default:
+//                            throw new ServletException("Unexpected command: " + commandType);
+//                    }
+//
+//                    Files.deleteIfExists(Paths.get(currFilePath));
+//                    File file = new File(currFilePath);
+//                    item.write(file);
+//                }
+//            }
+//        } catch (Exception e) {
+//            throw new ServletException(e);
+//        }
+//
+//        SessionRequestContent requestContent = new SessionRequestContent();
+//        requestContent.extractValues(req);
+//        RequestReceiver receiver = new RequestReceiver(commandType, requestContent);
+//        SessionRequestContent.ResponseType responseType;
+//        try {
+//            responseType = receiver.executeCommand();
+//        } catch (RepositoryException | ServiceException e) {
+//            throw new ServletException(e);
+//        }
+//
+//        requestContent.insertAttributes(req);
+//        String path = requestContent.getPath();
+//        if (responseType == FORWARD) {
+//            req.getRequestDispatcher(path).forward(req, resp);
+//        } else {
+//            resp.sendRedirect(path);
+//        }
     }
 }

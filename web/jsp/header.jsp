@@ -53,7 +53,8 @@
                 </c:when>
                 <c:otherwise>
                     <div class="header_logged_user_info">
-                        <img src="${pageContext.request.contextPath}/${sessionScope.user.pathToPhoto}" alt="avatar"/>
+                        <img src="${pageContext.request.contextPath}/img/${sessionScope.user.pathToPhoto}" alt="avatar"/>
+<%--                        <img src="${pageContext.request.contextPath}/${sessionScope.user.pathToPhoto}" alt="avatar"/>--%>
                         <div class="user_login"><a
                                 href="${pageContext.request.contextPath}/account">${sessionScope.user.login}</a></div>
                         <form id="header_logout_form" method="post" action="${pageContext.request.contextPath}/basic_servlet">

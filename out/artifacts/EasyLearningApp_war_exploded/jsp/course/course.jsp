@@ -31,7 +31,7 @@
             <ctg:course-options course="${curr_course}"/>
         </div>
         <div class="course_view">
-            <img class="course_avatar" src="${pageContext.request.contextPath}${curr_course.pathToPicture}"
+            <img class="course_avatar" src="${pageContext.request.contextPath}/img${curr_course.pathToPicture}"
                  alt="course">
             <div class="price">${curr_course.price}$</div>
         </div>
@@ -70,7 +70,7 @@
         <c:set var="author" value="${pageContext.request.getAttribute('author_of_course')}"/>
         <div class="author_image_and_stats">
             <a href="${pageContext.request.contextPath}/author-info/${author.login}"><img class="author_avatar"
-                                                                                          src="${pageContext.request.contextPath}/${author.pathToPhoto}"
+                                                                                          src="${pageContext.request.contextPath}/img/${author.pathToPhoto}"
                                                                                           alt="author"></a>
             <div class="author_rating"><fmt:message key='global.rating' bundle='${rb}'/>: <ctg:write-rating rating="${author.avgMark}"/></div>
             <div class="author_students">322 <fmt:message key='course.students' bundle='${rb}'/></div>
@@ -94,7 +94,7 @@
                     <div class="comment">${mark.comment}</div>
                     <div class="date">${mark.markDate}</div>
                 </div>
-                <img class="writer_avatar" src="${pageContext.request.contextPath}${mark.accPathToPhoto}"
+                <img class="writer_avatar" src="${pageContext.request.contextPath}/img/${mark.accPathToPhoto}"
                      alt="avatar"/>
             </div>
         </c:forEach>

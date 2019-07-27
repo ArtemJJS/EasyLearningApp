@@ -27,7 +27,7 @@
             <div class="info_block">
                 <div class="avatar">
                     <div class="img_detail"><fmt:message key='change.new_avatar' bundle='${rb}'/>:</div>
-                    <img src="${pageContext.request.contextPath}/${account.updatePhotoPath}" alt="">
+                    <img src="${pageContext.request.contextPath}/img/${account.updatePhotoPath}" alt="">
                 </div>
                 <div class="acc_info">
                     <div class="acc_login">${account.login}</div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="avatar">
                     <div class="img_detail"><fmt:message key='change.current_avatar' bundle='${rb}'/>:</div>
-                    <img src="${pageContext.request.contextPath}/${account.pathToPhoto}">
+                    <img src="${pageContext.request.contextPath}/img/${account.pathToPhoto}">
                 </div>
             </div>
             <div class="forms">

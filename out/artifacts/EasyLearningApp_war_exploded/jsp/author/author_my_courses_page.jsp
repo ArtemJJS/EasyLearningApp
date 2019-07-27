@@ -33,7 +33,7 @@
                         <div class="block1">
                             <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
                                 <img class="course_avatar"
-                                     src="${pageContext.request.contextPath}${course.pathToPicture}"
+                                     src="${pageContext.request.contextPath}/img${course.pathToPicture}"
                                      alt='<fmt:message key='global.course_image' bundle='${rb}'/>'/>
                             </a>
                         </div>

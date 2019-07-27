@@ -35,8 +35,10 @@ public class AccountService {
     // FIXME: 7/20/2019 на относительный путь
     private static final String CURRENT_ENCRYPTING = "SHA-256";
 
-    private static final String ACC_AVATAR_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/";
-    private static final String ACC_AVATAR_LOCATION_TEMP = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/";
+    private static final String ACC_AVATAR_LOCATION = "C:/temp/";
+//    private static final String ACC_AVATAR_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/";
+    private static final String ACC_AVATAR_LOCATION_TEMP = "C:/temp/";
+//    private static final String ACC_AVATAR_LOCATION_TEMP = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/";
     private static final String URI_SPACE_REPRESENT = "%20";
     private static final String PATH_SPLITTER = "/";
     private static final String SESSION_ATTR_USER = "user";

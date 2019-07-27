@@ -30,10 +30,10 @@ import static by.anelkin.easylearning.entity.Course.*;
 
 @Log4j
 public class CourseService {
-    private static final String COURSE_IMG_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web";
-    private static final String COURSE_IMG_LOCATION_TEMP = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web";
-    private static final String COURSE_DEFAULT_IMG_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/course_img/default_course_avatar.png";
-    private static final String COURSE_IMG_FOLDER = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/resources/course_img/";
+    private static final String COURSE_IMG_LOCATION = "C:/temp";
+    private static final String COURSE_IMG_LOCATION_TEMP = "C:/temp";
+    private static final String COURSE_DEFAULT_IMG_LOCATION = "C:/temp/resources/course_img/default_course_avatar.png";
+    private static final String COURSE_IMG_FOLDER = "C:/temp/resources/course_img/";
     private static final int SEARCH_LIMIT = 4;
 
     private static final String ATTR_COURSES_LIST = "courses_list";

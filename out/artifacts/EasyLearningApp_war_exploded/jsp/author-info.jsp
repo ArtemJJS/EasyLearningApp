@@ -28,7 +28,7 @@
         <div class="name_surname">${author.name} ${author.surname}</div>
     </section>
     <section class="section_2">
-        <img class="author_avatar" src="${pageContext.request.contextPath}/${author.pathToPhoto}"
+        <img class="author_avatar" src="${pageContext.request.contextPath}/img/${author.pathToPhoto}"
              alt="avatar"/>
         <div class="author_description_and_stats">
             <div class="author_about">${author.about}</div>
@@ -49,7 +49,7 @@
                 <div class="block1">
                     <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
                         <img class="course_avatar"
-                             src="${pageContext.request.contextPath}${course.pathToPicture}"
+                             src="${pageContext.request.contextPath}/img${course.pathToPicture}"
                              alt="course avatar"/>
                     </a>
                 </div>

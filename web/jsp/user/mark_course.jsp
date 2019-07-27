@@ -27,7 +27,7 @@
             <div class="course_price"><fmt:message key='global.price' bundle='${rb}'/>: ${course.price}$</div>
         </div>
         <div class="course_name">${course.name}</div>
-        <img class="course_img" src="${pageContext.request.contextPath}/${course.pathToPicture}" alt='<fmt:message key='global.course_image' bundle='${rb}'/>'>
+        <img class="course_img" src="${pageContext.request.contextPath}/img/${course.pathToPicture}" alt='<fmt:message key='global.course_image' bundle='${rb}'/>'>
     </div>
     <form class="mark_form" method="post" action="${pageContext.request.contextPath}/basic_servlet">
         <div class="params">

@@ -44,6 +44,6 @@
     <a href="${pageContext.request.contextPath}/sign-up"><fmt:message key="btn.sign_up"
                                                                       bundle="${rb}"/></a>
 </section>
-<img src="${pageContext.request.contextPath}/resources/Elephant.jpg" alt="logo" width="80%" height="60%">
+<img src="${pageContext.request.contextPath}/img/resources/Elephant.jpg" alt="logo" width="80%" height="60%">
 </body>
 </html>
