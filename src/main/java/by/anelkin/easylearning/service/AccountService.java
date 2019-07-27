@@ -18,7 +18,6 @@ import by.anelkin.easylearning.specification.mark.SelectMarkByTargetIdSpecificat
 import by.anelkin.easylearning.validator.FormValidator;
 import lombok.NonNull;
 
-import javax.xml.validation.Validator;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -211,8 +210,12 @@ public class AccountService {
             try {
                 // FIXME: 7/20/2019 по идее удалит дефолтный автар из папки если он стоит????
                 File file = new File(ACC_AVATAR_LOCATION_TEMP + currAccount.getUpdatePhotoPath());
-                Files.deleteIfExists(Paths.get(ACC_AVATAR_LOCATION + currAccount.getPathToPhoto()));
-                file.renameTo(new File(ACC_AVATAR_LOCATION + currAccount.getPathToPhoto()));
+                String previousAvatarPath = ACC_AVATAR_LOCATION + currAccount.getPathToPhoto();
+                if (!previousAvatarPath.contains("default_acc_avatar")) {
+                    Files.deleteIfExists(Paths.get(ACC_AVATAR_LOCATION + currAccount.getPathToPhoto()));
+                }
+                file.renameTo(new File(ACC_AVATAR_LOCATION + "resources/account_avatar"
+                        + currAccount.getUpdatePhotoPath().substring(currAccount.getUpdatePhotoPath().lastIndexOf("/"))));
                 Files.deleteIfExists(Paths.get(ACC_AVATAR_LOCATION_TEMP + currAccount.getUpdatePhotoPath()));
             } catch (IOException e) {
                 throw new ServiceException(e);
@@ -224,7 +227,6 @@ public class AccountService {
             requestContent.getRequestAttributes().put(ATTR_ACCS_TO_AVATAR_APPROVE
                     , repository.query(new SelectAccToPhotoApproveSpecification()));
         } catch (RepositoryException e) {
-            // FIXME: 7/17/2019
             throw new ServiceException(e);
         }
     }
