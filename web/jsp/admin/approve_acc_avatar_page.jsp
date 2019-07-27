@@ -22,6 +22,7 @@
 
 <main>
     <div class="page_title"><fmt:message key='change.change_acc_avatar_requests' bundle='${rb}'/>:</div>
+    <div class="message">${pageContext.request.getAttribute("message")}</div>
     <c:forEach var="account" items="${accounts}">
         <div class="acc_wrapper">
             <div class="info_block">
@@ -39,12 +40,12 @@
                 </div>
             </div>
             <div class="forms">
-                <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
+                <form method="post" action="${pageContext.request.contextPath}/admin/approve-acc-avatar">
                     <input type="hidden" name="login" value="${account.login}">
                     <input type="hidden" name="command_name" value="approve_avatar_change">
                     <input type="submit" value='<fmt:message key='btn.approve' bundle='${rb}'/>'>
                 </form>
-                <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
+                <form method="post" action="${pageContext.request.contextPath}/admin/approve-acc-avatar">
                     <input type="hidden" name="login" value="${account.login}">
                     <input type="hidden" name="command_name" value="decline_avatar_change">
                     <input type="submit" value='<fmt:message key='btn.decline' bundle='${rb}'/>'>

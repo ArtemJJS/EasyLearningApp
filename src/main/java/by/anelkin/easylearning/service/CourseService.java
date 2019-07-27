@@ -7,12 +7,10 @@ import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.ChapterRepository;
 import by.anelkin.easylearning.repository.CourseRepository;
 import by.anelkin.easylearning.repository.LessonRepository;
-import by.anelkin.easylearning.specification.AppSpecification;
 import by.anelkin.easylearning.specification.chapter.SelectAllFromCourseSpecification;
 import by.anelkin.easylearning.specification.chapter.SelectChapterByNameAndCourseIdSpecification;
 import by.anelkin.easylearning.specification.course.*;
 import by.anelkin.easylearning.specification.lesson.SelectByChapterIdSpecification;
-import com.mysql.cj.jdbc.exceptions.NotUpdatable;
 import lombok.extern.log4j.Log4j;
 
 import java.io.File;

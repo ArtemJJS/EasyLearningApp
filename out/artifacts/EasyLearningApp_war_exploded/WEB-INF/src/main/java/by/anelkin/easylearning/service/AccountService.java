@@ -59,6 +59,9 @@ public class AccountService {
     private static final String ATTR_FILE_EXTENSION = "file_extension";
     private static final String ATTR_ACCS_TO_AVATAR_APPROVE = "acc_avatar_approve_list";
     private static final String ATTR_IS_AUTHOR_MARKED_ALREADY = "is_author_marked_already";
+    private static final String ATTR_MESSAGE = "message";
+    private static final String MSG_AVATAR_APPROVED= "Avatar changed successfully to account ";
+    private static final String MSG_AVATAR_DECLINED= "Avatar change was declined to account ";
     private static final String EMPTY_STRING = "";
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -210,7 +213,6 @@ public class AccountService {
             String fileName = currAccount.getUpdatePhotoPath();
 
             try {
-                // FIXME: 7/20/2019 по идее удалит дефолтный автар из папки если он стоит????
                 File file = new File(ACC_AVATAR_LOCATION_TEMP + currAccount.getUpdatePhotoPath());
                 String previousAvatarPath = ACC_AVATAR_LOCATION + currAccount.getPathToPhoto();
                 if (!previousAvatarPath.contains("default_acc_avatar")) {
@@ -226,6 +228,7 @@ public class AccountService {
             currAccount.setPathToPhoto(fileName);
             currAccount.setUpdatePhotoPath(EMPTY_STRING);
             repository.update(currAccount);
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, MSG_AVATAR_APPROVED + currAccount.getLogin());
             requestContent.getRequestAttributes().put(ATTR_ACCS_TO_AVATAR_APPROVE
                     , repository.query(new SelectAccToPhotoApproveSpecification()));
         } catch (RepositoryException e) {
@@ -241,6 +244,7 @@ public class AccountService {
             Files.deleteIfExists(Paths.get(ACC_AVATAR_LOCATION_TEMP + currAcc.getUpdatePhotoPath()));
             currAcc.setUpdatePhotoPath("");
             repository.update(currAcc);
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, MSG_AVATAR_DECLINED + currAcc.getLogin());
             requestContent.getRequestAttributes().put(ATTR_ACCS_TO_AVATAR_APPROVE
                     , repository.query(new SelectAccToPhotoApproveSpecification()));
         } catch (RepositoryException | IOException e) {

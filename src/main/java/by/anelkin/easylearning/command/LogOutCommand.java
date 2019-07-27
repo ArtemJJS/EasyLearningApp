@@ -10,11 +10,12 @@ import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseTyp
 
 public class LogOutCommand implements Command {
     private static final String ATTR_DESTROY_SESSION = "destroy_session";
+    private static final String SUCCESSFUL_OPERATION_REDIRECT = "/";
 
     @Override
     public ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
         requestContent.getSessionAttributes().put(ATTR_DESTROY_SESSION, true);
-        requestContent.setPath(requestContent.getRequestReferer());
+        requestContent.setPath(SUCCESSFUL_OPERATION_REDIRECT);
         requestContent.setResponseType(REDIRECT);
         return REDIRECT;
     }

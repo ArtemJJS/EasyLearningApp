@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Log4j
-@WebFilter(urlPatterns = "/admin/approve-acc-avatar")
+@WebFilter(urlPatterns = "/admin/approve-account-avatar")
 public class ApproveAvatarPagerFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

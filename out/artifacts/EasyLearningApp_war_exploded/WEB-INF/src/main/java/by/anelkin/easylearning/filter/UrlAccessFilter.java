@@ -1,6 +1,5 @@
 package by.anelkin.easylearning.filter;
 
-import by.anelkin.easylearning.entity.Account;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

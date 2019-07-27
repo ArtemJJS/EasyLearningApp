@@ -23,18 +23,18 @@ import static by.anelkin.easylearning.receiver.SessionRequestContent.*;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
 
 @Log4j
-@WebServlet(name = "BasicServlet", urlPatterns = {"/basic_servlet", "/search", "/change-lang"})
+@WebServlet(name = "BasicServlet", urlPatterns = {"/basic_servlet", "/search", "/change-lang"
+        , "/admin/approve-acc-avatar"})
 public class BasicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getHeader("referer"));
-        HttpSession session;
-        if ((session = request.getSession()).getAttribute("role") == null) {
-            request.getSession().setAttribute("role", GUEST);
-            request.getSession().setAttribute("locale", new Locale("en", "US"));
+        HttpSession session = request.getSession();
+        if (session.getAttribute("role") == null) {
+            session.setAttribute("role", GUEST);
+            session.setAttribute("locale", new Locale("en", "US"));
         }
 
         CommandType commandType;

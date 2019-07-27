@@ -195,7 +195,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ApproveAccAvatar</servlet-name>
-        <url-pattern>/admin/approve-acc-avatar</url-pattern>
+        <url-pattern>/admin/approve-account-avatar</url-pattern>
     </servlet-mapping>
 
     <servlet>
