@@ -131,8 +131,7 @@ main {
 }
 
 .author_image_and_stats {
-    min-width: 25%;
-    border-right: 1px solid green;
+    width: 27%;
 
     display: flex;
     flex-direction: column;
@@ -140,6 +139,7 @@ main {
 
 .author_avatar {
     width: 90%;
+    max-height: 200px;
 }
 
 .author_rating {
@@ -170,7 +170,8 @@ main {
 }
 
 .writer_avatar {
-    width: 120px;
+    max-width: 120px;
+    max-height: 200px;
 }
 
 /*=================================*/

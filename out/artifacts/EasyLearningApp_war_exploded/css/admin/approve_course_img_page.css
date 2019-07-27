@@ -52,6 +52,9 @@ main {
     display: flex;
     flex-direction: column;
 }
+img{
+    max-height: 250px;
+}
 
 .course_info{
     width: 30%;
