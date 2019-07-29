@@ -1,5 +1,6 @@
 package by.anelkin.easylearning.service;
 
+import by.anelkin.easylearning.Main;
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.entity.Course;
 import by.anelkin.easylearning.entity.Mark;
@@ -17,6 +18,7 @@ import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUser
 import by.anelkin.easylearning.specification.mark.SelectMarkByTargetIdSpecification;
 import by.anelkin.easylearning.validator.FormValidator;
 import lombok.NonNull;
+import lombok.extern.log4j.Log4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,14 +33,14 @@ import java.util.*;
 import static by.anelkin.easylearning.entity.Account.*;
 import static by.anelkin.easylearning.entity.Mark.*;
 
+@Log4j
 public class AccountService {
     // FIXME: 7/20/2019 на относительный путь
     private static final String CURRENT_ENCRYPTING = "SHA-256";
+    private static final String PROP_FILE_FOLDER = "file_folder";
+    private static final String RESOURCE_BUNDLE_BASE = "text_resources";
+    private static final String FILE_STORAGE_BUNDLE_BASE = "file_storage";
 
-    private static final String ACC_AVATAR_LOCATION = "C:/temp/";
-//    private static final String ACC_AVATAR_LOCATION = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/";
-    private static final String ACC_AVATAR_LOCATION_TEMP = "C:/temp/";
-//    private static final String ACC_AVATAR_LOCATION_TEMP = "C:/Users/User/Desktop/GIT Projects/EasyLearningApp/web/";
     private static final String URI_SPACE_REPRESENT = "%20";
     private static final String PATH_SPLITTER = "/";
     private static final String SESSION_ATTR_USER = "user";
@@ -60,8 +62,8 @@ public class AccountService {
     private static final String ATTR_ACCS_TO_AVATAR_APPROVE = "acc_avatar_approve_list";
     private static final String ATTR_IS_AUTHOR_MARKED_ALREADY = "is_author_marked_already";
     private static final String ATTR_MESSAGE = "message";
-    private static final String MSG_AVATAR_APPROVED= "Avatar changed successfully to account: ";
-    private static final String MSG_AVATAR_DECLINED= "Avatar change was declined to account: ";
+    private static final String MSG_AVATAR_APPROVED = "Avatar changed successfully to account: ";
+    private static final String MSG_AVATAR_DECLINED = "Avatar change was declined to account: ";
     private static final String EMPTY_STRING = "";
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -205,6 +207,7 @@ public class AccountService {
     }
 
     public void approveAccAvatar(SessionRequestContent requestContent) throws ServiceException {
+        String fileStorage = ResourceBundle.getBundle(FILE_STORAGE_BUNDLE_BASE).getString(PROP_FILE_FOLDER);
         AccRepository repository = new AccRepository();
         String currLogin = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
         Account currAccount;
@@ -213,14 +216,14 @@ public class AccountService {
             String fileName = currAccount.getUpdatePhotoPath();
 
             try {
-                File file = new File(ACC_AVATAR_LOCATION_TEMP + currAccount.getUpdatePhotoPath());
-                String previousAvatarPath = ACC_AVATAR_LOCATION + currAccount.getPathToPhoto();
+                File file = new File(fileStorage+ currAccount.getUpdatePhotoPath());
+                String previousAvatarPath = fileStorage+ currAccount.getPathToPhoto();
                 if (!previousAvatarPath.contains("default_acc_avatar")) {
-                    Files.deleteIfExists(Paths.get(ACC_AVATAR_LOCATION + currAccount.getPathToPhoto()));
+                    Files.deleteIfExists(Paths.get(fileStorage+ currAccount.getPathToPhoto()));
                 }
-                file.renameTo(new File(ACC_AVATAR_LOCATION + "resources/account_avatar"
+                file.renameTo(new File(fileStorage+ "resources/account_avatar"
                         + currAccount.getUpdatePhotoPath().substring(currAccount.getUpdatePhotoPath().lastIndexOf("/"))));
-                Files.deleteIfExists(Paths.get(ACC_AVATAR_LOCATION_TEMP + currAccount.getUpdatePhotoPath()));
+                Files.deleteIfExists(Paths.get(fileStorage+ currAccount.getUpdatePhotoPath()));
             } catch (IOException e) {
                 throw new ServiceException(e);
             }
@@ -237,11 +240,12 @@ public class AccountService {
     }
 
     public void declineAccAvatar(SessionRequestContent requestContent) throws ServiceException {
+        String fileStorage = ResourceBundle.getBundle(FILE_STORAGE_BUNDLE_BASE).getString(PROP_FILE_FOLDER);
         AccRepository repository = new AccRepository();
         String currLogin = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
         try {
             Account currAcc = repository.query(new SelectAccByLoginSpecification(currLogin)).get(0);
-            Files.deleteIfExists(Paths.get(ACC_AVATAR_LOCATION_TEMP + currAcc.getUpdatePhotoPath()));
+            Files.deleteIfExists(Paths.get(fileStorage + currAcc.getUpdatePhotoPath()));
             currAcc.setUpdatePhotoPath("");
             repository.update(currAcc);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, MSG_AVATAR_DECLINED + currAcc.getLogin());

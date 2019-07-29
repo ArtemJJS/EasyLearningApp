@@ -13,7 +13,6 @@ public class CommandFactory {
     public enum CommandType {
         LOGIN (GUEST),
         SIGN_UP_NEW_USER (GUEST),
-        //FIXME добавил guesta, глянуть работает ли
         LOG_OUT (ADMIN, AUTHOR, USER, GUEST),
         EDIT_USER_INFO (ADMIN, AUTHOR, USER),
         DEPOSIT_BY_CARD (USER),

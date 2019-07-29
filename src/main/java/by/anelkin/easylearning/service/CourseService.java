@@ -18,20 +18,14 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.security.Provider;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static by.anelkin.easylearning.entity.Course.*;
 
 @Log4j
 public class CourseService {
-    private static final String COURSE_IMG_LOCATION = "C:/temp";
-    private static final String COURSE_IMG_LOCATION_TEMP = "C:/temp";
-    private static final String COURSE_DEFAULT_IMG_LOCATION = "C:/temp/resources/course_img/default_course_avatar.png";
-    private static final String COURSE_IMG_FOLDER = "C:/temp/resources/course_img/";
+    private static final String PATH_RELATIVE_COURSE_IMG_FOLDER = "resources/course_img/";
+    private static final String PROP_FILE_FOLDER = "file_folder";
     private static final int SEARCH_LIMIT = 4;
 
     private static final String ATTR_COURSES_LIST = "courses_list";
@@ -47,12 +41,16 @@ public class CourseService {
     private static final String ATTR_PAGE = "page";
     private static final String ATTR_HAS_MORE_PAGES = "has_more_pages";
     private static final String ATTR_MESSAGE = "message";
+    private static final String ATTR_LOCALE = "locale";
+    private static final String LOCALE_SPLITTER = "_";
 
-    private static final String MSG_PICTURE_APPROVED = "Picture changed successfully to course id = ";
-    private static final String MSG_PICTURE_DECLINED = "Picture change was declined to course id = ";
-    private static final String MSG_COURSE_APPROVED = "Course was approved, id = ";
-    private static final String MSG_COURSE_FROZEN = "Course was frozen, id = ";
-    private static final String MSG_COURSE_ALREADY_EXISTS = "Course with name specified already exists! Try another one!";
+    private static final String RESOURCE_BUNDLE_BASE = "text_resources";
+    private static final String FILE_STORAGE_BUNDLE_BASE = "file_storage";
+    private static final String BUNDLE_PICTURE_APPROVED = "msg.course_picture_changed_successfully";
+    private static final String BUNDLE_PICTURE_DECLINED = "msg.course_picture_change_was_declined";
+    private static final String BUNDLE_COURSE_APPROVED = "msg.course_was_approved";
+    private static final String BUNDLE_COURSE_FROZEN = "msg.course_was_declined";
+    private static final String BUNDLE_COURSE_ALREADY_EXISTS = "msg.course_already_exists";
     private static final String DEFAULT_IMG = "default_course_avatar.png";
     private static final String PATTERN_LESSON_TITLE = "lesson_title_";
     private static final String PATTERN_LESSON_CONTENT = "lesson_content_";
@@ -74,24 +72,26 @@ public class CourseService {
     }
 
     public void approveCourseImgChange(SessionRequestContent requestContent) throws ServiceException {
+        Locale locale = takeLocaleFromSession(requestContent);
+        String fileStorage = ResourceBundle.getBundle(FILE_STORAGE_BUNDLE_BASE).getString(PROP_FILE_FOLDER);
+        String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_PICTURE_APPROVED);
         CourseRepository repository = new CourseRepository();
         String courseName = requestContent.getRequestParameters().get(ATTR_COURSE_NAME)[0];
         try {
             Course course = repository.query(new SelectCourseByNameSpecification(courseName)).get(0);
             String imgToApprovePath = course.getUpdatePhotoPath();
-            String currImgPath = COURSE_IMG_LOCATION + course.getPathToPicture();
+            String currImgPath = fileStorage + course.getPathToPicture();
             String fileName = imgToApprovePath.substring(imgToApprovePath.lastIndexOf(PATH_SPLITTER) + 1);
-            if (!currImgPath.equals(COURSE_DEFAULT_IMG_LOCATION)) {
+            if (!currImgPath.contains("default_course_avatar")) {
                 Files.deleteIfExists(Paths.get(currImgPath));
             }
-            File file = new File(COURSE_IMG_LOCATION_TEMP + imgToApprovePath);
-            file.renameTo(new File(COURSE_IMG_FOLDER + "/" + fileName));
-            Files.deleteIfExists(Paths.get(COURSE_IMG_LOCATION_TEMP + imgToApprovePath));
+            File file = new File(fileStorage + imgToApprovePath);
+            file.renameTo(new File(fileStorage + PATH_RELATIVE_COURSE_IMG_FOLDER + PATH_SPLITTER + fileName));
 
             course.setUpdatePhotoPath(EMPTY_STRING);
             course.setPathToPicture(imgToApprovePath); //it is getting correct value inside repo
             repository.update(course);
-            requestContent.getRequestAttributes().put(ATTR_MESSAGE, MSG_PICTURE_APPROVED + course.getId());
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + course.getId());
             requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));
         } catch (RepositoryException | NullPointerException | IOException e) {
@@ -100,13 +100,16 @@ public class CourseService {
     }
 
     public void declineCourseImgChange(SessionRequestContent requestContent) throws ServiceException {
+        Locale locale = takeLocaleFromSession(requestContent);
+        String fileStorage = ResourceBundle.getBundle(FILE_STORAGE_BUNDLE_BASE).getString(PROP_FILE_FOLDER);
+        String message = (ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale)).getString(BUNDLE_PICTURE_DECLINED);
         CourseRepository repository = new CourseRepository();
         String courseName = requestContent.getRequestParameters().get(ATTR_COURSE_NAME)[0];
         try {
             Course course = repository.query(new SelectCourseByNameSpecification(courseName)).get(0);
-            Files.deleteIfExists(Paths.get(COURSE_IMG_LOCATION_TEMP + course.getUpdatePhotoPath()));
+            Files.deleteIfExists(Paths.get(fileStorage + course.getUpdatePhotoPath()));
             course.setUpdatePhotoPath(EMPTY_STRING);
-            requestContent.getRequestAttributes().put(ATTR_MESSAGE, MSG_PICTURE_DECLINED + course.getId());
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + course.getId());
             requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));
         } catch (RepositoryException | NullPointerException | IOException e) {
@@ -115,6 +118,7 @@ public class CourseService {
     }
 
     public void initCoursePage(SessionRequestContent requestContent) throws ServiceException {
+        HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
         CourseRepository repository = new CourseRepository();
         int courseId = Integer.parseInt(requestContent.getRequestParameters().get("course-id")[0]);
         log.debug("receiving course from base, id: " + courseId);
@@ -130,10 +134,10 @@ public class CourseService {
             throw new ServiceException("Course wasn't found");
         }
         // fixme: 7/12/2019 вынести в текстовые константы
-        requestContent.getRequestAttributes().put("currentCourseMarks", marks);
-        requestContent.getRequestAttributes().put("requestedCourse", courses.get(0));
-        requestContent.getRequestAttributes().put("currentCourseContent", takeChaptersAndLessons(courseId));
-        requestContent.getRequestAttributes().put("author_of_course", (new AccountService()).takeAuthorOfCourse(courseId));
+        reqAttrs.put("currentCourseMarks", marks);
+        reqAttrs.put("requestedCourse", courses.get(0));
+        reqAttrs.put("currentCourseContent", takeChaptersAndLessons(courseId));
+        reqAttrs.put("author_of_course", (new AccountService()).takeAuthorOfCourse(courseId));
     }
 
     // TODO: 7/20/2019 может объединить этот и след методы????
@@ -185,6 +189,8 @@ public class CourseService {
     }
 
     public void approveCourse(SessionRequestContent requestContent) throws ServiceException {
+        Locale locale = takeLocaleFromSession(requestContent);
+        String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_APPROVED);
         // TODO: 7/18/2019 защиту если придет не инт
         int courseId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_COURSE_ID)[0]);
         CourseRepository repository = new CourseRepository();
@@ -192,17 +198,17 @@ public class CourseService {
             Course currCourse = repository.query(new SelectCourseByIdSpecification(courseId)).get(0);
             currCourse.setState(CourseState.APPROVED);
             repository.update(currCourse);
-//if I will change command result to forward, this will init correct courses list to approve:
-            requestContent.getRequestAttributes().put(ATTR_MESSAGE, MSG_COURSE_APPROVED + currCourse.getId());
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + currCourse.getId());
             initCourseApprovalPage(requestContent);
         } catch (RepositoryException | NullPointerException e) {
-            // FIXME: 7/18/2019
             throw new ServiceException(e);
         }
     }
 
 
     public void freezeCourse(SessionRequestContent requestContent) throws ServiceException {
+        Locale locale = takeLocaleFromSession(requestContent);
+        String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_FROZEN);
         // TODO: 7/18/2019 защиту если придет не инт
         int courseId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_COURSE_ID)[0]);
         CourseRepository repository = new CourseRepository();
@@ -210,25 +216,27 @@ public class CourseService {
             Course currCourse = repository.query(new SelectCourseByIdSpecification(courseId)).get(0);
             currCourse.setState(CourseState.FREEZING);
             repository.update(currCourse);
-            requestContent.getRequestAttributes().put(ATTR_MESSAGE, MSG_COURSE_FROZEN + currCourse.getId());
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + currCourse.getId());
         } catch (RepositoryException | NullPointerException e) {
             throw new ServiceException(e);
         }
     }
 
     public boolean addCourseToReview(SessionRequestContent requestContent) throws ServiceException {
+        Locale locale = takeLocaleFromSession(requestContent);
+        String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_ALREADY_EXISTS);
         Map<String, String[]> params = requestContent.getRequestParameters();
         CourseRepository courseRepo = new CourseRepository();
         String courseName = params.get(ATTR_COURSE_NAME)[0];
         // FIXME: 7/21/2019 при повторной отправке после форварда адрес
         //  отличается(там адрес сервлета) и бьет ошибку
         boolean isCourseNew = requestContent.getRequestReferer().endsWith("author/add-new-course");
-        List<Course> courses = null;
+        List<Course> courses;
         try {
             courses = courseRepo.query(new SelectCourseByNameSpecification(courseName));
             if (courses.size() > 0 && isCourseNew) {
                 // TODO: 7/18/2019 попробовать сохранить данные при наличии такого названия курса в базе? при форварде?
-                requestContent.getRequestAttributes().put(ATTR_COURSE_ALREADY_EXISTS, MSG_COURSE_ALREADY_EXISTS);
+                requestContent.getRequestAttributes().put(ATTR_COURSE_ALREADY_EXISTS, message);
                 return false;
             }
             Course course;
@@ -303,7 +311,6 @@ public class CourseService {
         }
     }
 
-    // returns map of chapters and lessons of current course, then it have to be setted to request attribute
     private Map<CourseChapter, List<CourseLesson>> takeChaptersAndLessons(int courseId) throws ServiceException {
         ChapterRepository chapterRepository = new ChapterRepository();
         LessonRepository lessonRepository = new LessonRepository();
@@ -320,5 +327,11 @@ public class CourseService {
         return courseContent;
     }
 
+    public Locale takeLocaleFromSession(SessionRequestContent requestContent) {
+        Locale locale;
+        String[] localeParts = requestContent.getSessionAttributes().get(ATTR_LOCALE).toString().split(LOCALE_SPLITTER);
+        locale = new Locale(localeParts[0], localeParts[1]);
+        return locale;
+    }
 
 }

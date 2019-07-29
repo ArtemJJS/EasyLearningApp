@@ -22,13 +22,9 @@ public class CourseOptionTag extends TagSupport {
     private static final String ATTR_LOCALE = "locale";
     private static final String LOCALE_SPLITTER = "_";
 
-
     private static final String BUNDLE_LEARNING_PAGE = "tag.learning_page";
     private static final String BUNDLE_EDIT_COURSE = "tag.edit_course";
     private static final String BUNDLE_EDIT_IMAGE = "tag.edit_image";
-    //    private static final String AUTHOR_LEARNING_PAGE = "Learning page";
-//    private static final String AUTHOR_EDIT_COURSE = "Edit course";
-//    private static final String AUTHOR_EDIT_IMAGE = "Edit image";
     private static final String AUTHOR_LEARNING_PAGE_LINK = "/course/learn?course-id=";
     private static final String AUTHOR_EDIT_COURSE_LINK = "/author/edit-course?course-id=";
     private static final String AUTHOR_EDIT_IMAGE_LINK = "/account/change-picture?course-id=";
@@ -38,9 +34,6 @@ public class CourseOptionTag extends TagSupport {
     private static final String USER_LEARNING_PAGE_LINK = "/course/learn?course-id=";
     private static final String USER_MARK_COURSE_LINK = "/user/mark-course?course-id=";
     private static final String USER_BUY_COURSE_LINK = "/user/buy-course?course-id=";
-//    private static final String USER_BUY_COURSE = "Buy course";
-//    private static final String USER_LEARNING_PAGE = "Learning page";
-//    private static final String USER_MARK_COURSE = "Mark course";
 
 
     private Course course;
