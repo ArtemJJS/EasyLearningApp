@@ -12,16 +12,23 @@ import by.anelkin.easylearning.repository.PaymentRepository;
 import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
 import by.anelkin.easylearning.specification.account.SelectAuthorOfCourseSpecification;
 import by.anelkin.easylearning.specification.course.SelectCourseByIdSpecification;
+import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
 import by.anelkin.easylearning.specification.payment.SelectPaymentByAccountIdSpecification;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import static by.anelkin.easylearning.entity.Payment.*;
 
 public class PaymentService {
-
+    private static final String ATTR_MESSAGE = "message";
+    private static final String BUNDLE_PAYMENT_SUCCEEDED = "msg.payment_approved";
+    private static final String BUNDLE_PAYMENT_DECLINED = "msg.payment_declined";
+    private static final String BUNDLE_PROBLEMS_PURCHASING_COURSE = "msg.problems_purchasing_course";
+    private static final String RESOURCE_BUNDLE_BASE = "text_resources";
     private static final String ATTR_COURSE_ID = "course_id";
     private static final String ATTR_USER = "user";
     private static final String ATTR_AMOUNT = "amount";
@@ -35,20 +42,21 @@ public class PaymentService {
     private static final String DESCRIPTION_BUY_WITH_CARD = "Purchasing by card ends with %s. Course: ";
     private static final String DESCRIPTION_BUY_FROM_BALANCE = "Purchasing from balance. Course: ";
     private static final String DESCRIPTION_SALE_COURSE = "Sale course: ";
-    private static final String NOT_ENOUGH_MONEY_MSG = "You have not enough funds to proceed operation!";
     private static final int NOT_EXISTS_COURSE_ID = -1;
 
 
     public boolean processPurchaseFromBalance(SessionRequestContent requestContent) throws ServiceException {
         PaymentRepository repository = new PaymentRepository();
+        CourseRepository courseRepository = new CourseRepository();
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
         Payment payment = new Payment();
         Account account = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
         int courseId = Integer.parseInt(reqParams.get(ATTR_COURSE_ID)[0]);
         try {
-            Course course = (new CourseRepository()).query(new SelectCourseByIdSpecification(courseId)).get(0);
-            if (account.getBalance().subtract(course.getPrice()).compareTo(BigDecimal.ZERO) < 0){
-                requestContent.getRequestAttributes().put(ATTR_PREVIOUS_OPERATION_MSG, NOT_ENOUGH_MONEY_MSG);
+            Course course = courseRepository.query(new SelectCourseByIdSpecification(courseId)).get(0);
+            boolean isCoursePurchasedAlready = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId())).contains(course);
+            boolean isEnoughFunds = account.getBalance().subtract(course.getPrice()).compareTo(BigDecimal.ZERO) >= 0;
+            if (!isEnoughFunds || isCoursePurchasedAlready) {
                 return false;
             }
             payment.setAccountId(account.getId());
@@ -69,14 +77,19 @@ public class PaymentService {
         return true;
     }
 
-    public void processPurchaseByCard(SessionRequestContent requestContent) throws ServiceException {
+    public boolean processPurchaseByCard(SessionRequestContent requestContent) throws ServiceException {
         PaymentRepository repository = new PaymentRepository();
+        CourseRepository courseRepository = new CourseRepository();
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
         Payment payment = new Payment();
         Account account = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
         int courseId = Integer.parseInt(reqParams.get(ATTR_COURSE_ID)[0]);
         try {
-            Course course = (new CourseRepository()).query(new SelectCourseByIdSpecification(courseId)).get(0);
+            Course course = courseRepository.query(new SelectCourseByIdSpecification(courseId)).get(0);
+            boolean isCoursePurchasedAlready = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId())).contains(course);
+            if (isCoursePurchasedAlready) {
+                return false;
+            }
             payment.setAccountId(account.getId());
             payment.setCourseId(courseId);
             payment.setPaymentCode(PaymentCode.BUY_COURSE_WITH_CARD.getCode());
@@ -92,6 +105,7 @@ public class PaymentService {
         } catch (RepositoryException | NullPointerException e) {
             throw new ServiceException(e);
         }
+        return true;
     }
 
 
@@ -115,6 +129,8 @@ public class PaymentService {
     }
 
     public void processDepositByCard(SessionRequestContent requestContent) throws ServiceException {
+        Locale locale = (new CourseService()).takeLocaleFromSession(requestContent);
+        String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_PAYMENT_SUCCEEDED);
         PaymentRepository repository = new PaymentRepository();
         Payment payment = initBasicPaymentParams(requestContent);
         payment.setCourseId(NOT_EXISTS_COURSE_ID);
@@ -124,12 +140,12 @@ public class PaymentService {
         try {
             repository.insert(payment);
         } catch (RepositoryException e) {
-            // FIXME: 7/16/2019
             throw new ServiceException(e);
         }
         Account currUser = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
         try {
             Account updatedUser = (new AccRepository()).query(new SelectAccByLoginSpecification(currUser.getLogin())).get(0);
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
             requestContent.getSessionAttributes().put(ATTR_USER, updatedUser);
         } catch (RepositoryException e) {
             // FIXME: 7/16/2019
@@ -137,15 +153,17 @@ public class PaymentService {
         }
     }
 
-    public boolean processCashOutFromBalance(SessionRequestContent requestContent) throws ServiceException {
+    public void processCashOutFromBalance(SessionRequestContent requestContent) throws ServiceException {
+        Locale locale = (new CourseService()).takeLocaleFromSession(requestContent);
         String cardEndNumbers = selectLastCardDigits(requestContent);
         Payment payment = initBasicPaymentParams(requestContent);
         payment.setAmount(payment.getAmount().negate());
         Account currAcc = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
         //not enough funds:
         if (currAcc.getBalance().add(payment.getAmount()).compareTo(BigDecimal.ZERO) < 0) {
-            requestContent.getRequestAttributes().put(ATTR_PREVIOUS_OPERATION_MSG, NOT_ENOUGH_MONEY_MSG);
-            return false;
+            String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_PAYMENT_DECLINED);
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
+            return;
         }
         payment.setCourseId(NOT_EXISTS_COURSE_ID);
         payment.setPaymentCode(PaymentCode.CASH_OUT_TO_CARD.getCode());
@@ -154,10 +172,11 @@ public class PaymentService {
         try {
             repository.insert(payment);
             (new AccountService()).refreshSessionAttributeUser(requestContent, currAcc);
+            String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_PAYMENT_SUCCEEDED);
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
-        return true;
     }
 
 

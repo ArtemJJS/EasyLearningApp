@@ -104,7 +104,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>UserDeposit</servlet-name>
-        <url-pattern>/user/deposit</url-pattern>
+        <url-pattern>/user/deposit-by-card</url-pattern>
     </servlet-mapping>
 
 
@@ -150,7 +150,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>CashOut</servlet-name>
-        <url-pattern>/author/cash-out</url-pattern>
+        <url-pattern>/author/cash-out-on-card</url-pattern>
     </servlet-mapping>
 
     <servlet>

@@ -116,7 +116,6 @@ public class AccountService {
 
     public boolean signUp(@NonNull SessionRequestContent requestContent) throws ServiceException {
         AccRepository repository = new AccRepository();
-        FormValidator validator = new FormValidator();
         String login = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
         try {
             if (repository.query(new SelectAccByLoginSpecification(login)).size() != 0) {

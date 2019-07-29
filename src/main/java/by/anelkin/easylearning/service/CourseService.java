@@ -51,6 +51,7 @@ public class CourseService {
     private static final String BUNDLE_COURSE_APPROVED = "msg.course_was_approved";
     private static final String BUNDLE_COURSE_FROZEN = "msg.course_was_declined";
     private static final String BUNDLE_COURSE_ALREADY_EXISTS = "msg.course_already_exists";
+    private static final String BUNDLE_COURSE_SENT_TO_REVIEW = "msg.course_sent_to_review";
     private static final String DEFAULT_IMG = "default_course_avatar.png";
     private static final String PATTERN_LESSON_TITLE = "lesson_title_";
     private static final String PATTERN_LESSON_CONTENT = "lesson_content_";
@@ -222,22 +223,21 @@ public class CourseService {
         }
     }
 
-    public boolean addCourseToReview(SessionRequestContent requestContent) throws ServiceException {
+    public void addCourseToReview(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = takeLocaleFromSession(requestContent);
-        String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_ALREADY_EXISTS);
         Map<String, String[]> params = requestContent.getRequestParameters();
         CourseRepository courseRepo = new CourseRepository();
         String courseName = params.get(ATTR_COURSE_NAME)[0];
-        // FIXME: 7/21/2019 при повторной отправке после форварда адрес
-        //  отличается(там адрес сервлета) и бьет ошибку
-        boolean isCourseNew = requestContent.getRequestReferer().endsWith("author/add-new-course");
+        String referer = requestContent.getRequestReferer();
+        boolean isCourseNew = referer.contains("author/add-new-course") || referer.contains("author/add-course");
         List<Course> courses;
         try {
             courses = courseRepo.query(new SelectCourseByNameSpecification(courseName));
             if (courses.size() > 0 && isCourseNew) {
                 // TODO: 7/18/2019 попробовать сохранить данные при наличии такого названия курса в базе? при форварде?
+                String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_ALREADY_EXISTS);
                 requestContent.getRequestAttributes().put(ATTR_COURSE_ALREADY_EXISTS, message);
-                return false;
+                return;
             }
             Course course;
             course = isCourseNew ? new Course() : courses.get(0);
@@ -260,10 +260,11 @@ public class CourseService {
 
             String[] chapterNames = insertChaptersIfNotExists(courseId, params);
             insertLessons(courseId, params, chapterNames);
+            String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_SENT_TO_REVIEW);
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
-        return true;
     }
 
     private String[] insertChaptersIfNotExists(int courseId, Map<String, String[]> params) throws RepositoryException {
@@ -327,6 +328,7 @@ public class CourseService {
         return courseContent;
     }
 
+    // FIXME: 7/29/2019 общий для нескольких репозиториев, куда вынести его? сделать общий интерфейс и туда???
     public Locale takeLocaleFromSession(SessionRequestContent requestContent) {
         Locale locale;
         String[] localeParts = requestContent.getSessionAttributes().get(ATTR_LOCALE).toString().split(LOCALE_SPLITTER);

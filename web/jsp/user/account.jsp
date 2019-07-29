@@ -33,12 +33,12 @@
             <c:choose>
                 <c:when test="${curr_role.toString() == 'USER'}">
                     <div class="link"><a href="${pageContext.request.contextPath}/user/purchased-courses"><fmt:message key='acc.purchased_courses' bundle='${rb}'/></a></div>
-                    <div class="link"><a href="${pageContext.request.contextPath}/user/deposit"><fmt:message key='acc.deposit' bundle='${rb}'/></a></div>
+                    <div class="link"><a href="${pageContext.request.contextPath}/user/deposit-by-card"><fmt:message key='acc.deposit' bundle='${rb}'/></a></div>
                 </c:when>
                 <c:when test="${curr_role.toString() == 'AUTHOR'}">
                     <div class="link"><a href="${pageContext.request.contextPath}/author/add-new-course"><fmt:message key='acc.add_new_course' bundle='${rb}'/></a></div>
                     <div class="link"><a href="${pageContext.request.contextPath}/author/my-courses"><fmt:message key='acc.my_courses' bundle='${rb}'/></a></div>
-                    <div class="link"><a href="${pageContext.request.contextPath}/author/cash-out"><fmt:message key='acc.cashout' bundle='${rb}'/></a></div>
+                    <div class="link"><a href="${pageContext.request.contextPath}/author/cash-out-on-card"><fmt:message key='acc.cashout' bundle='${rb}'/></a></div>
                 </c:when>
                 <c:when test="${curr_role.toString() == 'ADMIN'}">
                     <div class="link"><a href="${pageContext.request.contextPath}/admin/course-approve"><fmt:message key='acc.courses_on_review' bundle='${rb}'/></a></div>

@@ -30,7 +30,7 @@
         <img class="course_img" src="${pageContext.request.contextPath}/img/${course.pathToPicture}" alt='<fmt:message key='global.course_image' bundle='${rb}'/>'>
     </div>
     <c:if test="${pageContext.request.getParameter('result') != null}">
-        <div class="previous_operation_message"><fmt:message key='cbuy.insufficient_funds_payment_declined' bundle='${rb}'/></div>
+        <div class="previous_operation_message"><fmt:message key='msg.problems_purchasing_course' bundle='${rb}'/></div>
     </c:if>
     <div class="buy_block">
         <div class="pay-card">

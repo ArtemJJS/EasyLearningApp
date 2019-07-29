@@ -20,7 +20,8 @@
 <%@include file="/jsp/header.jsp" %>
 <main>
     <div class="page_title"><fmt:message key='course.create_new_course' bundle='${rb}'/>:</div>
-    <form class="main_form" method="post" action="${pageContext.request.contextPath}/basic_servlet">
+    <div class="message">${pageContext.request.getAttribute("message")}</div>
+    <form class="main_form" method="post" action="${pageContext.request.contextPath}/author/add-course">
         <div class="param">
             <label for="course_title_field"><fmt:message key='course.course_title' bundle='${rb}'/>:</label>
             <div class="input_and_pattern">

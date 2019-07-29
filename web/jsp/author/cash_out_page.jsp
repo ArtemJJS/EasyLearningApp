@@ -20,15 +20,14 @@
 <%@include file="/jsp/header.jsp" %>
 <main>
     <div class="page_title"><fmt:message key='payment.cash_out_to_card' bundle='${rb}'/></div>
+    <div class="message">${pageContext.request.getAttribute("message")}</div>
     <div class="curr_balance"><span><fmt:message key='payment.current_balance' bundle='${rb}'/>:</span><span
             class="balance_value">${sessionScope.user.balance}$</span></div>
-    <div class="privious_operation_message">${requestScope.previous_operation_message}</div>
-    <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
+    <form method="post" action="${pageContext.request.contextPath}/author/cash-out">
         <div class="param0 param">
             <label for="currency"><fmt:message key='global.currency' bundle='${rb}'/>: </label>
             <select id="currency" name="currency" required>
                 <option>USD</option>
-                <option>FIX ME</option>
             </select>
         </div>
         <div class="param1">
@@ -52,6 +51,7 @@
             <input class="submit_btn" type="submit" value='<fmt:message key='btn.process' bundle='${rb}'/>'>
         </div>
     </form>
+    <a class="back_to_acc" href="${pageContext.request.contextPath}/account"><fmt:message key="btn.back_to_account" bundle="${rb}"/></a>
 </main>
 </body>
 </html>

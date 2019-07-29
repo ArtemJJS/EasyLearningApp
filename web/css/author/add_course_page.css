@@ -115,7 +115,7 @@ input, textarea{
 }
 
 form .submit_btn{
-    width: 200px;
+    width: 240px;
     margin-top: 40px;
     align-self: center;
     height: 35px;
@@ -134,4 +134,9 @@ form .submit_btn{
 .previous_operation_msg{
     color: red;
     font-size: 0.9rem;
+}
+
+.message{
+    color: darkgreen;
+    margin-bottom: 25px;
 }
