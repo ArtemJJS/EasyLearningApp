@@ -1,6 +1,5 @@
 package by.anelkin.easylearning;
 
-//import by.anelkin.easylearning.connection.PoolInitializer;
 
 import by.anelkin.easylearning.exception.RepositoryException;
 import lombok.extern.log4j.Log4j;

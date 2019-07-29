@@ -40,6 +40,9 @@ public class AccountService {
     private static final String PROP_FILE_FOLDER = "file_folder";
     private static final String RESOURCE_BUNDLE_BASE = "text_resources";
     private static final String FILE_STORAGE_BUNDLE_BASE = "file_storage";
+    private static final String BUNDLE_INCORRECT_DATA = "msg.incorrect_data";
+    private static final String BUNDLE_INCORRECT_AGE = "msg.incorrect_date_of_birth";
+    private static final String BUNDLE_CHANGE_AVATAR_REQUEST = "msg.change_avatar_request_was_sent";
 
     private static final String URI_SPACE_REPRESENT = "%20";
     private static final String PATH_SPLITTER = "/";
@@ -114,7 +117,10 @@ public class AccountService {
         return true;
     }
 
+    // FIXME: 7/29/2019 может как-то получше переписать?
     public boolean signUp(@NonNull SessionRequestContent requestContent) throws ServiceException {
+        Locale locale = (new CourseService()).takeLocaleFromSession(requestContent);
+        FormValidator validator = new FormValidator();
         AccRepository repository = new AccRepository();
         String login = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
         try {
@@ -126,9 +132,14 @@ public class AccountService {
             initAccount(account, requestContent.getRequestParameters());
             String pass = requestContent.getRequestParameters().get(REQUEST_PARAM_PWD)[0];
             String birthdate = requestContent.getRequestParameters().get("birthdate")[0];
+            if (!validator.validateBirthDate(birthdate)) {
+                String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_INCORRECT_AGE);
+                requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
+                return false;
+            }
             if (!validateAccFields(account, pass, birthdate)) {
-                // TODO: 7/26/2019 сообщение на страницу
-                requestContent.getRequestAttributes().put(ATTR_WRONG_LOGIN_MSG, "true");
+                String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_INCORRECT_DATA);
+                requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
                 return false;
             }
             repository.insert(account);
@@ -147,14 +158,15 @@ public class AccountService {
 
 
     public void changeAccountPassword(SessionRequestContent requestContent) throws ServiceException {
+        FormValidator validator = new FormValidator();
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
         HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
         AccRepository repository = new AccRepository();
         String currPassword = reqParams.get(REQUEST_PARAM_PWD)[0];
         String updatedPassword = reqParams.get(REQUEST_PARAM_UPDATED_PWD)[0];
         String repeatedPassword = reqParams.get(REQUEST_PARAM_REPEATED_PWD)[0];
+        boolean isUpdatedPwdCorrect = validator.validatePassword(updatedPassword);
         Account clone;
-
         String hashedPass;
         try {
             clone = ((Account) requestContent.getSessionAttributes().get(SESSION_ATTR_USER)).clone();
@@ -162,7 +174,8 @@ public class AccountService {
             String saltedPass = currPassword + clone.getPassSalt();
             hashedPass = new String(messageDigest.digest(saltedPass.getBytes()));
 
-            if (clone.getPassword().equals(hashedPass) && updatedPassword.equals(repeatedPassword)) {
+            if (clone.getPassword().equals(hashedPass) && updatedPassword.equals(repeatedPassword)
+                    && isUpdatedPwdCorrect) {
                 clone.setPassSalt(generateSaltForPassword());
                 String updatedSaltedPass = updatedPassword + clone.getPassSalt();
                 String updatedHashedPass = new String(messageDigest.digest(updatedSaltedPass.getBytes()));
@@ -200,6 +213,9 @@ public class AccountService {
         AccRepository repository = new AccRepository();
         try {
             repository.update(account);
+            Locale locale = (new CourseService()).takeLocaleFromSession(requestContent);
+            String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_CHANGE_AVATAR_REQUEST);
+            requestContent.getRequestAttributes().put(PREVIOUS_OPERATION_MSG, message);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
@@ -215,14 +231,14 @@ public class AccountService {
             String fileName = currAccount.getUpdatePhotoPath();
 
             try {
-                File file = new File(fileStorage+ currAccount.getUpdatePhotoPath());
-                String previousAvatarPath = fileStorage+ currAccount.getPathToPhoto();
+                File file = new File(fileStorage + currAccount.getUpdatePhotoPath());
+                String previousAvatarPath = fileStorage + currAccount.getPathToPhoto();
                 if (!previousAvatarPath.contains("default_acc_avatar")) {
-                    Files.deleteIfExists(Paths.get(fileStorage+ currAccount.getPathToPhoto()));
+                    Files.deleteIfExists(Paths.get(fileStorage + currAccount.getPathToPhoto()));
                 }
-                file.renameTo(new File(fileStorage+ "resources/account_avatar"
+                file.renameTo(new File(fileStorage + "resources/account_avatar"
                         + currAccount.getUpdatePhotoPath().substring(currAccount.getUpdatePhotoPath().lastIndexOf("/"))));
-                Files.deleteIfExists(Paths.get(fileStorage+ currAccount.getUpdatePhotoPath()));
+                Files.deleteIfExists(Paths.get(fileStorage + currAccount.getUpdatePhotoPath()));
             } catch (IOException e) {
                 throw new ServiceException(e);
             }
@@ -256,23 +272,31 @@ public class AccountService {
     }
 
 
-    public void editAccountInfo(SessionRequestContent requestContent) throws ServiceException {
+    public boolean editAccountInfo(SessionRequestContent requestContent) throws ServiceException {
+        FormValidator val = new FormValidator();
+        Map<String, String[]> requestParams = requestContent.getRequestParameters();
         AccRepository repository = new AccRepository();
         Account clone;
         try {
             clone = ((Account) requestContent.getSessionAttributes().get(SESSION_ATTR_USER)).clone();
-            Map<String, String[]> requestParams = requestContent.getRequestParameters();
             clone.setLogin(requestParams.get("login")[0]);
             clone.setName(requestParams.get("name")[0]);
             clone.setSurname(requestParams.get("surname")[0]);
             clone.setEmail(requestParams.get("email")[0]);
             clone.setPhoneNumber(requestParams.get("phonenumber")[0]);
             clone.setAbout(requestParams.get("about")[0]);
-            repository.update(clone);
-            requestContent.getSessionAttributes().put(SESSION_ATTR_USER, clone);
-        } catch (CloneNotSupportedException | RepositoryException e) {
+            if (val.validateLogin(clone.getLogin()) && val.validateName(clone.getName()) && val.validateSurName(clone.getSurname())
+                    && val.validateEmail(clone.getEmail()) && val.validateAccAboutLength(clone.getAbout())
+                    && val.validatePhone(clone.getPhoneNumber())) {
+                clone.setAbout(escapeQuotes(clone.getAbout()));
+                repository.update(clone);
+                requestContent.getSessionAttributes().put(SESSION_ATTR_USER, clone);
+                return true;
+            }
+        } catch (CloneNotSupportedException | RepositoryException | NullPointerException e) {
             throw new ServiceException(e);
         }
+        return false;
     }
 
     void refreshSessionAttributeUser(SessionRequestContent requestContent, Account account) throws ServiceException {
@@ -403,14 +427,14 @@ public class AccountService {
         }
         boolean isAboutCorrect = acc.getAbout() == null || val.validateAccAboutLength(acc.getAbout());
         if (isAboutCorrect) {
-            acc.setAbout(esqapeQuotes(acc.getAbout()));
+            acc.setAbout(escapeQuotes(acc.getAbout()));
         }
         boolean isPhoneCorrect = acc.getPhoneNumber() == null || val.validatePhone(acc.getPhoneNumber());
         return isAboutCorrect && isPhoneCorrect;
     }
 
     // TODO: 7/27/2019 общий метод, может в utils вынести в отдельный пакет?
-    public String esqapeQuotes(String text) {
+    String escapeQuotes(String text) {
         String correctText = null;
         if (text != null) {
             correctText = text.replace("<", "&lt;");

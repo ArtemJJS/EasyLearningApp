@@ -10,7 +10,7 @@ public class SelectCourseSearchSpecification implements AppSpecification<Course>
     private int offset;
     private static final String SQL_PATTERN_SPECIFICATOR = "%";
     @Language("sql")
-    private static final String QUERY = "SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER(?) " +
+    private static final String QUERY = "SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER(?)  and state in (2) " +
             "LIMIT ? OFFSET ?";
 
     public SelectCourseSearchSpecification(String keyPhrase, int limit, int offset) {

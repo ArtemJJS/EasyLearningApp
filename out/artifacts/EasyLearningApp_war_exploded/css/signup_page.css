@@ -35,6 +35,11 @@ main {
     display: flex;
     flex-direction: column;
 }
+.message{
+    color: red;
+    margin-bottom: 25px;
+    margin-top: 20px;
+}
 
 form {
     display: flex;

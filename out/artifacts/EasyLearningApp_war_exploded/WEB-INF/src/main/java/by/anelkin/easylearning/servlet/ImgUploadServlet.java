@@ -6,6 +6,7 @@ import by.anelkin.easylearning.command.CommandFactory;
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.exception.ServiceException;
+import by.anelkin.easylearning.filter.JspAccessFilter;
 import by.anelkin.easylearning.receiver.RequestReceiver;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.AccRepository;
@@ -39,7 +40,7 @@ import static by.anelkin.easylearning.command.CommandFactory.CommandType.*;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.FORWARD;
 
 @Log4j
-@WebServlet(urlPatterns = "/upload_img_servlet")
+@WebServlet(urlPatterns = "/account/change-image")
 @MultipartConfig
 public class ImgUploadServlet extends HttpServlet {
     private static final String ATTR_USER = "user";
@@ -94,7 +95,6 @@ public class ImgUploadServlet extends HttpServlet {
         String extension = fileName.substring((fileName.lastIndexOf(".")));
 
         InputStream in = filePart.getInputStream();
-        System.out.println(in.available());
         File file = new File(currentFolderPath + tempFileName + extension);
         Files.copy(in, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
@@ -112,9 +112,13 @@ public class ImgUploadServlet extends HttpServlet {
         requestContent.insertAttributes(req);
         String path = requestContent.getPath();
         if (responseType == FORWARD) {
+            log.debug("Sending forward: " + path);
+            req.setAttribute(JspAccessFilter.ATTR_JSP_PERMITTED, true);
             req.getRequestDispatcher(path).forward(req, resp);
         } else {
-            resp.sendRedirect(path);
+            String url = req.getContextPath() + path;
+            log.debug("Sending redirect: " + url);
+            resp.sendRedirect(url);
         }
     }
 }

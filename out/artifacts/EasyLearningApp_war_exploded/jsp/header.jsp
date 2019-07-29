@@ -24,7 +24,6 @@
             <a href="${pageContext.request.contextPath}/easyLearning"><img
                     src="${pageContext.request.contextPath}/resources/logo.jpg" alt="logo"></a>
         </div>
-        <%--        <div class="panel">--%>
         <div class="choose_lang">
             <a href="${pageContext.request.contextPath}/change-lang?command_name=change_lang&locale=en_US"><fmt:message
                     key="header.lang_eng" bundle="${rb}"/></a>
@@ -40,8 +39,6 @@
             <input class="header_search_btn" type="submit"
                    value='<fmt:message key="header.Search" bundle="${rb}"/>'>
         </form>
-        <%--        </div>--%>
-<%--        <div class="user">--%>
             <c:choose>
                 <c:when test="${sessionScope.user == null}">
                     <div class="header_links">
@@ -54,7 +51,6 @@
                 <c:otherwise>
                     <div class="header_logged_user_info">
                         <img src="${pageContext.request.contextPath}/img/${sessionScope.user.pathToPhoto}" alt="avatar"/>
-<%--                        <img src="${pageContext.request.contextPath}/${sessionScope.user.pathToPhoto}" alt="avatar"/>--%>
                         <div class="user_login"><a
                                 href="${pageContext.request.contextPath}/account">${sessionScope.user.login}</a></div>
                         <form id="header_logout_form" method="post" action="${pageContext.request.contextPath}/basic_servlet">
@@ -64,7 +60,6 @@
                     </div>
                 </c:otherwise>
             </c:choose>
-<%--        </div>--%>
     </div>
 </header>
 </body>

@@ -3,12 +3,11 @@ package by.anelkin.easylearning.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.File;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-@EqualsAndHashCode(callSuper = false, exclude = {"pathToPicture", "avgMark"})
+@EqualsAndHashCode(callSuper = false, exclude = {"pathToPicture", "avgMark", "state", "updatePhotoPath"})
 public class Course extends AppEntity {
     private int id;
     private int authorId;
@@ -21,7 +20,7 @@ public class Course extends AppEntity {
     private double avgMark;
     private int lessonAmount;
     private long duration;
-    private CourseState state; // 1 - approved, 0 - not approved, -1 - freeze
+    private CourseState state;
 
     public enum CourseState{
         FREEZING,

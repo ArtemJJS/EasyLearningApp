@@ -10,7 +10,7 @@ import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseTyp
 public class ChangeLangCommand implements Command {
     private static final String ATTR_LOCALE = "locale";
     private static final String[] patternsWithIncorrectRedirect = new String[]{"/admin/", "/user/deposit",
-            "/author/cash-out", "/author/add-course"};
+            "/author/cash-out", "/author/add-course", "/account/change-pass", "/account/change-image"};
     private static final String REDIRECT_TO_ACCOUNT = "/account";
 
     @Override

@@ -22,10 +22,13 @@
     <div class="page_content_wrapper">
         <div class="page_title target_is_acc"><fmt:message key='change.change_account_avatar' bundle='${rb}'/>:</div>
         <div class="page_title target_is_course"><fmt:message key='change.change_course_image' bundle='${rb}'/>:</div>
+        <c:if test="${pageContext.request.getParameter('operation-result').equals('true')}">
+            <div class="change_successful"><fmt:message key="msg.change_img_request_was_sent" bundle="${rb}"/></div>
+        </c:if>
         <div id="result_message"
              class="previous_operation_msg">${pageContext.request.getAttribute("previous_operation_message")}</div>
         <form method="post" enctype="multipart/form-data"
-              action="${pageContext.request.contextPath}/upload_img_servlet">
+              action="${pageContext.request.contextPath}/account/change-image">
             <div class="param">
                 <label for="img_upload"><fmt:message key='change.upload_new_image' bundle='${rb}'/>: </label>
                 <input type="file" id="img_upload" name="img_to_upload" placeholder='<fmt:message key='change.choose_file' bundle='${rb}'/>'>

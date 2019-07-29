@@ -28,6 +28,7 @@
 </header>
 <main>
     <div class="header1"><fmt:message key='registr.Registration_form' bundle='${rb}'/></div>
+    <div class="message">${pageContext.request.getAttribute("message")}</div>
     <form id="reg_form" method="post" action="${pageContext.request.contextPath}/basic_servlet">
         <div class="param0">
             <label for="role-field"><fmt:message key='registr.role' bundle='${rb}'/></label>
@@ -77,14 +78,14 @@
         <div class="param7 ">
             <label for="phonenumber-field"><fmt:message key='registr.phone' bundle='${rb}'/></label>
             <input type="text" id="phonenumber-field" name="phonenumber" placeholder="+1234567890"
-                   pattern="+[0-9]{2,19}">
+                   pattern="\+[0-9]{2,19}">
             <p class="field_desc"><fmt:message key='registr.phone_pattern' bundle='${rb}'/></p>
         </div>
         <div class="param8">
             <p><fmt:message key='registr.about' bundle='${rb}'/></p>
             <textarea id="about-field" name="about"
                       placeholder='<fmt:message key='global.about_placeholder' bundle='${rb}'/>' cols="25" rows="5"
-                      maxlength="250"></textarea>
+                      maxlength="500"></textarea>
         </div>
         <div>
             <input type="hidden" name="command_name" value="sign_up_new_user">

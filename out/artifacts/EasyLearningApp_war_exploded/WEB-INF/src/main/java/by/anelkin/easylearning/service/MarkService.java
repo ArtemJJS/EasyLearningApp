@@ -80,7 +80,7 @@ public class MarkService {
             } else {
                 correctComment = comment;
             }
-            mark.setComment((new AccountService().esqapeQuotes(correctComment)));
+            mark.setComment((new AccountService().escapeQuotes(correctComment)));
         }
         mark.setMarkDate(System.currentTimeMillis());
         mark.setMarkValue(Integer.parseInt(reqParams.get(ATTR_MARK_VALUE)[0]));

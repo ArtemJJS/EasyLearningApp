@@ -26,7 +26,6 @@
             <label for="currency"><fmt:message key='global.currency' bundle='${rb}'/>: </label>
             <select id="currency" name="currency" required>
                 <option>USD</option>
-                <option>ANOTHER</option>
             </select>
         </div>
         <div class="param1">

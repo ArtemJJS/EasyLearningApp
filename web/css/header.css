@@ -19,7 +19,7 @@ header {
 }
 
 .header-content {
-    padding: 0 20px;
+    padding-right: 20px;
     width: 1300px;
     margin: 0 auto;
     display: flex;
@@ -36,6 +36,7 @@ header {
 }
 
 .logo img {
+    margin: 0;
     width: 200px;
     height: 58px;
 }
@@ -63,13 +64,6 @@ header {
     margin-right: 25px;
 }
 
-/*.user{*/
-/*    width:20%;*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: flex-end;*/
-/*}*/
-
 .header_logged_user_info {
     display: flex;
     align-items: center;
@@ -96,6 +90,7 @@ header {
 header .header_logged_user_info .header_logout_btn {
     width: 105px;
     font-size: 0.88rem;
+    height: 26px;
 }
 
 .header_logged_user_info form input {
@@ -133,7 +128,6 @@ header .header_logged_user_info .header_logout_btn {
 .header_search_btn {
     margin: 0;
     width: 90px;
-    /*align-self: normal;*/
     height: 30px;
     font-size: 20px;
 }

@@ -28,13 +28,10 @@ public class SessionRequestContent {
     }
 
     public void extractValues(@NonNull HttpServletRequest request) {
-        System.out.println(request.getRequestURI());
         String referer = request.getHeader("referer");
         referer = referer.substring(referer.indexOf(request.getContextPath()));
         referer = referer.replace("/easyLearning", "");
         requestReferer = referer;
-
-        System.out.println(requestReferer);
 
         requestParameters = request.getParameterMap();
 

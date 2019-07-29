@@ -22,7 +22,7 @@
     <div class="page_content_wrapper">
         <div class="page_title"><fmt:message key='change.change_account_password' bundle='${rb}'/>:</div>
         <div id="result_message" class="previous_operation_msg">${pageContext.request.getAttribute("previous_operation_message")}</div>
-        <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
+        <form method="post" action="${pageContext.request.contextPath}/account/change-pass">
             <div class="param">
                 <label for="password-field"><fmt:message key='change.enter_previous_password' bundle='${rb}'/>: </label>
                 <input type="password" id="password-field" name="password" placeholder='<fmt:message key='global.password' bundle='${rb}'/>' required pattern=".{5,50}">
