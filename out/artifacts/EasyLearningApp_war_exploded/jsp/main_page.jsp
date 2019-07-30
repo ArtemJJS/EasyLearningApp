@@ -37,14 +37,14 @@
                 <c:forEach var="course" items="${courses_available}">
                     <div class="about_course">
                         <div class="block1">
-                            <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
+                            <a class="image_link" href="${pageContext.request.contextPath}/course?course-id=${course.id}">
                                 <img class="course_avatar"
                                      src="${pageContext.request.contextPath}/img${course.pathToPicture}"
                                      alt='<fmt:message key='global.course_image' bundle='${rb}'/>'/>
                             </a>
                         </div>
                         <div class="block2">
-                            <div>
+                            <div class="name_and_desc">
                                 <div class="course_name">
                                     <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
                                             ${course.name}

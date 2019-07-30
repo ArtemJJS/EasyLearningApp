@@ -38,7 +38,7 @@
                             </a>
                         </div>
                         <div class="block2">
-                            <div>
+                            <div class="name_and_desk">
                                 <div class="course_name">
                                     <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">
                                             ${course.name}

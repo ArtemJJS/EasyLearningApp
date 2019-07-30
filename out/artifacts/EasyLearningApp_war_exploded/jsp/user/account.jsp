@@ -80,7 +80,7 @@
                 <label for="login-field"><fmt:message key='global.login' bundle='${rb}'/>: </label>
                 <div class="input_and_pattern">
                     <input value="${user.login}" type="text" id="login-field" name="login" required
-                           pattern="[A-z0-9_ -]{3,30}">
+                           pattern="[A-Za-zА-я0-9_ -]{3,30}">
                     <p class="field_desc"><fmt:message key='registr.login_pattern' bundle='${rb}'/></p>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                 <label for="name-field"><fmt:message key='global.name' bundle='${rb}'/>: </label>
                 <div class="input_and_pattern">
                     <input type="text" id="name-field" name="name" value="${user.name}" required
-                           pattern="[A-z]{2,45}">
+                           pattern="[A-Za-zА-я]{2,30}">
                     <p class="field_desc"><fmt:message key='registr.name_pattern' bundle='${rb}'/></p>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                 <label for="surname-field"><fmt:message key='global.surname' bundle='${rb}'/>: </label>
                 <div class="input_and_pattern">
                     <input type="text" id="surname-field" name="surname" value="${user.surname}" required
-                           pattern="[A-z]{2,45}">
+                           pattern="[A-Za-zА-я]{2,30}">
                     <p class="field_desc"><fmt:message key='registr.surname_pattern' bundle='${rb}'/></p>
                 </div>
             </div>

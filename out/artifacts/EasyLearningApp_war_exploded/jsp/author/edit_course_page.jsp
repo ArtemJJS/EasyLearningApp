@@ -42,7 +42,7 @@
         <div class="param">
             <label for="course_desc"><fmt:message key='course.course_description' bundle='${rb}'/>:</label>
             <textarea id="course_desc" name="course_description" cols="25"
-                      rows="7">${course.description}</textarea>
+                      rows="7" maxlength="1000">${course.description}</textarea>
         </div>
 
         <jsp:useBean id="i" class="by.anelkin.easylearning.entity.JspIntWrapper"/>

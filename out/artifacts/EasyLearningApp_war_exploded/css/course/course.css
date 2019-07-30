@@ -26,7 +26,7 @@ main {
 .section_1 {
     padding: 10px;
     width: 90%;
-    height: 300px;
+    min-height: 300px;
     background-color: rgb(184, 185, 187);
     border: 1px solid grey;
 
@@ -38,21 +38,21 @@ main {
     width: 70%;
     min-height: 90%;
 
-
     display: flex;
     flex-direction: column;
 }
 
 .course_name {
-    font-size: 2rem;
+    font-size: 1.9rem;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-weight: bold;
 }
 
 .course_description {
     margin-bottom: 10px;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
+    word-wrap: break-word;
 }
 
 .course_rating {
@@ -70,8 +70,10 @@ main {
 }
 
 .course_avatar {
+    margin-top: 10px;
     width: 80%;
-    height: 75%;
+    min-height: 200px;
+    max-height: 280px;
 }
 
 .price {
@@ -131,22 +133,42 @@ main {
 }
 
 .author_image_and_stats {
-    width: 27%;
+    width: 25%;
 
     display: flex;
     flex-direction: column;
 }
 
+.author_rating, .author_students{
+    font-size: 0.9rem;
+}
+
+.author_about{
+    width: 75%;
+}
+
 .author_avatar {
     width: 90%;
     max-height: 200px;
+    min-height: 140px;
 }
+
+
+.author_login{
+    font-weight: bold;
+}
+
+
 
 .author_rating {
     margin-top: 10px;
 }
 
-
+.author_description{
+    margin: 12px 0;
+    word-wrap: break-word;
+    font-size: 0.9rem;
+}
 /*==============================*/
 
 
