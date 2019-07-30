@@ -14,6 +14,7 @@ import by.anelkin.easylearning.specification.account.SelectAuthorOfCourseSpecifi
 import by.anelkin.easylearning.specification.course.SelectCourseByIdSpecification;
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
 import by.anelkin.easylearning.specification.payment.SelectPaymentByAccountIdSpecification;
+import by.anelkin.easylearning.validator.FormValidator;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -27,6 +28,7 @@ public class PaymentService {
     private static final String ATTR_MESSAGE = "message";
     private static final String BUNDLE_PAYMENT_SUCCEEDED = "msg.payment_approved";
     private static final String BUNDLE_PAYMENT_DECLINED = "msg.payment_declined";
+    private static final String BUNDLE_WRONG_DEPOSIT_DATA = "msg.wrong_deposit_data";
     private static final String BUNDLE_PROBLEMS_PURCHASING_COURSE = "msg.problems_purchasing_course";
     private static final String RESOURCE_BUNDLE_BASE = "text_resources";
     private static final String ATTR_COURSE_ID = "course_id";
@@ -78,6 +80,7 @@ public class PaymentService {
     }
 
     public boolean processPurchaseByCard(SessionRequestContent requestContent) throws ServiceException {
+        FormValidator validator = new FormValidator();
         PaymentRepository repository = new PaymentRepository();
         CourseRepository courseRepository = new CourseRepository();
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
@@ -87,7 +90,9 @@ public class PaymentService {
         try {
             Course course = courseRepository.query(new SelectCourseByIdSpecification(courseId)).get(0);
             boolean isCoursePurchasedAlready = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId())).contains(course);
-            if (isCoursePurchasedAlready) {
+            String cardNumber = requestContent.getRequestParameters().get(ATTR_CARD)[0];
+            boolean isCardNumberCorrect = validator.validateCard(cardNumber);
+            if (isCoursePurchasedAlready || !isCardNumberCorrect) {
                 return false;
             }
             payment.setAccountId(account.getId());
@@ -130,21 +135,25 @@ public class PaymentService {
 
     public void processDepositByCard(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = (new CourseService()).takeLocaleFromSession(requestContent);
-        String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_PAYMENT_SUCCEEDED);
+        FormValidator validator = new FormValidator();
         PaymentRepository repository = new PaymentRepository();
         Payment payment = initBasicPaymentParams(requestContent);
+        String cardNumber = requestContent.getRequestParameters().get(ATTR_CARD)[0];
+        if (!validator.validatePayment(payment.getAmount().toString()) ||
+                !validator.validateCard(cardNumber)) {
+            String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_WRONG_DEPOSIT_DATA);
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
+            return;
+        }
         payment.setCourseId(NOT_EXISTS_COURSE_ID);
         payment.setPaymentCode(PaymentCode.DEPOSIT_FROM_CARD.getCode());
         String cardEndNumbers = selectLastCardDigits(requestContent);
         payment.setDescription(DESCRIPTION_DEPOSIT_BY_CARD + cardEndNumbers);
         try {
             repository.insert(payment);
-        } catch (RepositoryException e) {
-            throw new ServiceException(e);
-        }
-        Account currUser = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
-        try {
+            Account currUser = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
             Account updatedUser = (new AccRepository()).query(new SelectAccByLoginSpecification(currUser.getLogin())).get(0);
+            String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_PAYMENT_SUCCEEDED);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
             requestContent.getSessionAttributes().put(ATTR_USER, updatedUser);
         } catch (RepositoryException e) {
@@ -154,13 +163,17 @@ public class PaymentService {
     }
 
     public void processCashOutFromBalance(SessionRequestContent requestContent) throws ServiceException {
+        FormValidator validator = new FormValidator();
         Locale locale = (new CourseService()).takeLocaleFromSession(requestContent);
         String cardEndNumbers = selectLastCardDigits(requestContent);
         Payment payment = initBasicPaymentParams(requestContent);
         payment.setAmount(payment.getAmount().negate());
         Account currAcc = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
-        //not enough funds:
-        if (currAcc.getBalance().add(payment.getAmount()).compareTo(BigDecimal.ZERO) < 0) {
+        boolean isEnoughFunds = currAcc.getBalance().add(payment.getAmount()).compareTo(BigDecimal.ZERO) >= 0;
+        boolean isCorrectAmount = validator.validatePayment(payment.getAmount().negate().toString());
+        String cardNumber = requestContent.getRequestParameters().get(ATTR_CARD)[0];
+        boolean isCorrectCard = validator.validateCard(cardNumber);
+        if (!isEnoughFunds || !isCorrectAmount || !isCorrectCard) {
             String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_PAYMENT_DECLINED);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
             return;

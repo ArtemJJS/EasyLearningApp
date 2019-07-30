@@ -13,6 +13,8 @@ public class FormValidator {
     private static final String SURNAME_PATTERN = "^[A-Za-zА-я]{2,30}$";
     private static final String EMAIL_PATTERN = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
     private static final String PHONE_PATTERN = "^\\+[0-9]{2,19}$";
+    private static final String PAYMENT_PATTERN = "[0-9]{1,8}(\\.[0-9]{1,2})?";
+    private static final String CARD_PATTERN = "[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}";
     private static final int ACC_ABOUT_MAX_LENGTH = 500;
     public static final int COURSE_MARK_COMMENT_MAX_LENGTH = 700;
 
@@ -57,5 +59,15 @@ public class FormValidator {
     public boolean validateCourseMarkCommentLength(String test) {
         return test.length() <= COURSE_MARK_COMMENT_MAX_LENGTH;
     }
+
+    public boolean validatePayment(String test) {
+        return test.matches(PAYMENT_PATTERN);
+    }
+
+    public boolean validateCard(String test) {
+        return test.matches(CARD_PATTERN);
+    }
+
+
 
 }
