@@ -25,7 +25,8 @@ import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseTyp
 
 @Log4j
 @WebServlet(name = "BasicServlet", urlPatterns = {"/basic_servlet", "/search", "/change-lang"
-        , "/admin/*", "/user/deposit", "/author/cash-out", "/author/add-course", "/account/change-pass"})
+        , "/admin/*", "/user/deposit", "/author/cash-out", "/author/add-course", "/account/change-pass", "/restore-password"
+         , "/change-forgotten-password"})
 public class BasicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);

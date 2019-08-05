@@ -1,15 +1,17 @@
 package by.anelkin.easylearning.service;
 
-import by.anelkin.easylearning.Main;
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.entity.Course;
 import by.anelkin.easylearning.entity.Mark;
+import by.anelkin.easylearning.entity.RestorePassRequest;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.repository.CourseRepository;
 import by.anelkin.easylearning.repository.MarkRepository;
+import by.anelkin.easylearning.repository.RestorePassRequestRepository;
+import by.anelkin.easylearning.specification.account.SelectAccByChangePassUuidSpecification;
 import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
 import by.anelkin.easylearning.specification.account.SelectAccToPhotoApproveSpecification;
 import by.anelkin.easylearning.specification.account.SelectAuthorOfCourseSpecification;
@@ -21,6 +23,12 @@ import by.anelkin.easylearning.validator.FormValidator;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -47,11 +55,11 @@ public class AccountService {
 
     private static final String URI_SPACE_REPRESENT = "%20";
     private static final String PATH_SPLITTER = "/";
-    private static final String SESSION_ATTR_USER = "user";
-    private static final String SESSION_ATTR_ROLE = "role";
+    private static final String ATTR_USER = "user";
+    private static final String ATTR_ROLE = "role";
     private static final String REQUEST_PARAM_PWD = "password";
-    private static final String REQUEST_PARAM_UPDATED_PWD = "updated_password";
-    private static final String REQUEST_PARAM_REPEATED_PWD = "repeated_password";
+    private static final String ATTR_UPDATED_PWD = "updated_password";
+    private static final String ATTR_REPEATED_PWD = "repeated_password";
     private static final String PREVIOUS_OPERATION_MSG = "previous_operation_message";
     private static final String PWD_CHANGED_SUCCESSFULLY_MSG = "You password has been successfully changed!!!";
     private static final String PWD_NOT_CHANGED_MSG = "You password wasn't changed! Check inserted data!";
@@ -67,12 +75,70 @@ public class AccountService {
     private static final String ATTR_ACCS_TO_AVATAR_APPROVE = "acc_avatar_approve_list";
     private static final String ATTR_IS_AUTHOR_MARKED_ALREADY = "is_author_marked_already";
     private static final String ATTR_MESSAGE = "message";
+    private static final String ATTR_UUID = "uuid";
     private static final String MSG_AVATAR_APPROVED = "Avatar changed successfully to account: ";
     private static final String MSG_AVATAR_DECLINED = "Avatar change was declined to account: ";
     private static final String EMPTY_STRING = "";
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+
+    public void changeForgottenPass(SessionRequestContent requestContent) throws ServiceException {
+        HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
+        Map<String, String[]> reqParams = requestContent.getRequestParameters();
+        AccRepository repository = new AccRepository();
+        RestorePassRequestRepository restorePassRequestRepo = new RestorePassRequestRepository();
+        try {
+            String uuid = reqParams.get(ATTR_UUID)[0];
+            List<Account> accounts = repository.query(new SelectAccByChangePassUuidSpecification(uuid));
+            if (accounts.size() == 0) {
+                reqAttrs.put(ATTR_MESSAGE, "incorrect data");
+                return;
+            }
+            Account account = accounts.get(0);
+            String updatedPass = reqParams.get(ATTR_UPDATED_PWD)[0];
+            String repeatedPass = reqParams.get(ATTR_REPEATED_PWD)[0];
+            if (!updatedPass.equals(repeatedPass)) {
+                reqAttrs.put(ATTR_MESSAGE, "Repeated pass is incorrect!");
+                return;
+            }
+
+            MessageDigest messageDigest = MessageDigest.getInstance(CURRENT_ENCRYPTING);
+            String salt = account.getPassSalt();
+            String updatedSaltedPass = updatedPass + salt;
+            String updatedHashedPass = new String(messageDigest.digest(updatedSaltedPass.getBytes()));
+            account.setPassword(updatedHashedPass);
+            repository.update(account);
+            reqAttrs.put(ATTR_MESSAGE, "Password changed successfully!");
+            restorePassRequestRepo.delete(new RestorePassRequest(account.getId(), uuid));
+        } catch (RepositoryException | IndexOutOfBoundsException | NoSuchAlgorithmException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public void restorePassword(SessionRequestContent requestContent) throws ServiceException {
+        AccRepository repo = new AccRepository();
+        HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
+        String login = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
+        try {
+            List<Account> accounts = repo.query(new SelectAccByLoginSpecification(login));
+            if (accounts.size() == 0) {
+                reqAttrs.put(ATTR_MESSAGE, "login not exists!");
+                return;
+            }
+            Account account = accounts.get(0);
+            String email = account.getEmail();
+            String uuid = UUID.randomUUID().toString();
+            sendConfirmationEmail(email, requestContent.getRequestFullReferer(), uuid);
+            new RestorePassRequestRepository().insert(new RestorePassRequest(account.getId(), uuid));
+            reqAttrs.put(ATTR_MESSAGE, "email sent!");
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        } catch (IOException | MessagingException e) {
+            log.error(e);
+            throw new ServiceException("Error while sending confirmation email... Try again later.");
+        }
+    }
 
     public boolean login(@NonNull SessionRequestContent requestContent) throws ServiceException {
         HashMap<String, Object> sessionAttrs = requestContent.getSessionAttributes();
@@ -109,11 +175,11 @@ public class AccountService {
                     break;
             }
             List<Course> recommendedCourses = courseRepository.query(new SelectCourseRecommendedSpecification(AMOUNT_COURSES_RECOMMENDED, account.getId()));
-            sessionAttrs.put(SESSION_ATTR_USER, account);
+            sessionAttrs.put(ATTR_USER, account);
             sessionAttrs.put(ATTR_AVAILABLE_COURSES, courses);
-            sessionAttrs.put(SESSION_ATTR_ROLE, account.getType());
+            sessionAttrs.put(ATTR_ROLE, account.getType());
             // TODO: 8/5/2019 может вынести в фильтр и отображать новые рекомендуемые курсы при каждом обновлении страницы?(в атрибутах реквеста обновлять тогда)
-            sessionAttrs.put(ATTR_RECOMMENDED_COURSES ,recommendedCourses);
+            sessionAttrs.put(ATTR_RECOMMENDED_COURSES, recommendedCourses);
             (new MarkService()).insertMarkedCourseIdsIntoSession(requestContent);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -149,13 +215,13 @@ public class AccountService {
             }
             repository.insert(account);
             account = repository.query(new SelectAccByLoginSpecification(account.getLogin())).get(0);
-            sessionAttrs.put(SESSION_ATTR_USER, account);
-            sessionAttrs.put(SESSION_ATTR_ROLE, account.getType());
+            sessionAttrs.put(ATTR_USER, account);
+            sessionAttrs.put(ATTR_ROLE, account.getType());
             CourseRepository courseRepository = new CourseRepository();
             List<Course> courses = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
             sessionAttrs.put(ATTR_AVAILABLE_COURSES, courses);
             List<Course> recommendedCourses = courseRepository.query(new SelectCourseRecommendedSpecification(AMOUNT_COURSES_RECOMMENDED, account.getId()));
-            sessionAttrs.put(ATTR_RECOMMENDED_COURSES ,recommendedCourses);
+            sessionAttrs.put(ATTR_RECOMMENDED_COURSES, recommendedCourses);
             (new MarkService()).insertMarkedCourseIdsIntoSession(requestContent);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -170,13 +236,13 @@ public class AccountService {
         HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
         AccRepository repository = new AccRepository();
         String currPassword = reqParams.get(REQUEST_PARAM_PWD)[0];
-        String updatedPassword = reqParams.get(REQUEST_PARAM_UPDATED_PWD)[0];
-        String repeatedPassword = reqParams.get(REQUEST_PARAM_REPEATED_PWD)[0];
+        String updatedPassword = reqParams.get(ATTR_UPDATED_PWD)[0];
+        String repeatedPassword = reqParams.get(ATTR_REPEATED_PWD)[0];
         boolean isUpdatedPwdCorrect = validator.validatePassword(updatedPassword);
         Account clone;
         String hashedPass;
         try {
-            clone = ((Account) requestContent.getSessionAttributes().get(SESSION_ATTR_USER)).clone();
+            clone = ((Account) requestContent.getSessionAttributes().get(ATTR_USER)).clone();
             MessageDigest messageDigest = MessageDigest.getInstance(CURRENT_ENCRYPTING);
             String saltedPass = currPassword + clone.getPassSalt();
             hashedPass = new String(messageDigest.digest(saltedPass.getBytes()));
@@ -189,7 +255,7 @@ public class AccountService {
                 clone.setPassword(updatedHashedPass);
                 repository.update(clone);
 
-                requestContent.getSessionAttributes().put(SESSION_ATTR_USER, clone);
+                requestContent.getSessionAttributes().put(ATTR_USER, clone);
                 reqAttrs.put(PREVIOUS_OPERATION_MSG, PWD_CHANGED_SUCCESSFULLY_MSG);
                 reqAttrs.put(ATTR_OPERATION_RESULT, true);
             } else {
@@ -214,7 +280,7 @@ public class AccountService {
 
     public void addAccAvatarToReview(SessionRequestContent requestContent) throws ServiceException {
         HashMap<String, Object> sessionAttrs = requestContent.getSessionAttributes();
-        Account account = (Account) sessionAttrs.get(SESSION_ATTR_USER);
+        Account account = (Account) sessionAttrs.get(ATTR_USER);
         String fileExtension = (String) requestContent.getRequestAttributes().get(ATTR_FILE_EXTENSION);
         account.setUpdatePhotoPath(account.getId() + fileExtension);
         AccRepository repository = new AccRepository();
@@ -285,7 +351,7 @@ public class AccountService {
         AccRepository repository = new AccRepository();
         Account clone;
         try {
-            clone = ((Account) requestContent.getSessionAttributes().get(SESSION_ATTR_USER)).clone();
+            clone = ((Account) requestContent.getSessionAttributes().get(ATTR_USER)).clone();
             clone.setName(requestParams.get("name")[0]);
             clone.setSurname(requestParams.get("surname")[0]);
             clone.setEmail(requestParams.get("email")[0]);
@@ -296,7 +362,7 @@ public class AccountService {
                     && val.validatePhone(clone.getPhoneNumber())) {
                 clone.setAbout(escapeQuotes(clone.getAbout()));
                 repository.update(clone);
-                requestContent.getSessionAttributes().put(SESSION_ATTR_USER, clone);
+                requestContent.getSessionAttributes().put(ATTR_USER, clone);
                 return true;
             }
         } catch (CloneNotSupportedException | RepositoryException | NullPointerException e) {
@@ -309,7 +375,7 @@ public class AccountService {
         AccRepository repository = new AccRepository();
         try {
             Account refreshedAcc = repository.query(new SelectAccByLoginSpecification(account.getLogin())).get(0);
-            requestContent.getSessionAttributes().put(SESSION_ATTR_USER, refreshedAcc);
+            requestContent.getSessionAttributes().put(ATTR_USER, refreshedAcc);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
@@ -343,6 +409,7 @@ public class AccountService {
         String[] parts = requestURI.split(PATH_SPLITTER);
         return parts[parts.length - 1].replaceAll(URI_SPACE_REPRESENT, " ");
     }
+
 
     public void initAuthorPage(@NonNull SessionRequestContent requestContent) throws ServiceException {
         HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
@@ -397,7 +464,7 @@ public class AccountService {
             e.printStackTrace();
         }
 
-        String role = requestParams.get(SESSION_ATTR_ROLE)[0].toLowerCase();
+        String role = requestParams.get(ATTR_ROLE)[0].toLowerCase();
         if (role.equals("студент") || role.equals("usager")) {
             role = "user";
         }
@@ -445,6 +512,26 @@ public class AccountService {
             correctText = correctText.replace(">", "&gt;");
         }
         return correctText;
+    }
+
+    private void sendConfirmationEmail(String emailTo, String referer, String uuid) throws IOException, MessagingException {
+        String changePassLink = referer.substring(0, referer.lastIndexOf(PATH_SPLITTER));
+        changePassLink += "/change-forgotten-pass?&uuid=" + uuid;
+
+
+        Properties properties = new Properties();
+        properties.load(Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream("mail_info.properties")));
+
+        Session mailSession = Session.getDefaultInstance(properties);
+        Message message = new MimeMessage(mailSession);
+        message.setRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));
+        message.setSubject("EasyLearning restore password instructions.");
+        message.setText("1. Go to link, placed below. \n 2. Set new password. \n " +
+                "3. Remember it! \n " + changePassLink);
+        Transport transport = mailSession.getTransport();
+        transport.connect("easylearningappstudy@gmail.com", "AB106116");
+        transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
+        transport.close();
     }
 
 }

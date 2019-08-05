@@ -88,10 +88,9 @@ public class AccRepository implements AppRepository<Account> {
             for (int i = 0; i < params.length; i++) {
                 statement.setString(i + 1, params[i]);
             }
-            log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
+            log.debug("Executing query:" + statement.toString().split(":")[1]);
             try (ResultSet resultSet = statement.executeQuery()) {
                 accountList = new ArrayList<>(fillAccountList(resultSet));
-                log.debug("Query completed:" + statement.toString().split(":")[1]);
             }
         } catch (SQLException e) {
             throw new RepositoryException(e);
@@ -156,8 +155,7 @@ public class AccRepository implements AppRepository<Account> {
         for (int i = 0; i < params.length; i++) {
             statement.setString(i + 1, params[i]);
         }
-        log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
+        log.debug("Executing query:" + statement.toString().split(":")[1]);
         statement.execute();
-        log.debug("Query completed:" + statement.toString().split(":")[1]);
     }
 }

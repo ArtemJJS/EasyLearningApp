@@ -13,7 +13,7 @@
 <fmt:setBundle basename="text_resources" var="rb"/>
 <html>
 <head>
-    <title>easyLearning</title>
+    <title>Easy Learning</title>
     <style>
         <%@include file="/css/author.css"%>
     </style>

@@ -72,9 +72,8 @@ public class LessonRepository implements AppRepository<CourseLesson> {
             for (int i = 0; i < params.length; i++) {
                 statement.setString(i + 1, params[i]);
             }
-            log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
+            log.debug("Executing query:" + statement.toString().split(":")[1]);
             try (ResultSet resultSet = statement.executeQuery()) {
-                log.debug("Query completed:" + statement.toString().split(":")[1]);
                 lessonList = fillLessonList(resultSet);
             }
         } catch (SQLException e) {
@@ -102,8 +101,7 @@ public class LessonRepository implements AppRepository<CourseLesson> {
         for (int i = 0; i < params.length; i++) {
             statement.setString(i + 1, params[i]);
         }
-        log.debug("Attempt to execute query:" + statement.toString());
+        log.debug("Executing query:" + statement.toString().split(":")[1]);
         statement.execute();
-        log.debug("Query completed:" + statement.toString());
     }
 }

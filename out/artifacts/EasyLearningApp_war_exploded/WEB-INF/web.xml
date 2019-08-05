@@ -243,4 +243,22 @@
         <url-pattern>/user/mark-author</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>RestorePassPage</servlet-name>
+        <jsp-file>/jsp/global/restore_pass_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RestorePassPage</servlet-name>
+        <url-pattern>/restore-pass</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ChangeForgottenPass</servlet-name>
+        <jsp-file>/jsp/global/change_forgotten_pass_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeForgottenPass</servlet-name>
+        <url-pattern>/change-forgotten-pass</url-pattern>
+    </servlet-mapping>
+
 </web-app>

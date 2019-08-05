@@ -32,7 +32,12 @@ public class CommandFactory {
         BUY_FROM_BALANCE (USER),
         MARK_COURSE (USER),
         MARK_AUTHOR (USER),
-        CHANGE_LANG (ADMIN, AUTHOR, USER, GUEST);
+        CHANGE_LANG (ADMIN, AUTHOR, USER, GUEST),
+        RESTORE_PASSWORD(GUEST),
+        GO_CHANGE_PASS(GUEST),
+        CHANGE_FORGOTTEN_PASSWORD(GUEST);
+
+
 
         private List<AccountType> accessTypes = new ArrayList<>();
         CommandType(@NonNull AccountType... types) {
@@ -112,6 +117,12 @@ public class CommandFactory {
                 break;
             case CHANGE_LANG:
                 command = new ChangeLangCommand();
+                break;
+            case RESTORE_PASSWORD:
+                command = new RestorePasswordCommand();
+                break;
+            case CHANGE_FORGOTTEN_PASSWORD:
+                command = new ChangeForgottenPassCommand();
                 break;
 
         }

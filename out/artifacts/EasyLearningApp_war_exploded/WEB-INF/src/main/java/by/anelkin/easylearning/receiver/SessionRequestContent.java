@@ -21,6 +21,8 @@ public class SessionRequestContent {
     private ResponseType responseType;
     private String path;
     private String requestReferer;
+    //this form is used in email sending:
+    private String requestFullReferer;
 
     public enum ResponseType {
         REDIRECT,
@@ -29,6 +31,7 @@ public class SessionRequestContent {
 
     public void extractValues(@NonNull HttpServletRequest request) {
         String referer = request.getHeader("referer");
+        requestFullReferer = referer;
         if (referer!=null) {
             referer = referer.substring(referer.indexOf(request.getContextPath()));
             referer = referer.replace("/easyLearning", "");
