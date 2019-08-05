@@ -279,7 +279,6 @@ public class AccountService {
         Account clone;
         try {
             clone = ((Account) requestContent.getSessionAttributes().get(SESSION_ATTR_USER)).clone();
-            clone.setLogin(requestParams.get("login")[0]);
             clone.setName(requestParams.get("name")[0]);
             clone.setSurname(requestParams.get("surname")[0]);
             clone.setEmail(requestParams.get("email")[0]);

@@ -2,20 +2,12 @@ package by.anelkin.easylearning.servlet;
 
 
 import by.anelkin.easylearning.Main;
-import by.anelkin.easylearning.command.CommandFactory;
 import by.anelkin.easylearning.entity.Account;
-import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.filter.JspAccessFilter;
 import by.anelkin.easylearning.receiver.RequestReceiver;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
-import by.anelkin.easylearning.repository.AccRepository;
-import by.anelkin.easylearning.service.AccountService;
-import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
 import lombok.extern.log4j.Log4j;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -30,8 +22,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -105,7 +95,7 @@ public class ImgUploadServlet extends HttpServlet {
         SessionRequestContent.ResponseType responseType;
         try {
             responseType = receiver.executeCommand();
-        } catch (RepositoryException | ServiceException e) {
+        } catch (ServiceException e) {
             throw new ServletException(e);
         }
 

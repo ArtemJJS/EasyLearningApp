@@ -40,14 +40,14 @@
             <div class="param">
                 <div class="label_and_pattern">
                     <label for="mark_comment"><fmt:message key='mark.comment' bundle='${rb}'/>:</label>
-                    <div class="pattern-info"><fmt:message key='mark.max_1000_symbols' bundle='${rb}'/></div>
+                    <div class="pattern-info"><fmt:message key='mark.max_700_symbols' bundle='${rb}'/></div>
                 </div>
                 <textarea id="mark_comment" name="comment" placeholder='<fmt:message key='mark.write_your_comment' bundle='${rb}'/>' rows="5"
-                          cols="40"></textarea>
+                          cols="40" maxlength="700"></textarea>
             </div>
         </div>
         <input type="hidden" name="command_name" value="mark_author"/>
-        <input type="hidden" name="author_id" value="${pageContext.request.getParameter("author-id")}"/>
+        <input type="hidden" name="target_id" value="${pageContext.request.getParameter("author-id")}"/>
         <input class="submit_btn" type="submit" value='<fmt:message key='btn.submit' bundle='${rb}'/>'>
     </form>
 </main>

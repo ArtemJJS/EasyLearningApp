@@ -1326,7 +1326,7 @@
     </column>
     <column id="327" parent="278" name="mark_comment">
       <Position>5</Position>
-      <DataType>varchar(1000)|0s</DataType>
+      <DataType>text|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="328" parent="278" name="mark_date">
@@ -1373,7 +1373,7 @@
     </column>
     <column id="335" parent="279" name="course_name">
       <Position>2</Position>
-      <DataType>varchar(200)|0s</DataType>
+      <DataType>varchar(1000)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1385,7 +1385,7 @@
     </column>
     <column id="337" parent="279" name="course_description">
       <Position>4</Position>
-      <DataType>varchar(1000)|0s</DataType>
+      <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1466,7 +1466,7 @@
     </column>
     <column id="351" parent="280" name="chapter_name">
       <Position>3</Position>
-      <DataType>varchar(200)|0s</DataType>
+      <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1512,9 +1512,8 @@
     </column>
     <column id="359" parent="281" name="lesson_name">
       <Position>3</Position>
-      <DataType>varchar(150)|0s</DataType>
+      <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
-      <DefaultExpression>&apos;wrong name&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="360" parent="281" name="lesson_content_address">
@@ -1577,7 +1576,7 @@
     </column>
     <column id="370" parent="282" name="mark_comment">
       <Position>5</Position>
-      <DataType>varchar(700)|0s</DataType>
+      <DataType>text|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="371" parent="282" name="mark_date">

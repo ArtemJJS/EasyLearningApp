@@ -66,8 +66,9 @@
         </c:forEach>
     </section>
 
+    <c:set var="author" value="${pageContext.request.getAttribute('author_of_course')}"/>
+    <div class="author_info_title"><fmt:message key="course.author_of_the_course" bundle="${rb}"/></div>
     <section class="section_4">
-        <c:set var="author" value="${pageContext.request.getAttribute('author_of_course')}"/>
         <div class="author_image_and_stats">
             <a href="${pageContext.request.contextPath}/author-info/${author.login}"><img class="author_avatar"
                                                                                           src="${pageContext.request.contextPath}/img/${author.pathToPhoto}"

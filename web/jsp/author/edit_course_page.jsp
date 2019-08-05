@@ -45,6 +45,7 @@
                       rows="7" maxlength="1000">${course.description}</textarea>
         </div>
 
+        <div class="info-message"><fmt:message key="msg.new_chapters_and_lessons_requirements" bundle="${rb}"/></div>
         <jsp:useBean id="i" class="by.anelkin.easylearning.entity.JspIntWrapper"/>
         <c:forEach var="entry" items="${content}">
             <c:set var="chapter" value="${entry.getKey()}"/>
@@ -78,6 +79,14 @@
         <input type="hidden" name="command_name" value="add_course_to_review">
         <input class="submit_btn" type="submit" value='<fmt:message key='btn.send_to_review' bundle='${rb}'/>'>
     </form>
+    <script>let addLessonText = '<fmt:message key='course.add_lesson' bundle='${rb}'/>';
+    let lessonText = '<fmt:message key='course.lesson' bundle='${rb}'/>';
+    let chapterText = '<fmt:message key='course.chapter' bundle='${rb}'/>';
+    let chapterTitleText = '<fmt:message key='course.chapter_title' bundle='${rb}'/>';
+    let lessonTitleText = '<fmt:message key='course.lesson_title' bundle='${rb}'/>';
+    let lessonDurationText = '<fmt:message key='course.duration' bundle='${rb}'/>';
+    let lessonContentText = '<fmt:message key='course.path_to_content' bundle='${rb}'/>';
+    </script>
     <script>
         <%@include file="/js/add_lesson.js"%>
     </script>

@@ -35,7 +35,6 @@ public class AccRepository implements AppRepository<Account> {
 
     @Override
     public boolean update(@NonNull Account account) throws RepositoryException {
-        // TODO: 6/18/2019 Сделать нормальное шифрование пароля
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
             String[] pathToPhotoParts = account.getPathToPhoto().split(PATH_SPLITTER);

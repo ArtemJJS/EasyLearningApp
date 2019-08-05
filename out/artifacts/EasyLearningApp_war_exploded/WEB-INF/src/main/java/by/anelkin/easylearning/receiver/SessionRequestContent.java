@@ -29,8 +29,10 @@ public class SessionRequestContent {
 
     public void extractValues(@NonNull HttpServletRequest request) {
         String referer = request.getHeader("referer");
-        referer = referer.substring(referer.indexOf(request.getContextPath()));
-        referer = referer.replace("/easyLearning", "");
+        if (referer!=null) {
+            referer = referer.substring(referer.indexOf(request.getContextPath()));
+            referer = referer.replace("/easyLearning", "");
+        }
         requestReferer = referer;
 
         requestParameters = request.getParameterMap();

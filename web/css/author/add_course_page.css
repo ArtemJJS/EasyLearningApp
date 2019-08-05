@@ -137,6 +137,17 @@ form .submit_btn{
 }
 
 .message{
-    color: darkgreen;
+    color: blue;
     margin-bottom: 25px;
+}
+
+.info-message{
+    margin-top: 45px;
+    font-size: 0.9rem;
+    color: #40802c;
+    text-align: center;
+}
+
+.chapter:first-child{
+    margin-top: 5px;
 }

@@ -56,7 +56,7 @@
             </div>
         </div>
         <input type="hidden" name="command_name" value="mark_course"/>
-        <input type="hidden" name="course_id" value="${pageContext.request.getParameter("course-id")}"/>
+        <input type="hidden" name="target_id" value="${pageContext.request.getParameter("course-id")}"/>
         <input class="submit_btn" type="submit" value='<fmt:message key='btn.submit' bundle='${rb}'/>'>
     </form>
 </main>

@@ -76,14 +76,6 @@
            </c:choose>
         </div>
         <form id="reg_form" method="post" action="${pageContext.request.contextPath}/basic_servlet">
-            <div class="param1 param">
-                <label for="login-field"><fmt:message key='global.login' bundle='${rb}'/>: </label>
-                <div class="input_and_pattern">
-                    <input value="${user.login}" type="text" id="login-field" name="login" required
-                           pattern="[A-Za-zА-я0-9_ -]{3,30}">
-                    <p class="field_desc"><fmt:message key='registr.login_pattern' bundle='${rb}'/></p>
-                </div>
-            </div>
             <div class="param2 param">
                 <label for="name-field"><fmt:message key='global.name' bundle='${rb}'/>: </label>
                 <div class="input_and_pattern">

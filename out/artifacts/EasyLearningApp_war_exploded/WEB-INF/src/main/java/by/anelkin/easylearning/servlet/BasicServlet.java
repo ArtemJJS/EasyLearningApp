@@ -1,5 +1,6 @@
 package by.anelkin.easylearning.servlet;
 
+import by.anelkin.easylearning.connection.ConnectionPool;
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.filter.JspAccessFilter;
@@ -55,7 +56,7 @@ public class BasicServlet extends HttpServlet {
         ResponseType responseType;
         try {
             responseType = receiver.executeCommand();
-        } catch (RepositoryException | ServiceException e) {
+        } catch (ServiceException e) {
             throw new ServletException(e);
         }
 
@@ -70,5 +71,10 @@ public class BasicServlet extends HttpServlet {
             log.debug("Sending redirect: " + url);
             response.sendRedirect(url);
         }
+    }
+
+    @Override
+    public void destroy() {
+        ConnectionPool.getInstance().closePool();
     }
 }

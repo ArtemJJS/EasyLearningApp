@@ -139,7 +139,7 @@ public class PaymentService {
         PaymentRepository repository = new PaymentRepository();
         Payment payment = initBasicPaymentParams(requestContent);
         String cardNumber = requestContent.getRequestParameters().get(ATTR_CARD)[0];
-        if (!validator.validatePayment(payment.getAmount().toString()) ||
+        if (!validator.validatePrice(payment.getAmount().toString()) ||
                 !validator.validateCard(cardNumber)) {
             String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_WRONG_DEPOSIT_DATA);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
@@ -170,7 +170,7 @@ public class PaymentService {
         payment.setAmount(payment.getAmount().negate());
         Account currAcc = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
         boolean isEnoughFunds = currAcc.getBalance().add(payment.getAmount()).compareTo(BigDecimal.ZERO) >= 0;
-        boolean isCorrectAmount = validator.validatePayment(payment.getAmount().negate().toString());
+        boolean isCorrectAmount = validator.validatePrice(payment.getAmount().negate().toString());
         String cardNumber = requestContent.getRequestParameters().get(ATTR_CARD)[0];
         boolean isCorrectCard = validator.validateCard(cardNumber);
         if (!isEnoughFunds || !isCorrectAmount || !isCorrectCard) {

@@ -8,12 +8,12 @@ import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseTyp
 
 public class MarkCourseCommand implements Command {
     private static final String SUCCESSFUL_OPERATION_REDIRECT = "/course?course-id=";
-    private static final String ATTR_COURSE_ID = "course_id";
+    private static final String ATTR_TARGET_ID = "target_id";
 
     @Override
     public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
         (new MarkService()).markCourse(requestContent);
-        int courseId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_COURSE_ID)[0]);
+        int courseId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_TARGET_ID)[0]);
         requestContent.setPath(SUCCESSFUL_OPERATION_REDIRECT + courseId);
         return REDIRECT;
     }

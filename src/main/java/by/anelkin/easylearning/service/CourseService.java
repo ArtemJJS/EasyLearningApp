@@ -11,6 +11,7 @@ import by.anelkin.easylearning.specification.chapter.SelectAllFromCourseSpecific
 import by.anelkin.easylearning.specification.chapter.SelectChapterByNameAndCourseIdSpecification;
 import by.anelkin.easylearning.specification.course.*;
 import by.anelkin.easylearning.specification.lesson.SelectByChapterIdSpecification;
+import by.anelkin.easylearning.validator.FormValidator;
 import lombok.extern.log4j.Log4j;
 
 import java.io.File;
@@ -52,6 +53,7 @@ public class CourseService {
     private static final String BUNDLE_COURSE_FROZEN = "msg.course_was_declined";
     private static final String BUNDLE_COURSE_ALREADY_EXISTS = "msg.course_already_exists";
     private static final String BUNDLE_COURSE_SENT_TO_REVIEW = "msg.course_sent_to_review";
+    private static final String BUNDLE_INCORRECT_DATA = "msg.incorrect_data";
     private static final String DEFAULT_IMG = "default_course_avatar.png";
     private static final String PATTERN_LESSON_TITLE = "lesson_title_";
     private static final String PATTERN_LESSON_CONTENT = "lesson_content_";
@@ -67,7 +69,7 @@ public class CourseService {
             Course course = repository.query(new SelectCourseByIdSpecification(courseId)).get(0);
             course.setUpdatePhotoPath(course.getId() + (String) requestContent.getRequestAttributes().get(ATTR_FILE_EXTENSION));
             repository.update(course);
-        } catch (RepositoryException | NullPointerException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -77,8 +79,8 @@ public class CourseService {
         String fileStorage = ResourceBundle.getBundle(FILE_STORAGE_BUNDLE_BASE).getString(PROP_FILE_FOLDER);
         String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_PICTURE_APPROVED);
         CourseRepository repository = new CourseRepository();
-        String courseName = requestContent.getRequestParameters().get(ATTR_COURSE_NAME)[0];
         try {
+            String courseName = requestContent.getRequestParameters().get(ATTR_COURSE_NAME)[0];
             Course course = repository.query(new SelectCourseByNameSpecification(courseName)).get(0);
             String imgToApprovePath = course.getUpdatePhotoPath();
             String currImgPath = fileStorage + course.getPathToPicture();
@@ -131,10 +133,8 @@ public class CourseService {
             throw new ServiceException(e);
         }
         if (courses.size() != 1) {
-            // fixme: 7/12/2019 service exception
             throw new ServiceException("Course wasn't found");
         }
-        // fixme: 7/12/2019 вынести в текстовые константы
         reqAttrs.put("currentCourseMarks", marks);
         reqAttrs.put("requestedCourse", courses.get(0));
         reqAttrs.put("currentCourseContent", takeChaptersAndLessons(courseId));
@@ -218,14 +218,23 @@ public class CourseService {
             currCourse.setState(CourseState.FREEZING);
             repository.update(currCourse);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + currCourse.getId());
-        } catch (RepositoryException | NullPointerException e) {
+        } catch (RepositoryException | IndexOutOfBoundsException e) {
             throw new ServiceException(e);
         }
     }
 
     public void addCourseToReview(SessionRequestContent requestContent) throws ServiceException {
+        FormValidator validator = new FormValidator();
         Locale locale = takeLocaleFromSession(requestContent);
         Map<String, String[]> params = requestContent.getRequestParameters();
+        boolean isPriceValid = validator.validatePrice(params.get(ATTR_COURSE_PRICE)[0]);
+        boolean isCourseNameValid = validator.validateCourseName(params.get(ATTR_COURSE_NAME)[0]);
+        boolean isDescriptionValid = validator.validateCourseDescription(params.get(ATTR_COURSE_DESCRIPTION)[0]);
+        if (!isCourseNameValid || !isPriceValid || !isDescriptionValid) {
+            String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_INCORRECT_DATA);
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
+            return;
+        }
         CourseRepository courseRepo = new CourseRepository();
         String courseName = params.get(ATTR_COURSE_NAME)[0];
         String referer = requestContent.getRequestReferer();
@@ -234,7 +243,6 @@ public class CourseService {
         try {
             courses = courseRepo.query(new SelectCourseByNameSpecification(courseName));
             if (courses.size() > 0 && isCourseNew) {
-                // TODO: 7/18/2019 попробовать сохранить данные при наличии такого названия курса в базе? при форварде?
                 String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_ALREADY_EXISTS);
                 requestContent.getRequestAttributes().put(ATTR_COURSE_ALREADY_EXISTS, message);
                 return;
@@ -250,11 +258,14 @@ public class CourseService {
             course.setPathToPicture(DEFAULT_IMG);
             course.setUpdatePhotoPath(EMPTY_STRING);
             course.setState(CourseState.NOT_APPROVED);
-            if (isCourseNew) {
-                courseRepo.insert(course);
-            } else {
-                courseRepo.update(course);
-            }
+
+            course.setDescription((new AccountService()).escapeQuotes(course.getDescription()));
+            boolean isOperationProceeded = isCourseNew ? courseRepo.insert(course) : courseRepo.update(course);
+//            if (isCourseNew) {
+//                courseRepo.insert(course);
+//            } else {
+//                courseRepo.update(course);
+//            }
             int courseId = courseRepo.query(new SelectCourseByNameSpecification(courseName))
                     .get(0).getId();
 
@@ -262,17 +273,19 @@ public class CourseService {
             insertLessons(courseId, params, chapterNames);
             String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_SENT_TO_REVIEW);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
-        } catch (RepositoryException e) {
+        } catch (RepositoryException | IndexOutOfBoundsException e) {
             throw new ServiceException(e);
         }
     }
 
     private String[] insertChaptersIfNotExists(int courseId, Map<String, String[]> params) throws RepositoryException {
+        FormValidator validator = new FormValidator();
         ChapterRepository chapterRepo = new ChapterRepository();
         String[] chapterNames = params.get(ATTR_CHAPTER_NAME);
-
         for (String chapterName : chapterNames) {
-            if (chapterRepo.query(new SelectChapterByNameAndCourseIdSpecification(chapterName, courseId)).size() == 0) {
+            boolean isChapterNameValid = validator.validateChapterName(chapterName);
+            // it seems that chapters names are not required to be unique. So i don't check it!
+            if (isChapterNameValid) {
                 CourseChapter chapter = new CourseChapter();
                 chapter.setCourseId(courseId);
                 chapter.setName(chapterName);
@@ -283,6 +296,7 @@ public class CourseService {
     }
 
     private void insertLessons(int courseId, Map<String, String[]> params, String[] chapterNames) throws RepositoryException {
+        FormValidator validator = new FormValidator();
         ChapterRepository chapterRepo = new ChapterRepository();
         LessonRepository lessonRepo = new LessonRepository();
         for (int i = 0; i < chapterNames.length; i++) {
@@ -299,11 +313,14 @@ public class CourseService {
                 String name = lessonNames[j];
                 String content = lessonContents[j];
                 String duration = lessonDurations[j];
+                boolean isLessonNameValid = validator.validateLessonName(name);
+                boolean isLessonDurationValid = validator.validateLessonDuration(duration);
                 //if any field is empty - skip this iteration
-                if (!name.isEmpty() && !content.isEmpty() && !duration.isEmpty()) {
+                if (!name.isEmpty() && !content.isEmpty() && !duration.isEmpty()
+                        && isLessonDurationValid && isLessonNameValid) {
                     lesson.setChapterId(chapterId);
                     lesson.setName(name);
-                    lesson.setPathToContent(content);
+                    lesson.setPathToContent(new AccountService().escapeQuotes(content));
                     lesson.setDuration(Long.parseLong(duration));
                     lesson.setCreationDate(new Date(System.currentTimeMillis()));
                     lessonRepo.insert(lesson);

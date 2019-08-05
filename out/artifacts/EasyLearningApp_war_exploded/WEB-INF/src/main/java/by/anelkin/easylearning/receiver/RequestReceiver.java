@@ -2,7 +2,6 @@ package by.anelkin.easylearning.receiver;
 
 import by.anelkin.easylearning.command.Command;
 import by.anelkin.easylearning.command.CommandFactory;
-import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.exception.ServiceException;
 
 import static by.anelkin.easylearning.command.CommandFactory.*;
@@ -19,7 +18,7 @@ public class RequestReceiver {
         this.requestContent = requestContent;
     }
 
-    public ResponseType executeCommand() throws RepositoryException, ServiceException {
+    public ResponseType executeCommand() throws ServiceException {
        return command.execute(requestContent);
     }
 }

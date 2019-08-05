@@ -6,12 +6,16 @@ const maxChapters = 10;
 const supportingMainFormElems = 6;
 const maxElemsInsideMainForm = maxChapters + supportingMainFormElems;
 
+const chapterNamePattern = "[A-Za-zА-я0-9_ -]{5,200}";
+const lessonNamePattern = "[A-Za-zА-я0-9_ -]{5,200}";
+const lessonDurationPattern = "[0-9]{1,6}";
+
 const chapterClass = 'chapter';
 const paramClass = 'param';
 const lessonParamClass = 'lesson_params';
 const lessonsClass = 'lessons';
 const addLessonClass = 'add_lesson';
-const addLessonBtnText = 'add lesson';
+const addLessonBtnText = addLessonText;
 let addLessonBtns = document.getElementsByClassName('add_lesson');
 let addChapterBtn = document.getElementsByClassName('add_chapter')[0];
 
@@ -21,13 +25,11 @@ function addMoreLesson(event) {
     let childs = parentElement.children;
     let childCount = childs.length;
     if (childCount >= maxElemsInsideChapterBlock) {
-        // addLessonBtn.style.display = 'none';
         findAncestor(event.target, chapterClass).getElementsByClassName(addLessonClass)[0].style.display = 'none';
         alert("You have reached lessons amount limit to this chapter!");
         return;
     }
 
-    //здесь передавался парент сразу первый
     let parentChapter = findAncestor(event.target, chapterClass);
 
     let addedLesson = createLessonInput(childCount, parentChapter.id);
@@ -38,13 +40,13 @@ function addMoreChapter(event) {
     let parentElement = event.target.parentElement;
     let childs = parentElement.children;
     let childCount = childs.length;
-    if (childCount >= maxElemsInsideMainForm) {
+    if (childCount > maxElemsInsideMainForm) {
         addChapterBtn.style.display = 'none';
         alert("You have reached chapter amount limit to this course!");
         return;
     }
-    // +1 because we already have one chapter block
-    let addedChapter = createChapterInput(childCount - supportingMainFormElems + 1);
+
+    let addedChapter = createChapterInput(childCount - supportingMainFormElems);
     parentElement.insertBefore(addedChapter, childs[childCount - 3]);
 }
 
@@ -56,25 +58,25 @@ function createLessonInput(index, parentId) {
 
     let label = document.createElement("div");
     label.setAttribute("for", "lesson_field_" + index);
-    label.innerText = "Lesson " + index + ":";
+    label.innerText = lessonText + " " + index + ":";
 
     let lessonTitle = document.createElement("input");
     lessonTitle.setAttribute("type", "by.anelkin.easylearning.text");
     lessonTitle.setAttribute("id", "lesson_field_" + index);
     lessonTitle.setAttribute("name", "lesson_title_" + parentId);
-    lessonTitle.setAttribute("placeholder", "Lesson title");
-    lessonTitle.setAttribute("pattern", "[A-z0-9_ -]{3,150}");
+    lessonTitle.setAttribute("placeholder", lessonTitleText);
+    lessonTitle.setAttribute("pattern", lessonNamePattern);
 
     let lessonContent = document.createElement("input");
     lessonContent.setAttribute("type", "by.anelkin.easylearning.text");
     lessonContent.setAttribute("name", "lesson_content_" + parentId);
-    lessonContent.setAttribute("placeholder", "Lesson content");
+    lessonContent.setAttribute("placeholder", lessonContentText);
 
     let lessonDuration = document.createElement("input");
     lessonDuration.setAttribute("type", "by.anelkin.easylearning.text");
     lessonDuration.setAttribute("name", "lesson_duration_" + parentId);
-    lessonDuration.setAttribute("placeholder", "Lesson duration");
-    lessonDuration.setAttribute("pattern", "[0-9]{1,10}");
+    lessonDuration.setAttribute("placeholder", lessonDurationText);
+    lessonDuration.setAttribute("pattern", lessonDurationPattern);
 
     let paramWrapper = document.createElement("div");
     paramWrapper.classList.add(lessonParamClass);
@@ -87,18 +89,17 @@ function createLessonInput(index, parentId) {
     return div;
 }
 
-
 function createChapterInput(index) {
     let label = document.createElement("label");
     label.setAttribute("for", "chapter_field_" + index);
-    label.innerText = "Chapter " + index + ":";
+    label.innerText = chapterText + " " + index + ":";
 
     let chapterTitle = document.createElement("input");
     chapterTitle.setAttribute("type", "by.anelkin.easylearning.text");
     chapterTitle.setAttribute("id", "chapter_field_" + index);
     chapterTitle.setAttribute("name", "chapter_name");
-    chapterTitle.setAttribute("placeholder", "Chapter title");
-    chapterTitle.setAttribute("pattern", "[A-z0-9_ -]{1,200}");
+    chapterTitle.setAttribute("placeholder", chapterTitleText);
+    chapterTitle.setAttribute("pattern", chapterNamePattern);
     chapterTitle.setAttribute("required", "true");
 
     let chapterInput = document.createElement("div");
@@ -107,7 +108,6 @@ function createChapterInput(index) {
     chapterInput.appendChild(label);
     chapterInput.appendChild(chapterTitle);
 
-    //<div class="add_lesson">add lesson</div>
     let oneMoreLessonBtn = document.createElement("div");
     oneMoreLessonBtn.classList.add(addLessonClass);
     oneMoreLessonBtn.innerText = addLessonBtnText;

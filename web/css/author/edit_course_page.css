@@ -78,12 +78,14 @@ form {
     color: rgb(84, 84, 84);
 }
 
-.add_lesson {
-    width: 140px;
+.add_lesson{
+    width: 170px;
     height: 30px;
     border: 1px solid grey;
     margin: 20px auto 0;
     text-align: center;
+    position: relative;
+    right: 18px;
 }
 
 .add_lesson:hover {
@@ -92,7 +94,7 @@ form {
 
 }
 
-.add_chapter {
+.add_chapter{
     width: 170px;
     height: 32px;
     border: 1px solid grey;
@@ -142,4 +144,15 @@ form .submit_btn {
 .previous_operation_msg {
     color: red;
     font-size: 0.9rem;
+}
+
+.info-message{
+    margin-top: 45px;
+    font-size: 0.9rem;
+    color: #40802c;
+    text-align: center;
+}
+
+.chapter:first-child{
+    margin-top: 5px;
 }
