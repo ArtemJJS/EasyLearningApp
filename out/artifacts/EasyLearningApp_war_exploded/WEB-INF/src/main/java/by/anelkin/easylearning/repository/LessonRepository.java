@@ -38,7 +38,6 @@ public class LessonRepository implements AppRepository<CourseLesson> {
         return true;
     }
 
-    // TODO: 7/16/2019 может быть сделать в параметрах просто инт id ???
     @Override
     public boolean delete(@NonNull CourseLesson lesson) throws RepositoryException {
         try (Connection connection = pool.takeConnection();

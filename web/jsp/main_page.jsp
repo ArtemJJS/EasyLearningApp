@@ -61,9 +61,9 @@
     </div>
     <div class="courses_block">
         <c:set var="courses_recommended"
-               value="${sessionScope.get('coursesRecommended')}"/>
+               value="${sessionScope.get('courses_recommended')}"/>
         <div class="course_block_header"><fmt:message key='main.courses_that_are_recommended' bundle='${rb}'/></div>
-        <c:forEach var="course" items="${courses_available}">
+        <c:forEach var="course" items="${courses_recommended}">
             <div class="about_course">
                 <div class="block1">
                     <a href="${pageContext.request.contextPath}/course?course-id=${course.id}">

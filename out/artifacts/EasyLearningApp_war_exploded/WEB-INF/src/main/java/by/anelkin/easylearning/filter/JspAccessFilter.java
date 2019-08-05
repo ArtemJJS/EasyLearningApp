@@ -21,7 +21,6 @@ public class JspAccessFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         // getSession() prevents "java.lang.IllegalStateException: Cannot create a session after the response has been committed",
         // which appears if *.jsp is the first request (still has no session)
-        // FIXME: 7/25/2019 посмотреть правильно ли работаетб может вынести в listener???
         if (request.getSession().isNew()) {
             request.getSession().setAttribute("role", GUEST);
             request.getSession().setAttribute("locale", new Locale("en", "US"));
@@ -30,7 +29,6 @@ public class JspAccessFilter implements Filter {
         if (uri.contains(JSP_EXTENSION) && request.getAttribute(ATTR_JSP_PERMITTED) == null) {
             response.sendRedirect(request.getContextPath() + URI_SPLITTER);
         }
-        // TODO: 7/25/2019 надо ли здесь filterChain???
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }

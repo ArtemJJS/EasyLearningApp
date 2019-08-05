@@ -1,1 +1,3 @@
-SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('%%') and state not in (0) LIMIT 4 OFFSET 0;
+select * from course where course_id not in (
+    select course_id from user_purchased_course where user_id = 30)
+order by rand() limit 4;

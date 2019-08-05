@@ -1,8 +1,6 @@
 package by.anelkin.easylearning.command;
 
 import by.anelkin.easylearning.exception.ServiceException;
-import by.anelkin.easylearning.service.AccountService;
-import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType;
 

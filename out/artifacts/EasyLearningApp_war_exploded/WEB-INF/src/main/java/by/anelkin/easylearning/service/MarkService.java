@@ -37,8 +37,8 @@ public class MarkService {
         MarkRepository repository = new MarkRepository();
         AccRepository accRepository = new AccRepository();
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
-        Account currAcc = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
         try {
+            Account currAcc = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
             int authorId = Integer.parseInt(reqParams.get(ATTR_TARGET_ID)[0]);
             Account author = accRepository.query(new SelectAccByIdSpecification(authorId)).get(0);
             List<Course> availableCourses = (List<Course>) requestContent.getSessionAttributes().get(ATTR_AVAILABLE_COURSES);
@@ -46,7 +46,7 @@ public class MarkService {
             List<Mark> allMarksOfAuthor = repository.query(new SelectMarkByTargetIdSpecification(AUTHOR_MARK, authorId));
             List<Mark> marksOfThisAuthorByCurrAcc = allMarksOfAuthor.stream().filter(mark -> mark.getAccId() == currAcc.getId()).collect(Collectors.toList());
             if (purchasedCoursesOfCurrentAuthor.size() == 0 || marksOfThisAuthorByCurrAcc.size() > 0) {
-                throw new ServiceException("You have no access to rate current author!");
+                throw new ServiceException("You have already rated or have no access to rate current author!");
             }
 
             Mark mark = initMarkFromRequestParams(new Mark(AUTHOR_MARK), reqParams, currAcc.getId());
@@ -62,8 +62,8 @@ public class MarkService {
     public void markCourse(SessionRequestContent requestContent) throws ServiceException {
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
         MarkRepository repository = new MarkRepository();
-        Account account = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
         try {
+            Account account = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
             int courseId = Integer.parseInt(reqParams.get(ATTR_TARGET_ID)[0]);
             List<Integer> markedCourseIds = (List<Integer>) requestContent.getSessionAttributes().get(ATTR_MARKED_COURSES_IDS);
             List<Course> purchasedCourses = (List<Course>) requestContent.getSessionAttributes().get(ATTR_AVAILABLE_COURSES);

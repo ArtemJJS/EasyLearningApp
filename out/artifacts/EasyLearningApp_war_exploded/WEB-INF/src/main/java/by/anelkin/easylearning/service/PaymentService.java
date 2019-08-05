@@ -157,7 +157,6 @@ public class PaymentService {
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
             requestContent.getSessionAttributes().put(ATTR_USER, updatedUser);
         } catch (RepositoryException e) {
-            // FIXME: 7/16/2019
             throw new ServiceException(e);
         }
     }

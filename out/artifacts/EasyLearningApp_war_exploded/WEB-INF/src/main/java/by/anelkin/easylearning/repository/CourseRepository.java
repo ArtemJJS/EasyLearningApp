@@ -4,7 +4,6 @@ import by.anelkin.easylearning.connection.ConnectionPool;
 import by.anelkin.easylearning.entity.Course;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.specification.AppSpecification;
-import by.anelkin.easylearning.specification.course.SelectCourseSearchSpecification;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
 import org.intellij.lang.annotations.Language;
@@ -86,18 +85,11 @@ public class CourseRepository implements AppRepository<Course> {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(specification.getQuery())) {
             String[] params = specification.getStatementParameters();
-            if (!(specification instanceof SelectCourseSearchSpecification)) {
                 for (int i = 0; i < params.length; i++) {
                     statement.setString(i + 1, params[i]);
                 }
-            }else {
-                statement.setString(1, params[0]);
-                statement.setInt(2, Integer.valueOf(params[1]));
-                statement.setInt(3, Integer.valueOf(params[2]));
-            }
-            log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
+            log.debug("Executing query:" + statement.toString().split(":")[1]);
             try (ResultSet resultSet = statement.executeQuery()) {
-                log.debug("Query completed:" + statement.toString().split(":")[1]);
                 courseList = fillCourseList(resultSet);
             }
         } catch (SQLException e) {
@@ -120,7 +112,6 @@ public class CourseRepository implements AppRepository<Course> {
             course.setLessonAmount(resultSet.getInt("course_lesson_amount"));
             course.setDuration(resultSet.getLong("course_duration"));
             course.setState(CourseState.values()[resultSet.getInt("state")]);
-            // TODO: 7/12/2019 продумать если нет оценок (уходит null, обработка в логике)
             String courseAvgMark = resultSet.getString("avg_mark");
 
             String updatePhotoFileName = resultSet.getString("update_img_path");
@@ -142,8 +133,7 @@ public class CourseRepository implements AppRepository<Course> {
         for (int i = 0; i < params.length; i++) {
             statement.setString(i + 1, params[i]);
         }
-        log.debug("Attempt to execute query:" + statement.toString().split(":")[1]);
+        log.debug("Executing query:" + statement.toString().split(":")[1]);
         statement.execute();
-        log.debug("Query completed:" + statement.toString().split(":")[1]);
     }
 }

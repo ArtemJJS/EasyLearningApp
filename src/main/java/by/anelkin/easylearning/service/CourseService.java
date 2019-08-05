@@ -141,7 +141,6 @@ public class CourseService {
         reqAttrs.put("author_of_course", (new AccountService()).takeAuthorOfCourse(courseId));
     }
 
-    // TODO: 7/20/2019 может объединить этот и след методы????
     public void initCourseApprovalPage(SessionRequestContent requestContent) throws ServiceException {
         CourseRepository repository = new CourseRepository();
         try {
@@ -152,7 +151,6 @@ public class CourseService {
         }
     }
 
-    // TODO: 7/21/2019 метод замещает несколько разных? после проверки попробовать совместить
     public void searchCourses(SessionRequestContent requestContent) throws ServiceException {
         Map<String, String[]> reqParam = requestContent.getRequestParameters();
         CourseRepository repository = new CourseRepository();
@@ -192,16 +190,15 @@ public class CourseService {
     public void approveCourse(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = takeLocaleFromSession(requestContent);
         String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_APPROVED);
-        // TODO: 7/18/2019 защиту если придет не инт
+        try {
         int courseId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_COURSE_ID)[0]);
         CourseRepository repository = new CourseRepository();
-        try {
             Course currCourse = repository.query(new SelectCourseByIdSpecification(courseId)).get(0);
             currCourse.setState(CourseState.APPROVED);
             repository.update(currCourse);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + currCourse.getId());
             initCourseApprovalPage(requestContent);
-        } catch (RepositoryException | NullPointerException e) {
+        } catch (RepositoryException | IndexOutOfBoundsException e) {
             throw new ServiceException(e);
         }
     }
@@ -261,11 +258,6 @@ public class CourseService {
 
             course.setDescription((new AccountService()).escapeQuotes(course.getDescription()));
             boolean isOperationProceeded = isCourseNew ? courseRepo.insert(course) : courseRepo.update(course);
-//            if (isCourseNew) {
-//                courseRepo.insert(course);
-//            } else {
-//                courseRepo.update(course);
-//            }
             int courseId = courseRepo.query(new SelectCourseByNameSpecification(courseName))
                     .get(0).getId();
 
@@ -345,8 +337,7 @@ public class CourseService {
         return courseContent;
     }
 
-    // FIXME: 7/29/2019 общий для нескольких репозиториев, куда вынести его? сделать общий интерфейс и туда???
-    public Locale takeLocaleFromSession(SessionRequestContent requestContent) {
+    Locale takeLocaleFromSession(SessionRequestContent requestContent) {
         Locale locale;
         String[] localeParts = requestContent.getSessionAttributes().get(ATTR_LOCALE).toString().split(LOCALE_SPLITTER);
         locale = new Locale(localeParts[0], localeParts[1]);

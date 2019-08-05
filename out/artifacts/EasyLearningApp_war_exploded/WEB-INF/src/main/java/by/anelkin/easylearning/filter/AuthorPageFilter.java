@@ -1,9 +1,7 @@
 package by.anelkin.easylearning.filter;
 
-import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
-import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.service.AccountService;
 
 import javax.servlet.*;
@@ -14,7 +12,6 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = "/author-info/*")
 public class AuthorPageFilter implements Filter {
-    // TODO: 7/12/2019 правильно ли вынести как поле в соответствии с жизненным циклом?
     private AccountService accountService;
 
     @Override

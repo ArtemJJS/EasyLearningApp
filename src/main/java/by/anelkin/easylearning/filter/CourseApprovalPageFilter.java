@@ -21,7 +21,6 @@ public class CourseApprovalPageFilter implements Filter {
         courseService = new CourseService();
     }
 
-    // TODO: 7/18/2019 проверку ролей в отельные фильтры
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
@@ -31,7 +30,6 @@ public class CourseApprovalPageFilter implements Filter {
             courseService.initCourseApprovalPage(requestContent);
             requestContent.insertAttributes(request);
         } catch (ServiceException e) {
-            // FIXME: 7/18/2019
             throw new ServletException(e);
         }
         filterChain.doFilter(request, servletResponse);

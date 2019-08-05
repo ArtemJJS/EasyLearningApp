@@ -9,22 +9,14 @@ import lombok.extern.log4j.Log4j;
 import org.intellij.lang.annotations.Language;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import static by.anelkin.easylearning.entity.Payment.*;
-import static by.anelkin.easylearning.entity.Payment.PaymentCode.*;
 
 @Log4j
 public class PaymentRepository implements AppRepository<Payment> {
     private ConnectionPool pool = ConnectionPool.getInstance();
-    // FIXME: 7/22/2019 может в enum?
-
-//    private static final int BUY_COURSE_WITH_CARD_PAYMENT_CODE = 10;
-//    private static final int BUY_COURSE_FROM_BALANCE_PAYMENT_CODE = 11;
-//    private static final int PAYMENT_CODE_DEPOSIT_FROM_CARD = 15;
-//    private static final int PAYMENT_CODE_CASH_OUT_TO_CARD = 20;
     @Language("sql")
     private static final String QUERY_DELETE = "DELETE FROM user_payment WHERE payment_id = ?";
     @Language("sql")

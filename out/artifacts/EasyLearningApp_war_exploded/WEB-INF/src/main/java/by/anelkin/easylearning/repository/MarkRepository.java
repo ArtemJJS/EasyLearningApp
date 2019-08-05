@@ -64,7 +64,6 @@ public class MarkRepository implements AppRepository<Mark> {
         String actualQuery = mark.getMarkType() == AUTHOR_MARK ? QUERY_INSERT_AUTHOR_MARK : QUERY_INSERT_COURSE_MARK;
         try (Connection connection = pool.takeConnection();
              CallableStatement statement = connection.prepareCall(actualQuery)) {
-            // TODO: 7/8/2019 спросить про два запроса
             String[] params1 = {String.valueOf(mark.getTargetId()), String.valueOf(mark.getAccId()),
                     String.valueOf(mark.getMarkValue()), mark.getComment(), String.valueOf(mark.getMarkDate())};
             setParametersAndExecute(statement, params1);

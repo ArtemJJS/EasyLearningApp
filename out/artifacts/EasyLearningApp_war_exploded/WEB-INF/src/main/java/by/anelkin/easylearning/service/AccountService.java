@@ -14,6 +14,7 @@ import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecificati
 import by.anelkin.easylearning.specification.account.SelectAccToPhotoApproveSpecification;
 import by.anelkin.easylearning.specification.account.SelectAuthorOfCourseSpecification;
 import by.anelkin.easylearning.specification.course.SelectByAuthorIdSpecification;
+import by.anelkin.easylearning.specification.course.SelectCourseRecommendedSpecification;
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
 import by.anelkin.easylearning.specification.mark.SelectMarkByTargetIdSpecification;
 import by.anelkin.easylearning.validator.FormValidator;
@@ -35,7 +36,7 @@ import static by.anelkin.easylearning.entity.Mark.*;
 
 @Log4j
 public class AccountService {
-    // FIXME: 7/20/2019 на относительный путь
+    private static final int AMOUNT_COURSES_RECOMMENDED = 4;
     private static final String CURRENT_ENCRYPTING = "SHA-256";
     private static final String PROP_FILE_FOLDER = "file_folder";
     private static final String RESOURCE_BUNDLE_BASE = "text_resources";
@@ -56,6 +57,7 @@ public class AccountService {
     private static final String PWD_NOT_CHANGED_MSG = "You password wasn't changed! Check inserted data!";
     private static final String ATTR_OPERATION_RESULT = "operation_result";
     private static final String ATTR_AVAILABLE_COURSES = "coursesAvailable";
+    private static final String ATTR_RECOMMENDED_COURSES = "courses_recommended";
     private static final String ATTR_LOGIN = "login";
     private static final String ATTR_WRONG_LOGIN_MSG = "wrong-login";
     private static final String ATTR_REQUESTED_AUTHOR_LOGIN = "requested_author_login";
@@ -73,7 +75,7 @@ public class AccountService {
 
 
     public boolean login(@NonNull SessionRequestContent requestContent) throws ServiceException {
-        HashMap<String, Object> reqAttrs = requestContent.getSessionAttributes();
+        HashMap<String, Object> sessionAttrs = requestContent.getSessionAttributes();
         AccRepository repository = new AccRepository();
         List<Account> accounts = null;
         try {
@@ -106,14 +108,16 @@ public class AccountService {
                     courses = courseRepository.query(new SelectByAuthorIdSpecification(account.getId()));
                     break;
             }
-            reqAttrs.put(SESSION_ATTR_USER, account);
-            reqAttrs.put(ATTR_AVAILABLE_COURSES, courses);
-            reqAttrs.put(SESSION_ATTR_ROLE, account.getType());
+            List<Course> recommendedCourses = courseRepository.query(new SelectCourseRecommendedSpecification(AMOUNT_COURSES_RECOMMENDED, account.getId()));
+            sessionAttrs.put(SESSION_ATTR_USER, account);
+            sessionAttrs.put(ATTR_AVAILABLE_COURSES, courses);
+            sessionAttrs.put(SESSION_ATTR_ROLE, account.getType());
+            // TODO: 8/5/2019 может вынести в фильтр и отображать новые рекомендуемые курсы при каждом обновлении страницы?(в атрибутах реквеста обновлять тогда)
+            sessionAttrs.put(ATTR_RECOMMENDED_COURSES ,recommendedCourses);
             (new MarkService()).insertMarkedCourseIdsIntoSession(requestContent);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
-
         return true;
     }
 
@@ -122,6 +126,7 @@ public class AccountService {
         Locale locale = (new CourseService()).takeLocaleFromSession(requestContent);
         FormValidator validator = new FormValidator();
         AccRepository repository = new AccRepository();
+        HashMap<String, Object> sessionAttrs = requestContent.getSessionAttributes();
         String login = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
         try {
             if (repository.query(new SelectAccByLoginSpecification(login)).size() != 0) {
@@ -144,11 +149,13 @@ public class AccountService {
             }
             repository.insert(account);
             account = repository.query(new SelectAccByLoginSpecification(account.getLogin())).get(0);
-            requestContent.getSessionAttributes().put(SESSION_ATTR_USER, account);
-            requestContent.getSessionAttributes().put(SESSION_ATTR_ROLE, account.getType());
+            sessionAttrs.put(SESSION_ATTR_USER, account);
+            sessionAttrs.put(SESSION_ATTR_ROLE, account.getType());
             CourseRepository courseRepository = new CourseRepository();
             List<Course> courses = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
-            requestContent.getSessionAttributes().put(ATTR_AVAILABLE_COURSES, courses);
+            sessionAttrs.put(ATTR_AVAILABLE_COURSES, courses);
+            List<Course> recommendedCourses = courseRepository.query(new SelectCourseRecommendedSpecification(AMOUNT_COURSES_RECOMMENDED, account.getId()));
+            sessionAttrs.put(ATTR_RECOMMENDED_COURSES ,recommendedCourses);
             (new MarkService()).insertMarkedCourseIdsIntoSession(requestContent);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -390,13 +397,11 @@ public class AccountService {
             e.printStackTrace();
         }
 
-        // FIXME: 7/26/2019 в отдельный метод
         String role = requestParams.get(SESSION_ATTR_ROLE)[0].toLowerCase();
-        // FIXME: 7/26/2019 добавить французские
-        if (role.equals("студент")) {
+        if (role.equals("студент") || role.equals("usager")) {
             role = "user";
         }
-        if (role.equals("автор")) {
+        if (role.equals("автор") || role.equals("auteur")) {
             role = "author";
         }
         try {
