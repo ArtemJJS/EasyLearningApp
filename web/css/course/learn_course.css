@@ -27,7 +27,8 @@ main {
 
 .section_1 {
     width: 70%;
-    height: 70vh;
+    min-height: 70vh;
+    padding-bottom: 40px;
     display: flex;
     flex-direction: column;
 }
@@ -49,6 +50,11 @@ main {
     font-size: 1.4rem;
     margin-bottom: 10px;
 }
+.course_description{
+    width: 100%;
+    word-wrap: break-word;
+    font-size: 0.9rem;
+}
 
 .rating_and_author{
     margin-bottom: 20px;
@@ -61,8 +67,8 @@ main {
 
 .section_2 {
     width: 30%;
-    min-height: 1200px;
-    max-height: 1400px;
+    min-height: 800px;
+    max-height: 1100px;
     overflow-y: scroll;
     background: linear-gradient(to bottom, rgb(247, 209, 209), #fff7fb);
     border-left: 1px solid gray;
