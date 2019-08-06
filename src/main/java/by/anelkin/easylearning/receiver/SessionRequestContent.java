@@ -16,7 +16,7 @@ public class SessionRequestContent {
     private static final String ATTR_DESTROY_SESSION = "destroy_session";
 
     private HashMap<String, Object> requestAttributes = new HashMap<>();
-    private Map<String, String[]> requestParameters;
+    private Map<String, String[]> requestParameters = new HashMap<>();
     private HashMap<String, Object> sessionAttributes = new HashMap<>();
     private ResponseType responseType;
     private String path;

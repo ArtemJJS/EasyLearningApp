@@ -13,6 +13,7 @@ import by.anelkin.easylearning.specification.mark.SelectByIdWithWriterInfoSpecif
 import by.anelkin.easylearning.specification.mark.SelectMarkByTargetIdSpecification;
 import by.anelkin.easylearning.specification.mark.SelectMarksMadeByUserSpecification;
 import by.anelkin.easylearning.validator.FormValidator;
+import lombok.extern.log4j.Log4j;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 
 import static by.anelkin.easylearning.entity.Mark.MarkType.*;
 
+@Log4j
 public class MarkService {
     private static final String ATTR_USER = "user";
     private static final String ATTR_COMMENT = "comment";
@@ -55,9 +57,11 @@ public class MarkService {
             requestContent.getRequestAttributes().put(ATTR_AUTHOR_LOGIN, author.getLogin());
             // TODO: 8/5/2019 ВОПРОС: Надо ли так ловить все искл-я (NullPointer, IndexOutOfBounds)
         } catch (RepositoryException | NullPointerException | IndexOutOfBoundsException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
     }
+
 
     public void markCourse(SessionRequestContent requestContent) throws ServiceException {
         Map<String, String[]> reqParams = requestContent.getRequestParameters();

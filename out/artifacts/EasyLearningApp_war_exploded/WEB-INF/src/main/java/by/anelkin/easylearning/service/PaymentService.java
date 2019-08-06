@@ -114,24 +114,6 @@ public class PaymentService {
     }
 
 
-    private void processAuthorSaleOperation(Course course) throws ServiceException {
-        AccRepository accRepository = new AccRepository();
-        PaymentRepository paymentRepository = new PaymentRepository();
-        Payment payment = new Payment();
-        try {
-            Account author = accRepository.query(new SelectAuthorOfCourseSpecification(course.getId())).get(0);
-            payment.setAccountId(author.getId());
-            payment.setCourseId(course.getId());
-            payment.setPaymentCode(PaymentCode.SALE_COURSE.getCode());
-            payment.setAmount(course.getPrice());
-            payment.setPaymentDate(System.currentTimeMillis());
-            payment.setCurrencyId(CurrencyType.USD.ordinal() + 1);
-            payment.setDescription(DESCRIPTION_SALE_COURSE);
-            paymentRepository.insert(payment);
-        } catch (RepositoryException | NullPointerException e) {
-            throw new ServiceException(e);
-        }
-    }
 
     public void processDepositByCard(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = (new CourseService()).takeLocaleFromSession(requestContent);
@@ -199,6 +181,25 @@ public class PaymentService {
             List<Payment> payments = paymentRepository.query(new SelectPaymentByAccountIdSpecification(currAccount.getId()));
             requestContent.getRequestAttributes().put(ATTR_PAYMENTS, payments);
         } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    private void processAuthorSaleOperation(Course course) throws ServiceException {
+        AccRepository accRepository = new AccRepository();
+        PaymentRepository paymentRepository = new PaymentRepository();
+        Payment payment = new Payment();
+        try {
+            Account author = accRepository.query(new SelectAuthorOfCourseSpecification(course.getId())).get(0);
+            payment.setAccountId(author.getId());
+            payment.setCourseId(course.getId());
+            payment.setPaymentCode(PaymentCode.SALE_COURSE.getCode());
+            payment.setAmount(course.getPrice());
+            payment.setPaymentDate(System.currentTimeMillis());
+            payment.setCurrencyId(CurrencyType.USD.ordinal() + 1);
+            payment.setDescription(DESCRIPTION_SALE_COURSE);
+            paymentRepository.insert(payment);
+        } catch (RepositoryException | NullPointerException e) {
             throw new ServiceException(e);
         }
     }

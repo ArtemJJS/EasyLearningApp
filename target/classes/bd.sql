@@ -1,1 +1,0 @@
-select * from account where acc_id = (select acc_id from restore_pass_requests where uuid = '638e86c8-1420-4fde-8fa4-21ac2150fea8')

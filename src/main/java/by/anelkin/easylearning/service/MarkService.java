@@ -13,6 +13,7 @@ import by.anelkin.easylearning.specification.mark.SelectByIdWithWriterInfoSpecif
 import by.anelkin.easylearning.specification.mark.SelectMarkByTargetIdSpecification;
 import by.anelkin.easylearning.specification.mark.SelectMarksMadeByUserSpecification;
 import by.anelkin.easylearning.validator.FormValidator;
+import lombok.extern.log4j.Log4j;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 
 import static by.anelkin.easylearning.entity.Mark.MarkType.*;
 
+@Log4j
 public class MarkService {
     private static final String ATTR_USER = "user";
     private static final String ATTR_COMMENT = "comment";
@@ -46,6 +48,7 @@ public class MarkService {
             List<Mark> allMarksOfAuthor = repository.query(new SelectMarkByTargetIdSpecification(AUTHOR_MARK, authorId));
             List<Mark> marksOfThisAuthorByCurrAcc = allMarksOfAuthor.stream().filter(mark -> mark.getAccId() == currAcc.getId()).collect(Collectors.toList());
             if (purchasedCoursesOfCurrentAuthor.size() == 0 || marksOfThisAuthorByCurrAcc.size() > 0) {
+                log.warn("Denied access attempt to rate an author. Intruder acc-id: " + currAcc.getId());
                 throw new ServiceException("You have already rated or have no access to rate current author!");
             }
 
@@ -55,9 +58,11 @@ public class MarkService {
             requestContent.getRequestAttributes().put(ATTR_AUTHOR_LOGIN, author.getLogin());
             // TODO: 8/5/2019 ВОПРОС: Надо ли так ловить все искл-я (NullPointer, IndexOutOfBounds)
         } catch (RepositoryException | NullPointerException | IndexOutOfBoundsException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
     }
+
 
     public void markCourse(SessionRequestContent requestContent) throws ServiceException {
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
@@ -69,6 +74,7 @@ public class MarkService {
             List<Course> purchasedCourses = (List<Course>) requestContent.getSessionAttributes().get(ATTR_AVAILABLE_COURSES);
             List<Integer> purchasedCoursesIds = purchasedCourses.stream().map(Course::getId).collect(Collectors.toList());
             if (markedCourseIds.contains(courseId) || !purchasedCoursesIds.contains(courseId)) {
+                log.warn("Denied access attempt to rate a course. Intruder acc-id: " + account.getId());
                 throw new ServiceException("You have already rated or have no access to rate current course!");
             }
 
@@ -77,6 +83,7 @@ public class MarkService {
             repository.insert(mark);
             insertMarkedCourseIdsIntoSession(requestContent);
         } catch (RepositoryException | NullPointerException | IndexOutOfBoundsException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
     }
