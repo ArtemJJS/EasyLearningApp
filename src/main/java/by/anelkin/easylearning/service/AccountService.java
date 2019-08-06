@@ -45,13 +45,23 @@ import static by.anelkin.easylearning.entity.Mark.*;
 @Log4j
 public class AccountService {
     private static final int AMOUNT_COURSES_RECOMMENDED = 4;
+    private static final String PATH_RELATIVE_TO_CHANGE_FORGOTTEN_PASS_PAGE = "/change-forgotten-pass?&uuid=";
     private static final String CURRENT_ENCRYPTING = "SHA-256";
+
     private static final String PROP_FILE_FOLDER = "file_folder";
+    private static final String PROP_EMAIL_SUBJECT = "email_subject";
+    private static final String PROP_EMAIL_ADDRESS = "mail.user.name";
+    private static final String PROP_EMAIL_MESSAGE = "email_message";
+    private static final String PROP_EMAIL_PASSWORD = "mail.user.password";
     private static final String RESOURCE_BUNDLE_BASE = "text_resources";
     private static final String FILE_STORAGE_BUNDLE_BASE = "file_storage";
+    private static final String MAIL_INFO_PROPERTIES = "mail_info.properties";
     private static final String BUNDLE_INCORRECT_DATA = "msg.incorrect_data";
     private static final String BUNDLE_INCORRECT_AGE = "msg.incorrect_date_of_birth";
     private static final String BUNDLE_CHANGE_AVATAR_REQUEST = "msg.change_avatar_request_was_sent";
+    private static final String BUNDLE_INCORRECT_REPEATED_PASS_OR_PATTERN = "msg.incorrect_repeated_password_or_pattern";
+    private static final String BUNDLE_LOGIN_NOT_EXISTS = "msg.login_not_exists";
+    private static final String BUNDLE_EMAIL_SENT = "msg.email_sent";
 
     private static final String URI_SPACE_REPRESENT = "%20";
     private static final String PATH_SPLITTER = "/";
@@ -84,6 +94,9 @@ public class AccountService {
 
 
     public void changeForgottenPass(SessionRequestContent requestContent) throws ServiceException {
+        FormValidator val = new FormValidator();
+        Locale locale = new CourseService().takeLocaleFromSession(requestContent);
+        ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale);
         HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
         AccRepository repository = new AccRepository();
@@ -92,14 +105,14 @@ public class AccountService {
             String uuid = reqParams.get(ATTR_UUID)[0];
             List<Account> accounts = repository.query(new SelectAccByChangePassUuidSpecification(uuid));
             if (accounts.size() == 0) {
-                reqAttrs.put(ATTR_MESSAGE, "incorrect data");
+                reqAttrs.put(ATTR_MESSAGE, rb.getString(BUNDLE_INCORRECT_DATA));
                 return;
             }
             Account account = accounts.get(0);
             String updatedPass = reqParams.get(ATTR_UPDATED_PWD)[0];
             String repeatedPass = reqParams.get(ATTR_REPEATED_PWD)[0];
-            if (!updatedPass.equals(repeatedPass)) {
-                reqAttrs.put(ATTR_MESSAGE, "Repeated pass is incorrect!");
+            if (!updatedPass.equals(repeatedPass) || !val.validatePassword(updatedPass)) {
+                reqAttrs.put(ATTR_MESSAGE, rb.getString(BUNDLE_INCORRECT_REPEATED_PASS_OR_PATTERN));
                 return;
             }
 
@@ -109,7 +122,7 @@ public class AccountService {
             String updatedHashedPass = new String(messageDigest.digest(updatedSaltedPass.getBytes()));
             account.setPassword(updatedHashedPass);
             repository.update(account);
-            reqAttrs.put(ATTR_MESSAGE, "Password changed successfully!");
+            reqAttrs.put(ATTR_MESSAGE, PWD_CHANGED_SUCCESSFULLY_MSG);
             restorePassRequestRepo.delete(new RestorePassRequest(account.getId(), uuid));
         } catch (RepositoryException | IndexOutOfBoundsException | NoSuchAlgorithmException e) {
             throw new ServiceException(e);
@@ -117,13 +130,15 @@ public class AccountService {
     }
 
     public void restorePassword(SessionRequestContent requestContent) throws ServiceException {
+        Locale locale = new CourseService().takeLocaleFromSession(requestContent);
+        ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale);
         AccRepository repo = new AccRepository();
         HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
         String login = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
         try {
             List<Account> accounts = repo.query(new SelectAccByLoginSpecification(login));
             if (accounts.size() == 0) {
-                reqAttrs.put(ATTR_MESSAGE, "login not exists!");
+                reqAttrs.put(ATTR_MESSAGE, rb.getString(BUNDLE_LOGIN_NOT_EXISTS));
                 return;
             }
             Account account = accounts.get(0);
@@ -131,7 +146,7 @@ public class AccountService {
             String uuid = UUID.randomUUID().toString();
             sendConfirmationEmail(email, requestContent.getRequestFullReferer(), uuid);
             new RestorePassRequestRepository().insert(new RestorePassRequest(account.getId(), uuid));
-            reqAttrs.put(ATTR_MESSAGE, "email sent!");
+            reqAttrs.put(ATTR_MESSAGE, rb.getString(BUNDLE_EMAIL_SENT));
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         } catch (IOException | MessagingException e) {
@@ -310,7 +325,7 @@ public class AccountService {
                     Files.deleteIfExists(Paths.get(fileStorage + currAccount.getPathToPhoto()));
                 }
                 file.renameTo(new File(fileStorage + "resources/account_avatar"
-                        + currAccount.getUpdatePhotoPath().substring(currAccount.getUpdatePhotoPath().lastIndexOf("/"))));
+                        + currAccount.getUpdatePhotoPath().substring(currAccount.getUpdatePhotoPath().lastIndexOf(PATH_SPLITTER))));
                 Files.deleteIfExists(Paths.get(fileStorage + currAccount.getUpdatePhotoPath()));
             } catch (IOException e) {
                 throw new ServiceException(e);
@@ -516,20 +531,18 @@ public class AccountService {
 
     private void sendConfirmationEmail(String emailTo, String referer, String uuid) throws IOException, MessagingException {
         String changePassLink = referer.substring(0, referer.lastIndexOf(PATH_SPLITTER));
-        changePassLink += "/change-forgotten-pass?&uuid=" + uuid;
-
+        changePassLink += PATH_RELATIVE_TO_CHANGE_FORGOTTEN_PASS_PAGE + uuid;
 
         Properties properties = new Properties();
-        properties.load(Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream("mail_info.properties")));
+        properties.load(Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream(MAIL_INFO_PROPERTIES)));
 
         Session mailSession = Session.getDefaultInstance(properties);
         Message message = new MimeMessage(mailSession);
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));
-        message.setSubject("EasyLearning restore password instructions.");
-        message.setText("1. Go to link, placed below. \n 2. Set new password. \n " +
-                "3. Remember it! \n " + changePassLink);
+        message.setSubject(properties.getProperty(PROP_EMAIL_SUBJECT));
+        message.setText(properties.getProperty(PROP_EMAIL_MESSAGE) + changePassLink);
         Transport transport = mailSession.getTransport();
-        transport.connect("easylearningappstudy@gmail.com", "AB106116");
+        transport.connect(properties.getProperty(PROP_EMAIL_ADDRESS), properties.getProperty(PROP_EMAIL_PASSWORD));
         transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
         transport.close();
     }

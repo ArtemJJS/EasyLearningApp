@@ -23,9 +23,10 @@ main {
 
 .page_content_wrapper{
     width: 600px;
-    height: 540px;
+    min-height: 500px;
     margin: 0 auto;
     padding-top: 35px;
+    padding-bottom: 45px;
     border: 1px solid grey;
 
     display: flex;
@@ -66,5 +67,11 @@ label{
 
 
 .message{
-    color: red;
+    color: blue;
+    margin-bottom: 20px;
+}
+
+.back_to_login_ref{
+    font-size: 0.9rem;
+    margin-top: 40px;
 }

@@ -20,7 +20,7 @@
 <main>
     <div class="page_title"><fmt:message key="restore.restore_password" bundle="${rb}"/></div>
     <div class="info-message"><fmt:message key="restore.info_message" bundle="${rb}"/></div>
-    <div class="message">${requestScope.get}</div>
+    <div class="message">${requestScope.message}</div>
     <form method="post" action="${pageContext.request.contextPath}/restore-password">
         <div class="param">
             <label for="login_field"><fmt:message key="global.login" bundle="${rb}"/>:</label>
@@ -30,6 +30,7 @@
         <input type="hidden" name="command_name" value="restore_password">
         <input type="submit" value="<fmt:message key="btn.submit" bundle="${rb}"/>">
     </form>
+    <a class="back_to_login_ref" href="${pageContext.request.contextPath}/login"><fmt:message key="restore.back_to_login_page" bundle="${rb}"/></a>
 </main>
 </body>
 </html>

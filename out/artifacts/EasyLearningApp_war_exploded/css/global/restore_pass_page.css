@@ -17,7 +17,7 @@ main {
     border: 1px solid #595959;
     margin: 150px auto;
     padding-top: 30px;
-    padding-bottom: 70px;
+    padding-bottom: 50px;
 
     display: flex;
     flex-direction: column;
@@ -39,12 +39,15 @@ main {
 }
 
 .message{
-    padding: 0 40px;
-    font-size: 0.8rem;
-    color: green;
+    color: blue;
     margin-bottom: 30px;
-    text-align: center;
 }
+
+.back_to_login_ref{
+    font-size: 0.9rem;
+    margin-top: 40px;
+}
+
 form{
     width: 80%;
 

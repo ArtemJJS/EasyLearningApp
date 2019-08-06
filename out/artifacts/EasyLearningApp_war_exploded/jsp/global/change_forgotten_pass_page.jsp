@@ -40,6 +40,7 @@
             <input type="hidden" name="command_name" value="change_forgotten_password">
             <input class="submit_btn" type="submit" value='<fmt:message key='btn.submit' bundle='${rb}'/>'>
         </form>
+        <a class="back_to_login_ref" href="${pageContext.request.contextPath}/login"><fmt:message key="restore.back_to_login_page" bundle="${rb}"/></a>
     </div>
 </main>
 </body>
