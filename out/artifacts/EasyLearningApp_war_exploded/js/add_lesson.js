@@ -1,10 +1,10 @@
-const maxLessons = 10;
+// const maxLessons = 10;
 const supportingChapterBlockElems = 1;
-const maxElemsInsideChapterBlock = maxLessons + supportingChapterBlockElems;
+// const maxElemsInsideChapterBlock = maxLessons + supportingChapterBlockElems;
 
-const maxChapters = 10;
+// const maxChapters = 10;
 const supportingMainFormElems = 6;
-const maxElemsInsideMainForm = maxChapters + supportingMainFormElems;
+// const maxElemsInsideMainForm = maxChapters + supportingMainFormElems;
 
 const chapterNamePattern = "[A-Za-zА-я0-9_ -]{5,200}";
 const lessonNamePattern = "[A-Za-zА-я0-9_ -]{5,200}";
@@ -24,11 +24,11 @@ function addMoreLesson(event) {
     let parentElement = event.target.parentElement;
     let childs = parentElement.children;
     let childCount = childs.length;
-    if (childCount >= maxElemsInsideChapterBlock) {
-        findAncestor(event.target, chapterClass).getElementsByClassName(addLessonClass)[0].style.display = 'none';
-        alert("You have reached lessons amount limit to this chapter!");
-        return;
-    }
+    // if (childCount >= maxElemsInsideChapterBlock) {
+    //     findAncestor(event.target, chapterClass).getElementsByClassName(addLessonClass)[0].style.display = 'none';
+    //     alert("You have reached lessons amount limit to this chapter!");
+    //     return;
+    // }
 
     let parentChapter = findAncestor(event.target, chapterClass);
 
@@ -40,11 +40,11 @@ function addMoreChapter(event) {
     let parentElement = event.target.parentElement;
     let childs = parentElement.children;
     let childCount = childs.length;
-    if (childCount > maxElemsInsideMainForm) {
-        addChapterBtn.style.display = 'none';
-        alert("You have reached chapter amount limit to this course!");
-        return;
-    }
+    // if (childCount > maxElemsInsideMainForm) {
+    //     addChapterBtn.style.display = 'none';
+    //     alert("You have reached chapter amount limit to this course!");
+    //     return;
+    // }
 
     let addedChapter = createChapterInput(childCount - supportingMainFormElems);
     parentElement.insertBefore(addedChapter, childs[childCount - 3]);

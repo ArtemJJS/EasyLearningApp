@@ -191,8 +191,8 @@ public class CourseService {
         Locale locale = takeLocaleFromSession(requestContent);
         String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_APPROVED);
         try {
-        int courseId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_COURSE_ID)[0]);
-        CourseRepository repository = new CourseRepository();
+            int courseId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_COURSE_ID)[0]);
+            CourseRepository repository = new CourseRepository();
             Course currCourse = repository.query(new SelectCourseByIdSpecification(courseId)).get(0);
             currCourse.setState(CourseState.APPROVED);
             repository.update(currCourse);
@@ -252,10 +252,11 @@ public class CourseService {
             course.setDescription(params.get(ATTR_COURSE_DESCRIPTION)[0]);
             course.setPrice(new BigDecimal(params.get(ATTR_COURSE_PRICE)[0]));
             course.setCreationDate(new Date(System.currentTimeMillis()));
-            course.setPathToPicture(DEFAULT_IMG);
             course.setUpdatePhotoPath(EMPTY_STRING);
             course.setState(CourseState.NOT_APPROVED);
-
+            if (isCourseNew) {
+                course.setPathToPicture(DEFAULT_IMG);
+            }
             course.setDescription((new AccountService()).escapeQuotes(course.getDescription()));
             boolean isOperationProceeded = isCourseNew ? courseRepo.insert(course) : courseRepo.update(course);
             int courseId = courseRepo.query(new SelectCourseByNameSpecification(courseName))

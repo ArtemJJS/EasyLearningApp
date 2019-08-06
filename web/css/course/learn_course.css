@@ -61,7 +61,8 @@ main {
 
 .section_2 {
     width: 30%;
-    min-height: 100%;
+    min-height: 1200px;
+    max-height: 1400px;
     overflow-y: scroll;
     background: linear-gradient(to bottom, rgb(247, 209, 209), #fff7fb);
     border-left: 1px solid gray;
