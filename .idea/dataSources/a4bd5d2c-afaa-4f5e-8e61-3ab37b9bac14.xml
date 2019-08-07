@@ -1130,7 +1130,7 @@
       <RoutineKind>procedure</RoutineKind>
     </routine>
     <routine id="292" parent="7" name="createTables">
-      <SourceTextLength>13294</SourceTextLength>
+      <SourceTextLength>13314</SourceTextLength>
       <Definer>root@localhost</Definer>
       <RoutineKind>procedure</RoutineKind>
     </routine>
@@ -1150,7 +1150,7 @@
       <RoutineKind>procedure</RoutineKind>
     </routine>
     <routine id="296" parent="7" name="dropTables">
-      <SourceTextLength>497</SourceTextLength>
+      <SourceTextLength>581</SourceTextLength>
       <Definer>root@localhost</Definer>
       <RoutineKind>procedure</RoutineKind>
     </routine>

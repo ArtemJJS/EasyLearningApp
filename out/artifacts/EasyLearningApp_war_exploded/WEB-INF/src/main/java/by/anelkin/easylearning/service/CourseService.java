@@ -112,6 +112,7 @@ public class CourseService {
             Course course = repository.query(new SelectCourseByNameSpecification(courseName)).get(0);
             Files.deleteIfExists(Paths.get(fileStorage + course.getUpdatePhotoPath()));
             course.setUpdatePhotoPath(EMPTY_STRING);
+            repository.update(course);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + course.getId());
             requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));

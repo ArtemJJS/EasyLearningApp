@@ -1,7 +1,6 @@
 package by.anelkin.easylearning.servlet;
 
 
-import by.anelkin.easylearning.Main;
 import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.filter.JspAccessFilter;
@@ -50,7 +49,7 @@ public class ImgUploadServlet extends HttpServlet {
     public void init() throws ServletException {
         Properties prop = new Properties();
         try {
-            prop.load(Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream("file_storage.properties")));
+            prop.load(Objects.requireNonNull(ImgUploadServlet.class.getClassLoader().getResourceAsStream("file_storage.properties")));
         } catch (IOException e) {
             log.error("Unable to read file storage path from properties!");
         }

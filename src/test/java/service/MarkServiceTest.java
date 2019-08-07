@@ -71,7 +71,6 @@ public class MarkServiceTest {
         Connection connection = pool.takeConnection();
         Statement statement = connection.createStatement();
         try {
-            // FIXME: 8/7/2019 ВОПРОС: почему если dropTables тут то все работает, а если в finally то нет
             statement.execute(DROP_TABLES);
             statement.execute(CREATE_TABLES);
 

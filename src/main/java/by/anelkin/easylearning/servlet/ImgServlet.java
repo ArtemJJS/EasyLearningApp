@@ -2,7 +2,6 @@ package by.anelkin.easylearning.servlet;
 
 
 
-import by.anelkin.easylearning.Main;
 import lombok.extern.log4j.Log4j;
 
 import javax.servlet.ServletException;
@@ -29,7 +28,7 @@ public class ImgServlet extends HttpServlet {
     public void init() throws ServletException {
         Properties prop = new Properties();
         try {
-            prop.load(Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream("file_storage.properties")));
+            prop.load(Objects.requireNonNull(ImgServlet.class.getClassLoader().getResourceAsStream("file_storage.properties")));
             fileStorage = prop.getProperty(PROP_FILE_FOLDER);
         } catch (IOException e) {
            log.error("Unable to read file storage path from properties!");

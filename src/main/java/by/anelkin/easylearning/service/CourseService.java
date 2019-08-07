@@ -112,6 +112,7 @@ public class CourseService {
             Course course = repository.query(new SelectCourseByNameSpecification(courseName)).get(0);
             Files.deleteIfExists(Paths.get(fileStorage + course.getUpdatePhotoPath()));
             course.setUpdatePhotoPath(EMPTY_STRING);
+            repository.update(course);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + course.getId());
             requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));
@@ -124,7 +125,6 @@ public class CourseService {
         HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
         CourseRepository repository = new CourseRepository();
         int courseId = Integer.parseInt(requestContent.getRequestParameters().get("course-id")[0]);
-        log.debug("receiving course from base, id: " + courseId);
         List<Mark> marks = (new MarkService()).takeMarksOfCourse(courseId);
         List<Course> courses = null;
         try {

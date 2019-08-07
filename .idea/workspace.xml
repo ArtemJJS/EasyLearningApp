@@ -7,46 +7,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77346347-82ab-4dd4-a607-ffc1e917cca2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/test/java/service/PaymentServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/service/PaymentServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/META-INF/EasyLearningApp.kotlin_module" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/service/MarkServiceTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/service/PaymentServiceTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/test/java/service/CourseServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/service/CourseServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/service/CourseServiceTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/storage_v2/_src_/schema/testdb.kHS3yw.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/storage_v2/_src_/schema/testdb.kHS3yw.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/connection/ConnectionPool$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/connection/ConnectionPool$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/connection/ConnectionPool.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/connection/ConnectionPool.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/service/MarkService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/service/MarkService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/service/PaymentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/service/PaymentService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/service/CourseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/service/CourseService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/log/logging.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/log/logging.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/log/logging.txt.1" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/log/logging.txt.1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/log/logging.txt.2" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/log/logging.txt.2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/log/logging.txt.3" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/log/logging.txt.3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/connection/ConnectionPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/connection/ConnectionPool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/service/MarkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/service/MarkService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/service/PaymentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/service/CourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/service/CourseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/log/logging.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/log/logging.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/log/logging.txt.1" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/log/logging.txt.1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/log/logging.txt.2" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/log/logging.txt.2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/log/logging.txt.3" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/log/logging.txt.3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/test/java/MarkService/MarkServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/service/MarkServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/PaymentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/test/java/service/MarkServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/test/java/service/MarkServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/test/java/service/PaymentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/test/java/service/PaymentServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/CourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/CourseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/servlet/ImgServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/servlet/ImgServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/servlet/ImgUploadServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/servlet/ImgUploadServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/file_storage.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/file_storage.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/log/logging.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log/logging.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/log/logging.txt.1" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log/logging.txt.1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/log/logging.txt.2" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log/logging.txt.2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/log/logging.txt.3" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log/logging.txt.3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MarkService/MarkServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/test/java/service/MarkServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/service/PaymentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/service/PaymentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/service/MarkServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/service/MarkServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/service/PaymentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/service/PaymentServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/service/CourseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/service/CourseService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/servlet/ImgServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/servlet/ImgServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/servlet/ImgUploadServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/servlet/ImgUploadServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/file_storage.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/file_storage.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/log/logging.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log/logging.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/log/logging.txt.1" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log/logging.txt.1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/log/logging.txt.2" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log/logging.txt.2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/log/logging.txt.3" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log/logging.txt.3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/MarkService/MarkServiceTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/service/MarkServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/service/MarkServiceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/service/PaymentServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/service/PaymentServiceTest.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -55,6 +55,9 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="259" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -95,7 +98,8 @@
         <item name="testDB@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="testdb: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="routines" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="course: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -105,41 +109,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/service/MarkServiceTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="571">
-              <caret line="236" column="19" lean-forward="true" selection-start-line="236" selection-start-column="19" selection-end-line="236" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="dbSrc:///975b04c5/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/routine/createTables@().sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-535">
-              <caret line="227" column="276" selection-start-line="227" selection-start-column="276" selection-end-line="227" selection-end-column="276" />
+            <state relative-caret-position="450">
+              <caret line="235" column="268" selection-start-line="235" selection-start-column="268" selection-end-line="235" selection-end-column="268" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/PaymentService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/CourseService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2743">
-              <caret line="62" column="13" lean-forward="true" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/service/PaymentServiceTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="457">
-              <caret line="446" column="86" selection-start-line="446" selection-start-column="86" selection-end-line="446" selection-end-column="86" />
+            <state relative-caret-position="-1528">
+              <caret line="222" column="16" selection-start-line="222" selection-start-column="16" selection-end-line="222" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -147,10 +130,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/jsp/author/cash_out_page.jsp">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/service/CourseServiceTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-683" />
+            <state relative-caret-position="134">
+              <caret line="171" selection-start-line="171" selection-end-line="171" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
@@ -236,10 +224,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/CommandFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/entity/JspIntWrapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/repository/AccRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/repository/ChapterRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/repository/LessonRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/repository/MarkRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/repository/PaymentRepository.java" />
@@ -248,7 +232,6 @@
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/RestorePasswordCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/ChangeForgottenPassCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/specification/account/SelectAccByChangePassUuidSpecification.java" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/web/css/global/change_password_page.css" />
         <option value="$PROJECT_DIR$/web/jsp/global/change_forgotten_pass_page.jsp" />
         <option value="$PROJECT_DIR$/web/css/start_page.css" />
@@ -259,7 +242,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/text_resources_fr_FR.properties" />
         <option value="$PROJECT_DIR$/src/main/resources/text_resources.properties" />
         <option value="$PROJECT_DIR$/src/main/resources/text_resources_ru_RU.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/CourseService.java" />
         <option value="$PROJECT_DIR$/web/js/add_lesson.js" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/filter/UrlAccessFilter.java" />
         <option value="$PROJECT_DIR$/web/css/course/learn_course.css" />
@@ -274,19 +256,25 @@
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/receiver/SessionRequestContent.java" />
         <option value="$PROJECT_DIR$/src/main/resources/bd.sql" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/console.sql" />
-        <option value="/975b04c5/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/routine/dropTables@().sql" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/MarkService.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/connection/ConnectionPool.java" />
         <option value="$PROJECT_DIR$/src/test/java/MarkService/MarkServiceTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/PaymentService/PaymentServiceTest.java" />
-        <option value="/975b04c5/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/routine/createTables@().sql" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/AccountService.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/PaymentService.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/db.properties" />
         <option value="/975b04c5/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/routine/insertPurchaseCourseFromBalance@(int(11),int(11),int(11),decimal(10,2),mediumtext,int(11),text).sql" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/test/java/service/PaymentServiceTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/service/MarkServiceTest.java" />
-        <option value="$PROJECT_DIR$/README.md" />
+        <option value="/975b04c5/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/routine/dropTables@().sql" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
+        <option value="$PROJECT_DIR$/src/main/resources/db.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/file_storage.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/CourseService.java" />
+        <option value="/975b04c5/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/routine/createTables@().sql" />
+        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/servlet/ImgServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/servlet/ImgUploadServlet.java" />
+        <option value="$PROJECT_DIR$/src/test/java/service/CourseServiceTest.java" />
       </list>
     </option>
   </component>
@@ -334,7 +322,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -345,6 +332,48 @@
             <path>
               <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
               <item name="EasyLearningApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EasyLearningApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EasyLearningApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EasyLearningApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="easylearning" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EasyLearningApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="easylearning" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EasyLearningApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EasyLearningApp" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -352,18 +381,12 @@
               <item name="EasyLearningApp" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
               <item name="jsp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EasyLearningApp" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="jsp" type="462c0819:PsiDirectoryNode" />
-              <item name="author" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -391,19 +414,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="service" />
       <recent name="PaymentService" />
       <recent name="MarkService" />
       <recent name="test" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\User\Desktop\GIT Projects\EasyLearningApp\src\test\resources" />
-      <recent name="C:\Users\User\Desktop\GIT Projects\EasyLearningApp\src\main\java" />
-      <recent name="C:\Users\User\Desktop\GIT Projects\EasyLearningApp\src\main" />
-      <recent name="C:\Users\User\Desktop\GIT Projects\EasyLearningApp\src\main\java\by\anelkin\easylearning" />
-      <recent name="C:\Users\User\Desktop\GIT Projects\EasyLearningApp\src\main\resources" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\Desktop\GIT Projects\EasyLearningApp\src\main\resources" />
@@ -411,6 +425,16 @@
       <recent name="C:\Users\User\Desktop\GIT Projects\EasyLearningApp" />
       <recent name="C:\Users\User\Desktop\GIT Projects\EasyLearningApp\src\main\java\by\anelkin\easylearning" />
       <recent name="C:\Users\User\Desktop\GIT Projects\EasyLearningApp\web\resources\course_img" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Desktop\GIT Projects\EasyLearningApp\src\test\resources" />
+      <recent name="C:\Users\User\Desktop\GIT Projects\EasyLearningApp\src\main\java" />
+      <recent name="C:\Users\User\Desktop\GIT Projects\EasyLearningApp\src\main" />
+      <recent name="C:\Users\User\Desktop\GIT Projects\EasyLearningApp\src\main\java\by\anelkin\easylearning" />
+      <recent name="C:\Users\User\Desktop\GIT Projects\EasyLearningApp\src\main\resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -426,7 +450,7 @@
     </option>
   </component>
   <component name="RunManager" selected="TestNG.&lt;default&gt;">
-    <configuration name="PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldDoNothingIfInsufficientFunds" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="CourseServiceTest.CourseService_ApproveCourse_ShouldUpdateCourseStatus" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="EasyLearningApp" />
       <extension name="coverage">
         <pattern>
@@ -435,8 +459,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="service" />
-      <option name="MAIN_CLASS_NAME" value="service.PaymentServiceTest" />
-      <option name="METHOD_NAME" value="PaymentRepository_ProcessCashOutFromBalance_ShouldDoNothingIfInsufficientFunds" />
+      <option name="MAIN_CLASS_NAME" value="service.CourseServiceTest" />
+      <option name="METHOD_NAME" value="CourseService_ApproveCourse_ShouldUpdateCourseStatus" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -444,7 +468,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldNotInsertPaymentsIfInsufficientFunds" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="CourseServiceTest.CourseService_FreezeCourse_ShouldUpdateCorrectlyCourseState" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="EasyLearningApp" />
       <extension name="coverage">
         <pattern>
@@ -453,8 +477,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="service" />
-      <option name="MAIN_CLASS_NAME" value="service.PaymentServiceTest" />
-      <option name="METHOD_NAME" value="PaymentRepository_ProcessCashOutFromBalance_ShouldNotInsertPaymentsIfInsufficientFunds" />
+      <option name="MAIN_CLASS_NAME" value="service.CourseServiceTest" />
+      <option name="METHOD_NAME" value="CourseService_FreezeCourse_ShouldUpdateCorrectlyCourseState" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -462,7 +486,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldUpdateAccBalance" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="CourseServiceTest.CourseService_InitCourseImgApprovalPage" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="EasyLearningApp" />
       <extension name="coverage">
         <pattern>
@@ -471,8 +495,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="service" />
-      <option name="MAIN_CLASS_NAME" value="service.PaymentServiceTest" />
-      <option name="METHOD_NAME" value="PaymentRepository_ProcessCashOutFromBalance_ShouldUpdateAccBalance" />
+      <option name="MAIN_CLASS_NAME" value="service.CourseServiceTest" />
+      <option name="METHOD_NAME" value="CourseService_InitCourseImgApprovalPage" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -480,7 +504,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PaymentServiceTest.PaymentRepository_ProcessDepositByCard_ShouldInsertOnePayment" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="CourseServiceTest.CourseService_SearchCourses_ShouldCorrectlySearchCourses" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="EasyLearningApp" />
       <extension name="coverage">
         <pattern>
@@ -489,8 +513,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="service" />
-      <option name="MAIN_CLASS_NAME" value="service.PaymentServiceTest" />
-      <option name="METHOD_NAME" value="PaymentRepository_ProcessDepositByCard_ShouldInsertOnePayment" />
+      <option name="MAIN_CLASS_NAME" value="service.CourseServiceTest" />
+      <option name="METHOD_NAME" value="CourseService_SearchCourses_ShouldCorrectlySearchCourses" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -582,19 +606,19 @@
     </configuration>
     <list>
       <item itemvalue="Tomcat Server.Tomcat 9.0.21" />
-      <item itemvalue="TestNG.PaymentServiceTest.PaymentRepository_ProcessDepositByCard_ShouldInsertOnePayment" />
-      <item itemvalue="TestNG.PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldUpdateAccBalance" />
-      <item itemvalue="TestNG.PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldDoNothingIfInsufficientFunds" />
-      <item itemvalue="TestNG.PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldNotInsertPaymentsIfInsufficientFunds" />
+      <item itemvalue="TestNG.CourseServiceTest.CourseService_SearchCourses_ShouldCorrectlySearchCourses" />
+      <item itemvalue="TestNG.CourseServiceTest.CourseService_InitCourseImgApprovalPage" />
+      <item itemvalue="TestNG.CourseServiceTest.CourseService_ApproveCourse_ShouldUpdateCourseStatus" />
+      <item itemvalue="TestNG.CourseServiceTest.CourseService_FreezeCourse_ShouldUpdateCorrectlyCourseState" />
       <item itemvalue="TestNG.&lt;default&gt;" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="TestNG.&lt;default&gt;" />
-        <item itemvalue="TestNG.PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldNotInsertPaymentsIfInsufficientFunds" />
-        <item itemvalue="TestNG.PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldDoNothingIfInsufficientFunds" />
-        <item itemvalue="TestNG.PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldUpdateAccBalance" />
-        <item itemvalue="TestNG.PaymentServiceTest.PaymentRepository_ProcessDepositByCard_ShouldInsertOnePayment" />
+        <item itemvalue="TestNG.CourseServiceTest.CourseService_FreezeCourse_ShouldUpdateCorrectlyCourseState" />
+        <item itemvalue="TestNG.CourseServiceTest.CourseService_ApproveCourse_ShouldUpdateCourseStatus" />
+        <item itemvalue="TestNG.CourseServiceTest.CourseService_InitCourseImgApprovalPage" />
+        <item itemvalue="TestNG.CourseServiceTest.CourseService_SearchCourses_ShouldCorrectlySearchCourses" />
       </list>
     </recent_temporary>
   </component>
@@ -734,14 +758,8 @@
       <workItem from="1565099492253" duration="1953000" />
       <workItem from="1565103460413" duration="7021000" />
       <workItem from="1565120957498" duration="4125000" />
-      <workItem from="1565125150436" duration="14446000" />
-    </task>
-    <task id="LOCAL-00030" summary="feat: add deposit by card to account balance option.">
-      <created>1563295876122</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1563295876122</updated>
+      <workItem from="1565125150436" duration="14492000" />
+      <workItem from="1565175216732" duration="9436000" />
     </task>
     <task id="LOCAL-00031" summary="feat: add check payment history option.">
       <created>1563313402224</created>
@@ -1079,43 +1097,50 @@
       <option name="project" value="LOCAL" />
       <updated>1565132949320</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="feat: add tests for PaymentService methods.">
+      <created>1565139631814</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1565139631814</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="PaymentServiceTest_PaymentRepository_ProcessPurchaseByCard_ShouldInsertTwoPayments - 2019.08.07 at 03h 31m 14s.xml">
-      <configuration name="PaymentServiceTest.PaymentRepository_ProcessPurchaseByCard_ShouldInsertTwoPayments" configurationId="TestNG" />
+    <history-entry file="CourseServiceTest_CourseService_SearchCourses_ShouldCorrectlySearchCourses - 2019.08.07 at 16h 28m 39s.xml">
+      <configuration name="CourseServiceTest.CourseService_SearchCourses_ShouldCorrectlySearchCourses" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="PaymentServiceTest_PaymentRepository_ProcessPurchaseByCard_ShouldAddCourseInPurchased - 2019.08.07 at 03h 32m 40s.xml">
-      <configuration name="PaymentServiceTest.PaymentRepository_ProcessPurchaseByCard_ShouldAddCourseInPurchased" configurationId="TestNG" />
+    <history-entry file="CourseServiceTest_CourseService_SearchCourses_ShouldCorrectlySearchCourses - 2019.08.07 at 16h 28m 48s.xml">
+      <configuration name="CourseServiceTest.CourseService_SearchCourses_ShouldCorrectlySearchCourses" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="PaymentServiceTest_PaymentRepository_ProcessDepositByCard_ShouldUpdateAccBalance - 2019.08.07 at 03h 38m 50s.xml">
-      <configuration name="PaymentServiceTest.PaymentRepository_ProcessDepositByCard_ShouldUpdateAccBalance" configurationId="TestNG" />
+    <history-entry file="CourseServiceTest_CourseService_InitCourseImgApprovalPage - 2019.08.07 at 16h 35m 26s.xml">
+      <configuration name="CourseServiceTest.CourseService_InitCourseImgApprovalPage" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="PaymentServiceTest_PaymentRepository_ProcessDepositByCard_ShouldUpdateAccBalance - 2019.08.07 at 03h 39m 13s.xml">
-      <configuration name="PaymentServiceTest.PaymentRepository_ProcessDepositByCard_ShouldUpdateAccBalance" configurationId="TestNG" />
+    <history-entry file="CourseServiceTest_CourseService_ApproveCourse_ShouldUpdateCourseStatus - 2019.08.07 at 16h 46m 55s.xml">
+      <configuration name="CourseServiceTest.CourseService_ApproveCourse_ShouldUpdateCourseStatus" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="PaymentServiceTest_PaymentRepository_ProcessDepositByCard_ShouldInsertOnePayment - 2019.08.07 at 03h 41m 20s.xml">
-      <configuration name="PaymentServiceTest.PaymentRepository_ProcessDepositByCard_ShouldInsertOnePayment" configurationId="TestNG" />
+    <history-entry file="CourseServiceTest_CourseService_ApproveCourse_ShouldUpdateCourseStatus - 2019.08.07 at 16h 47m 29s.xml">
+      <configuration name="CourseServiceTest.CourseService_ApproveCourse_ShouldUpdateCourseStatus" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="PaymentServiceTest_PaymentRepository_ProcessCashOutFromBalance_ShouldUpdateAccBalance - 2019.08.07 at 03h 48m 15s.xml">
-      <configuration name="PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldUpdateAccBalance" configurationId="TestNG" />
+    <history-entry file="CourseServiceTest_CourseService_ApproveCourse_ShouldUpdateCourseStatus - 2019.08.07 at 16h 48m 12s.xml">
+      <configuration name="CourseServiceTest.CourseService_ApproveCourse_ShouldUpdateCourseStatus" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="PaymentServiceTest_PaymentRepository_ProcessCashOutFromBalance_ShouldUpdateAccBalance - 2019.08.07 at 03h 48m 33s.xml">
-      <configuration name="PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldUpdateAccBalance" configurationId="TestNG" />
+    <history-entry file="CourseServiceTest_CourseService_FreezeCourse_ShouldUpdateCorrectlyCourseState - 2019.08.07 at 16h 50m 16s.xml">
+      <configuration name="CourseServiceTest.CourseService_FreezeCourse_ShouldUpdateCorrectlyCourseState" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="PaymentServiceTest_PaymentRepository_ProcessCashOutFromBalance_ShouldDoNothingIfInsufficientFunds - 2019.08.07 at 03h 52m 55s.xml">
-      <configuration name="PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldDoNothingIfInsufficientFunds" configurationId="TestNG" />
+    <history-entry file="_default_ - 2019.08.07 at 17h 00m 01s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="PaymentServiceTest_PaymentRepository_ProcessCashOutFromBalance_ShouldNotInsertPaymentsIfInsufficientFunds - 2019.08.07 at 03h 55m 06s.xml">
-      <configuration name="PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldNotInsertPaymentsIfInsufficientFunds" configurationId="TestNG" />
+    <history-entry file="_default_ - 2019.08.07 at 17h 02m 59s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2019.08.07 at 03h 56m 01s.xml">
+    <history-entry file="_default_ - 2019.08.07 at 17h 04m 57s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="912830000" />
+    <option name="totallyTimeSpent" value="922312000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1130,7 +1155,7 @@
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.64888126" visible="true" weight="0.121026896" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.64888126" visible="true" weight="0.2096577" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -1140,8 +1165,8 @@
       <window_info id="Web" order="7" sideWeight="0.35111877" side_tool="true" weight="0.21149144" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32997763" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49816626" weight="0.54362416" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.29642057" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49816626" visible="true" weight="0.28299776" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.34340045" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32997763" />
@@ -1153,19 +1178,19 @@
       <window_info anchor="bottom" id="Java Enterprise" order="12" weight="0.32997763" />
       <window_info anchor="bottom" id="Database Changes" order="13" weight="0.32997763" />
       <window_info anchor="bottom" id="Version Control" order="14" weight="0.32997763" />
-      <window_info anchor="bottom" id="Application Servers" order="15" weight="0.32997763" />
-      <window_info anchor="bottom" id="Thumbnails" order="16" weight="0.32997763" />
-      <window_info anchor="bottom" id="SQL Generator" order="17" weight="0.32997763" />
+      <window_info anchor="bottom" id="Thumbnails" order="15" weight="0.32997763" />
+      <window_info anchor="bottom" id="SQL Generator" order="16" weight="0.32997763" />
+      <window_info anchor="bottom" id="Application Servers" order="17" weight="0.21923937" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Maven" order="3" weight="0.22982885" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" weight="0.15403423" />
+      <window_info anchor="right" id="Database" order="6" sideWeight="0.49609983" weight="0.42359412" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.3294621" />
+      <window_info anchor="right" id="Coverage" order="9" sideWeight="0.5039002" side_tool="true" weight="0.42359412" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.64888126" visible="true" weight="0.27567238" />
@@ -1211,7 +1236,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="feat: add russian locale representation to pages." />
     <MESSAGE value="fix: charset problem when adding russian symbols to base from interface." />
     <MESSAGE value="feat: add internationalization to custom tags." />
     <MESSAGE value="feat: log out is now correct." />
@@ -1236,7 +1260,8 @@
     <MESSAGE value="style: change login, restore password, change forgotten password pages." />
     <MESSAGE value="refactor: url access filter controls access to course learning page depending of is course available to particular account." />
     <MESSAGE value="feat: add tests for MarkService methods." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add tests for MarkService methods." />
+    <MESSAGE value="feat: add tests for PaymentService methods." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add tests for PaymentService methods." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1271,6 +1296,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/EasyLearning$Tomcat_9_0_21.ic" NAME="Tomcat 9.0.21 Coverage Results" MODIFIED="1563566354693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/EasyLearning$_default_.ic" NAME="&lt;default&gt; Coverage Results" MODIFIED="1565186319945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
@@ -1282,85 +1308,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/connection/PoolInitializer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/resources/test_db.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Java/test1.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1075">
-          <caret line="43" column="87" lean-forward="true" selection-start-line="43" selection-start-column="87" selection-end-line="43" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/table/author_mark">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="6995ebfa-a2c3-4b55-b439-9836d68a629b">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/table/course_chapter">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="6995ebfa-a2c3-4b55-b439-9836d68a629b">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/table/course_lesson">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="6995ebfa-a2c3-4b55-b439-9836d68a629b">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://47865970-3e28-4724-ad20-d1f31bcebca0/schema/easylearning/table/account">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="6995ebfa-a2c3-4b55-b439-9836d68a629b">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/jsp/user/mark_author.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-600" />
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/testng/testng/6.14.3/testng-6.14.3.jar!/org/testng/internal/TestMethodWorker.class">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/receiver/SessionRequestContent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="18" column="68" selection-start-line="18" selection-start-column="68" selection-end-line="18" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbSrc:///975b04c5/47865970-3e28-4724-ad20-d1f31bcebca0/schema/easylearning/routine/deleteAuthorMark@(int(11)).sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbSrc:///975b04c5/47865970-3e28-4724-ad20-d1f31bcebca0/schema/easylearning/routine/deleteCourseMark@(int(11)).sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -1445,20 +1392,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/bd.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="dbSrc:///975b04c5/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/routine/deleteAuthorMark@(int(11)).sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
           <caret line="1" column="39" selection-start-line="1" selection-start-column="39" selection-end-line="1" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbSrc:///975b04c5/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/routine/dropTables@().sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -1510,35 +1447,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/db.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/entity/Payment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-225">
           <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/table/account">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="6995ebfa-a2c3-4b55-b439-9836d68a629b">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/table/course">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="6995ebfa-a2c3-4b55-b439-9836d68a629b">
-          <filtering>
-            <filter text="" />
-          </filtering>
         </state>
       </provider>
     </entry>
@@ -1605,35 +1517,6 @@
         <state relative-caret-position="-483" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/jsp/author/cash_out_page.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-683" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/PaymentService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2743">
-          <caret line="62" column="13" lean-forward="true" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbSrc:///975b04c5/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/routine/createTables@().sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-535">
-          <caret line="227" column="276" selection-start-line="227" selection-start-column="276" selection-end-line="227" selection-end-column="276" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/service/PaymentServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="446" column="86" selection-start-line="446" selection-start-column="86" selection-end-line="446" selection-end-column="86" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -1644,10 +1527,161 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/PaymentService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1000">
+          <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/jsp/author/cash_out_page.jsp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/service/PaymentServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="77" column="13" lean-forward="true" selection-start-line="77" selection-start-column="13" selection-end-line="77" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/service/MarkServiceTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
-          <caret line="236" column="19" lean-forward="true" selection-start-line="236" selection-start-column="19" selection-end-line="236" selection-end-column="19" />
+        <state relative-caret-position="191">
+          <caret line="73" column="27" selection-start-line="73" selection-start-column="27" selection-end-line="73" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbSrc:///975b04c5/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/routine/dropTables@().sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="47" lean-forward="true" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/bd.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="das://47865970-3e28-4724-ad20-d1f31bcebca0/schema/easylearning/table/course">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="32e2cea4-dc55-442d-a05c-04a3df57f20a">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/db.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/file_storage.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="25" lean-forward="true" selection-start-column="25" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/table/course_mark">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="32e2cea4-dc55-442d-a05c-04a3df57f20a">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/table/course_chapter">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="32e2cea4-dc55-442d-a05c-04a3df57f20a">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/table/account">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="32e2cea4-dc55-442d-a05c-04a3df57f20a">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbSrc:///975b04c5/a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/routine/createTables@().sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="235" column="268" selection-start-line="235" selection-start-column="268" selection-end-line="235" selection-end-column="268" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/specification/course/SelectCourseSearchSpecification.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="12" column="102" selection-start-line="12" selection-start-column="102" selection-end-line="12" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/repository/CourseRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="82" column="24" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/table/course">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="32e2cea4-dc55-442d-a05c-04a3df57f20a">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/entity/Course.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/servlet/ImgUploadServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="641">
+          <caret line="51" column="61" selection-start-line="51" selection-start-column="61" selection-end-line="51" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/servlet/ImgServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/CourseService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1528">
+          <caret line="222" column="16" selection-start-line="222" selection-start-column="16" selection-end-line="222" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/service/CourseServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="171" selection-start-line="171" selection-end-line="171" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -51,10 +51,10 @@ public class MarkServiceTest {
     private ConnectionPool pool = ConnectionPool.getInstance();
 
 
-    @AfterClass
-    public void tearDownTestClass(){
-        pool.closePool();
-    }
+//    @AfterClass
+//    public void tearDownTestClass(){
+//        pool.closePool();
+//    }
 
     @BeforeMethod
     public void setUp(){
@@ -67,11 +67,10 @@ public class MarkServiceTest {
 
 
     @Test
-    public void testMarkAuthorShouldAddMarkIntoDb() throws SQLException, RepositoryException, ServiceException {
+    public void MarkService_MarkAuthor_ShouldAddMarkIntoDb() throws SQLException, RepositoryException, ServiceException {
         Connection connection = pool.takeConnection();
         Statement statement = connection.createStatement();
         try {
-            // FIXME: 8/7/2019 ВОПРОС: почему если dropTables тут то все работает, а если в finally то нет
             statement.execute(DROP_TABLES);
             statement.execute(CREATE_TABLES);
 
@@ -99,7 +98,7 @@ public class MarkServiceTest {
     }
 
     @Test
-    public void testMarkAuthorShouldUpdateAuthorAvgMark() throws SQLException, RepositoryException, ServiceException {
+    public void MarkService_MarkAuthor_ShouldUpdateAuthorAvgMark() throws SQLException, RepositoryException, ServiceException {
         Connection connection = pool.takeConnection();
         Statement statement = connection.createStatement();
         try {
@@ -128,7 +127,7 @@ public class MarkServiceTest {
     }
 
     @Test(expectedExceptions = ServiceException.class)
-    public void testMarkAuthorShouldThrowExceptionIfOperationDenied() throws SQLException, RepositoryException, ServiceException {
+    public void MarkService_MarkAuthor_ShouldThrowExceptionIfOperationDenied() throws SQLException, RepositoryException, ServiceException {
         Connection connection = pool.takeConnection();
         Statement statement = connection.createStatement();
         try {
@@ -153,7 +152,7 @@ public class MarkServiceTest {
 
 
     @Test
-    public void testMarkCourseShouldAddMarkIntoDb() throws SQLException, RepositoryException, ServiceException {
+    public void MarkService_MarkCourse_ShouldAddMarkIntoDb() throws SQLException, RepositoryException, ServiceException {
         Connection connection = pool.takeConnection();
         Statement statement = connection.createStatement();
         try {
@@ -185,7 +184,7 @@ public class MarkServiceTest {
     }
 
     @Test
-    public void testMarkCourseShouldUpdateCourseAvgMark() throws SQLException, RepositoryException, ServiceException {
+    public void MarkService_MarkCourse_ShouldUpdateCourseAvgMark() throws SQLException, RepositoryException, ServiceException {
         Connection connection = pool.takeConnection();
         Statement statement = connection.createStatement();
         try {
@@ -216,7 +215,7 @@ public class MarkServiceTest {
 
 
     @Test(expectedExceptions = ServiceException.class)
-    public void testMarkCourseShouldThrowExceptionIfAccessDenied() throws SQLException, RepositoryException, ServiceException {
+    public void MarkService_MarkCourse_ShouldThrowExceptionIfAccessDenied() throws SQLException, RepositoryException, ServiceException {
         Connection connection = pool.takeConnection();
         Statement statement = connection.createStatement();
         try {
