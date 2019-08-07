@@ -1,250 +1,251 @@
-2019-08-07 01:11:29 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:11:29 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:11:29 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:11:29 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:11:29 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:11:29 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565129489676')
-2019-08-07 01:11:29 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:11:29 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:11:29 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:11:30 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:12:25 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-08-07 01:12:25 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-08-07 01:12:27 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:12:27 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:12:27 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
-2019-08-07 01:12:27 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:12:27 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:12:27 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:12:27 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:12:27 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:12:27 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:12:27 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:12:27 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565129547855')
-2019-08-07 01:12:27 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:12:27 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:12:27 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:12:28 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:17:35 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-08-07 01:17:35 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-08-07 01:20:11 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-08-07 01:20:11 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-08-07 01:20:13 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:20:13 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:20:13 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
-2019-08-07 01:20:13 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:20:13 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:20:13 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:20:13 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:20:13 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:20:13 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:20:13 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:20:13 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565130013901')
-2019-08-07 01:20:13 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:20:13 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:20:13 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:20:13 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:21:10 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-08-07 01:21:10 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-08-07 01:21:10 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:21:10 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:22:30 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-08-07 01:22:30 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-08-07 01:22:31 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:22:32 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
-2019-08-07 01:22:32 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:22:32 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:22:32 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:22:32 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:22:32 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:22:32 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:22:32 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:22:32 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565130152972')
-2019-08-07 01:22:32 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:22:33 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:22:33 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:22:33 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:25:17 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-08-07 01:25:17 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-08-07 01:26:13 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-08-07 01:26:13 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-08-07 01:26:15 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:26:15 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:15 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
-2019-08-07 01:26:15 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:15 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:26:15 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:15 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:26:15 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:15 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:26:15 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:15 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565130375131')
-2019-08-07 01:26:15 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:15 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:26:15 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:15 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:26:17 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
-2019-08-07 01:26:17 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:17 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:26:17 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:17 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:26:17 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:17 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:26:17 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:17 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565130377360')
-2019-08-07 01:26:17 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:17 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:26:17 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:17 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:26:41 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-08-07 01:26:41 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-08-07 01:26:43 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:26:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:43 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
-2019-08-07 01:26:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:43 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:26:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:43 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:26:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:43 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:26:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:43 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565130403722')
-2019-08-07 01:26:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:43 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:26:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:26:46 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
-2019-08-07 01:26:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:46 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:26:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:46 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:26:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:46 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:26:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:46 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565130406091')
-2019-08-07 01:26:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:46 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:26:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:26:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:30:45 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-08-07 01:30:45 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-08-07 01:30:47 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:30:48 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:48 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
-2019-08-07 01:30:48 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:48 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:30:48 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:48 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:30:48 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:48 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:30:48 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:48 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565130648034')
-2019-08-07 01:30:48 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:48 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:30:48 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:48 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:30:50 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:30:50 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:50 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
-2019-08-07 01:30:50 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:50 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:30:50 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:50 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:30:50 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:50 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:30:50 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:50 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565130650354')
-2019-08-07 01:30:50 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:50 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:30:50 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:50 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:30:52 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
-2019-08-07 01:30:52 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:52 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:30:52 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:52 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:30:52 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:52 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:30:52 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:52 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565130652649')
-2019-08-07 01:30:52 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:52 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:30:52 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:30:52 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:31:39 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-08-07 01:31:39 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-08-07 01:31:42 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:31:42 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:42 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
-2019-08-07 01:31:42 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:42 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:31:42 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:42 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:31:42 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:42 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:31:42 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:42 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565130702245')
-2019-08-07 01:31:42 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:42 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:31:42 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:42 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:31:44 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:31:44 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:44 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:31:44 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:44 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:31:44 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:44 main ERROR MarkService:60 - java.lang.NullPointerException
-2019-08-07 01:31:44 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:31:46 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
-2019-08-07 01:31:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:46 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:31:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:46 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:31:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:46 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:31:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:46 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565130706687')
-2019-08-07 01:31:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:46 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:31:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:31:46 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:32:35 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-08-07 01:32:35 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-08-07 01:32:38 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:32:38 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:38 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
-2019-08-07 01:32:38 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:38 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:32:38 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:38 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:32:38 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:38 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:32:38 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:38 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565130758401')
-2019-08-07 01:32:38 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:38 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:32:38 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:38 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:32:40 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:32:40 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:40 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:32:40 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:40 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:32:40 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:40 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:32:40 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:40 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
-2019-08-07 01:32:43 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
-2019-08-07 01:32:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:43 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 01:32:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:43 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:32:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:43 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
-2019-08-07 01:32:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:43 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565130763084')
-2019-08-07 01:32:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:43 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
-2019-08-07 01:32:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
-2019-08-07 01:32:43 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-08-07 01:37:39 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 01:37:39 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:37:39 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 01:37:39 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:37:39 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565131059821')
+2019-08-07 01:37:39 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:37:39 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 01:37:39 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:37:39 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-08-07 01:37:42 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 01:37:42 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:37:42 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 01:37:42 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:37:42 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 01:37:42 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:37:42 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 01:37:42 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:37:42 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-08-07 01:37:44 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 01:37:44 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:37:44 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 01:37:44 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:37:44 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 01:37:44 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:37:44 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 01:37:44 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:37:44 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565131064439')
+2019-08-07 01:37:44 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:37:44 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 01:37:44 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:37:44 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-08-07 01:39:21 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-08-07 01:39:21 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-08-07 01:39:23 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 01:39:23 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:23 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 01:39:23 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:23 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 01:39:23 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:23 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 01:39:23 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:23 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 01:39:23 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:23 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565131163780')
+2019-08-07 01:39:23 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:23 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 01:39:23 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:23 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-08-07 01:39:26 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 01:39:26 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:26 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 01:39:26 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:26 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 01:39:26 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:26 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 01:39:26 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:26 main ERROR service:51 - Denied access attempt. Acc-id: 3
+2019-08-07 01:39:26 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-08-07 01:39:28 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 01:39:28 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:28 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 01:39:28 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:28 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 01:39:28 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:28 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 01:39:28 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:28 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565131168325')
+2019-08-07 01:39:28 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:28 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 01:39:28 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:39:28 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-08-07 01:55:08 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-08-07 01:55:08 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-08-07 01:55:10 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 01:55:10 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:55:10 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 01:55:10 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:55:10 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 01:55:10 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:55:10 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 01:55:10 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:55:10 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 01:55:10 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:55:10 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565132110502')
+2019-08-07 01:55:10 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:55:10 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 01:55:10 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:55:10 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-08-07 01:55:43 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-08-07 01:55:43 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-08-07 01:55:45 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 01:55:45 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:55:45 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 01:55:45 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:55:45 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 01:55:45 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:55:45 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '1'
+2019-08-07 01:55:45 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:55:45 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '1'
+2019-08-07 01:55:45 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 9.
+2019-08-07 01:55:45 main ERROR service:51 - Denied access attempt to rate an author. Intruder acc-id: 3
+2019-08-07 01:55:45 main DEBUG ConnectionPool:104 - Returning of connection into the pool. Available connections: 10.
+2019-08-07 02:00:08 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-08-07 02:00:08 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-08-07 02:00:11 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 02:00:11 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:00:11 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:00:11 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '1'
+2019-08-07 02:00:11 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '1'
+2019-08-07 02:00:11 main WARN  service:51 - Denied access attempt to rate an author. Intruder acc-id: 3
+2019-08-07 02:01:01 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-08-07 02:01:01 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-08-07 02:01:03 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 02:01:03 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:01:03 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:01:03 main DEBUG MarkRepository:121 - Executing query: CALL InsertCourseMark('1', '3', '4', 'good course', '1565132463832')
+2019-08-07 02:01:03 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE acc_id = '3'
+2019-08-07 02:01:03 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 02:01:11 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-08-07 02:01:11 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-08-07 02:01:13 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 02:01:13 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:01:13 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:01:13 main DEBUG MarkRepository:121 - Executing query: CALL InsertCourseMark('1', '3', '4', 'good course', '1565132473457')
+2019-08-07 02:01:13 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE acc_id = '3'
+2019-08-07 02:01:13 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 02:01:19 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-08-07 02:01:19 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-08-07 02:01:22 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:01:22 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:01:22 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:01:22 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 02:01:22 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:01:22 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565132482119')
+2019-08-07 02:01:22 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:01:24 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:01:24 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:01:24 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 02:01:24 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:01:24 main WARN  service:51 - Denied access attempt to rate an author. Intruder acc-id: 3
+2019-08-07 02:01:26 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:01:26 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:01:26 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 02:01:26 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:01:26 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565132486684')
+2019-08-07 02:01:26 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 02:01:28 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 02:01:28 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:01:28 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:01:28 main DEBUG MarkRepository:121 - Executing query: CALL InsertCourseMark('1', '3', '4', 'good course', '1565132488948')
+2019-08-07 02:01:28 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE acc_id = '3'
+2019-08-07 02:01:28 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 02:04:24 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-08-07 02:04:24 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-08-07 02:04:27 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:04:27 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:04:27 main DEBUG MarkRepository:121 - Executing query: CALL InsertCourseMark('1', '3', '4', 'good course', '1565132667098')
+2019-08-07 02:04:27 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE acc_id = '3'
+2019-08-07 02:04:27 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 02:07:01 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-08-07 02:07:01 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-08-07 02:07:04 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 02:07:04 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:07:04 main WARN  service:77 - Denied access attempt to rate a course. Intruder acc-id: 3
+2019-08-07 02:07:26 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-08-07 02:07:26 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-08-07 02:07:28 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:07:28 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:07:28 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:07:28 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 02:07:28 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:07:28 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565132848409')
+2019-08-07 02:07:28 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:07:30 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:07:30 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:07:30 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 02:07:30 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:07:30 main WARN  service:51 - Denied access attempt to rate an author. Intruder acc-id: 3
+2019-08-07 02:07:33 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:07:33 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:07:33 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 02:07:33 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:07:33 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565132853081')
+2019-08-07 02:07:33 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 02:07:35 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 02:07:35 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:07:35 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:07:35 main DEBUG MarkRepository:121 - Executing query: CALL InsertCourseMark('1', '3', '4', 'good course', '1565132855243')
+2019-08-07 02:07:35 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE acc_id = '3'
+2019-08-07 02:07:35 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 02:07:37 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 02:07:37 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:07:37 main WARN  service:77 - Denied access attempt to rate a course. Intruder acc-id: 3
+2019-08-07 02:07:39 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:07:39 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:07:39 main DEBUG MarkRepository:121 - Executing query: CALL InsertCourseMark('1', '3', '4', 'good course', '1565132859556')
+2019-08-07 02:07:39 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE acc_id = '3'
+2019-08-07 02:07:39 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 02:24:02 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-08-07 02:24:02 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-08-07 02:24:05 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:24:05 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:24:05 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:24:05 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 02:24:05 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:24:05 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565133845209')
+2019-08-07 02:24:05 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:24:07 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:24:07 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 02:24:07 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:24:07 main WARN  MarkService:51 - Denied access attempt to rate an author. Intruder acc-id: 3
+2019-08-07 02:24:09 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:24:09 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:24:09 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 02:24:09 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 02:24:09 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565133849625')
+2019-08-07 02:24:09 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 02:24:12 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 02:24:12 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:24:12 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:24:12 main DEBUG MarkRepository:121 - Executing query: CALL InsertCourseMark('1', '3', '4', 'good course', '1565133852031')
+2019-08-07 02:24:12 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE acc_id = '3'
+2019-08-07 02:24:12 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 02:24:14 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:24:14 main WARN  MarkService:77 - Denied access attempt to rate a course. Intruder acc-id: 3
+2019-08-07 02:24:16 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:24:16 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:24:16 main DEBUG MarkRepository:121 - Executing query: CALL InsertCourseMark('1', '3', '4', 'good course', '1565133856499')
+2019-08-07 02:24:16 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE acc_id = '3'
+2019-08-07 02:24:16 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 02:37:24 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-08-07 02:37:24 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-08-07 02:37:26 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:37:26 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 02:37:26 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:38:07 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-08-07 02:38:07 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-08-07 02:38:09 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:38:09 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 02:38:09 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:38:09 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 02:38:09 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:38:09 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:38:53 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
+2019-08-07 02:38:53 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
+2019-08-07 02:38:56 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:38:56 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 02:38:56 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 02:38:56 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 02:38:56 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 02:38:56 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'

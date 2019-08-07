@@ -48,6 +48,7 @@ public class MarkService {
             List<Mark> allMarksOfAuthor = repository.query(new SelectMarkByTargetIdSpecification(AUTHOR_MARK, authorId));
             List<Mark> marksOfThisAuthorByCurrAcc = allMarksOfAuthor.stream().filter(mark -> mark.getAccId() == currAcc.getId()).collect(Collectors.toList());
             if (purchasedCoursesOfCurrentAuthor.size() == 0 || marksOfThisAuthorByCurrAcc.size() > 0) {
+                log.warn("Denied access attempt to rate an author. Intruder acc-id: " + currAcc.getId());
                 throw new ServiceException("You have already rated or have no access to rate current author!");
             }
 
@@ -73,6 +74,7 @@ public class MarkService {
             List<Course> purchasedCourses = (List<Course>) requestContent.getSessionAttributes().get(ATTR_AVAILABLE_COURSES);
             List<Integer> purchasedCoursesIds = purchasedCourses.stream().map(Course::getId).collect(Collectors.toList());
             if (markedCourseIds.contains(courseId) || !purchasedCoursesIds.contains(courseId)) {
+                log.warn("Denied access attempt to rate a course. Intruder acc-id: " + account.getId());
                 throw new ServiceException("You have already rated or have no access to rate current course!");
             }
 
@@ -81,6 +83,7 @@ public class MarkService {
             repository.insert(mark);
             insertMarkedCourseIdsIntoSession(requestContent);
         } catch (RepositoryException | NullPointerException | IndexOutOfBoundsException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
     }

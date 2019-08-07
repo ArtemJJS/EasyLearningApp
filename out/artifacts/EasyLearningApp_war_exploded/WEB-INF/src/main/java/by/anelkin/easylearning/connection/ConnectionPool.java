@@ -101,7 +101,6 @@ public class ConnectionPool {
         if (connection instanceof ProxyConnection) {
             usedConnections.remove(connection);
             availableConnections.offer((ProxyConnection) connection);
-            log.debug("Returning of connection into the pool. Available connections: " + availableConnections.size() + ".");
         } else {
             log.info("Attempt to return wrong connection into the pool!");
         }

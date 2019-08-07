@@ -1130,7 +1130,7 @@
       <RoutineKind>procedure</RoutineKind>
     </routine>
     <routine id="292" parent="7" name="createTables">
-      <SourceTextLength>13379</SourceTextLength>
+      <SourceTextLength>13294</SourceTextLength>
       <Definer>root@localhost</Definer>
       <RoutineKind>procedure</RoutineKind>
     </routine>

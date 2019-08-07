@@ -173,7 +173,6 @@ public class PaymentService {
         }
     }
 
-
     public void insertPaymentsIntoRequestAttributes(SessionRequestContent requestContent) throws ServiceException {
         PaymentRepository paymentRepository = new PaymentRepository();
         Account currAccount = (Account) requestContent.getSessionAttributes().get(ATTR_USER);

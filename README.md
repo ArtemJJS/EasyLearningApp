@@ -1,7 +1,6 @@
 # EasyLearningApp
 Web application. Online learning portal.
 
-Learning site application.
 
 Roles: GUEST, USER, AUTHOR, ADMIN
 
@@ -16,4 +15,5 @@ Options:
   ADMIN: approve or decline courses and their images, approve or decline account avatars
   
   EVERYONE: change language, search courses, change account info, change account avatar, 
-           change password, view courses and author's information
+           change password, view courses and author's information,
+           restore password (receive link on email)
