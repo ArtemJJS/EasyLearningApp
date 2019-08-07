@@ -1,72 +1,164 @@
-2019-08-07 15:27:40 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('Updated from main course')
-2019-08-07 15:27:40 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
-2019-08-07 15:29:13 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-08-07 15:29:13 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-08-07 15:29:15 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 15:29:15 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
-2019-08-07 15:29:15 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '2', update_img_path = '1.png' WHERE course_id = '1'
-2019-08-07 15:29:15 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('Updated from main course')
-2019-08-07 15:29:15 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
-2019-08-07 15:30:01 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-08-07 15:30:01 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-08-07 15:30:03 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 15:30:03 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '2'
-2019-08-07 15:30:03 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Second Course', course_description = 'second', course_creation_date = '2019-07-04', course_picture = 'default_course_avatar.png', course_price = '250.99', state = '0', update_img_path = '2.png' WHERE course_id = '2'
-2019-08-07 15:30:03 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('Second Course')
-2019-08-07 15:30:03 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
-2019-08-07 15:38:54 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-08-07 15:38:54 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-08-07 15:38:56 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 15:38:56 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
-2019-08-07 15:38:56 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '2', update_img_path = '1.png' WHERE course_id = '1'
-2019-08-07 15:38:59 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 15:38:59 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
-2019-08-07 15:38:59 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '2', update_img_path = '1.png' WHERE course_id = '1'
-2019-08-07 15:38:59 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('Updated from main course')
-2019-08-07 15:38:59 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = '1.png', course_price = '4.99', state = '2', update_img_path = '' WHERE course_id = '1'
-2019-08-07 15:38:59 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
-2019-08-07 15:39:01 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 15:39:01 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
-2019-08-07 15:39:01 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '2', update_img_path = '1.png' WHERE course_id = '1'
-2019-08-07 15:39:01 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('Updated from main course')
-2019-08-07 15:39:01 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = '1.png', course_price = '4.99', state = '2', update_img_path = '' WHERE course_id = '1'
-2019-08-07 15:39:01 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
-2019-08-07 15:39:03 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 15:39:03 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '2'
-2019-08-07 15:39:03 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Second Course', course_description = 'second', course_creation_date = '2019-07-04', course_picture = 'default_course_avatar.png', course_price = '250.99', state = '0', update_img_path = '2.png' WHERE course_id = '2'
-2019-08-07 15:39:03 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('Second Course')
-2019-08-07 15:39:03 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
-2019-08-07 15:39:05 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 15:39:05 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
-2019-08-07 15:39:05 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '2', update_img_path = '1.png' WHERE course_id = '1'
-2019-08-07 15:39:05 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('Updated from main course')
-2019-08-07 15:39:05 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
-2019-08-07 15:42:16 main INFO  ConnectionPool:67 - Pool was initialized. Connections amount: 10
-2019-08-07 15:42:16 main DEBUG ConnectionPool:79 - ConnectionPool instance created.
-2019-08-07 15:42:18 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 15:42:18 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
-2019-08-07 15:42:18 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '2', update_img_path = '1.png' WHERE course_id = '1'
-2019-08-07 15:42:21 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 15:42:21 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
-2019-08-07 15:42:21 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '2', update_img_path = '1.png' WHERE course_id = '1'
-2019-08-07 15:42:21 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('Updated from main course')
-2019-08-07 15:42:21 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = '1.png', course_price = '4.99', state = '2', update_img_path = '' WHERE course_id = '1'
-2019-08-07 15:42:21 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
-2019-08-07 15:42:23 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 15:42:23 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
-2019-08-07 15:42:23 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '2', update_img_path = '1.png' WHERE course_id = '1'
-2019-08-07 15:42:23 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('Updated from main course')
-2019-08-07 15:42:23 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = '1.png', course_price = '4.99', state = '2', update_img_path = '' WHERE course_id = '1'
-2019-08-07 15:42:23 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
-2019-08-07 15:42:25 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 15:42:25 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '2'
-2019-08-07 15:42:25 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Second Course', course_description = 'second', course_creation_date = '2019-07-04', course_picture = 'default_course_avatar.png', course_price = '250.99', state = '0', update_img_path = '2.png' WHERE course_id = '2'
-2019-08-07 15:42:25 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('Second Course')
-2019-08-07 15:42:25 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Second Course', course_description = 'second', course_creation_date = '2019-07-04', course_picture = 'default_course_avatar.png', course_price = '250.99', state = '0', update_img_path = '' WHERE course_id = '2'
-2019-08-07 15:42:25 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
-2019-08-07 15:42:28 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
-2019-08-07 15:42:28 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
-2019-08-07 15:42:28 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '2', update_img_path = '1.png' WHERE course_id = '1'
-2019-08-07 15:42:28 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('Updated from main course')
-2019-08-07 15:42:28 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '2', update_img_path = '' WHERE course_id = '1'
-2019-08-07 15:42:28 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
+2019-08-07 17:03:51 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = '1.png', course_price = '4.99', state = '2', update_img_path = '' WHERE course_id = '1'
+2019-08-07 17:03:51 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
+2019-08-07 17:03:53 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:03:53 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 17:03:53 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '2', update_img_path = '1.png' WHERE course_id = '1'
+2019-08-07 17:03:53 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('Updated from main course')
+2019-08-07 17:03:53 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = '1.png', course_price = '4.99', state = '2', update_img_path = '' WHERE course_id = '1'
+2019-08-07 17:03:53 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
+2019-08-07 17:03:56 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:03:56 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '3'
+2019-08-07 17:03:56 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'third course', course_description = 'third', course_creation_date = '2019-07-04', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '2', update_img_path = '' WHERE course_id = '3'
+2019-08-07 17:03:56 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE state = '1'
+2019-08-07 17:03:58 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:03:58 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '2'
+2019-08-07 17:03:58 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Second Course', course_description = 'second', course_creation_date = '2019-07-04', course_picture = 'default_course_avatar.png', course_price = '250.99', state = '0', update_img_path = '2.png' WHERE course_id = '2'
+2019-08-07 17:03:58 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('Second Course')
+2019-08-07 17:03:58 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Second Course', course_description = 'second', course_creation_date = '2019-07-04', course_picture = 'default_course_avatar.png', course_price = '250.99', state = '0', update_img_path = '' WHERE course_id = '2'
+2019-08-07 17:03:58 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
+2019-08-07 17:04:00 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:00 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 17:04:00 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '2', update_img_path = '1.png' WHERE course_id = '1'
+2019-08-07 17:04:00 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('Updated from main course')
+2019-08-07 17:04:00 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'Updated from main course', course_description = 'first', course_creation_date = '2000-01-01', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '2', update_img_path = '' WHERE course_id = '1'
+2019-08-07 17:04:00 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
+2019-08-07 17:04:02 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:02 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '3'
+2019-08-07 17:04:02 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'third course', course_description = 'third', course_creation_date = '2019-07-04', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '0', update_img_path = '' WHERE course_id = '3'
+2019-08-07 17:04:05 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:05 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE state = '1'
+2019-08-07 17:04:05 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '3'
+2019-08-07 17:04:07 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:07 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '3'
+2019-08-07 17:04:07 main DEBUG CourseRepository:136 - Executing query: UPDATE course SET course_name = 'third course', course_description = 'third', course_creation_date = '2019-07-04', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '1', update_img_path = '3.png' WHERE course_id = '3'
+2019-08-07 17:04:07 main DEBUG CourseRepository:91 - Executing query: select * from course where update_img_path NOT IN ('' AND NULL)
+2019-08-07 17:04:07 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '3'
+2019-08-07 17:04:09 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:09 main DEBUG MarkRepository:87 - Executing query: select t1.*, t2.acc_login, t2.acc_photo_path from course_mark as t1 left join account as t2 on t1.acc_id = t2.acc_id where t1.target_id = '1'
+2019-08-07 17:04:09 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 17:04:09 main DEBUG ChapterRepository:72 - Executing query: SELECT * FROM course_chapter WHERE course_id = '1'
+2019-08-07 17:04:09 main DEBUG LessonRepository:75 - Executing query: SELECT * FROM course_lesson WHERE course_chapter_id = '1'
+2019-08-07 17:04:09 main DEBUG LessonRepository:75 - Executing query: SELECT * FROM course_lesson WHERE course_chapter_id = '2'
+2019-08-07 17:04:09 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = (SELECT course_author_id FROM course WHERE course_id = '1')
+2019-08-07 17:04:09 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 17:04:09 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 17:04:12 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:12 main DEBUG CourseRepository:91 - Executing query: SELECT * FROM course WHERE LOWER(course_name) LIKE LOWER('%%')  and state in (2) LIMIT 5 OFFSET 0
+2019-08-07 17:04:12 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 17:04:14 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 17:04:14 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:14 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:14 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 17:04:14 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 17:04:14 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565186654276')
+2019-08-07 17:04:14 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 17:04:16 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:16 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 17:04:16 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 17:04:16 main WARN  MarkService:51 - Denied access attempt to rate an author. Intruder acc-id: 3
+2019-08-07 17:04:18 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:18 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:18 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 17:04:18 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM author_mark WHERE target_id = '2'
+2019-08-07 17:04:19 main DEBUG MarkRepository:121 - Executing query: CALL InsertAuthorMark('2', '3', '4', 'good author', '1565186658996')
+2019-08-07 17:04:19 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 17:04:21 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 17:04:21 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:21 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:21 main DEBUG MarkRepository:121 - Executing query: CALL InsertCourseMark('1', '3', '4', 'good course', '1565186661527')
+2019-08-07 17:04:21 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE acc_id = '3'
+2019-08-07 17:04:21 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE target_id = '1'
+2019-08-07 17:04:23 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:23 main WARN  MarkService:77 - Denied access attempt to rate a course. Intruder acc-id: 3
+2019-08-07 17:04:26 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:26 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:26 main DEBUG MarkRepository:121 - Executing query: CALL InsertCourseMark('1', '3', '4', 'good course', '1565186666057')
+2019-08-07 17:04:26 main DEBUG MarkRepository:87 - Executing query: SELECT * FROM course_mark WHERE acc_id = '3'
+2019-08-07 17:04:26 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 17:04:28 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 17:04:28 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 17:04:28 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 17:04:30 main DEBUG PaymentRepository:100 - Executing query: SELECT * FROM user_payment
+2019-08-07 17:04:30 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 17:04:30 main DEBUG PaymentRepository:100 - Executing query: SELECT * FROM user_payment
+2019-08-07 17:04:33 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 17:04:33 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 17:04:33 main DEBUG PaymentRepository:135 - Executing query: CALL insertPaymentAndUpdateBalance('2', '-1', '20', '-50', '1565186673046', '1', 'Cash out to card ends with 1231')
+2019-08-07 17:04:33 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE LOWER(acc_login) = LOWER('Author')
+2019-08-07 17:04:33 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '2'
+2019-08-07 17:04:35 main DEBUG PaymentRepository:100 - Executing query: SELECT * FROM user_payment
+2019-08-07 17:04:35 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:35 main DEBUG PaymentRepository:135 - Executing query: CALL insertPaymentAndUpdateBalance('3', '-1', '15', '50', '1565186675431', '1', 'Deposit from card ends with 1231')
+2019-08-07 17:04:35 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE LOWER(acc_login) = LOWER('User')
+2019-08-07 17:04:35 main DEBUG PaymentRepository:100 - Executing query: SELECT * FROM user_payment
+2019-08-07 17:04:37 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:37 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:37 main DEBUG PaymentRepository:135 - Executing query: CALL insertPaymentAndUpdateBalance('3', '-1', '15', '50', '1565186677809', '1', 'Deposit from card ends with 1231')
+2019-08-07 17:04:37 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE LOWER(acc_login) = LOWER('User')
+2019-08-07 17:04:37 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:40 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:40 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:40 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '3'
+2019-08-07 17:04:40 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:40 main DEBUG PaymentRepository:135 - Executing query: CALL insertPurchaseCourseByCard('3', '3', '10', '4.99', '1565186680100', '1', 'Purchasing by card ends with 1231. Course
+2019-08-07 17:04:40 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE LOWER(acc_login) = LOWER('User')
+2019-08-07 17:04:40 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:40 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = (SELECT course_author_id FROM course WHERE course_id = '3')
+2019-08-07 17:04:40 main DEBUG PaymentRepository:135 - Executing query: CALL insertPaymentAndUpdateBalance('2', '3', '21', '4.99', '1565186680123', '1', 'Sale course
+2019-08-07 17:04:40 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:42 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:42 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:42 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 17:04:42 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:42 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:44 main DEBUG PaymentRepository:100 - Executing query: SELECT * FROM user_payment
+2019-08-07 17:04:44 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:44 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '3'
+2019-08-07 17:04:44 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:44 main DEBUG PaymentRepository:135 - Executing query: CALL insertPurchaseCourseByCard('3', '3', '10', '4.99', '1565186684733', '1', 'Purchasing by card ends with 1231. Course
+2019-08-07 17:04:44 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE LOWER(acc_login) = LOWER('User')
+2019-08-07 17:04:44 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:44 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = (SELECT course_author_id FROM course WHERE course_id = '3')
+2019-08-07 17:04:44 main DEBUG PaymentRepository:135 - Executing query: CALL insertPaymentAndUpdateBalance('2', '3', '21', '4.99', '1565186684764', '1', 'Sale course
+2019-08-07 17:04:44 main DEBUG PaymentRepository:100 - Executing query: SELECT * FROM user_payment
+2019-08-07 17:04:46 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:46 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:46 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '3'
+2019-08-07 17:04:46 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:46 main DEBUG PaymentRepository:135 - Executing query: CALL insertPurchaseCourseFromBalance('3', '3', '11', '-4.99', '1565186686951', '1', 'Purchasing from balance. Course
+2019-08-07 17:04:46 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE LOWER(acc_login) = LOWER('User')
+2019-08-07 17:04:46 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:46 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = (SELECT course_author_id FROM course WHERE course_id = '3')
+2019-08-07 17:04:46 main DEBUG PaymentRepository:135 - Executing query: CALL insertPaymentAndUpdateBalance('2', '3', '21', '4.99', '1565186686996', '1', 'Sale course
+2019-08-07 17:04:47 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:49 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:49 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:49 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '2'
+2019-08-07 17:04:49 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:49 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:51 main DEBUG PaymentRepository:100 - Executing query: SELECT * FROM user_payment
+2019-08-07 17:04:51 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:51 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '3'
+2019-08-07 17:04:51 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:51 main DEBUG PaymentRepository:135 - Executing query: CALL insertPurchaseCourseFromBalance('3', '3', '11', '-4.99', '1565186691722', '1', 'Purchasing from balance. Course
+2019-08-07 17:04:51 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE LOWER(acc_login) = LOWER('User')
+2019-08-07 17:04:51 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:51 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = (SELECT course_author_id FROM course WHERE course_id = '3')
+2019-08-07 17:04:51 main DEBUG PaymentRepository:135 - Executing query: CALL insertPaymentAndUpdateBalance('2', '3', '21', '4.99', '1565186691751', '1', 'Sale course
+2019-08-07 17:04:51 main DEBUG PaymentRepository:100 - Executing query: SELECT * FROM user_payment
+2019-08-07 17:04:54 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:54 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:54 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 17:04:54 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:54 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:56 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:56 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '1'
+2019-08-07 17:04:56 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'
+2019-08-07 17:04:56 main DEBUG CourseRepository:91 - Executing query: SELECT * from course WHERE course_id = '3'
+2019-08-07 17:04:56 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:56 main DEBUG PaymentRepository:135 - Executing query: CALL insertPurchaseCourseFromBalance('3', '3', '11', '-4.99', '1565186696637', '1', 'Purchasing from balance. Course
+2019-08-07 17:04:56 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE LOWER(acc_login) = LOWER('User')
+2019-08-07 17:04:56 main DEBUG CourseRepository:91 - Executing query: select * from user_purchased_course as t1 LEFT JOIN course as t2 ON t1.course_id = t2.course_id where t1.user_id = '3'
+2019-08-07 17:04:56 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = (SELECT course_author_id FROM course WHERE course_id = '3')
+2019-08-07 17:04:56 main DEBUG PaymentRepository:135 - Executing query: CALL insertPaymentAndUpdateBalance('2', '3', '21', '4.99', '1565186696665', '1', 'Sale course
+2019-08-07 17:04:56 main DEBUG AccRepository:91 - Executing query: SELECT * FROM account WHERE acc_id = '3'

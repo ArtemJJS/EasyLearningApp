@@ -1,16 +1,18 @@
 package service;
 
 import by.anelkin.easylearning.connection.ConnectionPool;
-import by.anelkin.easylearning.entity.Account;
+import by.anelkin.easylearning.entity.*;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.repository.CourseRepository;
 import by.anelkin.easylearning.repository.MarkRepository;
+import by.anelkin.easylearning.service.AccountService;
 import by.anelkin.easylearning.service.CourseService;
 import by.anelkin.easylearning.service.MarkService;
 import by.anelkin.easylearning.specification.account.SelectAccByIdSpecification;
+import by.anelkin.easylearning.specification.course.SelectAllCourseSpecification;
 import by.anelkin.easylearning.specification.course.SelectCourseByIdSpecification;
 import org.intellij.lang.annotations.Language;
 import org.testng.annotations.BeforeMethod;
@@ -26,6 +28,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import static by.anelkin.easylearning.entity.Course.*;
 import static org.testng.Assert.*;
 
 public class CourseServiceTest {
@@ -96,7 +99,7 @@ public class CourseServiceTest {
             String expected = "1.png";
             String actual;
             String query = "select update_img_path from course where course_id = 1";
-            try (ResultSet resultSet = statement.executeQuery(query)){
+            try (ResultSet resultSet = statement.executeQuery(query)) {
                 resultSet.next();
                 actual = resultSet.getString("update_img_path");
             }
@@ -129,7 +132,7 @@ public class CourseServiceTest {
             String expected = "1.png";
             String actual;
             String query = "select course_picture from course where course_id = 1";
-            try (ResultSet resultSet = statement.executeQuery(query)){
+            try (ResultSet resultSet = statement.executeQuery(query)) {
                 resultSet.next();
                 actual = resultSet.getString("course_picture");
             }
@@ -161,7 +164,7 @@ public class CourseServiceTest {
             String expected = "";
             String actual;
             String query = "select update_img_path from course where course_id = 1";
-            try (ResultSet resultSet = statement.executeQuery(query)){
+            try (ResultSet resultSet = statement.executeQuery(query)) {
                 resultSet.next();
                 actual = resultSet.getString("update_img_path");
             }
@@ -193,7 +196,7 @@ public class CourseServiceTest {
             String expected = "default_course_avatar.png";
             String actual;
             String query = "select course_picture from course where course_id = 1";
-            try (ResultSet resultSet = statement.executeQuery(query)){
+            try (ResultSet resultSet = statement.executeQuery(query)) {
                 resultSet.next();
                 actual = resultSet.getString("course_picture");
             }
@@ -225,7 +228,7 @@ public class CourseServiceTest {
             String expected = "";
             String actual;
             String query = "select update_img_path from course where course_id = 2";
-            try (ResultSet resultSet = statement.executeQuery(query)){
+            try (ResultSet resultSet = statement.executeQuery(query)) {
                 resultSet.next();
                 actual = resultSet.getString("update_img_path");
             }
@@ -237,34 +240,177 @@ public class CourseServiceTest {
         }
     }
 
-
-
-
     @Test
-    public void CourseService_InitCoursePage() throws SQLException, RepositoryException, ServiceException {
+    public void CourseService_InitCoursePage_ShouldInitAttributesCorrectly() throws SQLException, RepositoryException, ServiceException {
+        Connection connection = pool.takeConnection();
+        Statement statement = connection.createStatement();
+        try {
+            statement.execute(DROP_TABLES);
+            statement.execute(CREATE_TABLES);
+
+            List<Account> accounts = accRepo.query(new SelectAccByIdSpecification(3));
+            sessionAttrs.put(ATTR_USER, accounts.get(0));
+            reqParams.put("course-id", new String[]{"1"});
+
+            courseService.initCoursePage(requestContent);
+
+            List<Mark> currentCourseMarks = (List<Mark>) reqAttrs.get("currentCourseMarks");
+            Course requestedCourse = (Course) reqAttrs.get("requestedCourse");
+            Map<CourseChapter, List<CourseLesson>> currentCourseContent = (Map<CourseChapter, List<CourseLesson>>) reqAttrs.get("currentCourseContent");
+            Account author_of_course = (Account) reqAttrs.get("author_of_course");
+
+            boolean actual = currentCourseMarks.size() == 0
+                    && requestedCourse.equals(courseRepo.query(new SelectCourseByIdSpecification(1)).get(0))
+                    && author_of_course.equals(accRepo.query(new SelectAccByIdSpecification(2)).get(0))
+                    && currentCourseContent.size() == 2;
+
+            assertTrue(actual);
+        } finally {
+            statement.close();
+            connection.close();
+        }
     }
+
 
     @Test
     public void CourseService_InitCourseApprovalPage() throws SQLException, RepositoryException, ServiceException {
+        Connection connection = pool.takeConnection();
+        Statement statement = connection.createStatement();
+        try {
+            statement.execute(DROP_TABLES);
+            statement.execute(CREATE_TABLES);
+
+            List<Account> accounts = accRepo.query(new SelectAccByIdSpecification(3));
+            sessionAttrs.put(ATTR_USER, accounts.get(0));
+
+            courseService.initCourseApprovalPage(requestContent);
+
+            List<Course> courses = (List<Course>) reqAttrs.get(ATTR_COURSES_LIST);
+            boolean actual = courses.get(0).equals(courseRepo.query(new SelectCourseByIdSpecification(3)).get(0));
+
+            assertTrue(actual);
+        } finally {
+            statement.close();
+            connection.close();
+        }
+    }
+
+
+    @Test
+    public void CourseService_SearchCourses_ShouldCorrectlySearchCourses() throws SQLException, RepositoryException, ServiceException {
+        Connection connection = pool.takeConnection();
+        Statement statement = connection.createStatement();
+        try {
+            statement.execute(DROP_TABLES);
+            statement.execute(CREATE_TABLES);
+
+            List<Account> accounts = accRepo.query(new SelectAccByIdSpecification(3));
+            sessionAttrs.put(ATTR_USER, accounts.get(0));
+            reqParams.put(ATTR_SEARCH_KEY, new String[]{""});
+            reqParams.put(ATTR_PAGE, new String[]{"0"});
+
+            courseService.searchCourses(requestContent);
+
+            List<Course> expected = courseRepo.query(new SelectCourseByIdSpecification(1));
+            List<Course> actual = (List<Course>) reqAttrs.get(ATTR_COURSES_LIST);
+
+            assertEquals(actual, expected);
+        } finally {
+            statement.close();
+            connection.close();
+        }
+    }
+
+
+
+    @Test
+    public void CourseService_InitCourseImgApprovalPage_ShouldCorrectlyInitCoursesList() throws SQLException, RepositoryException, ServiceException {
+        Connection connection = pool.takeConnection();
+        Statement statement = connection.createStatement();
+        try {
+            statement.execute(DROP_TABLES);
+            statement.execute(CREATE_TABLES);
+
+            List<Account> accounts = accRepo.query(new SelectAccByIdSpecification(3));
+            sessionAttrs.put(ATTR_USER, accounts.get(0));
+            reqAttrs.put(ATTR_COURSE_ID, "3");
+            reqAttrs.put(ATTR_FILE_EXTENSION, ".png");
+            courseService.addCourseImgToReview(requestContent);
+
+            courseService.initCourseImgApprovalPage(requestContent);
+
+            List<Course> expected = courseRepo.query(new SelectCourseByIdSpecification(3));
+            List<Course> actual = (List<Course>) reqAttrs.get(ATTR_COURSES_LIST);
+
+            assertEquals(actual, expected);
+        } finally {
+            statement.close();
+            connection.close();
+        }
     }
 
     @Test
-    public void CourseService_SearchCourses() throws SQLException, RepositoryException, ServiceException {
+    public void CourseService_ApproveCourse_ShouldUpdateCourseStatus() throws SQLException, RepositoryException, ServiceException {
+        Connection connection = pool.takeConnection();
+        Statement statement = connection.createStatement();
+        try {
+            statement.execute(DROP_TABLES);
+            statement.execute(CREATE_TABLES);
+
+            List<Account> accounts = accRepo.query(new SelectAccByIdSpecification(3));
+            sessionAttrs.put(ATTR_USER, accounts.get(0));
+            reqParams.put(ATTR_COURSE_ID, new String[]{"3"});
+
+            courseService.approveCourse(requestContent);
+
+            CourseState expected = CourseState.APPROVED;
+            CourseState actual;
+            String query = "select state from course where course_id = 3";
+            try (ResultSet resultSet = statement.executeQuery(query)) {
+                resultSet.next();
+                actual = CourseState.values()[resultSet.getInt("state")];
+            }
+
+            assertEquals(actual, expected);
+        } finally {
+            statement.close();
+            connection.close();
+        }
     }
 
-    @Test
-    public void CourseService_InitCourseImgApprovalPage() throws SQLException, RepositoryException, ServiceException {
-    }
+
 
     @Test
-    public void CourseService_ApproveCourse() throws SQLException, RepositoryException, ServiceException {
+    public void CourseService_FreezeCourse_ShouldUpdateCorrectlyCourseState() throws SQLException, RepositoryException, ServiceException {
+        Connection connection = pool.takeConnection();
+        Statement statement = connection.createStatement();
+        try {
+            statement.execute(DROP_TABLES);
+            statement.execute(CREATE_TABLES);
+
+            List<Account> accounts = accRepo.query(new SelectAccByIdSpecification(3));
+            sessionAttrs.put(ATTR_USER, accounts.get(0));
+            reqParams.put(ATTR_COURSE_ID, new String[]{"3"});
+
+            courseService.freezeCourse(requestContent);
+
+            CourseState expected = CourseState.FREEZING;
+            CourseState actual;
+            String query = "select state from course where course_id = 3";
+            try (ResultSet resultSet = statement.executeQuery(query)) {
+                resultSet.next();
+                actual = CourseState.values()[resultSet.getInt("state")];
+            }
+
+            assertEquals(actual, expected);
+        } finally {
+            statement.close();
+            connection.close();
+        }
     }
 
-    @Test
-    public void CourseService_FreezeCourse() throws SQLException, RepositoryException, ServiceException {
-    }
-
-    @Test
-    public void CourseService_AddCourseToReview() throws SQLException, RepositoryException, ServiceException {
-    }
+//    @Test
+//    public void CourseService_AddCourseToReview() throws SQLException, RepositoryException, ServiceException {
+//
+//    }
 }

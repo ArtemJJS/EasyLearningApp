@@ -62,17 +62,16 @@ public class AccountService {
     private static final String BUNDLE_INCORRECT_REPEATED_PASS_OR_PATTERN = "msg.incorrect_repeated_password_or_pattern";
     private static final String BUNDLE_LOGIN_NOT_EXISTS = "msg.login_not_exists";
     private static final String BUNDLE_EMAIL_SENT = "msg.email_sent";
-
     private static final String URI_SPACE_REPRESENT = "%20";
     private static final String PATH_SPLITTER = "/";
+
+
+
     private static final String ATTR_USER = "user";
     private static final String ATTR_ROLE = "role";
-    private static final String REQUEST_PARAM_PWD = "password";
+    private static final String ATTR_PWD = "password";
     private static final String ATTR_UPDATED_PWD = "updated_password";
     private static final String ATTR_REPEATED_PWD = "repeated_password";
-    private static final String PREVIOUS_OPERATION_MSG = "previous_operation_message";
-    private static final String PWD_CHANGED_SUCCESSFULLY_MSG = "You password has been successfully changed!!!";
-    private static final String PWD_NOT_CHANGED_MSG = "You password wasn't changed! Check inserted data!";
     private static final String ATTR_OPERATION_RESULT = "operation_result";
     private static final String ATTR_AVAILABLE_COURSES = "coursesAvailable";
     private static final String ATTR_RECOMMENDED_COURSES = "courses_recommended";
@@ -82,17 +81,28 @@ public class AccountService {
     private static final String ATTR_REQUESTED_AUTHOR = "requested_author";
     private static final String ATTR_AUTHOR_COURSE_LIST = "author_course_list";
     private static final String ATTR_FILE_EXTENSION = "file_extension";
+    private static final String ATTR_BIRTHDATE = "birthdate";
     private static final String ATTR_ACCS_TO_AVATAR_APPROVE = "acc_avatar_approve_list";
     private static final String ATTR_IS_AUTHOR_MARKED_ALREADY = "is_author_marked_already";
     private static final String ATTR_MESSAGE = "message";
     private static final String ATTR_UUID = "uuid";
+    private static final String ATTR_NAME = "name";
+    private static final String ATTR_SURNAME = "surname";
+    private static final String ATTR_EMAIL = "email";
+    private static final String ATTR_PHONENUMBER = "phonenumber";
+    private static final String ATTR_ABOUT = "about";
+
+
+    private static final String PREVIOUS_OPERATION_MSG = "previous_operation_message";
+    private static final String PWD_CHANGED_SUCCESSFULLY_MSG = "You password has been successfully changed!!!";
+    private static final String PWD_NOT_CHANGED_MSG = "You password wasn't changed! Check inserted data!";
     private static final String MSG_AVATAR_APPROVED = "Avatar changed successfully to account: ";
     private static final String MSG_AVATAR_DECLINED = "Avatar change was declined to account: ";
     private static final String EMPTY_STRING = "";
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-
+    
     public void changeForgottenPass(SessionRequestContent requestContent) throws ServiceException {
         FormValidator val = new FormValidator();
         Locale locale = new CourseService().takeLocaleFromSession(requestContent);
@@ -125,6 +135,7 @@ public class AccountService {
             reqAttrs.put(ATTR_MESSAGE, PWD_CHANGED_SUCCESSFULLY_MSG);
             restorePassRequestRepo.delete(new RestorePassRequest(account.getId(), uuid));
         } catch (RepositoryException | IndexOutOfBoundsException | NoSuchAlgorithmException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
     }
@@ -148,6 +159,7 @@ public class AccountService {
             new RestorePassRequestRepository().insert(new RestorePassRequest(account.getId(), uuid));
             reqAttrs.put(ATTR_MESSAGE, rb.getString(BUNDLE_EMAIL_SENT));
         } catch (RepositoryException e) {
+            log.error(e);
             throw new ServiceException(e);
         } catch (IOException | MessagingException e) {
             log.error(e);
@@ -160,11 +172,11 @@ public class AccountService {
         AccRepository repository = new AccRepository();
         List<Account> accounts = null;
         try {
-            accounts = repository.query(new SelectAccByLoginSpecification(requestContent.getRequestParameters().get("login")[0]));
+            accounts = repository.query(new SelectAccByLoginSpecification(requestContent.getRequestParameters().get(ATTR_LOGIN)[0]));
             if (accounts.size() != 1) {
                 return false;
             }
-            String expectedPassword = requestContent.getRequestParameters().get(REQUEST_PARAM_PWD)[0];
+            String expectedPassword = requestContent.getRequestParameters().get(ATTR_PWD)[0];
             try {
                 MessageDigest messageDigest = MessageDigest.getInstance(CURRENT_ENCRYPTING);
                 String saltedPass = expectedPassword + accounts.get(0).getPassSalt();
@@ -193,16 +205,16 @@ public class AccountService {
             sessionAttrs.put(ATTR_USER, account);
             sessionAttrs.put(ATTR_AVAILABLE_COURSES, courses);
             sessionAttrs.put(ATTR_ROLE, account.getType());
-            // TODO: 8/5/2019 может вынести в фильтр и отображать новые рекомендуемые курсы при каждом обновлении страницы?(в атрибутах реквеста обновлять тогда)
             sessionAttrs.put(ATTR_RECOMMENDED_COURSES, recommendedCourses);
             (new MarkService()).insertMarkedCourseIdsIntoSession(requestContent);
         } catch (RepositoryException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
         return true;
     }
 
-    // FIXME: 7/29/2019 может как-то получше переписать?
+
     public boolean signUp(@NonNull SessionRequestContent requestContent) throws ServiceException {
         Locale locale = (new CourseService()).takeLocaleFromSession(requestContent);
         FormValidator validator = new FormValidator();
@@ -216,8 +228,8 @@ public class AccountService {
             }
             Account account = new Account();
             initAccount(account, requestContent.getRequestParameters());
-            String pass = requestContent.getRequestParameters().get(REQUEST_PARAM_PWD)[0];
-            String birthdate = requestContent.getRequestParameters().get("birthdate")[0];
+            String pass = requestContent.getRequestParameters().get(ATTR_PWD)[0];
+            String birthdate = requestContent.getRequestParameters().get(ATTR_BIRTHDATE)[0];
             if (!validator.validateBirthDate(birthdate)) {
                 String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_INCORRECT_AGE);
                 requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
@@ -250,7 +262,7 @@ public class AccountService {
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
         HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
         AccRepository repository = new AccRepository();
-        String currPassword = reqParams.get(REQUEST_PARAM_PWD)[0];
+        String currPassword = reqParams.get(ATTR_PWD)[0];
         String updatedPassword = reqParams.get(ATTR_UPDATED_PWD)[0];
         String repeatedPassword = reqParams.get(ATTR_REPEATED_PWD)[0];
         boolean isUpdatedPwdCorrect = validator.validatePassword(updatedPassword);
@@ -430,7 +442,6 @@ public class AccountService {
         HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
         AccRepository repository = new AccRepository();
         MarkRepository markRepository = new MarkRepository();
-        // TODO: 7/12/2019 подумать надо ли Optional
         String login = (String) reqAttrs.get(ATTR_REQUESTED_AUTHOR_LOGIN);
         List<Account> accounts = null;
         try {
@@ -453,12 +464,12 @@ public class AccountService {
 
     // TODO: 7/12/2019 надо ли проверку на ноль??? nonnull?
     private void initAccount(Account account, Map<String, String[]> requestParams) throws ServiceException {
-        account.setLogin(requestParams.get("login")[0]);
-        account.setName(requestParams.get("name")[0]);
-        account.setSurname(requestParams.get("surname")[0]);
-        account.setEmail(requestParams.get("email")[0]);
-        account.setPhoneNumber(requestParams.get("phonenumber")[0]);
-        account.setAbout(requestParams.get("about")[0]);
+        account.setLogin(requestParams.get(ATTR_LOGIN)[0]);
+        account.setName(requestParams.get(ATTR_NAME)[0]);
+        account.setSurname(requestParams.get(ATTR_SURNAME)[0]);
+        account.setEmail(requestParams.get(ATTR_EMAIL)[0]);
+        account.setPhoneNumber(requestParams.get(ATTR_PHONENUMBER)[0]);
+        account.setAbout(requestParams.get(ATTR_ABOUT)[0]);
 
         try {
             MessageDigest messageDigest = MessageDigest.getInstance(CURRENT_ENCRYPTING);

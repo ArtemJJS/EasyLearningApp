@@ -1130,7 +1130,7 @@
       <RoutineKind>procedure</RoutineKind>
     </routine>
     <routine id="292" parent="7" name="createTables">
-      <SourceTextLength>13314</SourceTextLength>
+      <SourceTextLength>13498</SourceTextLength>
       <Definer>root@localhost</Definer>
       <RoutineKind>procedure</RoutineKind>
     </routine>
@@ -1509,6 +1509,8 @@
       <RefSchemaName>testdb</RefSchemaName>
       <RefTableName>course</RefTableName>
       <RefColNames>course_id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="360" parent="282" name="lesson_id">
       <Position>1</Position>
@@ -1561,6 +1563,8 @@
       <RefSchemaName>testdb</RefSchemaName>
       <RefTableName>course_chapter</RefTableName>
       <RefColNames>course_chapter_id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="369" parent="283" name="mark_id">
       <Position>1</Position>

@@ -125,7 +125,6 @@ public class CourseService {
         HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
         CourseRepository repository = new CourseRepository();
         int courseId = Integer.parseInt(requestContent.getRequestParameters().get("course-id")[0]);
-        log.debug("receiving course from base, id: " + courseId);
         List<Mark> marks = (new MarkService()).takeMarksOfCourse(courseId);
         List<Course> courses = null;
         try {
