@@ -44,7 +44,7 @@ import static by.anelkin.easylearning.util.GlobalConstant.*;
 
 @Log4j
 public class AccountService {
-    private static final int AMOUNT_COURSES_RECOMMENDED = 6;
+
     private static final String PATH_RELATIVE_TO_CHANGE_FORGOTTEN_PASS_PAGE = "/change-forgotten-pass?&uuid=";
     private static final String DEFAULT_ACC_AVATAR = "default_acc_avatar";
     private static final String CURRENT_ENCRYPTING = "SHA-256";
@@ -169,11 +169,9 @@ public class AccountService {
                     courses = courseRepository.query(new SelectByAuthorIdSpecification(account.getId()));
                     break;
             }
-            List<Course> recommendedCourses = courseRepository.query(new SelectCourseRecommendedSpecification(AMOUNT_COURSES_RECOMMENDED, account.getId()));
             sessionAttrs.put(ATTR_USER, account);
             sessionAttrs.put(ATTR_AVAILABLE_COURSES, courses);
             sessionAttrs.put(ATTR_ROLE, account.getType());
-            sessionAttrs.put(ATTR_RECOMMENDED_COURSES, recommendedCourses);
             (new MarkService()).insertMarkedCourseIdsIntoSession(requestContent);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -214,8 +212,6 @@ public class AccountService {
             CourseRepository courseRepository = new CourseRepository();
             List<Course> courses = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
             sessionAttrs.put(ATTR_AVAILABLE_COURSES, courses);
-            List<Course> recommendedCourses = courseRepository.query(new SelectCourseRecommendedSpecification(AMOUNT_COURSES_RECOMMENDED, account.getId()));
-            sessionAttrs.put(ATTR_RECOMMENDED_COURSES, recommendedCourses);
             (new MarkService()).insertMarkedCourseIdsIntoSession(requestContent);
         } catch (RepositoryException e) {
             throw new ServiceException(e);

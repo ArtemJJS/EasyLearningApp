@@ -22,6 +22,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static by.anelkin.easylearning.entity.Account.*;
 import static by.anelkin.easylearning.entity.Course.*;
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 
@@ -31,6 +32,7 @@ public class CourseService {
     private static final String DEFAULT_COURSE_AVATAR = "default_course_avatar";
     private static final String PROP_FILE_FOLDER = "file_folder";
     private static final int SEARCH_LIMIT = 4;
+    private static final int AMOUNT_COURSES_RECOMMENDED = 6;
 
     private static final String RESOURCE_BUNDLE_BASE = "text_resources";
     private static final String FILE_STORAGE_BUNDLE_BASE = "file_storage";
@@ -46,6 +48,23 @@ public class CourseService {
     private static final String PATTERN_LESSON_CONTENT = "lesson_content_";
     private static final String PATTERN_LESSON_DURATION = "lesson_duration_";
 
+
+    public void chooseRecommendedCourses(SessionRequestContent requestContent) throws ServiceException {
+        CourseRepository repo = new CourseRepository();
+        AccountType role = (AccountType) requestContent.getSessionAttributes().get(ATTR_ROLE);
+        List<Course> courses = new ArrayList<>();
+        try {
+            if (role == AccountType.GUEST) {
+                courses = repo.query(new SelectCourseRecommendedGuestSpecification(AMOUNT_COURSES_RECOMMENDED));
+            }else {
+                Account account = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
+                courses = repo.query(new SelectCourseRecommendedSpecification(AMOUNT_COURSES_RECOMMENDED, account.getId()));
+            }
+            requestContent.getRequestAttributes().put(ATTR_RECOMMENDED_COURSES, courses);
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
+    }
 
     public void addCourseImgToReview(SessionRequestContent requestContent) throws ServiceException {
         int courseId = Integer.parseInt(String.valueOf(requestContent.getRequestAttributes().get(ATTR_COURSE_ID)));

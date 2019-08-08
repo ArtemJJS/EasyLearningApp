@@ -34,8 +34,9 @@ public class CommandFactory {
         MARK_AUTHOR (USER),
         CHANGE_LANG (ADMIN, AUTHOR, USER, GUEST),
         RESTORE_PASSWORD(GUEST),
-        GO_CHANGE_PASS(GUEST),
+//        GO_CHANGE_PASS(GUEST),
         CHANGE_FORGOTTEN_PASSWORD(GUEST);
+
 
 
 
@@ -124,6 +125,7 @@ public class CommandFactory {
             case CHANGE_FORGOTTEN_PASSWORD:
                 command = new ChangeForgottenPassCommand();
                 break;
+
 
         }
         return command;
