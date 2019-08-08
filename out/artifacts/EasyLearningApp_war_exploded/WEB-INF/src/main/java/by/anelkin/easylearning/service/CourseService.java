@@ -7,10 +7,12 @@ import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.ChapterRepository;
 import by.anelkin.easylearning.repository.CourseRepository;
 import by.anelkin.easylearning.repository.LessonRepository;
+import by.anelkin.easylearning.repository.MarkRepository;
 import by.anelkin.easylearning.specification.chapter.SelectAllFromCourseSpecification;
 import by.anelkin.easylearning.specification.chapter.SelectChapterByNameAndCourseIdSpecification;
 import by.anelkin.easylearning.specification.course.*;
 import by.anelkin.easylearning.specification.lesson.SelectByChapterIdSpecification;
+import by.anelkin.easylearning.specification.mark.SelectMarkByTargetIdSpecification;
 import by.anelkin.easylearning.validator.FormValidator;
 import lombok.extern.log4j.Log4j;
 
@@ -56,7 +58,7 @@ public class CourseService {
         try {
             if (role == AccountType.GUEST) {
                 courses = repo.query(new SelectCourseRecommendedGuestSpecification(AMOUNT_COURSES_RECOMMENDED));
-            }else {
+            } else {
                 Account account = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
                 courses = repo.query(new SelectCourseRecommendedSpecification(AMOUNT_COURSES_RECOMMENDED, account.getId()));
             }
@@ -136,20 +138,23 @@ public class CourseService {
         CourseRepository repository = new CourseRepository();
         int courseId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_COURSE_ID_DEFIS)[0]);
         List<Mark> marks = (new MarkService()).takeMarksOfCourse(courseId);
-        List<Course> courses = null;
+        List<Mark> marksWithComment = marks.stream().filter(mark -> !mark.getComment().equals(EMPTY_STRING)).collect(Collectors.toList());
         try {
+            int courseMarkCount = new MarkRepository().query(new SelectMarkByTargetIdSpecification(Mark.MarkType.COURSE_MARK, courseId)).size();
+            List<Course> courses = null;
             courses = repository.query(new SelectCourseByIdSpecification(courseId));
+            if (courses.size() != 1) {
+                log.error("Course wasn't found, id: " + courseId);
+                throw new ServiceException("Course wasn't found");
+            }
+            reqAttrs.put(ATTR_COURSE_MARK_COUNT, courseMarkCount);
+            reqAttrs.put(ATTR_CURR_COURSE_MARKS, marksWithComment);
+            reqAttrs.put(ATTR_REQUESTED_COURSE, courses.get(0));
+            reqAttrs.put(ATTR_CURR_COURSE_CONTENT, takeChaptersAndLessons(courseId));
+            reqAttrs.put(ATTR_AUTHOR_OF_COURSE, (new AccountService()).takeAuthorOfCourse(courseId));
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
-        if (courses.size() != 1) {
-            log.error("Course wasn't found, id: " + courseId);
-            throw new ServiceException("Course wasn't found");
-        }
-        reqAttrs.put(ATTR_CURR_COURSE_MARKS, marks);
-        reqAttrs.put(ATTR_REQUESTED_COURSE, courses.get(0));
-        reqAttrs.put(ATTR_CURR_COURSE_CONTENT, takeChaptersAndLessons(courseId));
-        reqAttrs.put(ATTR_AUTHOR_OF_COURSE, (new AccountService()).takeAuthorOfCourse(courseId));
     }
 
     public void initCourseApprovalPage(SessionRequestContent requestContent) throws ServiceException {

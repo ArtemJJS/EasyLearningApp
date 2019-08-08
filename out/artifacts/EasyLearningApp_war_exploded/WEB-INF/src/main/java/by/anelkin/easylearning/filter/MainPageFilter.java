@@ -14,7 +14,6 @@ public class MainPageFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("FILTER");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         SessionRequestContent requestContent = new SessionRequestContent();
         requestContent.extractValues(request);

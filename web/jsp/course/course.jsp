@@ -27,7 +27,7 @@
             <div class="course_name">${curr_course.name}</div>
             <div class="course_description">${curr_course.description}</div>
             <div class="course_rating"><fmt:message key='course.mark_from_users' bundle='${rb}'/>: <ctg:write-rating rating='${curr_course.avgMark}'/>
-                <br><fmt:message key='course.feedbacks' bundle='${rb}'/>: 34</div>
+                <br><fmt:message key='course.feedbacks' bundle='${rb}'/>: ${requestScope.course_mark_count}</div>
             <ctg:course-options course="${curr_course}"/>
         </div>
         <div class="course_view">
@@ -90,10 +90,17 @@
         <c:forEach var="mark" items="${marks}">
             <div class="single_mark">
                 <div class="mark_content">
-                    <div class="value">Mark: ${mark.markValue}</div>
                     <div class="writer_login">${mark.accLogin}</div>
+                    <div class="value"><fmt:message key="mark.mark" bundle="${rb}"/>: ${mark.markValue}</div>
                     <div class="comment">${mark.comment}</div>
-                    <div class="date">${mark.markDate}</div>
+                    <div class="date"><ctg:millisec-to-time millisecAmount="${mark.markDate}"/></div>
+                <c:if test="${sessionScope.role.toString().equalsIgnoreCase('admin')}">
+                    <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
+                        <input type="hidden" name="mark_id" value="${mark.id}">
+                        <input type="hidden" name="command_name" value="delete_course_comment">
+                        <input class="mark_action_submit_btn" type="submit" value='<fmt:message key="btn.delete_comment" bundle="${rb}"/>'>
+                    </form>
+                </c:if>
                 </div>
                 <img class="writer_avatar" src="${pageContext.request.contextPath}/img/${mark.accPathToPhoto}"
                      alt="avatar"/>

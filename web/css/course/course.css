@@ -27,7 +27,7 @@ main {
     padding: 10px;
     width: 90%;
     min-height: 300px;
-    background-color: rgb(184, 185, 187);
+    background-color: rgba(214, 215, 217, 0.89);
     border: 1px solid grey;
 
     display: flex;
@@ -142,11 +142,11 @@ main {
     flex-direction: column;
 }
 
-.author_rating, .author_students{
+.author_rating, .author_students {
     font-size: 0.9rem;
 }
 
-.author_about{
+.author_about {
     width: 75%;
 }
 
@@ -157,21 +157,21 @@ main {
 }
 
 
-.author_login{
+.author_login {
     font-weight: bold;
 }
-
 
 
 .author_rating {
     margin-top: 10px;
 }
 
-.author_description{
+.author_description {
     margin: 12px 0;
     word-wrap: break-word;
     font-size: 0.9rem;
 }
+
 /*==============================*/
 
 
@@ -183,8 +183,6 @@ main {
 
     display: flex;
     flex-direction: column;
-
-
 }
 
 .single_mark {
@@ -194,19 +192,81 @@ main {
     justify-content: space-between;
 }
 
-.writer_avatar {
-    max-width: 120px;
-    max-height: 200px;
+.mark_content {
+    padding-left: 8px;
+    padding-bottom: 5px;
 }
 
-.author_info_title{
+.writer_avatar {
+    width: 160px;
+    max-height: 210px;
+}
+
+.author_info_title {
     margin-top: 35px;
     position: relative;
     top: 15px;
     font-size: 1.25rem;
 }
 
-.comments_title{
+.comments_title {
     align-self: center;
     font-size: 1.15rem;
+}
+
+.comment {
+    margin-top: 18px;
+    margin-bottom: 15px;
+}
+
+.date {
+    font-weight: bold;
+    font-size: 0.75rem;
+    margin-bottom: 10px;
+}
+
+.writer_login {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+.links {
+    display: flex;
+}
+
+.links a {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    margin-right: 20px;
+    text-decoration: none;
+    padding: 5px 8px;
+    background-color: rgba(87, 234, 131, 0.25);
+
+    display: inline-block;
+    border: 1px solid #008006;
+}
+
+.links a:hover {
+    background-color: rgb(143, 142, 230);
+    border: 1px solid #1f3e80;
+    cursor: pointer;
+}
+
+.mark_action_submit_btn {
+    font-size: 0.9rem;
+    margin-right: 20px;
+    text-decoration: none;
+    padding: 3px 5px;
+    background-color: rgba(87, 234, 131, 0.25);
+
+    display: inline-block;
+    border: 1px solid #008006;
+}
+
+.mark_action_submit_btn:hover {
+    background-color: rgb(143, 142, 230);
+    border: 1px solid #1f3e80;
+    cursor: pointer;
 }
