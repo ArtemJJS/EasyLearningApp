@@ -1,6 +1,7 @@
 package by.anelkin.easylearning.tag;
 
 import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+@Log4j
 @Setter
 public class RatingTag extends TagSupport {
     private static final String BUNDLE_NOT_RATED = "tag.not_rated";
@@ -28,7 +30,6 @@ public class RatingTag extends TagSupport {
         } else {
             String[] localeParts = localeAttr.toString().split(LOCALE_SPLITTER);
             locale = new Locale(localeParts[0], localeParts[1]);
-//            locale = localeAttr;
         }
         ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale);
         String notRated = rb.getString(BUNDLE_NOT_RATED);
@@ -40,6 +41,7 @@ public class RatingTag extends TagSupport {
                 writer.write(String.valueOf(rating));
             }
         } catch (IOException e) {
+            log.error(e);
             throw new JspTagException(e);
         }
         return SKIP_BODY;

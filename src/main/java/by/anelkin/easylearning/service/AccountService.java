@@ -159,7 +159,6 @@ public class AccountService {
             new RestorePassRequestRepository().insert(new RestorePassRequest(account.getId(), uuid));
             reqAttrs.put(ATTR_MESSAGE, rb.getString(BUNDLE_EMAIL_SENT));
         } catch (RepositoryException e) {
-            log.error(e);
             throw new ServiceException(e);
         } catch (IOException | MessagingException e) {
             log.error(e);
@@ -186,6 +185,7 @@ public class AccountService {
                     return false;
                 }
             } catch (NoSuchAlgorithmException e) {
+                log.error(e);
                 throw new ServiceException(e);
             }
             Account account = accounts.get(0);
@@ -208,7 +208,6 @@ public class AccountService {
             sessionAttrs.put(ATTR_RECOMMENDED_COURSES, recommendedCourses);
             (new MarkService()).insertMarkedCourseIdsIntoSession(requestContent);
         } catch (RepositoryException e) {
-            log.error(e);
             throw new ServiceException(e);
         }
         return true;
@@ -290,6 +289,7 @@ public class AccountService {
                 reqAttrs.put(ATTR_OPERATION_RESULT, false);
             }
         } catch (RepositoryException | NoSuchAlgorithmException | CloneNotSupportedException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
     }
@@ -340,6 +340,7 @@ public class AccountService {
                         + currAccount.getUpdatePhotoPath().substring(currAccount.getUpdatePhotoPath().lastIndexOf(PATH_SPLITTER))));
                 Files.deleteIfExists(Paths.get(fileStorage + currAccount.getUpdatePhotoPath()));
             } catch (IOException e) {
+                log.error(e);
                 throw new ServiceException(e);
             }
 
@@ -367,6 +368,7 @@ public class AccountService {
             requestContent.getRequestAttributes().put(ATTR_ACCS_TO_AVATAR_APPROVE
                     , repository.query(new SelectAccToPhotoApproveSpecification()));
         } catch (RepositoryException | IOException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
     }
@@ -393,6 +395,7 @@ public class AccountService {
                 return true;
             }
         } catch (CloneNotSupportedException | RepositoryException | NullPointerException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
         return false;
@@ -456,13 +459,14 @@ public class AccountService {
             if (accMarksForThisAuthor.size() != 0) {
                 reqAttrs.put(ATTR_IS_AUTHOR_MARKED_ALREADY, true);
             }
-        } catch (RepositoryException | NullPointerException e) {
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }catch (NullPointerException e){
+            log.error(e);
             throw new ServiceException(e);
         }
     }
 
-
-    // TODO: 7/12/2019 надо ли проверку на ноль??? nonnull?
     private void initAccount(Account account, Map<String, String[]> requestParams) throws ServiceException {
         account.setLogin(requestParams.get(ATTR_LOGIN)[0]);
         account.setName(requestParams.get(ATTR_NAME)[0]);
@@ -478,6 +482,7 @@ public class AccountService {
             String hashedPass = new String(messageDigest.digest(saltedPass.getBytes()));
             account.setPassword(hashedPass);
         } catch (NoSuchAlgorithmException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
 
@@ -487,7 +492,8 @@ public class AccountService {
             account.setBirthDate(dateFormat.parse(requestParams.get("birthdate")[0]));
             account.setRegistrDate(new Date(System.currentTimeMillis()));
         } catch (ParseException e) {
-            e.printStackTrace();
+            log.error(e);
+            throw new ServiceException(e);
         }
 
         String role = requestParams.get(ATTR_ROLE)[0].toLowerCase();
@@ -500,6 +506,7 @@ public class AccountService {
         try {
             account.setType(AccountType.valueOf(role.toUpperCase()));
         } catch (IllegalArgumentException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
     }
@@ -530,7 +537,6 @@ public class AccountService {
         return isAboutCorrect && isPhoneCorrect;
     }
 
-    // TODO: 7/27/2019 общий метод, может в utils вынести в отдельный пакет?
     String escapeQuotes(String text) {
         String correctText = null;
         if (text != null) {

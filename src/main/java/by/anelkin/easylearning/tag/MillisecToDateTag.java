@@ -1,7 +1,7 @@
 package by.anelkin.easylearning.tag;
 
-import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Log4j
 @Setter
 public class MillisecToDateTag extends TagSupport {
     private long millisecAmount;
@@ -24,6 +25,7 @@ public class MillisecToDateTag extends TagSupport {
         try {
             writer.write(prettyTime);
         } catch (IOException e) {
+            log.error(e);
             throw new JspTagException(e);
         }
         return SKIP_BODY;

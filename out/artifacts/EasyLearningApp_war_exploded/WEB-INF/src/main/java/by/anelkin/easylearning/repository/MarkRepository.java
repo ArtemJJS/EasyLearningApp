@@ -1,17 +1,15 @@
 package by.anelkin.easylearning.repository;
 
 import by.anelkin.easylearning.connection.ConnectionPool;
-import by.anelkin.easylearning.entity.Course;
 import by.anelkin.easylearning.entity.Mark;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.specification.AppSpecification;
 import by.anelkin.easylearning.specification.mark.MarkSpecification;
-import by.anelkin.easylearning.specification.mark.SelectByIdWithWriterInfoSpecification;
+import by.anelkin.easylearning.specification.mark.SelectByTargetIdWithWriterInfoSpecification;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,7 +103,7 @@ public class MarkRepository implements AppRepository<Mark> {
             mark.setComment(resultSet.getString("mark_comment"));
             mark.setMarkDate(resultSet.getLong("mark_date"));
             // data from account table (for queries with join)
-            if (specification instanceof SelectByIdWithWriterInfoSpecification){
+            if (specification instanceof SelectByTargetIdWithWriterInfoSpecification){
             mark.setAccLogin(resultSet.getString("acc_login"));
             mark.setAccPathToPhoto(PATH_TO_PICTURE + resultSet.getString("acc_photo_path"));
             }

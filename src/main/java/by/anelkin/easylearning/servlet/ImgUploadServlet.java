@@ -50,10 +50,10 @@ public class ImgUploadServlet extends HttpServlet {
         Properties prop = new Properties();
         try {
             prop.load(Objects.requireNonNull(ImgUploadServlet.class.getClassLoader().getResourceAsStream("file_storage.properties")));
+            fileStorage = prop.getProperty(PROP_FILE_FOLDER);
         } catch (IOException e) {
             log.error("Unable to read file storage path from properties!");
         }
-        fileStorage = prop.getProperty(PROP_FILE_FOLDER);
     }
 
 

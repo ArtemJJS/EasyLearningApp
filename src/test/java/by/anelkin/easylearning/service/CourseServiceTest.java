@@ -1,4 +1,4 @@
-package by.anelkin.easylearning.service.service;
+package by.anelkin.easylearning.service;
 
 import by.anelkin.easylearning.connection.ConnectionPool;
 import by.anelkin.easylearning.entity.*;

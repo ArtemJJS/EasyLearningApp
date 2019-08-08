@@ -9,7 +9,7 @@ import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.repository.MarkRepository;
 import by.anelkin.easylearning.specification.account.SelectAccByIdSpecification;
-import by.anelkin.easylearning.specification.mark.SelectByIdWithWriterInfoSpecification;
+import by.anelkin.easylearning.specification.mark.SelectByTargetIdWithWriterInfoSpecification;
 import by.anelkin.easylearning.specification.mark.SelectMarkByTargetIdSpecification;
 import by.anelkin.easylearning.specification.mark.SelectMarksMadeByUserSpecification;
 import by.anelkin.easylearning.validator.FormValidator;
@@ -111,7 +111,7 @@ public class MarkService {
         MarkRepository repo = new MarkRepository();
         List<Mark> marks;
         try {
-            marks = repo.query(new SelectByIdWithWriterInfoSpecification(COURSE_MARK, courseId));
+            marks = repo.query(new SelectByTargetIdWithWriterInfoSpecification(COURSE_MARK, courseId));
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }

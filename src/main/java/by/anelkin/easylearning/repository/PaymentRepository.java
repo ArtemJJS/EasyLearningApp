@@ -42,6 +42,7 @@ public class PaymentRepository implements AppRepository<Payment> {
                     payment.getDescription(), String.valueOf(payment.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -54,6 +55,7 @@ public class PaymentRepository implements AppRepository<Payment> {
             String[] params = {String.valueOf(payment.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -83,6 +85,7 @@ public class PaymentRepository implements AppRepository<Payment> {
                     payment.getDescription()};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -97,19 +100,18 @@ public class PaymentRepository implements AppRepository<Payment> {
             for (int i = 0; i < params.length; i++) {
                 statement.setString(i + 1, params[i]);
             }
-            log.debug("Executing query:" + statement.toString().split(":")[1]);
             try (ResultSet resultSet = statement.executeQuery()) {
                 paymentList = fillPaymentList(resultSet);
             }
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return paymentList;
     }
 
-    private List<Payment> fillPaymentList(ResultSet resultSet) {
+    private List<Payment> fillPaymentList(ResultSet resultSet) throws SQLException {
         List<Payment> paymentList = new ArrayList<>();
-        try {
             while (resultSet.next()) {
                 Payment payment = new Payment();
                 payment.setId(resultSet.getInt("payment_id"));
@@ -122,9 +124,6 @@ public class PaymentRepository implements AppRepository<Payment> {
                 payment.setDescription(resultSet.getString("payment_description"));
                 paymentList.add(payment);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         return paymentList;
     }
 

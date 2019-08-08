@@ -45,6 +45,7 @@ public class AccRepository implements AppRepository<Account> {
                     pathUpdatePhotoParts[pathUpdatePhotoParts.length - 1], account.getPassSalt(), account.getLogin()};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -57,6 +58,7 @@ public class AccRepository implements AppRepository<Account> {
             String[] params = {account.getLogin()};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -74,6 +76,7 @@ public class AccRepository implements AppRepository<Account> {
                     pathUpdatePhotoParts[pathUpdatePhotoParts.length - 1], account.getPassSalt()};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -88,11 +91,11 @@ public class AccRepository implements AppRepository<Account> {
             for (int i = 0; i < params.length; i++) {
                 statement.setString(i + 1, params[i]);
             }
-            log.debug("Executing query:" + statement.toString().split(":")[1]);
             try (ResultSet resultSet = statement.executeQuery()) {
                 accountList = new ArrayList<>(fillAccountList(resultSet));
             }
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return accountList;

@@ -1,4 +1,4 @@
-package service;
+package by.anelkin.easylearning.service;
 
 import by.anelkin.easylearning.connection.ConnectionPool;
 import by.anelkin.easylearning.entity.*;
@@ -7,18 +7,13 @@ import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.repository.CourseRepository;
-import by.anelkin.easylearning.repository.MarkRepository;
-import by.anelkin.easylearning.service.AccountService;
 import by.anelkin.easylearning.service.CourseService;
-import by.anelkin.easylearning.service.MarkService;
 import by.anelkin.easylearning.specification.account.SelectAccByIdSpecification;
-import by.anelkin.easylearning.specification.course.SelectAllCourseSpecification;
 import by.anelkin.easylearning.specification.course.SelectCourseByIdSpecification;
 import org.intellij.lang.annotations.Language;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,17 +31,9 @@ public class CourseServiceTest {
     private static final String ATTR_USER = "user";
     private static final String ATTR_COURSE_ID = "course_id";
     private static final String ATTR_COURSE_NAME = "course_name";
-    private static final String ATTR_COURSE_DESCRIPTION = "course_description";
-    private static final String ATTR_COURSE_PRICE = "course_price";
-    private static final String ATTR_CHAPTER_NAME = "chapter_name";
-    private static final String ATTR_COURSE_ALREADY_EXISTS = "course_exists_msg";
     private static final String ATTR_FILE_EXTENSION = "file_extension";
     private static final String ATTR_SEARCH_KEY = "search_key";
     private static final String ATTR_PAGE = "page";
-    private static final String ATTR_HAS_MORE_PAGES = "has_more_pages";
-    private static final String ATTR_MESSAGE = "message";
-    private static final String ATTR_LOCALE = "locale";
-    private static final String LOCALE_SPLITTER = "_";
     @Language("sql")
     private static final String CREATE_TABLES = "call createTables()";
     @Language("sql")
@@ -59,7 +46,6 @@ public class CourseServiceTest {
 
     private CourseRepository courseRepo = new CourseRepository();
     private AccRepository accRepo = new AccRepository();
-    private MarkRepository markRepo = new MarkRepository();
 
     private CourseService courseService = new CourseService();
     private ConnectionPool pool = ConnectionPool.getInstance();
@@ -79,7 +65,6 @@ public class CourseServiceTest {
 
         sessionAttrs.put("locale", Locale.US);
     }
-
 
     @Test
     public void CourseService_AddCourseImgToReview_ShouldUpdateTargetAccountCorrectly() throws SQLException, RepositoryException, ServiceException {
@@ -110,7 +95,6 @@ public class CourseServiceTest {
             connection.close();
         }
     }
-
 
     @Test
     public void CourseService_ApproveCourseImgChange_ShouldUpdateTargetAccPathToPhoto() throws SQLException, RepositoryException, ServiceException {
@@ -271,7 +255,6 @@ public class CourseServiceTest {
         }
     }
 
-
     @Test
     public void CourseService_InitCourseApprovalPage() throws SQLException, RepositoryException, ServiceException {
         Connection connection = pool.takeConnection();
@@ -294,7 +277,6 @@ public class CourseServiceTest {
             connection.close();
         }
     }
-
 
     @Test
     public void CourseService_SearchCourses_ShouldCorrectlySearchCourses() throws SQLException, RepositoryException, ServiceException {
@@ -320,8 +302,6 @@ public class CourseServiceTest {
             connection.close();
         }
     }
-
-
 
     @Test
     public void CourseService_InitCourseImgApprovalPage_ShouldCorrectlyInitCoursesList() throws SQLException, RepositoryException, ServiceException {
@@ -377,8 +357,6 @@ public class CourseServiceTest {
             connection.close();
         }
     }
-
-
 
     @Test
     public void CourseService_FreezeCourse_ShouldUpdateCorrectlyCourseState() throws SQLException, RepositoryException, ServiceException {

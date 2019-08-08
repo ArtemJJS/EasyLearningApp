@@ -97,7 +97,10 @@ public class CourseService {
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + course.getId());
             requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));
-        } catch (RepositoryException | NullPointerException | IOException e) {
+        } catch (NullPointerException | IOException e) {
+            log.error(e);
+            throw new ServiceException(e);
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -116,7 +119,10 @@ public class CourseService {
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + course.getId());
             requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));
-        } catch (RepositoryException | NullPointerException | IOException e) {
+        } catch (NullPointerException | IOException e) {
+            log.error(e);
+            throw new ServiceException(e);
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -129,10 +135,11 @@ public class CourseService {
         List<Course> courses = null;
         try {
             courses = repository.query(new SelectCourseByIdSpecification(courseId));
-        } catch (RepositoryException | NullPointerException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
         if (courses.size() != 1) {
+            log.error("Course wasn't found, id: " + courseId);
             throw new ServiceException("Course wasn't found");
         }
         reqAttrs.put("currentCourseMarks", marks);
@@ -198,7 +205,10 @@ public class CourseService {
             repository.update(currCourse);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + currCourse.getId());
             initCourseApprovalPage(requestContent);
-        } catch (RepositoryException | IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
+            log.error(e);
+            throw new ServiceException(e);
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -207,15 +217,17 @@ public class CourseService {
     public void freezeCourse(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = takeLocaleFromSession(requestContent);
         String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_FROZEN);
-        // TODO: 7/18/2019 защиту если придет не инт
-        int courseId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_COURSE_ID)[0]);
-        CourseRepository repository = new CourseRepository();
         try {
+            int courseId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_COURSE_ID)[0]);
+            CourseRepository repository = new CourseRepository();
             Course currCourse = repository.query(new SelectCourseByIdSpecification(courseId)).get(0);
             currCourse.setState(CourseState.FREEZING);
             repository.update(currCourse);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + currCourse.getId());
-        } catch (RepositoryException | IndexOutOfBoundsException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            log.error(e);
+            throw new ServiceException(e);
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -266,7 +278,10 @@ public class CourseService {
             insertLessons(courseId, params, chapterNames);
             String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_SENT_TO_REVIEW);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
-        } catch (RepositoryException | IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
+            log.error(e);
+            throw new ServiceException(e);
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -277,7 +292,7 @@ public class CourseService {
         String[] chapterNames = params.get(ATTR_CHAPTER_NAME);
         for (String chapterName : chapterNames) {
             boolean isChapterNameValid = validator.validateChapterName(chapterName);
-            // it seems that chapters names are not required to be unique. So i don't check it!
+            // it seems that chapters names are not required to be unique. So i don't check it.
             if (isChapterNameValid) {
                 CourseChapter chapter = new CourseChapter();
                 chapter.setCourseId(courseId);
@@ -332,7 +347,10 @@ public class CourseService {
                 List<CourseLesson> lessons = lessonRepository.query(new SelectByChapterIdSpecification(chapter.getId()));
                 courseContent.put(chapter, lessons);
             }
-        } catch (RepositoryException | NullPointerException e) {
+        } catch (NullPointerException e) {
+            log.error(e);
+            throw new ServiceException(e);
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
         return courseContent;

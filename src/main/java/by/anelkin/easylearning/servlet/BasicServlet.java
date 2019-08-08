@@ -43,11 +43,13 @@ public class BasicServlet extends HttpServlet {
         try {
             commandType = CommandType.valueOf(request.getParameter("command_name").toUpperCase());
         } catch (IllegalArgumentException e) {
+            log.error(e);
             throw new ServletException("Wrong command name!!!");
         }
 
         Account.AccountType accType = (Account.AccountType) session.getAttribute("role");
         if (!commandType.getAccessTypes().contains(accType)) {
+            log.warn("Access denied to command: " + commandType);
             throw new ServletException("Access DENIED!!!");
         }
         log.debug("Server received command: " + commandType);
@@ -78,4 +80,11 @@ public class BasicServlet extends HttpServlet {
     public void destroy() {
         ConnectionPool.getInstance().closePool();
     }
+
+//    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+//
+//    }
+
 }
+
+

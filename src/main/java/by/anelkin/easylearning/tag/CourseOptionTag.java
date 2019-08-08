@@ -2,6 +2,7 @@ package by.anelkin.easylearning.tag;
 
 import by.anelkin.easylearning.entity.Course;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -15,6 +16,7 @@ import java.util.ResourceBundle;
 
 import static by.anelkin.easylearning.entity.Account.*;
 
+@Log4j
 @Setter
 public class CourseOptionTag extends TagSupport {
     private static final String ATTR_MARKED_COURSES_IDS = "marked_courses_ids";
@@ -40,8 +42,6 @@ public class CourseOptionTag extends TagSupport {
 
     @Override
     public int doStartTag() throws JspException {
-//        String[] localeArr = String.valueOf(pageContext.getSession().getAttribute(ATTR_LOCALE)).split(LOCALE_SPLITTER);
-//        Locale locale = new Locale(localeArr[0], localeArr[1]);
         Locale locale;
         Object localeAttr =  pageContext.getSession().getAttribute(ATTR_LOCALE);
         //to prevent error when logging out on page with tag:
@@ -50,7 +50,6 @@ public class CourseOptionTag extends TagSupport {
         } else {
             String[] localeParts = localeAttr.toString().split(LOCALE_SPLITTER);
             locale = new Locale(localeParts[0], localeParts[1]);
-//            locale = localeAttr;
         }
         String contextPath = pageContext.getServletContext().getContextPath();
         AccountType role = (AccountType) pageContext.getSession().getAttribute("role");
@@ -68,6 +67,7 @@ public class CourseOptionTag extends TagSupport {
             }
 
         } catch (IOException e) {
+            log.error(e);
             throw new JspTagException(e);
         }
         return SKIP_BODY;

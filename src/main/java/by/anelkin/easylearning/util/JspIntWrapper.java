@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 
-// FIXME: 8/6/2019 ПЕРЕНЕСТИ В УТИЛ????
 public class JspIntWrapper {
     private int value;
 

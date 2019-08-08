@@ -3,12 +3,14 @@ package by.anelkin.easylearning.filter;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.service.CourseService;
+import lombok.extern.log4j.Log4j;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+@Log4j
 @WebFilter(urlPatterns = "/admin/approve-course-image")
 public class ApproveCourseImgPageFilter implements Filter {
     @Override
@@ -20,6 +22,7 @@ public class ApproveCourseImgPageFilter implements Filter {
             (new CourseService()).initCourseImgApprovalPage(requestContent);
             requestContent.insertAttributes(request);
         } catch (ServiceException e) {
+            log.error(e);
             throw new ServletException(e);
         }
         filterChain.doFilter(request, servletResponse);

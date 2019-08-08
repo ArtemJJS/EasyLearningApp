@@ -1,4 +1,4 @@
-package by.anelkin.easylearning.entity;
+package by.anelkin.easylearning.util;
 
 import lombok.Getter;
 import lombok.Setter;

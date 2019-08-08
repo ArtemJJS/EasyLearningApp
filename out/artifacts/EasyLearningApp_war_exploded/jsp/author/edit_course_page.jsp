@@ -46,7 +46,7 @@
         </div>
 
         <div class="info-message"><fmt:message key="msg.new_chapters_and_lessons_requirements" bundle="${rb}"/></div>
-        <jsp:useBean id="i" class="by.anelkin.easylearning.entity.JspIntWrapper"/>
+        <jsp:useBean id="i" class="by.anelkin.easylearning.util.JspIntWrapper"/>
         <c:forEach var="entry" items="${content}">
             <c:set var="chapter" value="${entry.getKey()}"/>
             <div id="${i.value}" class="chapter">
@@ -57,7 +57,7 @@
                            pattern="[A-z0-9_ -]{5,200}">
                 </div>
                 <div class="lessons">
-                    <jsp:useBean id="j" class="by.anelkin.easylearning.entity.JspIntWrapper"/>
+                    <jsp:useBean id="j" class="by.anelkin.easylearning.util.JspIntWrapper"/>
                     <c:forEach var="lesson" items="${entry.getValue()}">
                         <div class="param lesson">
                             <div class="unit_title"><fmt:message key='course.lesson' bundle='${rb}'/> ${j.receiveAndIncrement()}:</div>
