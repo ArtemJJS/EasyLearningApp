@@ -12,7 +12,7 @@ html {
 }
 
 main {
-    width: 1200px;
+    width: 1350px;
     min-height: 900px;
     background: linear-gradient(to bottom, rgb(247, 209, 209), rgb(242, 243, 242));
     padding-top: 40px;
@@ -41,13 +41,15 @@ main {
 
 .greeting {
     font-size: 1.5rem;
+    text-align: center;
     width: 80%;
-    color: #3d8056;
-    margin-bottom: 18px;
+    color: blue;
+    margin-top: 15px;
+    margin-bottom: 30px;
 }
 
 .courses_block {
-    width: 80%;
+    width: 94%;
 
     display: flex;
     flex-wrap: wrap;
@@ -58,19 +60,19 @@ main {
     display: flex;
     min-height: 120px;
     max-height: 230px;
-    width: 48%;
+    width: 49%;
     margin-bottom: 20px;
 
     border: 1px solid green;
 }
 
 .block1 {
-    width: 24%;
+    width: 35%;
 }
 
 .about_course .block2 {
-    width: 76%;
-    padding: 0 5px;
+    width: 65%;
+    padding: 0 5px 4px;
 
     display: flex;
     flex-direction: column;
@@ -92,7 +94,7 @@ main {
 
 .course_desc {
     width: 100%;
-    max-height: 150px;
+    max-height: 116px;
     overflow: hidden;
     text-overflow: ellipsis;
 
@@ -103,22 +105,37 @@ main {
 
 .course_avatar {
     width: 100%;
-    height: 120px;
+    height: 100%;
+    min-height: 170px;
+    max-height: 210px;
 }
 
 
 .course_block_header {
+    text-align: center;
     min-width: 100%;
     margin-bottom: 15px;
+    color: darkgreen;
+    font-size: 1.15rem;
 }
 
 .links {
-    width: 85%;
-
     display: flex;
-    justify-content: space-between;
 }
 
 .links a {
     font-size: 0.8rem;
+    margin-right: 15px;
+    text-decoration: none;
+    padding: 1px 3px;
+    background-color: rgba(87, 234, 131, 0.25);
+
+    display: inline-block;
+    border: 1px solid #008006;
+}
+
+.links a:hover {
+    background-color: rgba(196, 196, 196, 0.58);
+    border: 1px solid black;
+    cursor: pointer;
 }

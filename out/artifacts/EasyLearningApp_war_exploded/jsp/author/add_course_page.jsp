@@ -27,7 +27,7 @@
             <div class="input_and_pattern">
                 <input placeholder='<fmt:message key='course.course_title' bundle='${rb}'/>' type="text"
                        id="course_title_field" name="course_name" required
-                       pattern="[A-Za-zА-я0-9_ -]{5,200}">
+                       pattern="[A-Za-zА-я0-9\\_ \\,\\.\\:\\!\\?-]{5,200}">
                 <div class="previous_operation_msg">${requestScope.course_exists_msg}</div>
                 <p class="field_desc"><fmt:message key='course.course_name_pattern' bundle='${rb}'/></p>
             </div>
@@ -53,7 +53,7 @@
                 <label for="chapter-field_1"><fmt:message key='course.chapter' bundle='${rb}'/> 1:</label>
                 <input type="text" id="chapter-field_1" name="chapter_name" placeholder=
                 <fmt:message key='course.chapter_title' bundle='${rb}'/> required
-                       pattern='[A-Za-zА-я0-9_ -]{5,200}'>
+                       pattern='[A-Za-zА-я0-9\\_ \\,\\.\\:\\!\\?-]{5,200}'>
             </div>
             <div class="lessons">
                 <div class="param lesson">
@@ -61,7 +61,7 @@
                     <div class="lesson_params">
                         <input type="text" id="lesson_field" name="lesson_title_1"
                                placeholder='<fmt:message key='course.lesson_title' bundle='${rb}'/>'
-                               pattern='[A-Za-zА-я0-9_ -]{5,200}'>
+                               pattern='[A-Za-zА-я0-9\\_ \\,\\.\\:\\!\\?-]{5,200}'>
                         <input type="text" name="lesson_content_1"
                                placeholder='<fmt:message key='course.path_to_content' bundle='${rb}'/>'>
                         <input type="text" name="lesson_duration_1"
@@ -84,6 +84,10 @@ let chapterTitleText = '<fmt:message key='course.chapter_title' bundle='${rb}'/>
 let lessonTitleText = '<fmt:message key='course.lesson_title' bundle='${rb}'/>';
 let lessonDurationText = '<fmt:message key='course.duration' bundle='${rb}'/>';
 let lessonContentText = '<fmt:message key='course.path_to_content' bundle='${rb}'/>';
+</script>
+<script>
+    const chapterNamePattern = "[A-Za-zА-я0-9_ ,.:!?-]{5,200}";
+    const lessonNamePattern = "[A-Za-zА-я0-9_ ,.:!?-]{5,200}";
 </script>
 <script>
     <%@include file="/js/add_lesson.js"%>

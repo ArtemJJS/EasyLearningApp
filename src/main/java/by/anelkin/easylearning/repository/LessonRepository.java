@@ -11,6 +11,7 @@ import org.intellij.lang.annotations.Language;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 
 @Log4j
@@ -25,41 +26,116 @@ public class LessonRepository implements AppRepository<CourseLesson> {
 
     @Override
     public boolean update(@NonNull CourseLesson lesson) throws RepositoryException {
-        try (Connection connection = pool.takeConnection();
-             CallableStatement statement = connection.prepareCall(QUERY_UPDATE)) {
+        Connection connection = pool.takeConnection();
+        CallableStatement statement = null;
+        try {
+            connection.setAutoCommit(false);
+            statement = connection.prepareCall(QUERY_UPDATE);
             String[] params = {lesson.getName(), lesson.getPathToContent(),
                     String.valueOf(lesson.getDuration()), String.valueOf(lesson.getId())};
             setParametersAndExecute(statement, params);
+            connection.commit();
         } catch (SQLException e) {
             log.error(e);
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                log.error(ex);
+            }
             throw new RepositoryException(e);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    log.error(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException e) {
+                    log.error(e);
+                }
+            }
         }
         return true;
     }
 
     @Override
     public boolean delete(@NonNull CourseLesson lesson) throws RepositoryException {
-        try (Connection connection = pool.takeConnection();
-             CallableStatement statement = connection.prepareCall(QUERY_DELETE)) {
+        Connection connection = pool.takeConnection();
+        CallableStatement statement = null;
+        try {
+            connection.setAutoCommit(false);
+            statement = connection.prepareCall(QUERY_DELETE);
             String[] params = {String.valueOf(lesson.getId())};
             setParametersAndExecute(statement, params);
+            connection.commit();
         } catch (SQLException e) {
             log.error(e);
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                log.error(ex);
+            }
             throw new RepositoryException(e);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    log.error(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException e) {
+                    log.error(e);
+                }
+            }
         }
         return true;
     }
 
     @Override
     public boolean insert(@NonNull CourseLesson lesson) throws RepositoryException {
-        try (Connection connection = pool.takeConnection();
-             CallableStatement statement = connection.prepareCall(QUERY_INSERT)) {
+        Connection connection = pool.takeConnection();
+        CallableStatement statement = null;
+        try {
+            connection.setAutoCommit(false);
+            statement = connection.prepareCall(QUERY_INSERT);
             String[] params = {String.valueOf(lesson.getChapterId()), dateFormat.format(lesson.getCreationDate()),
                     lesson.getName(), lesson.getPathToContent(), String.valueOf(lesson.getDuration())};
             setParametersAndExecute(statement, params);
+            connection.commit();
         } catch (SQLException e) {
             log.error(e);
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                log.error(ex);
+            }
             throw new RepositoryException(e);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    log.error(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException e) {
+                    log.error(e);
+                }
+            }
         }
         return true;
     }

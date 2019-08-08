@@ -43,7 +43,7 @@ public class CourseOptionTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         Locale locale;
-        Object localeAttr =  pageContext.getSession().getAttribute(ATTR_LOCALE);
+        Object localeAttr = pageContext.getSession().getAttribute(ATTR_LOCALE);
         //to prevent error when logging out on page with tag:
         if (localeAttr == null) {
             locale = Locale.US;
@@ -64,6 +64,10 @@ public class CourseOptionTag extends TagSupport {
                     break;
                 case USER:
                     writeUserLinks(coursesAvailable, contextPath, locale);
+                    break;
+                case ADMIN:
+                    writeAdminLinks(coursesAvailable, contextPath, locale);
+                    break;
             }
 
         } catch (IOException e) {
@@ -108,6 +112,19 @@ public class CourseOptionTag extends TagSupport {
             writer.write("</div>");
         }
     }
+
+    private void writeAdminLinks(List<Course> coursesAvailable, String contextPath, Locale locale) throws IOException {
+        ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale);
+        String learningPage = rb.getString(BUNDLE_LEARNING_PAGE);
+        String editCourse = rb.getString(BUNDLE_EDIT_COURSE);
+        String editImage = rb.getString(BUNDLE_EDIT_IMAGE);
+
+        JspWriter writer = pageContext.getOut();
+        writer.write("<div class='links'>");
+        writer.write("<a href=" + contextPath + AUTHOR_LEARNING_PAGE_LINK + course.getId() + ">" + learningPage + "</a>");
+        writer.write("</div>");
+    }
+
 
     private String markLinkIfNotMarked(List<Integer> markedCoursesIds, String contextPath, String markCourse) {
         return markedCoursesIds.contains(course.getId()) ? "" :

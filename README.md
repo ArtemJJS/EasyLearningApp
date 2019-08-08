@@ -17,3 +17,9 @@ Options:
   EVERYONE: change language, search courses, change account info, change account avatar, 
            change password, view courses and author's information,
            restore password (receive link on email)
+
+
+
+
+**
+ Course state: frozen, on review, approved. Only approved courses can be purchased or showed from search function.

@@ -6,8 +6,8 @@ const supportingChapterBlockElems = 1;
 const supportingMainFormElems = 6;
 // const maxElemsInsideMainForm = maxChapters + supportingMainFormElems;
 
-const chapterNamePattern = "[A-Za-zА-я0-9_ -]{5,200}";
-const lessonNamePattern = "[A-Za-zА-я0-9_ -]{5,200}";
+// const chapterNamePattern = "[A-Za-zА-я0-9_ ,.:!?-]{5,200}";
+// const lessonNamePattern = "[A-Za-zА-я0-9_ ,.:!?-]{5,200}";
 const lessonDurationPattern = "[0-9]{1,6}";
 
 const chapterClass = 'chapter';

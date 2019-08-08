@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static by.anelkin.easylearning.entity.Course.*;
+import static by.anelkin.easylearning.util.GlobalConstant.*;
 
 @Log4j
 public class CourseRepository implements AppRepository<Course> {
@@ -105,21 +106,21 @@ public class CourseRepository implements AppRepository<Course> {
         List<Course> courseList = new ArrayList<>();
         while (resultSet.next()) {
             Course course = new Course();
-            course.setId(resultSet.getInt("course_id"));
-            course.setName(resultSet.getString("course_name"));
-            course.setAuthorId(resultSet.getInt("course_author_id"));
-            course.setDescription(resultSet.getString("course_description"));
-            course.setCreationDate(resultSet.getDate("course_creation_date"));
-            course.setPathToPicture(PATH_TO_PICTURE + resultSet.getString("course_picture"));
-            course.setPrice(new BigDecimal(resultSet.getString("course_price")));
-            course.setLessonAmount(resultSet.getInt("course_lesson_amount"));
-            course.setDuration(resultSet.getLong("course_duration"));
-            course.setState(CourseState.values()[resultSet.getInt("state")]);
-            String courseAvgMark = resultSet.getString("avg_mark");
+            course.setId(resultSet.getInt(COURSE_ID));
+            course.setName(resultSet.getString(COURSE_NAME));
+            course.setAuthorId(resultSet.getInt(COURSE_AUTHOR_ID));
+            course.setDescription(resultSet.getString(COURSE_DESCRIPTION));
+            course.setCreationDate(resultSet.getDate(COURSE_CREATION_DATE));
+            course.setPathToPicture(PATH_TO_PICTURE + resultSet.getString(COURSE_PICTURE));
+            course.setPrice(new BigDecimal(resultSet.getString(COURSE_PRICE)));
+            course.setLessonAmount(resultSet.getInt(COURSE_LESSON_AMOUNT));
+            course.setDuration(resultSet.getLong(COURSE_DURATION));
+            course.setState(CourseState.values()[resultSet.getInt(COURSE_STATE)]);
+            String courseAvgMark = resultSet.getString(COURSE_AVG_MARK);
 
-            String updatePhotoFileName = resultSet.getString("update_img_path");
+            String updatePhotoFileName = resultSet.getString(COURSE_UPDATE_IMG_PATH);
             if (updatePhotoFileName == null || updatePhotoFileName.isEmpty()) {
-                course.setUpdatePhotoPath("");
+                course.setUpdatePhotoPath(EMPTY_STRING);
             } else {
                 course.setUpdatePhotoPath(PATH_TO_PICTURE_UPDATE + updatePhotoFileName);
             }
@@ -136,7 +137,7 @@ public class CourseRepository implements AppRepository<Course> {
         for (int i = 0; i < params.length; i++) {
             statement.setString(i + 1, params[i]);
         }
-        log.debug("Executing query:" + statement.toString().split(":")[1]);
+        log.debug("Executing query:" + statement.toString().split(COLON_SYMBOL)[1]);
         statement.execute();
     }
 }

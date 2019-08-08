@@ -28,7 +28,7 @@
             <div class="input_and_pattern">
                 <div class="param_field">${course.name}</div>
                 <input type="hidden" value="${course.name}" id="course_title_field" name="course_name"
-                       pattern="[A-z0-9_ -]{5,200}">
+                       pattern="[A-Za-zА-я0-9\\_ \\,\\.\\:\\!\\?-]{5,200}">
             </div>
         </div>
         <div class="param">
@@ -54,7 +54,7 @@
                     <div class="unit_title"><fmt:message key='course.chapter' bundle='${rb}'/> ${i.value}:</div>
                     <div class="param_field">${chapter.name}</div>
                     <input value="${chapter.name}" type="text" id="chapter_name" name="chapter_name" hidden
-                           pattern="[A-z0-9_ -]{5,200}">
+                           pattern="[A-Za-zА-я0-9\\_ \\,\\.\\:\\!\\?-]{5,200}">
                 </div>
                 <div class="lessons">
                     <jsp:useBean id="j" class="by.anelkin.easylearning.util.JspIntWrapper"/>
@@ -86,6 +86,10 @@
     let lessonTitleText = '<fmt:message key='course.lesson_title' bundle='${rb}'/>';
     let lessonDurationText = '<fmt:message key='course.duration' bundle='${rb}'/>';
     let lessonContentText = '<fmt:message key='course.path_to_content' bundle='${rb}'/>';
+    </script>
+    <script>
+        const chapterNamePattern = "[A-Za-zА-я0-9_ ,.:!?-]{5,200}";
+        const lessonNamePattern = "[A-Za-zА-я0-9_ ,.:!?-]{5,200}";
     </script>
     <script>
         <%@include file="/js/add_lesson.js"%>

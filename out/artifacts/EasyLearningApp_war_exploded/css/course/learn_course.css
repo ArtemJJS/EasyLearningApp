@@ -113,6 +113,15 @@ main {
     cursor: pointer;
 }
 
+.materials_title{
+    font-weight: bold;
+}
 
+.lesson_title{
+    font-size: 0.85rem;
+    margin-bottom: 3px;
 
-
+}
+.lesson_duration{
+    font-size: 0.92rem;
+}

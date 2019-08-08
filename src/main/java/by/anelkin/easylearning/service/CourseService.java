@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static by.anelkin.easylearning.entity.Course.*;
 import static by.anelkin.easylearning.util.GlobalConstant.*;
@@ -273,11 +274,12 @@ public class CourseService {
     private String[] insertChaptersIfNotExists(int courseId, Map<String, String[]> params) throws RepositoryException {
         FormValidator validator = new FormValidator();
         ChapterRepository chapterRepo = new ChapterRepository();
+        List<CourseChapter> existingChapters = chapterRepo.query(new SelectAllFromCourseSpecification(courseId));
+        List<String> existingChaptersNames = existingChapters.stream().map(CourseChapter::getName).collect(Collectors.toList());
         String[] chapterNames = params.get(ATTR_CHAPTER_NAME);
         for (String chapterName : chapterNames) {
             boolean isChapterNameValid = validator.validateChapterName(chapterName);
-            // it seems that chapters names are not required to be unique. So i don't check it.
-            if (isChapterNameValid) {
+            if (isChapterNameValid && !existingChaptersNames.contains(chapterName)) {
                 CourseChapter chapter = new CourseChapter();
                 chapter.setCourseId(courseId);
                 chapter.setName(chapterName);
@@ -295,27 +297,26 @@ public class CourseService {
             String[] lessonNames = params.get(PATTERN_LESSON_TITLE + (i + 1));
             String[] lessonContents = params.get(PATTERN_LESSON_CONTENT + (i + 1));
             String[] lessonDurations = params.get(PATTERN_LESSON_DURATION + (i + 1));
-            if (lessonNames == null || lessonContents == null || lessonDurations == null) {
-                return;
-            }
-            int chapterId = chapterRepo.query(new SelectChapterByNameAndCourseIdSpecification(chapterNames[i], courseId))
-                    .get(0).getId();
-            for (int j = 0; j < lessonNames.length; j++) {
-                CourseLesson lesson = new CourseLesson();
-                String name = lessonNames[j];
-                String content = lessonContents[j];
-                String duration = lessonDurations[j];
-                boolean isLessonNameValid = validator.validateLessonName(name);
-                boolean isLessonDurationValid = validator.validateLessonDuration(duration);
-                //if any field is empty - skip this iteration
-                if (!name.isEmpty() && !content.isEmpty() && !duration.isEmpty()
-                        && isLessonDurationValid && isLessonNameValid) {
-                    lesson.setChapterId(chapterId);
-                    lesson.setName(name);
-                    lesson.setPathToContent(new AccountService().escapeQuotes(content));
-                    lesson.setDuration(Long.parseLong(duration));
-                    lesson.setCreationDate(new Date(System.currentTimeMillis()));
-                    lessonRepo.insert(lesson);
+            if (lessonNames != null || lessonContents != null || lessonDurations != null) {
+                int chapterId = chapterRepo.query(new SelectChapterByNameAndCourseIdSpecification(chapterNames[i], courseId))
+                        .get(0).getId();
+                for (int j = 0; j < lessonNames.length; j++) {
+                    CourseLesson lesson = new CourseLesson();
+                    String name = lessonNames[j];
+                    String content = lessonContents[j];
+                    String duration = lessonDurations[j];
+                    boolean isLessonNameValid = validator.validateLessonName(name);
+                    boolean isLessonDurationValid = validator.validateLessonDuration(duration);
+                    //if any field is empty - skip this iteration
+                    if (!name.isEmpty() && !content.isEmpty() && !duration.isEmpty()
+                            && isLessonDurationValid && isLessonNameValid) {
+                        lesson.setChapterId(chapterId);
+                        lesson.setName(name);
+                        lesson.setPathToContent(new AccountService().escapeQuotes(content));
+                        lesson.setDuration(Long.parseLong(duration));
+                        lesson.setCreationDate(new Date(System.currentTimeMillis()));
+                        lessonRepo.insert(lesson);
+                    }
                 }
             }
         }
@@ -324,11 +325,13 @@ public class CourseService {
     private Map<CourseChapter, List<CourseLesson>> takeChaptersAndLessons(int courseId) throws ServiceException {
         ChapterRepository chapterRepository = new ChapterRepository();
         LessonRepository lessonRepository = new LessonRepository();
-        Map<CourseChapter, List<CourseLesson>> courseContent = new HashMap<>();
+        Map<CourseChapter, List<CourseLesson>> courseContent = new LinkedHashMap<>();
         try {
             List<CourseChapter> chapters = chapterRepository.query(new SelectAllFromCourseSpecification(courseId));
+            chapters.sort(Comparator.comparing(CourseChapter::getId));
             for (CourseChapter chapter : chapters) {
                 List<CourseLesson> lessons = lessonRepository.query(new SelectByChapterIdSpecification(chapter.getId()));
+                lessons.sort(Comparator.comparing(CourseLesson::getId));
                 courseContent.put(chapter, lessons);
             }
         } catch (NullPointerException e) {

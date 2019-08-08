@@ -32,14 +32,39 @@ public class MarkRepository implements AppRepository<Mark> {
     @Override
     public boolean update(@NonNull Mark mark) throws RepositoryException {
         String actualQuery = mark.getMarkType() == AUTHOR_MARK ? QUERY_UPDATE_AUTHOR_MARK : QUERY_UPDATE_COURSE_MARK;
-        try (Connection connection = pool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(actualQuery)) {
+        Connection connection = pool.takeConnection();
+        PreparedStatement statement = null;
+        try {
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(actualQuery);
             String[] params = {String.valueOf(mark.getTargetId()), String.valueOf(mark.getAccId()), String.valueOf(mark.getMarkValue()),
                     mark.getComment(), String.valueOf(mark.getMarkDate()), String.valueOf(mark.getId())};
             setParametersAndExecute(statement, params);
+            connection.commit();
         } catch (SQLException e) {
             log.error(e);
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                log.error(ex);
+            }
             throw new RepositoryException(e);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    log.error(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException e) {
+                    log.error(e);
+                }
+            }
         }
         return true;
     }
@@ -47,13 +72,38 @@ public class MarkRepository implements AppRepository<Mark> {
     @Override
     public boolean delete(@NonNull Mark mark) throws RepositoryException {
         String actualQuery = mark.getMarkType() == AUTHOR_MARK ? QUERY_DELETE_AUTHOR_MARK : QUERY_DELETE_COURSE_MARK;
-        try (Connection connection = pool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(actualQuery)) {
+        Connection connection = pool.takeConnection();
+        PreparedStatement statement = null;
+        try {
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(actualQuery);
             String[] params = {String.valueOf(mark.getId())};
             setParametersAndExecute(statement, params);
+            connection.commit();
         } catch (SQLException e) {
             log.error(e);
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                log.error(ex);
+            }
             throw new RepositoryException(e);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    log.error(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException e) {
+                    log.error(e);
+                }
+            }
         }
         return true;
     }
@@ -61,14 +111,39 @@ public class MarkRepository implements AppRepository<Mark> {
     @Override
     public boolean insert(@NonNull Mark mark) throws RepositoryException {
         String actualQuery = mark.getMarkType() == AUTHOR_MARK ? QUERY_INSERT_AUTHOR_MARK : QUERY_INSERT_COURSE_MARK;
-        try (Connection connection = pool.takeConnection();
-             CallableStatement statement = connection.prepareCall(actualQuery)) {
+        Connection connection = pool.takeConnection();
+        PreparedStatement statement = null;
+        try {
+            connection.setAutoCommit(false);
+            statement = connection.prepareCall(actualQuery);
             String[] params1 = {String.valueOf(mark.getTargetId()), String.valueOf(mark.getAccId()),
                     String.valueOf(mark.getMarkValue()), mark.getComment(), String.valueOf(mark.getMarkDate())};
             setParametersAndExecute(statement, params1);
+            connection.commit();
         } catch (SQLException e) {
             log.error(e);
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                log.error(ex);
+            }
             throw new RepositoryException(e);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    log.error(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException e) {
+                    log.error(e);
+                }
+            }
         }
         return true;
     }
@@ -105,9 +180,9 @@ public class MarkRepository implements AppRepository<Mark> {
             mark.setComment(resultSet.getString(MARK_COMMENT));
             mark.setMarkDate(resultSet.getLong(MARK_DATE));
             // data from account table (for queries with join)
-            if (specification instanceof SelectByTargetIdWithWriterInfoSpecification){
-            mark.setAccLogin(resultSet.getString(ACC_LOGIN));
-            mark.setAccPathToPhoto(PATH_TO_PICTURE + resultSet.getString(ACC_PHOTO_PATH));
+            if (specification instanceof SelectByTargetIdWithWriterInfoSpecification) {
+                mark.setAccLogin(resultSet.getString(ACC_LOGIN));
+                mark.setAccPathToPhoto(PATH_TO_PICTURE + resultSet.getString(ACC_PHOTO_PATH));
             }
             marks.add(mark);
         }

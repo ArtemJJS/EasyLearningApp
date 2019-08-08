@@ -23,13 +23,22 @@
 <main>
     <div class="banner"><fmt:message key='main.learn_easy' bundle='${rb}'/><br><fmt:message
             key='main.everytime_everywhere' bundle='${rb}'/></div>
-    <div class="greeting"><fmt:message key='main.welcome_back' bundle='${rb}'/>${sessionScope.user.name}! <fmt:message
-            key='main.are_you_ready_to_study' bundle='${rb}'/></div>
+    <c:set var="role" value="${sessionScope.role.toString()}"/>
+    <c:choose>
+        <c:when test="${role.equalsIgnoreCase('guest')}">
+            <div class="greeting" style="font-size: 1.2rem; color: blue"><fmt:message key='main.greeting_guest' bundle='${rb}'/>!</div>
+        </c:when>
+        <c:otherwise>
+            <div class="greeting"><fmt:message key='main.welcome_back' bundle='${rb}'/>${sessionScope.user.name}!
+                <fmt:message
+                        key='main.are_you_ready_to_study' bundle='${rb}'/></div>
+        </c:otherwise>
+    </c:choose>
     <div class="courses_block">
         <c:set var="courses_available" value="${sessionScope.coursesAvailable}"/>
         <c:choose>
             <c:when test="${courses_available == null}">
-                <div><fmt:message key='main.you_do_not_have_available_courses' bundle='${rb}'/></div>
+                <div class="course_block_header"><fmt:message key='main.you_do_not_have_available_courses' bundle='${rb}'/></div>
             </c:when>
             <c:otherwise>
                 <div class="course_block_header"><fmt:message key='main.courses_that_you_have_purchased_already'
@@ -37,7 +46,8 @@
                 <c:forEach var="course" items="${courses_available}">
                     <div class="about_course">
                         <div class="block1">
-                            <a class="image_link" href="${pageContext.request.contextPath}/course?course-id=${course.id}">
+                            <a class="image_link"
+                               href="${pageContext.request.contextPath}/course?course-id=${course.id}">
                                 <img class="course_avatar"
                                      src="${pageContext.request.contextPath}/img${course.pathToPicture}"
                                      alt='<fmt:message key='global.course_image' bundle='${rb}'/>'/>

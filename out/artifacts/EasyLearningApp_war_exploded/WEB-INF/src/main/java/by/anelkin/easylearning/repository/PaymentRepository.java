@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static by.anelkin.easylearning.entity.Payment.*;
+import static by.anelkin.easylearning.util.GlobalConstant.*;
 
 @Log4j
 public class PaymentRepository implements AppRepository<Payment> {
@@ -31,10 +32,8 @@ public class PaymentRepository implements AppRepository<Payment> {
     @Language("sql")
     private static final String QUERY_INSERT_BUY_WITH_CARD = "{CALL insertPurchaseCourseByCard(?, ?, ?, ?, ?, ?, ?)}";
 
-    // TODO: 7/16/2019 Может для платежей вообще заглушить update/delete?
     @Override
     public boolean update(@NonNull Payment payment) throws RepositoryException {
-
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
             String[] params = {String.valueOf(payment.getAccountId()), String.valueOf(payment.getCourseId()), String.valueOf(payment.getPaymentCode()),
@@ -65,7 +64,8 @@ public class PaymentRepository implements AppRepository<Payment> {
     public boolean insert(@NonNull Payment payment) throws RepositoryException {
         String curr_query;
         PaymentCode paymentCode = PaymentCode.getPaymentCodeInstanceByCode(payment.getPaymentCode());
-        if (paymentCode == null){
+        if (paymentCode == null) {
+            log.error("Payment code is not correct!");
             throw new RepositoryException("Payment code is not correct!");
         }
         switch (paymentCode) {
@@ -78,15 +78,40 @@ public class PaymentRepository implements AppRepository<Payment> {
             default:
                 curr_query = QUERY_INSERT_AND_UPDATE_BALANCE;
         }
-        try (Connection connection = pool.takeConnection();
-             CallableStatement statement = connection.prepareCall(curr_query)) {
+        Connection connection = pool.takeConnection();
+        CallableStatement statement = null;
+        try {
+            connection.setAutoCommit(false);
+            statement = connection.prepareCall(curr_query);
             String[] params = {String.valueOf(payment.getAccountId()), String.valueOf(payment.getCourseId()), String.valueOf(payment.getPaymentCode()),
                     String.valueOf(payment.getAmount()), String.valueOf(payment.getPaymentDate()), String.valueOf(payment.getCurrencyId()),
                     payment.getDescription()};
             setParametersAndExecute(statement, params);
+            connection.commit();
         } catch (SQLException e) {
             log.error(e);
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                log.error(ex);
+            }
             throw new RepositoryException(e);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    log.error(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException e) {
+                    log.error(e);
+                }
+            }
         }
         return true;
     }
@@ -100,6 +125,7 @@ public class PaymentRepository implements AppRepository<Payment> {
             for (int i = 0; i < params.length; i++) {
                 statement.setString(i + 1, params[i]);
             }
+            log.debug("Executing query:" + statement.toString().split(COLON_SYMBOL)[1]);
             try (ResultSet resultSet = statement.executeQuery()) {
                 paymentList = fillPaymentList(resultSet);
             }
@@ -112,18 +138,18 @@ public class PaymentRepository implements AppRepository<Payment> {
 
     private List<Payment> fillPaymentList(ResultSet resultSet) throws SQLException {
         List<Payment> paymentList = new ArrayList<>();
-            while (resultSet.next()) {
-                Payment payment = new Payment();
-                payment.setId(resultSet.getInt("payment_id"));
-                payment.setAccountId(resultSet.getInt("acc_id"));
-                payment.setCourseId(resultSet.getInt("course_id"));
-                payment.setPaymentCode(resultSet.getInt("payment_code"));
-                payment.setAmount(resultSet.getBigDecimal("payment_amount"));
-                payment.setPaymentDate(resultSet.getLong("payment_date"));
-                payment.setCurrencyId(resultSet.getInt("currency_id"));
-                payment.setDescription(resultSet.getString("payment_description"));
-                paymentList.add(payment);
-            }
+        while (resultSet.next()) {
+            Payment payment = new Payment();
+            payment.setId(resultSet.getInt(PAYMENT_ID));
+            payment.setAccountId(resultSet.getInt(ACC_ID));
+            payment.setCourseId(resultSet.getInt(COURSE_ID));
+            payment.setPaymentCode(resultSet.getInt(PAYMENT_CODE));
+            payment.setAmount(resultSet.getBigDecimal(PAYMENT_AMOUNT));
+            payment.setPaymentDate(resultSet.getLong(PAYMENT_DATE));
+            payment.setCurrencyId(resultSet.getInt(PAYMENT_CURRENCY_ID));
+            payment.setDescription(resultSet.getString(PAYMENT_DESCRIPTION));
+            paymentList.add(payment);
+        }
         return paymentList;
     }
 
@@ -131,7 +157,7 @@ public class PaymentRepository implements AppRepository<Payment> {
         for (int i = 0; i < params.length; i++) {
             statement.setString(i + 1, params[i]);
         }
-        log.debug("Executing query:" + statement.toString().split(":")[1]);
+        log.debug("Executing query:" + statement.toString().split(COLON_SYMBOL)[1]);
         statement.execute();
     }
 }

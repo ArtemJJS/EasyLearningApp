@@ -79,13 +79,11 @@ public class GlobalConstant {
     public static final String ACC_PHOTO_PATH = "acc_photo_path";
     public static final String ACC_AVG_MARK = "avg_mark";
     public static final String ACC_TYPE = "acc_type";
-
     public static final String COURSE_CHAPTER_ID = "course_chapter_id";
     public static final String CHAPTER_NAME = "chapter_name";
-    public static final String COURSE_ID = "course_id";
     public static final String CHAPTER_LESSON_AMOUNT = "chapter_lesson_amount";
     public static final String CHAPTER_DURATION = "chapter_duration";
-
+    public static final String COURSE_ID = "course_id";
     public static final String COURSE_NAME = "course_name";
     public static final String COURSE_AUTHOR_ID = "course_author_id";
     public static final String COURSE_DESCRIPTION = "course_description";
@@ -97,26 +95,22 @@ public class GlobalConstant {
     public static final String COURSE_STATE = "state";
     public static final String COURSE_AVG_MARK = "avg_mark";
     public static final String COURSE_UPDATE_IMG_PATH = "update_img_path";
-
     public static final String LESSON_ID = "lesson_id";
     public static final String LESSON_NAME = "lesson_name";
     public static final String LESSON_CREATION_DATE = "lesson_creation_date";
     public static final String LESSON_DURATION = "lesson_duration";
     public static final String LESSON_CONTENT_ADDRESS = "lesson_content_address";
-
     public static final String MARK_ID = "mark_id";
     public static final String MARK_TARGET_ID = "target_id";
     public static final String MARK_VALUE = "mark_value";
     public static final String MARK_COMMENT = "mark_comment";
     public static final String MARK_DATE = "mark_date";
-
     public static final String PAYMENT_ID = "payment_id";
     public static final String PAYMENT_CODE = "payment_code";
     public static final String PAYMENT_AMOUNT = "payment_amount";
     public static final String PAYMENT_DATE = "payment_date";
     public static final String PAYMENT_CURRENCY_ID = "currency_id";
     public static final String PAYMENT_DESCRIPTION = "payment_description";
-
     public static final String RESTORE_PASS_UUID = "uuid";
 
 

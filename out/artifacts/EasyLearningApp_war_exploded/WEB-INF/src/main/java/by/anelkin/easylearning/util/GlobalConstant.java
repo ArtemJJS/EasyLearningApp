@@ -9,7 +9,9 @@ public class GlobalConstant {
     public static final String EMPTY_STRING = "";
     public static final String LOCALE_SPLITTER = "_";
     public static final String CARD_NUMBER_SPLITTER = " ";
+    public static final String COLON_SYMBOL = ":";
 
+    //for services, filters etc.
     public static final String ATTR_USER = "user";
     public static final String ATTR_ROLE = "role";
     public static final String ATTR_PWD = "password";
@@ -59,6 +61,77 @@ public class GlobalConstant {
     public static final String ATTR_CURRENCY = "currency";
     public static final String ATTR_CARD = "card";
     public static final String ATTR_PAYMENTS = "payments";
+
+    // for repositories;
+    public static final String ACC_ID = "acc_id";
+    public static final String ACC_LOGIN = "acc_login";
+    public static final String ACC_PWD = "acc_password";
+    public static final String ACC_EMAIL = "acc_email";
+    public static final String ACC_NAME = "acc_name";
+    public static final String ACC_SURNAME = "acc_surname";
+    public static final String ACC_BIRTHDATE = "acc_birthdate";
+    public static final String ACC_PHONE_NUMBER = "acc_phone_number";
+    public static final String ACC_REGISTR_DATE = "acc_registration_date";
+    public static final String ACC_ABOUT = "acc_about";
+    public static final String ACC_BALANCE = "acc_balance";
+    public static final String ACC_PASS_SALT = "acc_pass_salt";
+    public static final String ACC_UPDATE_PHOTO_PATH = "update_photo_path";
+    public static final String ACC_PHOTO_PATH = "acc_photo_path";
+    public static final String ACC_AVG_MARK = "avg_mark";
+    public static final String ACC_TYPE = "acc_type";
+    public static final String COURSE_CHAPTER_ID = "course_chapter_id";
+    public static final String CHAPTER_NAME = "chapter_name";
+    public static final String CHAPTER_LESSON_AMOUNT = "chapter_lesson_amount";
+    public static final String CHAPTER_DURATION = "chapter_duration";
+    public static final String COURSE_ID = "course_id";
+    public static final String COURSE_NAME = "course_name";
+    public static final String COURSE_AUTHOR_ID = "course_author_id";
+    public static final String COURSE_DESCRIPTION = "course_description";
+    public static final String COURSE_CREATION_DATE = "course_creation_date";
+    public static final String COURSE_PICTURE = "course_picture";
+    public static final String COURSE_PRICE = "course_price";
+    public static final String COURSE_LESSON_AMOUNT = "course_lesson_amount";
+    public static final String COURSE_DURATION = "course_duration";
+    public static final String COURSE_STATE = "state";
+    public static final String COURSE_AVG_MARK = "avg_mark";
+    public static final String COURSE_UPDATE_IMG_PATH = "update_img_path";
+    public static final String LESSON_ID = "lesson_id";
+    public static final String LESSON_NAME = "lesson_name";
+    public static final String LESSON_CREATION_DATE = "lesson_creation_date";
+    public static final String LESSON_DURATION = "lesson_duration";
+    public static final String LESSON_CONTENT_ADDRESS = "lesson_content_address";
+    public static final String MARK_ID = "mark_id";
+    public static final String MARK_TARGET_ID = "target_id";
+    public static final String MARK_VALUE = "mark_value";
+    public static final String MARK_COMMENT = "mark_comment";
+    public static final String MARK_DATE = "mark_date";
+    public static final String PAYMENT_ID = "payment_id";
+    public static final String PAYMENT_CODE = "payment_code";
+    public static final String PAYMENT_AMOUNT = "payment_amount";
+    public static final String PAYMENT_DATE = "payment_date";
+    public static final String PAYMENT_CURRENCY_ID = "currency_id";
+    public static final String PAYMENT_DESCRIPTION = "payment_description";
+    public static final String RESTORE_PASS_UUID = "uuid";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

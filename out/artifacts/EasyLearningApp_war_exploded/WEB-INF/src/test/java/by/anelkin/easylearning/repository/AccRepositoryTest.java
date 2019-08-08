@@ -29,7 +29,7 @@ public class AccRepositoryTest {
     private Connection connection;
     private Statement statement;
 
-    @BeforeMethod
+    @BeforeClass
     public void setUpTestClass() throws SQLException {
         connection = pool.takeConnection();
         statement = connection.createStatement();
@@ -38,7 +38,7 @@ public class AccRepositoryTest {
         statement.execute(CREATE_TABLES);
     }
 
-    @AfterMethod
+    @AfterClass
     public void tierDownTestClass() throws SQLException {
         statement.close();
         connection.close();

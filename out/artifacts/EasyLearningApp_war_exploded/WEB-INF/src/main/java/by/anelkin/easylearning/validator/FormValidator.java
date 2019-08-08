@@ -19,9 +19,9 @@ public class FormValidator {
     private static final String PHONE_PATTERN = "^\\+[0-9]{2,19}$";
     private static final String PRICE_PATTERN = "[0-9]{1,8}(\\.[0-9]{1,2})?";
     private static final String CARD_PATTERN = "[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}";
-    private static final String COURSE_NAME_PATTERN = "[A-Za-zА-я0-9_ -]{5,200}";
-    private static final String CHAPTER_NAME_PATTERN = "[A-Za-zА-я0-9_ -]{5,200}";
-    private static final String LESSON_NAME_PATTERN = "[A-Za-zА-я0-9_ -]{5,200}";
+    private static final String COURSE_NAME_PATTERN = "[A-Za-zА-я0-9_ ,.:!?-]{5,200}";
+    private static final String CHAPTER_NAME_PATTERN = "[A-Za-zА-я0-9_ ,.:!?-]{5,200}";
+    private static final String LESSON_NAME_PATTERN = "[A-Za-zА-я0-9_ ,.:!?-]{5,200}";
     private static final int COURSE_DESCRIPTION_LENGTH = 1000;
     private static final int MAX_LESSON_DURATION = 999_999;
     private static final int ACC_ABOUT_MAX_LENGTH = 500;
