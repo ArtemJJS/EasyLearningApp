@@ -24,6 +24,7 @@ public class RequestedCourseFilter implements Filter {
             courseService.initCoursePage(requestContent);
             requestContent.insertAttributes(request);
         } catch (ServiceException e) {
+            log.error(e);
             throw new ServletException(e);
         }
         filterChain.doFilter(request, servletResponse);

@@ -15,6 +15,7 @@ import java.util.List;
 
 import static by.anelkin.easylearning.entity.Mark.*;
 import static by.anelkin.easylearning.entity.Mark.MarkType.*;
+import static by.anelkin.easylearning.util.GlobalConstant.*;
 
 @Log4j
 public class MarkRepository implements AppRepository<Mark> {
@@ -97,16 +98,16 @@ public class MarkRepository implements AppRepository<Mark> {
         List<Mark> marks = new ArrayList<>();
         while (resultSet.next()) {
             Mark mark = new Mark(markType);
-            mark.setId(resultSet.getInt("mark_id"));
-            mark.setTargetId(resultSet.getInt("target_id"));
-            mark.setAccId(resultSet.getInt("acc_id"));
-            mark.setMarkValue(resultSet.getInt("mark_value"));
-            mark.setComment(resultSet.getString("mark_comment"));
-            mark.setMarkDate(resultSet.getLong("mark_date"));
+            mark.setId(resultSet.getInt(MARK_ID));
+            mark.setTargetId(resultSet.getInt(MARK_TARGET_ID));
+            mark.setAccId(resultSet.getInt(ACC_ID));
+            mark.setMarkValue(resultSet.getInt(MARK_VALUE));
+            mark.setComment(resultSet.getString(MARK_COMMENT));
+            mark.setMarkDate(resultSet.getLong(MARK_DATE));
             // data from account table (for queries with join)
             if (specification instanceof SelectByTargetIdWithWriterInfoSpecification){
-            mark.setAccLogin(resultSet.getString("acc_login"));
-            mark.setAccPathToPhoto(PATH_TO_PICTURE + resultSet.getString("acc_photo_path"));
+            mark.setAccLogin(resultSet.getString(ACC_LOGIN));
+            mark.setAccPathToPhoto(PATH_TO_PICTURE + resultSet.getString(ACC_PHOTO_PATH));
             }
             marks.add(mark);
         }
@@ -117,7 +118,7 @@ public class MarkRepository implements AppRepository<Mark> {
         for (int i = 0; i < params.length; i++) {
             statement.setString(i + 1, params[i]);
         }
-        log.debug("Executing query:" + statement.toString().split(":")[1]);
+        log.debug("Executing query:" + statement.toString().split(COLON_SYMBOL)[1]);
         statement.execute();
     }
 

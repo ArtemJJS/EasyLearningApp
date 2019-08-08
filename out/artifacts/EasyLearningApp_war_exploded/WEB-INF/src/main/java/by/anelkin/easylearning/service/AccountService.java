@@ -36,16 +36,17 @@ import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static by.anelkin.easylearning.entity.Account.*;
 import static by.anelkin.easylearning.entity.Mark.*;
+import static by.anelkin.easylearning.util.GlobalConstant.*;
 
 @Log4j
 public class AccountService {
-    private static final int AMOUNT_COURSES_RECOMMENDED = 4;
+    private static final int AMOUNT_COURSES_RECOMMENDED = 6;
     private static final String PATH_RELATIVE_TO_CHANGE_FORGOTTEN_PASS_PAGE = "/change-forgotten-pass?&uuid=";
+    private static final String DEFAULT_ACC_AVATAR = "default_acc_avatar";
     private static final String CURRENT_ENCRYPTING = "SHA-256";
 
     private static final String PROP_FILE_FOLDER = "file_folder";
@@ -62,47 +63,14 @@ public class AccountService {
     private static final String BUNDLE_INCORRECT_REPEATED_PASS_OR_PATTERN = "msg.incorrect_repeated_password_or_pattern";
     private static final String BUNDLE_LOGIN_NOT_EXISTS = "msg.login_not_exists";
     private static final String BUNDLE_EMAIL_SENT = "msg.email_sent";
-    private static final String URI_SPACE_REPRESENT = "%20";
-    private static final String PATH_SPLITTER = "/";
-
-
-
-    private static final String ATTR_USER = "user";
-    private static final String ATTR_ROLE = "role";
-    private static final String ATTR_PWD = "password";
-    private static final String ATTR_UPDATED_PWD = "updated_password";
-    private static final String ATTR_REPEATED_PWD = "repeated_password";
-    private static final String ATTR_OPERATION_RESULT = "operation_result";
-    private static final String ATTR_AVAILABLE_COURSES = "coursesAvailable";
-    private static final String ATTR_RECOMMENDED_COURSES = "courses_recommended";
-    private static final String ATTR_LOGIN = "login";
-    private static final String ATTR_WRONG_LOGIN_MSG = "wrong-login";
-    private static final String ATTR_REQUESTED_AUTHOR_LOGIN = "requested_author_login";
-    private static final String ATTR_REQUESTED_AUTHOR = "requested_author";
-    private static final String ATTR_AUTHOR_COURSE_LIST = "author_course_list";
-    private static final String ATTR_FILE_EXTENSION = "file_extension";
-    private static final String ATTR_BIRTHDATE = "birthdate";
-    private static final String ATTR_ACCS_TO_AVATAR_APPROVE = "acc_avatar_approve_list";
-    private static final String ATTR_IS_AUTHOR_MARKED_ALREADY = "is_author_marked_already";
-    private static final String ATTR_MESSAGE = "message";
-    private static final String ATTR_UUID = "uuid";
-    private static final String ATTR_NAME = "name";
-    private static final String ATTR_SURNAME = "surname";
-    private static final String ATTR_EMAIL = "email";
-    private static final String ATTR_PHONENUMBER = "phonenumber";
-    private static final String ATTR_ABOUT = "about";
-
 
     private static final String PREVIOUS_OPERATION_MSG = "previous_operation_message";
     private static final String PWD_CHANGED_SUCCESSFULLY_MSG = "You password has been successfully changed!!!";
     private static final String PWD_NOT_CHANGED_MSG = "You password wasn't changed! Check inserted data!";
     private static final String MSG_AVATAR_APPROVED = "Avatar changed successfully to account: ";
     private static final String MSG_AVATAR_DECLINED = "Avatar change was declined to account: ";
-    private static final String EMPTY_STRING = "";
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    
     public void changeForgottenPass(SessionRequestContent requestContent) throws ServiceException {
         FormValidator val = new FormValidator();
         Locale locale = new CourseService().takeLocaleFromSession(requestContent);
@@ -159,7 +127,6 @@ public class AccountService {
             new RestorePassRequestRepository().insert(new RestorePassRequest(account.getId(), uuid));
             reqAttrs.put(ATTR_MESSAGE, rb.getString(BUNDLE_EMAIL_SENT));
         } catch (RepositoryException e) {
-            log.error(e);
             throw new ServiceException(e);
         } catch (IOException | MessagingException e) {
             log.error(e);
@@ -186,6 +153,7 @@ public class AccountService {
                     return false;
                 }
             } catch (NoSuchAlgorithmException e) {
+                log.error(e);
                 throw new ServiceException(e);
             }
             Account account = accounts.get(0);
@@ -208,7 +176,6 @@ public class AccountService {
             sessionAttrs.put(ATTR_RECOMMENDED_COURSES, recommendedCourses);
             (new MarkService()).insertMarkedCourseIdsIntoSession(requestContent);
         } catch (RepositoryException e) {
-            log.error(e);
             throw new ServiceException(e);
         }
         return true;
@@ -290,6 +257,7 @@ public class AccountService {
                 reqAttrs.put(ATTR_OPERATION_RESULT, false);
             }
         } catch (RepositoryException | NoSuchAlgorithmException | CloneNotSupportedException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
     }
@@ -333,13 +301,14 @@ public class AccountService {
             try {
                 File file = new File(fileStorage + currAccount.getUpdatePhotoPath());
                 String previousAvatarPath = fileStorage + currAccount.getPathToPhoto();
-                if (!previousAvatarPath.contains("default_acc_avatar")) {
+                if (!previousAvatarPath.contains(DEFAULT_ACC_AVATAR)) {
                     Files.deleteIfExists(Paths.get(fileStorage + currAccount.getPathToPhoto()));
                 }
                 file.renameTo(new File(fileStorage + "resources/account_avatar"
                         + currAccount.getUpdatePhotoPath().substring(currAccount.getUpdatePhotoPath().lastIndexOf(PATH_SPLITTER))));
                 Files.deleteIfExists(Paths.get(fileStorage + currAccount.getUpdatePhotoPath()));
             } catch (IOException e) {
+                log.error(e);
                 throw new ServiceException(e);
             }
 
@@ -367,6 +336,7 @@ public class AccountService {
             requestContent.getRequestAttributes().put(ATTR_ACCS_TO_AVATAR_APPROVE
                     , repository.query(new SelectAccToPhotoApproveSpecification()));
         } catch (RepositoryException | IOException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
     }
@@ -379,11 +349,11 @@ public class AccountService {
         Account clone;
         try {
             clone = ((Account) requestContent.getSessionAttributes().get(ATTR_USER)).clone();
-            clone.setName(requestParams.get("name")[0]);
-            clone.setSurname(requestParams.get("surname")[0]);
-            clone.setEmail(requestParams.get("email")[0]);
-            clone.setPhoneNumber(requestParams.get("phonenumber")[0]);
-            clone.setAbout(requestParams.get("about")[0]);
+            clone.setName(requestParams.get(ATTR_NAME)[0]);
+            clone.setSurname(requestParams.get(ATTR_SURNAME)[0]);
+            clone.setEmail(requestParams.get(ATTR_EMAIL)[0]);
+            clone.setPhoneNumber(requestParams.get(ATTR_PHONENUMBER)[0]);
+            clone.setAbout(requestParams.get(ATTR_ABOUT)[0]);
             if (val.validateLogin(clone.getLogin()) && val.validateName(clone.getName()) && val.validateSurName(clone.getSurname())
                     && val.validateEmail(clone.getEmail()) && val.validateAccAboutLength(clone.getAbout())
                     && val.validatePhone(clone.getPhoneNumber())) {
@@ -393,6 +363,7 @@ public class AccountService {
                 return true;
             }
         } catch (CloneNotSupportedException | RepositoryException | NullPointerException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
         return false;
@@ -456,13 +427,14 @@ public class AccountService {
             if (accMarksForThisAuthor.size() != 0) {
                 reqAttrs.put(ATTR_IS_AUTHOR_MARKED_ALREADY, true);
             }
-        } catch (RepositoryException | NullPointerException e) {
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }catch (NullPointerException e){
+            log.error(e);
             throw new ServiceException(e);
         }
     }
 
-
-    // TODO: 7/12/2019 надо ли проверку на ноль??? nonnull?
     private void initAccount(Account account, Map<String, String[]> requestParams) throws ServiceException {
         account.setLogin(requestParams.get(ATTR_LOGIN)[0]);
         account.setName(requestParams.get(ATTR_NAME)[0]);
@@ -474,20 +446,23 @@ public class AccountService {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance(CURRENT_ENCRYPTING);
             account.setPassSalt(generateSaltForPassword());
-            String saltedPass = requestParams.get("password")[0] + account.getPassSalt();
+            String saltedPass = requestParams.get(ATTR_PWD)[0] + account.getPassSalt();
             String hashedPass = new String(messageDigest.digest(saltedPass.getBytes()));
             account.setPassword(hashedPass);
         } catch (NoSuchAlgorithmException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
+
 
         account.setPathToPhoto("/resources/account_avatar/default_acc_avatar.png");
         account.setUpdatePhotoPath(EMPTY_STRING);
         try {
-            account.setBirthDate(dateFormat.parse(requestParams.get("birthdate")[0]));
+            account.setBirthDate(dateFormat.parse(requestParams.get(ATTR_BIRTHDATE)[0]));
             account.setRegistrDate(new Date(System.currentTimeMillis()));
         } catch (ParseException e) {
-            e.printStackTrace();
+            log.error(e);
+            throw new ServiceException(e);
         }
 
         String role = requestParams.get(ATTR_ROLE)[0].toLowerCase();
@@ -500,6 +475,7 @@ public class AccountService {
         try {
             account.setType(AccountType.valueOf(role.toUpperCase()));
         } catch (IllegalArgumentException e) {
+            log.error(e);
             throw new ServiceException(e);
         }
     }
@@ -530,7 +506,6 @@ public class AccountService {
         return isAboutCorrect && isPhoneCorrect;
     }
 
-    // TODO: 7/27/2019 общий метод, может в utils вынести в отдельный пакет?
     String escapeQuotes(String text) {
         String correctText = null;
         if (text != null) {

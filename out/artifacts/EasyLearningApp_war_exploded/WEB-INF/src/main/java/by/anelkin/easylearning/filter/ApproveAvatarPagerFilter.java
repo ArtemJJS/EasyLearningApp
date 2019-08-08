@@ -1,7 +1,6 @@
 package by.anelkin.easylearning.filter;
 
 
-import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.service.AccountService;
@@ -25,6 +24,7 @@ public class ApproveAvatarPagerFilter implements Filter {
             requestContent.insertAttributes(request);
             log.debug("Filter " + this.getClass().getSimpleName() + " completed work.");
         } catch (ServiceException e) {
+            log.error(e);
             throw new ServletException(e);
         }
         filterChain.doFilter(request, servletResponse);

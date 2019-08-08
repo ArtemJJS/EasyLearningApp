@@ -45,6 +45,7 @@ public class WriteCourseStateTag extends TagSupport {
         try {
             writer.write("<span style='color : " + currColor + "'>" + state.toString() + "</span>");
         } catch (IOException e) {
+            log.error(e);
             throw new JspTagException(e);
         }
         return SKIP_BODY;

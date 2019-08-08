@@ -1,8 +1,7 @@
 package by.anelkin.easylearning.tag;
 
-import by.anelkin.easylearning.entity.Payment;
-import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -13,6 +12,7 @@ import java.io.IOException;
 
 import static by.anelkin.easylearning.entity.Payment.*;
 
+@Log4j
 @Setter
 public class CurrencyMarkerTag extends TagSupport {
     private int currencyId;
@@ -26,6 +26,7 @@ public class CurrencyMarkerTag extends TagSupport {
         try {
             writer.write(currencyType);
         } catch (IOException e) {
+            log.error(e);
             throw new JspTagException(e);
         }
         return SKIP_BODY;

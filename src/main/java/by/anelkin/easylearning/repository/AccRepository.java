@@ -9,19 +9,18 @@ import lombok.extern.log4j.Log4j;
 import org.intellij.lang.annotations.Language;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import static by.anelkin.easylearning.entity.Account.AccountType.*;
+import static by.anelkin.easylearning.util.GlobalConstant.*;
+
 
 @Log4j
 public class AccRepository implements AppRepository<Account> {
     private static final String PATH_TO_AVATAR = "resources/account_avatar/";
     private static final String PATH_TO_AVATAR_UPDATE = "resources/account_avatar_update/";
-    private static final String PATH_SPLITTER = "/";
     private ConnectionPool pool = ConnectionPool.getInstance();
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     @Language("sql")
     private static final String QUERY_UPDATE = "UPDATE account SET acc_password = ?, acc_email = ?, acc_name = ?," +
             " acc_surname = ?, acc_birthdate = ?, acc_phone_number = ?, acc_registration_date = ?, acc_about = ?," +
@@ -38,7 +37,7 @@ public class AccRepository implements AppRepository<Account> {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE)) {
             String[] pathToPhotoParts = account.getPathToPhoto().split(PATH_SPLITTER);
-            String[] pathUpdatePhotoParts = account.getUpdatePhotoPath().split("/");
+            String[] pathUpdatePhotoParts = account.getUpdatePhotoPath().split(PATH_SPLITTER);
             String[] params = {account.getPassword(), account.getEmail(), account.getName(), account.getSurname(),
                     dateFormat.format(account.getBirthDate()), account.getPhoneNumber(), dateFormat.format(account.getRegistrDate()),
                     account.getAbout(), pathToPhotoParts[pathToPhotoParts.length - 1], String.valueOf(account.getType().ordinal()),
@@ -68,8 +67,8 @@ public class AccRepository implements AppRepository<Account> {
     public boolean insert(@NonNull Account account) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_INSERT)) {
-            String[] pathToPhotoParts = account.getPathToPhoto().split("/");
-            String[] pathUpdatePhotoParts = account.getUpdatePhotoPath().split("/");
+            String[] pathToPhotoParts = account.getPathToPhoto().split(PATH_SPLITTER);
+            String[] pathUpdatePhotoParts = account.getUpdatePhotoPath().split(PATH_SPLITTER);
             String[] params = {account.getLogin(), account.getPassword(), account.getEmail(), account.getName(), account.getSurname(),
                     dateFormat.format(account.getBirthDate()), account.getPhoneNumber(), dateFormat.format(account.getRegistrDate()),
                     account.getAbout(), pathToPhotoParts[pathToPhotoParts.length - 1], String.valueOf(account.getType().ordinal()),
@@ -105,33 +104,33 @@ public class AccRepository implements AppRepository<Account> {
         List<Account> accountList = new ArrayList<>();
         while (resultSet.next()) {
             Account account = new Account();
-            account.setId(resultSet.getInt("acc_id"));
-            account.setLogin(resultSet.getString("acc_login"));
-            account.setPassword(resultSet.getString("acc_password"));
-            account.setEmail(resultSet.getString("acc_email"));
-            account.setName(resultSet.getString("acc_name"));
-            account.setSurname(resultSet.getString("acc_surname"));
-            account.setBirthDate(resultSet.getDate("acc_birthdate"));
-            account.setPhoneNumber(resultSet.getString("acc_phone_number"));
-            account.setRegistrDate(resultSet.getDate("acc_registration_date"));
-            account.setAbout(resultSet.getString("acc_about"));
-            account.setBalance(resultSet.getBigDecimal("acc_balance"));
-            account.setPassSalt(resultSet.getString("acc_pass_salt"));
+            account.setId(resultSet.getInt(ACC_ID));
+            account.setLogin(resultSet.getString(ACC_LOGIN));
+            account.setPassword(resultSet.getString(ACC_PWD));
+            account.setEmail(resultSet.getString(ACC_EMAIL));
+            account.setName(resultSet.getString(ACC_NAME));
+            account.setSurname(resultSet.getString(ACC_SURNAME));
+            account.setBirthDate(resultSet.getDate(ACC_BIRTHDATE));
+            account.setPhoneNumber(resultSet.getString(ACC_PHONE_NUMBER));
+            account.setRegistrDate(resultSet.getDate(ACC_REGISTR_DATE));
+            account.setAbout(resultSet.getString(ACC_ABOUT));
+            account.setBalance(resultSet.getBigDecimal(ACC_BALANCE));
+            account.setPassSalt(resultSet.getString(ACC_PASS_SALT));
 
-            String updatePhotoFileName = resultSet.getString("update_photo_path");
+            String updatePhotoFileName = resultSet.getString(ACC_UPDATE_PHOTO_PATH);
             if (updatePhotoFileName == null || updatePhotoFileName.isEmpty()) {
-                account.setUpdatePhotoPath("");
+                account.setUpdatePhotoPath(EMPTY_STRING);
             } else {
                 account.setUpdatePhotoPath(PATH_TO_AVATAR_UPDATE + updatePhotoFileName);
             }
 
-            String avatarFileName = resultSet.getString("acc_photo_path");
+            String avatarFileName = resultSet.getString(ACC_PHOTO_PATH);
             account.setPathToPhoto(PATH_TO_AVATAR + avatarFileName);
 
-            account.setAvgMark(resultSet.getDouble("avg_mark"));
+            account.setAvgMark(resultSet.getDouble(ACC_AVG_MARK));
 
             // do it with int because need default to handle possible exception
-            int typeId = resultSet.getInt("acc_type");
+            int typeId = resultSet.getInt(ACC_TYPE);
             switch (typeId) {
                 case 0:
                     account.setType(GUEST);
@@ -158,7 +157,7 @@ public class AccRepository implements AppRepository<Account> {
         for (int i = 0; i < params.length; i++) {
             statement.setString(i + 1, params[i]);
         }
-        log.debug("Executing query:" + statement.toString().split(":")[1]);
+        log.debug("Executing query:" + statement.toString().split(COLON_SYMBOL)[1]);
         statement.execute();
     }
 }

@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static by.anelkin.easylearning.util.GlobalConstant.*;
+
 @Log4j
 public class ChapterRepository implements AppRepository<CourseChapter> {
     private ConnectionPool pool = ConnectionPool.getInstance();
@@ -86,11 +88,11 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
         List<CourseChapter> chapterList = new ArrayList<>();
         while (resultSet.next()) {
             CourseChapter chapter = new CourseChapter();
-            chapter.setId(resultSet.getInt("course_chapter_id"));
-            chapter.setCourseId(resultSet.getInt("course_id"));
-            chapter.setName(resultSet.getString("chapter_name"));
-            chapter.setLessonAmount(resultSet.getInt("chapter_lesson_amount"));
-            chapter.setDuration(resultSet.getLong("chapter_duration"));
+            chapter.setId(resultSet.getInt(COURSE_CHAPTER_ID));
+            chapter.setCourseId(resultSet.getInt(COURSE_ID));
+            chapter.setName(resultSet.getString(CHAPTER_NAME));
+            chapter.setLessonAmount(resultSet.getInt(CHAPTER_LESSON_AMOUNT));
+            chapter.setDuration(resultSet.getLong(CHAPTER_DURATION));
             chapterList.add(chapter);
         }
         return chapterList;
@@ -100,7 +102,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
         for (int i = 0; i < params.length; i++) {
             statement.setString(i + 1, params[i]);
         }
-        log.debug("Executing query:" + statement.toString().split(":")[1]);
+        log.debug("Executing query:" + statement.toString().split(COLON_SYMBOL)[1]);
         statement.execute();
     }
 }

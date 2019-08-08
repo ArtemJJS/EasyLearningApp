@@ -22,19 +22,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static by.anelkin.easylearning.entity.Mark.MarkType.*;
+import static by.anelkin.easylearning.util.GlobalConstant.*;
 
 @Log4j
 public class MarkService {
-    private static final String ATTR_USER = "user";
-    private static final String ATTR_COMMENT = "comment";
-    private static final String ATTR_TARGET_ID = "target_id";
-    private static final String ATTR_MARK_VALUE = "mark_value";
-    private static final String ATTR_AVAILABLE_COURSES = "coursesAvailable";
-    private static final String ATTR_AUTHOR_LOGIN = "author_login";
-
-    private static final String ATTR_MARKED_COURSES_IDS = "marked_courses_ids";
-
-
     public void markAuthor(SessionRequestContent requestContent) throws ServiceException {
         MarkRepository repository = new MarkRepository();
         AccRepository accRepository = new AccRepository();

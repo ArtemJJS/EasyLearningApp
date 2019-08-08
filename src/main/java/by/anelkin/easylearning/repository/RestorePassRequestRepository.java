@@ -1,7 +1,6 @@
 package by.anelkin.easylearning.repository;
 
 import by.anelkin.easylearning.connection.ConnectionPool;
-import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.entity.RestorePassRequest;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.specification.AppSpecification;
@@ -15,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static by.anelkin.easylearning.util.GlobalConstant.*;
 
 @Log4j
 public class RestorePassRequestRepository implements AppRepository<RestorePassRequest> {
@@ -77,8 +78,8 @@ public class RestorePassRequestRepository implements AppRepository<RestorePassRe
     private List<RestorePassRequest> fillRestorePassRequestList(ResultSet resultSet) throws SQLException {
         List<RestorePassRequest> list = new ArrayList<>();
         while (resultSet.next()) {
-            int accId = resultSet.getInt("acc_id");
-            String uuid = resultSet.getString("uuid");
+            int accId = resultSet.getInt(ACC_ID);
+            String uuid = resultSet.getString(RESTORE_PASS_UUID);
             RestorePassRequest restorePassRequest = new RestorePassRequest(accId, uuid);
             list.add(restorePassRequest);
         }
@@ -90,7 +91,7 @@ public class RestorePassRequestRepository implements AppRepository<RestorePassRe
         for (int i = 0; i < params.length; i++) {
             statement.setString(i + 1, params[i]);
         }
-        log.debug("Executing query:" + statement.toString().split(":")[1]);
+        log.debug("Executing query:" + statement.toString().split(COLON_SYMBOL)[1]);
         statement.execute();
     }
 

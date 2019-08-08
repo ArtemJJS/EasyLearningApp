@@ -13,7 +13,6 @@ import java.io.IOException;
 @Log4j
 @WebFilter(urlPatterns = "/admin/course-approve")
 public class CourseApprovalPageFilter implements Filter {
-    private static final String ATTR_ROLE = "role";
     private CourseService courseService;
 
     @Override
@@ -30,6 +29,7 @@ public class CourseApprovalPageFilter implements Filter {
             courseService.initCourseApprovalPage(requestContent);
             requestContent.insertAttributes(request);
         } catch (ServiceException e) {
+            log.error(e);
             throw new ServletException(e);
         }
         filterChain.doFilter(request, servletResponse);

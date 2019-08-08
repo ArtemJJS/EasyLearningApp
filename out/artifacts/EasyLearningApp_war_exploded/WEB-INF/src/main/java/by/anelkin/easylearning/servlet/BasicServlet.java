@@ -22,17 +22,26 @@ import static by.anelkin.easylearning.command.CommandFactory.*;
 import static by.anelkin.easylearning.entity.Account.AccountType.*;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.*;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
-
 @Log4j
 @WebServlet(name = "BasicServlet", urlPatterns = {"/basic_servlet", "/search", "/change-lang"
         , "/admin/*", "/user/deposit", "/author/cash-out", "/author/add-course", "/account/change-pass", "/restore-password"
-         , "/change-forgotten-password"})
+        , "/change-forgotten-password"})
 public class BasicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        processRequest(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    public void destroy() {
+        ConnectionPool.getInstance().closePool();
+    }
+
+
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute("role") == null) {
             session.setAttribute("role", GUEST);
@@ -43,11 +52,13 @@ public class BasicServlet extends HttpServlet {
         try {
             commandType = CommandType.valueOf(request.getParameter("command_name").toUpperCase());
         } catch (IllegalArgumentException e) {
+            log.error(e);
             throw new ServletException("Wrong command name!!!");
         }
 
         Account.AccountType accType = (Account.AccountType) session.getAttribute("role");
         if (!commandType.getAccessTypes().contains(accType)) {
+            log.warn("Access denied to command: " + commandType);
             throw new ServletException("Access DENIED!!!");
         }
         log.debug("Server received command: " + commandType);
@@ -73,9 +84,6 @@ public class BasicServlet extends HttpServlet {
             response.sendRedirect(url);
         }
     }
-
-    @Override
-    public void destroy() {
-        ConnectionPool.getInstance().closePool();
-    }
 }
+
+

@@ -44,6 +44,7 @@ public class CourseRepository implements AppRepository<Course> {
                     pathToImgUpdate[pathToImgUpdate.length - 1], String.valueOf(course.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -58,6 +59,7 @@ public class CourseRepository implements AppRepository<Course> {
             String[] params = {String.valueOf(course.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -74,6 +76,7 @@ public class CourseRepository implements AppRepository<Course> {
                     String.valueOf(course.getState().ordinal()), pathToImgUpdate[pathToImgUpdate.length - 1]};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -88,11 +91,11 @@ public class CourseRepository implements AppRepository<Course> {
                 for (int i = 0; i < params.length; i++) {
                     statement.setString(i + 1, params[i]);
                 }
-            log.debug("Executing query:" + statement.toString().split(":")[1]);
             try (ResultSet resultSet = statement.executeQuery()) {
                 courseList = fillCourseList(resultSet);
             }
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return courseList;

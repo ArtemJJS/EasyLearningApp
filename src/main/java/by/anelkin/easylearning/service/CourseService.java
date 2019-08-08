@@ -22,28 +22,14 @@ import java.nio.file.Paths;
 import java.util.*;
 
 import static by.anelkin.easylearning.entity.Course.*;
+import static by.anelkin.easylearning.util.GlobalConstant.*;
 
 @Log4j
 public class CourseService {
     private static final String PATH_RELATIVE_COURSE_IMG_FOLDER = "resources/course_img/";
+    private static final String DEFAULT_COURSE_AVATAR = "default_course_avatar";
     private static final String PROP_FILE_FOLDER = "file_folder";
     private static final int SEARCH_LIMIT = 4;
-
-    private static final String ATTR_COURSES_LIST = "courses_list";
-    private static final String ATTR_USER = "user";
-    private static final String ATTR_COURSE_ID = "course_id";
-    private static final String ATTR_COURSE_NAME = "course_name";
-    private static final String ATTR_COURSE_DESCRIPTION = "course_description";
-    private static final String ATTR_COURSE_PRICE = "course_price";
-    private static final String ATTR_CHAPTER_NAME = "chapter_name";
-    private static final String ATTR_COURSE_ALREADY_EXISTS = "course_exists_msg";
-    private static final String ATTR_FILE_EXTENSION = "file_extension";
-    private static final String ATTR_SEARCH_KEY = "search_key";
-    private static final String ATTR_PAGE = "page";
-    private static final String ATTR_HAS_MORE_PAGES = "has_more_pages";
-    private static final String ATTR_MESSAGE = "message";
-    private static final String ATTR_LOCALE = "locale";
-    private static final String LOCALE_SPLITTER = "_";
 
     private static final String RESOURCE_BUNDLE_BASE = "text_resources";
     private static final String FILE_STORAGE_BUNDLE_BASE = "file_storage";
@@ -58,8 +44,6 @@ public class CourseService {
     private static final String PATTERN_LESSON_TITLE = "lesson_title_";
     private static final String PATTERN_LESSON_CONTENT = "lesson_content_";
     private static final String PATTERN_LESSON_DURATION = "lesson_duration_";
-    private static final String EMPTY_STRING = "";
-    private static final String PATH_SPLITTER = "/";
 
 
     public void addCourseImgToReview(SessionRequestContent requestContent) throws ServiceException {
@@ -85,7 +69,7 @@ public class CourseService {
             String imgToApprovePath = course.getUpdatePhotoPath();
             String currImgPath = fileStorage + course.getPathToPicture();
             String fileName = imgToApprovePath.substring(imgToApprovePath.lastIndexOf(PATH_SPLITTER) + 1);
-            if (!currImgPath.contains("default_course_avatar")) {
+            if (!currImgPath.contains(DEFAULT_COURSE_AVATAR)) {
                 Files.deleteIfExists(Paths.get(currImgPath));
             }
             File file = new File(fileStorage + imgToApprovePath);
@@ -130,7 +114,7 @@ public class CourseService {
     public void initCoursePage(SessionRequestContent requestContent) throws ServiceException {
         HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
         CourseRepository repository = new CourseRepository();
-        int courseId = Integer.parseInt(requestContent.getRequestParameters().get("course-id")[0]);
+        int courseId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_COURSE_ID_DEFIS)[0]);
         List<Mark> marks = (new MarkService()).takeMarksOfCourse(courseId);
         List<Course> courses = null;
         try {
@@ -142,10 +126,10 @@ public class CourseService {
             log.error("Course wasn't found, id: " + courseId);
             throw new ServiceException("Course wasn't found");
         }
-        reqAttrs.put("currentCourseMarks", marks);
-        reqAttrs.put("requestedCourse", courses.get(0));
-        reqAttrs.put("currentCourseContent", takeChaptersAndLessons(courseId));
-        reqAttrs.put("author_of_course", (new AccountService()).takeAuthorOfCourse(courseId));
+        reqAttrs.put(ATTR_CURR_COURSE_MARKS, marks);
+        reqAttrs.put(ATTR_REQUESTED_COURSE, courses.get(0));
+        reqAttrs.put(ATTR_CURR_COURSE_CONTENT, takeChaptersAndLessons(courseId));
+        reqAttrs.put(ATTR_AUTHOR_OF_COURSE, (new AccountService()).takeAuthorOfCourse(courseId));
     }
 
     public void initCourseApprovalPage(SessionRequestContent requestContent) throws ServiceException {

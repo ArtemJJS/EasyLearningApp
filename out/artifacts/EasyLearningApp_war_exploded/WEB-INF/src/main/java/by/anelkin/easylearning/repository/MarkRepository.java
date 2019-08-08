@@ -20,7 +20,6 @@ import static by.anelkin.easylearning.entity.Mark.MarkType.*;
 public class MarkRepository implements AppRepository<Mark> {
     private ConnectionPool pool = ConnectionPool.getInstance();
     private static final String PATH_TO_PICTURE = "/resources/account_avatar/";
-    //    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private static final String QUERY_INSERT_COURSE_MARK = "{call InsertCourseMark(?, ?, ?, ?, ?)}";
     private static final String QUERY_INSERT_AUTHOR_MARK = "{call InsertAuthorMark(?, ?, ?, ?, ?)}";
     private static final String QUERY_UPDATE_COURSE_MARK = "{call updateCourseMark(?, ?, ?, ?, ?, ?)}";
@@ -33,12 +32,12 @@ public class MarkRepository implements AppRepository<Mark> {
     public boolean update(@NonNull Mark mark) throws RepositoryException {
         String actualQuery = mark.getMarkType() == AUTHOR_MARK ? QUERY_UPDATE_AUTHOR_MARK : QUERY_UPDATE_COURSE_MARK;
         try (Connection connection = pool.takeConnection();
-             // FIXME: 7/15/2019 переделать на callableStatement?
              PreparedStatement statement = connection.prepareStatement(actualQuery)) {
             String[] params = {String.valueOf(mark.getTargetId()), String.valueOf(mark.getAccId()), String.valueOf(mark.getMarkValue()),
                     mark.getComment(), String.valueOf(mark.getMarkDate()), String.valueOf(mark.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -52,6 +51,7 @@ public class MarkRepository implements AppRepository<Mark> {
             String[] params = {String.valueOf(mark.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -66,6 +66,7 @@ public class MarkRepository implements AppRepository<Mark> {
                     String.valueOf(mark.getMarkValue()), mark.getComment(), String.valueOf(mark.getMarkDate())};
             setParametersAndExecute(statement, params1);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -82,11 +83,11 @@ public class MarkRepository implements AppRepository<Mark> {
             for (int i = 0; i < params.length; i++) {
                 statement.setString(i + 1, params[i]);
             }
-            log.debug("Executing query:" + statement.toString().split(":")[1]);
             try (ResultSet resultSet = statement.executeQuery()) {
                 markList = fillMarkList(resultSet, markType, specification);
             }
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return markList;

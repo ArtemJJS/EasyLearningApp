@@ -44,6 +44,7 @@ public class ConnectionPool {
             Class.forName(DRIVER_NAME);
             initPool();
         } catch (Exception e) {
+            log.fatal(e);
             throw new ExceptionInInitializerError(e);
         }
     }
@@ -62,6 +63,7 @@ public class ConnectionPool {
             }
         }
         if (availableConnections.size() < 1) {
+            log.fatal("ConnectionPool couldn't create any connection to database!!!");
             throw new ExceptionInInitializerError("Unable to create any connection to base!");
         }
         log.info("Pool was initialized. Connections amount: " + availableConnections.size());
@@ -102,7 +104,7 @@ public class ConnectionPool {
             usedConnections.remove(connection);
             availableConnections.offer((ProxyConnection) connection);
         } else {
-            log.info("Attempt to return wrong connection into the pool!");
+            log.warn("Attempt to return wrong connection into the pool!");
         }
     }
 

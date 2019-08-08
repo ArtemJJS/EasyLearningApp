@@ -36,6 +36,7 @@ public class RestorePassRequestRepository implements AppRepository<RestorePassRe
             String[] params = {String.valueOf(restorePassRequest.getAccId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -48,6 +49,7 @@ public class RestorePassRequestRepository implements AppRepository<RestorePassRe
             String[] params = {String.valueOf(restorePassRequest.getAccId()), restorePassRequest.getUuid()};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -62,11 +64,11 @@ public class RestorePassRequestRepository implements AppRepository<RestorePassRe
             for (int i = 0; i < params.length; i++) {
                 statement.setString(i + 1, params[i]);
             }
-            log.debug("Executing query:" + statement.toString().split(":")[1]);
             try (ResultSet resultSet = statement.executeQuery()) {
                 restorePassRequests = new ArrayList<>(fillRestorePassRequestList(resultSet));
             }
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return restorePassRequests;

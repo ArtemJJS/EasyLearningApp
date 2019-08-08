@@ -31,6 +31,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
             String[] params = {String.valueOf(chapter.getCourseId()), chapter.getName(), String.valueOf(chapter.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -43,6 +44,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
             String[] params = {String.valueOf(chapter.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -55,6 +57,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
             String[] params = {String.valueOf(chapter.getCourseId()), chapter.getName()};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -67,32 +70,28 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
              PreparedStatement statement = connection.prepareStatement(specification.getQuery())) {
             String[] params = specification.getStatementParameters();
             for (int i = 0; i < params.length; i++) {
-                statement.setString(i+1, params[i]);
+                statement.setString(i + 1, params[i]);
             }
-            log.debug("Executing query:" + statement.toString().split(":")[1]);
             try (ResultSet resultSet = statement.executeQuery()) {
                 chapterList = new ArrayList<>(fillChapterList(resultSet));
             }
         } catch (SQLException e) {
-           throw new RepositoryException(e);
+            log.error(e);
+            throw new RepositoryException(e);
         }
         return chapterList;
     }
 
-    private Collection<CourseChapter> fillChapterList(ResultSet resultSet) {
+    private Collection<CourseChapter> fillChapterList(ResultSet resultSet) throws SQLException {
         List<CourseChapter> chapterList = new ArrayList<>();
-        try {
-            while (resultSet.next()) {
-                CourseChapter chapter = new CourseChapter();
-                chapter.setId(resultSet.getInt("course_chapter_id"));
-                chapter.setCourseId(resultSet.getInt("course_id"));
-                chapter.setName(resultSet.getString("chapter_name"));
-                chapter.setLessonAmount(resultSet.getInt("chapter_lesson_amount"));
-                chapter.setDuration(resultSet.getLong("chapter_duration"));
-                chapterList.add(chapter);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        while (resultSet.next()) {
+            CourseChapter chapter = new CourseChapter();
+            chapter.setId(resultSet.getInt("course_chapter_id"));
+            chapter.setCourseId(resultSet.getInt("course_id"));
+            chapter.setName(resultSet.getString("chapter_name"));
+            chapter.setLessonAmount(resultSet.getInt("chapter_lesson_amount"));
+            chapter.setDuration(resultSet.getLong("chapter_duration"));
+            chapterList.add(chapter);
         }
         return chapterList;
     }

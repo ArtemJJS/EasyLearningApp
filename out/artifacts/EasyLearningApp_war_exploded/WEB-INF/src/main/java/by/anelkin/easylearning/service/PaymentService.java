@@ -15,6 +15,7 @@ import by.anelkin.easylearning.specification.course.SelectCourseByIdSpecificatio
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
 import by.anelkin.easylearning.specification.payment.SelectPaymentByAccountIdSpecification;
 import by.anelkin.easylearning.validator.FormValidator;
+import lombok.extern.log4j.Log4j;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -23,22 +24,16 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import static by.anelkin.easylearning.entity.Payment.*;
+import static by.anelkin.easylearning.util.GlobalConstant.*;
 
+@Log4j
 public class PaymentService {
-    private static final String ATTR_MESSAGE = "message";
+    private static final String RESOURCE_BUNDLE_BASE = "text_resources";
+
     private static final String BUNDLE_PAYMENT_SUCCEEDED = "msg.payment_approved";
     private static final String BUNDLE_PAYMENT_DECLINED = "msg.payment_declined";
     private static final String BUNDLE_WRONG_DEPOSIT_DATA = "msg.wrong_deposit_data";
-    private static final String BUNDLE_PROBLEMS_PURCHASING_COURSE = "msg.problems_purchasing_course";
-    private static final String RESOURCE_BUNDLE_BASE = "text_resources";
-    private static final String ATTR_COURSE_ID = "course_id";
-    private static final String ATTR_USER = "user";
-    private static final String ATTR_AMOUNT = "amount";
-    private static final String ATTR_CURRENCY = "currency";
-    private static final String ATTR_CARD = "card";
-    private static final String ATTR_PAYMENTS = "payments";
-    private static final String ATTR_PREVIOUS_OPERATION_MSG = "previous_operation_message";
-    private static final String CARD_NUMBER_SPLITTER = " ";
+
     private static final String DESCRIPTION_DEPOSIT_BY_CARD = "Deposit from card ends with ";
     private static final String DESCRIPTION_CASH_OUT_TO_CARD = "Cash out to card ends with ";
     private static final String DESCRIPTION_BUY_WITH_CARD = "Purchasing by card ends with %s. Course: ";
@@ -73,7 +68,10 @@ public class PaymentService {
             accService.refreshSessionAttributeUser(requestContent, account);
             accService.refreshSessionAttributeAvailableCourses(requestContent, account);
             processAuthorSaleOperation(course);
-        } catch (RepositoryException | NullPointerException e) {
+        } catch (NullPointerException e) {
+            log.error(e);
+            throw new ServiceException(e);
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
         return true;
@@ -107,7 +105,10 @@ public class PaymentService {
             accService.refreshSessionAttributeUser(requestContent, account);
             accService.refreshSessionAttributeAvailableCourses(requestContent, account);
             processAuthorSaleOperation(course);
-        } catch (RepositoryException | NullPointerException e) {
+        } catch (NullPointerException e) {
+            log.error(e);
+            throw new ServiceException(e);
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
         return true;
@@ -198,7 +199,10 @@ public class PaymentService {
             payment.setCurrencyId(CurrencyType.USD.ordinal() + 1);
             payment.setDescription(DESCRIPTION_SALE_COURSE);
             paymentRepository.insert(payment);
-        } catch (RepositoryException | NullPointerException e) {
+        } catch (NullPointerException e) {
+            log.error(e);
+            throw new ServiceException(e);
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }

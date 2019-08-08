@@ -32,9 +32,9 @@ public class LessonRepository implements AppRepository<CourseLesson> {
                     String.valueOf(lesson.getDuration()), String.valueOf(lesson.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
-        // FIXME: 7/16/2019 плохо что возврат true без возможности возврата false
         return true;
     }
 
@@ -45,6 +45,7 @@ public class LessonRepository implements AppRepository<CourseLesson> {
             String[] params = {String.valueOf(lesson.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -58,6 +59,7 @@ public class LessonRepository implements AppRepository<CourseLesson> {
                     lesson.getName(), lesson.getPathToContent(), String.valueOf(lesson.getDuration())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return true;
@@ -72,11 +74,11 @@ public class LessonRepository implements AppRepository<CourseLesson> {
             for (int i = 0; i < params.length; i++) {
                 statement.setString(i + 1, params[i]);
             }
-            log.debug("Executing query:" + statement.toString().split(":")[1]);
             try (ResultSet resultSet = statement.executeQuery()) {
                 lessonList = fillLessonList(resultSet);
             }
         } catch (SQLException e) {
+            log.error(e);
             throw new RepositoryException(e);
         }
         return lessonList;
