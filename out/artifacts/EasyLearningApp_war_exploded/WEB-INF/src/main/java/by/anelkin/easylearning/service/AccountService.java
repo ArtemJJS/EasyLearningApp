@@ -18,6 +18,7 @@ import by.anelkin.easylearning.specification.account.SelectAuthorOfCourseSpecifi
 import by.anelkin.easylearning.specification.course.SelectByAuthorIdSpecification;
 import by.anelkin.easylearning.specification.course.SelectCourseRecommendedSpecification;
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
+import by.anelkin.easylearning.specification.mark.SelectByTargetIdWithWriterInfoSpecification;
 import by.anelkin.easylearning.specification.mark.SelectMarkByTargetIdSpecification;
 import by.anelkin.easylearning.validator.FormValidator;
 import lombok.NonNull;
@@ -37,6 +38,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static by.anelkin.easylearning.entity.Account.*;
 import static by.anelkin.easylearning.entity.Mark.*;
@@ -416,16 +418,23 @@ public class AccountService {
             Account author = accounts.get(0);
             CourseRepository courseRepository = new CourseRepository();
             List<Course> courses = courseRepository.query(new SelectByAuthorIdSpecification(author.getId()));
+
+            Account currAcc = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
+            int currAccId = currAcc == null ? 0 : currAcc.getId();
+            List<Mark> marks = markRepository.query(new SelectByTargetIdWithWriterInfoSpecification(MarkType.AUTHOR_MARK, author.getId()));
+            List<Mark> marksFromCurrUser = marks.stream().filter(mark -> mark.getAccId() == currAccId).collect(Collectors.toList());
+            List<Mark> marksWithComments = marks.stream().filter(mark -> !mark.getComment().equals(EMPTY_STRING)).collect(Collectors.toList());
+
             reqAttrs.put(ATTR_REQUESTED_AUTHOR, author);
             reqAttrs.put(ATTR_AUTHOR_COURSE_LIST, courses);
+            reqAttrs.put(ATTR_AUTHOR_MARKS, marksWithComments);
 
-            List<Mark> accMarksForThisAuthor = markRepository.query(new SelectMarkByTargetIdSpecification(MarkType.AUTHOR_MARK, author.getId()));
-            if (accMarksForThisAuthor.size() != 0) {
+            if (marksFromCurrUser.size() != 0) {
                 reqAttrs.put(ATTR_IS_AUTHOR_MARKED_ALREADY, true);
             }
         } catch (RepositoryException e) {
             throw new ServiceException(e);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             log.error(e);
             throw new ServiceException(e);
         }

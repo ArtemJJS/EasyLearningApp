@@ -4,10 +4,8 @@ import by.anelkin.easylearning.entity.*;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
-import by.anelkin.easylearning.repository.ChapterRepository;
-import by.anelkin.easylearning.repository.CourseRepository;
-import by.anelkin.easylearning.repository.LessonRepository;
-import by.anelkin.easylearning.repository.MarkRepository;
+import by.anelkin.easylearning.repository.*;
+import by.anelkin.easylearning.specification.account.SelectAccPurchasedCourseSpecification;
 import by.anelkin.easylearning.specification.chapter.SelectAllFromCourseSpecification;
 import by.anelkin.easylearning.specification.chapter.SelectChapterByNameAndCourseIdSpecification;
 import by.anelkin.easylearning.specification.course.*;
@@ -141,6 +139,7 @@ public class CourseService {
         List<Mark> marksWithComment = marks.stream().filter(mark -> !mark.getComment().equals(EMPTY_STRING)).collect(Collectors.toList());
         try {
             int courseMarkCount = new MarkRepository().query(new SelectMarkByTargetIdSpecification(Mark.MarkType.COURSE_MARK, courseId)).size();
+            int purchaseCount = new AccRepository().query(new SelectAccPurchasedCourseSpecification(courseId)).size();
             List<Course> courses = null;
             courses = repository.query(new SelectCourseByIdSpecification(courseId));
             if (courses.size() != 1) {
@@ -148,6 +147,7 @@ public class CourseService {
                 throw new ServiceException("Course wasn't found");
             }
             reqAttrs.put(ATTR_COURSE_MARK_COUNT, courseMarkCount);
+            reqAttrs.put(ATTR_COURSE_PURCHASE_COUNT, purchaseCount);
             reqAttrs.put(ATTR_CURR_COURSE_MARKS, marksWithComment);
             reqAttrs.put(ATTR_REQUESTED_COURSE, courses.get(0));
             reqAttrs.put(ATTR_CURR_COURSE_CONTENT, takeChaptersAndLessons(courseId));

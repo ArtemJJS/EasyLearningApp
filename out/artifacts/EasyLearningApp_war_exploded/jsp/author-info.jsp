@@ -33,17 +33,21 @@
         <div class="author_description_and_stats">
             <div class="author_about">${author.about}</div>
             <div class="author_stats">
-                <div class="author_rating"><fmt:message key='author.rating' bundle='${rb}'/> <ctg:write-rating rating="${author.avgMark}"/></div>
-                <div class="author_students"><fmt:message key='author.students' bundle='${rb}'/> 352</div>
-                <div class="courses_amount"><fmt:message key='author.courses' bundle='${rb}'/> ${courses.size()}</div>
-            </div>
-            <c:if test="${pageContext.request.getAttribute('is_author_marked_already') == null}">
-                <a href="${pageContext.request.contextPath}/user/mark-author?author-id=${author.id}"><fmt:message key='global.mark_author' bundle='${rb}'/></a>
-            </c:if>
-        </div>
+                <c:if test="${pageContext.request.getAttribute('is_author_marked_already') == null
+                        && sessionScope.role.toString().equalsIgnoreCase('user')}">
+                    <div class="links">
+                        <a href="${pageContext.request.contextPath}/user/mark-author?author-id=${author.id}"><fmt:message
+                                key='global.mark_author' bundle='${rb}'/></a>
+                    </div>
+                </c:if>
+                <div class="stat_unit author_rating"><fmt:message key='author.rating' bundle='${rb}'/> <ctg:write-rating
+                        rating="${author.avgMark}"/></div>
+                <div class="stat_unit courses_amount"><fmt:message key='author.courses'
+                                                                   bundle='${rb}'/> ${courses.size()}</div>
     </section>
     <section class="section_3">
-        <div class="course_list_title"><fmt:message key='author.more_courses_from' bundle='${rb}'/> ${author.login}:</div>
+        <div class="course_list_title"><fmt:message key='author.more_courses_from' bundle='${rb}'/> ${author.login}:
+        </div>
         <c:forEach var="course" items="${courses}">
             <div class="about_course">
                 <div class="block1">
@@ -64,6 +68,31 @@
                     </div>
                     <ctg:course-options course="${course}"/>
                 </div>
+            </div>
+        </c:forEach>
+    </section>
+
+    <section class="section_5">
+        <div class="comments_title"><fmt:message key='author.feedback_from_users_on_author' bundle='${rb}'/>:</div>
+        <c:set var="marks" value="${pageContext.request.getAttribute('author_marks')}"/>
+        <c:forEach var="mark" items="${marks}">
+            <div class="single_mark">
+                <div class="mark_content">
+                    <div class="writer_login">${mark.accLogin}</div>
+                    <div class="value"><fmt:message key="mark.mark" bundle="${rb}"/>: ${mark.markValue}</div>
+                    <div class="comment">${mark.comment}</div>
+                    <div class="date"><ctg:millisec-to-time millisecAmount="${mark.markDate}"/></div>
+                    <c:if test="${sessionScope.role.toString().equalsIgnoreCase('admin')}">
+                        <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
+                            <input type="hidden" name="mark_id" value="${mark.id}">
+                            <input type="hidden" name="command_name" value="delete_author_comment">
+                            <input class="mark_action_submit_btn" type="submit"
+                                   value='<fmt:message key="btn.delete_comment" bundle="${rb}"/>'>
+                        </form>
+                    </c:if>
+                </div>
+                <img class="writer_avatar" src="${pageContext.request.contextPath}/img/${mark.accPathToPhoto}"
+                     alt="avatar"/>
             </div>
         </c:forEach>
     </section>

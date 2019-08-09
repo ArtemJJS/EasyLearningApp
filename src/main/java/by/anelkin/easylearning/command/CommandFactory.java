@@ -36,7 +36,8 @@ public class CommandFactory {
         RESTORE_PASSWORD(GUEST),
 //        GO_CHANGE_PASS(GUEST),
         CHANGE_FORGOTTEN_PASSWORD(GUEST),
-        DELETE_COURSE_COMMENT(ADMIN);
+        DELETE_COURSE_COMMENT(ADMIN),
+        DELETE_AUTHOR_COMMENT(ADMIN);
 
 
 
@@ -128,6 +129,9 @@ public class CommandFactory {
                 break;
             case DELETE_COURSE_COMMENT:
                 command = new DeleteCourseCommentCommand();
+                break;
+            case DELETE_AUTHOR_COMMENT:
+                command = new DeleteAuthorCommentCommand();
                 break;
 
         }

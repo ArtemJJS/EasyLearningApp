@@ -28,6 +28,20 @@ import static by.anelkin.easylearning.util.GlobalConstant.*;
 @Log4j
 public class MarkService {
 
+    public void deleteAuthorMarkComment(SessionRequestContent requestContent) throws ServiceException {
+        MarkRepository repo = new MarkRepository();
+        try {
+            int markId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_MARK_ID)[0]);
+            Mark mark = repo.query(new SelectMarkByIdSpecification(AUTHOR_MARK, markId)).get(0);
+            mark.setComment(EMPTY_STRING);
+            repo.update(mark);
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e){
+            log.error(e);
+        }
+    }
+
     public void deleteCourseMarkComment(SessionRequestContent requestContent) throws ServiceException {
         MarkRepository repo = new MarkRepository();
         try {

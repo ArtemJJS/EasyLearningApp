@@ -63,6 +63,8 @@ public class GlobalConstant {
     public static final String ATTR_PAYMENTS = "payments";
     public static final String ATTR_MARK_ID = "mark_id";
     public static final String ATTR_COURSE_MARK_COUNT = "course_mark_count";
+    public static final String ATTR_COURSE_PURCHASE_COUNT = "course_purchase_count";
+    public static final String ATTR_AUTHOR_MARKS = "author_marks";
 
     // for repositories;
     public static final String ACC_ID = "acc_id";

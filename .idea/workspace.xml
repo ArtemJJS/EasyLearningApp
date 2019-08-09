@@ -7,37 +7,58 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77346347-82ab-4dd4-a607-ffc1e917cca2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/DeleteCourseCommentCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/DeleteAuthorCommentCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/specification/account/SelectAccPurchasedCourseSpecification.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/bd.sql" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/bd.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/command/CommandFactory$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/command/CommandFactory$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/command/CommandFactory$CommandType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/command/CommandFactory$CommandType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/command/CommandFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/command/CommandFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/service/AccountService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/service/AccountService$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/service/AccountService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/service/AccountService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/service/CourseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/service/CourseService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/service/MarkService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/service/MarkService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/util/GlobalConstant.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/by/anelkin/easylearning/util/GlobalConstant.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/text_resources.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/text_resources.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/text_resources_fr_FR.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/text_resources_fr_FR.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/text_resources_ru_RU.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/classes/text_resources_ru_RU.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/command/CommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/command/CommandFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/service/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/service/CourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/service/CourseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/service/MarkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/service/MarkService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/util/GlobalConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/java/by/anelkin/easylearning/util/GlobalConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/bd.sql" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/bd.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/text_resources.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/text_resources.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/text_resources_fr_FR.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/text_resources_fr_FR.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/text_resources_ru_RU.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/WEB-INF/src/main/resources/text_resources_ru_RU.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/css/author.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/css/author.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/css/course/course.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/css/course/course.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/css/global/search_result_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/css/global/search_result_page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/author-info.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/author-info.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/course/course.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/EasyLearningApp_war_exploded/jsp/course/course.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/CommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/CommandFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/filter/MainPageFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/filter/MainPageFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/AccountService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/CourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/CourseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/MarkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/MarkService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/util/GlobalConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/util/GlobalConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/bd.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bd.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/text_resources.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/text_resources.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/text_resources_fr_FR.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/text_resources_fr_FR.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/text_resources_ru_RU.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/text_resources_ru_RU.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/bd.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bd.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/command/CommandFactory$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/command/CommandFactory$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/command/CommandFactory$CommandType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/command/CommandFactory$CommandType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/command/CommandFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/command/CommandFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/service/AccountService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/service/AccountService$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/service/AccountService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/service/AccountService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/service/CourseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/service/CourseService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/service/MarkService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/service/MarkService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/util/GlobalConstant.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/by/anelkin/easylearning/util/GlobalConstant.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/text_resources.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/text_resources.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/text_resources_fr_FR.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/text_resources_fr_FR.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/text_resources_ru_RU.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/text_resources_ru_RU.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/author.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/author.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/css/course/course.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/course/course.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/global/search_result_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/global/search_result_page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/jsp/author-info.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/author-info.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/jsp/course/course.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/course/course.jsp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -94,10 +115,30 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/jsp/main_page.jsp">
+        <entry file="file://$PROJECT_DIR$/web/jsp/author-info.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="70" column="10" selection-start-line="70" selection-start-column="10" selection-end-line="70" selection-end-column="10" />
+            <state relative-caret-position="250">
+              <caret line="46" column="14" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/css/author.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="64" column="24" selection-start-line="64" selection-start-column="24" selection-end-line="64" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://47865970-3e28-4724-ad20-d1f31bcebca0/schema/easylearning/table/author_mark">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state projectRestartId="10efb559-b2f9-4ef8-ae10-072e37e2f044">
+              <filtering>
+                <filter text="" />
+              </filtering>
             </state>
           </provider>
         </entry>
@@ -105,17 +146,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/css/main_page.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="116" column="24" lean-forward="true" selection-start-line="116" selection-start-column="24" selection-end-line="116" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/jsp/course/course.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="29" column="106" selection-start-line="29" selection-start-column="106" selection-end-line="29" selection-end-column="106" />
+            <state relative-caret-position="2150">
+              <caret line="101" column="26" selection-start-line="101" selection-start-column="26" selection-end-line="101" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -123,38 +155,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/css/course/course.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="29" column="4" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+            <state relative-caret-position="420">
+              <caret line="271" column="1" selection-start-line="271" selection-start-column="1" selection-end-line="271" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/util/GlobalConstant.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/AccountService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="61" column="50" lean-forward="true" selection-start-line="61" selection-start-column="50" selection-end-line="61" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/filter/RequestedCourseFilter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/CourseService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="149" column="40" lean-forward="true" selection-start-line="149" selection-start-column="40" selection-end-line="149" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="540">
+              <caret line="441" lean-forward="true" selection-start-line="441" selection-end-line="441" />
             </state>
           </provider>
         </entry>
@@ -176,13 +187,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>&lt;title&gt;easyLearning&lt;/title&gt;</find>
-      <find>REQUEST_PARAM_REPEATED_PWD</find>
-      <find>SESSION_ATTR_ROLE</find>
-      <find>incorrect</find>
-      <find>INCORRECT_DATA</find>
-      <find>repeated</find>
-      <find>test</find>
       <find>easylearning</find>
       <find>course_wa</find>
       <find>REQUEST_PARAM_PWD</find>
@@ -206,6 +210,13 @@
       <find>go</find>
       <find>course_blo</find>
       <find>writer_lo</find>
+      <find>course_ra</find>
+      <find>stude</find>
+      <find>stud</find>
+      <find>bloc</find>
+      <find>about</find>
+      <find>brea</find>
+      <find>stats</find>
     </findStrings>
     <replaceStrings>
       <replace>completed</replace>
@@ -245,11 +256,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/util/JspIntWrapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/tag/CurrencyMarkerTag.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/tag/MillisecToDateTag.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/tag/RatingTag.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/tag/SecondsToHoursAndMinutes.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/tag/WriteCourseStateTag.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/servlet/BasicServlet.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/util/Constant.java" />
@@ -280,22 +286,27 @@
         <option value="$PROJECT_DIR$/web/css/main_page.css" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/InitRecommendedCoursesCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/specification/course/SelectCourseRecommendedGuestSpecification.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/AccountService.java" />
         <option value="$PROJECT_DIR$/web/jsp/main_page.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/web/css/global/search_result_page.css" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
-        <option value="$PROJECT_DIR$/src/main/resources/text_resources.properties" />
-        <option value="$PROJECT_DIR$/src/main/resources/text_resources_ru_RU.properties" />
-        <option value="$PROJECT_DIR$/src/main/resources/text_resources_fr_FR.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/CommandFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/DeleteCourseCommentCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/MarkService.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/filter/MainPageFilter.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/bd.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/specification/account/SelectAccPurchasedCourseSpecification.java" />
         <option value="$PROJECT_DIR$/web/css/course/course.css" />
-        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/util/GlobalConstant.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/CourseService.java" />
         <option value="$PROJECT_DIR$/web/jsp/course/course.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/util/GlobalConstant.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/text_resources_fr_FR.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/text_resources_ru_RU.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/text_resources.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/MarkService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/DeleteAuthorCommentCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/CommandFactory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/AccountService.java" />
+        <option value="$PROJECT_DIR$/web/jsp/author-info.jsp" />
+        <option value="$PROJECT_DIR$/web/css/author.css" />
       </list>
     </option>
   </component>
@@ -383,34 +394,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="easylearning" type="462c0819:PsiDirectoryNode" />
-              <item name="filter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EasyLearningApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="easylearning" type="462c0819:PsiDirectoryNode" />
-              <item name="specification" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EasyLearningApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="easylearning" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EasyLearningApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="easylearning" type="462c0819:PsiDirectoryNode" />
-              <item name="validator" type="462c0819:PsiDirectoryNode" />
+              <item name="command" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
@@ -484,6 +468,13 @@
               <item name="web" type="462c0819:PsiDirectoryNode" />
               <item name="jsp" type="462c0819:PsiDirectoryNode" />
               <item name="course" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EasyLearningApp" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="jsp" type="462c0819:PsiDirectoryNode" />
+              <item name="global" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="EasyLearning" type="b2602c69:ProjectViewProjectNode" />
@@ -888,14 +879,7 @@
       <workItem from="1565272489675" duration="2776000" />
       <workItem from="1565277116319" duration="5745000" />
       <workItem from="1565290518725" duration="10630000" />
-      <workItem from="1565302251131" duration="5377000" />
-    </task>
-    <task id="LOCAL-00037" summary="style: update add course page styles.">
-      <created>1563476225901</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1563476225901</updated>
+      <workItem from="1565302251131" duration="11325000" />
     </task>
     <task id="LOCAL-00038" summary="feat: add authors courses page.">
       <created>1563486963940</created>
@@ -1233,7 +1217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565302145407</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="feat: add to admin delete course comments function.">
+      <created>1565307817223</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1565307817223</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1269,7 +1260,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="985469000" />
+    <option name="totallyTimeSpent" value="991417000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1283,7 +1274,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.64888126" visible="true" weight="0.22493887" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.64888126" visible="true" weight="0.22493887" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -1298,7 +1289,7 @@
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.34340045" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32997763" />
-      <window_info anchor="bottom" id="Database Console" order="7" weight="0.24720357" />
+      <window_info anchor="bottom" id="Database Console" order="7" weight="0.26286355" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.2181208" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.502445" side_tool="true" weight="0.3310962" />
@@ -1327,7 +1318,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="feat: add password encrypting." />
     <MESSAGE value="refactor: redirect links are relative now." />
     <MESSAGE value="feat: add form validation on server side while registering new account." />
     <MESSAGE value="fix: problem when new user was able to rewrite default avatar while changing photo." />
@@ -1352,7 +1342,8 @@
     <MESSAGE value="refactor: move global constants to separated class." />
     <MESSAGE value="style: improve displaying of main page and course options links (from custom tag)." />
     <MESSAGE value="feat: recommended courses are now random, generates from the beginning every time someone visiting main page." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: recommended courses are now random, generates from the beginning every time someone visiting main page." />
+    <MESSAGE value="feat: add to admin delete course comments function." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add to admin delete course comments function." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1396,98 +1387,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/repository/AccRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/repository/ChapterRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2200">
-          <caret line="97" column="27" lean-forward="true" selection-start-line="97" selection-start-column="27" selection-end-line="97" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/repository/CourseRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2347">
-          <caret line="120" column="83" selection-start-line="120" selection-start-column="83" selection-end-line="120" selection-end-column="83" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/db.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="1" column="39" selection-start-line="1" selection-start-column="39" selection-end-line="1" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/file_storage.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="20" lean-forward="true" selection-start-column="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14/schema/testdb/table/course_lesson">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="4f97651a-5074-41ef-826c-1bd3618611eb">
-          <filtering />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/css/admin/approve_course_img_page.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/css/admin/course_approval_page.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-331">
-          <caret line="45" column="20" lean-forward="true" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/AddCourseToReviewCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/css/author/edit_course_page.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/css/course/learn_course.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="113" column="1" selection-start-line="113" selection-start-column="1" selection-end-line="113" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/jsp/header.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="24" column="63" selection-start-line="24" selection-start-column="63" selection-end-line="24" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/entity/CourseLesson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/validator/FormValidator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
@@ -1594,13 +1493,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/AccountService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="215" column="41" selection-start-line="215" selection-start-column="41" selection-end-line="215" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/jsp/global/search_result_page.jsp">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1626,51 +1518,6 @@
           <filtering>
             <filter text="" />
           </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/text_resources.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="33" lean-forward="true" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
-        </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/text_resources_fr_FR.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="3" column="21" lean-forward="true" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/text_resources_ru_RU.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-        </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/jsp/main_page.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="70" column="10" selection-start-line="70" selection-start-column="10" selection-end-line="70" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/CommandFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="130" column="22" selection-start-line="130" selection-start-column="22" selection-end-line="130" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/css/main_page.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="116" column="24" lean-forward="true" selection-start-line="116" selection-start-column="24" selection-end-line="116" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -1719,16 +1566,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/MarkService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2175">
-          <caret line="36" column="30" lean-forward="true" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/DeleteCourseCommentCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
@@ -1739,12 +1576,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/css/course/course.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="29" column="4" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+    <entry file="das://47865970-3e28-4724-ad20-d1f31bcebca0/schema/easylearning/table/user_payment">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="10efb559-b2f9-4ef8-ae10-072e37e2f044">
+          <filtering>
+            <filter text="" />
+          </filtering>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/bd.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="103" selection-start-line="2" selection-start-column="103" selection-end-line="2" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/specification/account/SelectAccPurchasedCourseSpecification.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#403#404#0" expanded="true" />
+            <element signature="e#443#444#0" expanded="true" />
+            <element signature="e#333#334#0" expanded="true" />
+            <element signature="e#369#370#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/jsp/author/cash_out_page.jsp">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/filter/RequestedCourseFilter.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1756,24 +1619,163 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/CourseService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="370">
-          <caret line="149" column="40" lean-forward="true" selection-start-line="149" selection-start-column="40" selection-end-line="149" selection-end-column="40" />
+          <caret line="147" column="13" lean-forward="true" selection-start-line="147" selection-start-column="13" selection-end-line="147" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/util/GlobalConstant.java">
+    <entry file="file://$PROJECT_DIR$/web/jsp/main_page.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="61" column="50" lean-forward="true" selection-start-line="61" selection-start-column="50" selection-end-line="61" selection-end-column="50" />
+        <state relative-caret-position="520">
+          <caret line="70" column="10" selection-start-line="70" selection-start-column="10" selection-end-line="70" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/jsp/course/course.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="29" column="106" selection-start-line="29" selection-start-column="106" selection-end-line="29" selection-end-column="106" />
+        <state relative-caret-position="106">
+          <caret line="102" column="11" selection-start-line="102" selection-start-column="11" selection-end-line="102" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/specification/mark/SelectMarkByTargetIdSpecification.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/util/GlobalConstant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="70" column="55" lean-forward="true" selection-start-line="70" selection-start-column="55" selection-end-line="70" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/main_page.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2150">
+          <caret line="101" column="26" selection-start-line="101" selection-start-column="26" selection-end-line="101" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/course/course.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="271" column="1" selection-start-line="271" selection-start-column="1" selection-end-line="271" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/text_resources.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="72" column="71" selection-start-line="72" selection-start-column="71" selection-end-line="72" selection-end-column="71" />
+        </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/text_resources_ru_RU.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="73" selection-start-line="73" selection-end-line="73" selection-end-column="36" />
+        </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/text_resources_fr_FR.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="75" column="80" selection-start-line="75" selection-start-column="80" selection-end-line="75" selection-end-column="80" />
+        </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/MarkAuthorCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://47865970-3e28-4724-ad20-d1f31bcebca0/schema/easylearning/table/account">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="10efb559-b2f9-4ef8-ae10-072e37e2f044">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/MarkService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="38" column="42" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/CommandFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="38" column="37" lean-forward="true" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/filter/AuthorPageFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="30" column="32" lean-forward="true" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/service/AccountService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="441" lean-forward="true" selection-start-line="441" selection-end-line="441" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/anelkin/easylearning/command/DeleteAuthorCommentCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="11" column="64" selection-start-line="11" selection-start-column="64" selection-end-line="11" selection-end-column="64" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/course/learn_course.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="50" column="24" lean-forward="true" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://47865970-3e28-4724-ad20-d1f31bcebca0/schema/easylearning/table/author_mark">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="10efb559-b2f9-4ef8-ae10-072e37e2f044">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/jsp/author-info.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="46" column="14" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/author.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="64" column="24" selection-start-line="64" selection-start-column="24" selection-end-line="64" selection-end-column="24" />
         </state>
       </provider>
     </entry>

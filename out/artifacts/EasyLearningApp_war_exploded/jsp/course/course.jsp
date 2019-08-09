@@ -26,8 +26,11 @@
         <div class="course_title">
             <div class="course_name">${curr_course.name}</div>
             <div class="course_description">${curr_course.description}</div>
-            <div class="course_rating"><fmt:message key='course.mark_from_users' bundle='${rb}'/>: <ctg:write-rating rating='${curr_course.avgMark}'/>
-                <br><fmt:message key='course.feedbacks' bundle='${rb}'/>: ${requestScope.course_mark_count}</div>
+            <div class="course_rating"><fmt:message key='course.mark_from_users' bundle='${rb}'/>: <ctg:write-rating
+                    rating='${curr_course.avgMark}'/>
+                <br><fmt:message key='course.feedbacks' bundle='${rb}'/>: ${requestScope.course_mark_count}
+                <br><fmt:message key='course.purchase_count' bundle='${rb}'/>: ${requestScope.course_purchase_count}
+            </div>
             <ctg:course-options course="${curr_course}"/>
         </div>
         <div class="course_view">
@@ -52,7 +55,8 @@
             <div class="chapter">
                 <div class="materials_title">${chapter.getName()}</div>
                 <div class="lessons_minutes">
-                    <div class='lessons'>${chapter.getLessonAmount()} <fmt:message key='course.lessons' bundle='${rb}'/></div>
+                    <div class='lessons'>${chapter.getLessonAmount()} <fmt:message key='course.lessons'
+                                                                                   bundle='${rb}'/></div>
                     <div class='seconds'>
                         <ctg:time-prettier secondsAmount='${chapter.getDuration()}'/></div>
                 </div>
@@ -73,8 +77,8 @@
             <a href="${pageContext.request.contextPath}/author-info/${author.login}"><img class="author_avatar"
                                                                                           src="${pageContext.request.contextPath}/img/${author.pathToPhoto}"
                                                                                           alt="author"></a>
-            <div class="author_rating"><fmt:message key='global.rating' bundle='${rb}'/>: <ctg:write-rating rating="${author.avgMark}"/></div>
-            <div class="author_students">322 <fmt:message key='course.students' bundle='${rb}'/></div>
+            <div class="author_rating"><fmt:message key='global.rating' bundle='${rb}'/>: <ctg:write-rating
+                    rating="${author.avgMark}"/></div>
         </div>
         <div class="author_about">
             <div class="author_login"><a class="author_link"
@@ -94,13 +98,14 @@
                     <div class="value"><fmt:message key="mark.mark" bundle="${rb}"/>: ${mark.markValue}</div>
                     <div class="comment">${mark.comment}</div>
                     <div class="date"><ctg:millisec-to-time millisecAmount="${mark.markDate}"/></div>
-                <c:if test="${sessionScope.role.toString().equalsIgnoreCase('admin')}">
-                    <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
-                        <input type="hidden" name="mark_id" value="${mark.id}">
-                        <input type="hidden" name="command_name" value="delete_course_comment">
-                        <input class="mark_action_submit_btn" type="submit" value='<fmt:message key="btn.delete_comment" bundle="${rb}"/>'>
-                    </form>
-                </c:if>
+                    <c:if test="${sessionScope.role.toString().equalsIgnoreCase('admin')}">
+                        <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
+                            <input type="hidden" name="mark_id" value="${mark.id}">
+                            <input type="hidden" name="command_name" value="delete_course_comment">
+                            <input class="mark_action_submit_btn" type="submit"
+                                   value='<fmt:message key="btn.delete_comment" bundle="${rb}"/>'>
+                        </form>
+                    </c:if>
                 </div>
                 <img class="writer_avatar" src="${pageContext.request.contextPath}/img/${mark.accPathToPhoto}"
                      alt="avatar"/>
