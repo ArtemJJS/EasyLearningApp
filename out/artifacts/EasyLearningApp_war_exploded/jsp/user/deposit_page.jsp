@@ -21,7 +21,7 @@
     <div class="page_title"><fmt:message key='deposit.account_deposit' bundle='${rb}'/></div>
     <div class="message">${pageContext.request.getAttribute("message")}</div>
     <div class="curr_balance"><span><fmt:message key='deposit.current_balance' bundle='${rb}'/>:</span><span class="balance_value">${sessionScope.user.balance}$</span></div>
-    <form method="post" action="${pageContext.request.contextPath}/user/deposit">
+    <form id="form1" method="post" action="${pageContext.request.contextPath}/user/deposit">
         <div class="param0 param">
             <label for="currency"><fmt:message key='global.currency' bundle='${rb}'/>: </label>
             <select id="currency" name="currency" required>

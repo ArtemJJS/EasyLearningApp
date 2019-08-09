@@ -115,18 +115,24 @@ public class PaymentService {
     }
 
 
-
-    public void processDepositByCard(SessionRequestContent requestContent) throws ServiceException {
+    public boolean processDepositByCard(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = (new CourseService()).takeLocaleFromSession(requestContent);
         FormValidator validator = new FormValidator();
         PaymentRepository repository = new PaymentRepository();
-        Payment payment = initBasicPaymentParams(requestContent);
+        Payment payment;
+        try {
+            payment = initBasicPaymentParams(requestContent);
+        } catch (IllegalArgumentException e) {
+            String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_WRONG_DEPOSIT_DATA);
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
+            return false;
+        }
         String cardNumber = requestContent.getRequestParameters().get(ATTR_CARD)[0];
         if (!validator.validatePrice(payment.getAmount().toString()) ||
                 !validator.validateCard(cardNumber)) {
             String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_WRONG_DEPOSIT_DATA);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
-            return;
+            return false;
         }
         payment.setCourseId(NOT_EXISTS_COURSE_ID);
         payment.setPaymentCode(PaymentCode.DEPOSIT_FROM_CARD.getCode());
@@ -142,13 +148,21 @@ public class PaymentService {
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
+        return true;
     }
 
-    public void processCashOutFromBalance(SessionRequestContent requestContent) throws ServiceException {
+    public boolean processCashOutFromBalance(SessionRequestContent requestContent) throws ServiceException {
         FormValidator validator = new FormValidator();
         Locale locale = (new CourseService()).takeLocaleFromSession(requestContent);
         String cardEndNumbers = selectLastCardDigits(requestContent);
-        Payment payment = initBasicPaymentParams(requestContent);
+        Payment payment;
+        try {
+            payment = initBasicPaymentParams(requestContent);
+        } catch (IllegalArgumentException e) {
+            String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_WRONG_DEPOSIT_DATA);
+            requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
+            return false;
+        }
         payment.setAmount(payment.getAmount().negate());
         Account currAcc = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
         boolean isEnoughFunds = currAcc.getBalance().add(payment.getAmount()).compareTo(BigDecimal.ZERO) >= 0;
@@ -158,7 +172,7 @@ public class PaymentService {
         if (!isEnoughFunds || !isCorrectAmount || !isCorrectCard) {
             String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_PAYMENT_DECLINED);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
-            return;
+            return false;
         }
         payment.setCourseId(NOT_EXISTS_COURSE_ID);
         payment.setPaymentCode(PaymentCode.CASH_OUT_TO_CARD.getCode());
@@ -172,6 +186,7 @@ public class PaymentService {
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
+        return true;
     }
 
     public void insertPaymentsIntoRequestAttributes(SessionRequestContent requestContent) throws ServiceException {

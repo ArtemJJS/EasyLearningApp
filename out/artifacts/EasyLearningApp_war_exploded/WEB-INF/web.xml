@@ -260,4 +260,13 @@
         <url-pattern>/change-forgotten-pass</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>OperationResultPage</servlet-name>
+        <jsp-file>/jsp/global/operation_result_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OperationResultPage</servlet-name>
+        <url-pattern>/operation-result</url-pattern>
+    </servlet-mapping>
+
 </web-app>

@@ -252,3 +252,6 @@
 2019-08-08 16:37:50 main DEBUG LessonRepository:181 - Executing query: CALL deleteLesson('1')
 2019-08-08 16:37:50 main DEBUG LessonRepository:181 - Executing query: CALL insertLesson('2', '2019-06-20', 'lesson 2.1', 'https
 2019-08-08 16:37:50 main DEBUG LessonRepository:181 - Executing query: CALL updateLesson('new lesson name', 'https
+2019-08-10 00:44:55 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-10 00:44:55 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-10 00:44:57 main DEBUG PaymentRepository:160 - Executing query: CALL insertPaymentAndUpdateBalance('2', '-1', '20', '-50', '1565387097780', '1', 'Cash out to card ends with 1231')

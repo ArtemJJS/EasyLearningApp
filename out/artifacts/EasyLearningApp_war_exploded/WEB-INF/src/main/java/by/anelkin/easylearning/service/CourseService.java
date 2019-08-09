@@ -241,7 +241,7 @@ public class CourseService {
         }
     }
 
-    public void addCourseToReview(SessionRequestContent requestContent) throws ServiceException {
+    public boolean addCourseToReview(SessionRequestContent requestContent) throws ServiceException {
         FormValidator validator = new FormValidator();
         Locale locale = takeLocaleFromSession(requestContent);
         Map<String, String[]> params = requestContent.getRequestParameters();
@@ -251,7 +251,7 @@ public class CourseService {
         if (!isCourseNameValid || !isPriceValid || !isDescriptionValid) {
             String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_INCORRECT_DATA);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
-            return;
+            return false;
         }
         CourseRepository courseRepo = new CourseRepository();
         String courseName = params.get(ATTR_COURSE_NAME)[0];
@@ -263,7 +263,7 @@ public class CourseService {
             if (courses.size() > 0 && isCourseNew) {
                 String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_ALREADY_EXISTS);
                 requestContent.getRequestAttributes().put(ATTR_COURSE_ALREADY_EXISTS, message);
-                return;
+                return false;
             }
             Course course;
             course = isCourseNew ? new Course() : courses.get(0);
@@ -293,6 +293,7 @@ public class CourseService {
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
+        return true;
     }
 
     private String[] insertChaptersIfNotExists(int courseId, Map<String, String[]> params) throws RepositoryException {

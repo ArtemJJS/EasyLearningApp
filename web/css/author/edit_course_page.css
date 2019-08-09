@@ -70,6 +70,7 @@ form {
 .param_field, input, textarea {
     width: 550px;
     font-size: 0.9rem;
+    word-wrap: break-word;
 }
 
 .param_field{

@@ -8,10 +8,15 @@ import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseTyp
 
 public class CashOutCommand implements Command {
     private static final String FORWARD_PATH = "/jsp/author/cash_out_page.jsp";
+    private static final String REDIRECT_PATH = "/operation-result?operation=cash-out";
 
     @Override
     public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
-        (new PaymentService()).processCashOutFromBalance(requestContent);
+        boolean isSuccessful = (new PaymentService()).processCashOutFromBalance(requestContent);
+        if (isSuccessful) {
+            requestContent.setPath(REDIRECT_PATH);
+            return REDIRECT;
+        }
         requestContent.setPath(FORWARD_PATH);
         return FORWARD;
     }
