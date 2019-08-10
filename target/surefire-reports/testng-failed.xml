@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Command line suite]" verbose="0">
+  <test thread-count="5" name="Command line test(failed)" verbose="0">
+    <classes>
+      <class name="by.anelkin.easylearning.repository.RestorePassRequestRepositoryTest">
+        <methods>
+          <include name="tierDownTestClass"/>
+          <include name="setUpTestClass"/>
+          <include name="RestorePassRequestRepository_Query"/>
+        </methods>
+      </class> <!-- by.anelkin.easylearning.repository.RestorePassRequestRepositoryTest -->
+      <class name="by.anelkin.easylearning.service.AccountServiceTest">
+        <methods>
+          <include name="AccountService_ChangeForgottenPass_ShouldDoNothingIfUuidIncorrect"/>
+          <include name="setUp"/>
+          <include name="AccountService_ChangeAccountPassword_ShouldNotChangeAccPwdIfRepeatedPwdIncorrect"/>
+          <include name="AccountService_InitAuthorPage_ShouldInitAuthorCorrectly"/>
+          <include name="AccountService_DeclineAccAvatar_ShouldNotChangeAccPathToPhoto"/>
+          <include name="AccountService_DeclineAccAvatar_ShouldClearAccUpdatePhotoPath"/>
+          <include name="AccountService_ChangeAccountPassword_ShouldNotChangeAccPwdIfCurrentPwdIncorrect"/>
+          <include name="AccountService_Login_ShouldNotTakeAccIfPwdIncorrect"/>
+          <include name="AccountService_SignUp_ShouldInsertNewAcc"/>
+          <include name="AccountService_SignUp_ShouldNotInsertNewAccIfLoginExists"/>
+          <include name="AccountService_InitApproveAccAvatarPage_ShouldCorrectlyInitAccountList"/>
+          <include name="AccountService_Login_ShouldTakeCorrectAccount"/>
+          <include name="AccountService_ApproveAccAvatar_ShouldUpdateAccPathToPhotoCorrectly"/>
+          <include name="AccountService_ChangeForgottenPass_ShouldDoNothingIfRepeatedPwdIncorrect"/>
+          <include name="AccountService_ApproveAccAvatar_ShouldClearAccUpdatePhotoPath"/>
+          <include name="AccountService_ChangeAccountPassword_ShouldChangeAccPwd"/>
+          <include name="AccountService_ChangeForgottenPass_ShouldChangeAccPwd"/>
+          <include name="AccountService_AddAccAvatarToReview_ShouldCorrectlyUpdateAccUpdatePhotoPath"/>
+          <include name="AccountService_EditAccountInfo_ShouldUpdateAccData"/>
+          <include name="AccountService_InitAuthorPage_ShouldInitAuthorCoursesCorrectly"/>
+        </methods>
+      </class> <!-- by.anelkin.easylearning.service.AccountServiceTest -->
+      <class name="by.anelkin.easylearning.repository.CourseRepositoryTest">
+        <methods>
+          <include name="CourseRepository_Query"/>
+          <include name="setUpTestClass"/>
+          <include name="tierDownTestClass"/>
+        </methods>
+      </class> <!-- by.anelkin.easylearning.repository.CourseRepositoryTest -->
+      <class name="by.anelkin.easylearning.repository.LessonRepositoryTest">
+        <methods>
+          <include name="setUpTestClass"/>
+          <include name="testQuery"/>
+          <include name="tierDownTestClass"/>
+        </methods>
+      </class> <!-- by.anelkin.easylearning.repository.LessonRepositoryTest -->
+      <class name="by.anelkin.easylearning.service.MarkServiceTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="MarkService_MarkCourse_ShouldAddMarkIntoDb"/>
+          <include name="MarkService_MarkAuthor_ShouldUpdateAuthorAvgMark"/>
+          <include name="MarkService_MarkCourse_ShouldUpdateCourseAvgMark"/>
+          <include name="MarkService_MarkCourse_ShouldThrowExceptionIfAccessDenied"/>
+          <include name="MarkService_MarkAuthor_ShouldAddMarkIntoDb"/>
+          <include name="MarkService_MarkAuthor_ShouldThrowExceptionIfOperationDenied"/>
+        </methods>
+      </class> <!-- by.anelkin.easylearning.service.MarkServiceTest -->
+      <class name="by.anelkin.easylearning.repository.MarkRepositoryTest">
+        <methods>
+          <include name="setUpTestClass"/>
+          <include name="testQuery"/>
+          <include name="tierDownTestClass"/>
+        </methods>
+      </class> <!-- by.anelkin.easylearning.repository.MarkRepositoryTest -->
+      <class name="by.anelkin.easylearning.service.PaymentServiceTest">
+        <methods>
+          <include name="PaymentRepository_ProcessPurchaseFromBalance_ShouldDoNothingIfInsufficientFunds"/>
+          <include name="PaymentRepository_ProcessCashOutFromBalance_ShouldNotInsertPaymentsIfInsufficientFunds"/>
+          <include name="PaymentRepository_ProcessPurchaseByCard_ShouldDoNothingIfPurchasedAlready"/>
+          <include name="PaymentRepository_ProcessPurchaseFromBalance_ShouldUpdateAccBalance"/>
+          <include name="PaymentRepository_ProcessDepositByCard_ShouldUpdateAccBalance"/>
+          <include name="PaymentRepository_ProcessCashOutFromBalance_ShouldUpdateAccBalance"/>
+          <include name="PaymentRepository_ProcessPurchaseByCard_ShouldAddCourseInPurchased"/>
+          <include name="PaymentRepository_ProcessPurchaseByCard_ShouldInsertTwoPayments"/>
+          <include name="PaymentRepository_ProcessPurchaseFromBalance_ShouldNotInsertPaymentsIfPurchasedAlready"/>
+          <include name="PaymentRepository_ProcessPurchaseFromBalance_ShouldAddCourseToPurchased"/>
+          <include name="PaymentRepository_ProcessPurchaseFromBalance_ShouldInsertTwoPayments"/>
+          <include name="PaymentRepository_ProcessDepositByCard_ShouldInsertOnePayment"/>
+          <include name="PaymentRepository_ProcessCashOutFromBalance_ShouldNotChangeAccBalanceIfInsufficientFunds"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- by.anelkin.easylearning.service.PaymentServiceTest -->
+      <class name="by.anelkin.easylearning.service.CourseServiceTest">
+        <methods>
+          <include name="CourseService_ApproveCourseImgChange_ShouldClearUpdateImgPath"/>
+          <include name="setUp"/>
+          <include name="CourseService_SearchCourses_ShouldCorrectlySearchCourses"/>
+          <include name="CourseService_ApproveCourseImgChange_ShouldUpdateTargetAccPathToPhoto"/>
+          <include name="CourseService_FreezeCourse_ShouldUpdateCorrectlyCourseState"/>
+          <include name="CourseService_DeclineCourseImgChange_ShouldClearAccUpdatePhotoPath"/>
+          <include name="CourseService_InitCourseImgApprovalPage_ShouldCorrectlyInitCoursesList"/>
+          <include name="CourseService_DeclineCourseImgChange_ShouldNotChangeAccPathToImg"/>
+          <include name="CourseService_InitCoursePage_ShouldInitAttributesCorrectly"/>
+          <include name="CourseService_AddCourseImgToReview_ShouldUpdateTargetAccountCorrectly"/>
+          <include name="CourseService_ApproveCourse_ShouldUpdateCourseStatus"/>
+          <include name="CourseService_InitCourseApprovalPage"/>
+        </methods>
+      </class> <!-- by.anelkin.easylearning.service.CourseServiceTest -->
+      <class name="by.anelkin.easylearning.repository.PaymentRepositoryTest">
+        <methods>
+          <include name="setUpTestClass"/>
+          <include name="testQuery"/>
+          <include name="tierDownTestClass"/>
+        </methods>
+      </class> <!-- by.anelkin.easylearning.repository.PaymentRepositoryTest -->
+    </classes>
+  </test> <!-- Command line test(failed) -->
+</suite> <!-- Failed suite [Command line suite] -->

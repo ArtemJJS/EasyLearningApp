@@ -51,6 +51,9 @@ public class ConnectionPool {
 
     private void initPool() {
         // TODO: 6/28/2019 реализовать max_connections_amount поле
+        log.info("URL: " + URL);
+        String temp = URL;
+        System.out.println(temp);
         usedConnections = new LinkedBlockingQueue<>(MIN_CONNECTIONS_AMOUNT);
         availableConnections = new LinkedBlockingQueue<>(MIN_CONNECTIONS_AMOUNT);
         for (int i = 0; i < MIN_CONNECTIONS_AMOUNT; i++) {

@@ -34,7 +34,7 @@ public class SessionRequestContent {
         requestFullReferer = referer;
         if (referer!=null) {
             referer = referer.substring(referer.indexOf(request.getContextPath()));
-            referer = referer.replace("/easyLearning", "");
+            referer = referer.replace("/EasyLearning", "");
         }
         requestReferer = referer;
 

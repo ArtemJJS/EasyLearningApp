@@ -34,6 +34,7 @@ class PoolInitializer {
     String getDriverName(){
         return property.getProperty(PROPERTY_NAME_DRIVER);
     }
+
     String getUrl(){
         return property.getProperty(PROPERTY_NAME_URL);
     }

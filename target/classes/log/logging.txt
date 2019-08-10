@@ -255,3 +255,36 @@
 2019-08-10 00:44:55 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
 2019-08-10 00:44:55 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
 2019-08-10 00:44:57 main DEBUG PaymentRepository:160 - Executing query: CALL insertPaymentAndUpdateBalance('2', '-1', '20', '-50', '1565387097780', '1', 'Cash out to card ends with 1231')
+2019-08-10 18:12:44 main INFO  ConnectionPool:54 - URL: jdbc:mysql://localhost:3306/easylearning?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+2019-08-10 18:12:44 main INFO  ConnectionPool:72 - Pool was initialized. Connections amount: 10
+2019-08-10 18:12:44 main DEBUG ConnectionPool:84 - ConnectionPool instance created.
+2019-08-10 18:52:00 main INFO  ConnectionPool:54 - URL: jdbc:mysql://localhost:3306/easylearning?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+2019-08-10 18:52:00 main INFO  ConnectionPool:72 - Pool was initialized. Connections amount: 10
+2019-08-10 18:52:00 main DEBUG ConnectionPool:84 - ConnectionPool instance created.
+2019-08-10 18:52:28 main INFO  ConnectionPool:54 - URL: jdbc:mysql://localhost:3306/easylearning?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+2019-08-10 18:52:29 main INFO  ConnectionPool:72 - Pool was initialized. Connections amount: 10
+2019-08-10 18:52:29 main DEBUG ConnectionPool:84 - ConnectionPool instance created.
+2019-08-10 19:20:08 main INFO  ConnectionPool:54 - URL: jdbc:mysql://localhost:3306/testDB?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main FATAL ConnectionPool:69 - ConnectionPool couldn't create any connection to database!!!
+2019-08-10 19:20:23 main INFO  ConnectionPool:54 - URL: jdbc:mysql://localhost:3306/testDB?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main FATAL ConnectionPool:69 - ConnectionPool couldn't create any connection to database!!!

@@ -28,7 +28,7 @@ main {
     height: 180px;
     margin-bottom: 20px;
 
-    background-image: url("http://localhost:8080/easyLearning/img/resources/acc_banner.jpg");
+    background-image: url("http://localhost:8080/EasyLearning/img/resources/acc_banner.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
     background-position-y: 10%;

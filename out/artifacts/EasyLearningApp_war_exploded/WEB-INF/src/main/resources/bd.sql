@@ -1,45 +1,191 @@
-select t1.acc_name, t2.course_name, t2.course_price
-from account as t1
-         JOIN course as t2 on t1.acc_id = t2.course_author_id;
+create definer = root@localhost procedure InsertAuthorMark(IN targ_id int, IN account_id int, IN mark_val tinyint, IN mark_comm varchar(1000), IN date_of_mark bigint)
+begin
+    INSERT into author_mark set target_id=targ_id, acc_id = account_id, mark_value = mark_val,
+                                mark_comment = mark_comm, mark_date = date_of_mark;
+    UPDATE account set avg_mark=(select avg(mark_value) from author_mark where target_id = targ_id)
+    where acc_id = targ_id;
+end;
 
+create definer = root@localhost procedure InsertCourseMark(IN targ_id int, IN account_id int, IN mark_val tinyint, IN mark_comm varchar(1000), IN date_of_mark bigint)
+begin
+    INSERT into course_mark set target_id=targ_id, acc_id = account_id, mark_value = mark_val,
+                                mark_comment = mark_comm, mark_date = date_of_mark;
+    UPDATE course set avg_mark=(select avg(mark_value) from course_mark where target_id = targ_id)
+    where course_id = targ_id;
+end;
 
-select course_author_id, count(*)
-from course
-group by course_author_id
-having count(*) > 1;
+create definer = root@localhost procedure deleteAuthorMark(IN id int)
+begin
+    SELECT target_id AS count into @author_id from author_mark where mark_id = id;
+    DELETE from author_mark where mark_id = id;
+    UPDATE account set avg_mark=(select avg(mark_value) from author_mark where target_id = @author_id)
+    where acc_id = @author_id;
+end;
 
+create definer = root@localhost procedure deleteCourseMark(IN id int)
+begin
+    SELECT target_id AS count into @targ_id from course_mark where mark_id = id;
+    DELETE from course_mark where mark_id = id;
+    UPDATE course set avg_mark=(select avg(mark_value) from course_mark where target_id = @targ_id)
+    where course_id = @targ_id;
+end;
 
-select (case when count(*) = 10 then true else false end) as result
-from course;
+create definer = root@localhost procedure deleteLesson(IN curr_lesson_id int)
+begin
+    select @curr_chapter := course_chapter_id from course_lesson where lesson_id = curr_lesson_id;
 
+    delete from course_lesson where lesson_id = curr_lesson_id;
 
-select t1.acc_id, t1.acc_name, avg(t2.course_price) over (partition by t1.acc_id)
-from account as t1
-         join course as t2
-              on t1.acc_id = t2.course_author_id and t1.acc_type = 2
-group by t1.acc_id;
+    update course_chapter
+    set chapter_duration      = (select sum(lesson_duration)
+                                 from course_lesson
+                                 where course_lesson.course_chapter_id = @curr_chapter),
+        chapter_lesson_amount = (select count(*)
+                                 from course_lesson
+                                 where course_lesson.course_chapter_id = @curr_chapter)
+    where course_chapter_id = @curr_chapter;
 
+    select @curr_course := course_id from course_chapter where course_chapter_id = @curr_chapter;
 
-select t1.acc_id, t1.acc_name, sum(t2.payment_amount) over (partition by t2.payment_amount)
-from account t1
-         join user_payment t2 on t1.acc_id = t2.acc_id and t2.payment_code in (10, 11)
-group by t1.acc_id;
+    update course
+    set course_duration      = (select sum(chapter_duration)
+                                from course_chapter
+                                where course_chapter.course_id = @curr_course),
+        course_lesson_amount = (select sum(chapter_lesson_amount)
+                                from course_chapter
+                                where course_chapter.course_id = @curr_course)
+    where course_id = @curr_course;
 
+end;
 
-select t1.acc_id, t1.acc_name, t2.sum_payment, t2.count
-from account as t1
-         join
-     (select acc_id, sum(payment_amount) over (partition by user_payment.acc_id) as sum_payment, count(*) as count
-      from user_payment
-      where payment_code = 10
-      group by acc_id
-     ) as t2
-     on t1.acc_id = t2.acc_id and t2.sum_payment > 0;
+create definer = root@localhost procedure insertLesson(IN new_chapter_id int, IN new_date text, IN new_name text, IN new_path text, IN new_duration mediumtext)
+begin
+    insert into course_lesson set course_chapter_id = new_chapter_id, lesson_name = new_name,
+                                  lesson_content_address = new_path, lesson_creation_date = new_date,
+                                  lesson_duration = new_duration;
 
-# правильно (выбор всех пользователей у которых сумма покупок по карте больше 0):
-select t1.acc_id, t1.acc_name, sum(t2.payment_amount) as total_amount
-from account t1
-         right join user_payment t2 on t1.acc_id = t2.acc_id
-where t2.payment_code = 10
-group by t1.acc_id
-having sum(t2.payment_amount) > 0
+    update course_chapter
+    set chapter_duration      = (select sum(lesson_duration)
+                                 from course_lesson
+                                 where course_lesson.course_chapter_id = new_chapter_id),
+        chapter_lesson_amount = (select count(*)
+                                 from course_lesson
+                                 where course_lesson.course_chapter_id = new_chapter_id)
+    where course_chapter_id = new_chapter_id;
+
+    select @curr_course := course_id from course_chapter where course_chapter_id = new_chapter_id;
+
+    update course
+    set course_duration      = (select sum(chapter_duration)
+                                from course_chapter
+                                where course_chapter.course_id = @curr_course),
+        course_lesson_amount = (select sum(chapter_lesson_amount)
+                                from course_chapter
+                                where course_chapter.course_id = @curr_course)
+    where course_id = @curr_course;
+
+end;
+
+create definer = root@localhost procedure insertPaymentAndUpdateBalance(IN curr_acc_id int, IN curr_course_id int, IN curr_payment_code int, IN curr_amount decimal(10,2), IN curr_date mediumtext, IN curr_currency_id int, IN curr_description text)
+begin
+    select @curr_course_name := course_name from course where course_id = curr_course_id;
+
+    insert into user_payment
+    set acc_id              = curr_acc_id,
+        course_id           = curr_course_id,
+        payment_code        = curr_payment_code,
+        payment_amount      = curr_amount,
+        payment_date        = curr_date,
+        currency_id         = curr_currency_id,
+        payment_description = coalesce(concat(curr_description, @curr_course_name), curr_description);
+
+    select @actual_user_balance := acc_balance from account where acc_id = curr_acc_id;
+    update account set acc_balance = (@actual_user_balance + curr_amount) where acc_id = curr_acc_id;
+
+    #     select @actual_course_author_balance := acc_balance from account where acc_id = curr_author_id;
+#     update account set acc_balance = (@actual_course_author_balance - curr_amount) where  acc_id = curr_author_id;
+end;
+
+create definer = root@localhost procedure insertPurchaseCourseByCard(IN curr_acc_id int, IN curr_course_id int, IN curr_payment_code int, IN curr_amount decimal(10,2), IN curr_date mediumtext, IN curr_currency_id int, IN curr_description text)
+begin
+    select @curr_course_name := course_name from course where course_id = curr_course_id;
+
+    insert into user_payment
+    set acc_id              = curr_acc_id,
+        course_id           = curr_course_id,
+        payment_code        = curr_payment_code,
+        payment_amount      = curr_amount,
+        payment_date        = curr_date,
+        currency_id         = curr_currency_id,
+        payment_description = coalesce(concat(curr_description, @curr_course_name), curr_description);
+
+    insert into user_purchased_course set user_id = curr_acc_id, course_id = curr_course_id;
+end;
+
+create definer = root@localhost procedure insertPurchaseCourseFromBalance(IN curr_acc_id int, IN curr_course_id int, IN curr_payment_code int, IN curr_amount decimal(10,2), IN curr_date mediumtext, IN curr_currency_id int, IN curr_description text)
+begin
+    select @curr_course_name := course_name from course where course_id = curr_course_id;
+
+    insert into user_payment
+    set acc_id              = curr_acc_id,
+        course_id           = curr_course_id,
+        payment_code        = curr_payment_code,
+        payment_amount      = curr_amount,
+        payment_date        = curr_date,
+        currency_id         = curr_currency_id,
+        payment_description = coalesce(concat(curr_description, @curr_course_name), curr_description);
+
+    select @actual_user_balance := acc_balance from account where acc_id = curr_acc_id;
+    update account set acc_balance = (@actual_user_balance + curr_amount) where acc_id = curr_acc_id;
+
+    insert into user_purchased_course set user_id = curr_acc_id, course_id = curr_course_id;
+end;
+
+create definer = root@localhost procedure updateAuthorMark(IN targ_id int, IN account_id int, IN mark_val tinyint, IN mark_comm varchar(1000), IN date_of_mark bigint, IN id int)
+begin
+    UPDATE author_mark set target_id=targ_id, acc_id = account_id, mark_value = mark_val,
+                           mark_comment = mark_comm, mark_date = date_of_mark where mark_id = id;
+    UPDATE account set avg_mark=(select avg(mark_value) from author_mark where target_id = targ_id)
+    where acc_id = targ_id;
+end;
+
+create definer = root@localhost procedure updateCourseMark(IN targ_id int, IN account_id int, IN mark_val tinyint, IN mark_comm varchar(1000), IN date_of_mark bigint, IN id int)
+begin
+    UPDATE course_mark set target_id=targ_id, acc_id = account_id, mark_value = mark_val,
+                           mark_comment = mark_comm, mark_date = date_of_mark where mark_id = id;
+    UPDATE course set avg_mark=(select avg(mark_value) from course_mark where target_id = targ_id)
+    where course_id = targ_id;
+end;
+
+create definer = root@localhost procedure updateLesson(IN new_name text, IN new_path text, IN new_duration mediumtext, IN curr_lesson_id int)
+begin
+    update course_lesson
+    set lesson_name            = new_name,
+        lesson_content_address = new_path,
+        lesson_duration        = new_duration
+    where lesson_id = curr_lesson_id;
+
+    select @curr_chapter := course_chapter_id from course_lesson where lesson_id = curr_lesson_id;
+
+    update course_chapter
+    set chapter_duration      = (select sum(lesson_duration)
+                                 from course_lesson
+                                 where course_lesson.course_chapter_id = @curr_chapter),
+        chapter_lesson_amount = (select count(*)
+                                 from course_lesson
+                                 where course_lesson.course_chapter_id = @curr_chapter)
+    where course_chapter_id = @curr_chapter;
+
+    select @curr_course := course_id from course_chapter where course_chapter_id = @curr_chapter;
+
+    update course
+    set course_duration      = (select sum(chapter_duration)
+                                from course_chapter
+                                where course_chapter.course_id = @curr_course),
+        course_lesson_amount = (select sum(chapter_lesson_amount)
+                                from course_chapter
+                                where course_chapter.course_id = @curr_course)
+    where course_id = @curr_course;
+
+end;
+

@@ -1,0 +1,592 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>TestNG Report</title>
+<style type="text/css">table {margin-bottom:10px;border-collapse:collapse;empty-cells:show}th,td {border:1px solid #009;padding:.25em .5em}th {vertical-align:bottom}td {vertical-align:top}table a {font-weight:bold}.stripe td {background-color: #E6EBF9}.num {text-align:right}.passedodd td {background-color: #3F3}.passedeven td {background-color: #0A0}.skippedodd td {background-color: #DDD}.skippedeven td {background-color: #CCC}.failedodd td,.attn {background-color: #F33}.failedeven td,.stripe .attn {background-color: #D00}.stacktrace {white-space:pre;font-family:monospace}.totop {font-size:85%;text-align:center;border-bottom:2px solid #000}.invisible {display:none}</style>
+</head>
+<body>
+<table>
+<tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
+<tr><th colspan="7">Command line suite</th></tr>
+<tr><td><a href="#t0">Command line test</a></td><td class="num">1</td><td class="num attn">17</td><td class="num attn">49</td><td class="num">57 314</td><td></td><td></td></tr>
+</table>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Command line suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Command line test &#8212; failed (configuration methods)</th></tr><tr class="failedeven"><td rowspan="1">by.anelkin.easylearning.repository.CourseRepositoryTest</td><td><a href="#m0">setUpTestClass</a></td><td rowspan="1">1565450020245</td><td rowspan="1">0</td></tr><tr class="failedodd"><td rowspan="1">by.anelkin.easylearning.repository.LessonRepositoryTest</td><td><a href="#m1">setUpTestClass</a></td><td rowspan="1">1565449965068</td><td rowspan="1">156</td></tr><tr class="failedeven"><td rowspan="1">by.anelkin.easylearning.repository.MarkRepositoryTest</td><td><a href="#m2">setUpTestClass</a></td><td rowspan="1">1565449965271</td><td rowspan="1">0</td></tr><tr class="failedodd"><td rowspan="1">by.anelkin.easylearning.repository.PaymentRepositoryTest</td><td><a href="#m3">setUpTestClass</a></td><td rowspan="1">1565449965271</td><td rowspan="1">15</td></tr><tr class="failedeven"><td rowspan="1">by.anelkin.easylearning.repository.RestorePassRequestRepositoryTest</td><td><a href="#m4">setUpTestClass</a></td><td rowspan="1">1565449965286</td><td rowspan="1">0</td></tr><tr><th colspan="4">Command line test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="19">by.anelkin.easylearning.service.AccountServiceTest</td><td><a href="#m5">AccountService_AddAccAvatarToReview_ShouldCorrectlyUpdateAccUpdatePhotoPath</a></td><td rowspan="1">1565449965286</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m6">AccountService_ApproveAccAvatar_ShouldClearAccUpdatePhotoPath</a></td><td rowspan="1">1565449965302</td><td rowspan="1">15</td></tr><tr class="failedeven"><td><a href="#m7">AccountService_ApproveAccAvatar_ShouldUpdateAccPathToPhotoCorrectly</a></td><td rowspan="1">1565449965317</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m8">AccountService_ChangeAccountPassword_ShouldChangeAccPwd</a></td><td rowspan="1">1565449965317</td><td rowspan="1">16</td></tr><tr class="failedeven"><td><a href="#m9">AccountService_ChangeAccountPassword_ShouldNotChangeAccPwdIfCurrentPwdIncorrect</a></td><td rowspan="1">1565449965333</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m10">AccountService_ChangeAccountPassword_ShouldNotChangeAccPwdIfRepeatedPwdIncorrect</a></td><td rowspan="1">1565449965333</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m11">AccountService_ChangeForgottenPass_ShouldChangeAccPwd</a></td><td rowspan="1">1565449965333</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m12">AccountService_ChangeForgottenPass_ShouldDoNothingIfRepeatedPwdIncorrect</a></td><td rowspan="1">1565449965333</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m13">AccountService_ChangeForgottenPass_ShouldDoNothingIfUuidIncorrect</a></td><td rowspan="1">1565449965333</td><td rowspan="1">16</td></tr><tr class="failedeven"><td><a href="#m14">AccountService_DeclineAccAvatar_ShouldClearAccUpdatePhotoPath</a></td><td rowspan="1">1565449965349</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m15">AccountService_DeclineAccAvatar_ShouldNotChangeAccPathToPhoto</a></td><td rowspan="1">1565449965349</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m16">AccountService_EditAccountInfo_ShouldUpdateAccData</a></td><td rowspan="1">1565449965349</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m17">AccountService_InitApproveAccAvatarPage_ShouldCorrectlyInitAccountList</a></td><td rowspan="1">1565449965349</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m18">AccountService_InitAuthorPage_ShouldInitAuthorCorrectly</a></td><td rowspan="1">1565449965349</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m19">AccountService_InitAuthorPage_ShouldInitAuthorCoursesCorrectly</a></td><td rowspan="1">1565449965349</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m20">AccountService_Login_ShouldNotTakeAccIfPwdIncorrect</a></td><td rowspan="1">1565449965349</td><td rowspan="1">15</td></tr><tr class="failedeven"><td><a href="#m21">AccountService_Login_ShouldTakeCorrectAccount</a></td><td rowspan="1">1565449965364</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m22">AccountService_SignUp_ShouldInsertNewAcc</a></td><td rowspan="1">1565449965364</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m23">AccountService_SignUp_ShouldNotInsertNewAccIfLoginExists</a></td><td rowspan="1">1565449965364</td><td rowspan="1">0</td></tr><tr class="failedodd"><td rowspan="11">by.anelkin.easylearning.service.CourseServiceTest</td><td><a href="#m24">CourseService_AddCourseImgToReview_ShouldUpdateTargetAccountCorrectly</a></td><td rowspan="1">1565449965395</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m25">CourseService_ApproveCourseImgChange_ShouldClearUpdateImgPath</a></td><td rowspan="1">1565449965395</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m26">CourseService_ApproveCourseImgChange_ShouldUpdateTargetAccPathToPhoto</a></td><td rowspan="1">1565449965395</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m27">CourseService_ApproveCourse_ShouldUpdateCourseStatus</a></td><td rowspan="1">1565449965395</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m28">CourseService_DeclineCourseImgChange_ShouldClearAccUpdatePhotoPath</a></td><td rowspan="1">1565449965395</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m29">CourseService_DeclineCourseImgChange_ShouldNotChangeAccPathToImg</a></td><td rowspan="1">1565449965395</td><td rowspan="1">16</td></tr><tr class="failedodd"><td><a href="#m30">CourseService_FreezeCourse_ShouldUpdateCorrectlyCourseState</a></td><td rowspan="1">1565449965411</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m31">CourseService_InitCourseApprovalPage</a></td><td rowspan="1">1565449965411</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m32">CourseService_InitCourseImgApprovalPage_ShouldCorrectlyInitCoursesList</a></td><td rowspan="1">1565449965411</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m33">CourseService_InitCoursePage_ShouldInitAttributesCorrectly</a></td><td rowspan="1">1565449965411</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m34">CourseService_SearchCourses_ShouldCorrectlySearchCourses</a></td><td rowspan="1">1565449965411</td><td rowspan="1">0</td></tr><tr class="failedeven"><td rowspan="6">by.anelkin.easylearning.service.MarkServiceTest</td><td><a href="#m35">MarkService_MarkAuthor_ShouldAddMarkIntoDb</a></td><td rowspan="1">1565449965489</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m36">MarkService_MarkAuthor_ShouldThrowExceptionIfOperationDenied</a></td><td rowspan="1">1565449965489</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m37">MarkService_MarkAuthor_ShouldUpdateAuthorAvgMark</a></td><td rowspan="1">1565449965489</td><td rowspan="1">16</td></tr><tr class="failedeven"><td><a href="#m38">MarkService_MarkCourse_ShouldAddMarkIntoDb</a></td><td rowspan="1">1565449965505</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m39">MarkService_MarkCourse_ShouldThrowExceptionIfAccessDenied</a></td><td rowspan="1">1565449965505</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m40">MarkService_MarkCourse_ShouldUpdateCourseAvgMark</a></td><td rowspan="1">1565449965520</td><td rowspan="1">0</td></tr><tr class="failedodd"><td rowspan="13">by.anelkin.easylearning.service.PaymentServiceTest</td><td><a href="#m41">PaymentRepository_ProcessCashOutFromBalance_ShouldNotChangeAccBalanceIfInsufficientFunds</a></td><td rowspan="1">1565449965973</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m42">PaymentRepository_ProcessCashOutFromBalance_ShouldNotInsertPaymentsIfInsufficientFunds</a></td><td rowspan="1">1565449965973</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m43">PaymentRepository_ProcessCashOutFromBalance_ShouldUpdateAccBalance</a></td><td rowspan="1">1565449965973</td><td rowspan="1">15</td></tr><tr class="failedodd"><td><a href="#m44">PaymentRepository_ProcessDepositByCard_ShouldInsertOnePayment</a></td><td rowspan="1">1565449965988</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m45">PaymentRepository_ProcessDepositByCard_ShouldUpdateAccBalance</a></td><td rowspan="1">1565449965988</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m46">PaymentRepository_ProcessPurchaseByCard_ShouldAddCourseInPurchased</a></td><td rowspan="1">1565449965988</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m47">PaymentRepository_ProcessPurchaseByCard_ShouldDoNothingIfPurchasedAlready</a></td><td rowspan="1">1565449965988</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m48">PaymentRepository_ProcessPurchaseByCard_ShouldInsertTwoPayments</a></td><td rowspan="1">1565449965988</td><td rowspan="1">16</td></tr><tr class="failedodd"><td><a href="#m49">PaymentRepository_ProcessPurchaseFromBalance_ShouldAddCourseToPurchased</a></td><td rowspan="1">1565449966004</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m50">PaymentRepository_ProcessPurchaseFromBalance_ShouldDoNothingIfInsufficientFunds</a></td><td rowspan="1">1565449966004</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m51">PaymentRepository_ProcessPurchaseFromBalance_ShouldInsertTwoPayments</a></td><td rowspan="1">1565449966004</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m52">PaymentRepository_ProcessPurchaseFromBalance_ShouldNotInsertPaymentsIfPurchasedAlready</a></td><td rowspan="1">1565449966004</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m53">PaymentRepository_ProcessPurchaseFromBalance_ShouldUpdateAccBalance</a></td><td rowspan="1">1565449966004</td><td rowspan="1">0</td></tr><tr><th colspan="4">Command line test &#8212; skipped</th></tr><tr class="skippedeven"><td rowspan="8">by.anelkin.easylearning.repository.CourseRepositoryTest</td><td><a href="#m54">CourseRepository_Query</a></td><td rowspan="8">1565450020261</td><td rowspan="8">0</td></tr><tr class="skippedeven"><td><a href="#m55">CourseRepository_Query</a></td></tr><tr class="skippedeven"><td><a href="#m56">CourseRepository_Query</a></td></tr><tr class="skippedeven"><td><a href="#m57">CourseRepository_Query</a></td></tr><tr class="skippedeven"><td><a href="#m58">CourseRepository_Query</a></td></tr><tr class="skippedeven"><td><a href="#m59">CourseRepository_Query</a></td></tr><tr class="skippedeven"><td><a href="#m60">CourseRepository_Query</a></td></tr><tr class="skippedeven"><td><a href="#m61">CourseRepository_Query</a></td></tr><tr class="skippedodd"><td rowspan="2">by.anelkin.easylearning.repository.LessonRepositoryTest</td><td><a href="#m62">testQuery</a></td><td rowspan="2">1565449965271</td><td rowspan="2">0</td></tr><tr class="skippedodd"><td><a href="#m63">testQuery</a></td></tr><tr class="skippedeven"><td rowspan="4">by.anelkin.easylearning.repository.MarkRepositoryTest</td><td><a href="#m64">testQuery</a></td><td rowspan="4">1565449965271</td><td rowspan="4">0</td></tr><tr class="skippedeven"><td><a href="#m65">testQuery</a></td></tr><tr class="skippedeven"><td><a href="#m66">testQuery</a></td></tr><tr class="skippedeven"><td><a href="#m67">testQuery</a></td></tr><tr class="skippedodd"><td rowspan="2">by.anelkin.easylearning.repository.PaymentRepositoryTest</td><td><a href="#m68">testQuery</a></td><td rowspan="2">1565449965286</td><td rowspan="2">0</td></tr><tr class="skippedodd"><td><a href="#m69">testQuery</a></td></tr><tr class="skippedeven"><td rowspan="1">by.anelkin.easylearning.repository.RestorePassRequestRepositoryTest</td><td><a href="#m70">RestorePassRequestRepository_Query</a></td><td rowspan="1">1565449965286</td><td rowspan="1">0</td></tr><tr><th colspan="4">Command line test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">by.anelkin.easylearning.service.AccountServiceTest</td><td><a href="#m71">AccountService_PickTargetNameFromUri_ShouldReturnCorrectString</a></td><td rowspan="1">1565449965364</td><td rowspan="1">0</td></tr></tbody>
+</table>
+<h2>Command line test</h2><h3 id="m0">by.anelkin.easylearning.repository.CourseRepositoryTest#setUpTestClass</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.CourseRepositoryTest.setUpTestClass(CourseRepositoryTest.java:42)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">by.anelkin.easylearning.repository.LessonRepositoryTest#setUpTestClass</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.LessonRepositoryTest.setUpTestClass(LessonRepositoryTest.java:38)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">by.anelkin.easylearning.repository.MarkRepositoryTest#setUpTestClass</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.MarkRepositoryTest.setUpTestClass(MarkRepositoryTest.java:39)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">by.anelkin.easylearning.repository.PaymentRepositoryTest#setUpTestClass</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.PaymentRepositoryTest.setUpTestClass(PaymentRepositoryTest.java:37)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">by.anelkin.easylearning.repository.RestorePassRequestRepositoryTest#setUpTestClass</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.RestorePassRequestRepositoryTest.setUpTestClass(RestorePassRequestRepositoryTest.java:37)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">by.anelkin.easylearning.service.AccountServiceTest#AccountService_AddAccAvatarToReview_ShouldCorrectlyUpdateAccUpdatePhotoPath</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_AddAccAvatarToReview_ShouldCorrectlyUpdateAccUpdatePhotoPath(AccountServiceTest.java:459)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m6">by.anelkin.easylearning.service.AccountServiceTest#AccountService_ApproveAccAvatar_ShouldClearAccUpdatePhotoPath</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_ApproveAccAvatar_ShouldClearAccUpdatePhotoPath(AccountServiceTest.java:517)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m7">by.anelkin.easylearning.service.AccountServiceTest#AccountService_ApproveAccAvatar_ShouldUpdateAccPathToPhotoCorrectly</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_ApproveAccAvatar_ShouldUpdateAccPathToPhotoCorrectly(AccountServiceTest.java:489)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m8">by.anelkin.easylearning.service.AccountServiceTest#AccountService_ChangeAccountPassword_ShouldChangeAccPwd</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_ChangeAccountPassword_ShouldChangeAccPwd(AccountServiceTest.java:314)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m9">by.anelkin.easylearning.service.AccountServiceTest#AccountService_ChangeAccountPassword_ShouldNotChangeAccPwdIfCurrentPwdIncorrect</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_ChangeAccountPassword_ShouldNotChangeAccPwdIfCurrentPwdIncorrect(AccountServiceTest.java:356)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m10">by.anelkin.easylearning.service.AccountServiceTest#AccountService_ChangeAccountPassword_ShouldNotChangeAccPwdIfRepeatedPwdIncorrect</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_ChangeAccountPassword_ShouldNotChangeAccPwdIfRepeatedPwdIncorrect(AccountServiceTest.java:396)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m11">by.anelkin.easylearning.service.AccountServiceTest#AccountService_ChangeForgottenPass_ShouldChangeAccPwd</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_ChangeForgottenPass_ShouldChangeAccPwd(AccountServiceTest.java:87)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m12">by.anelkin.easylearning.service.AccountServiceTest#AccountService_ChangeForgottenPass_ShouldDoNothingIfRepeatedPwdIncorrect</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_ChangeForgottenPass_ShouldDoNothingIfRepeatedPwdIncorrect(AccountServiceTest.java:159)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m13">by.anelkin.easylearning.service.AccountServiceTest#AccountService_ChangeForgottenPass_ShouldDoNothingIfUuidIncorrect</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_ChangeForgottenPass_ShouldDoNothingIfUuidIncorrect(AccountServiceTest.java:123)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m14">by.anelkin.easylearning.service.AccountServiceTest#AccountService_DeclineAccAvatar_ShouldClearAccUpdatePhotoPath</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_DeclineAccAvatar_ShouldClearAccUpdatePhotoPath(AccountServiceTest.java:579)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m15">by.anelkin.easylearning.service.AccountServiceTest#AccountService_DeclineAccAvatar_ShouldNotChangeAccPathToPhoto</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_DeclineAccAvatar_ShouldNotChangeAccPathToPhoto(AccountServiceTest.java:545)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m16">by.anelkin.easylearning.service.AccountServiceTest#AccountService_EditAccountInfo_ShouldUpdateAccData</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_EditAccountInfo_ShouldUpdateAccData(AccountServiceTest.java:608)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m17">by.anelkin.easylearning.service.AccountServiceTest#AccountService_InitApproveAccAvatarPage_ShouldCorrectlyInitAccountList</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_InitApproveAccAvatarPage_ShouldCorrectlyInitAccountList(AccountServiceTest.java:436)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m18">by.anelkin.easylearning.service.AccountServiceTest#AccountService_InitAuthorPage_ShouldInitAuthorCorrectly</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_InitAuthorPage_ShouldInitAuthorCorrectly(AccountServiceTest.java:651)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m19">by.anelkin.easylearning.service.AccountServiceTest#AccountService_InitAuthorPage_ShouldInitAuthorCoursesCorrectly</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_InitAuthorPage_ShouldInitAuthorCoursesCorrectly(AccountServiceTest.java:675)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m20">by.anelkin.easylearning.service.AccountServiceTest#AccountService_Login_ShouldNotTakeAccIfPwdIncorrect</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_Login_ShouldNotTakeAccIfPwdIncorrect(AccountServiceTest.java:222)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m21">by.anelkin.easylearning.service.AccountServiceTest#AccountService_Login_ShouldTakeCorrectAccount</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_Login_ShouldTakeCorrectAccount(AccountServiceTest.java:194)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m22">by.anelkin.easylearning.service.AccountServiceTest#AccountService_SignUp_ShouldInsertNewAcc</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_SignUp_ShouldInsertNewAcc(AccountServiceTest.java:251)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m23">by.anelkin.easylearning.service.AccountServiceTest#AccountService_SignUp_ShouldNotInsertNewAccIfLoginExists</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.AccountServiceTest.AccountService_SignUp_ShouldNotInsertNewAccIfLoginExists(AccountServiceTest.java:282)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m24">by.anelkin.easylearning.service.CourseServiceTest#CourseService_AddCourseImgToReview_ShouldUpdateTargetAccountCorrectly</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.CourseServiceTest.CourseService_AddCourseImgToReview_ShouldUpdateTargetAccountCorrectly(CourseServiceTest.java:74)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m25">by.anelkin.easylearning.service.CourseServiceTest#CourseService_ApproveCourseImgChange_ShouldClearUpdateImgPath</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.CourseServiceTest.CourseService_ApproveCourseImgChange_ShouldClearUpdateImgPath(CourseServiceTest.java:136)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m26">by.anelkin.easylearning.service.CourseServiceTest#CourseService_ApproveCourseImgChange_ShouldUpdateTargetAccPathToPhoto</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.CourseServiceTest.CourseService_ApproveCourseImgChange_ShouldUpdateTargetAccPathToPhoto(CourseServiceTest.java:104)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m27">by.anelkin.easylearning.service.CourseServiceTest#CourseService_ApproveCourse_ShouldUpdateCourseStatus</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.CourseServiceTest.CourseService_ApproveCourse_ShouldUpdateCourseStatus(CourseServiceTest.java:337)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m28">by.anelkin.easylearning.service.CourseServiceTest#CourseService_DeclineCourseImgChange_ShouldClearAccUpdatePhotoPath</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.CourseServiceTest.CourseService_DeclineCourseImgChange_ShouldClearAccUpdatePhotoPath(CourseServiceTest.java:200)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m29">by.anelkin.easylearning.service.CourseServiceTest#CourseService_DeclineCourseImgChange_ShouldNotChangeAccPathToImg</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.CourseServiceTest.CourseService_DeclineCourseImgChange_ShouldNotChangeAccPathToImg(CourseServiceTest.java:168)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m30">by.anelkin.easylearning.service.CourseServiceTest#CourseService_FreezeCourse_ShouldUpdateCorrectlyCourseState</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.CourseServiceTest.CourseService_FreezeCourse_ShouldUpdateCorrectlyCourseState(CourseServiceTest.java:366)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m31">by.anelkin.easylearning.service.CourseServiceTest#CourseService_InitCourseApprovalPage</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.CourseServiceTest.CourseService_InitCourseApprovalPage(CourseServiceTest.java:263)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m32">by.anelkin.easylearning.service.CourseServiceTest#CourseService_InitCourseImgApprovalPage_ShouldCorrectlyInitCoursesList</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.CourseServiceTest.CourseService_InitCourseImgApprovalPage_ShouldCorrectlyInitCoursesList(CourseServiceTest.java:311)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m33">by.anelkin.easylearning.service.CourseServiceTest#CourseService_InitCoursePage_ShouldInitAttributesCorrectly</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.CourseServiceTest.CourseService_InitCoursePage_ShouldInitAttributesCorrectly(CourseServiceTest.java:232)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m34">by.anelkin.easylearning.service.CourseServiceTest#CourseService_SearchCourses_ShouldCorrectlySearchCourses</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.CourseServiceTest.CourseService_SearchCourses_ShouldCorrectlySearchCourses(CourseServiceTest.java:286)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m35">by.anelkin.easylearning.service.MarkServiceTest#MarkService_MarkAuthor_ShouldAddMarkIntoDb</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.MarkServiceTest.MarkService_MarkAuthor_ShouldAddMarkIntoDb(MarkServiceTest.java:74)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m36">by.anelkin.easylearning.service.MarkServiceTest#MarkService_MarkAuthor_ShouldThrowExceptionIfOperationDenied</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.testng.TestException: 
+Expected exception of type class by.anelkin.easylearning.exception.ServiceException but got java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+Caused by: java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.MarkServiceTest.MarkService_MarkAuthor_ShouldThrowExceptionIfOperationDenied(MarkServiceTest.java:134)
+	... 29 more
+... Removed 38 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m37">by.anelkin.easylearning.service.MarkServiceTest#MarkService_MarkAuthor_ShouldUpdateAuthorAvgMark</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.MarkServiceTest.MarkService_MarkAuthor_ShouldUpdateAuthorAvgMark(MarkServiceTest.java:105)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m38">by.anelkin.easylearning.service.MarkServiceTest#MarkService_MarkCourse_ShouldAddMarkIntoDb</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.MarkServiceTest.MarkService_MarkCourse_ShouldAddMarkIntoDb(MarkServiceTest.java:159)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m39">by.anelkin.easylearning.service.MarkServiceTest#MarkService_MarkCourse_ShouldThrowExceptionIfAccessDenied</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.testng.TestException: 
+Expected exception of type class by.anelkin.easylearning.exception.ServiceException but got java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+Caused by: java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.MarkServiceTest.MarkService_MarkCourse_ShouldThrowExceptionIfAccessDenied(MarkServiceTest.java:222)
+	... 29 more
+... Removed 38 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m40">by.anelkin.easylearning.service.MarkServiceTest#MarkService_MarkCourse_ShouldUpdateCourseAvgMark</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.MarkServiceTest.MarkService_MarkCourse_ShouldUpdateCourseAvgMark(MarkServiceTest.java:191)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m41">by.anelkin.easylearning.service.PaymentServiceTest#PaymentRepository_ProcessCashOutFromBalance_ShouldNotChangeAccBalanceIfInsufficientFunds</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldNotChangeAccBalanceIfInsufficientFunds(PaymentServiceTest.java:381)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m42">by.anelkin.easylearning.service.PaymentServiceTest#PaymentRepository_ProcessCashOutFromBalance_ShouldNotInsertPaymentsIfInsufficientFunds</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldNotInsertPaymentsIfInsufficientFunds(PaymentServiceTest.java:411)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m43">by.anelkin.easylearning.service.PaymentServiceTest#PaymentRepository_ProcessCashOutFromBalance_ShouldUpdateAccBalance</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.PaymentServiceTest.PaymentRepository_ProcessCashOutFromBalance_ShouldUpdateAccBalance(PaymentServiceTest.java:351)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m44">by.anelkin.easylearning.service.PaymentServiceTest#PaymentRepository_ProcessDepositByCard_ShouldInsertOnePayment</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.PaymentServiceTest.PaymentRepository_ProcessDepositByCard_ShouldInsertOnePayment(PaymentServiceTest.java:320)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m45">by.anelkin.easylearning.service.PaymentServiceTest#PaymentRepository_ProcessDepositByCard_ShouldUpdateAccBalance</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.PaymentServiceTest.PaymentRepository_ProcessDepositByCard_ShouldUpdateAccBalance(PaymentServiceTest.java:290)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m46">by.anelkin.easylearning.service.PaymentServiceTest#PaymentRepository_ProcessPurchaseByCard_ShouldAddCourseInPurchased</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.PaymentServiceTest.PaymentRepository_ProcessPurchaseByCard_ShouldAddCourseInPurchased(PaymentServiceTest.java:259)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m47">by.anelkin.easylearning.service.PaymentServiceTest#PaymentRepository_ProcessPurchaseByCard_ShouldDoNothingIfPurchasedAlready</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.PaymentServiceTest.PaymentRepository_ProcessPurchaseByCard_ShouldDoNothingIfPurchasedAlready(PaymentServiceTest.java:207)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m48">by.anelkin.easylearning.service.PaymentServiceTest#PaymentRepository_ProcessPurchaseByCard_ShouldInsertTwoPayments</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.PaymentServiceTest.PaymentRepository_ProcessPurchaseByCard_ShouldInsertTwoPayments(PaymentServiceTest.java:233)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m49">by.anelkin.easylearning.service.PaymentServiceTest#PaymentRepository_ProcessPurchaseFromBalance_ShouldAddCourseToPurchased</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.PaymentServiceTest.PaymentRepository_ProcessPurchaseFromBalance_ShouldAddCourseToPurchased(PaymentServiceTest.java:131)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m50">by.anelkin.easylearning.service.PaymentServiceTest#PaymentRepository_ProcessPurchaseFromBalance_ShouldDoNothingIfInsufficientFunds</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.PaymentServiceTest.PaymentRepository_ProcessPurchaseFromBalance_ShouldDoNothingIfInsufficientFunds(PaymentServiceTest.java:181)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m51">by.anelkin.easylearning.service.PaymentServiceTest#PaymentRepository_ProcessPurchaseFromBalance_ShouldInsertTwoPayments</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.PaymentServiceTest.PaymentRepository_ProcessPurchaseFromBalance_ShouldInsertTwoPayments(PaymentServiceTest.java:106)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m52">by.anelkin.easylearning.service.PaymentServiceTest#PaymentRepository_ProcessPurchaseFromBalance_ShouldNotInsertPaymentsIfPurchasedAlready</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.PaymentServiceTest.PaymentRepository_ProcessPurchaseFromBalance_ShouldNotInsertPaymentsIfPurchasedAlready(PaymentServiceTest.java:156)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m53">by.anelkin.easylearning.service.PaymentServiceTest#PaymentRepository_ProcessPurchaseFromBalance_ShouldUpdateAccBalance</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.service.PaymentServiceTest.PaymentRepository_ProcessPurchaseFromBalance_ShouldUpdateAccBalance(PaymentServiceTest.java:79)
+... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m54">by.anelkin.easylearning.repository.CourseRepositoryTest#CourseRepository_Query</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.CourseRepositoryTest.setUpTestClass(CourseRepositoryTest.java:42)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m55">by.anelkin.easylearning.repository.CourseRepositoryTest#CourseRepository_Query</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.CourseRepositoryTest.setUpTestClass(CourseRepositoryTest.java:42)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m56">by.anelkin.easylearning.repository.CourseRepositoryTest#CourseRepository_Query</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.CourseRepositoryTest.setUpTestClass(CourseRepositoryTest.java:42)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m57">by.anelkin.easylearning.repository.CourseRepositoryTest#CourseRepository_Query</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.CourseRepositoryTest.setUpTestClass(CourseRepositoryTest.java:42)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m58">by.anelkin.easylearning.repository.CourseRepositoryTest#CourseRepository_Query</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.CourseRepositoryTest.setUpTestClass(CourseRepositoryTest.java:42)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m59">by.anelkin.easylearning.repository.CourseRepositoryTest#CourseRepository_Query</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.CourseRepositoryTest.setUpTestClass(CourseRepositoryTest.java:42)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m60">by.anelkin.easylearning.repository.CourseRepositoryTest#CourseRepository_Query</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.CourseRepositoryTest.setUpTestClass(CourseRepositoryTest.java:42)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m61">by.anelkin.easylearning.repository.CourseRepositoryTest#CourseRepository_Query</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.CourseRepositoryTest.setUpTestClass(CourseRepositoryTest.java:42)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m62">by.anelkin.easylearning.repository.LessonRepositoryTest#testQuery</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.LessonRepositoryTest.setUpTestClass(LessonRepositoryTest.java:38)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m63">by.anelkin.easylearning.repository.LessonRepositoryTest#testQuery</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.LessonRepositoryTest.setUpTestClass(LessonRepositoryTest.java:38)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m64">by.anelkin.easylearning.repository.MarkRepositoryTest#testQuery</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.MarkRepositoryTest.setUpTestClass(MarkRepositoryTest.java:39)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m65">by.anelkin.easylearning.repository.MarkRepositoryTest#testQuery</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.MarkRepositoryTest.setUpTestClass(MarkRepositoryTest.java:39)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m66">by.anelkin.easylearning.repository.MarkRepositoryTest#testQuery</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.MarkRepositoryTest.setUpTestClass(MarkRepositoryTest.java:39)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m67">by.anelkin.easylearning.repository.MarkRepositoryTest#testQuery</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.MarkRepositoryTest.setUpTestClass(MarkRepositoryTest.java:39)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m68">by.anelkin.easylearning.repository.PaymentRepositoryTest#testQuery</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.PaymentRepositoryTest.setUpTestClass(PaymentRepositoryTest.java:37)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m69">by.anelkin.easylearning.repository.PaymentRepositoryTest#testQuery</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.PaymentRepositoryTest.setUpTestClass(PaymentRepositoryTest.java:37)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m70">by.anelkin.easylearning.repository.RestorePassRequestRepositoryTest#RestorePassRequestRepository_Query</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLSyntaxErrorException: PROCEDURE easylearning.dropTables does not exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at by.anelkin.easylearning.repository.RestorePassRequestRepositoryTest.setUpTestClass(RestorePassRequestRepositoryTest.java:37)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m71">by.anelkin.easylearning.service.AccountServiceTest#AccountService_PickTargetNameFromUri_ShouldReturnCorrectString</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+</body>
+</html>
