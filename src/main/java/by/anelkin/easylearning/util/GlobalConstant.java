@@ -12,7 +12,7 @@ public class GlobalConstant {
     public static final String COLON_SYMBOL = ":";
     public static final int ERROR_403 = 403;
     public static final int ERROR_500 = 500;
-    public static final int ERROR_400 = 400;
+    public static final int ERROR_404 = 404;
 
     //for services, filters etc.
     public static final String ATTR_USER = "user";

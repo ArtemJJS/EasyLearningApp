@@ -25,8 +25,16 @@
 <!--    </context-param>-->
 
     <error-page>
-        <exception-type>javax.servlet.ServletException</exception-type>
+        <error-code>500</error-code>
         <location>/jsp/error_page.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/jsp/error_page.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/error404_page.jsp</location>
     </error-page>
 
     <servlet-mapping>

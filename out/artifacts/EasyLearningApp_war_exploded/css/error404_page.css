@@ -12,9 +12,9 @@ html {
 }
 
 main {
-    margin: 80px auto 0;
-    width: 800px;
-    min-height: 600px;
+    margin: 0 auto;
+    /*width: 800px;*/
+    /*min-height: 600px;*/
 
     padding-top: 30px;
     padding-bottom: 30px;
@@ -22,6 +22,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 .page_title {
@@ -55,7 +56,13 @@ main {
     font-size: 4rem;
     color: blue;
 }
+.error_img{
+    width: 800px;
+    height: 600px;
+}
 
 .back_to_acc{
-    margin-top: 80px;
+    margin-top: 50px;
+    align-self: center;
+
 }

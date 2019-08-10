@@ -60,7 +60,7 @@ public class BasicServlet extends HttpServlet {
             return;
         }catch (NullPointerException e){
             log.error(e);
-            response.sendError(ERROR_400, rb.getString(BUNDLE_PAGE_NOT_FOUND));
+            response.sendError(ERROR_404, rb.getString(BUNDLE_PAGE_NOT_FOUND));
             return;
         }
 

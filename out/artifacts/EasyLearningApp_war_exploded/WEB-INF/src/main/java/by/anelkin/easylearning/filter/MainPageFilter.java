@@ -3,12 +3,18 @@ package by.anelkin.easylearning.filter;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.service.CourseService;
+import lombok.extern.log4j.Log4j;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
+import static by.anelkin.easylearning.util.GlobalConstant.*;
+
+@Log4j
 @WebFilter(urlPatterns = {"/easyLearning", "/jsp/main_page.jsp"})
 public class MainPageFilter implements Filter {
 
@@ -20,7 +26,11 @@ public class MainPageFilter implements Filter {
         try {
             new CourseService().chooseRecommendedCourses(requestContent);
         } catch (ServiceException e) {
-            throw new ServletException(e);
+            HttpServletResponse response = (HttpServletResponse) servletResponse;
+            ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, request.getLocale());
+            log.error(e);
+            response.sendError(ERROR_500, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
+            return;
         }
         requestContent.insertAttributes(request);
         filterChain.doFilter(request, servletResponse);

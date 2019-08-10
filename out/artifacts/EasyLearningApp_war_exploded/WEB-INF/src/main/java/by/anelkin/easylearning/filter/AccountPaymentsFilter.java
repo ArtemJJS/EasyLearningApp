@@ -28,9 +28,9 @@ public class AccountPaymentsFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
         SessionRequestContent requestContent = new SessionRequestContent();
         requestContent.extractValues(request);
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
         ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, request.getLocale());
         try {
             paymentService.insertPaymentsIntoRequestAttributes(requestContent);

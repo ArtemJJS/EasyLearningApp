@@ -79,7 +79,7 @@ public class ImgUploadServlet extends HttpServlet {
             return;
         }catch (NullPointerException e){
             log.error(e);
-            resp.sendError(ERROR_400, rb.getString(BUNDLE_PAGE_NOT_FOUND));
+            resp.sendError(ERROR_404, rb.getString(BUNDLE_PAGE_NOT_FOUND));
             return;
         }
 
