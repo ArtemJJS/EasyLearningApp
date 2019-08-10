@@ -24,7 +24,7 @@ public class JspAccessFilter implements Filter {
         // which appears if *.jsp is the first request (still has no session)
         if (request.getSession().isNew()) {
             request.getSession().setAttribute("role", GUEST);
-            request.getSession().setAttribute("locale", new Locale("en", "US"));
+            request.getSession().setAttribute("locale", Locale.US);
         }
         String uri = request.getRequestURI();
         if (uri.contains(JSP_EXTENSION) && request.getAttribute(ATTR_JSP_PERMITTED) == null) {

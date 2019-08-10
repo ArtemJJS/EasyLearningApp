@@ -10,6 +10,8 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+import static by.anelkin.easylearning.util.GlobalConstant.EMPTY_STRING;
+
 @Setter
 @Getter
 public class SessionRequestContent {
@@ -34,7 +36,7 @@ public class SessionRequestContent {
         requestFullReferer = referer;
         if (referer!=null) {
             referer = referer.substring(referer.indexOf(request.getContextPath()));
-            referer = referer.replace("/easyLearning", "");
+            referer = referer.replace(request.getContextPath(), EMPTY_STRING);
         }
         requestReferer = referer;
 

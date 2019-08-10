@@ -21,7 +21,7 @@
 <body>
 <%@include file="header.jsp" %>
 <main>
-    <div class="banner"><fmt:message key='main.learn_easy' bundle='${rb}'/><br><fmt:message
+    <div class="banner" style="background-image: url('${pageContext.request.contextPath}/img/resources/acc_banner.jpg');"><fmt:message key='main.learn_easy' bundle='${rb}'/><br><fmt:message
             key='main.everytime_everywhere' bundle='${rb}'/></div>
     <c:set var="role" value="${sessionScope.role.toString()}"/>
     <c:choose>

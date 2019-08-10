@@ -57,7 +57,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>main_page</servlet-name>
-        <url-pattern>/easyLearning</url-pattern>
+        <url-pattern>/EasyLearning</url-pattern>
     </servlet-mapping>
 
     <servlet>

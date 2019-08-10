@@ -10,7 +10,7 @@ import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseTyp
 
 
 public class SignUpNewUserCommand implements Command {
-    private static final String CORRECT_REGISTRATION_PATH = "/easyLearning";
+    private static final String CORRECT_REGISTRATION_PATH = "/";
     private static final String WRONG_REGISTRATION_REDIRECT_PATH = "/jsp/sign_up.jsp";
 
 

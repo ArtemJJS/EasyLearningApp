@@ -13,8 +13,10 @@ public class CashOutCommand implements Command {
     @Override
     public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
         boolean isSuccessful = (new PaymentService()).processCashOutFromBalance(requestContent);
+        System.out.println(isSuccessful);
         if (isSuccessful) {
             requestContent.setPath(REDIRECT_PATH);
+            System.out.println(REDIRECT_PATH);
             return REDIRECT;
         }
         requestContent.setPath(FORWARD_PATH);

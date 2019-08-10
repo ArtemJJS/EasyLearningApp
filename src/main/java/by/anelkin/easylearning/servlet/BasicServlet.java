@@ -44,6 +44,7 @@ public class BasicServlet extends HttpServlet {
 
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println(request.getRequestURI());
         HttpSession session = request.getSession();
         if (session.getAttribute(ATTR_ROLE) == null) {
             session.setAttribute(ATTR_ROLE, GUEST);

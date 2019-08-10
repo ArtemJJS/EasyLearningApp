@@ -14,20 +14,17 @@ import java.util.stream.Collectors;
 
 import static by.anelkin.easylearning.entity.Account.*;
 import static by.anelkin.easylearning.entity.Account.AccountType.GUEST;
+import static by.anelkin.easylearning.util.GlobalConstant.*;
 
 @WebFilter(urlPatterns = {"/admin/*", "/author/*", "/user/*", "/account/*", "/course/learn",
                             "/operation-result"})
 public class UrlAccessFilter implements Filter {
-    private static final String ATTR_ROLE = "role";
-    private static final String ATTR_LOCALE = "locale";
-    private static final String ATTR_COURSE_ID = "course-id";
     private static final String ATTR_AVAILABLE_COURSES = "coursesAvailable";
     private static final String URI_USER = "/user/";
-    private static final String URI_ADMIN = "/admin/";
+    private static final String URI_OPERATION_RESULT = "/operation-result";
     private static final String URI_AUTHOR = "/author/";
     private static final String URI_ACCOUNT = "/account";
     private static final String URI_LEARNING_PAGE = "/course/learn";
-    private static final String URL_SPLITTER = "/";
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -43,22 +40,22 @@ public class UrlAccessFilter implements Filter {
         boolean accessGrantedToLearningPage = uri.contains(URI_LEARNING_PAGE) && isAccessGrantedToLearningPage(request);
         switch (role) {
             case USER:
-                if (!uri.contains(URI_USER) && !uri.contains(URI_ACCOUNT) && !accessGrantedToLearningPage) {
-                    response.sendRedirect(request.getContextPath() + URL_SPLITTER);
+                if (!uri.contains(URI_USER) && !uri.contains(URI_ACCOUNT) && !uri.contains(URI_OPERATION_RESULT) && !accessGrantedToLearningPage) {
+                    response.sendRedirect(request.getContextPath() + PATH_SPLITTER);
                 }
                 break;
             case AUTHOR:
-                if (!uri.contains(URI_AUTHOR) && !uri.contains(URI_ACCOUNT) && !accessGrantedToLearningPage) {
-                    response.sendRedirect(request.getContextPath() + URL_SPLITTER);
+                if (!uri.contains(URI_AUTHOR) && !uri.contains(URI_ACCOUNT) && !uri.contains(URI_OPERATION_RESULT) && !accessGrantedToLearningPage) {
+                    response.sendRedirect(request.getContextPath() + PATH_SPLITTER);
                 }
                 break;
             case ADMIN:
                 if (uri.contains(URI_AUTHOR) && uri.contains(URI_USER)) {
-                    response.sendRedirect(request.getContextPath() + URL_SPLITTER);
+                    response.sendRedirect(request.getContextPath() + PATH_SPLITTER);
                 }
                 break;
             default:
-                response.sendRedirect(request.getContextPath() + URL_SPLITTER);
+                response.sendRedirect(request.getContextPath() + PATH_SPLITTER);
                 return;
         }
         filterChain.doFilter(request, servletResponse);
@@ -66,7 +63,7 @@ public class UrlAccessFilter implements Filter {
 
     private boolean isAccessGrantedToLearningPage(HttpServletRequest request) {
         AccountType role = AccountType.valueOf(request.getSession().getAttribute(ATTR_ROLE).toString().toUpperCase());
-        int courseId = Integer.parseInt(request.getParameter(ATTR_COURSE_ID));
+        int courseId = Integer.parseInt(request.getParameter(ATTR_COURSE_ID_DEFIS));
         boolean isAccessGranted = false;
         switch (role) {
             case GUEST:

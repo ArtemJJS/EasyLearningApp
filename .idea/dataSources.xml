@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="easylearning@localhost" uuid="47865970-3e28-4724-ad20-d1f31bcebca0">
+    <data-source source="LOCAL" name="easylearning" uuid="47865970-3e28-4724-ad20-d1f31bcebca0">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/easylearning</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/easylearning?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="CONVERT_TO_NULL" />
@@ -15,11 +15,11 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="testDB@localhost" uuid="a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14">
+    <data-source source="LOCAL" name="testDB" uuid="a4bd5d2c-afaa-4f5e-8e61-3ab37b9bac14">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/testDB</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/testDB?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="CONVERT_TO_NULL" />

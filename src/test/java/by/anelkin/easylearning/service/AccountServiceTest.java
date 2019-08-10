@@ -637,7 +637,7 @@ public class AccountServiceTest {
     public void AccountService_PickTargetNameFromUri_ShouldReturnCorrectString() throws SQLException, RepositoryException, ServiceException {
         String expected = "admin admin";
 
-        String uri = "/easyLearning/some-path/admin%20admin";
+        String uri = "/EasyLearning/some-path/admin%20admin";
         String actual = accService.pickTargetNameFromUri(uri);
 
         assertEquals(actual, expected);

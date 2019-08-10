@@ -21,8 +21,8 @@
 <header>
     <div class="header-content">
         <div class="logo">
-            <a href="${pageContext.request.contextPath}/easyLearning"><img
-                    src="${pageContext.request.contextPath}/img/resources/logo.jpg" alt="logo"></a>
+            <a href="${pageContext.request.contextPath}/"><img
+                    src="${pageContext.request.contextPath}/img/resources/logo.png" alt="logo"></a>
         </div>
         <div class="choose_lang">
             <a href="${pageContext.request.contextPath}/change-lang?command_name=change_lang&locale=en_US"><fmt:message
