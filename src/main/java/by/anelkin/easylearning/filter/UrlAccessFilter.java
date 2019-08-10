@@ -59,6 +59,7 @@ public class UrlAccessFilter implements Filter {
                 break;
             default:
                 response.sendRedirect(request.getContextPath() + URL_SPLITTER);
+                return;
         }
         filterChain.doFilter(request, servletResponse);
     }

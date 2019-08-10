@@ -84,3 +84,20 @@ main {
 .payment_currency{
     margin-left: 10px;
 }
+
+
+.pagination {
+    width: 110px;
+    margin: 25px auto 0;
+
+    display: flex;
+    justify-content: center;
+}
+
+.submit_btn {
+    width: 40px;
+}
+
+.curr_page{
+    margin: 0 12px;
+}

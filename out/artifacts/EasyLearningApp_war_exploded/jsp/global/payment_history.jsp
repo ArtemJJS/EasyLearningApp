@@ -34,6 +34,29 @@
             </div>
         </c:forEach>
     </div>
+    <div class="pagination">
+        <form class="pages_form" method="get" action="${pageContext.request.contextPath}/basic_servlet">
+            <input type="hidden" name="command_name" value="next_payment_page">
+            <input type="hidden" name="search_key" value="${pageContext.request.getParameter('search_key')}">
+            <input class="page_number" type="hidden" name="page" value="1">
+            <input class="submit_btn" type="submit" value="<">
+        </form>
+        <div class="curr_page">${pageContext.request.getParameter("page") + 1}</div>
+        <form class="pages_form" method="get" action="${pageContext.request.contextPath}/basic_servlet">
+            <input type="hidden" name="command_name" value="next_payment_page">
+            <input type="hidden" name="search_key" value="${pageContext.request.getParameter('search_key')}">
+            <input class="page_number" type="hidden" name="page" value="1">
+            <input class="submit_btn" type="submit" value=">">
+        </form>
+    </div>
 </main>
+<script>let currPageNumber = ${pageContext.request.getParameter('page')};
+</script>
+<script>
+    let hasMorePages =  ${pageContext.request.getAttribute('has_more_pages')};
+</script>
+<script>
+    <%@include file="/js/pagination.js"%>
+</script>
 </body>
 </html>

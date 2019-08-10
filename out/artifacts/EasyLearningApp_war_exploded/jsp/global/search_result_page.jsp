@@ -80,7 +80,7 @@
     let hasMorePages =  ${pageContext.request.getAttribute('has_more_pages')};
 </script>
 <script>
-    <%@include file="/js/search_page.js"%>
+    <%@include file="/js/pagination.js"%>
 </script>
 </body>
 </html>

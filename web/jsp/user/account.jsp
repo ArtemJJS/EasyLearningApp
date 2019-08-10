@@ -32,7 +32,7 @@
                     key='acc.change_photo' bundle='${rb}'/></a></div>
             <div class="link"><a href="${pageContext.request.contextPath}/account/change-password"><fmt:message
                     key='acc.change_password' bundle='${rb}'/></a></div>
-            <div class="link"><a href="${pageContext.request.contextPath}/account/payments"><fmt:message
+            <div class="link"><a href="${pageContext.request.contextPath}/account/payments?page=0"><fmt:message
                     key='acc.payments' bundle='${rb}'/></a></div>
             <c:choose>
                 <c:when test="${curr_role.toString() == 'USER'}">

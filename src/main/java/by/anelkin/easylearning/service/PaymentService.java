@@ -14,6 +14,7 @@ import by.anelkin.easylearning.specification.account.SelectAuthorOfCourseSpecifi
 import by.anelkin.easylearning.specification.course.SelectCourseByIdSpecification;
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
 import by.anelkin.easylearning.specification.payment.SelectPaymentByAccountIdSpecification;
+import by.anelkin.easylearning.specification.payment.SelectPaymentPaginationByAccIdSpecification;
 import by.anelkin.easylearning.validator.FormValidator;
 import lombok.extern.log4j.Log4j;
 
@@ -28,6 +29,9 @@ import static by.anelkin.easylearning.util.GlobalConstant.*;
 
 @Log4j
 public class PaymentService {
+    private static final int PAGINATION_LIMIT_PAYMENT_HISTORY = 8;
+
+
     private static final String RESOURCE_BUNDLE_BASE = "text_resources";
 
     private static final String BUNDLE_PAYMENT_SUCCEEDED = "msg.payment_approved";
@@ -191,9 +195,24 @@ public class PaymentService {
 
     public void insertPaymentsIntoRequestAttributes(SessionRequestContent requestContent) throws ServiceException {
         PaymentRepository paymentRepository = new PaymentRepository();
+        Map<String, String[]> reqParam = requestContent.getRequestParameters();
         Account currAccount = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
         try {
-            List<Payment> payments = paymentRepository.query(new SelectPaymentByAccountIdSpecification(currAccount.getId()));
+            String[] reqParamPageNumbers = reqParam.get(ATTR_PAGE);
+            String searchPageNumber = reqParamPageNumbers == null ? null : reqParamPageNumbers[0];
+            int currPageNumber;
+            if (searchPageNumber == null || searchPageNumber.isEmpty()) {
+                currPageNumber = 0;
+            } else {
+                int tempPageNumber = Integer.parseInt(searchPageNumber);
+                currPageNumber = tempPageNumber < 0 ? 0 : tempPageNumber;
+            }
+            int offset = currPageNumber * PAGINATION_LIMIT_PAYMENT_HISTORY;
+            List<Payment> payments = paymentRepository.query(new SelectPaymentPaginationByAccIdSpecification(currAccount.getId(), PAGINATION_LIMIT_PAYMENT_HISTORY + 1, offset));
+            if (payments.size() > PAGINATION_LIMIT_PAYMENT_HISTORY) {
+                requestContent.getRequestAttributes().put(ATTR_HAS_MORE_PAGES, "true");
+                payments.remove(payments.size() - 1);
+            }
             requestContent.getRequestAttributes().put(ATTR_PAYMENTS, payments);
         } catch (RepositoryException e) {
             throw new ServiceException(e);

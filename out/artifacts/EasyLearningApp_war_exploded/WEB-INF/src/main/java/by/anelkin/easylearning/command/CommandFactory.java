@@ -37,7 +37,10 @@ public class CommandFactory {
 //        GO_CHANGE_PASS(GUEST),
         CHANGE_FORGOTTEN_PASSWORD(GUEST),
         DELETE_COURSE_COMMENT(ADMIN),
-        DELETE_AUTHOR_COMMENT(ADMIN);
+        DELETE_AUTHOR_COMMENT(ADMIN),
+        NEXT_PAYMENT_PAGE(USER, AUTHOR, ADMIN);
+
+
 
 
 
@@ -132,6 +135,9 @@ public class CommandFactory {
                 break;
             case DELETE_AUTHOR_COMMENT:
                 command = new DeleteAuthorCommentCommand();
+                break;
+            case NEXT_PAYMENT_PAGE:
+                command = new NextPaymentsPageCommand();
                 break;
 
         }
