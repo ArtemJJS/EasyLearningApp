@@ -23,10 +23,13 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 import static by.anelkin.easylearning.command.CommandFactory.*;
 import static by.anelkin.easylearning.command.CommandFactory.CommandType.*;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.FORWARD;
+import static by.anelkin.easylearning.util.GlobalConstant.*;
+import static by.anelkin.easylearning.util.GlobalConstant.BUNDLE_PAGE_NOT_FOUND;
 
 @Log4j
 @WebServlet(urlPatterns = "/account/change-image")
@@ -66,7 +69,20 @@ public class ImgUploadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Account acc = (Account) req.getSession().getAttribute(ATTR_USER);
         String commandName = req.getParameter(ATTR_COMMAND_NAME);
-        CommandType command = CommandType.valueOf(commandName.toUpperCase());
+        ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, req.getLocale());
+        CommandType command;
+        try {
+            command = CommandType.valueOf(commandName.toUpperCase());
+        }catch (IllegalArgumentException e) {
+            log.error(e);
+            resp.sendError(ERROR_500, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
+            return;
+        }catch (NullPointerException e){
+            log.error(e);
+            resp.sendError(ERROR_400, rb.getString(BUNDLE_PAGE_NOT_FOUND));
+            return;
+        }
+
         String courseId = null;
         String currentFolderPath;
         String tempFileName;
@@ -95,7 +111,9 @@ public class ImgUploadServlet extends HttpServlet {
         try {
             responseType = receiver.executeCommand();
         } catch (ServiceException e) {
-            throw new ServletException(e);
+            log.error(e);
+            resp.sendError(ERROR_500, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
+            return;
         }
 
         requestContent.insertAttributes(req);

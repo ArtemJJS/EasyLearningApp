@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
 import static by.anelkin.easylearning.entity.Account.*;
 import static by.anelkin.easylearning.entity.Account.AccountType.GUEST;
 
-@WebFilter(urlPatterns = {"/admin/*", "/author/*", "/user/*", "/account/*", "/course/learn"})
+@WebFilter(urlPatterns = {"/admin/*", "/author/*", "/user/*", "/account/*", "/course/learn",
+                            "/operation-result"})
 public class UrlAccessFilter implements Filter {
     private static final String ATTR_ROLE = "role";
     private static final String ATTR_LOCALE = "locale";

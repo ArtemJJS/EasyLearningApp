@@ -51,20 +51,7 @@ public class AccountService {
     private static final String DEFAULT_ACC_AVATAR = "default_acc_avatar";
     private static final String CURRENT_ENCRYPTING = "SHA-256";
 
-    private static final String PROP_FILE_FOLDER = "file_folder";
-    private static final String PROP_EMAIL_SUBJECT = "email_subject";
-    private static final String PROP_EMAIL_ADDRESS = "mail.user.name";
-    private static final String PROP_EMAIL_MESSAGE = "email_message";
-    private static final String PROP_EMAIL_PASSWORD = "mail.user.password";
-    private static final String RESOURCE_BUNDLE_BASE = "text_resources";
-    private static final String FILE_STORAGE_BUNDLE_BASE = "file_storage";
-    private static final String MAIL_INFO_PROPERTIES = "mail_info.properties";
-    private static final String BUNDLE_INCORRECT_DATA = "msg.incorrect_data";
-    private static final String BUNDLE_INCORRECT_AGE = "msg.incorrect_date_of_birth";
-    private static final String BUNDLE_CHANGE_AVATAR_REQUEST = "msg.change_avatar_request_was_sent";
-    private static final String BUNDLE_INCORRECT_REPEATED_PASS_OR_PATTERN = "msg.incorrect_repeated_password_or_pattern";
-    private static final String BUNDLE_LOGIN_NOT_EXISTS = "msg.login_not_exists";
-    private static final String BUNDLE_EMAIL_SENT = "msg.email_sent";
+
 
     private static final String PREVIOUS_OPERATION_MSG = "previous_operation_message";
     private static final String PWD_CHANGED_SUCCESSFULLY_MSG = "You password has been successfully changed!!!";

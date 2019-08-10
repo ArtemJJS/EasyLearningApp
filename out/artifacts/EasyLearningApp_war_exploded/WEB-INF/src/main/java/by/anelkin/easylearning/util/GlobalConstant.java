@@ -10,6 +10,9 @@ public class GlobalConstant {
     public static final String LOCALE_SPLITTER = "_";
     public static final String CARD_NUMBER_SPLITTER = " ";
     public static final String COLON_SYMBOL = ":";
+    public static final int ERROR_403 = 403;
+    public static final int ERROR_500 = 500;
+    public static final int ERROR_400 = 400;
 
     //for services, filters etc.
     public static final String ATTR_USER = "user";
@@ -65,7 +68,40 @@ public class GlobalConstant {
     public static final String ATTR_COURSE_MARK_COUNT = "course_mark_count";
     public static final String ATTR_COURSE_PURCHASE_COUNT = "course_purchase_count";
     public static final String ATTR_AUTHOR_MARKS = "author_marks";
+    public static final String ATTR_COMMAND_NAME = "command_name";
 
+
+    public static final String PROP_FILE_FOLDER = "file_folder";
+    public static final String PROP_EMAIL_SUBJECT = "email_subject";
+    public static final String PROP_EMAIL_ADDRESS = "mail.user.name";
+    public static final String PROP_EMAIL_MESSAGE = "email_message";
+    public static final String PROP_EMAIL_PASSWORD = "mail.user.password";
+    public static final String RESOURCE_BUNDLE_BASE = "text_resources";
+    public static final String FILE_STORAGE_BUNDLE_BASE = "file_storage";
+    public static final String MAIL_INFO_PROPERTIES = "mail_info.properties";
+    public static final String BUNDLE_INCORRECT_DATA = "msg.incorrect_data";
+    public static final String BUNDLE_INCORRECT_AGE = "msg.incorrect_date_of_birth";
+    public static final String BUNDLE_CHANGE_AVATAR_REQUEST = "msg.change_avatar_request_was_sent";
+    public static final String BUNDLE_INCORRECT_REPEATED_PASS_OR_PATTERN = "msg.incorrect_repeated_password_or_pattern";
+    public static final String BUNDLE_LOGIN_NOT_EXISTS = "msg.login_not_exists";
+    public static final String BUNDLE_EMAIL_SENT = "msg.email_sent";
+    public static final String BUNDLE_PAGE_NOT_FOUND = "error.page_not_found";
+    public static final String BUNDLE_ETERNAL_SERVER_ERROR = "error.eternal_server_error";
+    public static final String BUNDLE_ACCESS_DENIED = "error.access_denied";
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // for repositories;
     public static final String ACC_ID = "acc_id";
     public static final String ACC_LOGIN = "acc_login";

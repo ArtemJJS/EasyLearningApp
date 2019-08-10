@@ -19,9 +19,6 @@ import java.util.Properties;
 @WebServlet(urlPatterns = "/img/*")
 public class ImgServlet extends HttpServlet {
     private static final String PROP_FILE_FOLDER = "file_folder";
-
-    // FIXME: 7/28/2019 константа не final? не инициализируется в конструкторе
-    //  (но сервлет живет все время так что нормально?)
     private String fileStorage;
 
     @Override

@@ -8,7 +8,11 @@ import lombok.extern.log4j.Log4j;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ResourceBundle;
+
+import static by.anelkin.easylearning.util.GlobalConstant.*;
 
 @Log4j
 @WebFilter(urlPatterns = {"/course", "/course/learn", "/author/edit-course", "/user/buy-course", "/user/mark-course"})
@@ -24,8 +28,11 @@ public class RequestedCourseFilter implements Filter {
             courseService.initCoursePage(requestContent);
             requestContent.insertAttributes(request);
         } catch (ServiceException e) {
+            HttpServletResponse response = (HttpServletResponse) servletResponse;
+            ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, request.getLocale());
             log.error(e);
-            throw new ServletException(e);
+            response.sendError(ERROR_500, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
+            return;
         }
         filterChain.doFilter(request, servletResponse);
     }
