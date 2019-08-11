@@ -67,5 +67,8 @@
         </c:choose>
     </div>
 </main>
+<script>
+    <%@include file="/js/localization_hidden.js"%>
+</script>
 </body>
 </html>

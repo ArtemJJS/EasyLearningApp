@@ -92,5 +92,8 @@ let lessonContentText = '<fmt:message key='course.path_to_content' bundle='${rb}
 <script>
     <%@include file="/js/add_lesson.js"%>
 </script>
+<script>
+    <%@include file="/js/localization_hidden.js"%>
+</script>
 </body>
 </html>

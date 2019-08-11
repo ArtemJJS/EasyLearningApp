@@ -47,5 +47,8 @@
 <script>
     <%@include file="/js/change_pwd_page.js"%>
 </script>
+<script>
+    <%@include file="/js/localization_hidden.js"%>
+</script>
 </body>
 </html>

@@ -25,11 +25,11 @@
                     src="${pageContext.request.contextPath}/img/resources/logo.png" alt="logo"></a>
         </div>
         <div class="choose_lang">
-            <a href="${pageContext.request.contextPath}/change-lang?command_name=change_lang&locale=en_US"><fmt:message
+            <a class="lang_option" href="${pageContext.request.contextPath}/change-lang?command_name=change_lang&locale=en_US"><fmt:message
                     key="header.lang_eng" bundle="${rb}"/></a>
-            <a href="${pageContext.request.contextPath}/change-lang?command_name=change_lang&locale=ru_RU"><fmt:message
+            <a class="lang_option" href="${pageContext.request.contextPath}/change-lang?command_name=change_lang&locale=ru_RU"><fmt:message
                     key="header.lang_ru" bundle="${rb}"/></a>
-            <a href="${pageContext.request.contextPath}/change-lang?command_name=change_lang&locale=fr_FR"><fmt:message
+            <a class="lang_option" href="${pageContext.request.contextPath}/change-lang?command_name=change_lang&locale=fr_FR"><fmt:message
                     key="header.lang_fr" bundle="${rb}"/></a>
         </div>
         <form id="header_search_form" action="${pageContext.request.contextPath}/search">

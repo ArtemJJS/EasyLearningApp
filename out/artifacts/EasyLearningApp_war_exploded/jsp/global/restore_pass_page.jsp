@@ -17,6 +17,7 @@
     </style>
 </head>
 <body>
+<%@include file="/jsp/header.jsp"%>
 <main>
     <div class="page_title"><fmt:message key="restore.restore_password" bundle="${rb}"/></div>
     <div class="info-message"><fmt:message key="restore.info_message" bundle="${rb}"/></div>

@@ -17,6 +17,7 @@
     </style>
 </head>
 <body>
+<%@include file="/jsp/header.jsp"%>
 <main>
     <div class="page_content_wrapper">
         <div class="page_title"><fmt:message key='change.change_account_password' bundle='${rb}'/>:</div>
@@ -43,5 +44,8 @@
         <a class="back_to_login_ref" href="${pageContext.request.contextPath}/login"><fmt:message key="restore.back_to_login_page" bundle="${rb}"/></a>
     </div>
 </main>
+<script>
+    <%@include file="/js/localization_hidden.js"%>
+</script>
 </body>
 </html>

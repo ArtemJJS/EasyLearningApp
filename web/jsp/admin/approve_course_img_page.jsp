@@ -54,5 +54,8 @@
         </div>
     </c:forEach>
 </main>
+<script>
+    <%@include file="/js/localization_hidden.js"%>
+</script>
 </body>
 </html>

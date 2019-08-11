@@ -17,6 +17,7 @@
     </style>
 </head>
 <body>
+    <%@include file="/jsp/header.jsp"%>
 <main>
     <div class="page_title"><fmt:message key='deposit.account_deposit' bundle='${rb}'/></div>
     <div class="message">${pageContext.request.getAttribute("message")}</div>
@@ -51,5 +52,8 @@
     </form>
     <a class="back_to_acc" href="${pageContext.request.contextPath}/account"><fmt:message key="btn.back_to_account" bundle="${rb}"/></a>
 </main>
+<script>
+    <%@include file="/js/localization_hidden.js"%>
+</script>
 </body>
 </html>

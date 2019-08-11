@@ -19,7 +19,6 @@
 <body>
 <%@include file="/jsp/header.jsp" %>
 <c:set var="accounts" value="${pageContext.request.getAttribute('acc_avatar_approve_list')}"/>
-
 <main>
     <div class="page_title"><fmt:message key='change.change_acc_avatar_requests' bundle='${rb}'/>:</div>
     <div class="message">${pageContext.request.getAttribute("message")}</div>
@@ -54,5 +53,8 @@
         </div>
     </c:forEach>
 </main>
+<script>
+    <%@include file="/js/localization_hidden.js"%>
+</script>
 </body>
 </html>

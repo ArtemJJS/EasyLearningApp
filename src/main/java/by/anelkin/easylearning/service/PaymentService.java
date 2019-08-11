@@ -71,7 +71,13 @@ public class PaymentService {
             AccountService accService = new AccountService();
             accService.refreshSessionAttributeUser(requestContent, account);
             accService.refreshSessionAttributeAvailableCourses(requestContent, account);
-            processAuthorSaleOperation(course);
+            try {
+                processAuthorSaleOperation(course);
+            } catch (Exception e) {
+                log.error(e);
+                repository.delete(payment);
+                return false;
+            }
         } catch (NullPointerException e) {
             log.error(e);
             throw new ServiceException(e);
@@ -108,7 +114,13 @@ public class PaymentService {
             AccountService accService = new AccountService();
             accService.refreshSessionAttributeUser(requestContent, account);
             accService.refreshSessionAttributeAvailableCourses(requestContent, account);
-            processAuthorSaleOperation(course);
+            try {
+                processAuthorSaleOperation(course);
+            } catch (Exception e) {
+                log.error(e);
+                repository.delete(payment);
+                return false;
+            }
         } catch (NullPointerException e) {
             log.error(e);
             throw new ServiceException(e);

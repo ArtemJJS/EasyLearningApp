@@ -76,5 +76,8 @@
 <script>
     <%@include file="/js/buy_course_page.js"%>
 </script>
+<script>
+    <%@include file="/js/localization_hidden.js"%>
+</script>
 </body>
 </html>
