@@ -16,18 +16,10 @@
         </taglib>
     </jsp-config>
 
-<!--    <context-param>-->
-<!--        <description>Location to store uploaded account avatar files</description>-->
-<!--        <param-name>acc_avatar_upload</param-name>-->
-<!--        <param-value>-->
-<!--            C:\Users\User\Desktop\GIT Projects\EasyLearningApp\web\resources\account_avatar-->
-<!--        </param-value>-->
-<!--    </context-param>-->
-
-<!--    <error-page>-->
-<!--        <error-code>500</error-code>-->
-<!--        <location>/jsp/error_page.jsp</location>-->
-<!--    </error-page>-->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/jsp/error_page.jsp</location>
+    </error-page>
     <error-page>
         <error-code>403</error-code>
         <location>/jsp/error_page.jsp</location>

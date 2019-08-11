@@ -21,17 +21,10 @@
 <main>
 
     <div class="page_title"><fmt:message key="error.ooops" bundle="${rb}"/></div>
-    <div class="message">${pageContext.request.getAttribute("message")}</div>
 
     <div class="subtitle"><fmt:message key="error.Something_went_wrong" bundle="${rb}"/></div>
-<%--    Request from ${pageContext.errorData.requestURI} is failed--%>
-    <%--    <br/>--%>
-    <%--    Servlet name: ${pageContext.errorData.servletName}--%>
-    <%--    <br/>--%>
     <div class="error_code"><fmt:message key="error.error_code" bundle="${rb}"/><span class="code">  ${pageContext.errorData.statusCode}</span></div>
-    <%--    <br/>--%>
-    <%--    Exception: ${pageContext.exception}--%>
-    <%--    <br/>--%>
+    <div class="error_message">${pageContext.request.getAttribute("message")}</div>
     <a class="back_to_acc" href="${pageContext.request.contextPath}/account"><fmt:message key="btn.back_to_account" bundle="${rb}"/></a>
 </main>
 </body>

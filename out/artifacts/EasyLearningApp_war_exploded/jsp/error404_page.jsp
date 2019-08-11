@@ -20,18 +20,7 @@
 <body>
 <main>
     <img class="error_img" src="${pageContext.request.contextPath}/img/resources/error_404.jpg" alt="Error 404">
-<%--    <div class="page_title"><fmt:message key="error.ooops" bundle="${rb}"/></div>--%>
-<%--    <div class="message">${pageContext.request.getAttribute("message")}</div>--%>
-
-<%--    <div class="subtitle"><fmt:message key="error.page_not_found" bundle="${rb}"/></div>--%>
-<%--&lt;%&ndash;    Request from ${pageContext.errorData.requestURI} is failed&ndash;%&gt;--%>
-<%--    &lt;%&ndash;    <br/>&ndash;%&gt;--%>
-<%--    &lt;%&ndash;    Servlet name: ${pageContext.errorData.servletName}&ndash;%&gt;--%>
-<%--    &lt;%&ndash;    <br/>&ndash;%&gt;--%>
-<%--    <div class="error_code"><fmt:message key="error.error_code" bundle="${rb}"/><span class="code">  ${pageContext.errorData.statusCode}</span></div>--%>
-<%--    &lt;%&ndash;    <br/>&ndash;%&gt;--%>
-<%--    &lt;%&ndash;    Exception: ${pageContext.exception}&ndash;%&gt;--%>
-<%--    &lt;%&ndash;    <br/>&ndash;%&gt;--%>
+    <div class="error_message"><fmt:message key="error.page_not_found" bundle="${rb}"/></div>
     <a class="back_to_acc" href="${pageContext.request.contextPath}/account"><fmt:message key="btn.back_to_account" bundle="${rb}"/></a>
 </main>
 </body>

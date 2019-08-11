@@ -36,7 +36,8 @@ public class AccountPaymentsFilter implements Filter {
             paymentService.insertPaymentsIntoRequestAttributes(requestContent);
         } catch (ServiceException e) {
             log.error(e);
-            response.sendError(ERROR_500, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
+            request.setAttribute(ATTR_MESSAGE,rb.getString(BUNDLE_ETERNAL_SERVER_ERROR) );
+            response.sendError(ERROR_500);
             return;
         }
         requestContent.insertAttributes(request);

@@ -38,7 +38,8 @@ public class AuthorPageFilter implements Filter {
             HttpServletResponse response = (HttpServletResponse) servletResponse;
             ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, request.getLocale());
             log.error(e);
-            response.sendError(ERROR_500, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
+            request.setAttribute(ATTR_MESSAGE,rb.getString(BUNDLE_ETERNAL_SERVER_ERROR) );
+            response.sendError(ERROR_500);
             return;
         }
 

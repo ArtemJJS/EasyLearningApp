@@ -49,24 +49,27 @@ public class BasicServlet extends HttpServlet {
             session.setAttribute(ATTR_ROLE, GUEST);
             session.setAttribute(ATTR_LOCALE, Locale.US);
         }
-
-        ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, request.getLocale());
+        String[] localeParts = session.getAttribute(ATTR_LOCALE).toString().split(LOCALE_SPLITTER);
+        Locale locale = new Locale(localeParts[0], localeParts[1]);
+        ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale);
         CommandType commandType = null;
         try {
             commandType = CommandType.valueOf(request.getParameter(ATTR_COMMAND_NAME).toUpperCase());
         } catch (IllegalArgumentException e) {
             log.error(e);
-            response.sendError(ERROR_500, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
+            request.setAttribute(ATTR_MESSAGE, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
+            response.sendError(ERROR_500);
             return;
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             log.error(e);
-            response.sendError(ERROR_404, rb.getString(BUNDLE_PAGE_NOT_FOUND));
+            response.sendError(ERROR_404);
             return;
         }
 
         Account.AccountType accType = (Account.AccountType) session.getAttribute(ATTR_ROLE);
         if (!commandType.getAccessTypes().contains(accType)) {
             log.warn("Access denied to command: " + commandType);
+            request.setAttribute(ATTR_MESSAGE, rb.getString(BUNDLE_ACCESS_DENIED));
             response.sendError(ERROR_403, rb.getString(BUNDLE_ACCESS_DENIED));
             return;
         }
@@ -79,7 +82,8 @@ public class BasicServlet extends HttpServlet {
             responseType = receiver.executeCommand();
         } catch (ServiceException e) {
             log.error(e);
-            response.sendError(ERROR_500, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
+            request.setAttribute(ATTR_MESSAGE, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
+            response.sendError(ERROR_500);
             return;
         }
 

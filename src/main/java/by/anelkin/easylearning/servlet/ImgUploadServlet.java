@@ -75,11 +75,13 @@ public class ImgUploadServlet extends HttpServlet {
             command = CommandType.valueOf(commandName.toUpperCase());
         }catch (IllegalArgumentException e) {
             log.error(e);
-            resp.sendError(ERROR_500, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
+            req.setAttribute(ATTR_MESSAGE, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
+            resp.sendError(ERROR_500);
             return;
         }catch (NullPointerException e){
             log.error(e);
-            resp.sendError(ERROR_404, rb.getString(BUNDLE_PAGE_NOT_FOUND));
+            req.setAttribute(ATTR_MESSAGE, rb.getString(BUNDLE_PAGE_NOT_FOUND));
+            resp.sendError(ERROR_404);
             return;
         }
 
@@ -112,7 +114,8 @@ public class ImgUploadServlet extends HttpServlet {
             responseType = receiver.executeCommand();
         } catch (ServiceException e) {
             log.error(e);
-            resp.sendError(ERROR_500, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
+            req.setAttribute(ATTR_MESSAGE, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
+            resp.sendError(ERROR_500);
             return;
         }
 
