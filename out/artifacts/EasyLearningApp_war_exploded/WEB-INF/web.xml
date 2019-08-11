@@ -24,10 +24,10 @@
 <!--        </param-value>-->
 <!--    </context-param>-->
 
-    <error-page>
-        <error-code>500</error-code>
-        <location>/jsp/error_page.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <error-code>500</error-code>-->
+<!--        <location>/jsp/error_page.jsp</location>-->
+<!--    </error-page>-->
     <error-page>
         <error-code>403</error-code>
         <location>/jsp/error_page.jsp</location>

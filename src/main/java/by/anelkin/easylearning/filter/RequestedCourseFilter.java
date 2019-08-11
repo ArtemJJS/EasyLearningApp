@@ -15,11 +15,11 @@ import java.util.ResourceBundle;
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 
 @Log4j
-@WebFilter(urlPatterns = {"/course", "/course/learn", "/author/edit-course", "/user/buy-course", "/user/mark-course"})
+@WebFilter(urlPatterns = {"/course", "/course/learn", "/author/edit-course", "/user/buy-course",
+        "/user/mark-course", "/edit_comment"})
 public class RequestedCourseFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        log.debug("Filter RequestedCourseFilter works.");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         SessionRequestContent requestContent = new SessionRequestContent();
         requestContent.extractValues(request);

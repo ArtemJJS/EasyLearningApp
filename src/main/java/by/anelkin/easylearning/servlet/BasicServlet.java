@@ -27,7 +27,7 @@ import static by.anelkin.easylearning.util.GlobalConstant.*;
 @Log4j
 @WebServlet(name = "BasicServlet", urlPatterns = {"/basic_servlet", "/search", "/change-lang"
         , "/admin/*", "/user/deposit", "/author/cash-out", "/author/add-course", "/account/change-pass", "/restore-password"
-        , "/change-forgotten-password"})
+        , "/change-forgotten-password", "/edit_comment", "/edit_author_comment"})
 public class BasicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
@@ -44,7 +44,6 @@ public class BasicServlet extends HttpServlet {
 
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getRequestURI());
         HttpSession session = request.getSession();
         if (session.getAttribute(ATTR_ROLE) == null) {
             session.setAttribute(ATTR_ROLE, GUEST);

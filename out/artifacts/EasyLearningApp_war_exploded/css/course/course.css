@@ -270,3 +270,12 @@ main {
     border: 1px solid #1f3e80;
     cursor: pointer;
 }
+
+
+.user_comment_actions{
+    display: flex;
+}
+
+.user_comment_actions form{
+    margin-right: 20px;
+}

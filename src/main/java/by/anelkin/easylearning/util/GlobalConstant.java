@@ -65,6 +65,7 @@ public class GlobalConstant {
     public static final String ATTR_CARD = "card";
     public static final String ATTR_PAYMENTS = "payments";
     public static final String ATTR_MARK_ID = "mark_id";
+    public static final String ATTR_MARK_COMMENT = "mark_comment";
     public static final String ATTR_COURSE_MARK_COUNT = "course_mark_count";
     public static final String ATTR_COURSE_PURCHASE_COUNT = "course_purchase_count";
     public static final String ATTR_AUTHOR_MARKS = "author_marks";

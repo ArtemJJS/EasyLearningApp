@@ -503,6 +503,7 @@ public class AccountService {
         if (text != null) {
             correctText = text.replace("<", "&lt;");
             correctText = correctText.replace(">", "&gt;");
+            correctText = correctText.replace("\n", "<br>");
         }
         return correctText;
     }

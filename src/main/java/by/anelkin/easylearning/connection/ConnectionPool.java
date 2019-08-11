@@ -53,7 +53,6 @@ public class ConnectionPool {
         // TODO: 6/28/2019 реализовать max_connections_amount поле
         log.info("URL: " + URL);
         String temp = URL;
-        System.out.println(temp);
         usedConnections = new LinkedBlockingQueue<>(MIN_CONNECTIONS_AMOUNT);
         availableConnections = new LinkedBlockingQueue<>(MIN_CONNECTIONS_AMOUNT);
         for (int i = 0; i < MIN_CONNECTIONS_AMOUNT; i++) {
@@ -71,7 +70,6 @@ public class ConnectionPool {
         }
         log.info("Pool was initialized. Connections amount: " + availableConnections.size());
         checkConnectionsAmount();
-
     }
 
     public static ConnectionPool getInstance() {

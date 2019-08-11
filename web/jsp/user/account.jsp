@@ -106,7 +106,7 @@
             </div>
             <div class="param6 param">
                 <p><fmt:message key='global.about' bundle='${rb}'/>:</p>
-                <textarea id="about-field" name="about" cols="30" rows="7"
+                <textarea id="about-field" name="about" cols="38" rows="7"
                           maxlength="500">${user.about}</textarea>
             </div>
             <div>

@@ -34,13 +34,12 @@ public class CommandFactory {
         MARK_AUTHOR (USER),
         CHANGE_LANG (ADMIN, AUTHOR, USER, GUEST),
         RESTORE_PASSWORD(GUEST),
-//        GO_CHANGE_PASS(GUEST),
         CHANGE_FORGOTTEN_PASSWORD(GUEST),
-        DELETE_COURSE_COMMENT(ADMIN),
-        DELETE_AUTHOR_COMMENT(ADMIN),
-        NEXT_PAYMENT_PAGE(USER, AUTHOR, ADMIN);
-
-
+        DELETE_COURSE_COMMENT(ADMIN, USER),
+        DELETE_AUTHOR_COMMENT(ADMIN, USER),
+        NEXT_PAYMENT_PAGE(USER, AUTHOR, ADMIN),
+        EDIT_COURSE_COMMENT(USER),
+        GO_EDIT_COURSE_COMMENT(USER);
 
 
 
@@ -138,6 +137,12 @@ public class CommandFactory {
                 break;
             case NEXT_PAYMENT_PAGE:
                 command = new NextPaymentsPageCommand();
+                break;
+            case EDIT_COURSE_COMMENT:
+                command = new EditCourseCommentCommand();
+                break;
+            case GO_EDIT_COURSE_COMMENT:
+                command = new GoEditCourseComment();
                 break;
 
         }

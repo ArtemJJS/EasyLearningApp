@@ -24,9 +24,46 @@ import java.util.stream.Collectors;
 
 import static by.anelkin.easylearning.entity.Mark.MarkType.*;
 import static by.anelkin.easylearning.util.GlobalConstant.*;
+import static by.anelkin.easylearning.validator.FormValidator.MARK_COMMENT_MAX_LENGTH;
 
 @Log4j
 public class MarkService {
+
+    public void editCourseComment(SessionRequestContent requestContent) throws ServiceException {
+        MarkRepository repository = new MarkRepository();
+        FormValidator validator = new FormValidator();
+        Map<String, String[]> reqParams = requestContent.getRequestParameters();
+        try {
+            String newComment = reqParams.get(ATTR_MARK_COMMENT)[0];
+            int markId = Integer.parseInt(reqParams.get(ATTR_MARK_ID)[0]);
+            if (!validator.validateMarkCommentLength(newComment)) {
+                newComment = newComment.substring(0, MARK_COMMENT_MAX_LENGTH);
+            }
+            Mark mark = repository.query(new SelectMarkByIdSpecification(COURSE_MARK, markId)).get(0);
+            mark.setComment(new AccountService().escapeQuotes(newComment));
+            repository.update(mark);
+        } catch (IllegalArgumentException e) {
+            log.error(e);
+            throw new ServiceException(e);
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public void takeCourseComment(SessionRequestContent requestContent) throws ServiceException {
+        MarkRepository repository = new MarkRepository();
+        try {
+            int markId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_MARK_ID)[0]);
+            Mark mark = repository.query(new SelectMarkByIdSpecification(COURSE_MARK, markId)).get(0);
+            String comment = mark.getComment();
+            requestContent.getRequestAttributes().put(ATTR_MARK_COMMENT, comment);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            log.error(e);
+            throw new ServiceException(e);
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
+    }
 
     public void deleteAuthorMarkComment(SessionRequestContent requestContent) throws ServiceException {
         MarkRepository repo = new MarkRepository();
@@ -37,7 +74,7 @@ public class MarkService {
             repo.update(mark);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
-        }catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e){
+        } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
             log.error(e);
         }
     }
@@ -51,7 +88,7 @@ public class MarkService {
             repo.update(mark);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
-        }catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e){
+        } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
             log.error(e);
         }
     }
@@ -118,7 +155,7 @@ public class MarkService {
             String comment = reqParams.get(ATTR_COMMENT)[0];
             String correctComment;
             if (!validator.validateMarkCommentLength(comment)) {
-                correctComment = comment.substring(0, FormValidator.MARK_COMMENT_MAX_LENGTH);
+                correctComment = comment.substring(0, MARK_COMMENT_MAX_LENGTH);
             } else {
                 correctComment = comment;
             }
