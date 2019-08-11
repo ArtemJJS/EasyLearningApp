@@ -50,11 +50,49 @@ public class MarkService {
         }
     }
 
+    // FIXME: 8/11/2019 объединить с предыдущим
+    public void editAuthorComment(SessionRequestContent requestContent) throws ServiceException {
+        MarkRepository repository = new MarkRepository();
+        FormValidator validator = new FormValidator();
+        Map<String, String[]> reqParams = requestContent.getRequestParameters();
+        try {
+            String newComment = reqParams.get(ATTR_MARK_COMMENT)[0];
+            int markId = Integer.parseInt(reqParams.get(ATTR_MARK_ID)[0]);
+            if (!validator.validateMarkCommentLength(newComment)) {
+                newComment = newComment.substring(0, MARK_COMMENT_MAX_LENGTH);
+            }
+            Mark mark = repository.query(new SelectMarkByIdSpecification(AUTHOR_MARK, markId)).get(0);
+            mark.setComment(new AccountService().escapeQuotes(newComment));
+            repository.update(mark);
+        } catch (IllegalArgumentException e) {
+            log.error(e);
+            throw new ServiceException(e);
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    // FIXME: 8/11/2019 соединить в один с предыдущим
     public void takeCourseComment(SessionRequestContent requestContent) throws ServiceException {
         MarkRepository repository = new MarkRepository();
         try {
             int markId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_MARK_ID)[0]);
             Mark mark = repository.query(new SelectMarkByIdSpecification(COURSE_MARK, markId)).get(0);
+            String comment = mark.getComment();
+            requestContent.getRequestAttributes().put(ATTR_MARK_COMMENT, comment);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            log.error(e);
+            throw new ServiceException(e);
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public void takeAuthorComment(SessionRequestContent requestContent) throws ServiceException {
+        MarkRepository repository = new MarkRepository();
+        try {
+            int markId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_MARK_ID)[0]);
+            Mark mark = repository.query(new SelectMarkByIdSpecification(AUTHOR_MARK, markId)).get(0);
             String comment = mark.getComment();
             requestContent.getRequestAttributes().put(ATTR_MARK_COMMENT, comment);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {

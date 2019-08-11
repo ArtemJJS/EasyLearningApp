@@ -42,7 +42,7 @@
 <section class="section3">
     <a class="forgot_pass" href="${pageContext.request.contextPath}/restore-pass"><fmt:message key="login.forgot_password" bundle="${rb}"/></a>
     <div class="desc_sign_up"><fmt:message key='login.Still_do_not_have_an_account?' bundle='${rb}'/></div>
-    <a href="${pageContext.request.contextPath}/sign-up"><fmt:message key="btn.sign_up" bundle="${rb}"/></a>
+    <a class="sign_up_link" href="${pageContext.request.contextPath}/sign-up"><fmt:message key="btn.sign_up" bundle="${rb}"/></a>
 </section>
 <img src="${pageContext.request.contextPath}/img/resources/acc_banner.jpg" alt="logo" width="80%" height="60%">
 </body>

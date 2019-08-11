@@ -2,11 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 html {
-    width: 800px;
+    width: 850px;
     height: 800px;
     margin: 0 auto;
     display: flex;
@@ -14,7 +14,7 @@ html {
 }
 
 body {
-    width: 80%;
+    width: 100%;
     display: flex;
     margin: 0 auto;
 
@@ -45,7 +45,7 @@ body {
 
 .log_in {
     margin: 0 auto;
-    width: 90%;
+    width: 75%;
     display: flex;
     justify-content: space-between;
 
@@ -100,4 +100,7 @@ body {
 .forgot_pass{
     margin: 5px 0 15px;
     color: #2d6a80;
+}
+.sign_up_link{
+    margin-bottom: 10px;
 }

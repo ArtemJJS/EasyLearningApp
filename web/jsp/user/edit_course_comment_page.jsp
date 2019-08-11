@@ -24,17 +24,18 @@
             <div class="course_price"><fmt:message key='global.price' bundle='${rb}'/>: ${course.price}$</div>
         </div>
         <div class="course_name">${course.name}</div>
-        <img class="course_img" src="${pageContext.request.contextPath}/img/${course.pathToPicture}" alt='<fmt:message key='global.course_image' bundle='${rb}'/>'>
+        <img class="course_img" src="${pageContext.request.contextPath}/img/${course.pathToPicture}"
+             alt='<fmt:message key='global.course_image' bundle='${rb}'/>'>
     </div>
     <form class="mark_form" method="post" action="${pageContext.request.contextPath}/edit_comment">
-            <div class="param">
-                <div class="label_and_pattern">
-                    <label for="mark_comment"><fmt:message key='mark.comment' bundle='${rb}'/>:</label>
-                    <div class="pattern-info"><fmt:message key='mark.max_700_symbols' bundle='${rb}'/></div>
-                </div>
-                <textarea id="mark_comment" name="mark_comment" <%--placeholder="<fmt:message key='mark.write_your_comment' bundle='${rb}'/>"--%> rows="7"
-                          cols="45" maxlength="700">${pageContext.request.getAttribute("mark_comment")}</textarea>
+        <div class="param">
+            <div class="label_and_pattern">
+                <label for="mark_comment"><fmt:message key='mark.comment' bundle='${rb}'/>:</label>
+                <div class="pattern-info"><fmt:message key='mark.max_700_symbols' bundle='${rb}'/></div>
             </div>
+            <textarea id="mark_comment" name="mark_comment" rows="7" cols="45"
+                      maxlength="700">${pageContext.request.getAttribute("mark_comment")}</textarea>
+        </div>
         <input type="hidden" name="command_name" value="edit_course_comment"/>
         <input type="hidden" name="course-id" value="${course.id}"/>
         <input type="hidden" name="mark_id" value="${pageContext.request.getParameter('mark_id')}"/>

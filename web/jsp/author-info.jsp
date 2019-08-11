@@ -35,10 +35,10 @@
             <div class="author_stats">
                 <c:if test="${pageContext.request.getAttribute('is_author_marked_already') == null
                         && sessionScope.role.toString().equalsIgnoreCase('user')}">
-                    <div class="links">
-                        <a href="${pageContext.request.contextPath}/user/mark-author?author-id=${author.id}"><fmt:message
-                                key='global.mark_author' bundle='${rb}'/></a>
-                    </div>
+                <div class="links">
+                    <a href="${pageContext.request.contextPath}/user/mark-author?author-id=${author.id}"><fmt:message
+                            key='global.mark_author' bundle='${rb}'/></a>
+                </div>
                 </c:if>
                 <div class="stat_unit author_rating"><fmt:message key='author.rating' bundle='${rb}'/> <ctg:write-rating
                         rating="${author.avgMark}"/></div>
@@ -80,44 +80,39 @@
                 <div class="mark_content">
                     <div class="writer_login">${mark.accLogin}</div>
                     <div class="value"><fmt:message key="mark.mark" bundle="${rb}"/>: ${mark.markValue}</div>
-                    <div class="comment">${mark.comment}</div>
+                    <div class="comment">
+                        <pre>${mark.comment}</pre>
+                    </div>
                     <div class="date"><ctg:millisec-to-time millisecAmount="${mark.markDate}"/></div>
                     <c:choose>
-                        <c:when test="${sessionScope.role.toString().equalsIgnoreCase('user')
-                        && sessionScope.coursesAvailable.contains(curr_course)}">
+                        <c:when test="${sessionScope.role.toString().equalsIgnoreCase('user')&& mark.accId == sessionScope.user.id}">
                             <div class="user_comment_actions">
                                 <form method="post" action="${pageContext.request.contextPath}/edit_author_comment">
                                     <input type="hidden" name="mark_id" value="${mark.id}">
+                                    <input type="hidden" name="author_login" value="${author.login}">
                                     <input type="hidden" name="command_name" value="go_edit_author_comment">
                                     <input class="mark_action_submit_btn" type="submit"
-                                           value='<fmt:message key="btn.delete_comment" bundle="${rb}"/>'>
+                                           value='<fmt:message key="btn.edit_comment" bundle="${rb}"/>'>
                                 </form>
                                 <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
                                     <input type="hidden" name="mark_id" value="${mark.id}">
-                                    <input type="hidden" name="course-id" value="${curr_course.id}">
-                                    <input type="hidden" name="command_name" value="go_edit_course_comment">
+                                    <input type="hidden" name="author_login" value="${author.login}">
+                                    <input type="hidden" name="command_name" value="delete_author_comment">
                                     <input class="mark_action_submit_btn" type="submit"
-                                           value='<fmt:message key="btn.edit_comment" bundle="${rb}"/>'>
+                                           value='<fmt:message key="btn.delete_comment" bundle="${rb}"/>'>
                                 </form>
                             </div>
                         </c:when>
                         <c:when test="${sessionScope.role.toString().equalsIgnoreCase('admin')}">
                             <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
                                 <input type="hidden" name="mark_id" value="${mark.id}">
+                                <input type="hidden" name="author-id" value="${author.id}">
                                 <input type="hidden" name="command_name" value="delete_author_comment">
                                 <input class="mark_action_submit_btn" type="submit"
                                        value='<fmt:message key="btn.delete_comment" bundle="${rb}"/>'>
                             </form>
                         </c:when>
                     </c:choose>
-                    <c:if test="${sessionScope.role.toString().equalsIgnoreCase('admin')}">
-                        <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
-                            <input type="hidden" name="mark_id" value="${mark.id}">
-                            <input type="hidden" name="command_name" value="delete_author_comment">
-                            <input class="mark_action_submit_btn" type="submit"
-                                   value='<fmt:message key="btn.delete_comment" bundle="${rb}"/>'>
-                        </form>
-                    </c:if>
                 </div>
                 <img class="writer_avatar" src="${pageContext.request.contextPath}/img/${mark.accPathToPhoto}"
                      alt="avatar"/>

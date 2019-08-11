@@ -39,8 +39,9 @@ public class CommandFactory {
         DELETE_AUTHOR_COMMENT(ADMIN, USER),
         NEXT_PAYMENT_PAGE(USER, AUTHOR, ADMIN),
         EDIT_COURSE_COMMENT(USER),
-        GO_EDIT_COURSE_COMMENT(USER);
-
+        GO_EDIT_COURSE_COMMENT(USER),
+        EDIT_AUTHOR_COMMENT(USER),
+        GO_EDIT_AUTHOR_COMMENT(USER);
 
 
 
@@ -142,8 +143,13 @@ public class CommandFactory {
                 command = new EditCourseCommentCommand();
                 break;
             case GO_EDIT_COURSE_COMMENT:
-                command = new GoEditCourseComment();
+                command = new GoEditCourseCommentCommand();
                 break;
+            case EDIT_AUTHOR_COMMENT:
+                command = new EditAuthorCommentCommand();
+                break;
+            case GO_EDIT_AUTHOR_COMMENT:
+                command = new GoEditAuthorCommentCommand();
 
         }
         return command;
