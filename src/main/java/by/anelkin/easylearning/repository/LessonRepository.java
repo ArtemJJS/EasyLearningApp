@@ -153,7 +153,7 @@ public class LessonRepository implements AppRepository<CourseLesson> {
                 lessonList = fillLessonList(resultSet);
             }
         } catch (SQLException e) {
-            log.error(e);
+            ;
             throw new RepositoryException(e);
         }
         return lessonList;

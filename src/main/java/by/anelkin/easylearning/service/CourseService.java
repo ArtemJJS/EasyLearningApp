@@ -102,7 +102,7 @@ public class CourseService {
             requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));
         } catch (NullPointerException | IOException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -124,7 +124,7 @@ public class CourseService {
             requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));
         } catch (NullPointerException | IOException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -215,7 +215,7 @@ public class CourseService {
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + currCourse.getId());
             initCourseApprovalPage(requestContent);
         } catch (IndexOutOfBoundsException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -234,7 +234,7 @@ public class CourseService {
             repository.update(currCourse);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + currCourse.getId());
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -288,7 +288,7 @@ public class CourseService {
             String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_SENT_TO_REVIEW);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
         } catch (IndexOutOfBoundsException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -360,7 +360,7 @@ public class CourseService {
                 courseContent.put(chapter, lessons);
             }
         } catch (NullPointerException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         } catch (RepositoryException e) {
             throw new ServiceException(e);

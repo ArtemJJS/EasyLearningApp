@@ -113,7 +113,7 @@ public class ImgUploadServlet extends HttpServlet {
         try {
             responseType = receiver.executeCommand();
         } catch (ServiceException e) {
-            log.error(e);
+            log.error("Command: " + command + ". " + e);
             req.setAttribute(ATTR_MESSAGE, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
             resp.sendError(ERROR_500);
             return;
@@ -122,12 +122,10 @@ public class ImgUploadServlet extends HttpServlet {
         requestContent.insertAttributes(req);
         String path = requestContent.getPath();
         if (responseType == FORWARD) {
-            log.debug("Sending forward: " + path);
             req.setAttribute(JspAccessFilter.ATTR_JSP_PERMITTED, true);
             req.getRequestDispatcher(path).forward(req, resp);
         } else {
             String url = req.getContextPath() + path;
-            log.debug("Sending redirect: " + url);
             resp.sendRedirect(url);
         }
     }

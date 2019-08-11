@@ -81,7 +81,7 @@ public class BasicServlet extends HttpServlet {
         try {
             responseType = receiver.executeCommand();
         } catch (ServiceException e) {
-            log.error(e);
+            log.error("Command: " + commandType + ". " + e);
             request.setAttribute(ATTR_MESSAGE, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
             response.sendError(ERROR_500);
             return;

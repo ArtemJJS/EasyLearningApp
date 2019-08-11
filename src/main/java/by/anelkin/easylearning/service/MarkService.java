@@ -43,7 +43,7 @@ public class MarkService {
             mark.setComment(new AccountService().escapeQuotes(newComment));
             repository.update(mark);
         } catch (IllegalArgumentException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -65,7 +65,7 @@ public class MarkService {
             mark.setComment(new AccountService().escapeQuotes(newComment));
             repository.update(mark);
         } catch (IllegalArgumentException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -81,7 +81,7 @@ public class MarkService {
             String comment = mark.getComment();
             requestContent.getRequestAttributes().put(ATTR_MARK_COMMENT, comment);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -96,7 +96,7 @@ public class MarkService {
             String comment = mark.getComment();
             requestContent.getRequestAttributes().put(ATTR_MARK_COMMENT, comment);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -113,7 +113,8 @@ public class MarkService {
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
-            log.error(e);
+            ;
+            throw new ServiceException(e);
         }
     }
 
@@ -127,7 +128,8 @@ public class MarkService {
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
-            log.error(e);
+            ;
+            throw new ServiceException(e);
         }
     }
 
@@ -153,7 +155,7 @@ public class MarkService {
             repository.insert(mark);
             requestContent.getRequestAttributes().put(ATTR_AUTHOR_LOGIN, author.getLogin());
         } catch (NullPointerException | IndexOutOfBoundsException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -180,7 +182,7 @@ public class MarkService {
             repository.insert(mark);
             insertMarkedCourseIdsIntoSession(requestContent);
         } catch (NullPointerException | IndexOutOfBoundsException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         } catch (RepositoryException e) {
             throw new ServiceException(e);

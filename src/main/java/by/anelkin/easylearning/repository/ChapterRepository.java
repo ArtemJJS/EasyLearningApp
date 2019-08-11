@@ -33,7 +33,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
             String[] params = {String.valueOf(chapter.getCourseId()), chapter.getName(), String.valueOf(chapter.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            log.error(e);
+            ;
             throw new RepositoryException(e);
         }
         return true;
@@ -46,7 +46,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
             String[] params = {String.valueOf(chapter.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            log.error(e);
+            ;
             throw new RepositoryException(e);
         }
         return true;
@@ -59,7 +59,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
             String[] params = {String.valueOf(chapter.getCourseId()), chapter.getName()};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            log.error(e);
+            ;
             throw new RepositoryException(e);
         }
         return true;
@@ -78,7 +78,7 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
                 chapterList = new ArrayList<>(fillChapterList(resultSet));
             }
         } catch (SQLException e) {
-            log.error(e);
+            ;
             throw new RepositoryException(e);
         }
         return chapterList;

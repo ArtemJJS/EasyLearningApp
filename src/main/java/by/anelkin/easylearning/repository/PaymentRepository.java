@@ -41,7 +41,7 @@ public class PaymentRepository implements AppRepository<Payment> {
                     payment.getDescription(), String.valueOf(payment.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            log.error(e);
+            ;
             throw new RepositoryException(e);
         }
         return true;
@@ -54,7 +54,7 @@ public class PaymentRepository implements AppRepository<Payment> {
             String[] params = {String.valueOf(payment.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            log.error(e);
+            ;
             throw new RepositoryException(e);
         }
         return true;
@@ -130,7 +130,6 @@ public class PaymentRepository implements AppRepository<Payment> {
                 paymentList = fillPaymentList(resultSet);
             }
         } catch (SQLException e) {
-            log.error(e);
             throw new RepositoryException(e);
         }
         return paymentList;

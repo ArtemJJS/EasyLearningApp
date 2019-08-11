@@ -49,7 +49,7 @@ class PoolInitializer {
         try{
             connAmount = Integer.parseInt(property.getProperty(PROPERTY_NAME_MIN_CONNECTIONS));
         }catch (NumberFormatException e){
-            log.warn("Wrong minimal amount of connections in properties file!!!");
+            log.warn("Wrong minimal amount of connections in properties file!!! Set default: " + DEFAULT_MIN_CONNECTIONS_AMOUNT);
             connAmount = DEFAULT_MIN_CONNECTIONS_AMOUNT;
         }
         return connAmount;

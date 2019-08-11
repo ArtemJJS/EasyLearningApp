@@ -74,14 +74,10 @@ public class PaymentService {
             try {
                 processAuthorSaleOperation(course);
             } catch (Exception e) {
-                log.error(e);
                 repository.delete(payment);
                 return false;
             }
-        } catch (NullPointerException e) {
-            log.error(e);
-            throw new ServiceException(e);
-        } catch (RepositoryException e) {
+        } catch (NullPointerException | RepositoryException e) {
             throw new ServiceException(e);
         }
         return true;
@@ -117,14 +113,11 @@ public class PaymentService {
             try {
                 processAuthorSaleOperation(course);
             } catch (Exception e) {
-                log.error(e);
+                log.error("Transaction rollback. Author Sale operation fail! " + e);
                 repository.delete(payment);
                 return false;
             }
-        } catch (NullPointerException e) {
-            log.error(e);
-            throw new ServiceException(e);
-        } catch (RepositoryException e) {
+        } catch (NullPointerException | RepositoryException e) {
             throw new ServiceException(e);
         }
         return true;
@@ -246,7 +239,6 @@ public class PaymentService {
             payment.setDescription(DESCRIPTION_SALE_COURSE);
             paymentRepository.insert(payment);
         } catch (NullPointerException e) {
-            log.error(e);
             throw new ServiceException(e);
         } catch (RepositoryException e) {
             throw new ServiceException(e);

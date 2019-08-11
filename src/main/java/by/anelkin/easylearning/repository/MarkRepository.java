@@ -163,7 +163,7 @@ public class MarkRepository implements AppRepository<Mark> {
                 markList = fillMarkList(resultSet, markType, specification);
             }
         } catch (SQLException e) {
-            log.error(e);
+            ;
             throw new RepositoryException(e);
         }
         return markList;

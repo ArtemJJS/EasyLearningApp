@@ -92,7 +92,7 @@ public class AccountService {
             reqAttrs.put(ATTR_MESSAGE, PWD_CHANGED_SUCCESSFULLY_MSG);
             restorePassRequestRepo.delete(new RestorePassRequest(account.getId(), uuid));
         } catch (RepositoryException | IndexOutOfBoundsException | NoSuchAlgorithmException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         }
     }
@@ -118,7 +118,7 @@ public class AccountService {
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         } catch (IOException | MessagingException e) {
-            log.error(e);
+            ;
             throw new ServiceException("Error while sending confirmation email... Try again later.");
         }
     }
@@ -142,7 +142,6 @@ public class AccountService {
                     return false;
                 }
             } catch (NoSuchAlgorithmException e) {
-                log.error(e);
                 throw new ServiceException(e);
             }
             Account account = accounts.get(0);
@@ -242,7 +241,7 @@ public class AccountService {
                 reqAttrs.put(ATTR_OPERATION_RESULT, false);
             }
         } catch (RepositoryException | NoSuchAlgorithmException | CloneNotSupportedException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         }
     }
@@ -293,7 +292,7 @@ public class AccountService {
                         + currAccount.getUpdatePhotoPath().substring(currAccount.getUpdatePhotoPath().lastIndexOf(PATH_SPLITTER))));
                 Files.deleteIfExists(Paths.get(fileStorage + currAccount.getUpdatePhotoPath()));
             } catch (IOException e) {
-                log.error(e);
+                ;
                 throw new ServiceException(e);
             }
 
@@ -321,7 +320,7 @@ public class AccountService {
             requestContent.getRequestAttributes().put(ATTR_ACCS_TO_AVATAR_APPROVE
                     , repository.query(new SelectAccToPhotoApproveSpecification()));
         } catch (RepositoryException | IOException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         }
     }
@@ -348,7 +347,7 @@ public class AccountService {
                 return true;
             }
         } catch (CloneNotSupportedException | RepositoryException | NullPointerException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         }
         return false;
@@ -422,7 +421,7 @@ public class AccountService {
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         } catch (NullPointerException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         }
     }
@@ -442,7 +441,7 @@ public class AccountService {
             String hashedPass = new String(messageDigest.digest(saltedPass.getBytes()));
             account.setPassword(hashedPass);
         } catch (NoSuchAlgorithmException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         }
 
@@ -453,7 +452,7 @@ public class AccountService {
             account.setBirthDate(dateFormat.parse(requestParams.get(ATTR_BIRTHDATE)[0]));
             account.setRegistrDate(new Date(System.currentTimeMillis()));
         } catch (ParseException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         }
 
@@ -467,7 +466,7 @@ public class AccountService {
         try {
             account.setType(AccountType.valueOf(role.toUpperCase()));
         } catch (IllegalArgumentException e) {
-            log.error(e);
+            ;
             throw new ServiceException(e);
         }
     }
