@@ -16,10 +16,8 @@ import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecificati
 import by.anelkin.easylearning.specification.account.SelectAccToPhotoApproveSpecification;
 import by.anelkin.easylearning.specification.account.SelectAuthorOfCourseSpecification;
 import by.anelkin.easylearning.specification.course.SelectByAuthorIdSpecification;
-import by.anelkin.easylearning.specification.course.SelectCourseRecommendedSpecification;
 import by.anelkin.easylearning.specification.course.SelectCoursesPurchasedByUserSpecification;
 import by.anelkin.easylearning.specification.mark.SelectByTargetIdWithWriterInfoSpecification;
-import by.anelkin.easylearning.specification.mark.SelectMarkByTargetIdSpecification;
 import by.anelkin.easylearning.validator.FormValidator;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j;
@@ -298,6 +296,7 @@ public class AccountService {
             currAccount.setPathToPhoto(fileName);
             currAccount.setUpdatePhotoPath(EMPTY_STRING);
             repository.update(currAccount);
+            refreshSessionAttributeUser(requestContent, currAccount);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, MSG_AVATAR_APPROVED + currAccount.getLogin());
             requestContent.getRequestAttributes().put(ATTR_ACCS_TO_AVATAR_APPROVE
                     , repository.query(new SelectAccToPhotoApproveSpecification()));

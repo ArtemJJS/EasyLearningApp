@@ -24,6 +24,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import static by.anelkin.easylearning.entity.Course.*;
 import static by.anelkin.easylearning.entity.Payment.*;
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 
@@ -55,9 +56,10 @@ public class PaymentService {
         int courseId = Integer.parseInt(reqParams.get(ATTR_COURSE_ID)[0]);
         try {
             Course course = courseRepository.query(new SelectCourseByIdSpecification(courseId)).get(0);
+            boolean isCourseApproved = course.getState() == CourseState.APPROVED;
             boolean isCoursePurchasedAlready = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId())).contains(course);
             boolean isEnoughFunds = account.getBalance().subtract(course.getPrice()).compareTo(BigDecimal.ZERO) >= 0;
-            if (!isEnoughFunds || isCoursePurchasedAlready) {
+            if (!isEnoughFunds || isCoursePurchasedAlready || !isCourseApproved) {
                 return false;
             }
             payment.setAccountId(account.getId());
@@ -96,7 +98,8 @@ public class PaymentService {
             boolean isCoursePurchasedAlready = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId())).contains(course);
             String cardNumber = requestContent.getRequestParameters().get(ATTR_CARD)[0];
             boolean isCardNumberCorrect = validator.validateCard(cardNumber);
-            if (isCoursePurchasedAlready || !isCardNumberCorrect) {
+            boolean isCourseApproved = course.getState() == CourseState.APPROVED;
+            if (isCoursePurchasedAlready || !isCardNumberCorrect || !isCourseApproved) {
                 return false;
             }
             payment.setAccountId(account.getId());

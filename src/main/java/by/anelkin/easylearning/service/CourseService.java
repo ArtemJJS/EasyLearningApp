@@ -52,7 +52,7 @@ public class CourseService {
     public void chooseRecommendedCourses(SessionRequestContent requestContent) throws ServiceException {
         CourseRepository repo = new CourseRepository();
         AccountType role = (AccountType) requestContent.getSessionAttributes().get(ATTR_ROLE);
-        List<Course> courses = new ArrayList<>();
+        List<Course> courses;
         try {
             if (role == AccountType.GUEST) {
                 courses = repo.query(new SelectCourseRecommendedGuestSpecification(AMOUNT_COURSES_RECOMMENDED));

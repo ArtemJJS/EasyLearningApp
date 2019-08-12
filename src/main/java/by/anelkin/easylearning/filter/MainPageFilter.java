@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 
 @Log4j
-@WebFilter(urlPatterns = {"/EasyLearning", "/jsp/main_page.jsp"})
+@WebFilter(urlPatterns = {"/jsp/main_page.jsp"})
 public class MainPageFilter implements Filter {
 
     @Override
