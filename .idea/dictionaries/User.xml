@@ -2,6 +2,7 @@
   <dictionary name="User">
     <words>
       <w>complited</w>
+      <w>deregistered</w>
     </words>
   </dictionary>
 </component>

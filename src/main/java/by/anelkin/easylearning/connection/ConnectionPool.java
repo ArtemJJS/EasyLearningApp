@@ -12,6 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -22,14 +23,17 @@ public class ConnectionPool {
     private static final String USER;
     private static final String PASSWORD;
     private static final String DRIVER_NAME;
-    private static final int MIN_CONNECTIONS_AMOUNT;
-
+    private static int MIN_CONNECTIONS_AMOUNT;
+    private Thread connCountChecker;
+    private AtomicBoolean connAmountCheckingFlag = new AtomicBoolean(false);
+    private static int CONN_AMOUNT_CHECK_INTERVAL = 60 * 60 * 1000;
 
     private static ConnectionPool instance;
     private static AtomicBoolean isInitialized = new AtomicBoolean(false);
     private static Lock lock = new ReentrantLock();
     private BlockingQueue<ProxyConnection> availableConnections;
     private BlockingQueue<ProxyConnection> usedConnections;
+
 
     static {
         PoolInitializer poolInitializer = new PoolInitializer();
@@ -90,6 +94,9 @@ public class ConnectionPool {
     public Connection takeConnection() {
         ProxyConnection connection = null;
         try {
+            while (connAmountCheckingFlag.get()) {
+                TimeUnit.MILLISECONDS.sleep(100);
+            }
             connection = availableConnections.take();
             usedConnections.offer(connection);
         } catch (InterruptedException e) {
@@ -109,6 +116,7 @@ public class ConnectionPool {
     }
 
     public void closePool() {
+        connCountChecker.interrupt();
         for (int i = 0; i < MIN_CONNECTIONS_AMOUNT; i++) {
             try {
                 ProxyConnection connection = availableConnections.take();
@@ -118,6 +126,7 @@ public class ConnectionPool {
             }
         }
         deregisterDrivers();
+        log.info("Pool has been closed, drivers deregistered.");
     }
 
     private void deregisterDrivers() {
@@ -132,34 +141,46 @@ public class ConnectionPool {
         }
     }
 
-    // TODO: 6/21/2019 как правильно реагировать на утечку соединений
     private void checkConnectionsAmount() {
-//        TimerTask checkConnections = new TimerTask() {
-//            @Override
-//            public void run() {
-//                int availableAmount = availableConnections.size();
-//                int usedAmount = usedConnections.size();
-//                if (availableAmount + usedAmount != MIN_CONNECTIONS_AMOUNT) {
-//                    log.warn("Connections leak!!! Current amount " + (availableAmount + usedAmount)
-//                        + ". Attempt to create additional connection instead.");
-//                    try {
-//                        Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-//                        ProxyConnection proxyConnection = new ProxyConnection(connection);
-//                        availableConnections.offer(proxyConnection);
-//                        log.info("Additional connection has been created due to connection leak.");
-//                    } catch (SQLException e) {
-//                        log.error("Connection to base wasn't created successfully! " + e);
-//                    }
-//                }
-//            }
-//        };
-//
-//        Thread checker = new Thread(() -> {
-//            Timer timer = new Timer();
-//            timer.schedule(checkConnections, 0, 30); //period = 3 min
-//        });
-//        checker.setDaemon(true);
-//        checker.start();
+        TimerTask checkConnections = new TimerTask() {
+            @Override
+            public void run() {
+                int availableAmount = availableConnections.size();
+                int usedAmount = usedConnections.size();
+
+                try {
+                    connAmountCheckingFlag.set(true);
+                    TimeUnit.SECONDS.sleep(1);
+                    if (availableAmount + usedAmount < MIN_CONNECTIONS_AMOUNT) {
+                        log.warn("Connections leak!!! Current amount " + (availableAmount + usedAmount)
+                                + ". Attempt to create additional connection instead.");
+                        for (int i = 0; i < MIN_CONNECTIONS_AMOUNT - availableAmount - usedAmount; i++) {
+                            try {
+                                Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+                                ProxyConnection proxyConnection = new ProxyConnection(connection);
+                                availableConnections.offer(proxyConnection);
+                                log.info("Additional connection has been created due to connection leak.");
+                            } catch (SQLException e) {
+                                log.error("Connection to base wasn't created successfully! MinConnectionsAmount decreased by 1. " + e);
+                                MIN_CONNECTIONS_AMOUNT--;
+                            }
+                        }
+                    } else {
+                        log.debug("Connections amount checked. Amount: " + (availableAmount + usedAmount));
+                    }
+                } catch (InterruptedException e) {
+                    log.error(e);
+                } finally {
+                    connAmountCheckingFlag.set(false);
+                }
+            }
+        };
+
+        connCountChecker = new Thread(() -> {
+            Timer timer = new Timer();
+            timer.schedule(checkConnections, 3, CONN_AMOUNT_CHECK_INTERVAL); // once in an hour
+        });
+        connCountChecker.start();
     }
 
 
