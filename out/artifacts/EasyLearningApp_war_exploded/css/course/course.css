@@ -193,6 +193,9 @@ main {
 }
 
 .mark_content {
+    word-wrap: break-word;
+    font-size: 0.9rem;
+    width: 100%;
     padding-left: 8px;
     padding-bottom: 5px;
 }

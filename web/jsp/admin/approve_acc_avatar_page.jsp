@@ -39,12 +39,12 @@
                 </div>
             </div>
             <div class="forms">
-                <form method="post" action="${pageContext.request.contextPath}/admin/approve-acc-avatar">
+                <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
                     <input type="hidden" name="login" value="${account.login}">
                     <input type="hidden" name="command_name" value="approve_avatar_change">
                     <input type="submit" value='<fmt:message key='btn.approve' bundle='${rb}'/>'>
                 </form>
-                <form method="post" action="${pageContext.request.contextPath}/admin/approve-acc-avatar">
+                <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
                     <input type="hidden" name="login" value="${account.login}">
                     <input type="hidden" name="command_name" value="decline_avatar_change">
                     <input type="submit" value='<fmt:message key='btn.decline' bundle='${rb}'/>'>

@@ -41,7 +41,7 @@
         </div>
         <div class="param">
             <label for="course_desc"><fmt:message key='course.course_description' bundle='${rb}'/>:</label>
-            <textarea id="course_desc" name="course_description" cols="25"
+            <textarea class="replace_br" id="course_desc" name="course_description" cols="25"
                       rows="7" maxlength="1000">${course.description}</textarea>
         </div>
 
@@ -95,5 +95,8 @@
         <%@include file="/js/add_lesson.js"%>
     </script>
 </main>
+<script>
+    <%@include file="/js/replace_br.js"%>
+</script>
 </body>
 </html>

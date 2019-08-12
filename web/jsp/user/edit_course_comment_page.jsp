@@ -33,7 +33,7 @@
                 <label for="mark_comment"><fmt:message key='mark.comment' bundle='${rb}'/>:</label>
                 <div class="pattern-info"><fmt:message key='mark.max_700_symbols' bundle='${rb}'/></div>
             </div>
-            <textarea id="mark_comment" name="mark_comment" rows="7" cols="45"
+            <textarea class="replace_br" class="replace_br" id="mark_comment" name="mark_comment" rows="7" cols="45"
                       maxlength="700">${pageContext.request.getAttribute("mark_comment")}</textarea>
         </div>
         <input type="hidden" name="command_name" value="edit_course_comment"/>
@@ -43,4 +43,7 @@
     </form>
 </main>
 </body>
+<script>
+    <%@include file="/js/replace_br.js"%>
+</script>
 </html>

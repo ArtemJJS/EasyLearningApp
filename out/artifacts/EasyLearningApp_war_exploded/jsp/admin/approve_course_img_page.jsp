@@ -40,12 +40,12 @@
                 </div>
             </div>
             <div class="forms">
-                <form method="post" action="${pageContext.request.contextPath}/admin/approve-course-img">
+                <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
                     <input type="hidden" name="course_name" value="${course.name}">
                     <input type="hidden" name="command_name" value="approve_course_img_change">
                     <input type="submit" value='<fmt:message key='btn.approve' bundle='${rb}'/>'>
                 </form>
-                <form method="post" action="${pageContext.request.contextPath}/admin/approve-course-img">
+                <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
                     <input type="hidden" name="course_name" value="${course.name}">
                     <input type="hidden" name="command_name" value="decline_course_img_change">
                     <input type="submit" value='<fmt:message key='btn.decline' bundle='${rb}'/>'>

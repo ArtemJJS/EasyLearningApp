@@ -18,15 +18,15 @@
 
     <error-page>
         <error-code>500</error-code>
-        <location>/jsp/error_page.jsp</location>
+        <location>/jsp/error/error_page.jsp</location>
     </error-page>
     <error-page>
         <error-code>403</error-code>
-        <location>/jsp/error_page.jsp</location>
+        <location>/jsp/error/error_page.jsp</location>
     </error-page>
     <error-page>
         <error-code>404</error-code>
-        <location>/jsp/error404_page.jsp</location>
+        <location>/jsp/error/error404_page.jsp</location>
     </error-page>
 
     <servlet-mapping>
@@ -90,7 +90,7 @@
 
     <servlet>
         <servlet-name>AccountUser</servlet-name>
-        <jsp-file>/jsp/user/account.jsp</jsp-file>
+        <jsp-file>/jsp/global/account.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>AccountUser</servlet-name>

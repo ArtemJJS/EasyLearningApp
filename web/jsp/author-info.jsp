@@ -81,7 +81,7 @@
                     <div class="writer_login">${mark.accLogin}</div>
                     <div class="value"><fmt:message key="mark.mark" bundle="${rb}"/>: ${mark.markValue}</div>
                     <div class="comment">
-                        <pre>${mark.comment}</pre>
+                            ${mark.comment}
                     </div>
                     <div class="date"><ctg:millisec-to-time millisecAmount="${mark.markDate}"/></div>
                     <c:choose>

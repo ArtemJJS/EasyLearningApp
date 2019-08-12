@@ -285,6 +285,7 @@ public class CourseService {
 
             String[] chapterNames = insertChaptersIfNotExists(courseId, params);
             insertLessons(courseId, params, chapterNames);
+            new AccountService().refreshSessionAttributeAvailableCourses(requestContent, currAccount);
             String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_SENT_TO_REVIEW);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
         } catch (IndexOutOfBoundsException e) {

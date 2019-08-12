@@ -51,12 +51,12 @@
                         </div>
                     </div>
                     <div class="forms">
-                        <form method="post" action="${pageContext.request.contextPath}/admin/course-approval">
+                        <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
                             <input type="hidden" name="course_id" value="${course.id}">
                             <input type="hidden" name="command_name" value="approve_course">
                             <input type="submit" value='<fmt:message key='btn.approve' bundle='${rb}'/>'>
                         </form>
-                        <form method="post" action="${pageContext.request.contextPath}/admin/course-approval">
+                        <form method="post" action="${pageContext.request.contextPath}/basic_servlet">
                             <input type="hidden" name="course_id" value="${course.id}">
                             <input type="hidden" name="command_name" value="decline_course_approval">
                             <input type="submit" value='<fmt:message key='btn.decline' bundle='${rb}'/>'>

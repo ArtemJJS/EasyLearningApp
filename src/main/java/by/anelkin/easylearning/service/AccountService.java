@@ -52,7 +52,6 @@ public class AccountService {
     private static final String CURRENT_ENCRYPTING = "SHA-256";
 
 
-
     private static final String PREVIOUS_OPERATION_MSG = "previous_operation_message";
     private static final String PWD_CHANGED_SUCCESSFULLY_MSG = "You password has been successfully changed!!!";
     private static final String PWD_NOT_CHANGED_MSG = "You password wasn't changed! Check inserted data!";
@@ -366,7 +365,12 @@ public class AccountService {
     void refreshSessionAttributeAvailableCourses(SessionRequestContent requestContent, Account account) throws ServiceException {
         CourseRepository repository = new CourseRepository();
         try {
-            List<Course> courses = repository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
+            List<Course> courses;
+            if (account.getType() == AccountType.USER) {
+                courses = repository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
+            } else {
+                courses = repository.query(new SelectByAuthorIdSpecification(account.getId()));
+            }
             requestContent.getSessionAttributes().put(ATTR_AVAILABLE_COURSES, courses);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -500,10 +504,10 @@ public class AccountService {
     String escapeQuotes(String text) {
         String correctText = null;
         if (text != null) {
-            correctText = text.replace("<", "&lt;");
-            correctText = correctText.replace(">", "&gt;");
-            correctText = correctText.replace("&lt;br&gt;", "\n");
-            correctText = correctText.replace("\n", "<br>");
+            correctText = text.replaceAll("<br>", "");
+            correctText = correctText.replaceAll("<", "&lt;");
+            correctText = correctText.replaceAll(">", "&gt;");
+            correctText = correctText.replaceAll("\n", "<br>");
         }
         return correctText;
     }

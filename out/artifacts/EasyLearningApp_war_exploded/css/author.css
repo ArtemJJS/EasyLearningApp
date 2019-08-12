@@ -188,6 +188,7 @@ section {
 
 .comment {
     width: 100%;
+    font-size: 0.9rem;
     word-wrap: break-word;
     margin-top: 18px;
     margin-bottom: 15px;

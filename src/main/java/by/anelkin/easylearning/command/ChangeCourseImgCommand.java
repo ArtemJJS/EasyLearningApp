@@ -7,14 +7,15 @@ import by.anelkin.easylearning.service.CourseService;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
 
 public class ChangeCourseImgCommand implements Command{
-    private static final String REDIRECT_PATH = "/account/change-picture?operation-result=true&course-id=";
-    private static final String ATTR_COURSE_ID = "course_id";
+    private static final String REDIRECT_PATH = "/operation-result?operation=send_avatar_to_review";
+//    private static final String ATTR_COURSE_ID = "course_id";
 
     @Override
     public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws  ServiceException {
         (new CourseService()).addCourseImgToReview(requestContent);
-        String courseId = requestContent.getRequestParameters().get(ATTR_COURSE_ID)[0];
-        requestContent.setPath(REDIRECT_PATH + courseId);
+//        String courseId = requestContent.getRequestParameters().get(ATTR_COURSE_ID)[0];
+//        requestContent.setPath(REDIRECT_PATH + courseId);
+        requestContent.setPath(REDIRECT_PATH);
         return REDIRECT;
     }
 }

@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ResourceBundleManager">
     <file url="file://$PROJECT_DIR$/src/main/resources/text_resources.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/text_resources_en_US.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/text_resources_fr_FR.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/text_resources_ru_RU.properties" />
     <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/text_resources.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/text_resources_en_US.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/text_resources_fr_FR.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/text_resources_ru_RU.properties" />

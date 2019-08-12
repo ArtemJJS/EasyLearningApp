@@ -7,12 +7,12 @@ import by.anelkin.easylearning.service.AccountService;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
 
 public class ApproveAccAvatarCommand implements Command {
-    private static final String FORWARD_PATH = "/jsp/admin/approve_acc_avatar_page.jsp";
+    private static final String REDIRECT_PATH = "/admin/approve-account-avatar";
 
     @Override
     public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {
         (new AccountService()).approveAccAvatar(requestContent);
-        requestContent.setPath(FORWARD_PATH);
-        return FORWARD;
+        requestContent.setPath(REDIRECT_PATH);
+        return REDIRECT;
     }
 }

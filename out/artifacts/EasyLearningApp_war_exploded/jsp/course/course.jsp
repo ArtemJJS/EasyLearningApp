@@ -96,7 +96,7 @@
                 <div class="mark_content">
                     <div class="writer_login">${mark.accLogin}</div>
                     <div class="value"><fmt:message key="mark.mark" bundle="${rb}"/>: ${mark.markValue}</div>
-                    <div class="comment"><pre>${mark.comment}</pre></div>
+                    <div class="comment">${mark.comment}</div>
                     <div class="date"><ctg:millisec-to-time millisecAmount="${mark.markDate}"/></div>
                     <c:choose>
                         <c:when test="${sessionScope.role.toString().equalsIgnoreCase('user')
