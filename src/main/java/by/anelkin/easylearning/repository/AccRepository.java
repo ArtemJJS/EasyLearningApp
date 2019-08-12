@@ -88,7 +88,7 @@ public class AccRepository implements AppRepository<Account> {
                 statement.setString(i + 1, params[i]);
             }
             try (ResultSet resultSet = statement.executeQuery()) {
-                accountList = new ArrayList<>(fillAccountList(resultSet));
+                accountList = fillAccountList(resultSet);
             }
         } catch (SQLException e) {
             throw new RepositoryException(e);

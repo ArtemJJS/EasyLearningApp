@@ -70,6 +70,13 @@ public class GlobalConstant {
     public static final String ATTR_COURSE_PURCHASE_COUNT = "course_purchase_count";
     public static final String ATTR_AUTHOR_MARKS = "author_marks";
     public static final String ATTR_COMMAND_NAME = "command_name";
+    public static final String ATTR_IS_NEED_COOKIE = "is_need_cookie";
+    public static final String ATTR_COOKIE_LOGIN = "cookie_login";
+    public static final String ATTR_CREATION_DATE = "creation_date";
+
+
+
+
 
 
     public static final String PROP_FILE_FOLDER = "file_folder";

@@ -7,10 +7,7 @@ import by.anelkin.easylearning.entity.RestorePassRequest;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
-import by.anelkin.easylearning.repository.AccRepository;
-import by.anelkin.easylearning.repository.CourseRepository;
-import by.anelkin.easylearning.repository.MarkRepository;
-import by.anelkin.easylearning.repository.RestorePassRequestRepository;
+import by.anelkin.easylearning.repository.*;
 import by.anelkin.easylearning.specification.account.SelectAccByChangePassUuidSpecification;
 import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
 import by.anelkin.easylearning.specification.account.SelectAccToPhotoApproveSpecification;
@@ -89,7 +86,6 @@ public class AccountService {
             reqAttrs.put(ATTR_MESSAGE, PWD_CHANGED_SUCCESSFULLY_MSG);
             restorePassRequestRepo.delete(new RestorePassRequest(account.getId(), uuid));
         } catch (RepositoryException | IndexOutOfBoundsException | NoSuchAlgorithmException e) {
-            ;
             throw new ServiceException(e);
         }
     }
@@ -115,7 +111,6 @@ public class AccountService {
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         } catch (IOException | MessagingException e) {
-            ;
             throw new ServiceException("Error while sending confirmation email... Try again later.");
         }
     }
@@ -123,7 +118,7 @@ public class AccountService {
     public boolean login(@NonNull SessionRequestContent requestContent) throws ServiceException {
         HashMap<String, Object> sessionAttrs = requestContent.getSessionAttributes();
         AccRepository repository = new AccRepository();
-        List<Account> accounts = null;
+        List<Account> accounts;
         try {
             accounts = repository.query(new SelectAccByLoginSpecification(requestContent.getRequestParameters().get(ATTR_LOGIN)[0]));
             if (accounts.size() != 1) {
@@ -238,10 +233,11 @@ public class AccountService {
                 reqAttrs.put(ATTR_OPERATION_RESULT, false);
             }
         } catch (RepositoryException | NoSuchAlgorithmException | CloneNotSupportedException e) {
-            ;
             throw new ServiceException(e);
         }
     }
+
+
 
 
     public void initApproveAccAvatarPage(SessionRequestContent requestContent) throws ServiceException {
@@ -289,7 +285,6 @@ public class AccountService {
                         + currAccount.getUpdatePhotoPath().substring(currAccount.getUpdatePhotoPath().lastIndexOf(PATH_SPLITTER))));
                 Files.deleteIfExists(Paths.get(fileStorage + currAccount.getUpdatePhotoPath()));
             } catch (IOException e) {
-                ;
                 throw new ServiceException(e);
             }
 
@@ -318,7 +313,6 @@ public class AccountService {
             requestContent.getRequestAttributes().put(ATTR_ACCS_TO_AVATAR_APPROVE
                     , repository.query(new SelectAccToPhotoApproveSpecification()));
         } catch (RepositoryException | IOException e) {
-            ;
             throw new ServiceException(e);
         }
     }
@@ -345,11 +339,11 @@ public class AccountService {
                 return true;
             }
         } catch (CloneNotSupportedException | RepositoryException | NullPointerException e) {
-            ;
             throw new ServiceException(e);
         }
         return false;
     }
+
 
     void refreshSessionAttributeUser(SessionRequestContent requestContent, Account account) throws ServiceException {
         AccRepository repository = new AccRepository();
@@ -378,7 +372,7 @@ public class AccountService {
 
     Account takeAuthorOfCourse(int courseId) throws ServiceException {
         AccRepository repository = new AccRepository();
-        List<Account> accounts = null;
+        List<Account> accounts;
         try {
             accounts = repository.query(new SelectAuthorOfCourseSpecification(courseId));
         } catch (RepositoryException e) {
@@ -401,7 +395,7 @@ public class AccountService {
         AccRepository repository = new AccRepository();
         MarkRepository markRepository = new MarkRepository();
         String login = (String) reqAttrs.get(ATTR_REQUESTED_AUTHOR_LOGIN);
-        List<Account> accounts = null;
+        List<Account> accounts;
         try {
             accounts = repository.query(new SelectAccByLoginSpecification(login));
             Account author = accounts.get(0);
@@ -421,10 +415,25 @@ public class AccountService {
             if (marksFromCurrUser.size() != 0) {
                 reqAttrs.put(ATTR_IS_AUTHOR_MARKED_ALREADY, true);
             }
-        } catch (RepositoryException e) {
+        } catch (RepositoryException | NullPointerException e) {
             throw new ServiceException(e);
-        } catch (NullPointerException e) {
-            ;
+        }
+    }
+
+    public boolean initUserAndRole(SessionRequestContent requestContent) throws ServiceException {
+        String login = (String) requestContent.getRequestAttributes().get(ATTR_COOKIE_LOGIN);
+        AccRepository repo = new AccRepository();
+        try {
+            List<Account> accounts = repo.query(new SelectAccByLoginSpecification(login));
+            if (accounts.size() == 0){
+                return false;
+            }
+            Account account = accounts.get(0);
+            AccountType role = account.getType();
+            requestContent.getSessionAttributes().put(ATTR_USER, account);
+            requestContent.getSessionAttributes().put(ATTR_ROLE, role);
+            return true;
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -444,7 +453,6 @@ public class AccountService {
             String hashedPass = new String(messageDigest.digest(saltedPass.getBytes()));
             account.setPassword(hashedPass);
         } catch (NoSuchAlgorithmException e) {
-            ;
             throw new ServiceException(e);
         }
 
@@ -455,7 +463,6 @@ public class AccountService {
             account.setBirthDate(dateFormat.parse(requestParams.get(ATTR_BIRTHDATE)[0]));
             account.setRegistrDate(new Date(System.currentTimeMillis()));
         } catch (ParseException e) {
-            ;
             throw new ServiceException(e);
         }
 
@@ -469,7 +476,6 @@ public class AccountService {
         try {
             account.setType(AccountType.valueOf(role.toUpperCase()));
         } catch (IllegalArgumentException e) {
-            ;
             throw new ServiceException(e);
         }
     }

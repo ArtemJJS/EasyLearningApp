@@ -45,6 +45,7 @@ public class CommandFactory {
 
 
 
+
         private List<AccountType> accessTypes = new ArrayList<>();
         CommandType(@NonNull AccountType... types) {
             accessTypes.addAll(Arrays.asList(types));
@@ -150,6 +151,7 @@ public class CommandFactory {
                 break;
             case GO_EDIT_AUTHOR_COMMENT:
                 command = new GoEditAuthorCommentCommand();
+
 
         }
         return command;

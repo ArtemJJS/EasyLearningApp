@@ -7,6 +7,7 @@ import by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType;
 import lombok.NonNull;
 
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
+import static by.anelkin.easylearning.util.GlobalConstant.ATTR_IS_NEED_COOKIE;
 
 public class LoginCommand implements Command {
     private static final String CORRECT_PATH = "/";
@@ -21,6 +22,7 @@ public class LoginCommand implements Command {
             return FORWARD;
         }else {
             requestContent.setPath(CORRECT_PATH);
+            requestContent.getRequestAttributes().put(ATTR_IS_NEED_COOKIE, true);
             return REDIRECT;
         }
     }

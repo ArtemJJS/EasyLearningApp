@@ -24,6 +24,7 @@ public class ConnectionPool {
     private static final String DRIVER_NAME;
     private static final int MIN_CONNECTIONS_AMOUNT;
 
+
     private static ConnectionPool instance;
     private static AtomicBoolean isInitialized = new AtomicBoolean(false);
     private static Lock lock = new ReentrantLock();
@@ -50,9 +51,7 @@ public class ConnectionPool {
     }
 
     private void initPool() {
-        // TODO: 6/28/2019 реализовать max_connections_amount поле
         log.info("URL: " + URL);
-        String temp = URL;
         usedConnections = new LinkedBlockingQueue<>(MIN_CONNECTIONS_AMOUNT);
         availableConnections = new LinkedBlockingQueue<>(MIN_CONNECTIONS_AMOUNT);
         for (int i = 0; i < MIN_CONNECTIONS_AMOUNT; i++) {
@@ -135,20 +134,29 @@ public class ConnectionPool {
 
     // TODO: 6/21/2019 как правильно реагировать на утечку соединений
     private void checkConnectionsAmount() {
-        TimerTask checkConnections = new TimerTask() {
-            @Override
-            public void run() {
-                int availableAmount = availableConnections.size();
-                int usedAmount = usedConnections.size();
-                if (availableAmount + usedAmount != MIN_CONNECTIONS_AMOUNT) {
-                    log.warn("Connections leak!!! Current amount " + (availableAmount + usedAmount));
-                }
-            }
-        };
-
+//        TimerTask checkConnections = new TimerTask() {
+//            @Override
+//            public void run() {
+//                int availableAmount = availableConnections.size();
+//                int usedAmount = usedConnections.size();
+//                if (availableAmount + usedAmount != MIN_CONNECTIONS_AMOUNT) {
+//                    log.warn("Connections leak!!! Current amount " + (availableAmount + usedAmount)
+//                        + ". Attempt to create additional connection instead.");
+//                    try {
+//                        Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+//                        ProxyConnection proxyConnection = new ProxyConnection(connection);
+//                        availableConnections.offer(proxyConnection);
+//                        log.info("Additional connection has been created due to connection leak.");
+//                    } catch (SQLException e) {
+//                        log.error("Connection to base wasn't created successfully! " + e);
+//                    }
+//                }
+//            }
+//        };
+//
 //        Thread checker = new Thread(() -> {
 //            Timer timer = new Timer();
-//            timer.schedule(checkConnections, 0, 180_000); //period = 3 min
+//            timer.schedule(checkConnections, 0, 30); //period = 3 min
 //        });
 //        checker.setDaemon(true);
 //        checker.start();

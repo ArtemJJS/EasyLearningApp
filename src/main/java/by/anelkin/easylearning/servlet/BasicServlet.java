@@ -6,19 +6,20 @@ import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.filter.JspAccessFilter;
 import by.anelkin.easylearning.receiver.RequestReceiver;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
+import by.anelkin.easylearning.service.AccountService;
 import lombok.extern.log4j.Log4j;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static by.anelkin.easylearning.command.CommandFactory.*;
+import static by.anelkin.easylearning.command.CommandFactory.CommandType.*;
+import static by.anelkin.easylearning.entity.Account.*;
 import static by.anelkin.easylearning.entity.Account.AccountType.*;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.*;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
@@ -49,10 +50,11 @@ public class BasicServlet extends HttpServlet {
             session.setAttribute(ATTR_ROLE, GUEST);
             session.setAttribute(ATTR_LOCALE, Locale.US);
         }
+        session.setMaxInactiveInterval(60*60);
         String[] localeParts = session.getAttribute(ATTR_LOCALE).toString().split(LOCALE_SPLITTER);
         Locale locale = new Locale(localeParts[0], localeParts[1]);
         ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale);
-        CommandType commandType = null;
+        CommandType commandType;
         try {
             commandType = CommandType.valueOf(request.getParameter(ATTR_COMMAND_NAME).toUpperCase());
         } catch (IllegalArgumentException e) {
@@ -66,7 +68,7 @@ public class BasicServlet extends HttpServlet {
             return;
         }
 
-        Account.AccountType accType = (Account.AccountType) session.getAttribute(ATTR_ROLE);
+        AccountType accType = (AccountType) session.getAttribute(ATTR_ROLE);
         if (!commandType.getAccessTypes().contains(accType)) {
             log.warn("Access denied to command: " + commandType);
             request.setAttribute(ATTR_MESSAGE, rb.getString(BUNDLE_ACCESS_DENIED));
@@ -88,6 +90,9 @@ public class BasicServlet extends HttpServlet {
         }
 
         requestContent.insertAttributes(request);
+        if (commandType == LOGIN || commandType == SIGN_UP_NEW_USER) {
+            setSessionIdCookie(request, response);
+        }
         String path = requestContent.getPath();
         if (responseType == FORWARD) {
             request.setAttribute(JspAccessFilter.ATTR_JSP_PERMITTED, true);
@@ -97,6 +102,19 @@ public class BasicServlet extends HttpServlet {
             response.sendRedirect(url);
         }
     }
+
+    private void setSessionIdCookie(HttpServletRequest request, HttpServletResponse response) {
+        Cookie[] cookies = request.getCookies();
+        for(Cookie cookie : cookies){
+            if (cookie.getName().equals("JSESSIONID")){
+                String sessionId = cookie.getValue();
+                Cookie jsessionId = new Cookie("JSESSIONID", sessionId);
+                jsessionId.setMaxAge(60 * 60);
+                response.addCookie(jsessionId);
+            }
+        }
+    }
+
 }
 
 

@@ -43,8 +43,6 @@ public class ImgUploadServlet extends HttpServlet {
     private static final String PROP_FILE_FOLDER = "file_folder";
     private static final String TEMP_ACC_AVATAR_RELATIVE_LOCATION = "resources/account_avatar_update/";
     private static final String TEMP_COURSE_IMG_RELATIVE_LOCATION = "resources/course_img_update/";
-
-    // FIXME: 7/28/2019 что на счет static?
     private String fileStorage;
 
 

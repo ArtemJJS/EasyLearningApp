@@ -7,6 +7,7 @@ import by.anelkin.easylearning.receiver.SessionRequestContent;
 
 import static by.anelkin.easylearning.receiver.SessionRequestContent.*;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
+import static by.anelkin.easylearning.util.GlobalConstant.ATTR_IS_NEED_COOKIE;
 
 
 public class SignUpNewUserCommand implements Command {
@@ -19,6 +20,7 @@ public class SignUpNewUserCommand implements Command {
         boolean isRegistered = (new AccountService()).signUp(requestContent);
         if (isRegistered) {
             requestContent.setPath(CORRECT_REGISTRATION_PATH);
+            requestContent.getRequestAttributes().put(ATTR_IS_NEED_COOKIE, true);
             return REDIRECT;
         } else {
             requestContent.setPath(WRONG_REGISTRATION_REDIRECT_PATH);
