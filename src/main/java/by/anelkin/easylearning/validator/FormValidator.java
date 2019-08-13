@@ -6,7 +6,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
+/**
+ * implementation of validation of incoming values
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 public class FormValidator {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

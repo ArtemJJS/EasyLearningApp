@@ -6,6 +6,13 @@ import lombok.EqualsAndHashCode;
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * model Course entity
+ * contains{@link CourseState} enum
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Data
 @EqualsAndHashCode(callSuper = false, exclude = {"pathToPicture", "avgMark", "state", "updatePhotoPath"})
 public class Course extends AppEntity {

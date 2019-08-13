@@ -13,7 +13,13 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 import static by.anelkin.easylearning.util.GlobalConstant.*;
-
+/**
+ * Provides initialisation of requested course into the {@link HttpServletRequest}
+ *
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 @WebFilter(urlPatterns = {"/course", "/course/learn", "/author/edit-course", "/user/buy-course",
         "/user/mark-course", "/edit_comment"})

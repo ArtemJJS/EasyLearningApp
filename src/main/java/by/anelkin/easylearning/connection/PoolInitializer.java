@@ -6,6 +6,13 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.Properties;
 
+
+/**
+ *inits {@link ConnectionPool} params from properties file
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 class PoolInitializer {
     private static final String PATH_TO_PROPERTIES = "db.properties";
@@ -23,6 +30,9 @@ class PoolInitializer {
         initProperty();
     }
 
+    /**
+     * load properties
+     */
     private void initProperty() {
         try  {
             property.load(Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream(PATH_TO_PROPERTIES)));
@@ -34,7 +44,6 @@ class PoolInitializer {
     String getDriverName(){
         return property.getProperty(PROPERTY_NAME_DRIVER);
     }
-
     String getUrl(){
         return property.getProperty(PROPERTY_NAME_URL);
     }

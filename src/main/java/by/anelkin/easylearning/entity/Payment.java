@@ -8,7 +8,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
-
+/**
+ * model payment entity
+ * contains{@link PaymentCode} enum
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Payment extends AppEntity{

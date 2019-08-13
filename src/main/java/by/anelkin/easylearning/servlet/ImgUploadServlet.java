@@ -31,21 +31,27 @@ import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseTyp
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 import static by.anelkin.easylearning.util.GlobalConstant.BUNDLE_PAGE_NOT_FOUND;
 
+/**
+ * Assistance servlet of the controller layer.
+ * Responsible for downloading user's images.
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 @WebServlet(urlPatterns = "/account/change-image")
 @MultipartConfig
 public class ImgUploadServlet extends HttpServlet {
-    private static final String ATTR_USER = "user";
-    private static final String ATTR_COMMAND_NAME = "command_name";
-    private static final String ATTR_COURSE_ID = "course_id";
-    private static final String ATTR_IMG_TO_UPLOAD = "img_to_upload";
-    private static final String ATTR_FILE_EXTENSION = "file_extension";
-    private static final String PROP_FILE_FOLDER = "file_folder";
     private static final String TEMP_ACC_AVATAR_RELATIVE_LOCATION = "resources/account_avatar_update/";
     private static final String TEMP_COURSE_IMG_RELATIVE_LOCATION = "resources/course_img_update/";
     private String fileStorage;
 
 
+    /**
+     * inits absolute path to external file storage from properties file
+     *
+     * @throws ServletException if problems with property file
+     */
     @Override
     public void init() throws ServletException {
         Properties prop = new Properties();
@@ -63,6 +69,15 @@ public class ImgUploadServlet extends HttpServlet {
         throw new ServletException("Expected POST method. Instead got GET method.");
     }
 
+    /**
+     * process downloading of file to the directory with images on review
+     * , invoke suitable {@link by.anelkin.easylearning.command.Command}
+     *
+     * @param req  current {@link HttpServletRequest}
+     * @param resp current {@link HttpServletResponse}
+     * @throws ServletException replaced with {@link HttpServletResponse} sending error
+     * @throws IOException  replaced with {@link HttpServletResponse} sending error
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Account acc = (Account) req.getSession().getAttribute(ATTR_USER);
@@ -71,19 +86,19 @@ public class ImgUploadServlet extends HttpServlet {
         CommandType command;
         try {
             command = CommandType.valueOf(commandName.toUpperCase());
-        }catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             log.error(e);
             req.setAttribute(ATTR_MESSAGE, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
             resp.sendError(ERROR_500);
             return;
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             log.error(e);
             req.setAttribute(ATTR_MESSAGE, rb.getString(BUNDLE_PAGE_NOT_FOUND));
             resp.sendError(ERROR_404);
             return;
         }
 
-        String courseId = null;
+        String courseId;
         String currentFolderPath;
         String tempFileName;
         if (command == CHANGE_COURSE_IMG) {

@@ -1,19 +1,16 @@
 package by.anelkin.easylearning.servlet;
 
 import by.anelkin.easylearning.connection.ConnectionPool;
-import by.anelkin.easylearning.entity.Account;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.filter.JspAccessFilter;
 import by.anelkin.easylearning.receiver.RequestReceiver;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
-import by.anelkin.easylearning.service.AccountService;
 import lombok.extern.log4j.Log4j;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -25,6 +22,14 @@ import static by.anelkin.easylearning.receiver.SessionRequestContent.*;
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 
+
+/**
+ * Main servlet of the controller layer.
+ * Responsible for processing requests and dynamically generating a response.
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 @WebServlet(name = "BasicServlet", urlPatterns = {"/basic_servlet", "/search", "/change-lang"
         , "/user/deposit", "/author/cash-out", "/author/add-course", "/account/change-pass", "/restore-password"
@@ -44,6 +49,15 @@ public class BasicServlet extends HttpServlet {
     }
 
 
+    /**
+     * Performs request processing. selects the desired command and sends the request data to it.
+     * It processes exceptions arising in the logic
+     *
+     * @param request  current {@link HttpServletRequest}
+     * @param response current {@link HttpServletResponse}
+     * @throws ServletException replaced with {@link HttpServletResponse} sending error
+     * @throws IOException  replaced with {@link HttpServletResponse} sending error
+     */
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute(ATTR_ROLE) == null) {

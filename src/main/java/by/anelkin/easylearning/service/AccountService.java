@@ -39,21 +39,36 @@ import static by.anelkin.easylearning.entity.Account.*;
 import static by.anelkin.easylearning.entity.Mark.*;
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 
+/**
+ * Presents logic to execute operations, required mostly {@link Account} data
+ * from data store. Used to operation that can change account state inside
+ * of the data store or required account data.
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 public class AccountService {
-
     private static final String PATH_RELATIVE_TO_CHANGE_FORGOTTEN_PASS_PAGE = "/change-forgotten-pass?&uuid=";
-    private static final String DEFAULT_ACC_AVATAR = "default_acc_avatar";
+    private static final String PATH_RELATIVE_TO_DEFAULT_AVATAR = "/resources/account_avatar/default_acc_avatar.png";
+    private static final String PATH_ACCOUNT_AVATAR = "resources/account_avatar";
     private static final String CURRENT_ENCRYPTING = "SHA-256";
+    private static final String TAG_BR = "<br>";
+    private static final String NEW_LINE = "\n";
+    private static final String OPEN_DIAMOND_QOUTE = "<";
+    private static final String OPEN_DIAMOND_QOUTE_REPLACEMENT = "&lt;";
+    private static final String CLOSE_DIAMOND_QOUTE = ">";
+    private static final String CLOSE_DIAMOND_QOUTE_REPLACEMENT = "&gt;";
 
-
-    private static final String PREVIOUS_OPERATION_MSG = "previous_operation_message";
-    private static final String PWD_CHANGED_SUCCESSFULLY_MSG = "You password has been successfully changed!!!";
-    private static final String PWD_NOT_CHANGED_MSG = "You password wasn't changed! Check inserted data!";
-    private static final String MSG_AVATAR_APPROVED = "Avatar changed successfully to account: ";
-    private static final String MSG_AVATAR_DECLINED = "Avatar change was declined to account: ";
-
-
+    /**
+     * method changes path to account
+     * current account password is not required
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBounds
+     *                          or NoSuchAlgorithmException
+     */
     public void changeForgottenPass(SessionRequestContent requestContent) throws ServiceException {
         FormValidator val = new FormValidator();
         Locale locale = new CourseService().takeLocaleFromSession(requestContent);
@@ -90,13 +105,23 @@ public class AccountService {
         }
     }
 
+
+    /**
+     * method sends email with link to restore password page
+     * and insert into db {@link RestorePassRequest}
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBounds
+     *                          or IOException or MessagingException
+     */
     public void restorePassword(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = new CourseService().takeLocaleFromSession(requestContent);
         ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale);
         AccRepository repo = new AccRepository();
         HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
-        String login = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
         try {
+            String login = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
             List<Account> accounts = repo.query(new SelectAccByLoginSpecification(login));
             if (accounts.size() == 0) {
                 reqAttrs.put(ATTR_MESSAGE, rb.getString(BUNDLE_LOGIN_NOT_EXISTS));
@@ -108,13 +133,23 @@ public class AccountService {
             sendConfirmationEmail(email, requestContent.getRequestFullReferer(), uuid);
             new RestorePassRequestRepository().insert(new RestorePassRequest(account.getId(), uuid));
             reqAttrs.put(ATTR_MESSAGE, rb.getString(BUNDLE_EMAIL_SENT));
-        } catch (RepositoryException e) {
+        } catch (RepositoryException | IndexOutOfBoundsException e) {
             throw new ServiceException(e);
         } catch (IOException | MessagingException e) {
             throw new ServiceException("Error while sending confirmation email... Try again later.");
         }
     }
 
+
+    /**
+     * method to login operation, check password and login using{@link AccRepository}
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @return true if login proceeded, otherwise false
+     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBounds
+     *                          or NoSuchAlgorithmException
+     */
     public boolean login(@NonNull SessionRequestContent requestContent) throws ServiceException {
         HashMap<String, Object> sessionAttrs = requestContent.getSessionAttributes();
         AccRepository repository = new AccRepository();
@@ -153,20 +188,27 @@ public class AccountService {
             sessionAttrs.put(ATTR_AVAILABLE_COURSES, courses);
             sessionAttrs.put(ATTR_ROLE, account.getType());
             (new MarkService()).insertMarkedCourseIdsIntoSession(requestContent);
-        } catch (RepositoryException e) {
+        } catch (RepositoryException | IndexOutOfBoundsException e) {
             throw new ServiceException(e);
         }
         return true;
     }
 
-
+    /**
+     * method to register new account
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @return true if registration proceeded, otherwise false
+     * @throws ServiceException if faces {@link RepositoryException}, IndexOutOfBounds
+     */
     public boolean signUp(@NonNull SessionRequestContent requestContent) throws ServiceException {
         Locale locale = (new CourseService()).takeLocaleFromSession(requestContent);
         FormValidator validator = new FormValidator();
         AccRepository repository = new AccRepository();
         HashMap<String, Object> sessionAttrs = requestContent.getSessionAttributes();
-        String login = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
         try {
+            String login = requestContent.getRequestParameters().get(ATTR_LOGIN)[0];
             if (repository.query(new SelectAccByLoginSpecification(login)).size() != 0) {
                 requestContent.getRequestAttributes().put(ATTR_WRONG_LOGIN_MSG, "true");
                 return false;
@@ -193,13 +235,21 @@ public class AccountService {
             List<Course> courses = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId()));
             sessionAttrs.put(ATTR_AVAILABLE_COURSES, courses);
             (new MarkService()).insertMarkedCourseIdsIntoSession(requestContent);
-        } catch (RepositoryException e) {
+        } catch (RepositoryException | IndexOutOfBoundsException e) {
             throw new ServiceException(e);
         }
         return true;
     }
 
-
+    /**
+     * method to change current account password, checks is current password correct
+     * then updates account in session and db
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBounds
+     *                          or NoSuchAlgorithmException
+     */
     public void changeAccountPassword(SessionRequestContent requestContent) throws ServiceException {
         FormValidator validator = new FormValidator();
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
@@ -238,8 +288,13 @@ public class AccountService {
     }
 
 
-
-
+    /**
+     * takes acc with images to approve and places it to request attribute
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}
+     */
     public void initApproveAccAvatarPage(SessionRequestContent requestContent) throws ServiceException {
         AccRepository repository = new AccRepository();
         try {
@@ -250,6 +305,14 @@ public class AccountService {
         }
     }
 
+
+    /**
+     * set @see path to photo on review on particular account
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}
+     */
     public void addAccAvatarToReview(SessionRequestContent requestContent) throws ServiceException {
         HashMap<String, Object> sessionAttrs = requestContent.getSessionAttributes();
         Account account = (Account) sessionAttrs.get(ATTR_USER);
@@ -266,6 +329,15 @@ public class AccountService {
         }
     }
 
+
+    /**
+     * changes current acc avatar file on external file storage to file
+     * that is on review
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}, IOException
+     */
     public void approveAccAvatar(SessionRequestContent requestContent) throws ServiceException {
         String fileStorage = ResourceBundle.getBundle(FILE_STORAGE_BUNDLE_BASE).getString(PROP_FILE_FOLDER);
         AccRepository repository = new AccRepository();
@@ -281,7 +353,7 @@ public class AccountService {
                 if (!previousAvatarPath.contains(DEFAULT_ACC_AVATAR)) {
                     Files.deleteIfExists(Paths.get(fileStorage + currAccount.getPathToPhoto()));
                 }
-                file.renameTo(new File(fileStorage + "resources/account_avatar"
+                file.renameTo(new File(fileStorage + PATH_ACCOUNT_AVATAR
                         + currAccount.getUpdatePhotoPath().substring(currAccount.getUpdatePhotoPath().lastIndexOf(PATH_SPLITTER))));
                 Files.deleteIfExists(Paths.get(fileStorage + currAccount.getUpdatePhotoPath()));
             } catch (IOException e) {
@@ -291,7 +363,9 @@ public class AccountService {
             currAccount.setPathToPhoto(fileName);
             currAccount.setUpdatePhotoPath(EMPTY_STRING);
             repository.update(currAccount);
-            refreshSessionAttributeUser(requestContent, currAccount);
+            if (currAccount.getType() == AccountType.ADMIN) {
+                refreshSessionAttributeUser(requestContent, currAccount);
+            }
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, MSG_AVATAR_APPROVED + currAccount.getLogin());
             requestContent.getRequestAttributes().put(ATTR_ACCS_TO_AVATAR_APPROVE
                     , repository.query(new SelectAccToPhotoApproveSpecification()));
@@ -300,6 +374,13 @@ public class AccountService {
         }
     }
 
+    /**
+     * delete image on review file. Acc image will not change
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}, IOException
+     */
     public void declineAccAvatar(SessionRequestContent requestContent) throws ServiceException {
         String fileStorage = ResourceBundle.getBundle(FILE_STORAGE_BUNDLE_BASE).getString(PROP_FILE_FOLDER);
         AccRepository repository = new AccRepository();
@@ -318,6 +399,12 @@ public class AccountService {
     }
 
 
+    /**
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @return true if edit proceeded, false if validation fail
+     * @throws ServiceException if faced {@link RepositoryException}, CloneNotSupportedException, NullPointerException
+     */
     public boolean editAccountInfo(SessionRequestContent requestContent) throws ServiceException {
         FormValidator val = new FormValidator();
         Map<String, String[]> requestParams = requestContent.getRequestParameters();
@@ -345,6 +432,14 @@ public class AccountService {
     }
 
 
+    /**
+     * refresh "user" session attribute with fresh value from {@link AccRepository}
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @param account        - account to be refreshed
+     * @throws ServiceException if faced {@link RepositoryException}
+     */
     void refreshSessionAttributeUser(SessionRequestContent requestContent, Account account) throws ServiceException {
         AccRepository repository = new AccRepository();
         try {
@@ -355,6 +450,15 @@ public class AccountService {
         }
     }
 
+    /**
+     * refresh account's available courses (purchased for user, authored for author)
+     * in session attributes
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @param account        - account to be refreshed
+     * @throws ServiceException if faced {@link RepositoryException}
+     */
     void refreshSessionAttributeAvailableCourses(SessionRequestContent requestContent, Account account) throws ServiceException {
         CourseRepository repository = new CourseRepository();
         try {
@@ -370,6 +474,13 @@ public class AccountService {
         }
     }
 
+    /**
+     * take {@link Account} author of course
+     *
+     * @param courseId course to look for author
+     * @return {@link Account} author of course
+     * @throws ServiceException if faced {@link RepositoryException} or account not exists in db
+     */
     Account takeAuthorOfCourse(int courseId) throws ServiceException {
         AccRepository repository = new AccRepository();
         List<Account> accounts;
@@ -390,6 +501,14 @@ public class AccountService {
     }
 
 
+    /**
+     * place in request attributes account-author's authored courses
+     * and marks from users to this author
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     *                       * @throws ServiceException if faced {@link RepositoryException}, NullPointerException
+     */
     public void initAuthorPage(@NonNull SessionRequestContent requestContent) throws ServiceException {
         HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
         AccRepository repository = new AccRepository();
@@ -420,24 +539,13 @@ public class AccountService {
         }
     }
 
-    public boolean initUserAndRole(SessionRequestContent requestContent) throws ServiceException {
-        String login = (String) requestContent.getRequestAttributes().get(ATTR_COOKIE_LOGIN);
-        AccRepository repo = new AccRepository();
-        try {
-            List<Account> accounts = repo.query(new SelectAccByLoginSpecification(login));
-            if (accounts.size() == 0){
-                return false;
-            }
-            Account account = accounts.get(0);
-            AccountType role = account.getType();
-            requestContent.getSessionAttributes().put(ATTR_USER, account);
-            requestContent.getSessionAttributes().put(ATTR_ROLE, role);
-            return true;
-        } catch (RepositoryException e) {
-            throw new ServiceException(e);
-        }
-    }
-
+    /**
+     * takes values from request parameters and set them to account
+     *
+     * @param account       account to place values in
+     * @param requestParams - request parameters
+     * @throws ServiceException if faced NoSuchAlgorithmException, ParseException, IllegalArgumentException
+     */
     private void initAccount(Account account, Map<String, String[]> requestParams) throws ServiceException {
         account.setLogin(requestParams.get(ATTR_LOGIN)[0]);
         account.setName(requestParams.get(ATTR_NAME)[0]);
@@ -456,8 +564,7 @@ public class AccountService {
             throw new ServiceException(e);
         }
 
-
-        account.setPathToPhoto("/resources/account_avatar/default_acc_avatar.png");
+        account.setPathToPhoto(PATH_RELATIVE_TO_DEFAULT_AVATAR);
         account.setUpdatePhotoPath(EMPTY_STRING);
         try {
             account.setBirthDate(dateFormat.parse(requestParams.get(ATTR_BIRTHDATE)[0]));
@@ -491,6 +598,12 @@ public class AccountService {
         return sb.toString();
     }
 
+    /**
+     * @param acc       account to validate
+     * @param pass      account's password
+     * @param birthdate account's birthdate
+     * @return true if all field are valid, otherwise false
+     */
     private boolean validateAccFields(Account acc, String pass, String birthdate) {
         FormValidator val = new FormValidator();
         boolean isFieldsCorrect = val.validateLogin(acc.getLogin()) && val.validateName(acc.getName()) && val.validateSurName(acc.getSurname())
@@ -506,17 +619,31 @@ public class AccountService {
         return isAboutCorrect && isPhoneCorrect;
     }
 
+    /**
+     * prevents xss interventions, replace <br> tag to better text representation on the page
+     *
+     * @param text text to replace qoutes and <br> tag
+     * @return String with replaced qoutes(< and >) and <br> tags
+     */
     String escapeQuotes(String text) {
         String correctText = null;
         if (text != null) {
-            correctText = text.replaceAll("<br>", "");
-            correctText = correctText.replaceAll("<", "&lt;");
-            correctText = correctText.replaceAll(">", "&gt;");
-            correctText = correctText.replaceAll("\n", "<br>");
+            correctText = text.replaceAll(TAG_BR, EMPTY_STRING);
+            correctText = correctText.replaceAll(OPEN_DIAMOND_QOUTE, OPEN_DIAMOND_QOUTE_REPLACEMENT);
+            correctText = correctText.replaceAll(CLOSE_DIAMOND_QOUTE, CLOSE_DIAMOND_QOUTE_REPLACEMENT);
+            correctText = correctText.replaceAll(NEW_LINE, TAG_BR);
         }
         return correctText;
     }
 
+
+    /**
+     * @param emailTo email of recipient
+     * @param referer path from request's header "referer"
+     * @param uuid    unique String
+     * @throws IOException        to be handled farther
+     * @throws MessagingException to be handled farther
+     */
     private void sendConfirmationEmail(String emailTo, String referer, String uuid) throws IOException, MessagingException {
         String changePassLink = referer.substring(0, referer.lastIndexOf(PATH_SPLITTER));
         changePassLink += PATH_RELATIVE_TO_CHANGE_FORGOTTEN_PASS_PAGE + uuid;

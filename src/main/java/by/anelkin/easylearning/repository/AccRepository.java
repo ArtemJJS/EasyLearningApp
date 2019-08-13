@@ -15,7 +15,12 @@ import java.util.List;
 import static by.anelkin.easylearning.entity.Account.AccountType.*;
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 
-
+/**
+ * Class to process operations with data base and {@link Account} entity
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 public class AccRepository implements AppRepository<Account> {
     private static final String PATH_TO_AVATAR = "resources/account_avatar/";
@@ -32,6 +37,14 @@ public class AccRepository implements AppRepository<Account> {
             "acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_photo_path, acc_type, update_photo_path, acc_pass_salt) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+
+    /**
+     * updates account in the db
+     *
+     * @param account - updated account
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean update(@NonNull Account account) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
@@ -49,6 +62,13 @@ public class AccRepository implements AppRepository<Account> {
         return true;
     }
 
+    /**
+     * delete account in the db
+     *
+     * @param account - deleted account
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean delete(@NonNull Account account) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
@@ -61,6 +81,14 @@ public class AccRepository implements AppRepository<Account> {
         return true;
     }
 
+
+    /**
+     * inserts account in the db
+     *
+     * @param account - inserts account
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean insert(@NonNull Account account) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
@@ -78,6 +106,14 @@ public class AccRepository implements AppRepository<Account> {
         return true;
     }
 
+
+    /**
+     * query {@link Account} which satisfy the requirements of particular {@link AppSpecification}
+     *
+     * @param specification query specification
+     * @return - list of {@link Account}
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public List<Account> query(@NonNull AppSpecification<Account> specification) throws RepositoryException {
         List<Account> accountList;

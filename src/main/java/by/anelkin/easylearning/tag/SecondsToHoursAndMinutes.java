@@ -15,13 +15,15 @@ public class SecondsToHoursAndMinutes extends TagSupport {
     private static final String HOURS_MARKER = "h ";
     private static final String MINUTES_MARKER = "m ";
     private static final String SECONDS_MARKER = "sec";
+    private static final int SECONDS_IN_HOUR = 60;
     private long secondsAmount;
+
 
     @Override
     public int doStartTag() throws JspException {
-        long hours = secondsAmount / (60 * 60);
-        long minutes = (secondsAmount / 60) % 60;
-        long seconds = secondsAmount % 60;
+        long hours = secondsAmount / (SECONDS_IN_HOUR * SECONDS_IN_HOUR);
+        long minutes = (secondsAmount / SECONDS_IN_HOUR) % SECONDS_IN_HOUR;
+        long seconds = secondsAmount % SECONDS_IN_HOUR;
 
         JspWriter writer = pageContext.getOut();
         try {

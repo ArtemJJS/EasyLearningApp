@@ -22,6 +22,9 @@
 <main>
     <c:set var="course" value="${pageContext.request.getAttribute('requestedCourse')}"/>
     <c:set var="author" value="${pageContext.request.getAttribute('author_of_course')}"/>
+    <c:set var="course_content" value="${requestScope.get('currentCourseContent')}"/>
+<%--    <c:out value="${course_content}">--%>
+<%--        .get(0).getValue().get(0).pathToContent--%>
     <section class="section_1">
         <div class="video_content">
             <iframe id="video_player" src="https://drive.google.com/file/d/1iEEp7Yxcta_g6tRhC8b0J_EzTEbvacqi/preview"
@@ -47,7 +50,6 @@
             </div>
         </div>
 
-        <c:set var="course_content" value="${requestScope.get('currentCourseContent')}"/>
         <c:forEach var="chapter_lesson" items="${course_content}">
             <c:set var="chapter" value="${chapter_lesson.getKey()}"/>
             <div class="chapter">

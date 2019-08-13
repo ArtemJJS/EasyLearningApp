@@ -6,6 +6,13 @@ import lombok.EqualsAndHashCode;
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * model account entity
+ * contains {@link AccountType} enum
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Data
 @EqualsAndHashCode(callSuper = false, exclude = {"about", "pathToPhoto", "updatePhotoPath"})
 public class Account extends AppEntity {

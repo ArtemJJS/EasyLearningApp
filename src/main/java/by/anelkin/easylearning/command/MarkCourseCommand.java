@@ -5,10 +5,9 @@ import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.service.MarkService;
 
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
-
+import static by.anelkin.easylearning.util.GlobalConstant.*;
 public class MarkCourseCommand implements Command {
     private static final String SUCCESSFUL_OPERATION_REDIRECT = "/course?course-id=";
-    private static final String ATTR_TARGET_ID = "target_id";
 
     @Override
     public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {

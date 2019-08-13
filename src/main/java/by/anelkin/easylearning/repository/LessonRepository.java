@@ -14,6 +14,12 @@ import java.util.List;
 
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 
+/**
+ * Class to process operations with data base and {@link CourseLesson} entity
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 public class LessonRepository implements AppRepository<CourseLesson> {
     private ConnectionPool pool = ConnectionPool.getInstance();
@@ -24,6 +30,13 @@ public class LessonRepository implements AppRepository<CourseLesson> {
     @Language("sql")
     private static final String QUERY_UPDATE = "{call updateLesson(?, ?, ?, ?)}";
 
+    /**
+     * updates lesson in the db
+     *
+     * @param lesson - updated {@link CourseLesson}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean update(@NonNull CourseLesson lesson) throws RepositoryException {
         Connection connection = pool.takeConnection();
@@ -62,7 +75,13 @@ public class LessonRepository implements AppRepository<CourseLesson> {
         }
         return true;
     }
-
+    /**
+     * delete lesson in the db
+     *
+     * @param lesson - delete {@link CourseLesson}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean delete(@NonNull CourseLesson lesson) throws RepositoryException {
         Connection connection = pool.takeConnection();
@@ -100,7 +119,13 @@ public class LessonRepository implements AppRepository<CourseLesson> {
         }
         return true;
     }
-
+    /**
+     * insert lesson in the db
+     *
+     * @param lesson - insert {@link CourseLesson}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean insert(@NonNull CourseLesson lesson) throws RepositoryException {
         Connection connection = pool.takeConnection();
@@ -139,7 +164,13 @@ public class LessonRepository implements AppRepository<CourseLesson> {
         }
         return true;
     }
-
+    /**
+     * query {@link CourseLesson} which satisfy the requirements of particular {@link AppSpecification}
+     *
+     * @param specification query specification
+     * @return - list of {@link CourseLesson}
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public List<CourseLesson> query(@NonNull AppSpecification<CourseLesson> specification) throws RepositoryException {
         List<CourseLesson> lessonList;

@@ -16,7 +16,12 @@ import java.util.List;
 
 import static by.anelkin.easylearning.entity.Course.*;
 import static by.anelkin.easylearning.util.GlobalConstant.*;
-
+/**
+ * Class to process operations with data base and {@link Course} entity
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 public class CourseRepository implements AppRepository<Course> {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -33,6 +38,13 @@ public class CourseRepository implements AppRepository<Course> {
     private static final String QUERY_UPDATE = "UPDATE course SET course_name = ?, course_description = ?, " +
             "course_creation_date = ?, course_picture = ?, course_price = ?, state = ?, update_img_path = ? WHERE course_id = ?";
 
+    /**
+     * updates course in the db
+     *
+     * @param course - updated {@link Course}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean update(@NonNull Course course) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
@@ -45,13 +57,18 @@ public class CourseRepository implements AppRepository<Course> {
                     pathToImgUpdate[pathToImgUpdate.length - 1], String.valueOf(course.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            ;
             throw new RepositoryException(e);
         }
         return true;
     }
 
-
+    /**
+     * delete course in the db
+     *
+     * @param course - delete {@link Course}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean delete(@NonNull Course course) throws RepositoryException {
         //set state = 0 (freeze) instead of deleting
@@ -60,12 +77,17 @@ public class CourseRepository implements AppRepository<Course> {
             String[] params = {String.valueOf(course.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            ;
             throw new RepositoryException(e);
         }
         return true;
     }
-
+    /**
+     * inserts course in the db
+     *
+     * @param course - inserted {@link Course}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean insert(@NonNull Course course) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
@@ -77,12 +99,18 @@ public class CourseRepository implements AppRepository<Course> {
                     String.valueOf(course.getState().ordinal()), pathToImgUpdate[pathToImgUpdate.length - 1]};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            ;
             throw new RepositoryException(e);
         }
         return true;
     }
 
+    /**
+     * query {@link Course} which satisfy the requirements of particular {@link AppSpecification}
+     *
+     * @param specification query specification
+     * @return - list of {@link Course}
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public List<Course> query(@NonNull AppSpecification<Course> specification) throws RepositoryException {
         List<Course> courseList;
@@ -96,7 +124,6 @@ public class CourseRepository implements AppRepository<Course> {
                 courseList = fillCourseList(resultSet);
             }
         } catch (SQLException e) {
-            ;
             throw new RepositoryException(e);
         }
         return courseList;

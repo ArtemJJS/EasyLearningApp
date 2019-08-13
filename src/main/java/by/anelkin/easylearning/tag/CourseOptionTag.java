@@ -15,29 +15,14 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static by.anelkin.easylearning.entity.Account.*;
+import static by.anelkin.easylearning.util.GlobalConstant.*;
 
 @Log4j
 @Setter
 public class CourseOptionTag extends TagSupport {
-    private static final String ATTR_MARKED_COURSES_IDS = "marked_courses_ids";
-    private static final String RESOURCE_BUNDLE_BASE = "text_resources";
-    private static final String ATTR_LOCALE = "locale";
-    private static final String LOCALE_SPLITTER = "_";
-
-    private static final String BUNDLE_LEARNING_PAGE = "tag.learning_page";
-    private static final String BUNDLE_EDIT_COURSE = "tag.edit_course";
-    private static final String BUNDLE_EDIT_IMAGE = "tag.edit_image";
     private static final String AUTHOR_LEARNING_PAGE_LINK = "/course/learn?course-id=";
     private static final String AUTHOR_EDIT_COURSE_LINK = "/author/edit-course?course-id=";
     private static final String AUTHOR_EDIT_IMAGE_LINK = "/account/change-picture?course-id=";
-
-    private static final String BUNDLE_BUY_COURSE = "tag.buy_course";
-    private static final String BUNDLE_MARK_COURSE = "tag.mark_course";
-    private static final String USER_LEARNING_PAGE_LINK = "/course/learn?course-id=";
-    private static final String USER_MARK_COURSE_LINK = "/user/mark-course?course-id=";
-    private static final String USER_BUY_COURSE_LINK = "/user/buy-course?course-id=";
-
-
     private Course course;
 
     @Override

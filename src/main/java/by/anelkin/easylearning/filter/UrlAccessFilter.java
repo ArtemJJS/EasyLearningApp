@@ -15,11 +15,17 @@ import java.util.stream.Collectors;
 import static by.anelkin.easylearning.entity.Account.*;
 import static by.anelkin.easylearning.entity.Account.AccountType.GUEST;
 import static by.anelkin.easylearning.util.GlobalConstant.*;
-
+import static by.anelkin.easylearning.util.GlobalConstant.*;
+/**
+ * Provides protection from direct access to resources
+ * according to {@link by.anelkin.easylearning.entity.Account} role
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @WebFilter(urlPatterns = {"/admin/*", "/author/*", "/user/*", "/account/*", "/course/learn",
                             "/operation-result"})
 public class UrlAccessFilter implements Filter {
-    private static final String ATTR_AVAILABLE_COURSES = "coursesAvailable";
     private static final String URI_USER = "/user/";
     private static final String URI_OPERATION_RESULT = "/operation-result";
     private static final String URI_AUTHOR = "/author/";

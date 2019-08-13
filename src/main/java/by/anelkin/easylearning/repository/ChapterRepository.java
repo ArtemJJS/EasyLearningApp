@@ -14,7 +14,12 @@ import java.util.Collection;
 import java.util.List;
 
 import static by.anelkin.easylearning.util.GlobalConstant.*;
-
+/**
+ * Class to process operations with data base and {@link CourseChapter} entity
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 public class ChapterRepository implements AppRepository<CourseChapter> {
     private ConnectionPool pool = ConnectionPool.getInstance();
@@ -26,6 +31,13 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
     private static final String QUERY_UPDATE = "UPDATE course_chapter SET course_id = ?, chapter_name = ?" +
             "WHERE course_chapter_id = ?";
 
+    /**
+     * updates chapter in the db
+     *
+     * @param chapter - updated {@link CourseChapter}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean update(@NonNull CourseChapter chapter) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
@@ -33,12 +45,17 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
             String[] params = {String.valueOf(chapter.getCourseId()), chapter.getName(), String.valueOf(chapter.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            ;
             throw new RepositoryException(e);
         }
         return true;
     }
-
+    /**
+     * delete chapter in the db
+     *
+     * @param chapter - deleted {@link CourseChapter}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean delete(@NonNull CourseChapter chapter) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
@@ -46,12 +63,17 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
             String[] params = {String.valueOf(chapter.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            ;
             throw new RepositoryException(e);
         }
         return true;
     }
-
+    /**
+     * inserts chapter in the db
+     *
+     * @param chapter - inserted {@link CourseChapter}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean insert(@NonNull CourseChapter chapter) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
@@ -59,12 +81,18 @@ public class ChapterRepository implements AppRepository<CourseChapter> {
             String[] params = {String.valueOf(chapter.getCourseId()), chapter.getName()};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            ;
             throw new RepositoryException(e);
         }
         return true;
     }
 
+    /**
+     * query {@link CourseChapter} which satisfy the requirements of particular {@link AppSpecification}
+     *
+     * @param specification query specification
+     * @return - list of {@link CourseChapter}
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public List<CourseChapter> query(@NonNull AppSpecification<CourseChapter> specification) throws RepositoryException {
         List<CourseChapter> chapterList;

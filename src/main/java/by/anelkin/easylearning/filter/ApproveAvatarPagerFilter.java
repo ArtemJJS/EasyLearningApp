@@ -14,7 +14,13 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 import static by.anelkin.easylearning.util.GlobalConstant.*;
-
+/**
+ * Provides initialisation of avatars approval page
+ *
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 @WebFilter(urlPatterns = "/admin/approve-account-avatar")
 public class ApproveAvatarPagerFilter implements Filter {

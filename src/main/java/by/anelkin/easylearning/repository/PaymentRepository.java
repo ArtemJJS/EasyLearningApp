@@ -1,6 +1,7 @@
 package by.anelkin.easylearning.repository;
 
 import by.anelkin.easylearning.connection.ConnectionPool;
+import by.anelkin.easylearning.entity.CourseChapter;
 import by.anelkin.easylearning.entity.Payment;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.specification.AppSpecification;
@@ -15,6 +16,12 @@ import java.util.List;
 import static by.anelkin.easylearning.entity.Payment.*;
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 
+/**
+ * Class to process operations with data base and {@link Payment} entity
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 public class PaymentRepository implements AppRepository<Payment> {
     private ConnectionPool pool = ConnectionPool.getInstance();
@@ -32,6 +39,13 @@ public class PaymentRepository implements AppRepository<Payment> {
     @Language("sql")
     private static final String QUERY_INSERT_BUY_WITH_CARD = "{CALL insertPurchaseCourseByCard(?, ?, ?, ?, ?, ?, ?)}";
 
+    /**
+     * updates payment in the db
+     *
+     * @param payment - updated {@link Payment}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean update(@NonNull Payment payment) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
@@ -41,12 +55,18 @@ public class PaymentRepository implements AppRepository<Payment> {
                     payment.getDescription(), String.valueOf(payment.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            ;
             throw new RepositoryException(e);
         }
         return true;
     }
 
+    /**
+     * delete payment in the db
+     *
+     * @param payment - delete {@link Payment}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean delete(@NonNull Payment payment) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
@@ -54,12 +74,18 @@ public class PaymentRepository implements AppRepository<Payment> {
             String[] params = {String.valueOf(payment.getId())};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            ;
             throw new RepositoryException(e);
         }
         return true;
     }
 
+    /**
+     * insert payment in the db
+     *
+     * @param payment - insert {@link Payment}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean insert(@NonNull Payment payment) throws RepositoryException {
         String curr_query;
@@ -116,6 +142,13 @@ public class PaymentRepository implements AppRepository<Payment> {
         return true;
     }
 
+    /**
+     * query {@link Payment} which satisfy the requirements of particular {@link AppSpecification}
+     *
+     * @param specification query specification
+     * @return - list of {@link Payment}
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public List<Payment> query(@NonNull AppSpecification<Payment> specification) throws RepositoryException {
         List<Payment> paymentList;

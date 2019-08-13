@@ -8,6 +8,7 @@ import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.AccRepository;
 import by.anelkin.easylearning.repository.CourseRepository;
+import by.anelkin.easylearning.repository.MarkRepository;
 import by.anelkin.easylearning.repository.PaymentRepository;
 import by.anelkin.easylearning.specification.account.SelectAccByLoginSpecification;
 import by.anelkin.easylearning.specification.account.SelectAuthorOfCourseSpecification;
@@ -28,33 +29,44 @@ import static by.anelkin.easylearning.entity.Course.*;
 import static by.anelkin.easylearning.entity.Payment.*;
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 
+/**
+ * Represents logic to execute operations, required mostly {@link Payment} data
+ * from data store. Used to operation that can change {@link Payment} state inside
+ * of the data store or required course data.
+ * Common repository - {@link PaymentRepository}
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 public class PaymentService {
+    /**
+     * amount of payment on one page on view. Used in {@link PaymentRepository} query
+     */
     private static final int PAGINATION_LIMIT_PAYMENT_HISTORY = 8;
-
-
-    private static final String RESOURCE_BUNDLE_BASE = "text_resources";
-
-    private static final String BUNDLE_PAYMENT_SUCCEEDED = "msg.payment_approved";
-    private static final String BUNDLE_PAYMENT_DECLINED = "msg.payment_declined";
-    private static final String BUNDLE_WRONG_DEPOSIT_DATA = "msg.wrong_deposit_data";
-
-    private static final String DESCRIPTION_DEPOSIT_BY_CARD = "Deposit from card ends with ";
-    private static final String DESCRIPTION_CASH_OUT_TO_CARD = "Cash out to card ends with ";
-    private static final String DESCRIPTION_BUY_WITH_CARD = "Purchasing by card ends with %s. Course: ";
-    private static final String DESCRIPTION_BUY_FROM_BALANCE = "Purchasing from balance. Course: ";
-    private static final String DESCRIPTION_SALE_COURSE = "Sale course: ";
+    /**
+     * representation of {@link Course#getId()} if payment is not linked
+     * with purchase or sell {@link Course}
+     */
     private static final int NOT_EXISTS_COURSE_ID = -1;
 
-
+    /**
+     * process purchasing {@link Course} from balance
+     * invoke {@link PaymentService#processAuthorSaleOperation(Course)} to update author of the course balance
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @return true if payment proceeded, otherwise false (if course purchased already or invalid data)
+     * @throws ServiceException if faced {@link RepositoryException}, IllegalArgumentException, NullPointerException
+     */
     public boolean processPurchaseFromBalance(SessionRequestContent requestContent) throws ServiceException {
         PaymentRepository repository = new PaymentRepository();
         CourseRepository courseRepository = new CourseRepository();
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
         Payment payment = new Payment();
         Account account = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
-        int courseId = Integer.parseInt(reqParams.get(ATTR_COURSE_ID)[0]);
         try {
+        int courseId = Integer.parseInt(reqParams.get(ATTR_COURSE_ID)[0]);
             Course course = courseRepository.query(new SelectCourseByIdSpecification(courseId)).get(0);
             boolean isCourseApproved = course.getState() == CourseState.APPROVED;
             boolean isCoursePurchasedAlready = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId())).contains(course);
@@ -79,12 +91,20 @@ public class PaymentService {
                 repository.delete(payment);
                 return false;
             }
-        } catch (NullPointerException | RepositoryException e) {
+        } catch (NullPointerException | RepositoryException | IllegalArgumentException e) {
             throw new ServiceException(e);
         }
         return true;
     }
 
+    /**
+     * process purchasing {@link Course} by card
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @return true if payment proceeded, otherwise false (if course purchased already or invalid data)
+     * @throws ServiceException if faced {@link RepositoryException}, IllegalArgumentException, NullPointerException
+     */
     public boolean processPurchaseByCard(SessionRequestContent requestContent) throws ServiceException {
         FormValidator validator = new FormValidator();
         PaymentRepository repository = new PaymentRepository();
@@ -92,8 +112,8 @@ public class PaymentService {
         Map<String, String[]> reqParams = requestContent.getRequestParameters();
         Payment payment = new Payment();
         Account account = (Account) requestContent.getSessionAttributes().get(ATTR_USER);
-        int courseId = Integer.parseInt(reqParams.get(ATTR_COURSE_ID)[0]);
         try {
+        int courseId = Integer.parseInt(reqParams.get(ATTR_COURSE_ID)[0]);
             Course course = courseRepository.query(new SelectCourseByIdSpecification(courseId)).get(0);
             boolean isCoursePurchasedAlready = courseRepository.query(new SelectCoursesPurchasedByUserSpecification(account.getId())).contains(course);
             String cardNumber = requestContent.getRequestParameters().get(ATTR_CARD)[0];
@@ -120,13 +140,21 @@ public class PaymentService {
                 repository.delete(payment);
                 return false;
             }
-        } catch (NullPointerException | RepositoryException e) {
+        } catch (NullPointerException | RepositoryException | IllegalArgumentException e) {
             throw new ServiceException(e);
         }
         return true;
     }
 
 
+    /**
+     * process deposit by card
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @return true if payment proceeded, otherwise false
+     * @throws ServiceException if faced {@link RepositoryException}, IllegalArgumentException
+     */
     public boolean processDepositByCard(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = (new CourseService()).takeLocaleFromSession(requestContent);
         FormValidator validator = new FormValidator();
@@ -157,12 +185,20 @@ public class PaymentService {
             String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_PAYMENT_SUCCEEDED);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
             requestContent.getSessionAttributes().put(ATTR_USER, updatedUser);
-        } catch (RepositoryException e) {
+        } catch (RepositoryException | IllegalArgumentException e) {
             throw new ServiceException(e);
         }
         return true;
     }
 
+    /**
+     * process cash-out on card
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @return true if payment proceeded, otherwise false
+     * @throws ServiceException if faced {@link RepositoryException}, IllegalArgumentException, NullPointerException
+     */
     public boolean processCashOutFromBalance(SessionRequestContent requestContent) throws ServiceException {
         FormValidator validator = new FormValidator();
         Locale locale = (new CourseService()).takeLocaleFromSession(requestContent);
@@ -195,12 +231,19 @@ public class PaymentService {
             (new AccountService()).refreshSessionAttributeUser(requestContent, currAcc);
             String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_PAYMENT_SUCCEEDED);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
-        } catch (RepositoryException e) {
+        } catch (RepositoryException | IllegalArgumentException e) {
             throw new ServiceException(e);
         }
         return true;
     }
 
+    /**
+     * inserts {@link Payment} into request attributes
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}
+     */
     public void insertPaymentsIntoRequestAttributes(SessionRequestContent requestContent) throws ServiceException {
         PaymentRepository paymentRepository = new PaymentRepository();
         Map<String, String[]> reqParam = requestContent.getRequestParameters();
@@ -227,6 +270,14 @@ public class PaymentService {
         }
     }
 
+    /**\
+     * process operation of refilling {@link Account} author balance
+     * when some user purchase {@link Course} athered by Author
+     * In this version full sale amount goes to author balance
+     *      *
+     * @param course - purchased course
+     * @throws ServiceException if faced {@link RepositoryException}, NullPointerException
+     */
     private void processAuthorSaleOperation(Course course) throws ServiceException {
         AccRepository accRepository = new AccRepository();
         PaymentRepository paymentRepository = new PaymentRepository();
@@ -241,9 +292,7 @@ public class PaymentService {
             payment.setCurrencyId(CurrencyType.USD.ordinal() + 1);
             payment.setDescription(DESCRIPTION_SALE_COURSE);
             paymentRepository.insert(payment);
-        } catch (NullPointerException e) {
-            throw new ServiceException(e);
-        } catch (RepositoryException e) {
+        } catch (NullPointerException | RepositoryException e) {
             throw new ServiceException(e);
         }
     }

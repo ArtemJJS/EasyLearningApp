@@ -5,6 +5,14 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+/**
+ * Implementation of Proxy patternt for {@link Connection}
+ * ensures that malicious connections do not get into the {@link ConnectionPool}
+ * implements correct closing logic according to pool
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 public class ProxyConnection implements Connection {
     private Connection connection;
 

@@ -11,13 +11,13 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import static by.anelkin.easylearning.util.GlobalConstant.*;
+
 @Log4j
 @Setter
 public class RatingTag extends TagSupport {
-    private static final String BUNDLE_NOT_RATED = "tag.not_rated";
-    private static final String ATTR_LOCALE = "locale";
-    private static final String LOCALE_SPLITTER = "_";
-    private static final String RESOURCE_BUNDLE_BASE = "text_resources";
+
+
     private double rating;
 
     @Override

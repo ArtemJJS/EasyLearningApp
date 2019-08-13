@@ -17,6 +17,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Class thread-safe singleton to provide {@link Connection} to db
+ * controls opened connections amount
+ * Keeps connections open for increased application performance
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 public class ConnectionPool {
     private static final String URL;
@@ -54,6 +62,9 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * inits entry params for instance
+     */
     private void initPool() {
         log.info("URL: " + URL);
         usedConnections = new LinkedBlockingQueue<>(MIN_CONNECTIONS_AMOUNT);
@@ -75,6 +86,10 @@ public class ConnectionPool {
         checkConnectionsAmount();
     }
 
+    /**
+     * @return instance {@link ConnectionPool}
+     * thread-safe initialisation inside
+     */
     public static ConnectionPool getInstance() {
         if (!isInitialized.get()) {
             try {
@@ -91,6 +106,11 @@ public class ConnectionPool {
         return instance;
     }
 
+    /**
+     * provides active connection to db on logic request
+     *
+     * @return {@link Connection}
+     */
     public Connection takeConnection() {
         ProxyConnection connection = null;
         try {
@@ -106,6 +126,11 @@ public class ConnectionPool {
         return connection;
     }
 
+    /**
+     * returns connection to pool insted of closing it
+     *
+     * @param connection - connection to be returned
+     */
     void returnConnection(Connection connection) {
         if (connection instanceof ProxyConnection) {
             usedConnections.remove(connection);
@@ -115,6 +140,10 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * close connections, stop check connections amount task
+     * incoe {@link ConnectionPool#deregisterDrivers()}
+     */
     public void closePool() {
         connCountChecker.interrupt();
         for (int i = 0; i < MIN_CONNECTIONS_AMOUNT; i++) {
@@ -129,6 +158,9 @@ public class ConnectionPool {
         log.info("Pool has been closed, drivers deregistered.");
     }
 
+    /**
+     * deregister drivers
+     */
     private void deregisterDrivers() {
         Enumeration<Driver> drivers = DriverManager.getDrivers();
         while (drivers.hasMoreElements()) {
@@ -141,6 +173,10 @@ public class ConnectionPool {
         }
     }
 
+
+    /**
+     * task for scheduled check active connection amount in separated thread
+     */
     private void checkConnectionsAmount() {
         TimerTask checkConnections = new TimerTask() {
             @Override

@@ -6,10 +6,11 @@ import by.anelkin.easylearning.service.PaymentService;
 
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
 
+import static by.anelkin.easylearning.util.GlobalConstant.*;
 public class BuyWithCardCommand implements Command {
     private static final String SUCCESSFUL_OPERATION_REDIRECT = "/course?course-id=";
     private static final String FAIL_OPERATION_REDIRECT = "/user/buy-course?result=fail&course-id=";
-    private static final String ATTR_COURSE_ID = "course_id";
+
 
     @Override
     public SessionRequestContent.ResponseType execute(SessionRequestContent requestContent) throws ServiceException {

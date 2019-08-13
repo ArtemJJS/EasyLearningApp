@@ -3,9 +3,14 @@ package by.anelkin.easylearning.util;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Class-wrapper to implements increment option on jsp pages
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Getter
 @Setter
-
 public class JspIntWrapper {
     private int value;
 

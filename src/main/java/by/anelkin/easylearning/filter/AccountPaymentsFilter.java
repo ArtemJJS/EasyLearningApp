@@ -1,5 +1,6 @@
 package by.anelkin.easylearning.filter;
 
+import by.anelkin.easylearning.entity.Payment;
 import by.anelkin.easylearning.exception.ServiceException;
 import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.repository.PaymentRepository;
@@ -15,6 +16,13 @@ import java.util.ResourceBundle;
 
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 
+/**
+ * Provides initialisation of {@link Payment} for current account
+ *
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 @WebFilter(urlPatterns = "/account/payments")
 public class AccountPaymentsFilter implements Filter {

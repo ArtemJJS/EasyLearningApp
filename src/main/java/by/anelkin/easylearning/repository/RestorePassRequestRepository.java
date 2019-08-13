@@ -1,6 +1,7 @@
 package by.anelkin.easylearning.repository;
 
 import by.anelkin.easylearning.connection.ConnectionPool;
+import by.anelkin.easylearning.entity.Payment;
 import by.anelkin.easylearning.entity.RestorePassRequest;
 import by.anelkin.easylearning.exception.RepositoryException;
 import by.anelkin.easylearning.specification.AppSpecification;
@@ -17,6 +18,12 @@ import java.util.List;
 
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 
+/**
+ * Class to process operations with data base and {@link RestorePassRequest} entity
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 public class RestorePassRequestRepository implements AppRepository<RestorePassRequest> {
     private ConnectionPool pool = ConnectionPool.getInstance();
@@ -25,11 +32,25 @@ public class RestorePassRequestRepository implements AppRepository<RestorePassRe
     @Language("sql")
     private static final String QUERY_INSERT = "insert into restore_pass_requests(acc_id, uuid) VALUES(?, ?)";
 
+    /**
+     * do nothing
+     *
+     * @param restorePassRequest - updated {@link RestorePassRequest}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean update(@NonNull RestorePassRequest restorePassRequest) throws RepositoryException {
         return false;
     }
 
+    /**
+     * delete restore pass request in the db
+     *
+     * @param restorePassRequest - delete {@link RestorePassRequest}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean delete(@NonNull RestorePassRequest restorePassRequest) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
@@ -42,7 +63,13 @@ public class RestorePassRequestRepository implements AppRepository<RestorePassRe
         }
         return true;
     }
-
+    /**
+     * insert restore pass request in the db
+     *
+     * @param restorePassRequest - insert {@link RestorePassRequest}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean insert(@NonNull RestorePassRequest restorePassRequest) throws RepositoryException {
         try (Connection connection = pool.takeConnection();
@@ -50,12 +77,18 @@ public class RestorePassRequestRepository implements AppRepository<RestorePassRe
             String[] params = {String.valueOf(restorePassRequest.getAccId()), restorePassRequest.getUuid()};
             setParametersAndExecute(statement, params);
         } catch (SQLException e) {
-            ;
             throw new RepositoryException(e);
         }
         return true;
     }
 
+    /**
+     * query {@link RestorePassRequest} which satisfy the requirements of particular {@link AppSpecification}
+     *
+     * @param specification query specification
+     * @return - list of {@link RestorePassRequest}
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public List<RestorePassRequest> query(@NonNull AppSpecification<RestorePassRequest> specification) throws RepositoryException {
         List<RestorePassRequest> restorePassRequests;
@@ -69,7 +102,6 @@ public class RestorePassRequestRepository implements AppRepository<RestorePassRe
                 restorePassRequests = new ArrayList<>(fillRestorePassRequestList(resultSet));
             }
         } catch (SQLException e) {
-            ;
             throw new RepositoryException(e);
         }
         return restorePassRequests;

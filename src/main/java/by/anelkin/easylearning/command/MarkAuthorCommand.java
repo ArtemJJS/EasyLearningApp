@@ -5,9 +5,8 @@ import by.anelkin.easylearning.receiver.SessionRequestContent;
 import by.anelkin.easylearning.service.MarkService;
 
 import static by.anelkin.easylearning.receiver.SessionRequestContent.ResponseType.*;
-
+import static by.anelkin.easylearning.util.GlobalConstant.*;
 public class MarkAuthorCommand implements Command {
-    private static final String ATTR_AUTHOR_LOGIN = "author_login";
     private static final String SUCCESSFUL_OPERATION_REDIRECT = "/author-info/";
 
     @Override

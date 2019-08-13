@@ -13,7 +13,13 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 import static by.anelkin.easylearning.util.GlobalConstant.*;
-
+/**
+ * Provides initialisation of author-info page
+ *
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 @WebFilter(urlPatterns = "/author-info/*")
 public class AuthorPageFilter implements Filter {
@@ -28,7 +34,7 @@ public class AuthorPageFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String login = accountService.pickTargetNameFromUri(request.getRequestURI());
-        request.setAttribute("requested_author_login", login);
+        request.setAttribute(ATTR_REQUESTED_AUTHOR_LOGIN, login);
         SessionRequestContent requestContent = new SessionRequestContent();
         requestContent.extractValues(request);
         try {

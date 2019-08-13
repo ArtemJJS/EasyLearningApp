@@ -17,6 +17,12 @@ import static by.anelkin.easylearning.entity.Mark.*;
 import static by.anelkin.easylearning.entity.Mark.MarkType.*;
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 
+/**
+ * Class to process operations with data base and {@link Mark} entity
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 public class MarkRepository implements AppRepository<Mark> {
     private ConnectionPool pool = ConnectionPool.getInstance();
@@ -28,7 +34,13 @@ public class MarkRepository implements AppRepository<Mark> {
     private static final String QUERY_DELETE_COURSE_MARK = "{call deleteCourseMark(?)}";
     private static final String QUERY_DELETE_AUTHOR_MARK = "{call deleteAuthorMark(?)}";
 
-
+    /**
+     * updates mark in the db
+     *
+     * @param mark - updated {@link Mark}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean update(@NonNull Mark mark) throws RepositoryException {
         String actualQuery = mark.getMarkType() == AUTHOR_MARK ? QUERY_UPDATE_AUTHOR_MARK : QUERY_UPDATE_COURSE_MARK;
@@ -69,6 +81,13 @@ public class MarkRepository implements AppRepository<Mark> {
         return true;
     }
 
+    /**
+     * delete mark in the db
+     *
+     * @param mark - delete {@link Mark}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean delete(@NonNull Mark mark) throws RepositoryException {
         String actualQuery = mark.getMarkType() == AUTHOR_MARK ? QUERY_DELETE_AUTHOR_MARK : QUERY_DELETE_COURSE_MARK;
@@ -108,6 +127,13 @@ public class MarkRepository implements AppRepository<Mark> {
         return true;
     }
 
+    /**
+     * insert mark in the db
+     *
+     * @param mark - insert {@link Mark}
+     * @return - true if successful
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public boolean insert(@NonNull Mark mark) throws RepositoryException {
         String actualQuery = mark.getMarkType() == AUTHOR_MARK ? QUERY_INSERT_AUTHOR_MARK : QUERY_INSERT_COURSE_MARK;
@@ -148,7 +174,13 @@ public class MarkRepository implements AppRepository<Mark> {
         return true;
     }
 
-
+    /**
+     * query {@link Mark} which satisfy the requirements of particular {@link AppSpecification}
+     *
+     * @param specification query specification
+     * @return - list of {@link Mark}
+     * @throws RepositoryException when faced{@link SQLException}
+     */
     @Override
     public List<Mark> query(AppSpecification<Mark> specification) throws RepositoryException {
         List<Mark> markList;

@@ -26,29 +26,30 @@ import static by.anelkin.easylearning.entity.Account.*;
 import static by.anelkin.easylearning.entity.Course.*;
 import static by.anelkin.easylearning.util.GlobalConstant.*;
 
+/**
+ * Presents logic to execute operations, required mostly {@link Course} data
+ * from data store. Used to operation that can change course state inside
+ * of the data store or required course data.
+ * Common repository - {@link CourseRepository}
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 public class CourseService {
-    private static final String PATH_RELATIVE_COURSE_IMG_FOLDER = "resources/course_img/";
-    private static final String DEFAULT_COURSE_AVATAR = "default_course_avatar";
-    private static final String PROP_FILE_FOLDER = "file_folder";
     private static final int SEARCH_LIMIT = 4;
     private static final int AMOUNT_COURSES_RECOMMENDED = 6;
+    private static final String PATH_ADD_NEW_COURSE = "author/add-new-course";
+    private static final String PATH_ADD_COURSE = "author/add-course";
 
-    private static final String RESOURCE_BUNDLE_BASE = "text_resources";
-    private static final String FILE_STORAGE_BUNDLE_BASE = "file_storage";
-    private static final String BUNDLE_PICTURE_APPROVED = "msg.course_picture_changed_successfully";
-    private static final String BUNDLE_PICTURE_DECLINED = "msg.course_picture_change_was_declined";
-    private static final String BUNDLE_COURSE_APPROVED = "msg.course_was_approved";
-    private static final String BUNDLE_COURSE_FROZEN = "msg.course_was_declined";
-    private static final String BUNDLE_COURSE_ALREADY_EXISTS = "msg.course_already_exists";
-    private static final String BUNDLE_COURSE_SENT_TO_REVIEW = "msg.course_sent_to_review";
-    private static final String BUNDLE_INCORRECT_DATA = "msg.incorrect_data";
-    private static final String DEFAULT_IMG = "default_course_avatar.png";
-    private static final String PATTERN_LESSON_TITLE = "lesson_title_";
-    private static final String PATTERN_LESSON_CONTENT = "lesson_content_";
-    private static final String PATTERN_LESSON_DURATION = "lesson_duration_";
-
-
+    /**
+     * select courses that are not available to see learning page to current user
+     * this courses will be shoen as recommended courses to this account
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}
+     */
     public void chooseRecommendedCourses(SessionRequestContent requestContent) throws ServiceException {
         CourseRepository repo = new CourseRepository();
         AccountType role = (AccountType) requestContent.getSessionAttributes().get(ATTR_ROLE);
@@ -66,6 +67,14 @@ public class CourseService {
         }
     }
 
+
+    /**
+     * updates course path to picture on review
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}
+     */
     public void addCourseImgToReview(SessionRequestContent requestContent) throws ServiceException {
         int courseId = Integer.parseInt(String.valueOf(requestContent.getRequestAttributes().get(ATTR_COURSE_ID)));
         CourseRepository repository = new CourseRepository();
@@ -78,6 +87,13 @@ public class CourseService {
         }
     }
 
+    /**
+     * replace current course image file with file on review, updates course's path to image
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}, NullPointerException, IOException
+     */
     public void approveCourseImgChange(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = takeLocaleFromSession(requestContent);
         String fileStorage = ResourceBundle.getBundle(FILE_STORAGE_BUNDLE_BASE).getString(PROP_FILE_FOLDER);
@@ -101,14 +117,18 @@ public class CourseService {
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + course.getId());
             requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));
-        } catch (NullPointerException | IOException e) {
-            ;
-            throw new ServiceException(e);
-        } catch (RepositoryException e) {
+        } catch (NullPointerException | IOException | RepositoryException e) {
             throw new ServiceException(e);
         }
     }
 
+    /**
+     * delete current course image on review file, course's image not changed
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}, NullPointerException, IOException
+     */
     public void declineCourseImgChange(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = takeLocaleFromSession(requestContent);
         String fileStorage = ResourceBundle.getBundle(FILE_STORAGE_BUNDLE_BASE).getString(PROP_FILE_FOLDER);
@@ -123,24 +143,29 @@ public class CourseService {
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + course.getId());
             requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));
-        } catch (NullPointerException | IOException e) {
-            ;
-            throw new ServiceException(e);
-        } catch (RepositoryException e) {
+        } catch (NullPointerException | IOException | RepositoryException e) {
             throw new ServiceException(e);
         }
     }
 
+    /**
+     * places linked with the course info into request attributes
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBoundsException
+     * or if course doesn't exist
+     */
     public void initCoursePage(SessionRequestContent requestContent) throws ServiceException {
         HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
         CourseRepository repository = new CourseRepository();
+        try {
         int courseId = Integer.parseInt(requestContent.getRequestParameters().get(ATTR_COURSE_ID_DEFIS)[0]);
         List<Mark> marks = (new MarkService()).takeMarksOfCourse(courseId);
         List<Mark> marksWithComment = marks.stream().filter(mark -> !mark.getComment().equals(EMPTY_STRING)).collect(Collectors.toList());
-        try {
             int courseMarkCount = new MarkRepository().query(new SelectMarkByTargetIdSpecification(Mark.MarkType.COURSE_MARK, courseId)).size();
             int purchaseCount = new AccRepository().query(new SelectAccPurchasedCourseSpecification(courseId)).size();
-            List<Course> courses = null;
+            List<Course> courses;
             courses = repository.query(new SelectCourseByIdSpecification(courseId));
             if (courses.size() != 1) {
                 log.error("Course wasn't found, id: " + courseId);
@@ -152,11 +177,18 @@ public class CourseService {
             reqAttrs.put(ATTR_REQUESTED_COURSE, courses.get(0));
             reqAttrs.put(ATTR_CURR_COURSE_CONTENT, takeChaptersAndLessons(courseId));
             reqAttrs.put(ATTR_AUTHOR_OF_COURSE, (new AccountService()).takeAuthorOfCourse(courseId));
-        } catch (RepositoryException e) {
+        } catch (RepositoryException | IndexOutOfBoundsException e) {
             throw new ServiceException(e);
         }
     }
 
+    /**
+     * select courses "ON REVIEW" and places it to request attributes
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}
+     */
     public void initCourseApprovalPage(SessionRequestContent requestContent) throws ServiceException {
         CourseRepository repository = new CourseRepository();
         try {
@@ -167,6 +199,16 @@ public class CourseService {
         }
     }
 
+    /**
+     * select courses using {@link CourseRepository} that are corresponding to search string
+     * Pagination exists. Pagination attribute will be placed to request attributes if
+     * there are more courses corresponding to pattern in db, but they are over current page
+     * showing courses limit
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}
+     */
     public void searchCourses(SessionRequestContent requestContent) throws ServiceException {
         Map<String, String[]> reqParam = requestContent.getRequestParameters();
         CourseRepository repository = new CourseRepository();
@@ -193,6 +235,13 @@ public class CourseService {
         }
     }
 
+    /**
+     * select courses with images on review and places it to request attributes
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}
+     */
     public void initCourseImgApprovalPage(SessionRequestContent requestContent) throws ServiceException {
         CourseRepository repository = new CourseRepository();
         try {
@@ -203,6 +252,14 @@ public class CourseService {
         }
     }
 
+    /**
+     * change course state to "APPROVED"
+     *@see CourseState
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBoundsException
+     */
     public void approveCourse(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = takeLocaleFromSession(requestContent);
         String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_APPROVED);
@@ -214,15 +271,20 @@ public class CourseService {
             repository.update(currCourse);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + currCourse.getId());
             initCourseApprovalPage(requestContent);
-        } catch (IndexOutOfBoundsException e) {
-            ;
-            throw new ServiceException(e);
-        } catch (RepositoryException e) {
+        } catch (IndexOutOfBoundsException | RepositoryException e) {
             throw new ServiceException(e);
         }
     }
 
 
+    /**
+     * change course state to "FROZEN"
+     * @see CourseState
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBoundsException, NumberFormatException
+     */
     public void freezeCourse(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = takeLocaleFromSession(requestContent);
         String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_FROZEN);
@@ -233,14 +295,23 @@ public class CourseService {
             currCourse.setState(CourseState.FREEZING);
             repository.update(currCourse);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + currCourse.getId());
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            ;
-            throw new ServiceException(e);
-        } catch (RepositoryException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException | RepositoryException e) {
             throw new ServiceException(e);
         }
     }
 
+    /**
+     * Used to create new courses and edit existing courses. Create {@link Course} and init fields,
+     * then insert it into db using{@link CourseRepository}
+     *
+     *invokes {@link CourseService#insertChaptersIfNotExists(int, Map)}
+     *and {@link CourseService#insertLessons(int, Map, String[])}
+     *
+     * @param requestContent - entity represents separated HTTPRequest attributes and parameters
+     *                       and session attributes. Include "referer" header from request
+     * @return true if operation proceeded, false if course exists already or data invalid
+     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBoundsException
+     */
     public boolean addCourseToReview(SessionRequestContent requestContent) throws ServiceException {
         FormValidator validator = new FormValidator();
         Locale locale = takeLocaleFromSession(requestContent);
@@ -256,7 +327,7 @@ public class CourseService {
         CourseRepository courseRepo = new CourseRepository();
         String courseName = params.get(ATTR_COURSE_NAME)[0];
         String referer = requestContent.getRequestReferer();
-        boolean isCourseNew = referer.contains("author/add-new-course") || referer.contains("author/add-course");
+        boolean isCourseNew = referer.contains(PATH_ADD_NEW_COURSE) || referer.contains(PATH_ADD_COURSE);
         List<Course> courses;
         try {
             courses = courseRepo.query(new SelectCourseByNameSpecification(courseName));
@@ -288,15 +359,20 @@ public class CourseService {
             new AccountService().refreshSessionAttributeAvailableCourses(requestContent, currAccount);
             String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_SENT_TO_REVIEW);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
-        } catch (IndexOutOfBoundsException e) {
-            ;
-            throw new ServiceException(e);
-        } catch (RepositoryException e) {
+        } catch (IndexOutOfBoundsException | RepositoryException e) {
             throw new ServiceException(e);
         }
         return true;
     }
 
+    /**
+     * Method inserts chapters from request parameters into db
+     *
+     * @param courseId - id of course to place chapters in
+     * @param params request parameters
+     * @return array of chapter's names from request parameters
+     * @throws RepositoryException from {@link ChapterRepository}
+     */
     private String[] insertChaptersIfNotExists(int courseId, Map<String, String[]> params) throws RepositoryException {
         FormValidator validator = new FormValidator();
         ChapterRepository chapterRepo = new ChapterRepository();
@@ -315,6 +391,12 @@ public class CourseService {
         return chapterNames;
     }
 
+    /**
+     * @param courseId - id of course to place lessons in
+     * @param params request parameters
+     * @param chapterNames - chapter names from current request, returned by {@link CourseService#insertChaptersIfNotExists(int, Map)}
+     * @throws RepositoryException from {@link ChapterRepository}
+     */
     private void insertLessons(int courseId, Map<String, String[]> params, String[] chapterNames) throws RepositoryException {
         FormValidator validator = new FormValidator();
         ChapterRepository chapterRepo = new ChapterRepository();
@@ -348,6 +430,11 @@ public class CourseService {
         }
     }
 
+    /**
+     * @param courseId current course id
+     * @return map with {@link CourseChapter} as keys and corresponded to particular chapter list of {@link CourseLesson}
+     * @throws ServiceException if faced {@link RepositoryException}, NullPointerException
+     */
     private Map<CourseChapter, List<CourseLesson>> takeChaptersAndLessons(int courseId) throws ServiceException {
         ChapterRepository chapterRepository = new ChapterRepository();
         LessonRepository lessonRepository = new LessonRepository();
@@ -360,10 +447,7 @@ public class CourseService {
                 lessons.sort(Comparator.comparing(CourseLesson::getId));
                 courseContent.put(chapter, lessons);
             }
-        } catch (NullPointerException e) {
-            ;
-            throw new ServiceException(e);
-        } catch (RepositoryException e) {
+        } catch (NullPointerException | RepositoryException e) {
             throw new ServiceException(e);
         }
         return courseContent;

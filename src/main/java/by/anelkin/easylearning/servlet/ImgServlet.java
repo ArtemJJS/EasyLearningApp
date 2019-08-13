@@ -15,12 +15,24 @@ import java.nio.file.Files;
 import java.util.Objects;
 import java.util.Properties;
 
+/**
+ * Assistance servlet of the controller layer.
+ * Responsible for representing of images in the interface.
+ *
+ * @author Artsiom Anelkin on 2019-08-12.
+ * @version 0.1
+ */
 @Log4j
 @WebServlet(urlPatterns = "/img/*")
 public class ImgServlet extends HttpServlet {
     private static final String PROP_FILE_FOLDER = "file_folder";
     private String fileStorage;
 
+    /**
+     * inits absolute path to external file storage from properties file
+     *
+     * @throws ServletException if problems with property file
+     */
     @Override
     public void init() throws ServletException {
         Properties prop = new Properties();
@@ -32,6 +44,14 @@ public class ImgServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Responsible representing of images in the interface.
+     *
+     * @param request  current {@link HttpServletRequest}
+     * @param response current {@link HttpServletResponse}
+     * @throws ServletException if faced problems
+     * @throws IOException  if faced problems
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
