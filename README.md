@@ -21,26 +21,21 @@ Options:
            restore password (receive link on email)
 
 
-Features
 
 
-* Pagination: search course, view account payments
-* On pages active options depends on role (custom tags realisation). It includes "learning page", "buy course", "rate course", "edit course" etc.
-* File storage is outside of project folder. Path specified in property file.
-* Personal information editable (not all, but mostly)
-* Change avatar command (for course or user) send image on review. Before admin aprovement, active is previous image. When admin approves 
-  new image, it replace previous image. Approvement can be declined, image will not change as a result.
-* Course state: frozen, on review, approved. Only approved courses can be purchased or showed from search function. State is showed 
-  on author "My courses" page.
-* Create/edit course: new/updated courses receive "ON REVIEW" status. They will not be shown in search results. After admin's approvement
-  they become visible. Author has no possibility to delete or change content of previously placed chapters and lessons in particular course,
-  because of the situation when someone has purchased course (and he expected to see exactly what he bought). But it's still possible to add new chapters
-  and lessons (placed chapters included).
-* Payments. There are 5 types of payments: buy course by card (user), buy course from balanse (user), deposit to balance by card (user), 
-  cash-out to card from balance (author), receive funds automatically sale on acc balance after course (author). Payments that are using card are conditionally, 
-  all they need is a card number (not real of course), it's just a simulation. At present time full amount of money payed for course goes to author of
-  course, but in the future it's possible to set percent of funds, that will go to owner of application ))
-* Registered users can once rate purchased courses and author, who sold at least one course to particular user. Mark includes value (1-5) 
-  and comment. Comment can be deleted by admin (value not change however).
+
+SOME IMPLEMENTATION FEATURES
+
+• Pagination: search course, view account payments
+• On pages active options depends on role (custom tags implementation). It includes "learning page", "buy course", "rate course", "edit course" etc.
+• File storage is outside of the project folder. Path specified in a property file.
+• When a user sends an avatar or course image for verification, it is loaded into a separate directory with the name corresponding to the user id. After approval by the administrator, the old image is deleted and the new image is moved to the directory of active user images. 
+• Personal information editable (not all, but mostly)
+• Change avatar command (for a course or user) sends an image on review. Before admin approval, active in the previous image. When an admin approves the new image, it replaces the previous image. Approval can be declined, the image will not change as a result.
+• Course state: frozen, on review approved. Only approved courses can be purchased or showed from search function. The state is shown on the author’s "My courses" page.
+• Create/edit course: new/updated courses receive "ON REVIEW" status. They will not be shown in search results. After the admin's approval, they become visible. The author cannot delete or change the content of previously placed chapters and lessons in a particular course, because of the situation when someone has purchased a course (and he expected to see exactly what he bought). But it's still possible to add new chapters and lessons (placed chapters included).
+• Payments. There are 5 types of payments: buy course by card (user), buy a course from the balance (user), deposit to balance by card (user), cash-out to a card from the balance (author), receive funds automatically sale on account balance after a course (author). Payments that are using card are conditional, all they need is a card number (not real of course), it's just a simulation. At present time full amount of money paid for course goes to the author, of course, but in the future it's possible to set percent of funds, that will go to the owner of application ))
+• Registered users can once rate purchased courses and author, who sold at least one course to a particular user. Mark includes value (1-5) and comment. Comment can be deleted by admin (value does not change, however).
+
 
 ***** To be continued  *****
