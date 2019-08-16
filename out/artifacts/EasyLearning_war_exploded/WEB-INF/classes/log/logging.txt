@@ -1,0 +1,290 @@
+2019-08-08 03:40:00 main DEBUG PaymentRepository:134 - Executing query: CALL insertPurchaseCourseByCard('3', '3', '10', '4.99', '1565224800554', '1', 'Purchasing by card ends with 1231. Course
+2019-08-08 03:40:00 main DEBUG PaymentRepository:134 - Executing query: CALL insertPaymentAndUpdateBalance('2', '3', '21', '4.99', '1565224800592', '1', 'Sale course
+2019-08-08 03:40:03 main DEBUG PaymentRepository:134 - Executing query: CALL insertPurchaseCourseFromBalance('3', '3', '11', '-4.99', '1565224803341', '1', 'Purchasing from balance. Course
+2019-08-08 03:40:03 main DEBUG PaymentRepository:134 - Executing query: CALL insertPaymentAndUpdateBalance('2', '3', '21', '4.99', '1565224803373', '1', 'Sale course
+2019-08-08 03:40:08 main DEBUG PaymentRepository:134 - Executing query: CALL insertPurchaseCourseFromBalance('3', '3', '11', '-4.99', '1565224808484', '1', 'Purchasing from balance. Course
+2019-08-08 03:40:08 main DEBUG PaymentRepository:134 - Executing query: CALL insertPaymentAndUpdateBalance('2', '3', '21', '4.99', '1565224808531', '1', 'Sale course
+2019-08-08 03:40:14 main DEBUG PaymentRepository:134 - Executing query: CALL insertPurchaseCourseFromBalance('3', '3', '11', '-4.99', '1565224814246', '1', 'Purchasing from balance. Course
+2019-08-08 03:40:14 main DEBUG PaymentRepository:134 - Executing query: CALL insertPaymentAndUpdateBalance('2', '3', '21', '4.99', '1565224814277', '1', 'Sale course
+2019-08-08 03:50:05 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 03:50:05 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 03:50:37 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 03:50:37 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 03:50:55 main DEBUG AccRepository:160 - Executing query: INSERT INTO account(acc_login, acc_password, acc_email, acc_name, acc_surname, acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_photo_path, acc_type, update_photo_path, acc_pass_salt) VALUES ('new login', 'NшОѕЌ‘(з±"’ Фјv-B)c4•ѓвCf;®зр$Г', 'annit@list.ru', 'Tom', 'Jerry', '2000-01-01', '+12312312123123', '2019-08-06', '123123', 'default_acc_avatar.png', '3', '1.png', 'q[43b_f^Gb')
+2019-08-08 03:50:57 main DEBUG AccRepository:160 - Executing query: UPDATE account SET acc_password = 'NшОѕЌ‘(з±"’ Фјv-B)c4•ѓвCf;®зр$Г', acc_email = 'annit@list.ru', acc_name = 'some new name', acc_surname = 'Jerry', acc_birthdate = '2000-01-01', acc_phone_number = '+12312312123123', acc_registration_date = '2019-08-06', acc_about = '123123', acc_photo_path = 'default_acc_avatar.png', acc_type = '3', update_photo_path = '1.png', acc_pass_salt = 'q[43b_f^Gb' WHERE acc_login = 'admin'
+2019-08-08 03:50:59 main DEBUG AccRepository:160 - Executing query: DELETE FROM account WHERE acc_login = 'User'
+2019-08-08 03:59:19 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 03:59:19 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 03:59:22 main DEBUG AccRepository:160 - Executing query: INSERT INTO account(acc_login, acc_password, acc_email, acc_name, acc_surname, acc_birthdate, acc_phone_number, acc_registration_date, acc_about, acc_photo_path, acc_type, update_photo_path, acc_pass_salt) VALUES ('new login', 'NшОѕЌ‘(з±"’ Фјv-B)c4•ѓвCf;®зр$Г', 'annit@list.ru', 'Tom', 'Jerry', '2000-01-01', '+12312312123123', '2019-08-06', '123123', 'default_acc_avatar.png', '3', '1.png', 'q[43b_f^Gb')
+2019-08-08 03:59:22 main DEBUG AccRepository:160 - Executing query: UPDATE account SET acc_password = 'NшОѕЌ‘(з±"’ Фјv-B)c4•ѓвCf;®зр$Г', acc_email = 'annit@list.ru', acc_name = 'some new name', acc_surname = 'Jerry', acc_birthdate = '2000-01-01', acc_phone_number = '+12312312123123', acc_registration_date = '2019-08-06', acc_about = '123123', acc_photo_path = 'default_acc_avatar.png', acc_type = '3', update_photo_path = '1.png', acc_pass_salt = 'q[43b_f^Gb' WHERE acc_login = 'admin'
+2019-08-08 03:59:22 main DEBUG AccRepository:160 - Executing query: DELETE FROM account WHERE acc_login = 'User'
+2019-08-08 04:08:52 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 04:08:52 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 04:08:55 main DEBUG ChapterRepository:105 - Executing query: DELETE FROM course_chapter WHERE course_chapter_id = '1'
+2019-08-08 04:08:55 main DEBUG ChapterRepository:105 - Executing query: INSERT INTO course_chapter(course_id, chapter_name) VALUES ('1', 'Updated chapter name')
+2019-08-08 04:08:55 main DEBUG ChapterRepository:105 - Executing query: UPDATE course_chapter SET course_id = '1', chapter_name = 'some new name'WHERE course_chapter_id = '2'
+2019-08-08 04:08:59 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 04:08:59 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 04:09:01 main DEBUG CourseRepository:140 - Executing query: UPDATE course SET state = 0 WHERE course_id = '2'
+2019-08-08 04:09:01 main DEBUG CourseRepository:140 - Executing query: INSERT INTO course(course_author_id ,course_name, course_description, course_creation_date, course_picture, course_price, state, update_img_path) VALUES ('2', 'new name', 'first', '2000-01-01', 'default_course_avatar.png', '4.99', '2', '')
+2019-08-08 04:09:01 main DEBUG CourseRepository:140 - Executing query: UPDATE course SET course_name = 'some new name', course_description = 'first', course_creation_date = '2000-01-01', course_picture = 'default_course_avatar.png', course_price = '4.99', state = '2', update_img_path = '' WHERE course_id = '1'
+2019-08-08 04:11:49 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 04:11:49 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 04:11:51 main DEBUG LessonRepository:105 - Executing query: CALL deleteLesson('1')
+2019-08-08 04:11:51 main DEBUG LessonRepository:105 - Executing query: CALL insertLesson('2', '2019-06-20', 'lesson 2.1', 'https
+2019-08-08 04:11:51 main DEBUG LessonRepository:105 - Executing query: CALL updateLesson('new lesson name', 'https
+2019-08-08 04:14:24 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 04:14:24 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 04:14:26 main DEBUG MarkRepository:121 - Executing query: CALL InsertCourseMark('2', '3', '5', '', '1565007798943')
+2019-08-08 04:14:26 main DEBUG MarkRepository:121 - Executing query: CALL updateCourseMark('3', '3', '5', 'some comment', '1565007798943', '1')
+2019-08-08 04:14:26 main DEBUG MarkRepository:121 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 04:18:35 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 04:18:35 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 04:18:37 main DEBUG PaymentRepository:104 - Executing query: SELECT * FROM user_payment
+2019-08-08 04:18:37 main DEBUG PaymentRepository:104 - Executing query: SELECT * FROM user_payment WHERE acc_id = '3'
+2019-08-08 04:18:37 main DEBUG PaymentRepository:104 - Executing query: SELECT * FROM user_payment
+2019-08-08 04:18:37 main DEBUG PaymentRepository:136 - Executing query: DELETE FROM user_payment WHERE payment_id = '1'
+2019-08-08 04:18:37 main DEBUG PaymentRepository:104 - Executing query: SELECT * FROM user_payment
+2019-08-08 04:18:37 main DEBUG PaymentRepository:104 - Executing query: SELECT * FROM user_payment
+2019-08-08 04:18:37 main DEBUG PaymentRepository:136 - Executing query: CALL insertPaymentAndUpdateBalance('2', '1', '21', '19.99', '1565091865573', '1', 'Sale course
+2019-08-08 04:18:37 main DEBUG PaymentRepository:104 - Executing query: SELECT * FROM user_payment
+2019-08-08 04:18:37 main DEBUG PaymentRepository:104 - Executing query: SELECT * FROM user_payment
+2019-08-08 04:18:37 main DEBUG PaymentRepository:136 - Executing query: UPDATE user_payment SET  acc_id = '2', course_id = '1', payment_code = '21', payment_amount = '19.99', payment_date = '1565091865573', currency_id = '1', payment_description = 'new comment' WHERE payment_id = '2'
+2019-08-08 04:18:37 main DEBUG PaymentRepository:104 - Executing query: SELECT * FROM user_payment
+2019-08-08 04:20:20 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 04:20:20 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 04:20:23 main DEBUG RestorePassRequestRepository:94 - Executing query: insert into restore_pass_requests(acc_id, uuid) VALUES('1', '12345')
+2019-08-08 04:20:23 main DEBUG RestorePassRequestRepository:94 - Executing query: delete from restore_pass_requests where acc_id = '1'
+2019-08-08 04:21:01 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 04:21:01 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 04:21:08 main DEBUG PaymentRepository:104 - Executing query: SELECT * FROM user_payment
+2019-08-08 04:21:08 main DEBUG PaymentRepository:104 - Executing query: SELECT * FROM user_payment WHERE acc_id = '3'
+2019-08-08 14:58:37 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 14:58:37 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 14:58:40 main DEBUG PaymentRepository:117 - Executing query: SELECT * FROM user_payment
+2019-08-08 14:58:40 main DEBUG PaymentRepository:117 - Executing query: SELECT * FROM user_payment WHERE acc_id = '3'
+2019-08-08 14:58:40 main DEBUG PaymentRepository:117 - Executing query: SELECT * FROM user_payment
+2019-08-08 14:58:40 main DEBUG PaymentRepository:149 - Executing query: DELETE FROM user_payment WHERE payment_id = '1'
+2019-08-08 14:58:40 main DEBUG PaymentRepository:117 - Executing query: SELECT * FROM user_payment
+2019-08-08 14:58:40 main DEBUG PaymentRepository:117 - Executing query: SELECT * FROM user_payment
+2019-08-08 14:58:40 main DEBUG PaymentRepository:149 - Executing query: CALL insertPaymentAndUpdateBalance('2', '1', '21', '19.99', '1565091865573', '1', 'Sale course
+2019-08-08 14:58:40 main DEBUG PaymentRepository:117 - Executing query: SELECT * FROM user_payment
+2019-08-08 14:58:40 main DEBUG PaymentRepository:117 - Executing query: SELECT * FROM user_payment
+2019-08-08 14:58:40 main DEBUG PaymentRepository:149 - Executing query: UPDATE user_payment SET  acc_id = '2', course_id = '1', payment_code = '21', payment_amount = '19.99', payment_date = '1565091865573', currency_id = '1', payment_description = 'new comment' WHERE payment_id = '2'
+2019-08-08 14:58:40 main DEBUG PaymentRepository:117 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:17:43 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:17:43 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:17:45 main DEBUG MarkRepository:146 - Executing query: CALL InsertCourseMark('2', '3', '5', '', '1565007798943')
+2019-08-08 15:17:45 main DEBUG MarkRepository:146 - Executing query: CALL updateCourseMark('3', '3', '5', 'some comment', '1565007798943', '1')
+2019-08-08 15:17:45 main DEBUG MarkRepository:146 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 15:18:51 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:18:51 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:18:54 main DEBUG MarkRepository:146 - Executing query: CALL InsertCourseMark('2', '3', '5', '', '1565007798943')
+2019-08-08 15:18:54 main DEBUG MarkRepository:146 - Executing query: CALL updateCourseMark('3', '3', '5', 'some comment', '1565007798943', '1')
+2019-08-08 15:18:54 main DEBUG MarkRepository:146 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 15:20:36 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:20:36 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:20:42 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:20:42 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment WHERE acc_id = '3'
+2019-08-08 15:21:17 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:21:17 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:21:19 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:21:19 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment WHERE acc_id = '3'
+2019-08-08 15:21:19 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:21:19 main DEBUG PaymentRepository:159 - Executing query: DELETE FROM user_payment WHERE payment_id = '1'
+2019-08-08 15:21:19 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:21:19 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:21:19 main DEBUG PaymentRepository:159 - Executing query: CALL insertPaymentAndUpdateBalance('2', '1', '21', '19.99', '1565091865573', '1', 'Sale course
+2019-08-08 15:21:19 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:21:19 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:21:19 main DEBUG PaymentRepository:159 - Executing query: UPDATE user_payment SET  acc_id = '2', course_id = '1', payment_code = '21', payment_amount = '19.99', payment_date = '1565091865573', currency_id = '1', payment_description = 'new comment' WHERE payment_id = '2'
+2019-08-08 15:21:19 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:21:26 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:21:26 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:21:29 main DEBUG MarkRepository:145 - Executing query: CALL InsertCourseMark('2', '3', '5', '', '1565007798943')
+2019-08-08 15:21:29 main DEBUG MarkRepository:145 - Executing query: CALL updateCourseMark('3', '3', '5', 'some comment', '1565007798943', '1')
+2019-08-08 15:21:29 main DEBUG MarkRepository:145 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 15:21:36 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:21:36 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:21:41 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:21:41 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment WHERE acc_id = '3'
+2019-08-08 15:22:23 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:22:23 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:22:28 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:22:28 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment WHERE acc_id = '3'
+2019-08-08 15:24:48 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:24:48 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:24:50 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:24:50 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment WHERE acc_id = '3'
+2019-08-08 15:25:17 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:25:17 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:25:19 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:25:19 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment WHERE acc_id = '3'
+2019-08-08 15:25:30 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:25:30 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:25:35 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:25:35 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment WHERE acc_id = '3'
+2019-08-08 15:26:25 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:26:25 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:26:27 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:26:27 main DEBUG PaymentRepository:159 - Executing query: DELETE FROM user_payment WHERE payment_id = '1'
+2019-08-08 15:26:27 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:26:27 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:26:27 main DEBUG PaymentRepository:159 - Executing query: CALL insertPaymentAndUpdateBalance('2', '1', '21', '19.99', '1565091865573', '1', 'Sale course
+2019-08-08 15:26:27 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:26:27 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:26:27 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment WHERE acc_id = '3'
+2019-08-08 15:26:27 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:26:27 main DEBUG PaymentRepository:159 - Executing query: UPDATE user_payment SET  acc_id = '2', course_id = '1', payment_code = '21', payment_amount = '19.99', payment_date = '1565091865573', currency_id = '1', payment_description = 'new comment' WHERE payment_id = '2'
+2019-08-08 15:26:27 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:27:06 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:27:06 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:27:08 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:27:08 main DEBUG PaymentRepository:159 - Executing query: DELETE FROM user_payment WHERE payment_id = '2'
+2019-08-08 15:27:08 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:27:08 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:27:08 main DEBUG PaymentRepository:159 - Executing query: CALL insertPurchaseCourseFromBalance('3', '1', '11', '-19.99', '1565091865502', '1', 'Purchasing from balance. Course
+2019-08-08 15:27:09 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:27:09 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:27:09 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment WHERE acc_id = '3'
+2019-08-08 15:27:09 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:27:09 main DEBUG PaymentRepository:159 - Executing query: UPDATE user_payment SET  acc_id = '3', course_id = '1', payment_code = '11', payment_amount = '-19.99', payment_date = '1565091865502', currency_id = '1', payment_description = 'new comment' WHERE payment_id = '1'
+2019-08-08 15:27:09 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:27:45 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:27:45 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:27:50 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:27:50 main DEBUG PaymentRepository:159 - Executing query: DELETE FROM user_payment WHERE payment_id = '2'
+2019-08-08 15:27:50 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:27:50 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:27:50 main DEBUG PaymentRepository:159 - Executing query: CALL insertPurchaseCourseFromBalance('3', '1', '11', '-19.99', '1565091865502', '1', 'Purchasing from balance. Course
+2019-08-08 15:27:50 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:27:50 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:27:50 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment WHERE acc_id = '3'
+2019-08-08 15:27:50 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:27:50 main DEBUG PaymentRepository:159 - Executing query: UPDATE user_payment SET  acc_id = '3', course_id = '1', payment_code = '11', payment_amount = '-19.99', payment_date = '1565091865502', currency_id = '1', payment_description = 'new comment' WHERE payment_id = '1'
+2019-08-08 15:27:50 main DEBUG PaymentRepository:127 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:28:25 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:28:25 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:28:28 main DEBUG MarkRepository:145 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 15:30:18 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:30:18 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:30:21 main DEBUG MarkRepository:145 - Executing query: CALL InsertCourseMark('3', '3', '5', '', '1565007798943')
+2019-08-08 15:30:21 main DEBUG MarkRepository:145 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 15:30:21 main DEBUG MarkRepository:145 - Executing query: CALL InsertCourseMark('2', '3', '5', '', '1565007798943')
+2019-08-08 15:34:15 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:34:15 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:34:17 main DEBUG MarkRepository:169 - Executing query: CALL InsertCourseMark('2', '3', '5', '', '1565007798943')
+2019-08-08 15:34:17 main DEBUG MarkRepository:169 - Executing query: CALL updateCourseMark('3', '3', '5', 'some comment', '1565007798943', '1')
+2019-08-08 15:34:17 main DEBUG MarkRepository:169 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 15:35:01 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:35:01 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:35:04 main DEBUG MarkRepository:168 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 15:35:30 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:35:30 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:35:32 main DEBUG MarkRepository:168 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 15:36:21 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:36:21 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:36:24 main DEBUG MarkRepository:169 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 15:38:13 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:38:13 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:38:15 main DEBUG MarkRepository:170 - Executing query: CALL updateCourseMark('3', '3', '5', 'some comment', '1565007798943', '1')
+2019-08-08 15:39:05 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:39:05 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:39:07 main DEBUG MarkRepository:170 - Executing query: CALL updateCourseMark('3', '3', '5', 'some comment', '1565007798943', '1')
+2019-08-08 15:39:45 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:39:45 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:39:47 main DEBUG MarkRepository:170 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 15:40:04 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:40:04 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:40:06 main DEBUG MarkRepository:170 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 15:40:15 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:40:15 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:40:17 main DEBUG MarkRepository:169 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 15:58:16 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:58:16 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:58:19 main DEBUG MarkRepository:196 - Executing query: CALL InsertCourseMark('2', '3', '5', '', '1565007798943')
+2019-08-08 15:58:19 main DEBUG MarkRepository:196 - Executing query: CALL updateCourseMark('3', '3', '5', 'some comment', '1565007798943', '1')
+2019-08-08 15:58:19 main DEBUG MarkRepository:196 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 15:58:46 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 15:58:47 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 15:58:49 main DEBUG PaymentRepository:128 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:58:49 main DEBUG PaymentRepository:128 - Executing query: SELECT * FROM user_payment WHERE acc_id = '3'
+2019-08-08 15:58:49 main DEBUG PaymentRepository:128 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:58:49 main DEBUG PaymentRepository:160 - Executing query: DELETE FROM user_payment WHERE payment_id = '1'
+2019-08-08 15:58:49 main DEBUG PaymentRepository:128 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:58:49 main DEBUG PaymentRepository:128 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:58:49 main DEBUG PaymentRepository:160 - Executing query: CALL insertPaymentAndUpdateBalance('2', '1', '21', '19.99', '1565091865573', '1', 'Sale course
+2019-08-08 15:58:49 main DEBUG PaymentRepository:128 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:58:49 main DEBUG PaymentRepository:128 - Executing query: SELECT * FROM user_payment
+2019-08-08 15:58:49 main DEBUG PaymentRepository:160 - Executing query: UPDATE user_payment SET  acc_id = '2', course_id = '1', payment_code = '21', payment_amount = '19.99', payment_date = '1565091865573', currency_id = '1', payment_description = 'new comment' WHERE payment_id = '2'
+2019-08-08 15:58:49 main DEBUG PaymentRepository:128 - Executing query: SELECT * FROM user_payment
+2019-08-08 16:15:35 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 16:15:35 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 16:15:38 main DEBUG MarkRepository:196 - Executing query: CALL InsertCourseMark('2', '3', '5', '', '1565007798943')
+2019-08-08 16:15:38 main DEBUG MarkRepository:196 - Executing query: CALL updateCourseMark('3', '3', '5', 'some comment', '1565007798943', '1')
+2019-08-08 16:15:38 main DEBUG MarkRepository:196 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 16:17:12 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 16:17:12 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 16:17:14 main DEBUG MarkRepository:199 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 16:17:14 main ERROR MarkRepository:87 - java.sql.SQLException: something wrong
+2019-08-08 16:20:25 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 16:20:25 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 16:20:28 main DEBUG MarkRepository:196 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 16:22:07 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 16:22:07 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 16:22:09 main DEBUG MarkRepository:196 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 16:22:57 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 16:22:57 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 16:22:59 main DEBUG MarkRepository:196 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 16:24:59 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 16:24:59 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 16:25:01 main DEBUG MarkRepository:196 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 16:26:12 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 16:26:12 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 16:26:15 main DEBUG MarkRepository:196 - Executing query: CALL deleteCourseMark('1')
+2019-08-08 16:32:52 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 16:32:52 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 16:32:54 main DEBUG LessonRepository:131 - Executing query: CALL deleteLesson('1')
+2019-08-08 16:32:54 main DEBUG LessonRepository:131 - Executing query: CALL insertLesson('2', '2019-06-20', 'lesson 2.1', 'https
+2019-08-08 16:32:54 main DEBUG LessonRepository:131 - Executing query: CALL updateLesson('new lesson name', 'https
+2019-08-08 16:37:48 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-08 16:37:48 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-08 16:37:50 main DEBUG LessonRepository:181 - Executing query: CALL deleteLesson('1')
+2019-08-08 16:37:50 main DEBUG LessonRepository:181 - Executing query: CALL insertLesson('2', '2019-06-20', 'lesson 2.1', 'https
+2019-08-08 16:37:50 main DEBUG LessonRepository:181 - Executing query: CALL updateLesson('new lesson name', 'https
+2019-08-10 00:44:55 main INFO  ConnectionPool:69 - Pool was initialized. Connections amount: 10
+2019-08-10 00:44:55 main DEBUG ConnectionPool:81 - ConnectionPool instance created.
+2019-08-10 00:44:57 main DEBUG PaymentRepository:160 - Executing query: CALL insertPaymentAndUpdateBalance('2', '-1', '20', '-50', '1565387097780', '1', 'Cash out to card ends with 1231')
+2019-08-10 18:12:44 main INFO  ConnectionPool:54 - URL: jdbc:mysql://localhost:3306/easylearning?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+2019-08-10 18:12:44 main INFO  ConnectionPool:72 - Pool was initialized. Connections amount: 10
+2019-08-10 18:12:44 main DEBUG ConnectionPool:84 - ConnectionPool instance created.
+2019-08-10 18:52:00 main INFO  ConnectionPool:54 - URL: jdbc:mysql://localhost:3306/easylearning?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+2019-08-10 18:52:00 main INFO  ConnectionPool:72 - Pool was initialized. Connections amount: 10
+2019-08-10 18:52:00 main DEBUG ConnectionPool:84 - ConnectionPool instance created.
+2019-08-10 18:52:28 main INFO  ConnectionPool:54 - URL: jdbc:mysql://localhost:3306/easylearning?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+2019-08-10 18:52:29 main INFO  ConnectionPool:72 - Pool was initialized. Connections amount: 10
+2019-08-10 18:52:29 main DEBUG ConnectionPool:84 - ConnectionPool instance created.
+2019-08-10 19:20:08 main INFO  ConnectionPool:54 - URL: jdbc:mysql://localhost:3306/testDB?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:08 main FATAL ConnectionPool:69 - ConnectionPool couldn't create any connection to database!!!
+2019-08-10 19:20:23 main INFO  ConnectionPool:54 - URL: jdbc:mysql://localhost:3306/testDB?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main ERROR ConnectionPool:65 - Connection to base wasn't created successfully! java.sql.SQLSyntaxErrorException: Unknown database 'testdb'
+2019-08-10 19:20:24 main FATAL ConnectionPool:69 - ConnectionPool couldn't create any connection to database!!!

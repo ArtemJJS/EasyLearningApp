@@ -57,7 +57,7 @@ public class PaymentService {
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
      * @return true if payment proceeded, otherwise false (if course purchased already or invalid data)
-     * @throws ServiceException if faced {@link RepositoryException}, IllegalArgumentException, NullPointerException
+     * @throws ServiceException if faced {@link RepositoryException}
      */
     public boolean processPurchaseFromBalance(SessionRequestContent requestContent) throws ServiceException {
         PaymentRepository repository = new PaymentRepository();
@@ -91,7 +91,7 @@ public class PaymentService {
                 repository.delete(payment);
                 return false;
             }
-        } catch (NullPointerException | RepositoryException | IllegalArgumentException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
         return true;
@@ -103,7 +103,7 @@ public class PaymentService {
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
      * @return true if payment proceeded, otherwise false (if course purchased already or invalid data)
-     * @throws ServiceException if faced {@link RepositoryException}, IllegalArgumentException, NullPointerException
+     * @throws ServiceException if faced {@link RepositoryException}
      */
     public boolean processPurchaseByCard(SessionRequestContent requestContent) throws ServiceException {
         FormValidator validator = new FormValidator();
@@ -140,7 +140,7 @@ public class PaymentService {
                 repository.delete(payment);
                 return false;
             }
-        } catch (NullPointerException | RepositoryException | IllegalArgumentException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
         return true;
@@ -153,7 +153,7 @@ public class PaymentService {
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
      * @return true if payment proceeded, otherwise false
-     * @throws ServiceException if faced {@link RepositoryException}, IllegalArgumentException
+     * @throws ServiceException if faced {@link RepositoryException}
      */
     public boolean processDepositByCard(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = (new CourseService()).takeLocaleFromSession(requestContent);
@@ -185,7 +185,7 @@ public class PaymentService {
             String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_PAYMENT_SUCCEEDED);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
             requestContent.getSessionAttributes().put(ATTR_USER, updatedUser);
-        } catch (RepositoryException | IllegalArgumentException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
         return true;
@@ -197,7 +197,7 @@ public class PaymentService {
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
      * @return true if payment proceeded, otherwise false
-     * @throws ServiceException if faced {@link RepositoryException}, IllegalArgumentException, NullPointerException
+     * @throws ServiceException if faced {@link RepositoryException}
      */
     public boolean processCashOutFromBalance(SessionRequestContent requestContent) throws ServiceException {
         FormValidator validator = new FormValidator();
@@ -231,7 +231,7 @@ public class PaymentService {
             (new AccountService()).refreshSessionAttributeUser(requestContent, currAcc);
             String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_PAYMENT_SUCCEEDED);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
-        } catch (RepositoryException | IllegalArgumentException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
         return true;
@@ -276,7 +276,7 @@ public class PaymentService {
      * In this version full sale amount goes to author balance
      *      *
      * @param course - purchased course
-     * @throws ServiceException if faced {@link RepositoryException}, NullPointerException
+     * @throws ServiceException if faced {@link RepositoryException}
      */
     private void processAuthorSaleOperation(Course course) throws ServiceException {
         AccRepository accRepository = new AccRepository();
@@ -292,7 +292,7 @@ public class PaymentService {
             payment.setCurrencyId(CurrencyType.USD.ordinal() + 1);
             payment.setDescription(DESCRIPTION_SALE_COURSE);
             paymentRepository.insert(payment);
-        } catch (NullPointerException | RepositoryException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }

@@ -92,7 +92,7 @@ public class CourseService {
      *
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
-     * @throws ServiceException if faced {@link RepositoryException}, NullPointerException, IOException
+     * @throws ServiceException if faced {@link RepositoryException}, IOException
      */
     public void approveCourseImgChange(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = takeLocaleFromSession(requestContent);
@@ -117,7 +117,7 @@ public class CourseService {
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + course.getId());
             requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));
-        } catch (NullPointerException | IOException | RepositoryException e) {
+        } catch (IOException | RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -127,7 +127,7 @@ public class CourseService {
      *
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
-     * @throws ServiceException if faced {@link RepositoryException}, NullPointerException, IOException
+     * @throws ServiceException if faced {@link RepositoryException}, IOException
      */
     public void declineCourseImgChange(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = takeLocaleFromSession(requestContent);
@@ -143,7 +143,7 @@ public class CourseService {
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + course.getId());
             requestContent.getRequestAttributes().put(ATTR_COURSES_LIST
                     , repository.query(new SelectCourseUpdateImgSpecification()));
-        } catch (NullPointerException | IOException | RepositoryException e) {
+        } catch (IOException | RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -153,8 +153,7 @@ public class CourseService {
      *
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
-     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBoundsException
-     * or if course doesn't exist
+     * @throws ServiceException if faced {@link RepositoryException} or course doesn't exists
      */
     public void initCoursePage(SessionRequestContent requestContent) throws ServiceException {
         HashMap<String, Object> reqAttrs = requestContent.getRequestAttributes();
@@ -177,7 +176,7 @@ public class CourseService {
             reqAttrs.put(ATTR_REQUESTED_COURSE, courses.get(0));
             reqAttrs.put(ATTR_CURR_COURSE_CONTENT, takeChaptersAndLessons(courseId));
             reqAttrs.put(ATTR_AUTHOR_OF_COURSE, (new AccountService()).takeAuthorOfCourse(courseId));
-        } catch (RepositoryException | IndexOutOfBoundsException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -271,7 +270,7 @@ public class CourseService {
             repository.update(currCourse);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + currCourse.getId());
             initCourseApprovalPage(requestContent);
-        } catch (IndexOutOfBoundsException | RepositoryException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -283,7 +282,7 @@ public class CourseService {
      *
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
-     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBoundsException, NumberFormatException
+     * @throws ServiceException if faced {@link RepositoryException}
      */
     public void freezeCourse(SessionRequestContent requestContent) throws ServiceException {
         Locale locale = takeLocaleFromSession(requestContent);
@@ -295,7 +294,7 @@ public class CourseService {
             currCourse.setState(CourseState.FREEZING);
             repository.update(currCourse);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message + currCourse.getId());
-        } catch (NumberFormatException | IndexOutOfBoundsException | RepositoryException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -310,7 +309,7 @@ public class CourseService {
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
      * @return true if operation proceeded, false if course exists already or data invalid
-     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBoundsException
+     * @throws ServiceException if faced {@link RepositoryException}
      */
     public boolean addCourseToReview(SessionRequestContent requestContent) throws ServiceException {
         FormValidator validator = new FormValidator();
@@ -359,7 +358,7 @@ public class CourseService {
             new AccountService().refreshSessionAttributeAvailableCourses(requestContent, currAccount);
             String message = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale).getString(BUNDLE_COURSE_SENT_TO_REVIEW);
             requestContent.getRequestAttributes().put(ATTR_MESSAGE, message);
-        } catch (IndexOutOfBoundsException | RepositoryException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
         return true;
@@ -433,7 +432,7 @@ public class CourseService {
     /**
      * @param courseId current course id
      * @return map with {@link CourseChapter} as keys and corresponded to particular chapter list of {@link CourseLesson}
-     * @throws ServiceException if faced {@link RepositoryException}, NullPointerException
+     * @throws ServiceException if faced {@link RepositoryException}
      */
     private Map<CourseChapter, List<CourseLesson>> takeChaptersAndLessons(int courseId) throws ServiceException {
         ChapterRepository chapterRepository = new ChapterRepository();
@@ -447,7 +446,7 @@ public class CourseService {
                 lessons.sort(Comparator.comparing(CourseLesson::getId));
                 courseContent.put(chapter, lessons);
             }
-        } catch (NullPointerException | RepositoryException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
         return courseContent;

@@ -43,7 +43,7 @@ public class MarkService {
      *
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
-     * @throws ServiceException if faced {@link RepositoryException}, IllegalArgumentException
+     * @throws ServiceException if faced {@link RepositoryException}
      */
     public void editAuthorComment(SessionRequestContent requestContent) throws ServiceException {
         MarkRepository repository = new MarkRepository();
@@ -58,7 +58,7 @@ public class MarkService {
             Mark mark = repository.query(new SelectMarkByIdSpecification(AUTHOR_MARK, markId)).get(0);
             mark.setComment(new AccountService().escapeQuotes(newComment));
             repository.update(mark);
-        } catch (IllegalArgumentException | RepositoryException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -69,7 +69,7 @@ public class MarkService {
      *
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
-     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBoundsException, NumberFormatException
+     * @throws ServiceException if faced {@link RepositoryException}
      */
     public void takeAuthorComment(SessionRequestContent requestContent) throws ServiceException {
         MarkRepository repository = new MarkRepository();
@@ -78,7 +78,7 @@ public class MarkService {
             Mark mark = repository.query(new SelectMarkByIdSpecification(AUTHOR_MARK, markId)).get(0);
             String comment = mark.getComment();
             requestContent.getRequestAttributes().put(ATTR_MARK_COMMENT, comment);
-        } catch (IndexOutOfBoundsException | NumberFormatException | RepositoryException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -88,7 +88,7 @@ public class MarkService {
      *
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
-     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBoundsException, NumberFormatException, NullPointerException
+     * @throws ServiceException if faced {@link RepositoryException}
      */
     public void deleteAuthorMarkComment(SessionRequestContent requestContent) throws ServiceException {
         MarkRepository repo = new MarkRepository();
@@ -97,7 +97,7 @@ public class MarkService {
             Mark mark = repo.query(new SelectMarkByIdSpecification(AUTHOR_MARK, markId)).get(0);
             mark.setComment(EMPTY_STRING);
             repo.update(mark);
-        } catch (RepositoryException | NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -108,7 +108,7 @@ public class MarkService {
      *
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
-     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBoundsException, NullPointerException
+     * @throws ServiceException if faced {@link RepositoryException}
      *                          or if current author already marked by this user
      */
     public void markAuthor(SessionRequestContent requestContent) throws ServiceException {
@@ -132,7 +132,7 @@ public class MarkService {
 
             repository.insert(mark);
             requestContent.getRequestAttributes().put(ATTR_AUTHOR_LOGIN, author.getLogin());
-        } catch (NullPointerException | IndexOutOfBoundsException | RepositoryException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -142,7 +142,7 @@ public class MarkService {
      *
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
-     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBoundsException, NullPointerException
+     * @throws ServiceException if faced {@link RepositoryException}
      *                          or if current course already marked by this user
      */
     public void markCourse(SessionRequestContent requestContent) throws ServiceException {
@@ -163,7 +163,7 @@ public class MarkService {
 
             repository.insert(mark);
             insertMarkedCourseIdsIntoSession(requestContent);
-        } catch (NullPointerException | IndexOutOfBoundsException | RepositoryException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -232,7 +232,7 @@ public class MarkService {
      *
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
-     * @throws ServiceException if faced {@link RepositoryException}, IllegalArgumentException
+     * @throws ServiceException if faced {@link RepositoryException}
      */
     public void editCourseComment(SessionRequestContent requestContent) throws ServiceException {
         MarkRepository repository = new MarkRepository();
@@ -247,7 +247,7 @@ public class MarkService {
             Mark mark = repository.query(new SelectMarkByIdSpecification(COURSE_MARK, markId)).get(0);
             mark.setComment(new AccountService().escapeQuotes(newComment));
             repository.update(mark);
-        } catch (IllegalArgumentException | RepositoryException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -257,7 +257,7 @@ public class MarkService {
      *
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
-     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBoundsException, NumberFormatException
+     * @throws ServiceException if faced {@link RepositoryException}
      */
     public void takeCourseComment(SessionRequestContent requestContent) throws ServiceException {
         MarkRepository repository = new MarkRepository();
@@ -266,7 +266,7 @@ public class MarkService {
             Mark mark = repository.query(new SelectMarkByIdSpecification(COURSE_MARK, markId)).get(0);
             String comment = mark.getComment();
             requestContent.getRequestAttributes().put(ATTR_MARK_COMMENT, comment);
-        } catch (IndexOutOfBoundsException | NumberFormatException | RepositoryException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
@@ -276,7 +276,7 @@ public class MarkService {
      *
      * @param requestContent - entity represents separated HTTPRequest attributes and parameters
      *                       and session attributes. Include "referer" header from request
-     * @throws ServiceException if faced {@link RepositoryException}, IndexOutOfBoundsException, NumberFormatException, NullPointerException
+     * @throws ServiceException if faced {@link RepositoryException}
      */
     public void deleteCourseMarkComment(SessionRequestContent requestContent) throws ServiceException {
         MarkRepository repo = new MarkRepository();
@@ -285,7 +285,7 @@ public class MarkService {
             Mark mark = repo.query(new SelectMarkByIdSpecification(COURSE_MARK, markId)).get(0);
             mark.setComment(EMPTY_STRING);
             repo.update(mark);
-        } catch (RepositoryException | NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
+        } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }

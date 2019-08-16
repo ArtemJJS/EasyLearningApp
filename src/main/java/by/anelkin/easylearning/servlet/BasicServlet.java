@@ -55,8 +55,8 @@ public class BasicServlet extends HttpServlet {
      *
      * @param request  current {@link HttpServletRequest}
      * @param response current {@link HttpServletResponse}
-     * @throws ServletException replaced with {@link HttpServletResponse} sending error
-     * @throws IOException  replaced with {@link HttpServletResponse} sending error
+     * @throws ServletException in unforeseen situations, otherwise replaced with {@link HttpServletResponse} sending error
+     * @throws IOException in unforeseen situations, otherwise replaced with {@link HttpServletResponse} sending error
      */
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -64,24 +64,12 @@ public class BasicServlet extends HttpServlet {
             session.setAttribute(ATTR_ROLE, GUEST);
             session.setAttribute(ATTR_LOCALE, Locale.US);
         }
-        session.setMaxInactiveInterval(60*60);
+        session.setMaxInactiveInterval(60*60); // one hour
         String[] localeParts = session.getAttribute(ATTR_LOCALE).toString().split(LOCALE_SPLITTER);
         Locale locale = new Locale(localeParts[0], localeParts[1]);
         ResourceBundle rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE, locale);
-        CommandType commandType;
-        try {
-            commandType = CommandType.valueOf(request.getParameter(ATTR_COMMAND_NAME).toUpperCase());
-        } catch (IllegalArgumentException e) {
-            log.error(e);
-            request.setAttribute(ATTR_MESSAGE, rb.getString(BUNDLE_ETERNAL_SERVER_ERROR));
-            response.sendError(ERROR_500);
-            return;
-        } catch (NullPointerException e) {
-            log.error(e);
-            response.sendError(ERROR_404);
-            return;
-        }
-
+        // FIXME: 8/16/2019 обработку неверного имени команды
+        CommandType commandType = CommandType.valueOf(request.getParameter(ATTR_COMMAND_NAME).toUpperCase());
         AccountType accType = (AccountType) session.getAttribute(ATTR_ROLE);
         if (!commandType.getAccessTypes().contains(accType)) {
             log.warn("Access denied to command: " + commandType);

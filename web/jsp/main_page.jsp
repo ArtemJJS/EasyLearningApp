@@ -96,6 +96,15 @@
             </div>
         </c:forEach>
     </div>
+<%--    <c:set var="message" value="message"/>--%>
+<%--    <script>--%>
+<%--        let mess = "${message}";--%>
+<%--    </script>--%>
+<%--    <script>--%>
+<%--        if (mess !== "") {--%>
+<%--            alert( mess);--%>
+<%--        }--%>
+<%--    </script>--%>
 </main>
 </body>
 </html>

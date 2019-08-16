@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 20px;
+    color: black;
+}
+
+header {
+    width: 1400px;
+    min-width: 100vw;
+    height: 60px;
+    background: linear-gradient(to top, rgb(247, 209, 209), #fff7fb);
+    position: relative;
+    z-index: 10;
+
+    border-bottom: 1px solid green;
+    display: block;
+}
+
+.header-content {
+    padding-right: 20px;
+    width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 180px;
+    height: 59px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.logo img {
+    margin: 0;
+    width: 175px;
+    height: 58px;
+}
+
+.panel {
+    width: 60%;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.choose_lang {
+    display: flex;
+    align-items: center;
+    margin-left: 60px;
+}
+
+.header_links {
+    display: flex;
+    align-items: center;
+}
+
+.header_links a {
+    margin-right: 25px;
+}
+
+.header_logged_user_info {
+    display: flex;
+    align-items: center;
+}
+
+.header_logged_user_info img {
+    height: 59px;
+    width: 68px;
+    margin: 0 10px;
+}
+
+.header-content .user form {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.user_login {
+    font-size: 0.9rem;
+    word-wrap: break-word;
+    margin-right: 10px;
+    min-width: 75px;
+    max-width: 135px;
+}
+
+header .header_logged_user_info .header_logout_btn {
+    width: 105px;
+    font-size: 0.88rem;
+    height: 26px;
+}
+
+.header_logged_user_info form input {
+    border: 1px solid #313131;
+    margin: 0;
+    padding: 0;
+    width: 120px;
+}
+
+#header_logout_form{
+    border: none;
+}
+
+#header_search_form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 550px;
+}
+
+.header_search_field {
+    margin: 0;
+    width: 450px;
+    height: 30px;
+    font-size: 20px;
+    border-right: none;
+    text-align: end;
+    padding-right: 10px;
+}
+
+.header_search_btn {
+    margin: 0;
+    width: 90px;
+    height: 30px;
+    font-size: 20px;
+}
+
+
+.choose_lang a {
+    margin-right: 20px;
+}

@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 22px;
+    color: black;
+}
+
+html {
+    width: 100vw;
+    height: 100vh;
+}
+
+main {
+    width: 1200px;
+    min-height: 600px;
+    border: 1px solid #595959;
+    border-top: none;
+    margin: 0 auto;
+    padding-top: 30px;
+    padding-bottom: 70px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page_title {
+    width: 80%;
+    margin: 0 auto;
+    padding-bottom: 15px;
+    border-bottom: 1px solid grey;
+
+    display: flex;
+}
+
+.title_and_price {
+    width: 30%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #434143;
+}
+
+.course_price {
+    font-size: 2rem;
+}
+
+.course_name {
+    width: 52%;
+    font-size: 1.4rem;
+}
+
+.course_img {
+    width: 18%;
+    max-height: 270px;
+}
+
+.buy_block {
+    width: 70%;
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pay-card{
+    padding: 20px;
+    width: 60%;
+    border: 1px solid green;
+}
+.pay_balance{
+    padding: 20px;
+    width: 30%;
+    border: 1px solid green;
+}
+
+.payment_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form_title{
+    font-size: 1.3rem;
+    color: green;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.form_subtitle{
+    width: 100%;
+    margin-bottom: 12px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.param{
+    width: 100%;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.param label{
+    width: 25%;
+}
+
+.param input{
+    width: 75%;
+}
+.acc_balance{
+    color: darkgreen;
+}
+.form_price{
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.submit_btn{
+    margin-top: 25px;
+    padding: 8px 15px;
+}
+.previous_operation_message{
+    color: red;
+    margin: 20px auto;
+}
+
+.insufficient_funds{
+    color: red;
+    margin-top: 25px;
+}
+

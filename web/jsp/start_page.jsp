@@ -45,5 +45,6 @@
     <a class="sign_up_link" href="${pageContext.request.contextPath}/sign-up"><fmt:message key="btn.sign_up" bundle="${rb}"/></a>
 </section>
 <img src="${pageContext.request.contextPath}/img/resources/acc_banner.jpg" alt="logo" width="80%" height="60%">
-</body>
+
+
 </html>

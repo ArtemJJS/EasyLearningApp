@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 18px;
+    color: black;
+}
+
+html {
+    min-height: 100vh;
+    position: relative;
+}
+
+main {
+    width: 1350px;
+    min-height: 900px;
+    background: linear-gradient(to bottom, rgb(247, 209, 209), rgb(242, 243, 242));
+    padding-top: 40px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.banner {
+    width: 80%;
+    height: 180px;
+    margin-bottom: 20px;
+
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position-y: 10%;
+
+    font-size: 2.1rem;
+    color: rgb(11, 134, 11);
+    padding-left: 1.5rem;
+    padding-top: 0.3rem;
+}
+
+.greeting {
+    font-size: 1.5rem;
+    text-align: center;
+    width: 80%;
+    color: blue;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.courses_block {
+    width: 94%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.about_course {
+    display: flex;
+    min-height: 120px;
+    max-height: 230px;
+    width: 49%;
+    margin-bottom: 20px;
+
+    border: 1px solid green;
+}
+
+.block1 {
+    width: 35%;
+}
+
+.about_course .block2 {
+    width: 65%;
+    padding: 0 5px 4px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 0.7rem;
+}
+
+.course_name {
+    font-size: 0.8em;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.name_and_desk {
+    width: 98%;
+    font-size: 0.85rem;
+}
+
+.course_desc {
+    width: 100%;
+    max-height: 116px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    font-size: 0.8em;
+    word-wrap: break-word;
+    margin-bottom: 10px;
+}
+
+.course_avatar {
+    width: 100%;
+    height: 100%;
+    min-height: 170px;
+    max-height: 210px;
+}
+
+
+.course_block_header {
+    text-align: center;
+    min-width: 100%;
+    margin-bottom: 15px;
+    color: darkgreen;
+    font-size: 1.15rem;
+}
+
+.links {
+    display: flex;
+}
+
+.links a {
+    font-size: 0.8rem;
+    margin-right: 15px;
+    text-decoration: none;
+    padding: 1px 3px;
+    background-color: rgba(87, 234, 131, 0.25);
+
+    display: inline-block;
+    border: 1px solid #008006;
+}
+
+.links a:hover {
+    background-color: rgba(196, 196, 196, 0.58);
+    border: 1px solid black;
+    cursor: pointer;
+}

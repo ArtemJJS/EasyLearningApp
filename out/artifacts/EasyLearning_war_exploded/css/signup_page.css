@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 22px;
+}
+
+h1 {
+    color: green;
+}
+
+
+body {
+    width: 60%;
+    height: 100vh;
+    margin: 0 auto;
+    padding-top: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header1 {
+    color: green;
+}
+
+main {
+    padding-top: 20px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.message {
+    color: red;
+    margin-bottom: 25px;
+    margin-top: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input, select, textarea {
+    border: 1px solid #474747;
+    font-size: 0.8rem;
+}
+
+textarea {
+    margin-top: 20px;
+}
+
+input {
+    margin-top: 20px;
+    margin-bottom: 4px;
+    color: #292929;
+    width: 180px;
+}
+
+
+.field_desc {
+    font-size: 10px;
+    color: #8a8a8a;
+}
+
+label {
+    width: 100px;
+}
+
+.param8 {
+    display: flex;
+}
+
+.param8 p {
+    margin-top: 18px;
+    margin-right: 10px;
+}
+
+.submit_btn {
+    width: 100px;
+    height: 25px;
+    margin: 30px;
+    position: relative;
+    left: 100px;
+
+    border-radius: 3px;
+    background-color: #d0d0d0;
+}
+
+.param {
+    width: 100%;
+    margin-top: 20px;
+
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.param:first-child{
+    margin: 0;
+}
+
+.param input {
+    width: 250px;
+    margin: 0;
+}
+
+.input_and_pattern {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/*.logo {*/
+/*    width: 180px;*/
+/*    height: 59px;*/
+
+/*    display: flex;*/
+/*    justify-content: flex-start;*/
+/*    align-items: center;*/
+/*}*/
+.logo img {
+    margin: 0;
+    width: 250px;
+    height: 90px;
+}

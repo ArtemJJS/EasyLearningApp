@@ -41,7 +41,8 @@ public class CommandFactory {
         EDIT_COURSE_COMMENT(USER),
         GO_EDIT_COURSE_COMMENT(USER),
         EDIT_AUTHOR_COMMENT(USER),
-        GO_EDIT_AUTHOR_COMMENT(USER);
+        GO_EDIT_AUTHOR_COMMENT(USER),
+        INVALID_REQUEST_PARAMETERS(ADMIN, AUTHOR, USER, GUEST);
 
 
 
@@ -151,6 +152,10 @@ public class CommandFactory {
                 break;
             case GO_EDIT_AUTHOR_COMMENT:
                 command = new GoEditAuthorCommentCommand();
+                break;
+            case INVALID_REQUEST_PARAMETERS:
+                command = new InvalidRequestParamsCommand();
+                break;
 
 
         }

@@ -1,0 +1,3 @@
+if (mess !== "") {
+    alert( mess);
+}

@@ -1,0 +1,284 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 22px;
+    color: black;
+}
+
+html {
+    width: 100vw;
+    height: 100vw;
+}
+
+main {
+    width: 1000px;
+    min-height: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding-top: 70px;
+
+    background: linear-gradient(to bottom, rgb(183, 247, 199), rgb(209, 189, 206));
+}
+
+.section_1 {
+    padding: 10px;
+    width: 90%;
+    min-height: 300px;
+    background-color: rgba(214, 215, 217, 0.89);
+    border: 1px solid grey;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.course_title {
+    width: 70%;
+    min-height: 90%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.course_name {
+    font-size: 1.9rem;
+    width: 100%;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.course_description {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    word-wrap: break-word;
+}
+
+.course_rating {
+    font-size: 1.05rem;
+    margin-top: auto;
+}
+
+.course_view {
+    width: 30%;
+    min-height: 90%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.course_avatar {
+    margin-top: 10px;
+    width: 80%;
+    min-height: 200px;
+    max-height: 280px;
+}
+
+.price {
+    margin-top: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/*========================*/
+
+.section_2 {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-top: 40px;
+
+    background-color: rgb(159, 230, 142);
+}
+
+.lessons_minutes {
+    display: flex;
+}
+
+.lessons_minutes div:first-child {
+    margin-right: 30px;
+}
+
+/*=========================*/
+.section_3 {
+    width: 90%;
+}
+
+.chapter {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 40px;
+
+    margin-top: 16px;
+
+    background-color: rgb(143, 142, 230);
+}
+
+.lesson {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-left: 60px;
+    padding-right: 20px;
+}
+
+/*==============================*/
+.section_4 {
+    width: 80%;
+    margin-top: 30px;
+    border: 1px solid green;
+
+    display: flex;
+}
+
+.author_image_and_stats {
+    width: 25%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.author_rating, .author_students {
+    font-size: 0.9rem;
+}
+
+.author_about {
+    width: 75%;
+}
+
+.author_avatar {
+    width: 90%;
+    max-height: 200px;
+    min-height: 140px;
+}
+
+
+.author_login {
+    font-weight: bold;
+}
+
+
+.author_rating {
+    margin-top: 10px;
+}
+
+.author_description {
+    margin: 12px 0;
+    word-wrap: break-word;
+    font-size: 0.9rem;
+}
+
+/*==============================*/
+
+
+.section_5 {
+    width: 80%;
+    min-height: 150px;
+    margin-top: 35px;
+    margin-bottom: 50px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.single_mark {
+    border: 1px solid green;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mark_content {
+    word-wrap: break-word;
+    font-size: 0.9rem;
+    width: 100%;
+    padding-left: 8px;
+    padding-bottom: 5px;
+}
+
+.writer_avatar {
+    width: 160px;
+    max-height: 210px;
+}
+
+.author_info_title {
+    margin-top: 35px;
+    position: relative;
+    top: 15px;
+    font-size: 1.25rem;
+}
+
+.comments_title {
+    align-self: center;
+    font-size: 1.15rem;
+}
+
+.comment {
+    margin-top: 18px;
+    margin-bottom: 15px;
+}
+
+.date {
+    font-weight: bold;
+    font-size: 0.75rem;
+    margin-bottom: 10px;
+}
+
+.writer_login {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+.links {
+    display: flex;
+}
+
+.links a {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    margin-right: 20px;
+    text-decoration: none;
+    padding: 5px 8px;
+    background-color: rgba(87, 234, 131, 0.25);
+
+    display: inline-block;
+    border: 1px solid #008006;
+}
+
+.links a:hover {
+    background-color: rgb(143, 142, 230);
+    border: 1px solid #1f3e80;
+    cursor: pointer;
+}
+
+.mark_action_submit_btn {
+    font-size: 0.9rem;
+    margin-right: 20px;
+    text-decoration: none;
+    padding: 3px 5px;
+    background-color: rgba(87, 234, 131, 0.25);
+
+    display: inline-block;
+    border: 1px solid #008006;
+}
+
+.mark_action_submit_btn:hover {
+    background-color: rgb(143, 142, 230);
+    border: 1px solid #1f3e80;
+    cursor: pointer;
+}
+
+
+.user_comment_actions{
+    display: flex;
+}
+
+.user_comment_actions form{
+    margin-right: 12px;
+}

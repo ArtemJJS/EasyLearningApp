@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 20px;
+    color: black;
+}
+
+html {
+    width: 100vw;
+    height: 100vw;
+}
+
+
+main {
+    width: 1000px;
+    min-height: 700px;
+    border: 1px solid grey;
+    border-top: none;
+    padding-top: 25px;
+    padding-bottom: 10%;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.page_title {
+    color: darkgreen;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+
+form {
+    width: 80%;
+    border-right: 1px solid grey;
+    border-left: 1px solid grey;
+    padding-left: 40px;
+    padding-right: 40px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.param {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.input_and_pattern {
+    display: flex;
+    flex-direction: column;
+}
+
+.field_desc {
+    width: 550px;
+    font-size: 0.7rem;
+    color: #5e5e5e;
+}
+
+.unit_title {
+    margin-right: 15px;
+}
+
+.param_field, input, textarea {
+    width: 550px;
+    font-size: 0.9rem;
+    word-wrap: break-word;
+}
+
+.param_field{
+    border: 1px solid grey;
+    background-color: rgb(235, 235, 228);
+    color: rgb(84, 84, 84);
+}
+
+.add_lesson{
+    width: 170px;
+    height: 30px;
+    border: 1px solid grey;
+    margin: 20px auto 0;
+    text-align: center;
+    position: relative;
+    right: 18px;
+}
+
+.add_lesson:hover {
+    border: 2px solid black;
+    cursor: pointer;
+
+}
+
+.add_chapter{
+    width: 170px;
+    height: 32px;
+    border: 1px solid grey;
+    margin: 25px auto 0;
+    text-align: center;
+}
+
+.add_chapter:hover {
+    border: 2px solid black;
+    cursor: pointer;
+
+}
+
+.lesson_params {
+    display: flex;
+    flex-direction: column;
+    width: 550px;
+}
+
+.lesson_params .param_field,
+.lesson_params input{
+    margin-top: 8px;
+}
+
+.lesson_params .param_field:first-child,
+.lesson_params input:first-child{
+    margin-top: 0;
+}
+
+form .submit_btn {
+    max-width: 280px;
+    margin-top: 40px;
+    align-self: center;
+    height: 35px;
+
+    text-align: center;
+}
+
+.lessons {
+    padding-left: 35px;
+}
+
+.chapter {
+    margin-top: 30px;
+}
+
+.previous_operation_msg {
+    color: red;
+    font-size: 0.9rem;
+}
+
+.info-message{
+    margin-top: 45px;
+    font-size: 0.9rem;
+    color: #40802c;
+    text-align: center;
+}
+
+.chapter:first-child{
+    margin-top: 5px;
+}
